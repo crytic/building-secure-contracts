@@ -1,4 +1,4 @@
-# Re-entrancy vulnerability
+# Re-entrancy
 
 ## Principle:
 - A state variable is changed after a call to `send` / `call.value`
