@@ -3,7 +3,8 @@
 ## Principle
 
 - Certain Solidity operations, known as "external calls", require the developer to manually ensure that the operation succeeded. This is in contrast to operations which throw an exception on failure.
-- Contracts which use external calls and do not check for success will likely be buggy, and may also be exploitable.
+- If an external call fails, but is not checked, the contract will continue execution as if the call succeeded.
+- This will likely result in buggy and potentially exploitable behavior from the contract.
 
 ## Attack
 
@@ -14,11 +15,11 @@
 
 ## Known Exploit
 
-- [King of the Ether](https://www.kingoftheether.com/postmortem.html)
-	- https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L100
-	- https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L107
-	- https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L120
-	- https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L161
+- [King of the Ether](https://www.kingoftheether.com/postmortem.html) (line numbers:
+	[100](https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L100),
+	[107](https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L107),
+	[120](https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L120),
+	[161](https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L161))
 
 ## Further Resources
 
