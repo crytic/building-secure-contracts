@@ -10,3 +10,8 @@ This repository contains examples of common Ethereum smart contract vulnerabilit
 - Unchecked External Call
 - Unprotected Function
 - Wrong Interface
+
+## Credits
+
+These examples were developed and are maintained by [Trail of Bits](https://www.trailofbits.com/).
+If you have questions, are experiencing problems, or just want to learn more and contribute, [please contact us](https://www.trailofbits.com/contact/).
