@@ -4,7 +4,7 @@
 - Wrong contract interface
 
 ## Detail
-The interface is wrongly define. `Alice.set(uint)` takes an `uint` in `Bob.sol` but `Alice.set(int)` a `int` in `Alice.sol`.
+The interface is wrongly defined. `Alice.set(uint)` takes an `uint` in `Bob.sol` but `Alice.set(int)` a `int` in `Alice.sol`.
 The two interface will produces two differents method ids. 
 As a result bob will call the fallback function of alice, instead of `set`.
 

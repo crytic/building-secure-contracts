@@ -9,7 +9,7 @@
 ## Attack
 
 - A contract uses an unchecked `address.send()` external call to transfer Ether.
-- An attacker can reliably can cause this external call to fail 
+- If it transfers Ether to an attacker contract, the attacker contract can reliably cause the external call to fail, for example, with a fallback function which intentionally runs out of gas.
 - The consequences of this external call failing will be contract specific.
 	- In the case of the King of the Ether contract, this resulted in accidental loss of Ether for some contract users, due to refunds not being sent.
 
@@ -23,5 +23,6 @@
 
 ## Further Resources
 
+- http://solidity.readthedocs.io/en/develop/security-considerations.html
 - http://solidity.readthedocs.io/en/develop/types.html#members-of-addresses
 - https://github.com/ConsenSys/smart-contract-best-practices#handle-errors-in-external-calls
