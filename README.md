@@ -13,5 +13,6 @@ This repository contains examples of common Ethereum smart contract vulnerabilit
 
 ## Credits
 
-These examples were developed and are maintained by [Trail of Bits](https://www.trailofbits.com/).
-If you have questions, are experiencing problems, or just want to learn more and contribute, [please contact us](https://www.trailofbits.com/contact/).
+These examples are developed and maintained by [Trail of Bits](https://www.trailofbits.com/). Contributions are encouraged and are covered under our [bounty program](https://github.com/trailofbits/not-so-smart-contracts/wiki#bounties).
+
+If you have questions, problems, or just want to learn more, then join the #ethereum channel on the [Empire Hacking Slack](https://empireslacking.herokuapp.com/) or [contact us](https://www.trailofbits.com/contact/) directly.

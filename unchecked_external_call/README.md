@@ -16,12 +16,12 @@
 ## Known Exploit
 
 - [King of the Ether](https://www.kingoftheether.com/postmortem.html) (line numbers:
-	[100](https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L100),
-	[107](https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L107),
-	[120](https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L120),
-	[161](https://github.com/trailofbits/not-so-smart-contracts/blob/85fb77e4de3d1628e3509703cd2f60a7d055962c/unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L161))
+	[100](unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L100),
+	[107](unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L107),
+	[120](unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L120),
+	[161](unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L161))
 
-## Further Resources
+## References
 
 - http://solidity.readthedocs.io/en/develop/security-considerations.html
 - http://solidity.readthedocs.io/en/develop/types.html#members-of-addresses

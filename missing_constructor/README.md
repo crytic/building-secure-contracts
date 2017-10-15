@@ -1,6 +1,6 @@
 # Missing constructor
 
-## Principle:
+## Principle
 - Wrong constructor name
 
 ## Attack
