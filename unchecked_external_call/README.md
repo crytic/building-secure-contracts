@@ -16,10 +16,10 @@
 ## Known Exploit
 
 - [King of the Ether](https://www.kingoftheether.com/postmortem.html) (line numbers:
-	[100](unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L100),
-	[107](unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L107),
-	[120](unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L120),
-	[161](unchecked_external_call/KotET_source_code/KingOfTheEtherThrone.sol#L161))
+	[100](KotET_source_code/KingOfTheEtherThrone.sol#L100),
+	[107](KotET_source_code/KingOfTheEtherThrone.sol#L107),
+	[120](KotET_source_code/KingOfTheEtherThrone.sol#L120),
+	[161](KotET_source_code/KingOfTheEtherThrone.sol#L161))
 
 ## References
 
