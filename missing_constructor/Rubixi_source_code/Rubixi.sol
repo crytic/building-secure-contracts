@@ -1,4 +1,5 @@
 // 0xe82719202e5965Cf5D9B6673B7503a3b92DE20be#code
+pragma solidity ^0.4.15;
 
 contract Rubixi {
 
@@ -17,7 +18,7 @@ contract Rubixi {
         }
 
         modifier onlyowner {
-                if (msg.sender == creator) _
+                if (msg.sender == creator) _;
         }
 
         struct Participant {
@@ -47,7 +48,7 @@ contract Rubixi {
                 addPayout(_fee);
         }
 
-        //Function called for valid tx to the contract 
+        //Function called for valid tx to the contract
         function addPayout(uint _fee) private {
                 //Adds new address to participant array
                 participants.push(Participant(msg.sender, (msg.value * pyramidMultiplier) / 100));
