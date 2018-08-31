@@ -4,6 +4,7 @@ This repository contains examples of common Ethereum smart contract vulnerabilit
 
 ## Vulnerabilities
 
+- Bad randomness
 - Denial of Service
 - Integer Overflow
 - Missing Constructor
