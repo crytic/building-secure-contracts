@@ -1,12 +1,9 @@
 # Variable Shadowing
-
-## Principle
-- Variable shadowing occurs when a variable declared within a certain scope (decision block, method, or inner class)
+Variable shadowing occurs when a variable declared within a certain scope (decision block, method, or inner class)
 has the same name as a variable declared in an outer scope.
 
 ## Attack
-This depends a lot on the code of the contract itself. For instance, in the state_inherance.sol example, 
-it stops the owner to perform the self-destruction of the contract.
+This depends a lot on the code of the contract itself. For instance, in the [this example](variable%20shadowing/inherited_state.sol), variable shadowing prevents the owner of contract `C` from performing self destruct
 
 ## Mitigation
 The solidity compiler has [some checks](https://github.com/ethereum/solidity/issues/973) to emit warnings when 

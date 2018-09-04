@@ -12,5 +12,4 @@ As a result anyone can change the state variables initialized in this function.
 
 ## Examples
 - [Rubixi](https://etherscan.io/address/0xe82719202e5965Cf5D9B6673B7503a3b92DE20be#code)
-
-## References
+- An [incorrectly named constructor](missing_constructor/Missing.sol)

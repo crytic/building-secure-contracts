@@ -12,12 +12,13 @@ the array and alter other variables in the contract.
 
 ## Mitigations
 
-- Use openZeppelin's safeMath library
+- Use openZeppelin's [safeMath library](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol)
 - Validate all arithmetic
 
 ## Examples
 
-## References
+- In [integer_overflow_1](integer_overflow/interger_overflow_1.sol), we give both unsafe and safe version of
+the `add` operation.
 
-- https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol
-- https://github.com/Arachnid/uscc/tree/master/submissions-2017/doughoyte
+- [A submission](https://github.com/Arachnid/uscc/tree/master/submissions-2017/doughoyte) to the Underhanded Solidity Coding Contest that explots the unsafe dynamic array bug outlined above
+

@@ -32,9 +32,9 @@ There are currently not any recommended mitigations for this issue.
 Do not build applications that require on-chain randomness.
 In the future, however, these approaches show promise
 
-- Verifiable delay functions: functions which produce a pseudorandom number
+- [Verifiable delay functions](https://eprint.iacr.org/2018/601.pdf): functions which produce a pseudorandom number
 and take a fixed amount of sequential time to evaluate
-- Randao: A commit reveal scheme where users must stake wei to participate
+- [Randao](https://github.com/randao/randao): A commit reveal scheme where users must stake wei to participate
 
 ## Examples
 
@@ -42,5 +42,3 @@ and take a fixed amount of sequential time to evaluate
 
 - https://ethereum.stackexchange.com/questions/191/how-can-i-securely-generate-a-random-number-in-my-smart-contract
 - https://blog.positive.com/predicting-random-numbers-in-ethereum-smart-contracts-e5358c6b8620
-- Forthcoming VDF blog post.
-- https://github.com/randao/randao

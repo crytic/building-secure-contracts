@@ -3,7 +3,7 @@ Missing (or incorrectly used) modifier on a function allows an attacker to use s
 
 ## Attack Scenario
 
-- A contract with a `changeOwner` function does not label it as `private` and therefore
+A contract with a `changeOwner` function does not label it as `private` and therefore
 allows anyone to become the contract owner.
 
 ## Mitigations
@@ -11,6 +11,5 @@ allows anyone to become the contract owner.
 Always specify a modifier for functions.
 
 ## Examples
-[Parity Wallet](https://blog.zeppelin.solutions/on-the-parity-wallet-multisig-hack-405a8c12e8f7)
-- See `initWallet` in `WalletLibrary_source_code/WalletLibrary.sol`
+[Parity Wallet](https://blog.zeppelin.solutions/on-the-parity-wallet-multisig-hack-405a8c12e8f7). For code, see [initWallet](WalletLibrary_source_code/WalletLibrary.sol)
 

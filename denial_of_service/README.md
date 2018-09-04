@@ -16,6 +16,10 @@ all reimbursements fail.
 
 ## Examples
 
+- Both [insecure](denial_of_service/auction.sol#L4) and [secure](denial_of_service/auction.sol#L26) versions of the auction contract mentioned above
+
+- Bulk refund functionality that is [suceptible to DoS](denial_of_service/list_dos.sol#L3), and a [secure](denial_of_service/list_dos.sol#L29) version
+
 ## Mitigations
 
 - Favor pull over push for external calls

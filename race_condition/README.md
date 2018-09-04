@@ -17,8 +17,7 @@ second `approve`, Bob will be able to spend 150 of Alice's tokens.
 ## Mitigations
 
 - For the ERC20 bug, insist that Alice only be able to `approve` Bob when he is approved for 0 tokens.
+- Keep in mind that all transactions may be front-run
 
 ## Examples
-ERC20 approve/transferFrom
-
-## References
+- [Race condition](race_condition/RaceCondition.sol) outlined in the first bullet point above

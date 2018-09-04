@@ -13,6 +13,4 @@ that they do not have.
 - Avoid use of `call.value`
 
 ## Examples
-[DAO](http://hackingdistributed.com/2016/06/18/analysis-of-the-dao-exploit/)
-
-## References
+- The [DAO](http://hackingdistributed.com/2016/06/18/analysis-of-the-dao-exploit/) hack
