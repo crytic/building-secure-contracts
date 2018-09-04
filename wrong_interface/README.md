@@ -1,14 +1,17 @@
 # Wrong interface
+A contract interface defines functions with a different type signature than the implementation, causing two different method id's to be created.
+As a result, when the interfact is called, the fallback method will be executed.
 
-## Principle:
-- Wrong contract interface
+## Attack Scenario
 
-## Detail
-The interface is wrongly defined. `Alice.set(uint)` takes an `uint` in `Bob.sol` but `Alice.set(int)` a `int` in `Alice.sol`.
-The two interface will produces two differents method ids. 
-As a result bob will call the fallback function of alice, instead of `set`.
+- The interface for a contract defines `set(uint)` but the implementation defines `set(int)`. Anyone calling
+`set` via the interface will execute the fallback function.
 
-## Running example
+## Mitigations
+
+Verify that type signatures are identical between inferfaces and implementations.
+
+## Example
 First, get the bytecode and the abi of the contracts:
 ```̀bash 
 $ solc --bin Alice.sol

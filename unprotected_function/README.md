@@ -1,8 +1,16 @@
 # Unprotected function
+Missing (or incorrectly used) modifier on a function allows an attacker to use sensitive functionality in the contract.
 
-## Principle
-- Missing modifier on a sensitive function
+## Attack Scenario
 
-## Known exploit
+- A contract with a `changeOwner` function does not label it as `private` and therefore
+allows anyone to become the contract owner.
+
+## Mitigations
+
+Always specify a modifier for functions.
+
+## Examples
 [Parity Wallet](https://blog.zeppelin.solutions/on-the-parity-wallet-multisig-hack-405a8c12e8f7)
 - See `initWallet` in `WalletLibrary_source_code/WalletLibrary.sol`
+
