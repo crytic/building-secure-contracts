@@ -11,7 +11,8 @@ Certain Solidity operations known as "external calls", require the developer to 
 
 ## Mitigation
 
-Manually perform validation when making external calls
+- Manually perform validation when making external calls
+- Use `address.transfer()`
 
 ## Example
 

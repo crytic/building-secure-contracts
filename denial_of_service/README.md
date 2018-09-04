@@ -26,3 +26,8 @@ all reimbursements fail.
 - If iterating over a dynamically sized data structure, be able to handle the case where the function
 takes multiple blocks to execute. One strategy for this is storing iterator in a private variable and
 using `while` loop that exists when gas drops below certain threshold.
+
+## References
+
+- https://www.reddit.com/r/ethereum/comments/4ghzhv/governmentals_1100_eth_jackpot_payout_is_stuck/
+- https://github.com/ConsenSys/smart-contract-best-practices#dos-with-unexpected-revert
