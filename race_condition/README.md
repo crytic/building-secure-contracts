@@ -20,4 +20,4 @@ second `approve`, Bob will be able to spend 150 of Alice's tokens.
 - Keep in mind that all transactions may be front-run
 
 ## Examples
-- [Race condition](race_condition/RaceCondition.sol) outlined in the first bullet point above
+- [Race condition](RaceCondition.sol) outlined in the first bullet point above

@@ -9,6 +9,10 @@ Certain Solidity operations known as "external calls", require the developer to 
 - The consequences of this external call failing will be contract specific.
 	- In the case of the King of the Ether contract, this resulted in accidental loss of Ether for some contract users, due to refunds not being sent.
 
+## Mitigation
+
+Manually perform validation when making external calls
+
 ## Example
 
 - [King of the Ether](https://www.kingoftheether.com/postmortem.html) (line numbers:

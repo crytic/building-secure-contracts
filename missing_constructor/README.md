@@ -11,5 +11,5 @@ As a result anyone can change the state variables initialized in this function.
 - Use `constructor` instead of a named constructor
 
 ## Examples
-- [Rubixi](https://etherscan.io/address/0xe82719202e5965Cf5D9B6673B7503a3b92DE20be#code)
-- An [incorrectly named constructor](missing_constructor/Missing.sol)
+- [Rubixi](Rubixi_source_code/Rubixi.sol) uses `DynamicPyramid` instead of `Rubixi` as a constructor
+- An [incorrectly named constructor](Missing.sol)

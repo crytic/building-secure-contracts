@@ -11,5 +11,6 @@ allows anyone to become the contract owner.
 Always specify a modifier for functions.
 
 ## Examples
-[Parity Wallet](https://blog.zeppelin.solutions/on-the-parity-wallet-multisig-hack-405a8c12e8f7). For code, see [initWallet](WalletLibrary_source_code/WalletLibrary.sol)
+- An `onlyOwner` modifier is [defined but not used](Unprotected.sol), allowing anyone to become the `owner`
+- [Parity Wallet](https://blog.zeppelin.solutions/on-the-parity-wallet-multisig-hack-405a8c12e8f7). For code, see [initWallet](WalletLibrary_source_code/WalletLibrary.sol)
 

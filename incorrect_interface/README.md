@@ -12,7 +12,7 @@ Verify that type signatures are identical between inferfaces and implementations
 
 ## Example
 
-We now walk through how to find this vulnerability in the [Alice](incorrect_interface/Alice.sol) and [Bob](incorrect_interface/Bob.sol) contracts in this repo.
+We now walk through how to find this vulnerability in the [Alice](Alice.sol) and [Bob](Bob.sol) contracts in this repo.
 
 First, get the bytecode and the abi of the contracts:
 ```̀bash 
