@@ -1,6 +1,8 @@
 # Re-entrancy
-A state variable is changed after a contract uses `call.value`. The attacker uses the fallback function to
-execute the vulnerable function again before the state variable is changed.
+A state variable is changed after a contract uses `call.value`. The attacker uses
+[a fallback function](reentrancy/ReentrancyExploit.sol#L26-L33)—which is automatically executed after
+Ether is transferred from the targeted contract—to execute the vulnerable function again, *before* the
+state variable is changed.
 
 ## Attack Scenarios
 - A contract that holds a map of account balances allows users to call a `withdraw` function. However,
@@ -11,6 +13,7 @@ that they do not have.
 ## Mitigations
 
 - Avoid use of `call.value`
+- Update all bookkeeping state variables _before_ transferring execution to an external contract.
 
 ## Examples
 - The [DAO](http://hackingdistributed.com/2016/06/18/analysis-of-the-dao-exploit/) hack
