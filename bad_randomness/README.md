@@ -1,18 +1,14 @@
 # Bad Randomness
 
-Due to the fact that all information on the blockchain in public, acquiring random numbers that
-cannot be influenced by malicious actors is nearly impossible.
+Pseudorandom number generation on the blockchain is generally unsafe. There are a number of reasons for this, including:
 
-People have mistakenly attempted to use the following sources of "randomness" in their smart contracts
+- The blockchain does not provide any cryptographically secure source of randomness. Block hashes in isolation are cryptographically random, however, a malicious miner can modify block headers, introduce additional transactions, and choose not to publish blocks in order to influence the resulting hashes. Therefore, miner-influenced values like block hashes and timestamps should never be used as a source of randomness.
 
-- Block variables such as `coinbase`, `difficulty`, `gasLimit`, `number`, and `timestamp`
-- Blockhash of a past or future block
+- Everything in a contract is publicly visible. Random numbers cannot be generated or stored in the contract until after all lottery entries have been stored.
 
-The problem with each of these examples is that miners can influence their values.
-Even if it is unlikely a miner is able to specify exactly what these quantities,
-they could stack the cards slightly in their favor.
+- Computers will always be faster than the blockchain. Any number that the contract could generate can potentially be precalculated off-chain before the end of the block.
 
-A common workaround for this issue is a commit and reveal scheme. Here, each user submits the hash of their secret number.
+A common workaround for the lack of on-chain randomness is using a commit and reveal scheme. Here, each user submits the hash of their secret number.
 When the time comes for the random number to be generated, each user sends their secret number to the contract
 which then verifies it matches the hash submitted earlier and xors them together. Therefore no participant can observe how their contribution
 will affect the end result until after everyone has already committed to a value. However, this is also vulnerable to DoS attacks,
