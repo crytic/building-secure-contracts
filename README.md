@@ -15,7 +15,7 @@ It also includes a repository and analysis of several [honeypots](honeypots/)
 - [Reentrancy](reentrancy/): Calling external contracts gives them control over execution
 - [Unchecked External Call](unchecked_external_call/): Some Solidity operations silently fail
 - [Unprotected Function](unprotected_function/): Failure to use function modifier allows attacker to manipulate contract
-- [Variable Shadowing](variable_shadowing/): Local variable name is identical to one in outer scope
+- [Variable Shadowing](variable%20shadowing/): Local variable name is identical to one in outer scope
 
 ## Credits
 
