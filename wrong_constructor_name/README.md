@@ -1,6 +1,6 @@
-# Missing constructor
+# Wrong Constructor Name
 
-If the constructor of a smart contract is not present (or not spelled the same way as the contract name), it is callable by anyone.
+A function intended to be a constructor is named incorrectly, which causes it to end up in the runtime bytecode instead of being a constructor.
 
 ## Attack
 Anyone can call the function that was supposed to be the constructor.
