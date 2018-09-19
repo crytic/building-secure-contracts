@@ -2,17 +2,18 @@
 
 A malicious contract can permanently stall another contract by failing
 in a strategic way. In particular, contracts that bulk perform transactions or updates using
-a `for` loop can be DoS'd if a call to another contract or `send` fails during the loop. 
+a `for` loop can be DoS'd if a call to another contract or `transfer` fails during the loop. 
 
 ## Attack Scenarios
 
 - Auction contract where frontrunner must be reimbursed when they are outbid. If the call refunding
-the frontrunner continuously fails, the auction is stalled and they become the de-facto winner.
+the frontrunner continuously fails, the auction is stalled and they become the de facto winner.
 
-- Contract iterates through an array to pay back its users. If one send fails in the middle of a `for` loop
+- Contract iterates through an array to pay back its users. If one `transfer` fails in the middle of a `for` loop
 all reimbursements fail.
 
-- Attacker forces calling contract to spend remainder of its gas and revert.
+- Attacker spams contract, causing some array to become large. Then `for` loops iterating through the array 
+might run out of gas and revert.
 
 ## Examples
 
