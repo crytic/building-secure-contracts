@@ -12,4 +12,4 @@ As a result anyone can change the state variables initialized in this function.
 
 ## Examples
 - [Rubixi](Rubixi_source_code/Rubixi.sol) uses `DynamicPyramid` instead of `Rubixi` as a constructor
-- An [incorrectly named constructor](Missing.sol)
+- An [incorrectly named constructor](incorrect_constructor.sol)
