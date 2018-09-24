@@ -10,7 +10,7 @@ It also includes a repository and analysis of several [honeypots](honeypots/)
 - [Incorrect Interface](incorrect_interface/): Implementation uses different function signatures than interface
 - [Integer Overflow](integer_overflow/): Arithmetic in Solidity (or EVM) is not safe by default
 - [Forced Ether Reception](forced_ether_reception/): Contracts can be forced to receive Ether
-- [Missing Constructor](missing_constructor/): Anyone can become owner of contract due to missing constructor
+- [Wrong Constructor Name](wrong_constructor_name/): Anyone can become owner of contract due to missing constructor
 - [Race Condition](race_condition/): Transactions can be frontrun on the blockchain
 - [Reentrancy](reentrancy/): Calling external contracts gives them control over execution
 - [Unchecked External Call](unchecked_external_call/): Some Solidity operations silently fail
