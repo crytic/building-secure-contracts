@@ -34,7 +34,7 @@ and take a fixed amount of sequential time to evaluate
 
 ## Examples
 
-- The `random` function in [theRun](https://etherscan.io/address/0xcac337492149bdb66b088bf5914bedfbf78ccc18#code) was vulnerable to this attack. It used the blockhash, timestamp and block number to generate numbers in a range to determine winners of the lottery. To exploit this, an attacker could set up a smart contract that generates numbers in the same way and submits entries when it would win. As well, the miner of the block has some control over the blockhash and timestamp and would also be able to influence the lottery in their favor.
+- The `random` function in [theRun](theRun_source_code/theRun.sol) was vulnerable to this attack. It used the blockhash, timestamp and block number to generate numbers in a range to determine winners of the lottery. To exploit this, an attacker could set up a smart contract that generates numbers in the same way and submits entries when it would win. As well, the miner of the block has some control over the blockhash and timestamp and would also be able to influence the lottery in their favor.
 
 ## Sources
 
