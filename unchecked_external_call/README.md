@@ -27,3 +27,4 @@ Certain Solidity operations known as "external calls", require the developer to 
 - http://solidity.readthedocs.io/en/develop/security-considerations.html
 - http://solidity.readthedocs.io/en/develop/types.html#members-of-addresses
 - https://github.com/ConsenSys/smart-contract-best-practices#handle-errors-in-external-calls
+- https://vessenes.com/ethereum-griefing-wallets-send-w-throw-considered-harmful/
