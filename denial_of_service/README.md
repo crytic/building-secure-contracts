@@ -32,3 +32,4 @@ using `while` loop that exists when gas drops below certain threshold.
 
 - https://www.reddit.com/r/ethereum/comments/4ghzhv/governmentals_1100_eth_jackpot_payout_is_stuck/
 - https://github.com/ConsenSys/smart-contract-best-practices#dos-with-unexpected-revert
+- https://vessenes.com/ethereum-griefing-wallets-send-w-throw-considered-harmful/
