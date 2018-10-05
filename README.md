@@ -16,8 +16,8 @@ Bonus! We have also included a repository and analysis of several [honeypots](ho
 
 ## Vulnerabilities
 
-| Not So Smart Contract | Description | CWE(s) |
-| --- | --- | --- |
+| Not So Smart Contract | Description |
+| --- | --- |
 | [Bad randomness](bad_randomness) | Contract attempts to get on-chain randomness, which can be manipulated by users |
 | [Denial of Service](denial_of_service) | Attacker stalls contract execution by failing in strategic way |
 | [Forced Ether Reception](forced_ether_reception) | Contracts can be forced to receive Ether |
