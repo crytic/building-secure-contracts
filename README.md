@@ -4,7 +4,7 @@ This repository contains examples of common Ethereum smart contract vulnerabilit
 
 ## Features
 
-Not So Smart Contracts each include a standard set of information:
+Each _Not So Smart Contract_ includes a standard set of information:
 
 * Description of the unique vulnerability type
 * Attack scenarios to exploit the vulnerability
