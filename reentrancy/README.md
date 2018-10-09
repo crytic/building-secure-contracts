@@ -16,4 +16,6 @@ that they do not have.
 - Update all bookkeeping state variables _before_ transferring execution to an external contract.
 
 ## Examples
+
 - The [DAO](http://hackingdistributed.com/2016/06/18/analysis-of-the-dao-exploit/) hack
+- The [SpankChain](https://medium.com/spankchain/we-got-spanked-what-we-know-so-far-d5ed3a0f38fe) hack
