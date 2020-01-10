@@ -4,7 +4,7 @@
 
 - [Introduction](#introduction)
 - [Run a standalone exploration](#run-a-standalone-exploration)
-- [Manipulate a smart contract through the API](#manipulate-a-smart-contract-through-the-API)
+- [Manipulate a smart contract through the API](#manipulate-a-smart-contract-through-the-api)
 - [Summary: Running under Manticore](#summary-running-under-manticore)
 
 
@@ -31,7 +31,13 @@ You can run Manticore directly on the smart contract by the following command:
 $ manticore example.sol
 ```
 
-You will get the output of testcases(the order may change) like this one:
+If you are using a Truffle project, you must run manticore like this:
+
+```bash
+$ manticore . --contract Simple
+```
+
+You will get the output of testcases like this one (the order may change):
 
 ```
 ...
@@ -49,7 +55,7 @@ You will get the output of testcases(the order may change) like this one:
 Without additional information, Manticore will explore the contract with new symbolic
 transactions until it does not explore new paths on the contract. Manticore does not run new transactions after a failing one (e.g: after a revert).
 
-Manticore will output the information in a mcore_* directory. Among other, you will find in this directory:
+Manticore will output the information in a `mcore_*` directory. Among other, you will find in this directory:
 
  - `global.summary`: coverage and compiler warnings
  - `test_XXXXX.summary`: coverage, last instruction, account balances per test case
@@ -69,7 +75,13 @@ Here Manticore founds 7 test cases, which correspond to (the filename order may 
 
 _Exploration summary f(!=65) denotes f called with any value different than 65._
 
-As you can notice, Manticore generates an unique test case for every successful transaction.
+As you can notice, Manticore generates an unique test case for every successful or reverted transaction.
+
+There a few important command line options to restrict the manticore exploration:
+* `--exclude-all` disables all the bug detectors. If you do not want to detect common bugs, you can enable this flag to speed-up the manticore exploration.
+* `--txlimit N` limits the number of symbolic transaction to `N`. By default, Manticore will keep exploring symbolic transactions until the coverage stops to grow.
+* `--txnoether` disables the sending of ether to contract. If you are sure your contract does not handle ether, you can enable this flag to slightly speed-up the manticore exploration.
+
 
 ## Manipulate a smart contract through the API
 
