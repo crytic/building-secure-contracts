@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+  pull_request:
+  schedule:
+    # run CI every day even if no PRs/merges occur
+    - cron:  '0 12 * * *'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        type: ["slither", "echidna", "manticore"]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.6
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6
+    - name: Install dependencies
+      run: |
+        sudo wget -O /usr/bin/solc https://github.com/ethereum/solidity/releases/download/v0.5.11/solc-static-linux
+        sudo chmod +x /usr/bin/solc
+    - name: Run Tests
+      env:
+        TEST_TYPE: ${{ matrix.type }}
+      run: |
+        bash program-analysis/${TEST_TYPE}/scripts/gh_action_test.sh
