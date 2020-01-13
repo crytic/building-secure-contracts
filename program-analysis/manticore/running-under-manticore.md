@@ -25,17 +25,12 @@ contract Simple {
 
 ## Run a standalone exploration
 
-You can run Manticore directly on the smart contract by the following command:
+You can run Manticore directly on the smart contract by the following command (`project` can be a Solidity File, or a project directory):
 
 ```bash
-$ manticore example.sol
+$ manticore project
 ```
 
-If you are using a Truffle project, you must run manticore like this:
-
-```bash
-$ manticore . --contract Simple
-```
 
 You will get the output of testcases like this one (the order may change):
 
@@ -77,10 +72,7 @@ _Exploration summary f(!=65) denotes f called with any value different than 65._
 
 As you can notice, Manticore generates an unique test case for every successful or reverted transaction.
 
-There a few important command line options to restrict the manticore exploration:
-* `--exclude-all` disables all the bug detectors. If you do not want to detect common bugs, you can enable this flag to speed-up the manticore exploration.
-* `--txlimit N` limits the number of symbolic transaction to `N`. By default, Manticore will keep exploring symbolic transactions until the coverage stops to grow.
-* `--txnoether` disables the sending of ether to contract. If you are sure your contract does not handle ether, you can enable this flag to slightly speed-up the manticore exploration.
+Use the `--quick-mode` flag if you want fast code exploration (it disable bug detectors, gas computation, ...)
 
 
 ## Manipulate a smart contract through the API
