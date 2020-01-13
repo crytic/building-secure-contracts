@@ -4,7 +4,7 @@
 
 - [Introduction](#introduction)
 - [Run a standalone exploration](#run-a-standalone-exploration)
-- [Manipulate a smart contract through the API](#manipulate-a-smart-contract-through-the-API)
+- [Manipulate a smart contract through the API](#manipulate-a-smart-contract-through-the-api)
 - [Summary: Running under Manticore](#summary-running-under-manticore)
 
 
@@ -25,13 +25,14 @@ contract Simple {
 
 ## Run a standalone exploration
 
-You can run Manticore directly on the smart contract by the following command:
+You can run Manticore directly on the smart contract by the following command (`project` can be a Solidity File, or a project directory):
 
 ```bash
-$ manticore example.sol
+$ manticore project
 ```
 
-You will get the output of testcases(the order may change) like this one:
+
+You will get the output of testcases like this one (the order may change):
 
 ```
 ...
@@ -49,7 +50,7 @@ You will get the output of testcases(the order may change) like this one:
 Without additional information, Manticore will explore the contract with new symbolic
 transactions until it does not explore new paths on the contract. Manticore does not run new transactions after a failing one (e.g: after a revert).
 
-Manticore will output the information in a mcore_* directory. Among other, you will find in this directory:
+Manticore will output the information in a `mcore_*` directory. Among other, you will find in this directory:
 
  - `global.summary`: coverage and compiler warnings
  - `test_XXXXX.summary`: coverage, last instruction, account balances per test case
@@ -69,7 +70,10 @@ Here Manticore founds 7 test cases, which correspond to (the filename order may 
 
 _Exploration summary f(!=65) denotes f called with any value different than 65._
 
-As you can notice, Manticore generates an unique test case for every successful transaction.
+As you can notice, Manticore generates an unique test case for every successful or reverted transaction.
+
+Use the `--quick-mode` flag if you want fast code exploration (it disable bug detectors, gas computation, ...)
+
 
 ## Manipulate a smart contract through the API
 
