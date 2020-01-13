@@ -15,10 +15,7 @@ Knowing what you want to check will also help you to select the right tool.
 
 The components to be tested, that are frequently relevant for smart contracts, include:
 
-- **State machine.** Most of the contracts can be represented partially as a state machine. Some general properties to test:
-   + No invalid state can be reached.
-   + If a state is valid, then it can be reached.
-   + There are no terminal states (where other states cannot be reached).
+- **State machine.** Most of the contracts can be represented partially as a state machine. Consider checking that (1) No invalid state can be reached, (2) if a state is valid, then it can be reached, (3) no state traps the contract.
   - Echidna and Manticore are the tools to favor to test state-machines specifications.
 
 - **Access control.** If you system has privileged users (e.g. an owner, controllers, …) you must ensure that (1) each user can only perform the authorized actions and (2) no user can block actions from a more priviledged one.
@@ -34,7 +31,7 @@ The components to be tested, that are frequently relevant for smart contracts, i
   - Manticore and Echidna will allow to test the external interactions. Manticore has an inbuilt mechanism to stub external contracts.
 
 - **Standard conformance.** Ethereum standards (e.g. ERC20) have a history of flaws in their design. Be sure to be aware of the limitations of the standard you are building on top of.
-  - Slither will let you detect the standard used to detect potential issues. Echidna and Manticore can be also be used to test for standard properties, but requiere to careful implement each ERC property. 
+  - Slither, Echidna and Manticore will help you to detect deviance to a given standard. 
 
 To summarize:
 
@@ -45,7 +42,7 @@ Access control | Slither, Echidna, Manticore | [Slither exercise 2](https://gith
 Arithmetic operations | Manticore, Echidna | [Echidna exercise 1](https://github.com/trailofbits/building-secure-contracts/blob/master/program-analysis/echidna/Exercise-1.md), [Manticore exercises 1 - 3](https://github.com/trailofbits/building-secure-contracts/tree/master/program-analysis/manticore/exercises)
 Inheritance correctness | Slither | [Slither exercise 1](https://github.com/trailofbits/building-secure-contracts/blob/master/program-analysis/slither/exercise1.md)
 External interactions | Manticore, Echidna | 
-Standard conformance | Slither | [`slither-erc`](https://github.com/crytic/slither/wiki/ERC-Conformance)
+Standard conformance | Slither, Echidna, Manticore | [`slither-erc`](https://github.com/crytic/slither/wiki/ERC-Conformance)
 
 Depending on your application's goal, other areas will need to be checked.
 
