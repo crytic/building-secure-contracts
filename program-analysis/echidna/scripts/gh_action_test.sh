@@ -3,7 +3,7 @@
 
 install_echidna(){
     pip install crytic-compile
-    wget https://github.com/crytic/echidna/releases/download/1.2.0.0/echidna-test-1.2.0.0-Ubuntu-18.04.tar.gz
+    wget https://github.com/crytic/echidna/releases/download/v1.2.0.0/echidna-test-1.2.0.0-Ubuntu-18.04.tar.gz
     tar -xvf echidna-test-1.2.0.0-Ubuntu-18.04.tar.gz
     sudo mv echidna-test /usr/bin/
 }
