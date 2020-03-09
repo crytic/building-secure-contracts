@@ -27,6 +27,25 @@ test_example(){
     fi
 
     echo "testtoken.sol passed"
+    
+    echidna-test assert.sol --config assert.yaml > results.txt
+    
+    if [ $? -ne 1 ]
+    then
+        echo "assert.sol failed"
+        exit -1
+    fi
+
+    grep "assertion in inc: failed!" results.txt
+    if [ $? -ne 0 ]
+    then
+        echo "Bug not found"
+        echo "assert.sol failed"
+        exit -1
+    fi
+
+    echo "assert.sol passed"
+
     cd ..
 }
 
