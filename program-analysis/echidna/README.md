@@ -10,6 +10,7 @@ The second part is a set of exercises to solve.
 - [Installation](#installation)
 - [Introduction to fuzzing](./fuzzing-introduction.md): Brief introduction to fuzzing
 - [How to test a property](./how-to-test-a-property.md): How to test a property with Echidna
+- [How to test assertions](./assertion-checking.md): How to test Solidity's `assert` with Echidna
 - [Exercise 1](./Exercise-1.md): Testing token's balance
 - [Exercise 2](./Exercise-2.md): Testing access control
 - [Exercise 3](./Exercise-3.md): Testing with custom initialization
