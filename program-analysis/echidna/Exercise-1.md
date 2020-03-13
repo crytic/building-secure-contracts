@@ -10,7 +10,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
   
-We will test the following contract *[exercises/token.sol](exercises/token.sol)*:
+We will test the following contract *[exercises/exercise1/token.sol](exercises/excercise1/token.sol)*:
 
 ```Solidity
  contract Ownership{
@@ -57,7 +57,7 @@ We will test the following contract *[exercises/token.sol](exercises/token.sol)*
 - Add a property to check that `echidna_caller` cannot have more than an initial balance of 10000.
 - Once Echidna found the bug, fix the issue, and re-try your property with Echidna.
 
-The skeleton for this exercise is (*[exercises/exercise1/exercise1.sol](./exercises/exercise1/exercise1.sol)*):
+The skeleton for this exercise is (*[exercises/exercise1/template.sol](./exercises/exercise1/template.sol)*):
 
 ```Solidity
      import "token.sol";
