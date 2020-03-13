@@ -12,7 +12,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
   
-We will test the following contract *[exercises/token.sol](./exercises/token.sol)*:
+We will test the following contract *[exercises/exercise3/token.sol](./exercises/exercise3/token.sol)*:
 
 ```Solidity
  contract Ownership{
@@ -54,7 +54,7 @@ We will test the following contract *[exercises/token.sol](./exercises/token.sol
 
 ## Testing with custom initialization
 
-Consider the following extension of the token (*[exercises/exercise3/mintable.sol](.exercises/exercise3/mintable.sol)*):
+Consider the following extension of the token (*[exercises/exercise3/mintable.sol](./exercises/exercise3/mintable.sol)*):
 
 ```Solidity
    import "token.sol";
@@ -74,7 +74,7 @@ Consider the following extension of the token (*[exercises/exercise3/mintable.so
     }
 ```
 
-The [version of token.sol](./exercises/exercises3/token.sol#L1) contains the fixes of the previous exercises.
+The [version of token.sol](./exercises/exercise3/token.sol#L1) contains the fixes of the previous exercises.
 
 ### Goals
 
