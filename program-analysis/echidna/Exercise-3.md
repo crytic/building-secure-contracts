@@ -54,7 +54,7 @@ We will test the following contract *[exercises/exercise3/token.sol](./exercises
 
 ## Testing with custom initialization
 
-Consider the following extension of the token (*[exercises/exercise3/mintable.sol](.exercises/exercise3/mintable.sol)*):
+Consider the following extension of the token (*[exercises/exercise3/mintable.sol](./exercises/exercise3/mintable.sol)*):
 
 ```Solidity
    import "token.sol";

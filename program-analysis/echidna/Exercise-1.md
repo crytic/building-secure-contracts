@@ -10,7 +10,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
   
-We will test the following contract *[exercises/exercise1/token.sol](exercises/excercise1/token.sol)*:
+We will test the following contract *[exercises/exercise1/token.sol](exercises/exercise1/token.sol)*:
 
 ```Solidity
  contract Ownership{

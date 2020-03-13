@@ -60,7 +60,7 @@ We will test the following contract *[exercises/exercise2/token.sol](./exercises
 - Add a property to check that the contract cannot be unpaused.
 - Once Echidna found the bug, fix the issue, and re-try your property with Echidna.
 
-The skeleton for this exercise is (*[exercises/exercise2/template.sol](./exercise2/template.sol)*):
+The skeleton for this exercise is (*[exercises/exercise2/template.sol](./exercises/exercise2/template.sol)*):
 
 ```Solidity
    import "token.sol";
