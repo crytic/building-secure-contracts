@@ -5,6 +5,7 @@
 - [Introduction](#introduction)
 - [Write an assertion](#write-an-assertion)
 - [Run Echidna](#run-echidna)
+- [When and how use assertions](#when-and-how-use-assertions)
 - [Summary: Assertion checking](#summary-assertion-checking)
 
 ## Introduction
@@ -65,6 +66,35 @@ Seed: 1806480648350826486
 ```
 
 As you can see, Echidna reports some assertion failure in the `inc` function. Adding more than one assertion per function is possible, but Echidna cannot tell which assertion failed.
+
+## When and how use assertions
+
+Assertions can be used as alternatives to explicit properties, specially if the conditions to check are directly related with the correct use of some operation `f`. Adding assertions after some code will enforce that the check will happen inmediately after it was executed: 
+
+```solidity
+function f(..) public {
+    // some complex code
+    ...
+    assert (condition);
+    ...
+}
+
+```
+
+On the contrary, using an explicit echidna property will randomly execution transactions and there is no easy way to enforce exactly when it will be checked. It is still possible to do this workaround:
+
+```solidity
+function echidna_assert_after_f() public returns (bool) {
+    f(..); 
+    return(condition);
+}
+```
+
+However, there are some issues:
+
+* It fails if `f` is declared as `internal` or `external`. 
+* It is unclear which arguments should be used to call `f`. 
+* If `f` reverts, the property will fail.
 
 In general, we recommend following [John Regehr's recommendation](https://blog.regehr.org/archives/1091) on how to use assertions:
 
