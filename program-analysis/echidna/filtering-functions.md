@@ -75,8 +75,7 @@ Seed: -3684648582249875403
 
 ## Filtering functions
 
-Echidna has trouble finding the correct sequence to test this contract because the two reset functions (`reset1` and `reset2`)
-will set all the state variables to `false`. 
+Echidna has trouble finding the correct sequence to test this contract because the two reset functions (`reset1` and `reset2`) will set all the state variables to `false`. 
 However, we can use a special Echidna feature to either blacklist the reset function or to whitelist only the `f`, `g`, 
 `h` and `i` functions. 
 
@@ -94,6 +93,8 @@ filterBlacklist: false
 filterFunctions: ["f", "g", "h", "i"]
 ```
 
+It is important to note that the filtering will be performed by name only: if you need to filter an overloaded function, (e.g. `f()` and `f(uint256)`) this approach will not be precise enough.
+
 # Run Echidna
 
 Once we have one of the configuration files created, we can run Echidna like this:
@@ -110,6 +111,7 @@ echidna_state4: failed!💥
 ```
 
 Echidna should find the sequence of transactions to falsify the property almost inmmediately. 
+While this example is artificial, filtering function to call in contracts with a large number of methods can be helpful for the fuzzer to test certain properties.
 
 ## Summary: Filtering functions
 
