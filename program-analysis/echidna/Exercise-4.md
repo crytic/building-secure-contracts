@@ -54,23 +54,12 @@ We will test the following contract *[exercises/token.sol](exercises/token.sol)*
 
 ### Goals
 
-- Add an assert to check that `echidna_caller` cannot have more than an initial balance of 10000.
-- Once Echidna found the bug, fix the issue, and re-try your property with Echidna.
+- Add an assert to check that, after calling `transfer` the `msg.sender` address cannot have more tokens than its initial balance.
+- Add an assert to check that, after calling `transfer` the `to` address cannot have less tokens than its initial balance.
+- Once Echidna found the bug, fix the issue, and re-try your assertion with Echidna.
 
 This exercise is similar to the [first one](Exercise-1.md), but using assertions instead of explicit properties.  
-The skeleton for this exercise is (*[exercises/exercise4/template.sol](./exercises/exercise4/template.sol)*):
-
-```Solidity
-     import "token.sol";
-     contract TestToken is Token {
-       address echidna_caller = 0x00a329c0648769a73afac7f9381e08fb43dbea70;
-
-        constructor() public{
-            balances[echidna_caller] = 10000;
-         }
-         // add the property
-      }
- ```
+However, in this exercise, it is easier to modify the original token contract (*[exercises/exercise4/token.sol](./exercises/exercise4/token.sol)*):
 
 ## Solution
 
