@@ -27,6 +27,24 @@ test_example(){
     fi
 
     echo "testtoken.sol passed"
+    
+    echidna-test multi.sol --config filter.yaml > results.txt
+    if [ $? -ne 1 ]
+    then
+        echo "multi.sol failed"
+        exit -1
+    fi
+
+    grep "echidna_state4: failed!" results.txt
+    if [ $? -ne 0 ]
+    then
+        echo "Bug not found"
+        echo "multi.sol failed"
+        exit -1
+    fi
+
+    echo "multi.sol passed"
+    
     cd ..
 }
 
