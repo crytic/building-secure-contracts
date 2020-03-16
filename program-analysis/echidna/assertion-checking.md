@@ -1,4 +1,4 @@
-# Testing a Property with Echidna
+# How to test Solidity's `assert` with Echidna
 
 **Table of contents:**
 
