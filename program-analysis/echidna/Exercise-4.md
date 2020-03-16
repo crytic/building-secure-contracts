@@ -2,7 +2,7 @@
 
 **Table of contents:**
 
-- [Targeted contract](#Targeted-contract)
+- [Targeted contract](#targeted-contract)
 - [Exercise](#exercise)
 - [Solution](#solution)
 
@@ -15,7 +15,7 @@ We will test the following contract *[exercises/token.sol](exercises/token.sol)*
 ```Solidity
  contract Ownership{
     address owner = msg.sender;
-    function Owner(){
+    function Owner() public{
          owner = msg.sender;
      }
      modifier isOwner(){
@@ -50,7 +50,7 @@ We will test the following contract *[exercises/token.sol](exercises/token.sol)*
 
 ```
 
-## Testing token's balance
+## Exercise
 
 ### Goals
 
