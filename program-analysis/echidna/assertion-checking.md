@@ -102,4 +102,4 @@ assertion in inc: failed!💥
 Seed: 1806480648350826486
 ```
 
-Echidna found that the assertion in `inc` can fail this function is called multiple times with large arguments.
+Echidna found that the assertion in `inc` can fail if this function is called multiple times with large arguments.
