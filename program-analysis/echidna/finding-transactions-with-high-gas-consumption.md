@@ -84,6 +84,66 @@ Seed: -325611019680165325
 It is important to note that the gas shown here is only an estimation provided by [HEVM](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-). 
 This should precise enough, but it can be slightly different from mainstream Ethereum clients.
 
+# Filtering Out Gas-Reducing Calls
+
+The tutorial on [filtering functions to call during a fuzzing campaign](./filtering-functions.md) shows how to
+remove some functions from your testing.  This can be critical for getting an accurate gas estimate.
+
+```solidity
+contract C {
+  address [] addrs;
+  function push(address a) public {
+    addrs.push(a);
+  }
+  function pop() public {
+    addrs.pop();
+  }
+  function clear() public{
+    addrs.length = 0;
+  }
+  function check() public{
+    for(uint256 i = 0; i < addrs.length; i++)
+      for(uint256 j = i+1; j < addrs.length; j++)
+        if (addrs[i] == addrs[j])
+          addrs[j] = address(0x0);
+  }
+  function echidna_test() public returns (bool) {
+      return true;
+  }
+}
+```
+
+If we measure gas consumption as with the first contract, using a configuration as above, we don't get a very
+accurate measure of how expensive `check` can be:
+
+```
+$ echidna-test pushpop.sol --config gas.yaml
+...
+pop used a maximum of 10746 gas
+...
+check used a maximum of 23730 gas
+...
+clear used a maximum of 35916 gas
+...
+push used a maximum of 40839 gas
+```
+
+That's because the cost depends on the size of `addrs` and random calls tend to leave the array almost empty.
+Blacklisting `pop` and `clear`, however, gives us much better results:
+
+```yaml
+filterBlacklist: true
+filterFunctions: ["pop", "clear"]
+```
+
+```
+$ echidna-test pushpop.sol --config blacklistpushpop.yaml
+...
+push used a maximum of 40839 gas
+...
+check used a maximum of 1484472 gas
+```
+
 ## Summary: Finding transactions with high gas consumption
 
 Echidna can find transactions with high gas consumption using the `estimateGas` configuration option:
