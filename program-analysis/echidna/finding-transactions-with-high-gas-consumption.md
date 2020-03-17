@@ -9,8 +9,8 @@
 
 ## Introduction
 
-In this short tutorial, we are going to show how to tell Echidna find transactions with high gas consumption. 
-This feature can be useful to optimize contracts before deployment. Let's suppose we have a contract like this one: 
+In this short tutorial, we are going to show how to use Echidna to find transactions with high gas consumption. 
+This feature can be useful to optimize contracts before deployment, or to detect possible Denial-of-Service attacks. Let's suppose we have a contract like this one: 
 
 ```solidity
 contract C {
@@ -35,7 +35,7 @@ contract C {
 }
 ```
 
-This small example shows a contract with a function that has a large gas consumption if certain input is provided. 
+This small example shows a contract with a function that has a large gas consumption if a certain input is provided. 
 The echidna property to test is not important, so we just use one that always returns `true`.
 We can run Echidna to verify this:
 
@@ -55,7 +55,7 @@ Echidna can be used to detect transactions with high gas consumption using the `
 estimateGas: true
 ```
 
-In this example, we will also reduce the size of the transaction sequence to get results easier to understand: 
+In this example, we will also reduce the size of the transaction sequence to make the results easier to understand: 
 
 ```yaml
 seqLen: 2
@@ -81,7 +81,7 @@ Seed: -325611019680165325
 
 ```
 
-It is important to note that the gas showed here is only an estimation provided by [HEVM](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-). 
+It is important to note that the gas shown here is only an estimation provided by [HEVM](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-). 
 This should precise enough, but it can be slightly different from mainstream Ethereum clients.
 
 ## Summary: Finding transactions with high gas consumption
