@@ -118,7 +118,7 @@ If we measure gas consumption as with the first contract, using a configuration 
 accurate measure of how expensive `check` can be:
 
 ```
-$ echidna-test pushpop.sol --config gas.yaml
+$ echidna-test pushpop.sol --config pushpop.yaml
 ...
 pop used a maximum of 10746 gas
 ...
