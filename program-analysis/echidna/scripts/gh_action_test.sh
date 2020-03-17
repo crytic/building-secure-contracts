@@ -27,6 +27,24 @@ test_example(){
     fi
 
     echo "testtoken.sol passed"
+    
+    echidna-test gas.sol --config gas.yaml > results.txt
+    if [ $? -ne 0 ]
+    then
+        echo "gas.sol failed"
+        exit -1
+    fi
+
+    grep "f(42,123," results.txt
+    if [ $? -ne 0 ]
+    then
+        echo "Maximum gas estimation not found"
+        echo "gas.sol failed"
+        exit -1
+    fi
+
+    echo "gas.sol passed"
+    
     cd ..
 }
 
