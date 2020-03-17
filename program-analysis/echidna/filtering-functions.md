@@ -9,7 +9,7 @@
 
 ## Introduction
 
-In this short tutorial, we are going to show how to tell Echidna to call certain functions from a contract or avoid others. 
+In this short tutorial, we are going to show how to tell Echidna to only call certain functions from a contract or, alternativelly, to avoid callling some functions. 
 Let's suppose we have a contract like this one: 
 
 ```solidity
@@ -62,7 +62,7 @@ contract C {
 }
 ```
 
-This small example forces Echidna to find certain sequence of transactions to change a state variable. 
+This small example forces Echidna to find a ertain sequence of transactions to change a state variable. 
 This is hard for a fuzzer (it is recommended to use a symbolic execution tool like [Manticore](https://github.com/trailofbits/manticore)).
 We can run Echidna to verify this:
 
