@@ -5,6 +5,7 @@
 - [Introduction](#introduction)
 - [Measuring Gas Consumption](#measuring-gas-consumption)
 - [Run Echidna](#run-echidna)
+- [Filtering Out Gas-Reducing Calls](#filtering-out-gas-reducing-calls)
 - [Summary: Finding transactions with high gas consumption](#summary-finding-transactions-with-high-gas-consumption)
 
 ## Introduction
