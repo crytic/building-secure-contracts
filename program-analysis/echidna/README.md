@@ -10,6 +10,7 @@ The second part is a set of exercises to solve.
 - [Installation](#installation)
 - [Introduction to fuzzing](./fuzzing-introduction.md): Brief introduction to fuzzing
 - [How to test a property](./how-to-test-a-property.md): How to test a property with Echidna
+- [How to detect high gas consumption](./finding-transactions-with-high-gas-consumption.md): How to use Echidna to find transactions with high gas consumption.
 - [Exercise 1](./Exercise-1.md): Testing token's balance
 - [Exercise 2](./Exercise-2.md): Testing access control
 - [Exercise 3](./Exercise-3.md): Testing with custom initialization
