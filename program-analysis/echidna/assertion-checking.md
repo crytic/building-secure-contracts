@@ -45,7 +45,7 @@ contract Incrementor {
 
 ## Run Echidna
 
-Echidna is capable of testing assertion failure, only if you enable the `checkAssert` configuration option:
+To enable the assertion failture testing, create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config)  `config.yaml`:
 
 ```yaml
 checkAsserts: true
@@ -54,7 +54,7 @@ checkAsserts: true
 When we run this contract in Echidna, we obtain the expected results:
 
 ```
-$ echidna-test assert.sol --config assert.yaml 
+$ echidna-test assert.sol --config config.yaml 
 Analyzing contract: assert.sol:Incrementor
 assertion in inc: failed!💥  
   Call sequence, shrinking (2596/5000):
@@ -121,7 +121,7 @@ contract Incrementor {
 ```
 
 ```bash
-$ echidna-test assert.sol --config assert.yaml 
+$ echidna-test assert.sol --config config.yaml 
 Analyzing contract: assert.sol:Incrementor
 assertion in inc: failed!💥  
   Call sequence, shrinking (2596/5000):
