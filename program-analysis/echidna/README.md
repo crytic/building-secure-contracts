@@ -15,6 +15,7 @@ The second part is a set of exercises to solve.
 - [Exercise 1](./Exercise-1.md): Testing token's balance
 - [Exercise 2](./Exercise-2.md): Testing access control
 - [Exercise 3](./Exercise-3.md): Testing with custom initialization
+- [Exercise 4](./Exercise-4.md): Testing with `assert`
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
