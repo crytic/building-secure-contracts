@@ -10,8 +10,7 @@
 
 ## Introduction
 
-In this short tutorial, we are going to show how to use Echidna to find transactions with high gas consumption. 
-This feature can be useful to optimize contracts before deployment, or to detect possible Denial-of-Service attacks. Let's suppose we have a contract like this one: 
+We will see how to find the transactions with has gas consumption with Echidna. The target is the following smart contract:
 
 ```solidity
 contract C {
@@ -35,9 +34,9 @@ contract C {
 
 }
 ```
+Here `expensive` can have a large gas consumption. 
 
-This small example shows a contract with a function that has a large gas consumption if a certain input is provided. 
-The echidna property to test is not important, so we just use one that always returns `true`.
+Currently, Echidna always need a property to test: here `echidna_test` always returns `true`.
 We can run Echidna to verify this:
 
 ```
@@ -50,7 +49,7 @@ Seed: 2320549945714142710
 
 ## Measuring Gas Consumption
 
-Echidna can be used to detect transactions with high gas consumption using the `gasEstimate` configuratation options like this:
+To enable the gas consumption with Echidna, create an configuration file `config.yaml`:
 
 ```yaml
 estimateGas: true
@@ -68,7 +67,7 @@ estimateGas: true
 Once we have the configuration file created, we can run Echidna like this:
 
 ```
-$ echidna-test gas.sol --config gas.yaml 
+$ echidna-test gas.sol --config config.yaml 
 ...
 echidna_test: passed! 🎉
 
@@ -82,13 +81,14 @@ Seed: -325611019680165325
 
 ```
 
-It is important to note that the gas shown here is only an estimation provided by [HEVM](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-). 
-This should precise enough, but it can be slightly different from mainstream Ethereum clients.
+- The gas shown is an estimation provided by [HEVM](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-).
 
 # Filtering Out Gas-Reducing Calls
 
 The tutorial on [filtering functions to call during a fuzzing campaign](./filtering-functions.md) shows how to
-remove some functions from your testing.  This can be critical for getting an accurate gas estimate.
+remove some functions from your testing.  
+This can be critical for getting an accurate gas estimate.
+Consider the following example:
 
 ```solidity
 contract C {
@@ -113,12 +113,10 @@ contract C {
   }
 }
 ```
-
-If we measure gas consumption as with the first contract, using a configuration as above, we don't get a very
-accurate measure of how expensive `check` can be:
+If Echidna can call all the functions, it won't easily find transactions with high gas cost:
 
 ```
-$ echidna-test pushpop.sol --config pushpop.yaml
+$ echidna-test pushpop.sol --config config.yaml
 ...
 pop used a maximum of 10746 gas
 ...
@@ -138,7 +136,7 @@ filterFunctions: ["pop", "clear"]
 ```
 
 ```
-$ echidna-test pushpop.sol --config blacklistpushpop.yaml
+$ echidna-test pushpop.sol --config config.yaml
 ...
 push used a maximum of 40839 gas
 ...
