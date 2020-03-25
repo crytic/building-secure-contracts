@@ -9,8 +9,8 @@
 
 ## Introduction
 
-In this short tutorial, we are going to show how to tell Echidna to only call certain functions from a contract or, alternativelly, to avoid callling some functions. 
-Let's suppose we have a contract like this one: 
+We will see how to filter the functions to be fuzzed.
+The target is the following smart contract: 
 
 ```solidity
 contract C {
@@ -93,11 +93,12 @@ filterBlacklist: false
 filterFunctions: ["f", "g", "h", "i"]
 ```
 
-It is important to note that the filtering will be performed by name only: if you need to filter an overloaded function, (e.g. `f()` and `f(uint256)`) this approach will not be precise enough.
+- `filterBlacklist` is `true` by default.
+- Filtering will be performed by name only (without parameters). If you have `f()` and `f(uint256)`, the filter `"f"` will match both functions.
 
 # Run Echidna
 
-Once we have one of the configuration files created, we can run Echidna like this:
+To run Echidna with a configuration file `blacklist.yaml`:
 
 ```
 $ echidna-test multi.sol --config blacklist.yaml 
@@ -110,8 +111,8 @@ echidna_state4: failed!💥
     i()
 ```
 
-Echidna should find the sequence of transactions to falsify the property almost inmmediately. 
-While this example is artificial, filtering function to call in contracts with a large number of methods can be helpful for the fuzzer to test certain properties.
+Echidna will find the sequence of transactions to falsify the property almost inmmediately. 
+
 
 ## Summary: Filtering functions
 
@@ -128,4 +129,4 @@ $ echidna-test contract.sol --config config.yaml
 ```
 
 Echidna starts a fuzzing campaign either blacklisting `f1`, `f2` and `f3` or only calling these, according
-to the value of the `filterBlacklist` boolean (which is `true` by default)
+to the value of the `filterBlacklist` boolean.
