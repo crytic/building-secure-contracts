@@ -6,6 +6,8 @@
 - [Exercise](#exercise)
 - [Solution](#solution)
 
+This exercise is based on the tutorial [How to test assertions](./assertion-checking.md).
+
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
@@ -59,7 +61,7 @@ We will test the following contract *[exercises/token.sol](exercises/token.sol)*
 - Once Echidna found the bug, fix the issue, and re-try your assertion with Echidna.
 
 This exercise is similar to the [first one](Exercise-1.md), but using assertions instead of explicit properties.  
-However, in this exercise, it is easier to modify the original token contract (*[exercises/exercise4/token.sol](./exercises/exercise4/token.sol)*):
+However, in this exercise, it is easier to modify the original token contract (*[exercises/exercise4/token.sol](./exercises/exercise4/token.sol)*).
 
 ## Solution
 
