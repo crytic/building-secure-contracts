@@ -45,15 +45,20 @@ However, we can still use Echidna to collect corpus when running this fuzzing ca
 
 ## Collecting a corpus
 
-To enable the corpus collection, we need to use a configuration file that included the following lines:
+To enable the corpus collection, create a corpus directory:
+
+```
+$ mkdir corpus-magic
+```
+
+And an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config) `config.yaml`:
 
 ```yaml
 coverage: true
 corpusDir: "corpus-magic"
 ```
 
-The directory used to read/write the corpus (`corpus-magic`) should be created by the user 
-(otherwise Echidna will fail to run). Now we can run our tool and check the collected corpus. 
+Now we can run our tool and check the collected corpus:
 
 ```
 $ echidna-test magic.sol --config config.yaml 
