@@ -1,4 +1,4 @@
-// Note: First, fix the issues from exercise 1 and 2
+// Note: The issues from exercise 1 and 2 are fixed
 
 contract Ownership{
 

@@ -77,8 +77,8 @@ install_echidna
 
 test_example
 
-test_exercise 1 "echidna_no_transfer: failed!"
-test_exercise 2 "echidna_test_balance: failed!"
+test_exercise 1 "echidna_test_balance: failed!"
+test_exercise 2 "echidna_no_transfer: failed!"
 test_exercise 3 "echidna_test_balance: failed!"
 
 
