@@ -56,10 +56,10 @@ We will test the following contract *[exercises/token.sol](exercises/token.sol)*
 
 ### Goals
 
-Add asserts to ensure that:
+Add asserts to ensure that after calling `transfer`:
 
-- After calling transfer the msg.sender address must have its initial balance or less.
-- After calling transfer the to address must have its initial balance or more.
+- `msg.sender` must have its initial balance or less.
+- `to` must have its initial balance or more.
 
 Once Echidna found the bug, fix the issue, and re-try your assertion with Echidna.
 
