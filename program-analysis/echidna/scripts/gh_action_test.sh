@@ -3,15 +3,15 @@
 
 install_echidna(){
     pip install crytic-compile
-    wget https://github.com/crytic/echidna/releases/download/v1.2.0.0/echidna-test-1.2.0.0-Ubuntu-18.04.tar.gz
-    tar -xvf echidna-test-1.2.0.0-Ubuntu-18.04.tar.gz
+    wget https://github.com/crytic/echidna/releases/download/v1.4.0.0/echidna-test-1.4.0.0-Ubuntu-18.04.tar.gz
+    tar -xvf echidna-test-1.4.0.0-Ubuntu-18.04.tar.gz
     sudo mv echidna-test /usr/bin/
 }
 
 test_example(){
     cd example
 
-    echidna-test testtoken.sol TestToken > results.txt
+    echidna-test testtoken.sol --contract TestToken > results.txt
     if [ $? -ne 1 ]
     then
         echo "testtoken.sol failed"
@@ -33,7 +33,7 @@ test_example(){
 test_exercise(){
     cd "exercises/exercise$1"
 
-    echidna-test solution.sol TestToken > results.txt 
+    echidna-test solution.sol --contract TestToken > results.txt 
     if [ $? -ne 1 ]
     then
         echo "Bug not found"
