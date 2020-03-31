@@ -5,7 +5,7 @@
 - [Introduction](#introduction)
 - [Write a property](#write-a-property)
 - [Initiate a contract](#initiate-a-contract)
-- [Run Echidna](#run-Echidna)
+- [Run Echidna](#run-echidna)
 - [Summary: Testing a property](#summary-testing-a-property)
 
 
@@ -73,11 +73,11 @@ Use inheritance to separate your contract from your properties:
 Echidna needs a constructor without argument.
 If your contract needs a specific initialization, you need to do it in the constructor.
 
-There are two specific addresses in Echidna:
+There are some specific addresses in Echidna:
 
 - `0x00a329c0648769A73afAc7F9381E08FB43dBEA72` which calls the constructor.
 
-- `0x00a329C0648769a73afAC7F9381e08fb43DBEA70` which calls the other functions.
+- `0x10000`, `0x20000`, and `0x00a329C0648769a73afAC7F9381e08fb43DBEA70` which randomly calls the other functions.
 
 We do not need any particular initialization in our current example, as a result our constructor is empty.
 
@@ -92,7 +92,7 @@ $ echidna-test contract.sol
 If contract.sol contains multiple contracts, you can specify the target:
 
 ```bash
-$ echidna-test contract.sol MyContract
+$ echidna-test contract.sol --contract MyContract
 ```
 
 ## Summary: Testing a property
@@ -109,7 +109,7 @@ The following summarizes the run of echidna on our example:
 ```
 
 ```bash
-$ echidna-test testtoken.sol TestToken
+$ echidna-test testtoken.sol --contract TestToken
 ...
 
 echidna_balance_under_1000: failed!💥  
