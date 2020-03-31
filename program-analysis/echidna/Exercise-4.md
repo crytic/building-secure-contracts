@@ -56,9 +56,12 @@ We will test the following contract *[exercises/token.sol](exercises/token.sol)*
 
 ### Goals
 
-- Add an assert to check that, after calling `transfer` the `msg.sender` address cannot have more tokens than its initial balance.
-- Add an assert to check that, after calling `transfer` the `to` address cannot have less tokens than its initial balance.
-- Once Echidna found the bug, fix the issue, and re-try your assertion with Echidna.
+Add asserts to ensure that:
+
+- After calling transfer the msg.sender address must have its initial balance or less.
+- After calling transfer the to address must have its initial balance or more.
+
+Once Echidna found the bug, fix the issue, and re-try your assertion with Echidna.
 
 This exercise is similar to the [first one](Exercise-1.md), but using assertions instead of explicit properties.  
 However, in this exercise, it is easier to modify the original token contract (*[exercises/exercise4/token.sol](./exercises/exercise4/token.sol)*).
