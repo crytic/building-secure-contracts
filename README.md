@@ -1,5 +1,7 @@
 # Building Secure Smart Contracts
 
+![](https://github.com/crytic/building-secure-contracts/workflows/CI/badge.svg)
+
 Follow our guidelines and best practices to write secure smart contracts.
 
 **Table of contents:**
