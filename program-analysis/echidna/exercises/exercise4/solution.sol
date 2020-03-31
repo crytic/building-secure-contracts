@@ -23,13 +23,14 @@
    }
    contract Token is Pausable{
       mapping(address => uint) public balances;
-      function transfer(address to, uint value) ifNotPaused public{
-
-           assert(balances[msg.sender] - value <= balances[msg.sender]);
-           balances[msg.sender] -= value;
+      function transfer(address to, uint value) ifNotPaused public{     
+           uint initial_balance_from = balances[msg.sender];
+           uint initial_balance_to = balances[to];
            
-           assert(balances[to] + value >= balances[to]);
+           balances[msg.sender] -= value;           
            balances[to] += value;
-            
+           
+           assert(balances[msg.sender] <= initial_balance_from);
+           assert(balances[to] >= initial_balance_to);           
        }
     }
