@@ -62,7 +62,7 @@ contract C {
 }
 ```
 
-This small example forces Echidna to find a ertain sequence of transactions to change a state variable. 
+This small example forces Echidna to find a certain sequence of transactions to change a state variable. 
 This is hard for a fuzzer (it is recommended to use a symbolic execution tool like [Manticore](https://github.com/trailofbits/manticore)).
 We can run Echidna to verify this:
 
