@@ -1,12 +1,11 @@
 from manticore.ethereum import ManticoreEVM
 from manticore.ethereum.abi import ABI
 from manticore.core.smtlib import Operators
-
 ETHER = 10**18
 
 m = ManticoreEVM() # initiate the blockchain
 # Init
-user_account = m.create_account()
+user_account = m.create_account(balance=1*ETHER)
 with open('token.sol', 'r') as f:
     contract_account = m.solidity_create_contract(f, owner=user_account)
 
