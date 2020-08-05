@@ -3,7 +3,7 @@
 Follow these high-level recommendations to build more secure smart contracts.
 
 * [Design (before development)](#design-guidelines)
-  * [Documentation and specifications](#documentation-and-specification)
+  * [Documentation and specifications](#documentation-and-specifications)
   * [On-chain vs off-chain computation](#on-chain-vs-off-chain-computation)
   * [Upgradeability](#upgradeability)
 * [Implementation (during development)](#implementation-guidelines)

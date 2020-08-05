@@ -6,7 +6,9 @@ Follow our guidelines and best practices to write secure smart contracts.
 
 **Table of contents:**
 
-- [Development Guidelines](./development-guidelines): List of best practices
+- Development guidelines
+  - [High-level best practices](./development-guidelines/guidelines.md)
+  - [Token integration checklist](./development-guidelines/token_integration.md)
 - [Program analysis](./program-analysis): How to use automated tools to secure contracts
   - [Slither](./program-analysis/slither): a static analyzer avaialable through a CLI and scriptable interface.
   - [Echidna](./program-analysis/echidna): a fuzzer that will check your contract's properties.
