@@ -1,6 +1,6 @@
 from manticore.utils import config
+consts = config.get_group("smt")
 # Either wait for Z3 
-# consts = config.get_group("smt")
 # consts.timeout = 99999
 # Or just shift to yikes ...
 consts.solver = consts.solver.yices
