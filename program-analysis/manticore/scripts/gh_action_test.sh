@@ -60,6 +60,10 @@ test_exercise(){
     cd ../..
 }
 
+#install Yices
+sudo add-apt-repository ppa:sri-csl/formal-methods
+sudo apt-get update
+sudo apt-get install yices2
 
 cd program-analysis/manticore
 pip install manticore[evm]

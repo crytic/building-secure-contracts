@@ -1,3 +1,11 @@
+from manticore.utils import config
+# Either wait for Z3 
+# consts = config.get_group("smt")
+# consts.timeout = 99999
+# Or just shift to yikes ...
+consts.solver = consts.solver.yices
+
+
 from manticore.ethereum import ManticoreEVM, ABI
 from manticore.core.smtlib import Operators, solver
 ETHER = 10**18

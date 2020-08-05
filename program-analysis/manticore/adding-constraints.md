@@ -89,6 +89,7 @@ Adding constraint to the previous code, we obtain:
 ```python3
 from manticore.ethereum import ManticoreEVM
 from manticore.core.smtlib.solver import Z3Solver
+ETHER = 10**18
 
 solver = Z3Solver.instance()
 
@@ -97,7 +98,7 @@ m = ManticoreEVM()
 with open("example.sol") as f:
     source_code = f.read()
 
-user_account = m.create_account(balance=1000)
+user_account = m.create_account(balance=1*ETHER)
 contract_account = m.solidity_create_contract(source_code, owner=user_account)
 
 symbolic_var = m.make_symbolic_value()
