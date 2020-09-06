@@ -10,7 +10,7 @@ Each technique has advantages and pitfalls, and will be useful in [specific case
 
 Technique | Tool | Usage | Speed | Bugs missed | False Alarms
 --- | --- | --- | --- | --- | --- 
-Static Analysis | Slither  | CLI & Scripts  | seconds | moderate | low
+Static Analysis | Slither  | CLI & scripts  | seconds | moderate | low
 Fuzzing | Echidna  | Solidity properties  | minutes | low | none
 Symbolic Execution | Manticore  | Solidity properties & scripts | hours | none\* | none
 
@@ -24,7 +24,7 @@ Symbolic Execution | Manticore  | Solidity properties & scripts | hours | none\*
 
 ### Suggested workflow
 
-Start with Slither's built-in detectors to ensure that no simple bugs are present and/or will be introduced. Use Slither to check properties related to inheritance, variable dependencies, and structural issues. As the codebase grows, use Echidna to test more complex properties of the state machine. Revisit Slither to develop custom checks for protections unavailable from Solidity, like protecting against a function being overridden. Finally, use Manticore to perform targeted verification of critical security properties, e.g., arithmetic operations.
+Start with Slither's built-in detectors to ensure that no simple bugs are present now or will be introduced later. Use Slither to check properties related to inheritance, variable dependencies, and structural issues. As the codebase grows, use Echidna to test more complex properties of the state machine. Revisit Slither to develop custom checks for protections unavailable from Solidity, like protecting against a function being overridden. Finally, use Manticore to perform targeted verification of critical security properties, e.g., arithmetic operations.
 
 - Use Slither's CLI to catch common issues
 - Use Echidna to test high-level security properties of your contract
@@ -35,13 +35,14 @@ Start with Slither's built-in detectors to ensure that no simple bugs are presen
 
 ## Determining Security Properties
 
-To effectively test and verify your code, you must identify the areas that need attention. As your resources spent on security are limited, scoping the weak or high-value parts of your codebase is important to optimize your effort. Threat modeling can help. There are many threat modeling frameworks, consider reviewing:
+To effectively test and verify your code, you must identify the areas that need attention. As your resources spent on security are limited, scoping the weak or high-value parts of your codebase is important to optimize your effort. Threat modeling can help. Consider reviewing:
 
 - [Rapid Risk Assessments](https://infosec.mozilla.org/guidelines/risk/rapid_risk_assessment.html) (our preferred approach when time is short)
 - [Guide to Data-Centric System Threat Modeling](https://csrc.nist.gov/publications/detail/sp/800-154/draft) (aka NIST 800-154)
 - [Shostack thread modeling](https://www.amazon.com/Threat-Modeling-Designing-Adam-Shostack/dp/1118809998)
 - [STRIDE](https://en.wikipedia.org/wiki/STRIDE_(security)) / [DREAD](https://en.wikipedia.org/wiki/DREAD_(risk_assessment_model))
 - [PASTA](https://en.wikipedia.org/wiki/Threat_model#P.A.S.T.A.)
+- [Use of Assertions](https://blog.regehr.org/archives/1091)
 
 ### Components
 

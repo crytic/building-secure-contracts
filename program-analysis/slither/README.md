@@ -5,7 +5,7 @@ The aim of this tutorial is to show how to use Slither to automatically find bug
 - [Installation](#installation)
 - [Command line usage](#command-line)
 - [Introduction to static analysis](#static-analysis): Brief introduction to static analysis
-- [API](#api): Slither Python's API description
+- [API](#api-basics): Python API description
 
 Once you feel you understand the material in this README, proceed to the exercises:
 
@@ -183,7 +183,7 @@ An intermediate representation (IR) is a language meant to be more amenable to s
 
 Understanding SlithIR is not necessary if you only want to write basic checks. However, it will come in handy if you plan to write advanced semantic analyses. The [SlithIR](https://github.com/crytic/slither/wiki/Printer-documentation#slithir) and [SSA](https://github.com/crytic/slither/wiki/Printer-documentation#slithir-ssa) printers will help you to understand how the code is translated.
 
-## Slither: API Basics
+## API Basics
 
 Slither has an API that lets you explore basic attributes of the contract and its functions.
 
