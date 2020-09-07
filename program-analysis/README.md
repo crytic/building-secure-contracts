@@ -6,7 +6,7 @@ We are going use three distinctive testing and program analysis techniques:
 - **Fuzzing with [Echidna](./echidna).** The code is executed with a pseudo-random generation of transactions. The fuzzer will try to find a sequence of transactions to violate a given property.
 - **Symbolic execution with [Manticore](./manticore).** A formal verification technique, which translates each execution path to a mathematical formula, on which on top constraints can be checked.
 
-Each technique has advantages and pitfalls, and will be useful in [specific cases](./determine-properties.md):
+Each technique has advantages and pitfalls, and will be useful in [specific cases](#determining-security-properties):
 
 Technique | Tool | Usage | Speed | Bugs missed | False Alarms
 --- | --- | --- | --- | --- | --- 
