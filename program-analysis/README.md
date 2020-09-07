@@ -48,12 +48,12 @@ To effectively test and verify your code, you must identify the areas that need 
 
 Knowing what you want to check will also help you to select the right tool.
 
-The components to be tested that are frequently relevant for smart contracts include:
+The broad areas that are frequently relevant for smart contracts include:
 
 - **State machine.** Most contracts can be represented as a state machine. Consider checking that (1) No invalid state can be reached, (2) if a state is valid that it can be reached, and (3) no state traps the contract.
   - Echidna and Manticore are the tools to favor to test state-machine specifications.
 
-- **Access control.** If you system has privileged users (e.g. an owner, controllers, ...) you must ensure that (1) each user can only perform the authorized actions and (2) no user can block actions from a more priviledged user.
+- **Access controls.** If you system has privileged users (e.g. an owner, controllers, ...) you must ensure that (1) each user can only perform the authorized actions and (2) no user can block actions from a more priviledged user.
   - Slither, Echidna and Manticore can check for correct access controls. For example, Slither can check that only whitelisted functions lack the onlyOwner modifier. Echidna and Manticore are useful for more complex access control, such as a permission given only if the contract reaches a given state.
 
 - **Arithmetic operations.** Checking the soundness of the arithmetic operations is critical. Using `SafeMath` everywhere is a good step to prevent overflow/underflow, however, you must still consider other arithmetic flaws, including rounding issues and flaws that trap the contract.
