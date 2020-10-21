@@ -81,7 +81,7 @@ function f(..) public {
 
 ```
 
-On the contrary, using an explicit echidna property will randomly execution transactions and there is no easy way to enforce exactly when it will be checked. It is still possible to do this workaround:
+On the contrary, using an explicit echidna property will randomly execute transactions and there is no easy way to enforce exactly when it will be checked. It is still possible to do this workaround:
 
 ```solidity
 function echidna_assert_after_f() public returns (bool) {
