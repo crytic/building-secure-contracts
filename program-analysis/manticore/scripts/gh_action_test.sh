@@ -62,12 +62,7 @@ test_exercise(){
 
 
 
-#pip install manticore[evm]
-git clone https://github.com/trailofbits/manticore
-cd manticore
-git checkout master
-pip install -e "."
-cd ..
+pip install manticore
 
 cd program-analysis/manticore
 
