@@ -61,8 +61,19 @@ test_exercise(){
 }
 
 
+
+#pip install manticore[evm]
+git clone https://github.com/trailofbits/manticore
+cd manticore
+git checkout dev-detect-default-solver
+pip install -e ".[evm]"
+cd ..
+
 cd program-analysis/manticore
-pip install manticore[evm]
+
+sudo add-apt-repository ppa:sri-csl/formal-methods -y
+sudo apt-get update
+sudo apt-get install yices2
 
 test_example example_run.py
 test_example example_throw.py

@@ -3,13 +3,15 @@ from manticore.core.smtlib import Operators, solver
 
 ###### Initialization ######
 
+ETHER = 10**18
+
 m = ManticoreEVM()
 with open('my_token.sol') as f:
     source_code = f.read()
 
 # Create one user account
 # And deploy the contract
-user_account = m.create_account(balance=1000)
+user_account = m.create_account(balance=1000*ETHER)
 contract_account = m.solidity_create_contract(source_code, owner=user_account, balance=0)
 
 ###### Exploration ######

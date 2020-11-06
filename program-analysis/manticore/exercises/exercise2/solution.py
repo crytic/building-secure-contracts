@@ -2,10 +2,12 @@ from manticore.ethereum import ManticoreEVM
 from manticore.core.smtlib import Operators, solver
 from manticore.ethereum.abi import ABI
 
+ETHER = 10**18
+
 m = ManticoreEVM() # initiate the blockchain
 
 # Generate the accounts
-user_account = m.create_account(balance=1000)
+user_account = m.create_account(balance=1000*ETHER)
 with open('overflow.sol') as f:
     contract_account = m.solidity_create_contract(f, owner=user_account)
 
