@@ -62,7 +62,7 @@ test_exercise(){
 
 
 cd program-analysis/manticore
-pip install "manticore[evm]==0.3.4.dev201102"
+pip install manticore[evm]
 
 test_example example_run.py
 test_example example_throw.py
