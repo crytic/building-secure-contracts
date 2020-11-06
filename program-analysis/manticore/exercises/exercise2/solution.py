@@ -2,6 +2,7 @@ from manticore.ethereum import ManticoreEVM
 from manticore.core.smtlib import Operators, solver
 from manticore.ethereum.abi import ABI
 
+
 m = ManticoreEVM() # initiate the blockchain
 
 # Generate the accounts

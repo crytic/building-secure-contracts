@@ -1,11 +1,13 @@
 from manticore.ethereum import ManticoreEVM
 
+ETHER = 10**18
+
 m = ManticoreEVM()
 
 with open('example.sol') as f:
     source_code = f.read()
 
-user_account = m.create_account(balance=1000)
+user_account = m.create_account(balance=1000*ETHER)
 contract_account = m.solidity_create_contract(source_code,
                                               owner=user_account)
 

@@ -6,7 +6,7 @@ ETHER = 10**18
 
 m = ManticoreEVM() # initiate the blockchain
 # Init
-user_account = m.create_account()
+user_account = m.create_account(1*ETHER)
 with open('token.sol', 'r') as f:
     contract_account = m.solidity_create_contract(f, owner=user_account)
 
