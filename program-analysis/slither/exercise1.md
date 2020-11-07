@@ -25,6 +25,3 @@ Get the coin contract
 - To get a specific contract, use `slither.get_contract_from_name`
 - To get a specific function, use `contract.get_function_from_signature`
 
-## Solution
-
-See [exercises/exercise1/solution.py](exercises/exercise1/solution.py).
