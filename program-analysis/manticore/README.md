@@ -41,8 +41,22 @@ cd /home/trufflecon/
 ```bash
 pip3 install --user manticore
 ```
-
 solc 0.5.11 is recommended.
+
+#### Yices
+We recommend to install the [yices](https://yices.csl.sri.com/= smt solver.
+
+On Ubuntu or Debian:
+```
+sudo add-apt-repository ppa:sri-csl/formal-methods
+sudo apt-get update
+sudo apt-get install yices2
+```
+
+On Mac OS X:
+```
+brew install SRI-CSL/sri-csl/yices2
+```
 
 ### Running a script
 
