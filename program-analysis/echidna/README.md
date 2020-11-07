@@ -39,6 +39,6 @@ cd /home/training
 
 ### Binary
 
-[https://github.com/crytic/echidna/releases/tag/1.4.0.0](https://github.com/crytic/echidna/releases/tag/1.4.0.0)
+[https://github.com/crytic/echidna/releases/](https://github.com/crytic/echidna/releases/)
 
 solc 0.5.11 is recommended for the exercises.
