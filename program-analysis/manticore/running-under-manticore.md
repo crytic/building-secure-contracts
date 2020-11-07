@@ -92,7 +92,7 @@ m = ManticoreEVM()
 A non-contract account is created using [m.create_account](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.create_account):
 
 ```python3
-user_account = m.create_account(balance=1000)
+user_account = m.create_account(balance=1 * 10**18)
 ```
 
 A Solidity contract can be deployed using [m.solidity_create_contract](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.solidity_create_contract):
@@ -195,7 +195,7 @@ m = ManticoreEVM()
 with open('example.sol') as f:
     source_code = f.read()
 
-user_account = m.create_account(balance=1000)
+user_account = m.create_account(balance=1*10**18)
 contract_account = m.solidity_create_contract(source_code, owner=user_account)
 
 symbolic_var = m.make_symbolic_value()

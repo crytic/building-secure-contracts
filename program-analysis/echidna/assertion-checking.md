@@ -92,8 +92,8 @@ function echidna_assert_after_f() public returns (bool) {
 
 However, there are some issues:
 
-* It fails if `f` is declared as `internal` or `external`. 
-* It is unclear which arguments should be used to call `f`. 
+* It doesn't compile if `f` is declared as `internal` or `external`.
+* It is unclear which arguments should be used to call `f`.
 * If `f` reverts, the property will fail.
 
 In general, we recommend following [John Regehr's recommendation](https://blog.regehr.org/archives/1091) on how to use assertions:
