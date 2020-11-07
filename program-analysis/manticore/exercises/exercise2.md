@@ -34,6 +34,6 @@ state.platform.transactions[-1].return_data
 data = ABI.deserialize("uint", data)
 ```
 
-- You can use the template proposed in [exercise2/template.sol](./exercise2/template.sol)
+- You can use the template proposed in [exercise2/template.py](./exercise2/template.py)
 
 
