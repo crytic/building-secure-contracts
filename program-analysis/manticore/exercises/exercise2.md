@@ -36,6 +36,4 @@ data = ABI.deserialize("uint", data)
 
 - You can use the template proposed in [exercise2/template.sol](./exercise2/template.sol)
 
-### Solution
 
-[exercise2/solution.py](./exercise2/solution.py).
