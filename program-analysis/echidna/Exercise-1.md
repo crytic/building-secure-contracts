@@ -71,6 +71,4 @@ The skeleton for this exercise is (*[exercises/exercise1/template.sol](./exercis
       }
  ```
 
-## Solution
 
-This solution can be found in [exercises/exercise1/solution.sol](./exercises/exercise1/solution.sol)
