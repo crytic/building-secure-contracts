@@ -17,6 +17,3 @@ Explore all the functions
             A bug is found
 ```
 
-## Solution
-
-See [exercises/exercise2/solution.py](exercises/exercise2/solution.py).
