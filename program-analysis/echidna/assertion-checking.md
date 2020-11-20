@@ -1,4 +1,4 @@
-# How to test Solidity's `assert` with Echidna
+# How to test assertions with Echidna
 
 **Table of contents:**
 
@@ -38,6 +38,23 @@ contract Incrementor {
     uint tmp = counter;
     counter += val;
     assert (tmp <= counter);
+    return (counter - tmp);
+  }
+}
+```
+
+Additionally, we could use a special event called `AssertionFailed` with any number of parameters to let Echidna know about an a failed assertion without using `assert`. This will also work in any contract. For instance:
+
+```solidity
+contract Incrementor {
+  event AssertionFailed(uint);
+  uint private counter = 2**200;
+
+  function inc(uint val) public returns (uint){
+    uint tmp = counter;
+    counter += val;
+    if (tmp > counter)
+      emit AssertionFailed(counter);
     return (counter - tmp);
   }
 }
