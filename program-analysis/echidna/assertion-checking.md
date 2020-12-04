@@ -1,4 +1,4 @@
-# How to test Solidity's `assert` with Echidna
+# How to test assertions with Echidna
 
 **Table of contents:**
 
@@ -10,7 +10,11 @@
 
 ## Introduction
 
-In this short tutorial, we are going to show how to use Echidna to test assertion checking in contracts. Let's suppose we have a contract like this one: 
+In this short tutorial, we will show you how to use Echidna to check assertions in smart contracts.
+
+## Write an assertion
+
+Let's suppose we have a contract like this one: 
 
 ```solidity
 contract Incrementor {
@@ -25,10 +29,7 @@ contract Incrementor {
 }
 ```
 
-## Write an assertion
-
-We want to make sure that `tmp` is less or equal than `counter` after returning its difference. We could write an 
-Echidna property, but we will need to store the `tmp` value somewhere. Instead, we could use an assertion like this one:
+We want to make sure that `tmp` is less or equal than `counter` after returning its difference. We could write an Echidna property, but we will need to store the `tmp` value somewhere. Instead, we could use an assertion like this one:
 
 ```solidity
 contract Incrementor {
@@ -43,9 +44,26 @@ contract Incrementor {
 }
 ```
 
+We could also use a special event called `AssertionFailed` with any number of parameters to let Echidna know about a failed assertion without using `assert`. This will works in any contract. For instance:
+
+```solidity
+contract Incrementor {
+  event AssertionFailed(uint);
+  uint private counter = 2**200;
+
+  function inc(uint val) public returns (uint){
+    uint tmp = counter;
+    counter += val;
+    if (tmp > counter)
+      emit AssertionFailed(counter);
+    return (counter - tmp);
+  }
+}
+```
+
 ## Run Echidna
 
-To enable the assertion failture testing, create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config)  `config.yaml`:
+To enable the assertion failure testing in Echidna, create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config), `config.yaml`, with checkAsserts set to true:
 
 ```yaml
 checkAsserts: true
@@ -65,11 +83,11 @@ assertion in inc: failed!💥
 Seed: 1806480648350826486
 ```
 
-As you can see, Echidna reports some assertion failure in the `inc` function. Adding more than one assertion per function is possible, but Echidna cannot tell which assertion failed.
+As you can see, Echidna reports an assertion failure in the `inc` function. Adding more than one assertion per function is possible, however, Echidna cannot tell which assertion failed.
 
 ## When and how use assertions
 
-Assertions can be used as alternatives to explicit properties, specially if the conditions to check are directly related with the correct use of some operation `f`. Adding assertions after some code will enforce that the check will happen inmediately after it was executed: 
+Assertions can be used as alternatives to explicit properties if the conditions to check are directly related to the correct use of some operation `f`. Adding assertions after some code will enforce that the check will happen immediately after it was executed: 
 
 ```solidity
 function f(..) public {
@@ -81,7 +99,7 @@ function f(..) public {
 
 ```
 
-On the contrary, using an explicit echidna property will randomly execute transactions and there is no easy way to enforce exactly when it will be checked. It is still possible to do this workaround:
+On the contrary, using an explicit Echidna property will randomly execute transactions and there is no easy way to enforce exactly when it will be checked. It is still possible to do this workaround:
 
 ```solidity
 function echidna_assert_after_f() public returns (bool) {
@@ -92,20 +110,20 @@ function echidna_assert_after_f() public returns (bool) {
 
 However, there are some issues:
 
-* It doesn't compile if `f` is declared as `internal` or `external`.
-* It is unclear which arguments should be used to call `f`.
-* If `f` reverts, the property will fail.
+* It does not compile if `f` is declared as `internal` or `external`
+* It is unclear which arguments should be used to call `f`
+* The property will fail if `f` reverts, 
 
-In general, we recommend following [John Regehr's recommendation](https://blog.regehr.org/archives/1091) on how to use assertions:
+In general, we recommend following [John Regehr's advice](https://blog.regehr.org/archives/1091) on using assertions:
 
-* Do not force any side effect during the assertion checking. For instance: `assert(ChangeStateAndReturn() == 1)`
+* Do not force any side effects during the assertion checking. For instance: `assert(ChangeStateAndReturn() == 1)`
 * Do not assert obvious statements. For instance `assert(var >= 0)` where `var` is declared as `uint`.
 
 Finally, please **do not use** `require` instead of `assert`, since Echidna will not be able to detect it (but the contract will revert anyway).
 
 ## Summary: Assertion Checking
 
-The following summarizes the run of echidna on our example:
+The following summarizes the run of Echidna on our example:
 
 ```solidity
 contract Incrementor {

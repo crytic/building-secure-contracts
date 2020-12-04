@@ -13,7 +13,7 @@ The second part is a set of exercises to solve.
   - [How to test a property](./how-to-test-a-property.md): How to test a property with Echidna
 - Basic
   - [How to filter functions](./filtering-functions.md): How to filters the functions to be fuzzed
-  - [How to test assertions](./assertion-checking.md): How to test Solidity's `assert` with Echidna
+  - [How to test assertions](./assertion-checking.md): How to test assertions with Echidna
 - Advanced
   - [How to collect a corpus](./collecting-a-corpus.md): How to use Echidna to collect a corpus of transactions
   - [How to detect high gas consumption](./finding-transactions-with-high-gas-consumption.md): How to find functions with high gas consumption.
