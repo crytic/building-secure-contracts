@@ -5,7 +5,6 @@ Here's a high-level process we recommend following while you write your smart co
 Check for known security issues:
 
 - [ ] Review your contracts with [Slither](https://github.com/crytic/slither). It has more than 40 built-in detectors for common vulnerabilities. Run it on every check-in with new code and ensure it gets a clean report (or use triage mode to silence certain issues).
-- [ ] Review your contracts with [Crytic](https://crytic.io/). It checks for 50 issues that Slither does not. Crytic can help your team stay on top of each other too, by easily surfacing security issues in Pull Requests on GitHub.
 
 Consider special features of your contract:
 
