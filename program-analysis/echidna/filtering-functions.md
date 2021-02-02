@@ -83,18 +83,18 @@ To blacklist functions, we can use this configuration file:
 
 ```yaml
 filterBlacklist: true
-filterFunctions: ["reset1", "reset2"]
+filterFunctions: ["C.reset1()", "C.reset2()"]
 ```
 
 Another approach to filter functions is to list the whitelisted functions. To do that, we can use this configuration file:
 
 ```yaml
 filterBlacklist: false
-filterFunctions: ["f", "g", "h", "i"]
+filterFunctions: ["C.f(uint256)", "C.g(uint256)", "C.h(uint256)", "C.i()"]
 ```
 
 - `filterBlacklist` is `true` by default.
-- Filtering will be performed by name only (without parameters). If you have `f()` and `f(uint256)`, the filter `"f"` will match both functions.
+- Filtering will be performed by full function name (contract name + "." + ABI). If you have `f()` and `f(uint256)`, you can specify exactly which function to filter.
 
 # Run Echidna
 
@@ -120,7 +120,7 @@ Echidna can either blacklist or whitelist functions to call during a fuzzing cam
 
 ```yaml
 filterBlacklist: true
-filterFunctions: ["f1", "f2", "f3"]
+filterFunctions: ["C.f1()", "C.f2()", "C.f3()"]
 ```
 
 ```bash
@@ -128,5 +128,5 @@ $ echidna-test contract.sol --config config.yaml
 ...
 ```
 
-Echidna starts a fuzzing campaign either blacklisting `f1`, `f2` and `f3` or only calling these, according
+Echidna starts a fuzzing campaign either blacklisting `C.f1()`, `C.f2()` and `C.f3()` or only calling these, according
 to the value of the `filterBlacklist` boolean.
