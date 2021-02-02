@@ -3,8 +3,8 @@
 
 install_echidna(){
     pip install crytic-compile slither-analyzer
-    wget https://github.com/crytic/echidna/releases/download/v1.6.1/echidna-test-v1.6.1-Ubuntu-18.04.zip
-    unzip echidna-test-v1.6.1-Ubuntu-18.04.zip
+    wget https://github.com/crytic/echidna/releases/download/v1.6.1/echidna-test-1.6.1-Ubuntu-18.04.zip
+    unzip echidna-test-1.6.1-Ubuntu-18.04.zip
     tar -xf echidna-test.tar.gz
     sudo mv home/runner/.local/bin/echidna-test /usr/bin/
 }
