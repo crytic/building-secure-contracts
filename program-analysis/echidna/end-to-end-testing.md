@@ -12,11 +12,19 @@ For this document, [we used the metacoin example](https://github.com/truffle-box
 
 Before doing anything, let's install the tools we need:
 
-* Install echidna from [dev-auto branch]().
+* Install echidna from [master branch]().
 * Install etheno from [X branch]().
 * Install slither from [dev-new-props branch]().
 
-Then, install the packages to compile the project. If ganache and ganache-cli are not installed, add them manually. For instance, running: 
+Then, install the packages to compile the project:
+
+```
+$ git clone https://github.com/truffle-box/metacoin-box
+$ cd metacoin-box
+$ npm i
+```
+
+If ganache and ganache-cli are not installed, add them manually. For instance, running: 
 
 ```
 $ npm i ganache ganache-cli 
@@ -28,8 +36,8 @@ or:
 $ yarn add ganache ganache-cli
 ```
 
-It is also important to select *one* test script from the tests. Ideally, this test will deploy all (or most) contracts, including mock/test ones. 
-For instance, here we have part of a test script that deploys and uses the metacoin contracts:
+It is also important to select *one* test script from the available tests. Ideally, this test will deploy all (or most) contracts, including mock/test ones. 
+For instance, here we have part of a test script that deploys and uses the metacoin contracts (`metacoin.js`):
 
 ```js
 const MetaCoin = artifacts.require("MetaCoin");
@@ -51,15 +59,17 @@ contract('MetaCoin', (accounts) => {
   ...
 ```
 
-**❗ Important detail**: if the test hardcodes the some date (or uses the current time), Echidna (or Manticore) could have issues reproducing the transactions. For instance, if you have something like this:
+**❗ Important detail**: when selecting a test, if it hardcodes some date (or uses the current time), Echidna (or Manticore) could have issues reproducing the transactions. For instance, if you have something like this:
 
-```
+```js
 const now = Math.floor((new Date()).getTime() / 1000);
 ```
 
 Then, it is necessary to change the `now` constant:
 
+```js
 const now = 1524785992; // This is the value used by echidna/manticore
+```
 
 Otherwise, Echidna will fail to replicate the contract deployment from the scripts.
 
@@ -67,10 +77,10 @@ Otherwise, Echidna will fail to replicate the contract deployment from the scrip
 
 Before starting to write interesting properties, it is necessary to to collect an etheno trace to replay it inside Echidna:
 
-Fist, start Etheno: 
+First, start Etheno: 
 
 ```
-$ etheno --ganache --ganache-args "--deterministic --gasLimit 10000000" -x output.json
+$ etheno --ganache --ganache-args "--deterministic --gasLimit 10000000" -x init.json
 ```
 
 In another terminal, run *one* test or the deployment process. How to run it depends on how the project was developed. For instance, for truffle, use:
@@ -98,14 +108,20 @@ module.exports = {
 };
 ```
 
-After etheno finishes, kill it using ctrl+c. It will save the `output.json` file.
+In the MetaCoin repository, we will run:
+
+```
+$ truffle test test/metacoin.js`.
+```
+
+After etheno finishes, kill it using ctrl+c (twice). It will save the `init.json` file.
 
 ## Writing properties:
 
-Once we have a json file with saved transactions, we can run slither-prop to generate a template of the properties to use. This tool is optional, but very recommended. It will also show useful information on each transaction, so we can copy where each contract was deployed.
+Once we have a json file with saved transactions, we can run `slither-prop` to generate a template of the properties to use. This tool is optional, but very recommended. It will also show useful information on each transaction, so we can know where and how each contract was deployed.
 
 ``` 
-$ slither-prop  . --txs output.json
+$ slither-prop  . --txs init.json
 ```
 
 This tool shows a list of transactions with some labels for each deployed/called contract. For instance:
