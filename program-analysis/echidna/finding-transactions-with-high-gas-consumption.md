@@ -132,7 +132,7 @@ Blacklisting `pop` and `clear`, however, gives us much better results:
 
 ```yaml
 filterBlacklist: true
-filterFunctions: ["pop", "clear"]
+filterFunctions: ["C.pop()", "C.clear()"]
 ```
 
 ```

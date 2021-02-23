@@ -1,2 +1,2 @@
 filterBlacklist: true
-filterFunctions: ["reset1", "reset2"]
+filterFunctions: ["C.reset1()", "C.reset2()"]
