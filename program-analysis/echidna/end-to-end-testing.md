@@ -98,7 +98,7 @@ $ buidler test test/test.js --network localhost
 In the Drizzle example, we will run:
 
 ```
-$ truffle test test/simplestorage.js --network develop`.
+$ truffle test test/simplestorage.js --network develop.
 ```
 
 After etheno finishes, kill it using ctrl+c (twice). It will save the `init.json` file.
@@ -118,12 +118,19 @@ contract E2E {
 }
 ```
 
-This simple property checks if the stored data remains constant. To run it you will need this echidna config:
+This simple property checks if the stored data remains constant. To run it you will need the following echidna config file (`echidna.yaml`):
+
+```
+prefix: crytic_
+initialize: init.json
+multi-abi: true
+cryticArgs: ['--truffle-build-directory', 'app/src/contracts/'] # needed by drizzle
+```
 
 Then, running Echidna shows the results immediately: 
 
 ```
-$ echidna-test . --contract E2E --config echidna_config.yaml
+$ echidna-test . --contract E2E --config echidna.yaml
 ...
 crytic_const_storage: failed!💥  
   Call sequence:
