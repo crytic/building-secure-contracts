@@ -111,7 +111,7 @@ After etheno finishes, kill it using ctrl+c (twice). It will save the `init.json
 
 Once we have a json file with saved transactions, we can verify that the `SimpleStorage` contract is deployed in `0x871DD7C2B4b25E1Aa18728e9D5f2Af4C4e431f5c`, so we can easily write a contract (`./contracts/crytic/E2E.sol`) with a simple a property to test it:
 
-```
+```solidity
 import "../SimpleStorage.sol";
 
 contract E2E {
@@ -124,7 +124,7 @@ contract E2E {
 
 This simple property checks if the stored data remains constant. To run it you will need the following echidna config file (`echidna.yaml`):
 
-```
+```yaml
 prefix: crytic_
 initialize: init.json
 multi-abi: true
