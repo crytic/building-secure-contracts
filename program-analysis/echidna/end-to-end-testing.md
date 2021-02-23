@@ -1,3 +1,7 @@
+# End-to-End testing with Echidna (Part I)
+
+When smart contracts require a complex initialization and the time to do it is short, we want to avoid to manually recreate a deployment for a fuzzing campaign with Echidna. That's why we have a new approach for testing using Echidna based on the deployments and execution of tests directly from ganache.
+
 ## Requirements:
 
 This approach needs a smart contract project, with the following constraints:
@@ -134,7 +138,7 @@ $ echidna-test . --contract E2E --config echidna.yaml
 ...
 crytic_const_storage: failed!💥  
   Call sequence:
-    set(0)
+    (0x871dd7c2b4b25e1aa18728e9d5f2af4c4e431f5c).set(0) from: 0x0000000000000000000000000000000000010000
 ```
 
-In the next part of this tutorial, we will explore how to easily find where contracts are deployed with a specific tool. This will be useful if the deployment process is complex and we need to test an specific contract.
+In the next part of this tutorial, we will explore how to easily find where contracts are deployed with a specific tool based on Slither. This will be useful if the deployment process is complex and we need to test an specific contract.
