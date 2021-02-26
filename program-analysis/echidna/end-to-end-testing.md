@@ -16,7 +16,7 @@ For this tutorial, [we used the drizzle-box example](https://github.com/truffle-
 
 Before doing anything, let's install the tools we need:
 
-* Install echidna from [dev-refactor-etheno branch](https://github.com/crytic/echidna/pull/615).
+* Install echidna from [master branch](https://github.com/crytic/echidna).
 * Install etheno from [dev-ganache-improvements branch](https://github.com/crytic/etheno/tree/dev-ganache-improvements).
 
 
