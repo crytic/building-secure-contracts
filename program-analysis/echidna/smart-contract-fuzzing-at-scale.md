@@ -74,36 +74,31 @@ After it runs, check the coverage file, located in `corpus-exploration/covered.*
 
 ## 3. Starting a continuous fuzzing campaign
 
-When you are satisfied with the first iteration of the initialization, start a longer campaign for exploration. 
+When you are satisfied with the first iteration of the initialization, we can start a "continuous campaign" for exploration and testing using [echidna-parade](https://github.com/agroce/echidna-parade). Before starting, double check your config file. For instance, if you added properties, do not forget to remove `benchmarkMode`.
 
-```
-testLimit: 100000000000
-timeout: 1800 # 30 minutes
-```
+echidna-parade is tool is used to launch echidna instances at the same time, keeping track of the corpora of each one. Each instance will be configured to run for a certain amount of time with different parameters in order to maximize the chance to reach new code.
 
-If you add properties, do not forget to remove `benchmarkMode`.
-When the first exploration of the corpus finished, we should check the corpus and start a "continuous campaign", but using [echidna-parade](https://github.com/agroce/echidna-parade). 
-This tool is used to launch echidna instances at the same time. Each instance will be configured to run for a certain amount of time with different parameters in order to maximize the chance to reach new code.
-
-In this example:
-* the initial corpus used will be our corpus-exploration directory
+We will show it with an example, where:
+* the initial corpus is empty
 * the base config file will be exploration.yaml
+* the time to run the initial instance will be 3600 seconds (1 hour)
 * the time to run each "generations" will be 1800 seconds (30 minutes)
 * the overall timeout for the campaign will be 99999999999999 (practically infinite)
-* the number of echidna instances per generation will be 8 (this should be adjusted according to the number of available cores but avoid using all your cores if you don't want to kill your server).
-* the file that contains the contract is test.sol
+* the number of echidna instances per generation will be 8 (this should be adjusted according to the number of available cores but avoid using all your cores if you don't want to kill your server)
+* the target contract is named `C`
+* the file that contains the contract is `test.sol`
 
 Finally, we will log the stdout and stderr in `parade.log` and `parade.err` and fork the process to let it run forever. 
 
 ```
-$ echidna-parade --corpus_dir corpus-exploration --contract C --config exploration.yaml --gen_time 1800 --timeout 99999999999999 --ncores 8 Test.sol > parade.log 2> parade.err &
+$ echidna-parade --config exploration.yaml --initial_time 3600 --gen_time 1800 --timeout 99999999999999 --ncores 8 --contract C test.sol > parade.log 2> parade.err &
 ```
 
 **After you run this command, exit the shell so you won't kill it accidentally if your connect fails**
 
-## 4. Add properties, check coverage and modify the code if necessary
+## 4. Add more properties, check coverage and modify the code if necessary
 
-In this step, we can add properties while Echidna is exploring the executions. If a long campaign has already started, do not change the ABI of the properties 
+In this step, we can add more properties while Echidna is exploring the contracts. Keep in mind that you should avoid changing the ABI of the properties 
 (otherwise the quality of the corpus will degrade). 
 
 Also, we can tweak the code to improve coverage, but before starting that, we need to know how to monitor our fuzzing campaign. We can use a simple command:
