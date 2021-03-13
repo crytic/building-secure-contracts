@@ -8,6 +8,7 @@ In this tutorial we will review how we can create a dedicated server for fuzzing
 2. Start a short fuzzing campaign
 3. Start a continuous fuzzing campaign
 4. Add properties, check coverage and modify the code if necessary
+5. Ending the campaign 
 
 ## 1. Install and setup a dedicated server
 
@@ -83,15 +84,15 @@ We will show it with an example, where:
 * the base config file will be exploration.yaml
 * the time to run the initial instance will be 3600 seconds (1 hour)
 * the time to run each "generations" will be 1800 seconds (30 minutes)
-* the overall timeout for the campaign will be 99999999999999 (practically infinite)
-* the number of echidna instances per generation will be 8 (this should be adjusted according to the number of available cores but avoid using all your cores if you don't want to kill your server)
+* the campaign will run with timeout in -1, which means continuous mode (infinite)
+* the number of echidna instances per generation will be 8. This should be adjusted according to the number of available cores but avoid using all your cores if you don't want to kill your server
 * the target contract is named `C`
 * the file that contains the contract is `test.sol`
 
 Finally, we will log the stdout and stderr in `parade.log` and `parade.err` and fork the process to let it run forever. 
 
 ```
-$ echidna-parade --config exploration.yaml --initial_time 3600 --gen_time 1800 --timeout 99999999999999 --ncores 8 --contract C test.sol > parade.log 2> parade.err &
+$ echidna-parade --config exploration.yaml --initial_time 3600 --gen_time 1800 --timeout -1 --ncores 8 --contract C test.sol > parade.log 2> parade.err &
 ```
 
 **After you run this command, exit the shell so you won't kill it accidentally if your connect fails**
@@ -101,7 +102,7 @@ $ echidna-parade --config exploration.yaml --initial_time 3600 --gen_time 1800 -
 In this step, we can add more properties while Echidna is exploring the contracts. Keep in mind that you should avoid changing the ABI of the properties 
 (otherwise the quality of the corpus will degrade). 
 
-Also, we can tweak the code to improve coverage, but before starting that, we need to know how to monitor our fuzzing campaign. We can use a simple command:
+Also, we can tweak the code to improve coverage, but before starting that, we need to know how to monitor our fuzzing campaign. We can use this command:
 
 ```
 $ watch "grep 'COLLECTING NEW COVERAGE' parade.log | tail -n 30"
@@ -121,3 +122,29 @@ COLLECTING NEW COVERAGE: parade.181140/gen.37.6/corpus/coverage/6733481703877290
 you can verify the corresponding covered file, such as `parade.181140/gen.37.6/corpus/covered.1615497368.txt`. 
 
 For examples on how to help echidna to improve its coverage, please review the improving coverage tutorial.
+
+To monitor failed properties, use this command:
+
+```
+$ watch "grep 'FAIL' parade.log | tail -n 30"
+```
+
+When failed properties are found, you will see something like this:
+
+```
+NEW FAILURE: assertion in f: failed!💥
+parade.181140/gen.179.0 FAILED
+parade.181140/gen.179.3 FAILED
+parade.181140/gen.180.2 FAILED
+parade.181140/gen.180.4 FAILED
+parade.181140/gen.180.3 FAILED
+...
+```
+
+## 4. Ending the campaign
+
+When you are satisfied with the coverage results, you can terminate the continuous campaign using:
+
+```
+$ killall echidna-parade echidna
+```
