@@ -26,13 +26,13 @@ Then, using that user (`echidna`), install some basic dependencies:
 $ sudo apt install unzip python3-pip
 ```
 
-Then install everything necessary to build your smart contract as well to run slither and echidna-parade. For instance:
+Then install everything necessary to build your smart contract as well to run `slither` and `echidna-parade`. For instance:
 
 ```
 $ pip3 install solc-select
 $ solc-select install all
 $ pip3 install slither_analyzer
-$ pip3 install git+https://github.com/agroce/echidna-parade
+$ pip3 install echidna_parade
 ```
 
 Add `$PATH=$PATH:/home/echidna/.local/bin` at the end of `/home/echidna/.bashrc`
@@ -47,7 +47,7 @@ $ mv echidna-test /home/echidna/.local/bin
 
 ## 2. Start a short fuzzing campaign
 
-Select a contract to test and provide an initialization if needed. It doesn't have to be perfect, just start with some basic stuff.
+Select a contract to test and provide an initialization if needed. It does not have to be perfect, just start with some basic stuff and iterate over the result.
 Before starting this campaign, modify your echidna config to define a corpus directory to use. For instance:
 
 ```
@@ -84,7 +84,7 @@ We will show it with an example, where:
 * the base config file will be exploration.yaml
 * the time to run the initial instance will be 3600 seconds (1 hour)
 * the time to run each "generations" will be 1800 seconds (30 minutes)
-* the campaign will run with timeout in -1, which means continuous mode (infinite)
+* the campaign will run in continuous mode (if timeout is -1, it means run forever)
 * the number of echidna instances per generation will be 8. This should be adjusted according to the number of available cores but avoid using all your cores if you don't want to kill your server
 * the target contract is named `C`
 * the file that contains the contract is `test.sol`
