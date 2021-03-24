@@ -42,6 +42,7 @@ We should install echidna. The easiest way is to download a precompiled version 
 ```
 $ wget "https://github.com/crytic/echidna/releases/download/v1.7.0/echidna-test-1.7.0-Ubuntu-18.04.zip"
 $ unzip echidna-test-1.7.0-Ubuntu-18.04.zip
+$ tar -xf echidna-test.tar.gz
 $ mv echidna-test /home/echidna/.local/bin
 ```
 
