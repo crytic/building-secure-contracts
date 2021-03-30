@@ -17,6 +17,7 @@ The second part is a set of exercises to solve.
 - Advanced
   - [How to collect a corpus](./collecting-a-corpus.md): How to use Echidna to collect a corpus of transactions
   - [How to detect high gas consumption](./finding-transactions-with-high-gas-consumption.md): How to find functions with high gas consumption.
+  - [End-to-End testing](./end-to-end-testing.md): How to use existing unit tests to seed Echidna
 - Exercises
   - [Exercise 1](./Exercise-1.md): Testing token's balance
   - [Exercise 2](./Exercise-2.md): Testing access control
