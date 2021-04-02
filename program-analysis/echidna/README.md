@@ -23,6 +23,8 @@ The second part is a set of exercises to solve.
   - [Exercise 2](./Exercise-2.md): Testing access control
   - [Exercise 3](./Exercise-3.md): Testing with custom initialization
   - [Exercise 4](./Exercise-4.md): Testing with `assert`
+  - [Exercise 5](./Exercise-5.md): [Damn Vulnerable DeFi CTF][ctf] #1
+  - [Exercise 6](./Exercise-6.md): [Damn Vulnerable DeFi CTF][ctf] #2
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
@@ -51,3 +53,5 @@ cd /home/training
 [https://github.com/crytic/echidna/releases/tag/v1.6.0](https://github.com/crytic/echidna/releases/tag/v1.6.0)
 
 solc 0.5.11 is recommended for the exercises.
+
+[ctf]: https://www.damnvulnerabledefi.xyz/
