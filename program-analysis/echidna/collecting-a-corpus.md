@@ -1,4 +1,4 @@
-# Collecting and modifying an Echidna corpus
+# Collecting, visualizing and modifying an Echidna corpus
 
 **Table of contents:**
 
@@ -54,7 +54,6 @@ $ mkdir corpus-magic
 And an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config) `config.yaml`:
 
 ```yaml
-coverage: true
 corpusDir: "corpus-magic"
 ```
 
@@ -64,8 +63,30 @@ Now we can run our tool and check the collected corpus:
 $ echidna-test magic.sol --config config.yaml 
 ```
 
-Echidna still cannot find the correct magic values, but we can take look to the corpus it collected. 
-For instance, one of these files was:
+Echidna still cannot find the correct magic value. We can verify where it gets stuck reviewing the `corpus-magic/covered.*.txt` file:
+
+```
+r   |contract C {
+  bool value_found = false;
+r   |  function magic(uint magic_1, uint magic_2, uint magic_3, uint magic_4) public {
+r   |    require(magic_1 == 42);
+r   |    require(magic_2 == 129);
+r   |    require(magic_3 == magic_4+333);
+    value_found = true;
+    return;
+  }
+
+  function echidna_magic_values() public returns (bool) {
+    return !value_found;
+  }
+
+}
+```
+
+The label `r` on the left of each line shows that Echidna is able to reach these lines but it ends in a revert. 
+As you can see, the fuzzer gets stuck in the last `require`.
+
+To find a workaround, let's take look to the corpus it collected. For instance, one of these files was:
 
 ```json
 [
@@ -127,7 +148,7 @@ Echidna needs some help in order to deal with the `magic` function. We are going
 parameters for it:
 
 ```
-$ cp corpus/2712688662897926208.txt corpus/new.txt
+$ cp corpus-magic/coverage/2712688662897926208.txt corpus-magic/coverage/new.txt
 ```
 
 We will modify `new.txt` to call `magic(42,129,333,0)`. Now, we can re-run Echidna:
@@ -146,4 +167,22 @@ Seed: -7293830866560616537
 
 ```
 
-This time, it found that the property is violated inmmediately.
+This time, the property is violated inmmediately. We can verify that another `covered.*.txt` file is created showing another trace (labeled with `*`) that Echidna executed that finished with a return at the end of the `magic` function.
+
+```
+*r  |contract C {
+  bool value_found = false;
+*r  |  function magic(uint magic_1, uint magic_2, uint magic_3, uint magic_4) public {
+*r  |    require(magic_1 == 42);
+*r  |    require(magic_2 == 129);
+*r  |    require(magic_3 == magic_4+333);
+*   |    value_found = true;
+    return;
+  }
+
+  function echidna_magic_values() public returns (bool) {
+    return !value_found;
+  }
+
+}
+```
