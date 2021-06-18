@@ -31,14 +31,15 @@ Slither includes a utility, [slither-check-erc](https://github.com/crytic/slithe
 - [ ] **The name, decimals, and symbol functions are present if used.** These functions are optional in the ERC20 standard and might not be present.
 - [ ] **Decimals returns a uint8.** Several tokens incorrectly return a uint256. If this is the case, ensure the value returned is below 255.
 - [ ] **The token mitigates the known [ERC20 race condition](https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729).** The ERC20 standard has a known ERC20 race condition that must be mitigated to prevent attackers from stealing tokens.
-- [ ] **The token is not an ERC777 token and has no external function call in transfer and transferFrom.** External calls in the transfer functions can lead to reentrancies.
 
 Slither includes a utility, [slither-prop](https://github.com/crytic/slither/wiki/Property-generation), that generates unit tests and security properties that can discover many common ERC flaws. Use slither-prop to review that:
 
 - [ ] **The contract passes all unit tests and security properties from slither-prop.** Run the generated unit tests, then check the properties with [Echidna](https://github.com/crytic/echidna) and [Manticore](https://manticore.readthedocs.io/en/latest/verifier.html).
 
-Finally, there are certain characteristics that are difficult to identify automatically. Review for these conditions by hand:
+## ERC extensions risks
+Contracts might have different behaviors from their original ERC specification, manually review that:
 
+- [ ] **The token is not an ERC777 token and has no external function call in transfer and transferFrom.** External calls in the transfer functions can lead to reentrancies.
 - [ ] **Transfer and transferFrom should not take a fee.** Deflationary tokens can lead to unexpected behavior.
 - [ ] **Potential interest earned from the token is taken into account.** Some tokens distribute interest to token holders. This interest might be trapped in the contract if not taken into account.
 
