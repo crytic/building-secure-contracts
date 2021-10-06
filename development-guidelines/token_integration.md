@@ -76,6 +76,7 @@ Reviews for issues of token scarcity requires manual review. Check for these con
 ### ERC conformity
 Contracts might have different behaviors from their original ERC specification, manually review that:
 
+- [ ] **Transfering tokens to 0x0 should revert.** Several tokens allow transfering to 0x0, counting these as burned, however the ERC-721 standard requires to revert in such case.
 - [ ] **safeTransferFrom functions are implemented with the correct signature** Several tokens do not implement these functions. As a result, transferring NFTs into a contract can result in loss of assets.
 - [ ] **The name, decimals, and symbol functions are present if used.** These functions are optional in the ERC721 standard and might not be present.
 - [ ] **if used, decimals should return uint8(0)** Other values are not valid.
@@ -87,5 +88,8 @@ Contracts might have different behaviors from their original ERC specification, 
 ### ERC common risks
 ERC-721 contracts are exposed to the following risks when implementing:
 
+
 - [ ] **The onERC721Received callback cannot be exploited.** External calls in the transfer functions can lead to reentrancies.
-- [ ] **Mint safely transfer an NFT to a smart contract**. While minting is not part of this standard, if there is a function to mint, it should properly handle minting new tokens to a smart contract (similarly to `safeTransferFrom`) to avoid loss of assets.
+- [ ] **Minting safely transfer an NFT to a smart contract**. If there is a function to mint, it should properly handle minting new tokens to a smart contract (similarly to `safeTransferFrom`) to avoid loss of assets.
+- [ ] **Burning clears approvals**. If there is a function to burn, it should clear previous approvals.
+
