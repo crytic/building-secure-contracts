@@ -32,7 +32,7 @@ Then install everything necessary to build your smart contract as well to run `s
 $ pip3 install solc-select
 $ solc-select install all
 $ pip3 install slither_analyzer
-$ pip3 install https://github.com/crytic/echidna-parade/archive/refs/heads/main.zip
+$ pip3 install echidna_parade
 ```
 
 Add `$PATH=$PATH:/home/echidna/.local/bin` at the end of `/home/echidna/.bashrc`
@@ -40,8 +40,8 @@ Add `$PATH=$PATH:/home/echidna/.local/bin` at the end of `/home/echidna/.bashrc`
 We should install echidna. The easiest way is to download a precompiled version of echidna, uncompress it and move it to `/home/echidna/.local/bin`:
 
 ```
-$ wget "https://github.com/crytic/echidna/releases/download/v1.7.1/echidna-test-1.7.1-Ubuntu-18.04.tar.gz"
-$ tar -xf echidna-test-1.7.1-Ubuntu-18.04.tar.gz
+$ wget "https://github.com/crytic/echidna/releases/download/v1.7.2/echidna-test-1.7.2-Ubuntu-18.04.tar.gz"
+$ tar -xf echidna-test-1.7.2-Ubuntu-18.04.tar.gz
 $ mv echidna-test /home/echidna/.local/bin
 ```
 
