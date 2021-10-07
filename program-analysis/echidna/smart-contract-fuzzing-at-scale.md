@@ -40,9 +40,8 @@ Add `$PATH=$PATH:/home/echidna/.local/bin` at the end of `/home/echidna/.bashrc`
 We should install echidna. The easiest way is to download a precompiled version of echidna, uncompress it and move it to `/home/echidna/.local/bin`:
 
 ```
-$ wget "https://github.com/crytic/echidna/releases/download/v1.7.0/echidna-test-1.7.0-Ubuntu-18.04.zip"
-$ unzip echidna-test-1.7.0-Ubuntu-18.04.zip
-$ tar -xf echidna-test.tar.gz
+$ wget "https://github.com/crytic/echidna/releases/download/v1.7.2/echidna-test-1.7.2-Ubuntu-18.04.tar.gz"
+$ tar -xf echidna-test-1.7.2-Ubuntu-18.04.tar.gz
 $ mv echidna-test /home/echidna/.local/bin
 ```
 
@@ -93,14 +92,14 @@ We will show it with an example, where:
 Finally, we will log the stdout and stderr in `parade.log` and `parade.err` and fork the process to let it run forever. 
 
 ```
-$ echidna-parade --config exploration.yaml --initial_time 3600 --gen_time 1800 --timeout -1 --ncores 8 --contract C test.sol > parade.log 2> parade.err &
+$ echidna-parade test.sol --config exploration.yaml --initial_time 3600 --gen_time 1800 --timeout -1 --ncores 8 --contract C > parade.log 2> parade.err &
 ```
 
-**After you run this command, exit the shell so you won't kill it accidentally if your connect fails**
+**After you run this command, exit the shell so you won't kill it accidentally if your connect fails.**
 
 ## 4. Add more properties, check coverage and modify the code if necessary
 
-In this step, we can add more properties while Echidna is exploring the contracts. Keep in mind that you should avoid changing the ABI of the properties 
+In this step, we can add more properties while Echidna is exploring the contracts. Keep in mind that you should avoid changing the ABI of the contracts 
 (otherwise the quality of the corpus will degrade). 
 
 Also, we can tweak the code to improve coverage, but before starting that, we need to know how to monitor our fuzzing campaign. We can use this command:
