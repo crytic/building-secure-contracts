@@ -22,7 +22,7 @@ Get the coin contract
 
 ## Hints
 
-- To get a specific contract, use `slither.get_contract_from_name`
+- To get a specific contract, use `slither.get_contract_from_name` (note: it returns a list)
 - To get a specific function, use `contract.get_function_from_signature`
 
 ## Solution
