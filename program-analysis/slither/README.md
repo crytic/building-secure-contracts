@@ -201,7 +201,7 @@ A `Slither` object has:
 
 - `contracts (list(Contract)`: list of contracts
 - `contracts_derived (list(Contract)`: list of contracts that are not inherited by another contract (subset of contracts)
-- `get_contract_from_name (str)`: Return a contract from its name
+- `get_contract_from_name (str)`: Return a list of contract matching the name
 
 A `Contract` object has:
 
