@@ -89,7 +89,7 @@ Contracts might have different behaviors from their original ERC specification, 
 ERC-721 contracts are exposed to the following risks when implementing:
 
 
-- [ ] **The onERC721Received callback cannot be exploited.** External calls in the transfer functions can lead to reentrancies.
+- [ ] **The onERC721Received callback cannot be exploited.** External calls in the transfer functions can lead to reentrancies. This is particulary risky when the callback is not explicit (e.g. when [calling `safeMint`](https://www.paradigm.xyz/2021/08/the-dangers-of-surprising-code/)).
 - [ ] **Minting safely transfer an NFT to a smart contract**. If there is a function to mint, it should properly handle minting new tokens to a smart contract (similarly to `safeTransferFrom`) to avoid loss of assets.
 - [ ] **Burning clears approvals**. If there is a function to burn, it should clear previous approvals.
 
