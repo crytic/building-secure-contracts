@@ -41,7 +41,7 @@ To follow this checklist, you'll want to have this output from Slither for the t
 
 ## ERC-20 tokens 
 
-### ERC conformity
+### Suggested ERC-20 conformity checks
 
 Slither includes a utility, [slither-check-erc](https://github.com/crytic/slither/wiki/ERC-Conformance), that reviews the conformance of a token to many related ERC standards. Use slither-check-erc to review that:
 
@@ -54,7 +54,7 @@ Slither includes a utility, [slither-prop](https://github.com/crytic/slither/wik
 
 - [ ] **The contract passes all unit tests and security properties from slither-prop.** Run the generated unit tests, then check the properties with [Echidna](https://github.com/crytic/echidna) and [Manticore](https://manticore.readthedocs.io/en/latest/verifier.html).
 
-### ERC extensions risks
+### Risks in ERC-20 extensions
 Contracts might have different behaviors from their original ERC specification, manually review that:
 
 - [ ] **The token is not an ERC777 token and has no external function call in transfer and transferFrom.** External calls in the transfer functions can lead to reentrancies.
@@ -73,23 +73,23 @@ Reviews for issues of token scarcity requires manual review. Check for these con
 
 ## ERC-721 tokens 
 
-### ERC conformity
-Contracts might have different behaviors from their original ERC specification, manually review that:
+### Suggested ERC-721 conformity checks
+Contracts might have different behavior from their original ERC specification. Manually review that:
 
-- [ ] **Transfering tokens to 0x0 should revert.** Several tokens allow transfering to 0x0, counting these as burned, however the ERC-721 standard requires to revert in such case.
-- [ ] **safeTransferFrom functions are implemented with the correct signature** Several tokens do not implement these functions. As a result, transferring NFTs into a contract can result in loss of assets.
+- [ ] **Transfering tokens to 0x0 reverts.** Several tokens allow transfering to 0x0, counting these as burned, however the ERC-721 standard requires a revert in such case.
+- [ ] **safeTransferFrom functions are implemented with the correct signature.** Several tokens do not implement these functions. As a result, transferring NFTs into a contract can result in loss of assets.
 - [ ] **The name, decimals, and symbol functions are present if used.** These functions are optional in the ERC721 standard and might not be present.
-- [ ] **if used, decimals should return uint8(0)** Other values are not valid.
-- [ ] **The name and symbol functions can return an empty string**. This is allowed by the standard.
+- [ ] **If used, decimals should return uint8(0).** Other values are not valid.
+- [ ] **The name and symbol functions can return an empty string.** This is allowed by the standard.
 - [ ] **ownerOf reverts if the `tokenId` is invalid or it was already burned. This function cannot return 0x0**. This is required by the standard, but it is not always properly implemented.
-- [ ] **Transferring an NFT clears the its approvals**. This is required by the standard.
+- [ ] **Transferring an NFT clears its approvals**. This is required by the standard.
 - [ ] **The token id from an NFT cannot be changed during its lifetime**. This is required by the standard.
 
-### ERC common risks
+### Common risks to ERC-721
+
 ERC-721 contracts are exposed to the following risks when implementing:
 
-
-- [ ] **The onERC721Received callback cannot be exploited.** External calls in the transfer functions can lead to reentrancies. This is particulary risky when the callback is not explicit (e.g. when [calling `safeMint`](https://www.paradigm.xyz/2021/08/the-dangers-of-surprising-code/)).
-- [ ] **Minting safely transfer an NFT to a smart contract**. If there is a function to mint, it should properly handle minting new tokens to a smart contract (similarly to `safeTransferFrom`) to avoid loss of assets.
+- [ ] **The onERC721Received callback is commonly exploited.** External calls in the transfer functions can lead to reentrancies. This is particulary risky when the callback is not explicit. E.g., when [calling `safeMint`](https://www.paradigm.xyz/2021/08/the-dangers-of-surprising-code/).
+- [ ] **Minting safely transfers an NFT to a smart contract**. If there is a function to mint, it should properly handle minting new tokens to a smart contract (similarly to `safeTransferFrom`) to avoid loss of assets.
 - [ ] **Burning clears approvals**. If there is a function to burn, it should clear previous approvals.
 
