@@ -53,7 +53,7 @@ function operation(uint256[] data, ...) public{
 }
 ```
 
-This is because deserializing dynamic array is slow and can take a some amount of memory during the execution. Dynamic arrays are also problematic since they are hard to mutate. Despite Echidna includes some specific mutators (to remove/repeat elements or cut them), the mutators are only over the collected corpus. That is why we suggest to use `push(..)` and `pop()` to handle the exporation:
+This is because deserializing dynamic array is slow and can take a some amount of memory during the execution. Dynamic arrays are also problematic since they are hard to mutate. Despite Echidna includes some specific mutators (to remove/repeat elements or cut them), the mutators are performed using the collected corpus. That is why we suggest to use an functions `push(..)` and `pop()` to handle the exporation of dynamic array used as inputs:
 
 ```solidity
 private uint256[] data;
@@ -76,4 +76,4 @@ This will work well to test arrays with a small amount of elements, however, it 
 filterFunctions: ["C.pop()"]
 ```
 
-This is enough for small scale testing. A more general solution is available thanks to a specific testing technique called [*swarm testing*](https://www.cs.utah.edu/~regehr/papers/swarm12.pdf). This allows to run a long testing campaign with some tool but randomly shuffling the configuration of it. In case of Echidna, swarm testing runs with different config files, where it blacklists an amount of random functions from the contract to test. We offer swarm testing and scalability with [echidna-parade](https://github.com/crytic/echidna-parade), our dedicated tool for fuzzing smart contracts. A specific tutorial in the use of echidna-parade is available [here](smart-contract-fuzzing-at-scale.md).
+This is enough for small scale testing. A more general solution is available using a specific testing technique called [*swarm testing*](https://www.cs.utah.edu/~regehr/papers/swarm12.pdf). This allows to run a long testing campaign with some tool but randomly shuffling the configuration of it. In case of Echidna, swarm testing runs with different config files, where it blacklists an amount of random functions from the contract to test. We offer swarm testing and scalability with [echidna-parade](https://github.com/crytic/echidna-parade), our dedicated tool for fuzzing smart contracts. A specific tutorial in the use of echidna-parade is available [here](smart-contract-fuzzing-at-scale.md).
