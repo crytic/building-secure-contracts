@@ -79,7 +79,7 @@ contract Test {
 After you have write your first version of properties, run Echidna to make sure they work as expected. During this tutorial, we will improve them step by step, it is strongly recommended to run the fuzzer at each step, to increase the probability of detecting any potential issue. 
 
 Perhaps you think this properties are too low level to be useful, in particular if the code has a good coverage in terms of unit tests, 
-but you will be surpriced how often a unexpected reverts/returns uncovers a complex and severe issue. Moreover, we will see how these properties can be improved to cover more complex post-conditions.
+but you will be surpriced how often an unexpected reverts/returns uncovers a complex and severe issue. Moreover, we will see how these properties can be improved to cover more complex post-conditions.
 
 Before continue, we will improve these properties using [try/catch](https://docs.soliditylang.org/en/v0.6.0/control-structures.html#try-catch). The use of a low level call force us to manually encode the data, which can be error prone (an error will cause calls to always revert). However, this will only works if the codebase is using solc 0.6.0 or later:
 
@@ -104,7 +104,7 @@ Before continue, we will improve these properties using [try/catch](https://docs
 
 ## Enhacing postcondition checks
 
-If the previous properties are passing, this means that the preconditions are good enough, however the post-conditions are not very precise. 
+If the previous properties are passing, this means that the pre-conditions are good enough, however the post-conditions are not very precise. 
 Avoid reverting doesn't mean that the contract is in a valid state. Let's add some basic preconditions:
 
 ```solidity
@@ -150,7 +150,7 @@ In this generic example, it is unclear if there is a way to calculate how many s
 }
 ```
 
-The resulting property checks that calls to deposit/withdraw shares will never revert and once they executed, the number of obtained tokens will not change. Keep in mind that this property should consider fees or tolerated loss of precision.
+The resulting property checks that calls to deposit/withdraw shares will never revert and once they executed, the number of obtained tokens will not change. Keep in mind that this property should consider fees and any tolerated loss of precision (e.g. when the computation requires a division).
 
 ## Final considerations
 
@@ -158,7 +158,7 @@ Two important considerations for this example:
 
 We want echidna to spend most of the execution exploring the contract to test, so in order to make the properties more efficient, we should avoid dead branches where there is nothing to do. That's why we can improve `depositShares_never_reverts` to use:
 
-```
+```solidity
   function depositShares_never_reverts(uint256 val) public {
     if(token.balanceOf(address(this)) > 0) {
       val = val % token.balanceOf(address(this));
