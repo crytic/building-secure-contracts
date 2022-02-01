@@ -14,6 +14,8 @@ Follow our guidelines and best practices to write secure smart contracts.
   - [Slither](./program-analysis/slither): a static analyzer avaialable through a CLI and scriptable interface.
   - [Echidna](./program-analysis/echidna): a fuzzer that will check your contract's properties.
   - [Manticore](./program-analysis/manticore): a symbolic execution engine that can prove the correctness properties.
+- [Learn EVM](./learn_evm): EVM technical knowledge
+  - [EIPs - forks](./learn_evm/eips_forks.md): summarize the EIPs included in each fork
 
 For each tool, this training material will provide:
 
