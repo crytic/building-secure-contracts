@@ -1,4 +1,4 @@
-The following list every EIPs associated to an Ethereum fork.
+The following list every EIP associated to an Ethereum fork.
 
 | Fork  | EIP  | What it does  | Opcode | Gas | Notes
 |---|---|---|---|---|---|
@@ -43,5 +43,6 @@ The following list every EIPs associated to an Ethereum fork.
 | [Arrow Glacier](https://github.com/ethereum/execution-specs/blob/a01c4c76e12fe9f0debf93bda7f67f002d77f8b4/network-upgrades/mainnet-upgrades/arrow-glacier.md) | [4345](https://eips.ethereum.org/EIPS/eip-4345)  |  Difficulty Bomb Delay to June 2022 | | |
 
 
-- `Opcode`: the EIP adds or remove an opcode
+In this table:
+- `Opcode`: the EIP adds or removes an opcode
 - `Gas`: the EIP changes the gas rules
