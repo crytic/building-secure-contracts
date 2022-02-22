@@ -75,7 +75,7 @@ test_example(){
         exit -1
     fi
 
-    grep "assertion in inc: failed!" results.txt
+    grep "inc(uint256): failed" results.txt
     if [ $? -ne 0 ]
     then
         echo "Bug not found"

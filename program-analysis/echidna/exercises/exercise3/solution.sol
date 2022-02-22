@@ -3,7 +3,7 @@ import "mintable.sol";
 
 contract TestToken is MintableToken{
 
-    address echidna_caller = 0x00a329C0648769a73afAC7F9381e08fb43DBEA70;
+    address echidna_caller = msg.sender;
     constructor() MintableToken(10000) public {
         owner = echidna_caller;
     }
