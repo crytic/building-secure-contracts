@@ -18,7 +18,7 @@ test_example(){
         exit -1
     fi
 
-    grep "echidna_balance_under_1000: failed" results.txt
+    grep "echidna_balance_under_1000:\s*failed" results.txt
     if [ $? -ne 0 ]
     then
         echo "Bug not found"
@@ -55,7 +55,7 @@ test_example(){
         exit -1
     fi
 
-    grep "echidna_state4: failed" results.txt
+    grep "echidna_state4:\s*failed" results.txt
     if [ $? -ne 0 ]
     then
         echo "Bug not found"
@@ -75,7 +75,7 @@ test_example(){
         exit -1
     fi
 
-    grep "inc(uint256): failed" results.txt
+    grep "inc(uint256):\s*failed" results.txt
     if [ $? -ne 0 ]
     then
         echo "Bug not found"
@@ -117,9 +117,9 @@ install_echidna
 
 test_example
 
-test_exercise 1 "echidna_test_balance: failed"
-test_exercise 2 "echidna_no_transfer: failed"
-test_exercise 3 "echidna_test_balance: failed"
+test_exercise 1 "echidna_test_balance:\s*failed"
+test_exercise 2 "echidna_no_transfer:\s*failed"
+test_exercise 3 "echidna_test_balance:\s*failed"
 
 
 
