@@ -62,7 +62,7 @@ test_exercise(){
 
 
 
-pip install manticore
+pip install manticore==0.3.5
 
 cd program-analysis/manticore
 
