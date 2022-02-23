@@ -6,7 +6,7 @@ Follow our guidelines and best practices to write secure smart contracts.
 
 **Table of contents:**
 
-- Development guidelines
+- [Development guidelines](./development-guidelines)
   - [Secure development workflow](./development-guidelines/workflow.md)
   - [High-level best practices](./development-guidelines/guidelines.md)
   - [Token integration checklist](./development-guidelines/token_integration.md)
