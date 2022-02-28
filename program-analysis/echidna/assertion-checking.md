@@ -10,7 +10,7 @@
 
 ## Introduction
 
-In this short tutorial, we will show you how to use Echidna to check assertions in smart contracts.
+In this short tutorial, we will show you how to use Echidna to check assertions in smart contracts. For this example, make sure you use Solidity 0.7.x or older. If you run them with Solidity 0.8.x, the test will never fail.
 
 ## Write an assertion
 
@@ -63,11 +63,13 @@ contract Incrementor {
 
 ## Run Echidna
 
-To enable the assertion failure testing in Echidna, create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config), `config.yaml`, with checkAsserts set to true:
+To enable the assertion failure testing in Echidna, create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config), `config.yaml`, with `testMode` set for assertion checking:
 
 ```yaml
-checkAsserts: true
+testMode: assertion
 ```
+
+Otherwise, you can use `--test-mode assertion` directly from the command line.
 
 When we run this contract in Echidna, we obtain the expected results:
 
