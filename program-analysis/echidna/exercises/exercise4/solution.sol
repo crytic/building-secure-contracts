@@ -1,5 +1,5 @@
 /// @notice there are two ways to run this contract
-/// @dev to run: $ echidna-test solution.sol --test-mode assertion --contract Token
+/// @dev first way to run: $ echidna-test solution.sol --test-mode assertion --contract Token
 /// @dev second way to run: $ echidna-test solution.sol --config config.yaml --contract Token
 contract Ownership {
     address owner = msg.sender;
