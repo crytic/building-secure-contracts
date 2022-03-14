@@ -10,7 +10,7 @@
 ## Introduction
 
 We will see how to filter the functions to be fuzzed.
-The target is the following smart contract (*[example/multi.sol](./example/multi.sol)*):: 
+The target is the following smart contract (*[example/multi.sol](./example/multi.sol)*): 
 
 ```solidity
 contract C {

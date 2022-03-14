@@ -48,7 +48,7 @@ Echidna will:
 - Report any transactions leading a property to return false or throw an error. 
 - Discard side-effects when calling a property (i.e. if the property changes a state variable, it is discarded after the test)
 
-The following property checks that the caller has no more than 1000 tokens:
+The following property checks that the caller can have no more than 1000 tokens:
 
 ```Solidity
     function echidna_balance_under_1000() public view returns(bool){
@@ -70,7 +70,7 @@ Use inheritance to separate your contract from your properties:
 
 ## Initiate a contract
 
-Echidna needs a constructor without argument.
+Echidna needs a constructor without input arguments.
 If your contract needs a specific initialization, you need to do it in the constructor.
 
 There are some specific addresses in Echidna:
@@ -97,7 +97,7 @@ $ echidna-test contract.sol --contract MyContract
 
 ## Summary: Testing a property
 
-The following summarizes the run of echidna on our example:
+The following summarizes the run of Echidna on our example:
 
 ```Solidity
      contract TestToken is Token{

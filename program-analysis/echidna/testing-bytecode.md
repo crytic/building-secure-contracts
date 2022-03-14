@@ -10,8 +10,8 @@
 
 ## Introduction
 
-We will see how to fuzz a contract without providing the source code. 
-The technique can used to do differential fuzzing (i.e. compare multiple implementations) between a Solidity contract, a Vyper contract, or without source code.
+We will see how to fuzz a contract without any provided source code. 
+The technique can also be used to perform differential fuzzing (i.e. compare multiple implementations) between a Solidity contract and a Vyper contract.
 
 Consider the following bytecode:
 ```
@@ -68,9 +68,9 @@ contract TestBytecodeOnly{
 ```
 
 The proxy:
-- Deploy the bytecode in its constructor
+- Deploys the bytecode in its constructor
 - Has one function that will call the target's `transfer` function
-- Has one echidna property `t.balanceOf(address(this)) <= t.totalSupply()`
+- Has one Echidna property `t.balanceOf(address(this)) <= t.totalSupply()`
 
 ## Run Echidna
 

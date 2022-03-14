@@ -70,7 +70,7 @@ function operation(...) public{
 }
 ```
 
-This will work well to test arrays with a small amount of elements, however, it introduces an unexpected bias in the exploration: since `push` an `pop` are functions that will be selected with equal probability, the chance of building large arrays (e.g. more than 64 elements) is very very small. One quick solution could be to run Echidna blacklisting the `pop()` during a short campaign:
+This will work well to test arrays with a small amount of elements; however, it introduces an unexpected bias in the exploration: since `push` an `pop` are functions that will be selected with equal probability, the chance of building large arrays (e.g. more than 64 elements) is very very small. One quick solution could be to blacklist the `pop()` function during a short campaign:
 
 ```
 filterFunctions: ["C.pop()"]

@@ -71,7 +71,7 @@ Otherwise, you can create an [Echidna configuration file](https://github.com/cry
 testMode: assertion
 ```
 
-When we run this contract in Echidna, we obtain the expected results:
+When we run this contract with Echidna, we obtain the expected results:
 
 ```
 $ echidna-test assert.sol --test-mode assertion
@@ -89,7 +89,7 @@ As you can see, Echidna reports an assertion failure in the `inc` function. Addi
 
 ## When and how to use assertions
 
-Assertions can be used as alternatives to explicit properties if the conditions to check are directly related to the correct use of some operation `f`. Adding assertions after some code will enforce that the check will happen immediately after it was executed: 
+Assertions can be used as alternatives to explicit properties if the conditions to check are directly related to the correct use of some operation `f`. Adding assertions after some code will enforce that the check happens immediately after it was executed: 
 
 ```solidity
 function f(..) public {

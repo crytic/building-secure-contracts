@@ -157,7 +157,7 @@ The resulting property checks that calls to deposit/withdraw shares will never r
 
 Two important considerations for this example:
 
-We want echidna to spend most of the execution exploring the contract to test. So, in order to make the properties more efficient, we should avoid dead branches where there is nothing to do. That's why we can improve `depositShares_never_reverts` to use:
+We want Echidna to spend most of the execution exploring the contract to test. So, in order to make the properties more efficient, we should avoid dead branches where there is nothing to do. That's why we can improve `depositShares_never_reverts` to use:
 
 ```solidity
   function depositShares_never_reverts(uint256 val) public {
@@ -171,7 +171,7 @@ We want echidna to spend most of the execution exploring the contract to test. S
   }
 ```
 
-Additionally, combining properties does not mean that we will have to remove simpler ones. For instance, if we want to write `withdraw_deposit_shares_never_reverts`, in which we reverse the order of operations (withdraw and then deposit, instead of deposit and then withdraw), we will have to make sure `c.getShares(address(this))` can be positive. An easy way to do it is to keep `depositShares_never_reverts`, since this code allows Echidna to deposit shares from `address(this)` (otherwise, this is impossible).
+Additionally, combining properties does not mean that we will have to remove simpler ones. For instance, if we want to write `withdraw_deposit_shares_never_reverts`, in which we reverse the order of operations (withdraw and then deposit, instead of deposit and then withdraw), we will have to make sure `c.getShares(address(this))` can be positive. An easy way to do it is to keep `depositShares_never_reverts`, since this code allows Echidna to deposit tokens from `address(this)` (otherwise, this is impossible).
 
 ## Summary: How to write good properties
 

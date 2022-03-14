@@ -157,4 +157,4 @@ $ echidna-test contract.sol --config config.yaml
 ...
 ```
 
-Echidna will report a sequence with the maximum gas consumption for every function, once the fuzzing campaign is over.
+Once the fuzzing campaign is over, Echidna will report a sequence with the maximum gas consumption for every function.

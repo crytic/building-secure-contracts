@@ -167,7 +167,7 @@ Seed: -7293830866560616537
 
 ```
 
-This time, the property is violated immediately. We can verify that another `covered.*.txt` file is created showing another trace (labeled with `*`) that Echidna executed that finished with a return at the end of the `magic` function.
+This time, the property is violated immediately. We can verify that another `covered.*.txt` file is created showing another trace (labeled with `*`) that Echidna executed which finished with a return at the end of the `magic` function.
 
 ```
 *r  |contract C {
