@@ -2,10 +2,10 @@ import "token.sol";
 
 contract TestToken is Token {
     constructor() public {
-        paused();
+        paused(); // pause the contract
         owner = address(0x0); // lose ownership
     }
 
     // add the property
-    function echidna_no_transfer() public view returns (bool) {}
+    function echidna_cannot_be_unpaused() public view returns (bool) {}
 }
