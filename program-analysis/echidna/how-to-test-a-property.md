@@ -75,9 +75,9 @@ If your contract needs a specific initialization, you need to do it in the const
 
 There are some specific addresses in Echidna:
 
-- `0x00a329c0648769A73afAc7F9381E08FB43dBEA72` which calls the constructor.
+- `0x30000` calls the constructor.
 
-- `0x10000`, `0x20000`, and `0x00a329C0648769a73afAC7F9381e08fb43DBEA70` which randomly calls the other functions.
+- `0x10000`, `0x20000`, and `0x30000` randomly call the other functions.
 
 We do not need any particular initialization in our current example, as a result our constructor is empty.
 
