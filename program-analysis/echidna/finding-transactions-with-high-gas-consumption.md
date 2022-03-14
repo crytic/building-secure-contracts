@@ -10,7 +10,7 @@
 
 ## Introduction
 
-We will see how to find the transactions with has gas consumption with Echidna. The target is the following smart contract:
+We will see how to find transactions with has gas consumption using Echidna. The target is the following smart contract (*[example/gas.sol](./example/gas.sol)*):
 
 ```solidity
 contract C {
@@ -36,7 +36,7 @@ contract C {
 ```
 Here `expensive` can have a large gas consumption. 
 
-Currently, Echidna always need a property to test: here `echidna_test` always returns `true`.
+Currently, Echidna always needs a property to test: here `echidna_test` always returns `true`.
 We can run Echidna to verify this:
 
 ```
@@ -49,7 +49,7 @@ Seed: 2320549945714142710
 
 ## Measuring Gas Consumption
 
-To enable the gas consumption with Echidna, create an configuration file `config.yaml`:
+To enable Echidna's gas consumption feature, create a configuration file [`config.yaml`](./example/gas.yaml):
 
 ```yaml
 estimateGas: true
@@ -86,9 +86,9 @@ Seed: -325611019680165325
 # Filtering Out Gas-Reducing Calls
 
 The tutorial on [filtering functions to call during a fuzzing campaign](./filtering-functions.md) shows how to
-remove some functions from your testing.  
+remove some functions during testing.  
 This can be critical for getting an accurate gas estimate.
-Consider the following example:
+Consider the following example (*[example/pushpop.sol](./example/pushpop.sol)*):
 
 ```solidity
 contract C {
@@ -113,7 +113,7 @@ contract C {
   }
 }
 ```
-If Echidna can call all the functions, it won't easily find transactions with high gas cost:
+If Echidna uses this [`config.yaml`](./example/pushpop.yaml), it can call all functions and won't easily find transactions with high gas cost:
 
 ```
 $ echidna-test pushpop.sol --config config.yaml
@@ -128,9 +128,10 @@ push used a maximum of 40839 gas
 ```
 
 That's because the cost depends on the size of `addrs` and random calls tend to leave the array almost empty.
-Blacklisting `pop` and `clear`, however, gives us much better results:
+Blacklisting `pop` and `clear`, however, gives us much better results (*[example/blacklistpushpop.yaml](./example/blacklistpushpop.yaml)*):
 
 ```yaml
+estimateGas: true
 filterBlacklist: true
 filterFunctions: ["C.pop()", "C.clear()"]
 ```
@@ -156,4 +157,4 @@ $ echidna-test contract.sol --config config.yaml
 ...
 ```
 
-Echidna will report a sequence with the maximum gas consumption for every function, once the fuzzing campaign is over.
+Once the fuzzing campaign is over, Echidna will report a sequence with the maximum gas consumption for every function.

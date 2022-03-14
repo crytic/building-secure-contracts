@@ -1,6 +1,6 @@
 # Exercise 3
 
-This exercise requires to finish the [exercise 1](./Exercise-1.md) and the [exercise 2](./Exercise-2.md)
+This exercise requires to finish [exercise 1](./Exercise-1.md) and [exercise 2](./Exercise-2.md)
 
 **Table of contents:**
 
@@ -17,9 +17,9 @@ We will test the following contract *[exercises/exercise3/token.sol](./exercises
 ```Solidity
  contract Ownership{
     address owner = msg.sender;
-    function Owner(){
+    constructor() public {
         owner = msg.sender;
-     }
+    }
      modifier isOwner(){
          require(owner == msg.sender);
          _;
@@ -45,8 +45,9 @@ We will test the following contract *[exercises/exercise3/token.sol](./exercises
    contract Token is Pausable{
       mapping(address => uint) public balances;
       function transfer(address to, uint value) ifNotPaused public{
-           balances[msg.sender] -= value;
-           balances[to] += value;
+            require(balances[msg.sender] >= value);
+            balances[msg.sender] -= value;
+            balances[to] += value;
        }
     }
 
@@ -78,9 +79,24 @@ The [version of token.sol](./exercises/exercise3/token.sol#L1) contains the fixe
 
 ### Goals
 
-- Create a scenario, where `echidna_caller (0x00a329c0648769a73afac7f9381e08fb43dbea70)` becomes the owner of the contract at construction, and `totalMintable` is set to 10,000. Recall that Echidna needs a constructor without argument.
-- Add a property to check if `echidna_caller` cannot mint more than 10,000 tokens.
-- Once Echidna found the bug, fix the issue, and re-try your property with Echidna.
+- Create a scenario, where `echidna_caller (msg.sender)` becomes the owner of the contract at construction, and `totalMintable` is set to 10,000. Recall that Echidna needs a constructor without argument.
+- Add a property to check if `echidna_caller` can mint more than 10,000 tokens.
+- Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
+
+The skeleton for this exercise is (*[exercises/exercise3/template.sol](./exercises/exercise3/template.sol)*):
+
+```Solidity
+   import "mintable.sol";
+   contract TestToken is MintableToken {
+      address echidna_caller = msg.sender;
+
+      // update the constructor
+      constructor() public {}
+
+      // add the property
+      function echidna_test_balance() public view returns (bool) {}
+   }
+```
 
 ## Solution
 

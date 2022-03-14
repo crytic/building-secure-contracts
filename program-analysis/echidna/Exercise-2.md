@@ -58,20 +58,21 @@ We will test the following contract *[exercises/exercise2/token.sol](./exercises
 
 - Consider `paused()` to be called at deployment, and the ownership removed.
 - Add a property to check that the contract cannot be unpaused.
-- Once Echidna found the bug, fix the issue, and re-try your property with Echidna.
+- Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
 The skeleton for this exercise is (*[exercises/exercise2/template.sol](./exercises/exercise2/template.sol)*):
 
 ```Solidity
    import "token.sol";
    contract TestToken is Token {
-      address echidna_caller = 0x00a329c0648769a73afac7f9381e08fb43dbea70;
+      address echidna_caller = msg.sender;
       constructor(){
          paused(); // pause the contract
          owner = 0x0; // lose ownership
        }
-         // add the property
-     }
+      // add the property
+      function echidna_no_transfer() public view returns (bool) {}
+   }
 ```
 
 ## Solution
