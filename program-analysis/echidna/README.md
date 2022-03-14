@@ -2,7 +2,7 @@
 
 The aim of this tutorial is to show how to use Echidna to automatically test smart contracts.
 
-The first part introduces how to write a properties for Echidna.
+The first part introduces how to write properties for Echidna.
 The second part is a set of exercises to solve.
 
 **Table of contents:**
