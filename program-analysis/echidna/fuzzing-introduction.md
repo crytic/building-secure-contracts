@@ -16,7 +16,7 @@ Beyond the purely random generation of inputs, there are many techniques and str
 
 Echidna belongs to a specific family of fuzzer: property-based fuzzing heavily inspired by [QuickCheck](https://en.wikipedia.org/wiki/QuickCheck). In contrast to a classic fuzzer that will try to find crashes, Echidna will try to break user-defined invariants.
 
-In smart contracts, invariants are Solidity functions or properties that can represent any incorrect or invalid state that the contract can reach, including:
+In smart contracts, invariants are Solidity functions that can represent any incorrect or invalid state that the contract can reach, including:
 
 - Incorrect access control: the attacker became the owner of the contract.
 - Incorrect state machine: the tokens can be transferred while the contract is paused.
