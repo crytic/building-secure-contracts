@@ -63,18 +63,18 @@ contract Incrementor {
 
 ## Run Echidna
 
-To enable the assertion failure testing in Echidna, create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config), `config.yaml`, with `testMode` set for assertion checking:
+To enable the assertion failure testing in Echidna, you can use `--test-mode assertion` directly from the command line. 
+
+Otherwise, you can create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config), `config.yaml`, with `testMode` set for assertion checking:
 
 ```yaml
 testMode: assertion
 ```
 
-Otherwise, you can use `--test-mode assertion` directly from the command line.
-
 When we run this contract in Echidna, we obtain the expected results:
 
 ```
-$ echidna-test assert.sol --config config.yaml 
+$ echidna-test assert.sol --test-mode assertion
 Analyzing contract: assert.sol:Incrementor
 assertion in inc: failed!💥  
   Call sequence, shrinking (2596/5000):
@@ -87,7 +87,7 @@ Seed: 1806480648350826486
 
 As you can see, Echidna reports an assertion failure in the `inc` function. Adding more than one assertion per function is possible, however, Echidna cannot tell which assertion failed.
 
-## When and how use assertions
+## When and how to use assertions
 
 Assertions can be used as alternatives to explicit properties if the conditions to check are directly related to the correct use of some operation `f`. Adding assertions after some code will enforce that the check will happen immediately after it was executed: 
 
@@ -141,7 +141,7 @@ contract Incrementor {
 ```
 
 ```bash
-$ echidna-test assert.sol --config config.yaml 
+$ echidna-test assert.sol --test-mode assertion
 Analyzing contract: assert.sol:Incrementor
 assertion in inc: failed!💥  
   Call sequence, shrinking (2596/5000):
