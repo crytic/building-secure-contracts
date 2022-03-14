@@ -70,7 +70,7 @@ The skeleton for this exercise is (*[exercises/exercise2/template.sol](./exercis
          paused(); // pause the contract
          owner = 0x0; // lose ownership
        }
-         // add the property
+      // add the property
       function echidna_cannot_be_unpaused() public view returns (bool) {}
    }
 ```
