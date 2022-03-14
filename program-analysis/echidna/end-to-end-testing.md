@@ -1,6 +1,6 @@
 # End-to-End testing with Echidna (Part I)
 
-When smart contracts require a complex initialization and the time to do it is short, we want to avoid to manually recreate a deployment for a fuzzing campaign with Echidna. That's why we have a new approach for testing using Echidna based on the deployments and execution of tests directly from ganache.
+When smart contracts require a complex initialization and the time to do it is short, we want to avoid to manually recreating a deployment for a fuzzing campaign with Echidna. That's why we have a new approach for testing using Echidna based on the deployments and execution of tests directly from ganache.
 
 ## Requirements:
 

@@ -11,7 +11,7 @@
 ## Introduction
 
 We will see how to fuzz a contract without providing the source code. 
-The technique can used to do differential fuzzing (i.e. compare multiple implementations) between a Solidity contract, and a Vyper contract, or without source code.
+The technique can used to do differential fuzzing (i.e. compare multiple implementations) between a Solidity contract, a Vyper contract, or without source code.
 
 Consider the following bytecode:
 ```
@@ -81,7 +81,7 @@ echidna_test_balance: failed!💥
     transfer(0x0,1002)
 ```
 
-Here Echidna found that by calling `transfer(0 ,1002)` anyone can mint tokens. 
+Here Echidna found that by calling `transfer(0, 1002)` anyone can mint tokens. 
 
 ### Target source code
 
@@ -157,11 +157,9 @@ contract SolidityVersion{
 }
 ```
 
-Here we run Echidna with the [assertion mode](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/assertion-checking.md):
+Here we run Echidna with the [assertion mode](./assertion-checking.md):
 ```
-$ cat config.yaml 
-checkAsserts: true
-$ echidna-test  vyper.sol --config config.yaml --contract SolidityVersion
+$ echidna-test  vyper.sol --config config.yaml --contract SolidityVersion --test-mode assertion
 assertion in test: passed! 🎉
 ```
 

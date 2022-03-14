@@ -30,7 +30,7 @@ We will see how to test a smart contract with Echidna. The target is the followi
   
 ```
 
-We will make the assumption that this token must have the following properties:
+We will make the assumption that this token has the following properties:
 
 - Anyone can have at maximum 1000 tokens
 
@@ -46,7 +46,7 @@ Echidna properties are Solidity functions. A property must:
 Echidna will:
 - Automatically generate arbitrary transactions to test the property.
 - Report any transactions leading a property to return false or throw an error. 
-- Discard side-effect when calling a property (i.e. if the property changes a state variable, it is discarded after the test)
+- Discard side-effects when calling a property (i.e. if the property changes a state variable, it is discarded after the test)
 
 The following property checks that the caller has no more than 1000 tokens:
 
@@ -79,7 +79,7 @@ There are some specific addresses in Echidna:
 
 - `0x10000`, `0x20000`, and `0x30000` randomly call the other functions.
 
-We do not need any particular initialization in our current example, as a result our constructor is empty.
+We do not need any particular initialization in our current example. As a result, our constructor is empty.
 
 ## Run Echidna
 
@@ -89,7 +89,7 @@ Echidna is launched with:
 $ echidna-test contract.sol
 ```
 
-If contract.sol contains multiple contracts, you can specify the target:
+If `contract.sol` contains multiple contracts, you can specify the target:
 
 ```bash
 $ echidna-test contract.sol --contract MyContract
