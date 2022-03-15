@@ -62,6 +62,13 @@ jobs:
             config: assert.yaml
             outcome: failure
             expected: 'inc(uint256):\s*failed'
+          - name: PopsicleBroken
+            workdir: program-analysis/echidna/example/
+            files: PopsicleBroken.sol
+            config: PopsicleBroken.yaml
+            contract: PopsicleBroken
+            outcome: failure
+            expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*failed'
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
