@@ -1,0 +1,95 @@
+name: Echidna
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+  pull_request:
+  schedule:
+    # run CI every day even if no PRs/merges occur
+    - cron:  '0 12 * * *'
+
+jobs:
+  tests:
+    name: ${{ matrix.name }}
+    continue-on-error: ${{ matrix.flaky == true }}
+    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Exercise 1
+            workdir: program-analysis/echidna/exercises/exercise1/
+            files: solution.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_test_balance:\s*failed'
+          - name: Exercise 2
+            workdir: program-analysis/echidna/exercises/exercise2/
+            files: solution.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_no_transfer:\s*failed'
+          - name: Exercise 3
+            workdir: program-analysis/echidna/exercises/exercise3/
+            files: solution.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_test_balance:\s*failed'
+          - name: TestToken
+            workdir: program-analysis/echidna/example/
+            files: testtoken.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_balance_under_1000:\s*failed'
+          - name: Gas estimation
+            workdir: program-analysis/echidna/example/
+            files: gas.sol
+            config: gas.yaml
+            outcome: success
+            expected: 'f(42,123,'
+            flaky: true
+          - name: Multi
+            workdir: program-analysis/echidna/example/
+            files: multi.sol
+            config: filter.yaml
+            outcome: failure
+            expected: 'echidna_state4:\s*failed'
+          - name: Assert
+            workdir: program-analysis/echidna/example/
+            files: assert.sol
+            config: assert.yaml
+            outcome: failure
+            expected: 'inc(uint256):\s*failed'
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Run Echidna
+      uses: crytic/echidna-action@v2
+      id: echidna
+      continue-on-error: true
+      with:
+        files: ${{ matrix.files }}
+        contract: ${{ matrix.contract }}
+        config: ${{ matrix.config }}
+        output-file: ${{ matrix.files }}.out
+        solc-version: 0.5.11
+        echidna-workdir: ${{ matrix.workdir }}
+    - name: Verify that the exit code is correct
+      run: |
+        if [[ ${{ steps.echidna.outcome }} = ${{ matrix.outcome }} ]]; then
+          echo "Outcome matches"
+        else
+          echo "Outcome mismatch. Expected ${{ matrix.outcome }} but got ${{ steps.echidna.outcome }}"
+          exit 1
+        fi
+    - name: Verify that the output is correct
+      run: |
+        if grep -q "${{ matrix.expected }}" "${{ steps.echidna.outputs.output-file }}"; then
+          echo "Output matches"
+        else
+          echo "Output mismatch. Expected something matching '${{ matrix.expected }}'. Got the following:"
+          cat "${{ steps.echidna.outputs.output-file }}"
+          exit 1
+        fi
