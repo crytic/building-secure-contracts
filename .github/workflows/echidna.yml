@@ -19,7 +19,8 @@ jobs:
       matrix:
         include:
           - name: Exercise 1
-            files: program-analysis/echidna/exercises/exercise1/solution.sol
+            workdir: program-analysis/echidna/exercises/exercise1/
+            files: solution.sol
             contract: TestToken
             outcome: failure
             expected: 'echidna_test_balance:\s*failed'
@@ -27,7 +28,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Run Echidna
-      uses: crytic/echidna-action@dev-echidna-2
+      uses: crytic/echidna-action@dev-echidna-workdir
       id: echidna
       continue-on-error: true
       with:
@@ -36,6 +37,7 @@ jobs:
         config: ${{ matrix.config }}
         output-file: ${{ matrix.files }}.out
         solc-version: 0.5.11
+        echidna-workdir: ${{ matrix.workdir }}
     - name: Verify that the exit code is correct
       run: |
         if [[ ${{ steps.echidna.outcome }} = ${{ matrix.outcome }} ]]; then
@@ -46,10 +48,10 @@ jobs:
         fi
     - name: Verify that the output is correct
       run: |
-        if grep -q "${{ matrix.expected }}" "${{ matrix.files }}.out"; then
+        if grep -q "${{ matrix.expected }}" "${{ steps.echidna.outputs.output-file }}"; then
           echo "Output matches"
         else
-          echo "Output mismatch. Expected something matching ${{ matrix.expected }}. Got the following"
-          cat "${{ matrix.files }}.out"
+          echo "Output mismatch. Expected something matching ${{ matrix.expected }}. Got the following:"
+          cat "${{ steps.echidna.outputs.output-file }}"
           exit 1
         fi
