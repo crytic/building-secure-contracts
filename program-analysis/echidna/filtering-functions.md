@@ -10,7 +10,7 @@
 ## Introduction
 
 We will see how to filter the functions to be fuzzed.
-The target is the following smart contract: 
+The target is the following smart contract (*[example/multi.sol](./example/multi.sol)*): 
 
 ```solidity
 contract C {
@@ -76,7 +76,7 @@ Seed: -3684648582249875403
 ## Filtering functions
 
 Echidna has trouble finding the correct sequence to test this contract because the two reset functions (`reset1` and `reset2`) will set all the state variables to `false`. 
-However, we can use a special Echidna feature to either blacklist the reset function or to whitelist only the `f`, `g`, 
+However, we can use a special Echidna feature to either blacklist the `reset` functions or to whitelist only the `f`, `g`, 
 `h` and `i` functions. 
 
 To blacklist functions, we can use this configuration file:
@@ -94,7 +94,7 @@ filterFunctions: ["C.f(uint256)", "C.g(uint256)", "C.h(uint256)", "C.i()"]
 ```
 
 - `filterBlacklist` is `true` by default.
-- Filtering will be performed by full function name (contract name + "." + ABI). If you have `f()` and `f(uint256)`, you can specify exactly which function to filter.
+- Filtering will be performed by full function name (contract name + "." + ABI function signature). If you have `f()` and `f(uint256)`, you can specify exactly which function to filter.
 
 # Run Echidna
 
@@ -111,7 +111,7 @@ echidna_state4: failed!💥
     i()
 ```
 
-Echidna will find the sequence of transactions to falsify the property almost inmmediately. 
+Echidna will find the sequence of transactions to falsify the property almost immediately. 
 
 
 ## Summary: Filtering functions
@@ -128,5 +128,4 @@ $ echidna-test contract.sol --config config.yaml
 ...
 ```
 
-Echidna starts a fuzzing campaign either blacklisting `C.f1()`, `C.f2()` and `C.f3()` or only calling these, according
-to the value of the `filterBlacklist` boolean.
+According to the value of the `filterBlacklist` boolean, Echidna will start a fuzzing campaign by either blacklisting `C.f1()`, `C.f2()` and `C.f3()` or by _only_ calling those functions.

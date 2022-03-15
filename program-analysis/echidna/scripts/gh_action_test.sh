@@ -3,8 +3,8 @@
 
 install_echidna(){
     pip install crytic-compile slither-analyzer
-    wget https://github.com/crytic/echidna/releases/download/v1.7.2/echidna-test-1.7.2-Ubuntu-18.04.tar.gz
-    tar -xf echidna-test-1.7.2-Ubuntu-18.04.tar.gz
+    wget https://github.com/crytic/echidna/releases/download/v2.0.0/echidna-test-2.0.0-Ubuntu-18.04.tar.gz
+    tar -xf echidna-test-2.0.0-Ubuntu-18.04.tar.gz
     sudo mv ./echidna-test /usr/bin/
 }
 
@@ -18,7 +18,7 @@ test_example(){
         exit -1
     fi
 
-    grep "echidna_balance_under_1000: failed!" results.txt
+    grep "echidna_balance_under_1000:\s*failed" results.txt
     if [ $? -ne 0 ]
     then
         echo "Bug not found"
@@ -55,7 +55,7 @@ test_example(){
         exit -1
     fi
 
-    grep "echidna_state4: failed!" results.txt
+    grep "echidna_state4:\s*failed" results.txt
     if [ $? -ne 0 ]
     then
         echo "Bug not found"
@@ -75,7 +75,7 @@ test_example(){
         exit -1
     fi
 
-    grep "assertion in inc: failed!" results.txt
+    grep "inc(uint256):\s*failed" results.txt
     if [ $? -ne 0 ]
     then
         echo "Bug not found"
@@ -117,9 +117,9 @@ install_echidna
 
 test_example
 
-test_exercise 1 "echidna_test_balance: failed!"
-test_exercise 2 "echidna_no_transfer: failed!"
-test_exercise 3 "echidna_test_balance: failed!"
+test_exercise 1 "echidna_test_balance:\s*failed"
+test_exercise 2 "echidna_no_transfer:\s*failed"
+test_exercise 3 "echidna_test_balance:\s*failed"
 
 
 

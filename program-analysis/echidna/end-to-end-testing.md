@@ -1,14 +1,14 @@
 # End-to-End testing with Echidna (Part I)
 
-When smart contracts require a complex initialization and the time to do it is short, we want to avoid to manually recreate a deployment for a fuzzing campaign with Echidna. That's why we have a new approach for testing using Echidna based on the deployments and execution of tests directly from ganache.
+When smart contracts require a complex initialization and the time to do it is short, we want to avoid manually recreating a deployment for a fuzzing campaign with Echidna. That's why we have a new approach for testing using Echidna based on the deployments and execution of tests directly from ganache.
 
 ## Requirements:
 
 This approach needs a smart contract project, with the following constraints:
 
-* It should use Solidity: Vyper is not supported, since Slither/Echidna is not very effective running these (e.g. no AST is included). 
+* It should use Solidity: Vyper is not supported, since Slither/Echidna is not very effective at running these (e.g. no AST is included). 
 * It should have tests or at least, a complete deployment script. 
-* It should work with slither. If it fails, [please report the issue](https://github.com/crytic/slither).
+* It should work with Slither. If it fails, [please report the issue](https://github.com/crytic/slither).
 
 For this tutorial, [we used the drizzle-box example](https://github.com/truffle-box/drizzle-box). 
 
@@ -16,8 +16,8 @@ For this tutorial, [we used the drizzle-box example](https://github.com/truffle-
 
 Before doing anything, let's install the tools we need:
 
-* Install echidna from [master branch](https://github.com/crytic/echidna).
-* Install etheno from [dev-ganache-improvements branch](https://github.com/crytic/etheno/tree/dev-ganache-improvements).
+* Install Echidna from [master branch](https://github.com/crytic/echidna).
+* Install Etheno from [dev-ganache-improvements branch](https://github.com/crytic/etheno/tree/dev-ganache-improvements).
 
 
 Then, install the packages to compile the project:
@@ -79,7 +79,7 @@ contract("SimpleStorage", accounts => {
 
 ## Capturing transactions
 
-Before starting to write interesting properties, it is necessary to to collect an etheno trace to replay it inside Echidna:
+Before starting to write interesting properties, it is necessary to to collect an Etheno trace to replay it inside Echidna:
 
 First, start Etheno: 
 
@@ -105,11 +105,11 @@ In the Drizzle example, we will run:
 $ truffle test test/simplestorage.js --network develop.
 ```
 
-After etheno finishes, kill it using ctrl+c (twice). It will save the `init.json` file.
+After Etheno finishes, kill it using ctrl+c (twice). It will save the `init.json` file.
 
 ## Writing and running a property:
 
-Once we have a json file with saved transactions, we can verify that the `SimpleStorage` contract is deployed in `0x871DD7C2B4b25E1Aa18728e9D5f2Af4C4e431f5c`, so we can easily write a contract (`./contracts/crytic/E2E.sol`) with a simple a property to test it:
+Once we have a json file with saved transactions, we can verify that the `SimpleStorage` contract is deployed at `0x871DD7C2B4b25E1Aa18728e9D5f2Af4C4e431f5c`, so we can easily write a contract (`./contracts/crytic/E2E.sol`) with a simple a property to test it:
 
 ```solidity
 import "../SimpleStorage.sol";

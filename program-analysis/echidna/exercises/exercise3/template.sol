@@ -1,11 +1,10 @@
-import "token.sol";
+import "mintable.sol";
 
-contract TestToken is Token {
+contract TestToken is MintableToken {
     address echidna_caller = msg.sender;
 
-    constructor() public {
-        balances[echidna_caller] = 10000;
-    }
+    // update the constructor
+    constructor() public {}
 
     // add the property
     function echidna_test_balance() public view returns (bool) {}

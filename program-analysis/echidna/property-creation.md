@@ -10,25 +10,26 @@
 
 ## Introduction
 
-In this short tutorial, we will detail some ideas to write interesting or useful properties using Echidna, in an iteratively process where we improved them at each steap.
+In this short tutorial, we will detail some ideas to write interesting or useful properties using Echidna. At each step, we will iteratively improve our properties.
 
 ## A first approach
 
-One of the simplest properties to write using Echidna are going to assert when some function should revert/return exactly.
+One of the simplest properties to write using Echidna is to throw an assertion when some function is expected to revert/return.
 
-Let's suppose we have a contract like this one: 
+Let's suppose we have a contract interface like the one below: 
 
 ```solidity
 interface DeFi {
   ERC20 t;
   function getShares(address user) external returns (uint256)
   function createShares(uint256 val) external returns (uint256)
+  function depositShares(uint256 val) external
   function withdrawShares(uint256 val) external
   function transferShares(address to) external
   ...
 ```
 
-In this example, users can deposit tokens from `token` to mint shares using `createShares`. They can withdraw shares using `withdrawShares` or transfer all of them to another user another using `transferShares`. Finally `getShares` will return the number of shares for every account. We will start with very basic properties:
+In this example, users can deposit tokens using `depositShares`, mint shares using `createShares`, withdraw shares using `withdrawShares`, transfer all shares to another user using `transferShares`, and get the number of shares for any account using `getShares`. We will start with very basic properties:
 
 ```solidity
 contract Test {
@@ -76,12 +77,12 @@ contract Test {
 }
 ```
 
-After you have write your first version of properties, run Echidna to make sure they work as expected. During this tutorial, we will improve them step by step, it is strongly recommended to run the fuzzer at each step, to increase the probability of detecting any potential issue. 
+After you have writen your first version of properties, run Echidna to make sure they work as expected. During this tutorial, we will improve them step by step. It is strongly recommended to run the fuzzer at each step to increase the probability of detecting any potential issues. 
 
-Perhaps you think this properties are too low level to be useful, in particular if the code has a good coverage in terms of unit tests, 
-but you will be surpriced how often an unexpected reverts/returns uncovers a complex and severe issue. Moreover, we will see how these properties can be improved to cover more complex post-conditions.
+Perhaps you think these properties are too low level to be useful, particularly if the code has a good coverage in terms of unit tests.
+But you will be surprised how often an unexpected revert/return uncovers a complex and severe issue. Moreover, we will see how these properties can be improved to cover more complex post-conditions.
 
-Before continue, we will improve these properties using [try/catch](https://docs.soliditylang.org/en/v0.6.0/control-structures.html#try-catch). The use of a low level call force us to manually encode the data, which can be error prone (an error will cause calls to always revert). However, this will only works if the codebase is using solc 0.6.0 or later:
+Before we continue, we will improve these properties using [try/catch](https://docs.soliditylang.org/en/v0.6.0/control-structures.html#try-catch). The use of a low-level call forces us to manually encode the data, which can be error prone (an error will always cause calls to revert). Note, this will only work if the codebase is using solc 0.6.0 or later:
 
 
 ```solidity
@@ -105,7 +106,7 @@ Before continue, we will improve these properties using [try/catch](https://docs
 ## Enhacing postcondition checks
 
 If the previous properties are passing, this means that the pre-conditions are good enough, however the post-conditions are not very precise. 
-Avoid reverting doesn't mean that the contract is in a valid state. Let's add some basic preconditions:
+Avoiding reverts doesn't mean that the contract is in a valid state. Let's add some basic preconditions:
 
 ```solidity
   ...
@@ -127,11 +128,11 @@ Avoid reverting doesn't mean that the contract is in a valid state. Let's add so
 }
 ```
 
-Uhm, it looks like it is not that easy to specifying the value of shares/tokens obtained after each deposit/withdrawal. At least we can say that we must receveive something, right?
+Uhm, it looks like it is not that easy to specify the value of shares/tokens obtained after each deposit/withdrawal. At least we can say that we must receive something, right?
 
 ## Combining properties
 
-In this generic example, it is unclear if there is a way to calculate how many shares or tokens we should receive after executing the deposit/withdraw operations. Of course, if we have that information, we should use it. In any case, what we can do here is to combine these two properties in a single one to be able check more precisely it's preconditions. 
+In this generic example, it is unclear if there is a way to calculate how many shares or tokens we should receive after executing the deposit/withdraw operations. Of course, if we have that information, we should use it. In any case, what we can do here is to combine these two properties into a single one to be able check more precisely it's preconditions. 
 
 ```solidity
   ...
@@ -150,13 +151,13 @@ In this generic example, it is unclear if there is a way to calculate how many s
 }
 ```
 
-The resulting property checks that calls to deposit/withdraw shares will never revert and once they executed, the number of obtained tokens will not change. Keep in mind that this property should consider fees and any tolerated loss of precision (e.g. when the computation requires a division).
+The resulting property checks that calls to deposit/withdraw shares will never revert and once they execute, the original number of tokens remains the same. Keep in mind that this property should consider fees and any tolerated loss of precision (e.g. when the computation requires a division).
 
 ## Final considerations
 
 Two important considerations for this example:
 
-We want echidna to spend most of the execution exploring the contract to test, so in order to make the properties more efficient, we should avoid dead branches where there is nothing to do. That's why we can improve `depositShares_never_reverts` to use:
+We want Echidna to spend most of the execution exploring the contract to test. So, in order to make the properties more efficient, we should avoid dead branches where there is nothing to do. That's why we can improve `depositShares_never_reverts` to use:
 
 ```solidity
   function depositShares_never_reverts(uint256 val) public {
@@ -170,8 +171,8 @@ We want echidna to spend most of the execution exploring the contract to test, s
   }
 ```
 
-Additionally, combining properties does not mean that we will have to remove simpler ones. For instance, if we want to write `withdraw_deposit_shares_never_reverts`, in which we reverse the order of operations (withdraw and then deposit, instead of deposit and then withdraw), we will have to make sure `c.getShares(address(this))` can be positive. An easy way to do it is to keep `depositShares_never_reverts`, since this code allows Echidna to deposit shares into the `address(this)` (otherwise, this is impossible).
+Additionally, combining properties does not mean that we will have to remove simpler ones. For instance, if we want to write `withdraw_deposit_shares_never_reverts`, in which we reverse the order of operations (withdraw and then deposit, instead of deposit and then withdraw), we will have to make sure `c.getShares(address(this))` can be positive. An easy way to do it is to keep `depositShares_never_reverts`, since this code allows Echidna to deposit tokens from `address(this)` (otherwise, this is impossible).
 
 ## Summary: How to write good properties
 
-It is usually a good idea to start writting simple properties first and then improving them to make then more precise and easier to read. At each step you should run a short fuzzing campaign to make sure they work as expected and try to catch issues early during the development of your smart contracts. 
+It is usually a good idea to start writing simple properties first and then improving them to make them more precise and easier to read. At each step you should run a short fuzzing campaign to make sure they work as expected and try to catch issues early during the development of your smart contracts. 

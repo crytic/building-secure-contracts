@@ -62,12 +62,13 @@ The skeleton for this exercise is (*[exercises/exercise1/template.sol](./exercis
 ```Solidity
      import "token.sol";
      contract TestToken is Token {
-       address echidna_caller = 0x00a329c0648769a73afac7f9381e08fb43dbea70;
+       address echidna_caller = msg.sender;
 
         constructor() public{
             balances[echidna_caller] = 10000;
          }
          // add the property
+        function echidna_test_balance() public view returns (bool) {}
       }
  ```
 
