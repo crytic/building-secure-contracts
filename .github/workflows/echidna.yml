@@ -24,6 +24,42 @@ jobs:
             contract: TestToken
             outcome: failure
             expected: 'echidna_test_balance:\s*failed'
+          - name: Exercise 2
+            workdir: program-analysis/echidna/exercises/exercise2/
+            files: solution.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_no_transfer:\s*failed'
+          - name: Exercise 3
+            workdir: program-analysis/echidna/exercises/exercise3/
+            files: solution.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_test_balance:\s*failed'
+          - name: TestToken
+            workdir: program-analysis/echidna/example/
+            files: testtoken.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_balance_under_1000:\s*failed'
+          - name: Gas estimation
+            workdir: program-analysis/echidna/example/
+            files: gas.sol
+            config: gas.yaml
+            outcome: success
+            expected: 'f(42,123,'
+          - name: Multi
+            workdir: program-analysis/echidna/example/
+            files: multi.sol
+            config: filter.yaml
+            outcome: failure
+            expected: 'echidna_state4:\s*failed'
+          - name: Assert
+            workdir: program-analysis/echidna/example/
+            files: assert.sol
+            config: assert.yaml
+            outcome: failure
+            expected: 'inc(uint256):\s*failed'
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
