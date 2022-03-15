@@ -13,6 +13,7 @@ on:
 jobs:
   tests:
     name: ${{ matrix.name }}
+    continue-on-error: ${{ matrix.flaky == true }}
     runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
@@ -48,6 +49,7 @@ jobs:
             config: gas.yaml
             outcome: success
             expected: 'f(42,123,'
+            flaky: true
           - name: Multi
             workdir: program-analysis/echidna/example/
             files: multi.sol
