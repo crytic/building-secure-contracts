@@ -1,0 +1,55 @@
+name: Echidna
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+  pull_request:
+  schedule:
+    # run CI every day even if no PRs/merges occur
+    - cron:  '0 12 * * *'
+
+jobs:
+  tests:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Exercise 1
+            files: program-analysis/echidna/exercises/exercise1/solution.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_test_balance:\s*failed'
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Run Echidna
+      uses: crytic/echidna-action@dev-echidna-2
+      id: echidna
+      continue-on-error: true
+      with:
+        files: ${{ matrix.files }}
+        contract: ${{ matrix.contract }}
+        config: ${{ matrix.config }}
+        output-file: ${{ matrix.files }}.out
+        solc-version: 0.5.11
+    - name: Verify that the exit code is correct
+      run: |
+        if [[ ${{ steps.echidna.outcome }} = ${{ matrix.outcome }} ]]; then
+          echo "Outcome matches"
+        else
+          echo "Outcome mismatch. Expected ${{ matrix.outcome }} but got ${{ steps.echidna.outcome }}"
+          exit 1
+        fi
+    - name: Verify that the output is correct
+      run: |
+        if grep -q "${{ matrix.expected }}" "${{ matrix.files }}.out"; then
+          echo "Output matches"
+        else
+          echo "Output mismatch. Expected something matching ${{ matrix.expected }}. Got the following"
+          cat "${{ matrix.files }}.out"
+          exit 1
+        fi
