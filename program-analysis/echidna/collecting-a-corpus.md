@@ -148,7 +148,7 @@ Echidna needs some help in order to deal with the `magic` function. We are going
 parameters for it:
 
 ```
-$ cp corpus-magic/coverage/covered.*.txt corpus-magic/coverage/new.txt
+$ cp corpus-magic/coverage/2712688662897926208.txt corpus-magic/coverage/new.txt
 ```
 
 We will modify `new.txt` to call `magic(42,129,333,0)`. Now, we can re-run Echidna:
