@@ -87,7 +87,7 @@ jobs:
         if grep -q "${{ matrix.expected }}" "${{ steps.echidna.outputs.output-file }}"; then
           echo "Output matches"
         else
-          echo "Output mismatch. Expected something matching ${{ matrix.expected }}. Got the following:"
+          echo "Output mismatch. Expected something matching '${{ matrix.expected }}'. Got the following:"
           cat "${{ steps.echidna.outputs.output-file }}"
           exit 1
         fi
