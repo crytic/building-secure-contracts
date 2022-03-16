@@ -13,9 +13,10 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 1. Follow the instructions on the [Damn Vulnerable DeFi CTF][ctf] page, namely:
     - clone the repo, and
-    - install the dependencies.
-2. Create a contract called `UnstoppableEchidna` in the `contract/unstoppable` directory.
-3. Analyze the `before` function in `test/unstoppable/unstoppable.challenge.js` to identify what initial setup needs to be done.
+    - install the dependencies via `npm install`.
+2. To run Echidna on these contracts you must comment out the `dependencyCompiler` section in `hardhat.config.js`. Otherwise, the project will not compile with [`crytic-compile`](https://github.com/crytic/crytic-compile). See the example provided [here](./exercises/exercise5/example.hardhat.config.ts).
+3. Create a contract called `UnstoppableEchidna` in the `contract/unstoppable` directory.
+4. Analyze the `before` function in `test/unstoppable/unstoppable.challenge.js` to identify what initial setup needs to be done.
 
 Hint: You don't need to make the setup very complex. It is possible to find the bug with just three contracts:
   - `DamnValuableToken`

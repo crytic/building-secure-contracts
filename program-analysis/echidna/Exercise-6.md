@@ -14,8 +14,9 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 1. Follow the instructions on the [Damn Vulnerable DeFi CTF][ctf] page, namely:
     - clone the repo, and
     - install the dependencies.
-2. Create a contract called `TestNaiveReceiverEchidna` in the `contracts/naive-receiver` directory.
-3. Analyze the `before` function in `test/naive-receiver/naive-receiver.challenge.js` to identify what initial setup needs to be done.
+2. To run Echidna on these contracts you must comment out the `dependencyCompiler` section in `hardhat.config.js`. Otherwise, the project will not compile with [`crytic-compile`](https://github.com/crytic/crytic-compile). See the example provided [here](./exercises/exercise6/example.hardhat.config.ts).
+3. Create a contract called `TestNaiveReceiverEchidna` in the `contracts/naive-receiver` directory.
+4. Analyze the `before` function in `test/naive-receiver/naive-receiver.challenge.js` to identify what initial setup needs to be done.
 
 Hint: You don't need to make the setup very complex. It is possible to find the bug by examining just two contracts:
   - `FlashLoanReceiver`

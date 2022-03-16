@@ -1,8 +1,8 @@
 pragma solidity ^0.8.0;
 
-import "./unstoppable/DamnValuableToken.sol";
-import "./unstoppable/UnstoppableLender.sol";
-import "./unstoppable/ReceiverUnstoppable.sol";
+import "../DamnValuableToken.sol";
+import "./UnstoppableLender.sol";
+import "./ReceiverUnstoppable.sol";
 
 /// @dev To run this contract: $ npx hardhat clean && npx hardhat compile --force && echidna-test . --contract UnstoppableEchidna --multi-abi --config contracts/unstoppable/config.yaml --test-limit 1000000
 contract UnstoppableEchidna {
