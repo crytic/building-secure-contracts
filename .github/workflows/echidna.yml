@@ -62,6 +62,22 @@ jobs:
             config: assert.yaml
             outcome: failure
             expected: 'inc(uint256):\s*failed'
+          - name: PopsicleBroken
+            workdir: program-analysis/echidna/example/
+            files: PopsicleBroken.sol
+            solc-version: 0.8.4
+            config: Popsicle.yaml
+            contract: PopsicleBroken
+            outcome: failure
+            expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*failed'
+          - name: PopsicleFixed
+            workdir: program-analysis/echidna/example/
+            files: PopsicleFixed.sol
+            solc-version: 0.8.4
+            config: Popsicle.yaml
+            contract: PopsicleFixed
+            outcome: success
+            expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*passed'
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -74,7 +90,7 @@ jobs:
         contract: ${{ matrix.contract }}
         config: ${{ matrix.config }}
         output-file: ${{ matrix.files }}.out
-        solc-version: 0.5.11
+        solc-version: ${{ matrix.solc-version || '0.5.11' }}
         echidna-workdir: ${{ matrix.workdir }}
     - name: Verify that the exit code is correct
       run: |
