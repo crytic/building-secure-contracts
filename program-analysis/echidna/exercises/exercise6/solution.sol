@@ -4,7 +4,7 @@ import "./NaiveReceiverLenderPool.sol";
 import "./FlashLoanReceiver.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 
-/// @dev To run this contract: $ npx hardhat clean && npx hardhat compile --force && echidna-test . --contract TestNaiveReceiverEchidna --multi-abi --config contracts/naive-receiver/config.yaml
+/// @dev To run this contract: $ npx hardhat clean && npx hardhat compile --force && echidna-test . --contract TestNaiveReceiverEchidna --config contracts/naive-receiver/config.yaml
 contract TestNaiveReceiverEchidna {
     using Address for address payable;
 

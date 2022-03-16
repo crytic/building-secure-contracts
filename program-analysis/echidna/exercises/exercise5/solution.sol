@@ -4,7 +4,7 @@ import "../DamnValuableToken.sol";
 import "./UnstoppableLender.sol";
 import "./ReceiverUnstoppable.sol";
 
-/// @dev To run this contract: $ npx hardhat clean && npx hardhat compile --force && echidna-test . --contract UnstoppableEchidna --multi-abi --config contracts/unstoppable/config.yaml --test-limit 1000000
+/// @dev To run this contract: $ npx hardhat clean && npx hardhat compile --force && echidna-test . --contract UnstoppableEchidna --config contracts/unstoppable/config.yaml
 contract UnstoppableEchidna {
     // We will send ETHER_IN_POOL to the flash loan pool.
     uint256 constant ETHER_IN_POOL = 1000000e18;
