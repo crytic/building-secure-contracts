@@ -65,6 +65,7 @@ jobs:
           - name: PopsicleBroken
             workdir: program-analysis/echidna/example/
             files: PopsicleBroken.sol
+            solc-version: 0.8.4
             config: PopsicleBroken.yaml
             contract: PopsicleBroken
             outcome: failure
