@@ -31,7 +31,7 @@ No skeleton will be provided for this exercise.
 - Create a `config.yaml` with the necessary configuration option(s).
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
-Hint: You might have to use the `--multi-abi` flag in this exercise.
+Hint: You might have to use the `multi-abi` configuration option in this exercise.
 ## Solution
 
 This solution can be found in [exercises/exercise6/solution.sol](./exercises/exercise6/solution.sol)

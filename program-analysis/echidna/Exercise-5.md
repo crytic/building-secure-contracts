@@ -23,15 +23,16 @@ Hint: You don't need to make the setup very complex. It is possible to find the 
   - `UnstoppableLender`
   - `ReceiverUnstoppable`
 
+No skeleton will be provided for this exercise.
+
 ## Goals
 
 - Setup the testing environment with the right contracts and necessary balances.
 - Add a property to check whether `UnstoppableLender` can always provide flash loans.
-- Create `config.yaml` with the necessary configuration option(s). Use the [`template.yaml`](./exercises/exercise5/template.yaml) file as a starting point. 
-Consider if blacklisting specific functions that will definitely revert when called by an EOA will aid in Echidna's exploration.
+- Create `config.yaml` with the necessary configuration option(s).
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
-Hint: You might have to use the `--multi-abi` flag in this exercise.
+Hint: You might have to use the `multi-abi` configuration option in this exercise.
 ## Solution
 
 This solution can be found in [exercises/exercise5/solution.sol](./exercises/exercise5/solution.sol)
