@@ -69,7 +69,7 @@ jobs:
             config: PopsicleBroken.yaml
             contract: PopsicleBroken
             outcome: failure
-            expected: 'totalBalanceAfterTransferFromIsPreserved(address,uint256):\s*failed'
+            expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*failed'
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -82,7 +82,7 @@ jobs:
         contract: ${{ matrix.contract }}
         config: ${{ matrix.config }}
         output-file: ${{ matrix.files }}.out
-        solc-version: 0.5.11
+        solc-version: ${{ matrix.solc-version || '0.5.11' }}
         echidna-workdir: ${{ matrix.workdir }}
     - name: Verify that the exit code is correct
       run: |
