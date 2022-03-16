@@ -37,6 +37,13 @@ jobs:
             contract: TestToken
             outcome: failure
             expected: 'echidna_test_balance:\s*failed'
+          - name: Exercise 4
+            workdir: program-analysis/echidna/exercises/exercise4/
+            files: solution.sol
+            config: config.yaml
+            contract: Token
+            outcome: failure
+            expected: 'transfer(address,uint256):\s*failed'
           - name: TestToken
             workdir: program-analysis/echidna/example/
             files: testtoken.sol
