@@ -5,6 +5,3 @@ deployer: '0x30000'
 sender: ['0x30000']
 # Allow Echidna to run for more cycles. This will aid in additional exploration.
 testLimit: 1000000
-# Filter functions that will definitely revert to aid Echidna in exploration
-filterBlacklist: true
-filterFunctions: ['UnstoppableLender.depositTokens(uint256)', 'UnstoppableLender.flashLoan(uint256)', 'ReceiverUnstoppable.receiveTokens(address,uint256)', 'ReceiverUnstoppable.executeFlashLoan(uint256)']

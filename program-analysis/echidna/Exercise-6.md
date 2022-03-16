@@ -30,6 +30,7 @@ No skeleton will be provided for this exercise.
 - Create a `config.yaml` with the necessary configuration option(s).
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
+Hint: You might have to use the `--multi-abi` flag in this exercise.
 ## Solution
 
 This solution can be found in [exercises/exercise6/solution.sol](./exercises/exercise6/solution.sol)
@@ -47,10 +48,14 @@ Echidna found this by simply calling `NaiveReceiverLenderPool.flashLoan()` with 
 See example output below from Echidna:
 
 ```bash
-Analyzing contract: /Users/anishnaik/Documents/damn-vulnerable-defi/contracts/naive-receiver/NaiveReceiverEchidna.sol:NaiveReceiverEchidna
+$ npx hardhat clean && npx hardhat compile --force && echidna-test . --contract TestNaiveReceiverEchidna --multi-abi --config contracts/naive-receiver/config.yaml
+...
+
 echidna_test_contract_balance: failed!💥  
   Call sequence:
     flashLoan(0x62d69f6867a0a084c6d313943dc22023bc263691,353073667)
+
+...
 ```
 </details>
 
