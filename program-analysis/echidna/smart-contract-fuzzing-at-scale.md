@@ -12,7 +12,7 @@ In this tutorial we will review how we can create a dedicated server for fuzzing
 
 ## 1. Install and setup a dedicated server
 
-First, obtain a dedicated server with at least 32 GB of RAM and as many cores as possible. Start creating a user for the fuzzing. 
+First, obtain a dedicated server with at least 32 GB of RAM and as many cores as possible. Start by creating a user for the fuzzing campaign. 
 **Only use the root acount to create an unprivileged user**: 
 
 ```
@@ -26,7 +26,7 @@ Then, using that user (`echidna`), install some basic dependencies:
 $ sudo apt install unzip python3-pip
 ```
 
-Then install everything necessary to build your smart contract as well to run `slither` and `echidna-parade`. For instance:
+Then install everything necessary to build your smart contract(s) as well `slither` and `echidna-parade`. For instance:
 
 ```
 $ pip3 install solc-select
@@ -37,7 +37,7 @@ $ pip3 install echidna_parade
 
 Add `$PATH=$PATH:/home/echidna/.local/bin` at the end of `/home/echidna/.bashrc`
 
-We should install echidna. The easiest way is to download a precompiled version of echidna, uncompress it and move it to `/home/echidna/.local/bin`:
+Next, install Echidna. The easiest way is to download a precompiled version of Echidna, uncompress it, and move it to `/home/echidna/.local/bin`:
 
 ```
 $ wget "https://github.com/crytic/echidna/releases/download/v1.7.2/echidna-test-1.7.2-Ubuntu-18.04.tar.gz"
@@ -54,16 +54,16 @@ Before starting this campaign, modify your echidna config to define a corpus dir
 corpusDir: "corpus-exploration"
 ```
 
-This directory will be automatically created but since we are starting a new campaign, **please remove the corpus directory if it was created by previous echidna campaign**. 
+This directory will be automatically created but since we are starting a new campaign, **please remove the corpus directory if it was created by a previous echidna campaign**. 
 If you don't have any properties to test, you can use:
 
 ```
 benchmarkMode: true
 ```
 
-to allow echidna to run without any property. 
+to allow Echidna to run without any properties. 
  
-We will start a very short echidna run (5 minutes), to check that everything looks fine. To do that, use the following config:
+We will start a very short Echidna run (5 minutes), to check that everything looks fine. To do that, use the following config:
 
 ```
 testLimit: 100000000000
@@ -77,15 +77,15 @@ After it runs, check the coverage file, located in `corpus-exploration/covered.*
 
 When you are satisfied with the first iteration of the initialization, we can start a "continuous campaign" for exploration and testing using [echidna-parade](https://github.com/agroce/echidna-parade). Before starting, double check your config file. For instance, if you added properties, do not forget to remove `benchmarkMode`.
 
-echidna-parade is tool is used to launch echidna instances at the same time, keeping track of the corpora of each one. Each instance will be configured to run for a certain amount of time with different parameters in order to maximize the chance to reach new code.
+`echidna-parade` is a tool is used to launch multiple Echidna instances at the same time, keeping track of the corpora of each one. Each instance will be configured to run for a certain amount of time, with different parameters, in order to maximize the chance to reach new code.
 
 We will show it with an example, where:
 * the initial corpus is empty
-* the base config file will be exploration.yaml
+* the base config file will be `exploration.yaml`
 * the time to run the initial instance will be 3600 seconds (1 hour)
-* the time to run each "generations" will be 1800 seconds (30 minutes)
+* the time to run each "generation" will be 1800 seconds (30 minutes)
 * the campaign will run in continuous mode (if timeout is -1, it means run forever)
-* the number of echidna instances per generation will be 8. This should be adjusted according to the number of available cores but avoid using all your cores if you don't want to kill your server
+* the number of Echidna instances per generation will be 8. This should be adjusted according to the number of available cores, but avoid using all your cores if you don't want to kill your server
 * the target contract is named `C`
 * the file that contains the contract is `test.sol`
 
@@ -95,7 +95,7 @@ Finally, we will log the stdout and stderr in `parade.log` and `parade.err` and 
 $ echidna-parade test.sol --config exploration.yaml --initial_time 3600 --gen_time 1800 --timeout -1 --ncores 8 --contract C > parade.log 2> parade.err &
 ```
 
-**After you run this command, exit the shell so you won't kill it accidentally if your connect fails.**
+**After you run this command, exit the shell so you won't kill it accidentally if your connection fails.**
 
 ## 4. Add more properties, check coverage and modify the code if necessary
 
@@ -121,7 +121,7 @@ COLLECTING NEW COVERAGE: parade.181140/gen.37.6/corpus/coverage/6733481703877290
 
 you can verify the corresponding covered file, such as `parade.181140/gen.37.6/corpus/covered.1615497368.txt`. 
 
-For examples on how to help echidna to improve its coverage, please review the improving coverage tutorial.
+For examples on how to help Echidna to improve its coverage, please review the [improving coverage tutorial](./collecting-a-corpus.md).
 
 To monitor failed properties, use this command:
 

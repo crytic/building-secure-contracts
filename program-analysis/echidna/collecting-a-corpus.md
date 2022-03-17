@@ -84,9 +84,9 @@ r   |    require(magic_3 == magic_4+333);
 ```
 
 The label `r` on the left of each line shows that Echidna is able to reach these lines but it ends in a revert. 
-As you can see, the fuzzer gets stuck in the last `require`.
+As you can see, the fuzzer gets stuck at the last `require`.
 
-To find a workaround, let's take look to the corpus it collected. For instance, one of these files was:
+To find a workaround, let's take a look at the corpus it collected. For instance, one of these files was:
 
 ```json
 [
@@ -140,7 +140,7 @@ To find a workaround, let's take look to the corpus it collected. For instance, 
 ]
 ```
 
-Clearly, this input will not trigger the failure in our property. However, in the next step, we will see how to modify it for that.
+Clearly, this input will not trigger the failure in our property. In the next step, we will see how to modify it for that.
 
 ## Seeding a corpus
 
@@ -167,7 +167,7 @@ Seed: -7293830866560616537
 
 ```
 
-This time, the property is violated inmmediately. We can verify that another `covered.*.txt` file is created showing another trace (labeled with `*`) that Echidna executed that finished with a return at the end of the `magic` function.
+This time, the property is violated immediately. We can verify that another `covered.*.txt` file is created showing another trace (labeled with `*`) that Echidna executed which finished with a return at the end of the `magic` function.
 
 ```
 *r  |contract C {
