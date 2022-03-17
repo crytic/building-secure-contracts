@@ -10,7 +10,7 @@
 
 ## Introduction
 
-We will see how to find transactions with has gas consumption using Echidna. The target is the following smart contract (*[example/gas.sol](./example/gas.sol)*):
+We will see how to find the transactions with high gas consumption with Echidna. The target is the following smart contract (*[example/gas.sol](./example/gas.sol)*):
 
 ```solidity
 contract C {
