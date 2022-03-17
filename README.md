@@ -1,6 +1,6 @@
 # Building Secure Smart Contracts
 
-![](https://github.com/crytic/building-secure-contracts/workflows/CI/badge.svg)
+![](https://github.com/crytic/building-secure-contracts/workflows/CI/badge.svg) ![](https://github.com/crytic/building-secure-contracts/workflows/Echidna/badge.svg)
 
 Follow our guidelines and best practices to write secure smart contracts.
 
