@@ -37,11 +37,11 @@ $ pip3 install echidna_parade
 
 Add `$PATH=$PATH:/home/echidna/.local/bin` at the end of `/home/echidna/.bashrc`
 
-Next, install Echidna. The easiest way is to download a precompiled version of Echidna, uncompress it, and move it to `/home/echidna/.local/bin`:
+Next, install Echidna. The easiest way is to download the latest precompiled Echidna release, uncompress it, and move it to `/home/echidna/.local/bin`:
 
 ```
-$ wget "https://github.com/crytic/echidna/releases/download/v1.7.2/echidna-test-1.7.2-Ubuntu-18.04.tar.gz"
-$ tar -xf echidna-test-1.7.2-Ubuntu-18.04.tar.gz
+$ wget "https://github.com/crytic/echidna/releases/download/v2.0.0/echidna-test-2.0.0-Ubuntu-18.04.tar.gz"
+$ tar -xf echidna-test-2.0.0-Ubuntu-18.04.tar.gz
 $ mv echidna-test /home/echidna/.local/bin
 ```
 
@@ -58,7 +58,7 @@ This directory will be automatically created but since we are starting a new cam
 If you don't have any properties to test, you can use:
 
 ```
-benchmarkMode: true
+testMode: exploration
 ```
 
 to allow Echidna to run without any properties. 
