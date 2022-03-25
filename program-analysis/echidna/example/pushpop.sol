@@ -10,7 +10,7 @@ contract C {
     }
 
     function clear() public {
-        delete addrs;
+        addrs.length = 0;
     }
 
     function check() public {
