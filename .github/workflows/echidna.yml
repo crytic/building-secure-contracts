@@ -86,7 +86,7 @@ jobs:
             outcome: success
             expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*passed'
           - name: TestDepositWithPermit
-            workdir: program/analysis/echidna/example/
+            workdir: program-analysis/echidna/example/
             files: TestDepositWithPermit.sol
             solc-version: 0.8.0
             config: testdeposit.yaml
