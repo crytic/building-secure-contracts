@@ -24,7 +24,7 @@ contract TestDepositWithPermit {
         asset = new MockERC20Permit("Permit Token", "PMT", 18);
     }
 
-    //helper method to get signature, signs with private key 1
+    //helper method to get signature, signs with private key 2 
     function getSignature(
         address owner,
         address spender,
