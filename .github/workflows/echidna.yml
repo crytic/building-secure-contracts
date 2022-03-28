@@ -85,6 +85,15 @@ jobs:
             contract: PopsicleFixed
             outcome: success
             expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*passed'
+          - name: TestDepositWithPermit
+            workdir: program-analysis/echidna/example/
+            files: TestDepositWithPermit.sol
+            solc-version: 0.8.0
+            config: testdeposit.yaml
+            contract: TestDepositWithPermit
+            outcome: success
+            expected: 'testERC20PermitDeposit(uint256):\s*passed'
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
