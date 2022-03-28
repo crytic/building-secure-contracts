@@ -47,7 +47,7 @@ docker run -it -v "$PWD":/home/training trailofbits/eth-security-toolbox
 Inside docker, run :
 
 ```bash
-solc-select 0.5.11
+solc-select use 0.5.11
 cd /home/training
 ```
 
