@@ -24,7 +24,7 @@ contract TestDepositWithPermit {
         asset = new MockERC20Permit("Permit Token", "PMT", 18);
     }
 
-    //helper method to get signature, signs with private key 2 
+    //helper method to get signature, signs with private key 2
     function getSignature(
         address owner,
         address spender,
@@ -59,6 +59,7 @@ contract TestDepositWithPermit {
     }
 
     function testERC20PermitDeposit(uint256 amount) public {
+        amount = 1 + (amount % 1000000e18); // we'll only consider transfers of up to 1M tokens
         asset.mint(OWNER, amount);
 
         uint256 previousOwnerBalance = asset.balanceOf(OWNER);
@@ -70,8 +71,14 @@ contract TestDepositWithPermit {
             address(this),
             amount
         );
-        asset.permit(OWNER, address(this), amount, block.timestamp, v, r, s);
-        asset.transferFrom(OWNER, address(this), amount);
+        try
+            asset.permit(OWNER, address(this), amount, block.timestamp, v, r, s)
+        {} catch {
+            emit AssertionFailed("signature is invalid");
+        }
+        try asset.transferFrom(OWNER, address(this), amount) {} catch {
+            emit AssertionFailed("transferFrom reverted");
+        }
         uint256 currentOwnerBalance = asset.balanceOf(OWNER);
         uint256 currentCallerBalance = asset.balanceOf(address(this));
         emit LogBalance(currentOwnerBalance, currentCallerBalance);
@@ -79,7 +86,7 @@ contract TestDepositWithPermit {
             currentCallerBalance != previousCallerBalance + amount &&
             currentOwnerBalance != 0
         ) {
-            emit AssertionFailed("did not successfully transfer assets");
+            emit AssertionFailed("incorrect amount transferred");
         }
     }
 }
