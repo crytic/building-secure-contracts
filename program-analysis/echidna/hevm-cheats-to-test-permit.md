@@ -8,7 +8,7 @@
 
 This is a new way of allocating allowances, as signatures can be computed offchain and passed to a contract. This allows a relayer to pay the entire gas fee of the permit transaction in exchange for a fee and thus allows completely gasless transactions for a user. Furthermore this removes the typical `approve() -> transferFrom()` pattern that forces users to send two transactions instead of just one via this new method.
 
-Do note that for the permit function to work, a valid signature is needed. This example will show how we can use `hevm`'s `sign` cheatcode to sign data with a private key. More generally, you can use this cheatcode to test anything that requires valid signatures.
+Do note that for the permit function to work, a valid signature is needed. This example will show how we can use [`hevm`'s `sign` cheatcode](https://github.com/dapphub/dapptools/blob/master/src/hevm/README.md#cheat-codes) to sign data with a private key. More generally, you can use this cheatcode to test anything that requires valid signatures.
 
 ## Example 
 
@@ -16,7 +16,7 @@ We use solmate’s implementation of the ERC20 standard that includes the permit
 
 In our `TestDepositWithPermit` contract, we need to have the signature signed by an owner for validation. To do this, we can use `hevm`’s `sign` cheatcode, which takes in a message and a private key and creates a valid signature. For this example, we use the private key `0x02` and the following signed message, which essentially represents the permit signature following EIP 712:
 
-```
+```solidity
     keccak256(
         abi.encodePacked(
                 "\x19\x01",
@@ -43,4 +43,4 @@ First we will call `permit()` on our Mock ERC20 token with the signature generat
 
 ## Code
 
-The full example code can be found here: <https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/TestDepositWithPermit.sol>
+The full example code can be found [here](example/TestDepositWithPermit.sol).
