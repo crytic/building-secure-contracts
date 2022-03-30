@@ -41,4 +41,6 @@ The helper function `getSignature(address owner, address spender, uint256 assetA
 
 First we will call `permit()` on our Mock ERC20 token with the signature generated in `getSignature()`, and then call `transferFrom()`. If our permit request and transfer was successful, our balance of the mock ERC20 should be increased by the amount permitted and `OWNER`'s balance should decrease as well. For simplicity, we'll transfer all the minted tokens so that `OWNER`'s balance should be `0`, and our balance should be `amount`. 
 
+## Code
 
+The full example code can be found here: <https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/TestDepositWithPermit.sol>
