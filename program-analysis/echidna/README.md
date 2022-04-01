@@ -12,6 +12,7 @@ The second part is a set of exercises to solve.
   - [Introduction to fuzzing](./fuzzing-introduction.md): Brief introduction to fuzzing
   - [How to test a property](./how-to-test-a-property.md): How to test a property with Echidna
 - Basic
+  - [How to select the most suitable testing mode](./testing-modes.md): How to select the most suitable testing mode
   - [How to filter functions](./filtering-functions.md): How to filters the functions to be fuzzed
   - [How to test assertions](./assertion-checking.md): How to test assertions with Echidna
   - [How to write good properties step by step](./property-creation.md): How to iteratively improve property testing
