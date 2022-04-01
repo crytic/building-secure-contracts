@@ -1,6 +1,6 @@
 # On testing modes and how to use them
 
-Since Echidna offers several ways to write properties, often we are wondering which testing mode we should use. We will review how each mode works, as well as their advantages or disadvantages. 
+Since Echidna offers several ways to write properties, often developers or auditors are wondering which testing mode should use. We will review how each mode works, as well as their advantages or disadvantages. 
 
 ## Boolean properties
 
@@ -19,7 +19,7 @@ function echidna_property() public returns (bool) { // No arguments are required
 
     // The following statement can trigger a failure depending on the returned value
     return ..;
-}
+} // side effects are *not* kept
 
 function echidna_revert_property() public returns (bool) { // No arguments is required
 
@@ -48,3 +48,100 @@ function echidna_revert_property() public returns (bool) { // No arguments is re
 ### Recommendations
 
 This mode can be used when a property can be computed from the use of state variables (either internal or public), and there is no need to use extra parameters.
+
+## Assertions 
+
+Using the "assertion" testing mode, Echidna will report an assert violation if:
+
+* The execution reverts during a call to `assert`. Technically speaking, Echidna will a failure if executes an `assert` call that fails in the first call frame of the target contract. 
+* An `AssertionFailed` event (with any number of parameters) is emitted by any contract. This pseudo-code summarizes how assertions work:
+
+```solidity
+function checkInvariant(..) public { // Any number of arguments is supported
+
+    // The following statements can trigger a failure using `assert`
+    assert(..); 
+    publicFunction(..);
+    internalFunction(..);
+
+    // The following statement will always trigger a failure even if the execution ends with a revert
+    emits AssertionFailure(..);
+
+    // The following statement can *not* trigger a failure using `assert`
+    // unless it emits AssertionFailure(..)
+    anotherContract.function(..);
+}
+```
+
+Functions checking assertions do not require any particular name and are executed like any other function, and therefore, their side effects are kept if they do not revert.
+
+### Advantages
+
+* Easy to implement, in particular, if there are any number of parameters required.
+* Coverage is collected during the execution of these tests, so it can help to reach new failures.
+* If the code base already contains assertions for checking invariants, they can be reused.
+
+### Disadvantages
+
+* If the original is already using assertions for data validation, it will not work as expected. Developers *should* avoid doing that, but if that is not feasible, you can use AssertionFailure  or run code using external calls to avoid any false positives.
+
+### Recommendation
+
+You should use assertions if your invariant is more natural to be expressed using arguments or if it can only be checked in the middle of a transaction. Another good use case of assertions is complex code that require to check something as well as changing the state. In the following example, we test staking of some ERC20, given that there is at least MINSTAKE.
+
+```solidity
+function testStake(uint256 toStake) public {
+    uint256 balance = balanceOf(msg.sender);
+    toStake = toStake % (balance + 1); 
+    if (toStake < MINSTAKE)                             // Pre: minimal stake is required
+      return;
+    stake(msg.sender, toStake);
+    assert(staked(msg.sender) == toStake);              // Post: staking amount is toStake
+    assert(balanceOf(msg.sender) == balance - toStake); // Post: balance decreased
+}
+```
+
+`testStake` checks some invariants on staking, but also ensures that the state of the contract is updated (e.g only allowing a user to stake with more than MINSTAKE). 
+
+### Dapptest
+
+Using the "dapptest" testing mode, Echidna will report violations using certain functions following how dapptool and foundry work:
+* This mode uses any function with one or more arguments, which will trigger a failure if they revert, except in one case. This is, if the execution revets with the special reason “FOUNDRY::ASSUME”, then the test will pass (this emulates how the `assume` foundry cheat code works). This pseudo-code summarizes how dapptests work:
+
+```solidity
+function checkDappTest(..) public { // One or more arguments are required
+    // The following statements can trigger a failure if they revert
+    publicFunction(..);
+    internalFunction(..);
+    anotherContract.function(..);
+    // The following statement will never trigger a failure
+    require(.., “FOUNDRY::ASSUME”);
+}
+```
+
+* Functions implementing these tests do not require any particular name and are executed like any other function, and therefore, their side effects are kept if they do not revert (but usually, this mode is used only in stateless testing).
+* The function should NOT be payable (but this can change in the future)
+
+### Advantages:
+* Easy to implement, in particular, for stateless mode.
+* Coverage is collected during the execution of these tests, so it can help to reach new failures.
+
+### Disadvantages: 
+* Almost any revert will be interpreted as a failure, which is not always expected. 
+
+### Recommendation
+
+Use dapptest mode if you are testing stateless invariants and the code will never unexpectedly revert. Avoid using it for stateful testing, since it was not designed for that (however, Echidna supports it).
+
+## Stateless vs Stateful
+
+Any of these testing modes can be used, in either stateful (by default) or stateless mode (using `--seqLen 1`). In stateful mode, Echidna will keep the state between each function call and will try to break the invariants. In stateless, Echidna will not keep the state changes during the fuzzing. There are notable differences in these two modes. 
+
+* Stateful is more powerful, and can allow breaking invariants that exist only if the contract reaches a specific state. 
+* Stateless tests can be easier to use than stateful and benefits from simpler input generation.
+* Stateless tests can hide issues, since some of them can depend on a sequence of operations that is not reachable in a single transaction. 
+* Stateless mode forces resetting the EVM after each transaction or test, which is usually slower than resetting the state once every certain amount of transactions (by default, every 100 transactions).
+
+### Recommendations
+
+In terms of usage for beginners, we recommend starting using Echidna with stateless, and to switch to stateful once you have a good understanding of the system's invariants.
