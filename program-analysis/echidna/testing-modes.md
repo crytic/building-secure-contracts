@@ -1,4 +1,4 @@
-# On testing modes and how to use them
+# How to select the most suitable testing mode
 
 Since Echidna offers several ways to write properties, often developers or auditors are wondering which testing mode should use. We will review how each mode works, as well as their advantages or disadvantages. 
 
