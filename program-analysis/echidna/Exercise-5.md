@@ -12,11 +12,12 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 ## Setup
 
 1. Follow the instructions on the [Damn Vulnerable DeFi CTF][ctf] page, namely:
-    - clone the repo, and
-    - install the dependencies via `npm install`.
+    - clone the repo via `git clone https://github.com/tinchoabbate/damn-vulnerable-defi -b v2.0.0`, and
+    - install the dependencies via `yarn install`.
 2. To run Echidna on these contracts you must comment out the `dependencyCompiler` section in `hardhat.config.js`. Otherwise, the project will not compile with [`crytic-compile`](https://github.com/crytic/crytic-compile). See the example provided [here](./exercises/exercise5/example.hardhat.config.ts).
-3. Create a contract called `UnstoppableEchidna` in the `contract/unstoppable` directory.
+3. Create a contract called `UnstoppableEchidna` in the `contracts/unstoppable` directory.
 4. Analyze the `before` function in `test/unstoppable/unstoppable.challenge.js` to identify what initial setup needs to be done.
+5. Please comment out the `_transfer` function in `contracts/the-rewarder/AccountingToken.sol`. This will aid in Echidna in solving the challenge a lot faster. You may uncomment the `_transfer` function upon completion of this exercise.
 
 Hint: You don't need to make the setup very complex. It is possible to find the bug with just three contracts:
   - `DamnValuableToken`
@@ -41,6 +42,9 @@ This solution can be found in [exercises/exercise5/solution.sol](./exercises/exe
 
 <details>
 <summary>Solution Explained (spoilers ahead)</summary>
+
+
+Note: Please make sure that you have placed `solution.sol` (or `UnstoppableEchidna.sol`) in `contracts/unstoppable`. 
 
 The goal of the unstoppable challenge is to realize that `UnstoppableLender` has two modes of tracking its balance: `poolBalance` and `damnValuableToken.balanceOf(address(this))`.
 

@@ -12,8 +12,8 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 ## Setup
 
 1. Follow the instructions on the [Damn Vulnerable DeFi CTF][ctf] page, namely:
-    - clone the repo, and
-    - install the dependencies.
+    - clone the repo via `git clone https://github.com/tinchoabbate/damn-vulnerable-defi -b v2.0.0`, and
+    - install the dependencies via `yarn install`.
 2. To run Echidna on these contracts you must comment out the `dependencyCompiler` section in `hardhat.config.js`. Otherwise, the project will not compile with [`crytic-compile`](https://github.com/crytic/crytic-compile). See the example provided [here](./exercises/exercise6/example.hardhat.config.ts).
 3. Create a contract called `TestNaiveReceiverEchidna` in the `contracts/naive-receiver` directory.
 4. Analyze the `before` function in `test/naive-receiver/naive-receiver.challenge.js` to identify what initial setup needs to be done.
@@ -40,6 +40,9 @@ This solution can be found in [exercises/exercise6/solution.sol](./exercises/exe
 
 <details>
 <summary>Solution Explained (spoilers ahead)</summary>
+
+Note: Please make sure that you have placed `solution.sol` (or `TestNaiveReceiverEchidna.sol`) in `contracts/naive-receiver`. 
+
 
 The goal of the naive receiver challenge is to realize that an arbitrary user can call request a flash loan for `FlashLoanReceiver`.
 In fact, this can be done even if the arbitrary user has no ether.
