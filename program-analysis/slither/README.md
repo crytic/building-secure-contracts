@@ -5,9 +5,9 @@ bugs in smart contracts.
 
 - [Installation](#installation)
 - [Command line usage](#command-line)
+- [Jupyter notebook local](#running-jupyter-notebooks)
 - [Introduction to static analysis](#static-analysis): Brief introduction to
   static analysis
-- [API](#api-basics): Python API description
 
 Once you feel you understand the material in this README, proceed to the
 exercises and walkthroughs:
