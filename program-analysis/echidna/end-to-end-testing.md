@@ -14,11 +14,7 @@ For this tutorial, [we used the drizzle-box example](https://github.com/truffle-
 
 ## Getting started:
 
-Before doing anything, let's install the tools we need:
-
-* Install Echidna from [master branch](https://github.com/crytic/echidna).
-* Install Etheno from [dev-ganache-improvements branch](https://github.com/crytic/etheno/tree/dev-ganache-improvements).
-
+Before stating, make sure you have the latest releases from [Echidna](https://github.com/crytic/echidna/releases) and [Etheno](https://github.com/crytic/etheno/releases) installed.
 
 Then, install the packages to compile the project:
 
@@ -28,20 +24,19 @@ $ cd drizzle-box
 $ npm i truffle
 ```
 
-If ganache and ganache-cli are not installed, add them manually. For instance, running: 
+If ganache and ganache-cli are not installed, add them manually. In our example, we will run: 
 
 ```
 $ npm i ganache ganache-cli 
 ```
 
-or:
+Other projects using yarn will require:
 
 ```
 $ yarn add ganache ganache-cli
 ```
 
-It is also important to select *one* test script from the available tests. Ideally, this test will deploy all (or most) contracts, including mock/test ones. 
-Let's take a look to `SimpleStorage`, one of the contracts:
+It is also important to select *one* test script from the available tests. Ideally, this test will deploy all (or most) contracts, including mock/test ones. For this example, we are going to take a look to the `SimpleStorage` contract:
 
 ```solidity
 contract SimpleStorage {
@@ -87,7 +82,9 @@ First, start Etheno:
 $ etheno --ganache --ganache-args "--deterministic --gasLimit 10000000" -x init.json
 ```
 
-In another terminal, run *one* test or the deployment process. How to run it depends on how the project was developed. For instance, for truffle, use:
+If Etheno fails to produce any output, then it fails to execute `ganache`. Check if `ganache` can be executed correctly from your terminal.
+
+Meanwhile, in another terminal, run *one* test or the deployment process. How to run it depends on how the project was developed. For instance, for truffle, use:
 
 ```
 $ truffle test test/test.js
@@ -105,7 +102,7 @@ In the Drizzle example, we will run:
 $ truffle test test/simplestorage.js --network develop.
 ```
 
-After Etheno finishes, kill it using ctrl+c (twice). It will save the `init.json` file.
+After Etheno finishes, gently kill it using ctrl+c (twice). It will save the `init.json` file. If your test fails for some reason or you want to run a different one, restart etheno and re-run the test.
 
 ## Writing and running a property:
 
