@@ -60,9 +60,9 @@ contract ExternalTest {
 ```
 
 There are two important points to consider in this approach:
-The sender of each transaction will be the `ExternalTest` contract, instead of the simulated Echidna senders (e.g `0x10000`, ..). This means that the real address 
-interacting with the system will be the `External` contract one, instead of one of the Echidna senders. Please take particular care, if you need 
-to provide ETH or tokens into this contract. This approach is manual and can be time consuming if there a lot of functions operations, 
+* The sender of each transaction will be the `ExternalTest` contract, instead of the simulated Echidna senders (e.g `0x10000`, ..). This means that the real address  interacting with the system will be the `External` contract one, instead of one of the Echidna senders. Please take particular care, if you need  to provide ETH or tokens into this contract. 
+
+* This approach is manual and can be time consuming if there a lot of functions operations, 
 but it can be useful when Echidna needs some help calculating some value which cannot be randomly sampled:
  
 ```solidity
@@ -93,8 +93,7 @@ contract ExternalTest {
 }
 ``` 
 
-If we used "mock" contracts for tokens (e.g. MockERC20)  could be an issue, because Echidna could call functions that are public but are only supposed to be used during the initialization such as mint. 
-This can be easily solved using a blacklist of functions to ignore:
+If we used "mock" contracts for tokens (e.g. MockERC20)  could be an issue, because Echidna could call functions that are public but are only supposed to be used during the initialization such as `mint`. This can be easily solved using a blacklist of functions to ignore:
 
 ```yaml
 filterBlacklist: true
@@ -102,8 +101,7 @@ filterFunctions: [“MockERC20.mint(uint256,address)”]
 ```
 
 Finally, there is another benefit for using this approach: it will force the developer or auditor to write properties using public data. 
-If an important property cannot be defined using public data, it could be an indication that users or other contracts will NOT be able to easily interact with 
-the system to either perform some operation or verify that the system is in a valid state.
+If an important property cannot be defined using public data, it could be an indication that users or other contracts will NOT be able to easily interact with the system to either perform some operation or verify that the system is in a valid state.
 
 ### Partial Testing
 
