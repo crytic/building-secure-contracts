@@ -5,7 +5,7 @@
 - [Introduction](#introduction)
 - [Write an assertion](#write-an-assertion)
 - [Run Echidna](#run-echidna)
-- [When and how use assertions](#when-and-how-use-assertions)
+- [When and how to use assertions](#when-and-how-to-use-assertions)
 - [Summary: Assertion checking](#summary-assertion-checking)
 
 ## Introduction
@@ -98,10 +98,9 @@ function f(..) public {
     assert (condition);
     ...
 }
-
 ```
 
-On the contrary, using an explicit Echidna property will randomly execute transactions and there is no easy way to enforce exactly when it will be checked. It is still possible to do this workaround:
+On the contrary, using an explicit boolean property will randomly execute transactions and there is no easy way to enforce exactly when it will be checked. It is still possible to do this workaround:
 
 ```solidity
 function echidna_assert_after_f() public returns (bool) {
@@ -116,6 +115,28 @@ However, there are some issues:
 * It is unclear which arguments should be used to call `f`
 * The property will fail if `f` reverts, 
 
+Assertions can help to overcome this possible issues. For instance, they can be easily detected when calling internal or public functions:
+
+```solidity
+function f(..) public {
+    // some complex code
+    ...
+    g(..) // this contains an assert
+    ...
+}
+```
+
+If `g` is external, then assertion failure can be **only detected in Solidity 0.8.x or later**.
+
+```solidity
+function f(..) public {
+    // some complex code
+    ...
+    contract.g(..) // this contains an assert
+    ...
+}
+```
+
 In general, we recommend following [John Regehr's advice](https://blog.regehr.org/archives/1091) on using assertions:
 
 * Do not force any side effects during the assertion checking. For instance: `assert(ChangeStateAndReturn() == 1)`
@@ -125,7 +146,7 @@ Finally, please **do not use** `require` instead of `assert`, since Echidna will
 
 ## Summary: Assertion Checking
 
-The following summarizes the run of Echidna on our example:
+The following summarizes the run of Echidna on our example (remember to use 0.7.x or older):
 
 ```solidity
 contract Incrementor {
