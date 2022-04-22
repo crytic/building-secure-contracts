@@ -1,7 +1,7 @@
 # Frequently asked questions about Echidna
 
 This list contains answers to frequent questions related with the usage of Echidna. 
-If this looks too difficult to understand for you, you need to make sure you already reviewed [all the other Echidna documentation](../README.md). 
+If this looks too difficult to understand for you, you need to make sure you already reviewed [all the other Echidna documentation](./README.md). 
 
 ## Echidna fails to start or compile my contract, what should I do?
 
