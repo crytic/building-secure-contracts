@@ -1,28 +1,27 @@
 # Frequently asked questions about Echidna
 
-This list contains answers to frequent questions related with the usage of Echidna. 
-If this looks too difficult to understand for you, you need to make sure you already reviewed [all the other Echidna documentation](./README.md). 
+This list contains answers to frequent questions related with the usage of Echidna. If this looks too difficult to understand for you, you need to make sure you already reviewed [all the other Echidna documentation](./README.md). 
 
 ## Echidna fails to start or compile my contract, what should I do?
 
-Start testing if crytic-compile can compile your contracts. If you are using a compilation framework such as truffle or hardhat, use:
+Start testing if `crytic-compile` can compile your contracts. If you are using a compilation framework such as truffle or hardhat, use:
 
 `crytic-compile .`
 
 And check for any errors. If there is an unexpected error, please [report it in the crytic-compile issue tracker](https://github.com/crytic/crytic-compile/issues).
 
-If crytic-compile works fine, test slither to see if there is any issue with the information that this tool extract for Echidna. Again, if you are using a compilation framework, use:
+If `crytic-compile` works fine, test `slither` to see if there is any issues with the information that this tool extract for running Echidna. Again, if you are using a compilation framework, use:
 
 `slither . --print echidna`
 
 If that command works correctly, it should print a json file with some information from your contracts, otherwise, report any error [in the slither issue tracker](https://github.com/crytic/slither/issues). 
-If everything here works, but Echidna still fails, please open an issue in our issue tracker.
+If everything here works, but Echidna still fails, please open an issue in our issue tracker or ask in the #ethereum channel of the EmpireHacking slack.
 
 ## How long should I run Echidna?
 
-Echidna uses fuzzing testing which runs for a fixed amount of transactions (or a timeout). 
+Echidna uses fuzzing testing which runs for a fixed amount of transactions (or a global timeout). 
 Users should specify a suitable number of transactions or a timeout (in seconds), depending on the amount of resources available for a fuzzing campaign 
-and the complexity of the code.  Determining the best amount of time to run a fuzzer is still an [open research question](https://blog.trailofbits.com/2021/03/23/a-year-in-the-life-of-a-compiler-fuzzing-campaign/).
+and the complexity of the code.  Determining the best amount of time to run a fuzzer is still an [open research question](https://blog.trailofbits.com/2021/03/23/a-year-in-the-life-of-a-compiler-fuzzing-campaign/), however, [monitoring the code coverage of your smart contracts](./collecting-a-corpus.md) can be a good way to determinate if the fuzzing campaign should be extended.
 
 ## Why has Echidna not implemented fuzzing of smart contract constructors with parameters?
 
@@ -38,14 +37,14 @@ Coverage information is used to determine if a sequence of transactions has reac
 
 ## What is coverage information exactly?
 
-Coverage information is a combination of the following data:
+Coverage is a combination of the following information:
 * Echidna reached a certain program counter in a given contract.
 * The execution ended, either with stop, revert or a variety of errors (e.g. assertion failed, out of gas, not enough ether balance, etc) 
 * The number of EVM frames when the execution ended (in other words, how deep ends the execution in terms of internal transactions) 
 
 ## How is the corpus used? 
 
-The corpus is used as the primary source of transactions to replay and mutate. The probability of using sequence of transactions to replay and mutate is directly proportional to the number of transactions needed to add it into the corpus. In other words, more rare transactions are replayed and mutated more often during a fuzzing campaign.
+The corpus is used as the primary source of transactions to replay and mutate during a fuzzing campaign. The probability of using a sequence of transactions to replay and mutate is directly proportional to the number of transactions needed to add it into the corpus. In other words, more rare sequences are replayed and mutated more often during a fuzzing campaign.
 
 ## When a new sequence of transactions is added into the corpus, does this mean that a new line of code is always reached?
 
@@ -61,7 +60,7 @@ Check the [tutorial on selecting the right test mode](https://github.com/crytic/
 
 ## Why does Echidna return “Property X failed with no transactions made” when running one or more tests?
 
-Before starting a fuzzing campaign, Echidna tests the properties with no transactions at all to check if they fail. In that case, a property can be detected to fail in the initial state (after the contract is deployed). You should check that the property is correct to know why it fails without any transactions).
+Before starting a fuzzing campaign, Echidna tests the properties with no transactions at all to check if they fail. In that case, a property can be detected to fail in the initial state (after the contract is deployed). You should check that the property is correct to know why it fails without any transactions.
 
 ## How can I know how a property or assertion failed? 
 
@@ -69,8 +68,9 @@ Echidna indicates the cause of a failed test in the UI. For instance, if a boole
 
 ## How can I know exactly where and how property or assertion failed?
 
-Events are an easy way to output values from EVM. You can use them to get information in the code that has the failed property or assertion. Only the events of this transaction will be shown. Also, events are collected and displayed, even if the transaction reverted (despite the Yellow Paper states that the event log should be cleaned). 
-Another way to see where an assertion failed is using the coverage information. This requires to enable the corpus collection (e.g. --corpus-dir X) and check the coverage.*.txt file to see something like this: 
+Events are an easy way to output values from the EVM. You can use them to get information in the code that has the failed property or assertion. Only the events of transaction triggering the failure will be shown (this will be improved in the near future). Also, events are collected and displayed, even if the transaction reverted (despite the Yellow Paper states that the event log should be cleaned). 
+
+Another way to see where an assertion failed is using the coverage information. This requires to enable the corpus collection (e.g. `--corpus-dir X`) and check the coverage.\*.txt file to see something like this: 
 
 ```
 *e  |   function test(int x, address y, address z) public {
@@ -86,11 +86,11 @@ the path ends in the assert, so it should fail there.
 
 ## Echidna stopped working for some reason. How can I debug it? 
 
-Use “--format text” and open an issue with the error you see in your console or ask in the #ethereum channel at EmpireHacking.
+Use “--format text” and open an issue with the error you see in your console or ask in the #ethereum channel at the EmpireHacking slack.
 
 ## I am not getting expected results from Echidna tests. What can I do? 
 
-Sometimes it is useful to create small properties to test that the tool executed them correctly. For instance, for property mode:
+Sometimes it is useful to create small properties or assertions to test that the tool executed them correctly. For instance, for property mode:
 
 ```solidity
     function echidna_test() public returns (bool) {
