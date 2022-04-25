@@ -52,7 +52,7 @@ This mode can be used when a property can be easily computed from the use of sta
 
 Using the "assertion" testing mode, Echidna will report an assert violation if:
 
-* The execution reverts during a call to `assert`. Technically speaking, Echidna will detect an assertion failure if it executes an `assert` call that fails in the first call frame of the target contract (so this excludes any internal transactions). 
+* The execution reverts during a call to `assert`. Technically speaking, Echidna will detect an assertion failure if it executes an `assert` call that fails in the first call frame of the target contract (so this excludes any internal transactions in most of the cases). 
 * An `AssertionFailed` event (with any number of parameters) is emitted by any contract. This pseudo-code summarizes how assertions work:
 
 ```solidity
@@ -66,8 +66,8 @@ function checkInvariant(..) public { // Any number of arguments is supported
     // The following statement will always trigger a failure even if the execution ends with a revert
     emits AssertionFailure(..);
 
-    // The following statement can *not* trigger a failure using `assert`
-    // unless it emits AssertionFailure(..)
+    // The following statement will *only* trigger a failure using `assert` if using solc 0.8.x or newer
+    // To make sure it works in older versions, use the AssertionFailure(..) event
     anotherContract.function(..);
     
 } // side effects are preserved
