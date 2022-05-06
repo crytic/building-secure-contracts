@@ -108,7 +108,7 @@ Echidna correctly found the bug: lack of overflow checks in `transfer`.
 ## Differential fuzzing
 
 Consider the following Vyper and Solidity contracts:
-```python
+```vyper
 @view
 @external
 def my_func(a: uint256, b: uint256, c: uint256) -> uint256:
