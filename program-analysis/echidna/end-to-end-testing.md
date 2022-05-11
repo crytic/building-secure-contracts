@@ -138,4 +138,6 @@ crytic_const_storage: failed!💥
     (0x871dd7c2b4b25e1aa18728e9d5f2af4c4e431f5c).set(0) from: 0x0000000000000000000000000000000000010000
 ```
 
+For this last step, make sure you are using `.` as a target for `echidna-test`. If you use the path to the `E2E.sol` file instead, then Echidna will not be able get information from all the deployed contracts to call the `set(uint256)` function and the property will never fail.
+
 In the next part of this tutorial, we will explore how to easily find where contracts are deployed with a specific tool based on Slither. This will be useful if the deployment process is complex and we need to test an specific contract.
