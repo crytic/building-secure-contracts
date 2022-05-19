@@ -17,6 +17,7 @@ The second part is a set of exercises to solve.
   - [How to filter functions](./filtering-functions.md): How to filters the functions to be fuzzed
   - [How to test assertions](./assertion-checking.md): How to test assertions with Echidna
   - [How to write good properties step by step](./property-creation.md): How to iteratively improve property testing
+  - [Frequently Asked Questions](./frequently_asked_questions.md): Answers to common questions about Echidna
 - Advanced
   - [How to collect a corpus](./collecting-a-corpus.md): How to use Echidna to collect a corpus of transactions
   - [How to detect high gas consumption](./finding-transactions-with-high-gas-consumption.md): How to find functions with high gas consumption.
