@@ -16,9 +16,11 @@ Each _Not So Smart Contract_ includes a standard set of information:
 
 | Not So Smart Contract | Description |
 | --- | --- |
-
 | [Improper access controls](access_controls) | Broken access controls due to StarkNet account abstraction |
 | [Integer division errors](integer_division) | Unexpected results due to division in a finite field |
+| [View state modifications](view_state) | View functions don't prevent state modifications |
+| [Arithmetic overflow](arithmetic_overflow) | Arithmetic in Cairo is not safe by default |
+| [Signature replays](replay_protection) | Account abstraction requires robust reuse protections |
 
 ## Credits
 
