@@ -20,7 +20,7 @@ contract theRun {
             admin = msg.sender;
         }
 
-        modifier onlyowner {if (msg.sender == admin) _  }
+        modifier onlyowner {if (msg.sender == admin) _;  }
 
         struct Player {
             address addr;
