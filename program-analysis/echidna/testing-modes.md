@@ -83,7 +83,14 @@ Functions checking assertions do not require any particular name and are execute
 
 ### Disadvantages
 
-* If the original is already using assertions for data validation, it will not work as expected. Developers *should* avoid doing that, but if that is not feasible, you can use the `AssertionFailure` event or run code using external calls to avoid any false positives.
+* If the code to test is already using assertions for data validation, it will not work as expected. For example:
+```solidity
+function deposit(uint256 tokens) public {
+  assert(tokens > 0); // should be strictly positive
+  ..
+```
+
+Developers *should* avoid doing that and use `require` instead, but if that is not possible because you are calling some contract that is outside your control, you can use the `AssertionFailure` event.
 
 ### Recommendation
 
