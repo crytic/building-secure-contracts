@@ -1,0 +1,57 @@
+syntax = "proto3";
+package trailofbits.incorrect_getsigners.incorrectgetsigners;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "incorrectgetsigners/params.proto";
+import "incorrectgetsigners/post.proto";
+import "incorrectgetsigners/delegation.proto";
+
+// this line is used by starport scaffolding # 1
+
+option go_package = "github.com/trailofbits/incorrect_getsigners/x/incorrectgetsigners/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/trailofbits/incorrect_getsigners/incorrectgetsigners/params";
+  }
+  // Queries a list of Posts items.
+	rpc Posts(QueryPostsRequest) returns (QueryPostsResponse) {
+		option (google.api.http).get = "/trailofbits/incorrect_getsigners/incorrectgetsigners/posts";
+	}
+
+// Queries a list of Delegations items.
+	rpc Delegations(QueryDelegationsRequest) returns (QueryDelegationsResponse) {
+		option (google.api.http).get = "/trailofbits/incorrect_getsigners/incorrectgetsigners/delegations";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryPostsRequest {
+}
+
+message QueryPostsResponse {
+  repeated Post Post = 1;
+}
+
+message QueryDelegationsRequest {
+}
+
+message QueryDelegationsResponse {
+  repeated Delegation delegation = 1;
+}
+
+// this line is used by starport scaffolding # 3

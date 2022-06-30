@@ -1,0 +1,10 @@
+syntax = "proto3";
+package trailofbits.incorrect_getsigners.incorrectgetsigners;
+option go_package = "github.com/trailofbits/incorrect_getsigners/x/incorrectgetsigners/types";
+
+message Post {
+  string author = 1;
+  uint64 id = 2;
+  string title = 3;
+  string body = 4;
+}
