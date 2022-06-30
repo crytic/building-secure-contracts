@@ -1,16 +1,25 @@
-# Incorrect `GetSigners`
+# (Not So) Smart Contracts
 
-description
+This repository contains examples of common Cosmos applications vulnerabilities, including code from real applications. Use Not So Smart Contracts to learn about Cosmos (Tendermint) vulnerabilities, as a reference when performing security reviews, and as a benchmark for security and analysis tools.
 
-## Attack Scenarios
+## Features
 
-attack
+Each _Not So Smart Contract_ includes a standard set of information:
 
-## Mitigations
+* Description of the vulnerability type
+* Attack scenarios to exploit the vulnerability
+* Recommendations to eliminate or mitigate the vulnerability
+* Real-world contracts that exhibit the flaw
+* References to third-party resources with more information
 
-- x
+## Vulnerabilities
 
-## Examples
+| Not So Smart Contract | Description |
+| --- | --- |
+| [Incorrect signers](incorrect_signers) | Broken access controls due to incorrect signers validation |
 
-- y
+## Credits
 
+These examples are developed and maintained by [Trail of Bits](https://www.trailofbits.com/).
+
+If you have questions, problems, or just want to learn more, then join the #ethereum channel on the [Empire Hacking Slack](https://empireslacking.herokuapp.com/) or [contact us](https://www.trailofbits.com/contact/) directly.
