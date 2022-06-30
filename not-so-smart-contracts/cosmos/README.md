@@ -16,7 +16,7 @@ Each _Not So Smart Contract_ includes a standard set of information:
 
 | Not So Smart Contract | Description |
 | --- | --- |
-| [Incorrect signers](incorrect_signers) | Broken access controls due to incorrect signers validation |
+| [Incorrect signers](incorrect_getsigners) | Broken access controls due to incorrect signers validation |
 
 ## Credits
 
