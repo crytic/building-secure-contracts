@@ -24,17 +24,19 @@ $ cd drizzle-box
 $ npm i truffle
 ```
 
-If ganache and ganache-cli are not installed, add them manually. In our example, we will run: 
+If `ganache` is not installed, add it manually. In our example, we will run: 
 
 ```
-$ npm i ganache ganache-cli 
+$ npm i ganache
 ```
 
 Other projects using yarn will require:
 
 ```
-$ yarn add ganache ganache-cli
+$ yarn add ganache
 ```
+
+Ensure that `$ ganache --version` outputs `ganache v7.3.3` or greater.
 
 It is also important to select *one* test script from the available tests. Ideally, this test will deploy all (or most) contracts, including mock/test ones. For this example, we are going to take a look to the `SimpleStorage` contract:
 
@@ -79,10 +81,18 @@ Before starting to write interesting properties, it is necessary to to collect a
 First, start Etheno: 
 
 ```
-$ etheno --ganache --ganache-args "--deterministic --gasLimit 10000000" -x init.json
+$ etheno --ganache --ganache-args="--gasLimit 10000000" -x init.json
 ```
 
-If Etheno fails to produce any output, then it fails to execute `ganache`. Check if `ganache` can be executed correctly from your terminal.
+Note that by default the following Ganache arguments are set via Etheno:
+- `-d`: Ganache will use a pre-defined, deterministic seed to create all accounts.
+- `--chain.allowUnlimitedContractSize`: Allows unlimited contract sizes while debugging. This is set so that there is no size limitations on the contracts that are going to be deployed
+- `-p <port_num>`: The `port_num` will be set to (1) the value of `--ganache-port` or (2) Etheno will choose the smallest port number higher than the port number on which Etheno’s JSON RPC server is running.
+
+Note that if the deployment fails to complete successfully due to an out-of-gas exception, increasing the `--gasLimit` value can help.
+This is especially helpful for large contract deployments. Learn more about the various Ganache command-line arguments that can be set by clicking [here](https://www.npmjs.com/package/ganache). 
+
+Additionally, if Etheno fails to produce any output, then it fails to execute `ganache`. Check if `ganache` can be executed correctly from your terminal.
 
 Meanwhile, in another terminal, run *one* test or the deployment process. How to run it depends on how the project was developed. For instance, for truffle, use:
 
@@ -102,7 +112,7 @@ In the Drizzle example, we will run:
 $ truffle test test/simplestorage.js --network develop.
 ```
 
-After Etheno finishes, gently kill it using ctrl+c (twice). It will save the `init.json` file. If your test fails for some reason or you want to run a different one, restart etheno and re-run the test.
+After Etheno finishes, gently kill it by using Ctrl+c (or Command+C on Mac). It will save the `init.json` file. If your test fails for some reason or you want to run a different one, restart Etheno and re-run the test.
 
 ## Writing and running a property:
 
@@ -118,6 +128,8 @@ contract E2E {
         }
 }
 ```
+
+For large, multi-contract deployments, using `console.log` to print out the deployed, contract addresses can be valuable in quickly setting up the Echidna testing contract.
 
 This simple property checks if the stored data remains constant. To run it you will need the following echidna config file (`echidna.yaml`):
 
