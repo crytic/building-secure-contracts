@@ -81,7 +81,7 @@ Before starting to write interesting properties, it is necessary to to collect a
 First, start Etheno: 
 
 ```
-$ etheno --ganache --ganache-args="--gasLimit 10000000" -x init.json
+$ etheno --ganache --ganache-args="--miner.blockGasLimit 10000000" -x init.json
 ```
 
 Note that by default the following Ganache arguments are set via Etheno:
