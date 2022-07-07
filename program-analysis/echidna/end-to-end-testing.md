@@ -80,14 +80,26 @@ Before starting to write interesting properties, it is necessary to to collect a
 
 First, start Etheno: 
 
-```
+```bash
 $ etheno --ganache --ganache-args="--miner.blockGasLimit 10000000" -x init.json
 ```
 
-Note that by default the following Ganache arguments are set via Etheno:
+By default the following Ganache arguments are set via Etheno:
 - `-d`: Ganache will use a pre-defined, deterministic seed to create all accounts.
 - `--chain.allowUnlimitedContractSize`: Allows unlimited contract sizes while debugging. This is set so that there is no size limitations on the contracts that are going to be deployed
 - `-p <port_num>`: The `port_num` will be set to (1) the value of `--ganache-port` or (2) Etheno will choose the smallest port number higher than the port number on which Etheno’s JSON RPC server is running.
+
+**NOTE:** If you are using Docker to run etheno, the commands should be:
+
+```bash
+$ docker run -it -p 8545:8545 -v ~/etheno:/home/etheno/ trailofbits/etheno
+(you will now be working within the Docker instance)
+$ etheno --ganache --ganache-args="--miner.blockGasLimit 10000000" -x init.json
+```
+- The `-p` in the _first command_ publishes (i.e. exposes) port 8545 from inside the Docker container out to port 8545 on the host.
+- The `-v` in the _first command_ maps a directory from inside the Docker container to one outside the Docker container. After Etheno exits, the `init.json` file will now be in the `~/etheno` folder on the host.
+
+
 
 Note that if the deployment fails to complete successfully due to a `ProviderError: exceeds block gas limit` exception, increasing the `--miner.blockGasLimit` value can help.
 This is especially helpful for large contract deployments. Learn more about the various Ganache command-line arguments that can be set by clicking [here](https://www.npmjs.com/package/ganache). 
