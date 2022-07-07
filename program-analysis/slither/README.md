@@ -12,14 +12,14 @@ bugs in smart contracts.
     [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/crytic/building-secure-contracts/rgs/slither-jupyter?labpath=program-analysis%2Fslither%2Fjupyter%2FAPI.ipynb)
 - Basics
   - [Running Slither detectors on smart contracts](./running-detectors.md)
-    [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/crytic/building-secure-contracts/rgs/slither-jupyter?labpath=program-analysis%2Fslither%2Fjupyter%2FDetectors.ipynb)
   - [Running Slither printers on smart contracts](./running-printers.md)
-    [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/crytic/building-secure-contracts/rgs/slither-jupyter?labpath=program-analysis%2Fslither%2Fjupyter%2FPrinters.ipynb)
   - [Using a Slither utility on smart contracts](./running-utils.md)
   - [Troubleshooting & FAQs](./faq.md)
 - Advanced
   - [How to build a custom Slither detector](./building-detectors.md)
+    [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/crytic/building-secure-contracts/rgs/slither-jupyter?labpath=program-analysis%2Fslither%2Fjupyter%2FDetectors.ipynb)
   - [How to build a custom Slither printer](./building-printers.md)
+    [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/crytic/building-secure-contracts/rgs/slither-jupyter?labpath=program-analysis%2Fslither%2Fjupyter%2FPrinters.ipynb)
 - Exercises
   - [Exercise 1](./exercise1.md)
   - [Exercise 2](./exercise2.md)

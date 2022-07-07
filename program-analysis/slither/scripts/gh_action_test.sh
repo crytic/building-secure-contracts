@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-test_examples(){
-    cd examples
+test_printer(){
+    cd exercises/printer
 
     python print_basic_information.py > results.txt 
     if [ $? -ne 0 ]
@@ -23,7 +23,7 @@ test_examples(){
     fi
 
     echo "print_basic_information.py passed"
-    cd ..
+    cd ../..
 }
 
 test_exercise(){
@@ -56,7 +56,7 @@ test_exercise(){
 cd program-analysis/slither
 pip install slither-analyzer
 
-test_examples
+test_printer
 test_exercise 1
 test_exercise 2
 

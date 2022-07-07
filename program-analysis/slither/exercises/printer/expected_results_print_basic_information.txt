@@ -1,0 +1,405 @@
+Contract: Context
+	Inherit from[]
+	_msgSender():
+		Visibility: internal
+		Contract: Context
+		Modifier: []
+		Is constructor? False
+	_msgData():
+		Visibility: internal
+		Contract: Context
+		Modifier: []
+		Is constructor? False
+Contract: IERC20
+	Inherit from[]
+	totalSupply():
+		Visibility: external
+		Contract: IERC20
+		Modifier: []
+		Is constructor? False
+	balanceOf(address):
+		Visibility: external
+		Contract: IERC20
+		Modifier: []
+		Is constructor? False
+	transfer(address,uint256):
+		Visibility: external
+		Contract: IERC20
+		Modifier: []
+		Is constructor? False
+	allowance(address,address):
+		Visibility: external
+		Contract: IERC20
+		Modifier: []
+		Is constructor? False
+	approve(address,uint256):
+		Visibility: external
+		Contract: IERC20
+		Modifier: []
+		Is constructor? False
+	transferFrom(address,address,uint256):
+		Visibility: external
+		Contract: IERC20
+		Modifier: []
+		Is constructor? False
+Contract: IERC20Metadata
+	Inherit from['IERC20']
+	totalSupply():
+		Visibility: external
+		Contract: IERC20Metadata
+		Modifier: []
+		Is constructor? False
+	balanceOf(address):
+		Visibility: external
+		Contract: IERC20Metadata
+		Modifier: []
+		Is constructor? False
+	transfer(address,uint256):
+		Visibility: external
+		Contract: IERC20Metadata
+		Modifier: []
+		Is constructor? False
+	allowance(address,address):
+		Visibility: external
+		Contract: IERC20Metadata
+		Modifier: []
+		Is constructor? False
+	approve(address,uint256):
+		Visibility: external
+		Contract: IERC20Metadata
+		Modifier: []
+		Is constructor? False
+	transferFrom(address,address,uint256):
+		Visibility: external
+		Contract: IERC20Metadata
+		Modifier: []
+		Is constructor? False
+	name():
+		Visibility: external
+		Contract: IERC20Metadata
+		Modifier: []
+		Is constructor? False
+	symbol():
+		Visibility: external
+		Contract: IERC20Metadata
+		Modifier: []
+		Is constructor? False
+	decimals():
+		Visibility: external
+		Contract: IERC20Metadata
+		Modifier: []
+		Is constructor? False
+Contract: ERC20
+	Inherit from['IERC20Metadata', 'IERC20', 'Context']
+	name():
+		Visibility: external
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	symbol():
+		Visibility: external
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	decimals():
+		Visibility: external
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	totalSupply():
+		Visibility: external
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	balanceOf(address):
+		Visibility: external
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	transfer(address,uint256):
+		Visibility: external
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	allowance(address,address):
+		Visibility: external
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	approve(address,uint256):
+		Visibility: external
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	transferFrom(address,address,uint256):
+		Visibility: external
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	_msgSender():
+		Visibility: internal
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	_msgData():
+		Visibility: internal
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	constructor(string,string):
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? True
+	name():
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	symbol():
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	decimals():
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	totalSupply():
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	balanceOf(address):
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	transfer(address,uint256):
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	allowance(address,address):
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	approve(address,uint256):
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	transferFrom(address,address,uint256):
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	increaseAllowance(address,uint256):
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	decreaseAllowance(address,uint256):
+		Visibility: public
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	_transfer(address,address,uint256):
+		Visibility: internal
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	_mint(address,uint256):
+		Visibility: internal
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	_burn(address,uint256):
+		Visibility: internal
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	_approve(address,address,uint256):
+		Visibility: internal
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	_spendAllowance(address,address,uint256):
+		Visibility: internal
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	_beforeTokenTransfer(address,address,uint256):
+		Visibility: internal
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+	_afterTokenTransfer(address,address,uint256):
+		Visibility: internal
+		Contract: ERC20
+		Modifier: []
+		Is constructor? False
+Contract: Coin
+	Inherit from['ERC20', 'IERC20Metadata', 'IERC20', 'Context']
+	constructor(string,string):
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? True
+	name():
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	symbol():
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	decimals():
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	totalSupply():
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	balanceOf(address):
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	transfer(address,uint256):
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	allowance(address,address):
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	approve(address,uint256):
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	transferFrom(address,address,uint256):
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	increaseAllowance(address,uint256):
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	decreaseAllowance(address,uint256):
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	_transfer(address,address,uint256):
+		Visibility: internal
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	_mint(address,uint256):
+		Visibility: internal
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	_burn(address,uint256):
+		Visibility: internal
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	_approve(address,address,uint256):
+		Visibility: internal
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	_spendAllowance(address,address,uint256):
+		Visibility: internal
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	_beforeTokenTransfer(address,address,uint256):
+		Visibility: internal
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	_afterTokenTransfer(address,address,uint256):
+		Visibility: internal
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	name():
+		Visibility: external
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	symbol():
+		Visibility: external
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	decimals():
+		Visibility: external
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	totalSupply():
+		Visibility: external
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	balanceOf(address):
+		Visibility: external
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	transfer(address,uint256):
+		Visibility: external
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	allowance(address,address):
+		Visibility: external
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	approve(address,uint256):
+		Visibility: external
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	transferFrom(address,address,uint256):
+		Visibility: external
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	_msgSender():
+		Visibility: internal
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	_msgData():
+		Visibility: internal
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
+	constructor():
+		Visibility: public
+		Contract: Coin
+		Modifier: []
+		Is constructor? True
+	_mint(address,uint256):
+		Visibility: internal
+		Contract: Coin
+		Modifier: []
+		Is constructor? False
