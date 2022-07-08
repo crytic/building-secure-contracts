@@ -4,7 +4,7 @@ In Starknet, addresses are of type `felt` while on L1 addresses are of type `uin
 
 # Example
 
-Suppose that the following code to initiate L2 deposits from L1. The first example has no checks on the `to` parameter and thus depending on the users' address, it is possible to transfer tokens to an unexpected address on L2. The second example, however, verifies to make sure this check cannot happen.
+Suppose that the following code to initiate L2 deposits from L1. The first example has no checks on the `to` parameter and thus depending on the users' address, it is possible to transfer tokens to an unexpected address on L2. The second example, however, verifies to make sure this check cannot happen. Note that the code is just a simplification of how messages are sent on L1 and processed on L2. For a more thorough overview, see here: https://www.cairo-lang.org/docs/hello_starknet/l1l2.html.
 
 ```solidity 
 uint256 public constant STARKNET_FIELD_PRIME; // the prime order P of the elliptic curve used 
