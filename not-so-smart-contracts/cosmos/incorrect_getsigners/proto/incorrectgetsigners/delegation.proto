@@ -1,8 +1,0 @@
-syntax = "proto3";
-package trailofbits.incorrect_getsigners.incorrectgetsigners;
-option go_package = "github.com/trailofbits/incorrect_getsigners/x/incorrectgetsigners/types";
-
-message Delegation {
-  string delegator = 1;
-  string delegatee = 2;
-}
