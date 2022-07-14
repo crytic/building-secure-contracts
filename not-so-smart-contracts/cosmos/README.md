@@ -18,9 +18,9 @@ Each _Not So Smart Contract_ includes a standard set of information:
 | --- | --- |
 | [Incorrect signers](incorrect_getsigners) | Broken access controls due to incorrect signers validation |
 | [Non-determinism](non_determinism) | Consensus failure because of non-determinism |
-| [Messages priority](messages_priority) | Risks arising from usage of not prioritized message types |
-| [ABCI methods are fast](abci_fast) | Consensus failure because of slow ABCI methods |
-| [ABCI methods do not panic](abci_panic) | Chain halt due to panics in ABCI methods |
+| [Not prioritized messages](messages_priority) | Risks arising from usage of not prioritized message types |
+| [Slow ABCI methods](abci_fast) | Consensus failure because of slow ABCI methods |
+| [ABCI methods panic](abci_panic) | Chain halt due to panics in ABCI methods |
 | [Unregistered message handler](unregistered_msg_handler) | Broken functionality because of unregistered msg handler |
 
 ## Credits

@@ -1,4 +1,4 @@
-# ABCI methods are fast
+# Slow ABCI methods
 
 ABCI methods (like `EndBlocker`) [are not constrained by `gas`](https://docs.cosmos.network/v0.45/basics/app-anatomy.html#beginblocker-and-endblocker). Therefore, it is essential to ensure that they always will finish in a reasonable time. Otherwise, the chain will halt.
 

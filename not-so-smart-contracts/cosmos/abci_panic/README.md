@@ -1,4 +1,4 @@
-# ABCI methods do not panic
+# ABCI methods panic
 
 A `panic` inside an ABCI method (e.g., `EndBlocker`) will stop the chain. There should be no unanticipated `panic`s in these methods.
 

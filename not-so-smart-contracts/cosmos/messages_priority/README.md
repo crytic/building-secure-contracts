@@ -1,4 +1,4 @@
-# Messages priority
+# Not prioritized messages
 
 Some message types may be more important than others and should have priority over them. That is, the more significant message type is, the more quickly it should be included in a block, before other messages are.
 
