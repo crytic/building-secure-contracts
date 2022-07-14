@@ -18,7 +18,8 @@ Each _Not So Smart Contract_ includes a standard set of information:
 | --- | --- |
 | [Incorrect signers](incorrect_getsigners) | Broken access controls due to incorrect signers validation |
 | [Non-determinism](non_determinism) | Consensus failure because of non-determinism |
-| []() | x |
+| [Messages priority](messages_priority) | Risks araising from usage of not prioritized message types |
+| []() |  |
 | [Unregistered message handler](unregistered_msg_handler) | Broken functionality because of unregistered msg handler |
 
 ## Credits
