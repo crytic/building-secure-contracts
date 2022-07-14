@@ -1,6 +1,6 @@
 # Unregistered message handler
 
-In the legacy version of the [Msg Service](https://docs.cosmos.network/v0.44/building-modules/msg-services.html#implementation), all messages must be registered in a module keeper's `NewHandler` method. Failing to do so would prevent users from sending the not-registerd message.
+In the legacy version of the [Msg Service](https://docs.cosmos.network/v0.44/building-modules/msg-services.html#implementation), all messages have to be registered in a module keeper's `NewHandler` method. Failing to do so would prevent users from sending the not-registerd message.
 
 In [the recent Cosmos version manual registration is no longer needed](https://docs.cosmos.network/v0.44/architecture/adr-031-msg-service.html#pros).
 

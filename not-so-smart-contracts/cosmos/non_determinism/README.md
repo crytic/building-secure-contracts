@@ -14,7 +14,7 @@ There are quite a few sources of non-determinism, some of which are specific to 
 
 ## Example 
 
-He we can see iteration over a `map`. If `k.GetPool` fails for more than one `asset`, then different nodes will fail with different errors, causing chain to halt.
+Below we can see iteration over a `amounts` `map`. If `k.GetPool` fails for more than one `asset`, then different nodes will fail with different errors, causing chain to halt.
 
 ```go
 package keeper
@@ -49,10 +49,9 @@ func (k msgServer) CheckAmounts(goCtx context.Context, msg *types.MsgCheckAmount
 
     return &types.MsgCheckAmountsResponse{}, nil
 }
-
 ```
 
-Even if we fix the `map` problem, it is still possible than the `total` overflows for nodes running on 32-bit architectures earlier than for the rest of the nodes, again causing chain split.
+Even if we fix the `map` problem, it is still possible than the `total` overflows for nodes running on 32-bit architectures earlier than for the rest of the nodes, again causing the chain split.
 
 ## Mitigations
 
