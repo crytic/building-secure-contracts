@@ -17,7 +17,7 @@ function badDepositToL2(uint256 to,  uint256 amount) public returns (bool) {
     return true;
 }
 
-function goodDepositToL2(uint256 to,  uint256 amount) public returns (bool) {
+function betterDepositToL2(uint256 to,  uint256 amount) public returns (bool) {
     require(to !=0 && to < STARKNET_FIELD_PRIME, "invalid address"); //verifies 0 < to < P 
     token.transferFrom(to, address(this),amount);
     emit Deposited(to,amount); // this message gets processed on L2
