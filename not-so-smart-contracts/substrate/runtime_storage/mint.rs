@@ -33,26 +33,3 @@ pub(super) fn mint(
     // Return successful DispatchResultWithPostInfo
     Ok(().into())
 }
-
-pub(super) fn transfer(
-    origin: OriginFor<T>,
-    to: T::AccountId,
-    #[pallet::compact] amount: T::Balance,
-) -> DispatchResultWithPostInfo {
-    let sender = ensure_signed(origin)?;
-    // Current balances
-    let sender_balance = Self::get_balance(&sender);
-    let receiver_balance = Self::get_balance(&to);
-    
-    // Calculate new balances.
-    let updated_from_balance = sender_balance.checked_sub(value).ok_or(<Error<T>>::InsufficientFunds)?;
-    let updated_to_balance = receiver_balance.checked_add(value).expect("Entire supply fits in u64, qed");
-
-    // Update state
-    <Balances<T>>::insert(&sender, updated_from_balance);
-    <Balances<T>>::insert(&to, updated_to_balance);
-
-    // Emit event
-    Self::deposit_event(RawEvent::Transfer(sender, to, value));
-    Ok(())
-}
