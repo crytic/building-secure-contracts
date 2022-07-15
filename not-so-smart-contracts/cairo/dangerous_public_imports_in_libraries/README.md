@@ -11,11 +11,13 @@ Consider the library `library.cairo`. Even though the `example.cairo` file impor
 # library.cairo
 
 %lang starknet
+%builtins pedersen range_check
+from starkware.cairo.common.cairo_builtins import HashBuiltin
 @storage_var
 func owner() -> (res: felt):
 end
 
-func check_owner():
+func check_owner{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr: felt*}():
     let caller = get_caller_address()
     let owner = owner.read()
     assert caller = owner
@@ -38,9 +40,11 @@ end
 
 # example.cairo
 %lang starknet
+%builtins pedersen range_check
+from starkware.cairo.common.cairo_builtins import HashBuiltin
 from library import check_owner(), do_something()
 # Even though we just import check_owner() and do_something(), we can still call bypass_owner_do_something()!
-func check_owner_and_do_something():
+func check_owner_and_do_something{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr: felt*}():
     check_owner()
     do_something()
     return ()
