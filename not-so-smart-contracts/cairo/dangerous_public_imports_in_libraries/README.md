@@ -4,7 +4,7 @@ When a library is imported in Cairo, all functions can be called even if some of
 
 # Example
 
-Consider the library `library.cairo`. Even though the `example.cairo` file imports only the `check_owner()` and the `_do_something()` function, the `bypass_owner_do_something()` function is still exposed and can thus be called, making it possible to circumvent the owner check.
+Consider the library `library.cairo`. Even though the `example.cairo` file imports only the `check_owner()` and the `do_something()` function, the `bypass_owner_do_something()` function is still exposed and can thus be called, making it possible to circumvent the owner check.
 
 ```cairo
 
