@@ -4,7 +4,7 @@ Some message types may be more important than others and should have priority ov
 
 Failing to prioritize message types allows attackers to front-run them, possibly gaining unfair adventage. Moreover, during high network congestion, the message may be simply not included in a block for a long period, causing the system to malfunction.
 
-In the Cosmos's mempool, transactions are [ordered in first-in-first-out (FIFO) manner](https://github.com/tendermint/tendermint/blob/master/docs/architecture/adr-067-mempool-refactor.md#context) by default. Especially, there is no fee-based ordering.
+In the Cosmos's mempool, transactions are [ordered in first-in-first-out (FIFO) manner](https://github.com/tendermint/tendermint/blob/f9e0f77af333f4ab7bfa1c0c303f7db47cec0c9e/docs/architecture/adr-067-mempool-refactor.md#context) by default. Especially, there is no fee-based ordering.
 
 ## Example
 
@@ -53,7 +53,7 @@ Once a bug in pool's implementation is discovered, attackers and the pool's oper
 
 ## Mitigations
 
-- [Use `CheckTx`'s `priority` return value](https://docs.tendermint.com/master/spec/abci/abci.html#checktx-2) to prioritize messages. Please note that this feature has a transaction (not a message) granuality - users can send multiple messages in a single transactions, and it is the tx that will have to be prioritized.
+- [Use `CheckTx`'s `priority` return value](https://github.com/tendermint/spec/blob/v0.7.1/spec/abci/abci.md#checktx-1) to prioritize messages. Please note that this feature has a transaction (not a message) granuality - users can send multiple messages in a single transactions, and it is the tx that will have to be prioritized.
 
 ## External examples
 - [Terra Money's oracle messages were not prioritized](https://cryptorisks.substack.com/p/ust-december-2021) (search for "priority"). It was [fixed with modifications to Tendermint](https://github.com/terra-money/tendermint/commit/6805b4866bdbd6933000eb0e761acbf15edd8ed6).

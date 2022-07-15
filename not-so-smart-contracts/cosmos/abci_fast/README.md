@@ -35,7 +35,7 @@ users can take a lot of small loans to slow down computation to a point where th
 
 - Estimate computational complexity of all implemented ABCI methods and ensure that they will scale correctly with the application's usage growth
 - Implement stress tests for the ABCI methods
-- [Ensure that minimal fees are enforced on all messages](https://docs.cosmos.network/master/basics/gas-fees.html#introduction-to-gas-and-fees) to prevent spam
+- [Ensure that minimal fees are enforced on all messages](https://docs.cosmos.network/v0.46/basics/gas-fees.html#introduction-to-gas-and-fees) to prevent spam
 
 ## External examples
 - [Gravity Bridge's `slashing` method was executed in the `EndBlocker` and contained a computationally expensive, nested loop](https://github.com/althea-net/cosmos-gravity-bridge/issues/347).
