@@ -11,7 +11,6 @@ Consider the library `library.cairo`. Even though the `example.cairo` file impor
 # library.cairo
 
 %lang starknet
-%builtins pedersen range_check
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 @storage_var
 func owner() -> (res: felt):
