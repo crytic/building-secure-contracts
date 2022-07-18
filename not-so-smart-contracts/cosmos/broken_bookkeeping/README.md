@@ -62,6 +62,7 @@ The second one works because the IBC module [burns transfered coins in the sourc
 
 - Use [`Blocklist` to prevent unexpected token transfers](https://docs.cosmos.network/v0.45/modules/bank/02_keepers.html#blocklisting-addresses) to specific addresses
 - Use [`SendEnabled` parameter to prevent unexpected transfers](https://docs.cosmos.network/v0.45/modules/bank/05_params.html#parameters) of specific tokens (denominations)
+- Ensure that the blocklist is explicitely checked [whenever a new functionality allowing for tokens transfers is implemented](https://github.com/cosmos/cosmos-sdk/issues/8463#issuecomment-801046285)
 
 ## External examples
 

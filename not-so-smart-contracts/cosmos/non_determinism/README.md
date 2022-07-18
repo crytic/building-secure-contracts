@@ -17,15 +17,6 @@ There are quite a few sources of non-determinism, some of which are specific to 
 Below we can see iteration over a `amounts` `map`. If `k.GetPool` fails for more than one `asset`, then different nodes will fail with different errors, causing chain to halt.
 
 ```go
-package keeper
-
-import (
-    "context"
-
-    sdk "github.com/cosmos/cosmos-sdk/types"
-    "github.com/trailofbits/incorrect_getsigners/x/incorrect_getsigners/types"
-)
-
 func (k msgServer) CheckAmounts(goCtx context.Context, msg *types.MsgCheckAmounts) (*types.MsgCheckAmountsResponse, error) {
     ctx := sdk.UnwrapSDKContext(goCtx)
 

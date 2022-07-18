@@ -22,6 +22,8 @@ Each _Not So Smart Contract_ includes a standard set of information:
 | [Slow ABCI methods](abci_fast) | Consensus failure because of slow ABCI methods |
 | [ABCI methods panic](abci_panic) | Chain halt due to panics in ABCI methods |
 | [Broken bookkeeping](broken_bookkeeping) | Exploit mismatch between different modules' views on balances |
+| [Rounding errors](rounding_errors) | Bugs related to imprecision of finite precision arithmetic |
+| [Rounding errors](rounding_errors) | X |
 | [Unregistered message handler](unregistered_msg_handler) | Broken functionality because of unregistered msg handler |
 
 ## Credits
