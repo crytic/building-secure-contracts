@@ -3,9 +3,9 @@
 In Cosmos, transaction's signature(s) are validated against public keys (addresses) taken from the transaction itself,
 where locations of the keys [are specified in `GetSigners` methods](https://docs.cosmos.network/v0.46/core/transactions.html#signing-transactions).
 
-In the simples case there is just one signer required, and its address is simple to use correctly.
+In the simplest case there is just one signer required, and its address is simple to use correctly.
 However, in more complex scenarios like when multiple signatures are required or a delegation schema is implemented,
-it is possible to make mistake about what addresses in the transaction (the message) are actually authenticated. 
+it is possible to make mistakes about what addresses in the transaction (the message) are actually authenticated. 
 
 Fortunately, mistakes in `GetSigners` should make part of application's intended functionality not working,
 making it easy to spot the bug.  

@@ -27,7 +27,7 @@ func BalanceInvariant(k Keeper) sdk.Invariant {
 
 A spiteful user can simply transfer a tiny amount of BTC tokens directly to the `x/hodl` module via a message to the `x/bank` module. That would bypass accounting of the `x/hodl`, so the `GetTotalDeposited` function would report a not-updated amount, smaller than the module's `SpendableCoins`.
 
-Because an invariant's failure stops the chain, the bug consitutes a simple Denial-of-Service attack vector.
+Because an invariant's failure stops the chain, the bug constitutes a simple Denial-of-Service attack vector.
 
 ## Example 2 
 
@@ -51,18 +51,18 @@ func (k Keeper) GetExchangeRate(tokenDenom string) sdk.Coin {
 A malicious user can screw an exchange rate in two ways:
 
 * by force-sending Tokens to the module, changing the `tokensHeld` value
-* by transfering uTokens to another chain via IBC, chaning `uTokensInCirculation` value
+* by transferring uTokens to another chain via IBC, chaning `uTokensInCirculation` value
 
-The first "attack" could be pulled of by sending [`MsgSend`](https://docs.cosmos.network/main/modules/bank/03_messages.html#msgsend)) message. However, it would be not profitable (probably), as executing it would irreversibly decrease attacker's resources.
+The first "attack" could be pulled of by sending [`MsgSend`](https://docs.cosmos.network/main/modules/bank/03_messages.html#msgsend)) message. However, it would be not profitable (probably), as executing it would irreversibly decrease an attacker's resources.
 
-The second one works because the IBC module [burns transfered coins in the source chain](https://github.com/cosmos/ibc-go/blob/48a6ae512b4ea42c29fdf6c6f5363f50645591a2/modules/apps/transfer/keeper/relay.go#L135-L136) and mints corresponding tokens in the destination chain. Therefore, it will decrease the supply reported by the `x/bank` module, increasing the exchange rate. After the attack the malicious user can just transfer back uTokens.
+The second one works because the IBC module [burns transferred coins in the source chain](https://github.com/cosmos/ibc-go/blob/48a6ae512b4ea42c29fdf6c6f5363f50645591a2/modules/apps/transfer/keeper/relay.go#L135-L136) and mints corresponding tokens in the destination chain. Therefore, it will decrease the supply reported by the `x/bank` module, increasing the exchange rate. After the attack the malicious user can just transfer back uTokens.
 
 
 ## Mitigations
 
 - Use [`Blocklist` to prevent unexpected token transfers](https://docs.cosmos.network/v0.45/modules/bank/02_keepers.html#blocklisting-addresses) to specific addresses
 - Use [`SendEnabled` parameter to prevent unexpected transfers](https://docs.cosmos.network/v0.45/modules/bank/05_params.html#parameters) of specific tokens (denominations)
-- Ensure that the blocklist is explicitely checked [whenever a new functionality allowing for tokens transfers is implemented](https://github.com/cosmos/cosmos-sdk/issues/8463#issuecomment-801046285)
+- Ensure that the blocklist is explicitly checked [whenever a new functionality allowing for tokens transfers is implemented](https://github.com/cosmos/cosmos-sdk/issues/8463#issuecomment-801046285)
 
 ## External examples
 

@@ -1,6 +1,6 @@
 # Unregistered message handler
 
-In the legacy version of the [Msg Service](https://docs.cosmos.network/v0.44/building-modules/msg-services.html#implementation), all messages have to be registered in a module keeper's `NewHandler` method. Failing to do so would prevent users from sending the not-registerd message.
+In the legacy version of the [Msg Service](https://docs.cosmos.network/v0.44/building-modules/msg-services.html#implementation), all messages have to be registered in a module keeper's `NewHandler` method. Failing to do so would prevent users from sending the not-registered message.
 
 In [the recent Cosmos version manual registration is no longer needed](https://docs.cosmos.network/v0.44/architecture/adr-031-msg-service.html#pros).
 
@@ -178,4 +178,4 @@ And it is the `CancelCall` msg.
 - Deploy static-analysis tests in CI pipeline for all manually maintained code that must be repeated in multiple files/methods
 
 ## External examples
-- The bug occured in the [Gravity Bridge](https://github.com/code-423n4/2021-08-gravitybridge-findings/issues/64). It was impossible to send an evidence of malicious behaviour, which impacted Gravity Bridge's security model.
+- The bug occured in the [Gravity Bridge](https://github.com/code-423n4/2021-08-gravitybridge-findings/issues/64). It was impossible to send evidence of malicious behavior, which impacted Gravity Bridge's security model.
