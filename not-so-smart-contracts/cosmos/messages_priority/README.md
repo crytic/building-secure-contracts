@@ -53,7 +53,9 @@ Once a bug in pool's implementation is discovered, attackers and the pool's oper
 
 ## Mitigations
 
-- [Use `CheckTx`'s `priority` return value](https://github.com/tendermint/spec/blob/v0.7.1/spec/abci/abci.md#checktx-1) to prioritize messages. Please note that this feature has a transaction (not a message) granularity - users can send multiple messages in a single transactions, and it is the tx that will have to be prioritized.
+- [Use `CheckTx`'s `priority` return value](https://github.com/tendermint/spec/blob/v0.7.1/spec/abci/abci.md#checktx-1) to prioritize messages. Please note that this feature has a transaction (not a message) granularity - users can send multiple messages in a single transaction, and it is the transaction that will have to be prioritized.
+- Perform authorization for prioritized transactions as early as possible. That is, during the `CheckTx` phase. This will prevent attackers from filling whole blocks with invalid, but prioritized transactions. In other words, implement a mechanism that will prevent validators from accepting not-authorized, prioritized messages into a mempool.
+- Alternatively, charge a high fee for prioritized transactions to disincentivize attackers.
 
 ## External examples
 - [Terra Money's oracle messages were not prioritized](https://cryptorisks.substack.com/p/ust-december-2021) (search for "priority"). It was [fixed with modifications to Tendermint](https://github.com/terra-money/tendermint/commit/6805b4866bdbd6933000eb0e761acbf15edd8ed6).
