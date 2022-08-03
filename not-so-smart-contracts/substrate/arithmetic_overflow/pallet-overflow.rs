@@ -17,7 +17,7 @@ pub mod pallet {
 	#[pallet::generate_store(pub(super) trait Store)]
 	pub struct Pallet<T>(_);
 
-	// Total supply of tokens
+	// DEFAULT total supply of tokens
 	#[pallet::type_value]
 	pub(super) fn TotalSupplyDefaultValue<T: Config>() -> u64 {
 		1000
