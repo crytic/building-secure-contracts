@@ -98,7 +98,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Run Echidna
-      uses: crytic/echidna-action@dev-add-echidna-version
+      uses: crytic/echidna-action@dev-test-new-docker
       id: echidna
       continue-on-error: true
       with:
