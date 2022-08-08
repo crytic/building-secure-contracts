@@ -47,7 +47,7 @@ pub mod pallet {
 		/// Parameters:
 		/// - `useful_amounts`: A vector of u64 values in which there is a important value.
 		///
-		/// Emits `DidWork` event when successful.
+		/// Emits `FoundVal` event when successful.
 		#[pallet::weight(10_000)]
 		pub fn find_important_value(
 			origin: OriginFor<T>,
