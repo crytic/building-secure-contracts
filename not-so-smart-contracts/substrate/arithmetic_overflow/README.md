@@ -1,1 +1,44 @@
-There is an overflow/underflow issue for the `updated_from_balance` and `updated_to_balance`.
+# Arithmetic overflow
+
+Arithmetic overflow in Substrate occurs when arithmetic operations are performed using primitive operations instead of specialized functions that check for overflow. When a Substrate node is compiled in `debug` mode, integer overflows will cause the program to panic. However, when the node is compiled in `release` mode (e.g. `cargo build --release`), Substrate will perform two's complement wrapping. A production-ready node will be compiled in `release` mode, which makes it vulnerable to arithmetic overflow.
+
+# Example
+In the [`pallet-overflow`](./pallet-overflow.rs) pallet, notice that the `transfer` function sets `update_sender` and `update_to` using primitive arithmetic operations.
+ 
+ ```rust
+    /// Allow minting account to transfer a given balance to another account.
+    ///
+    /// Parameters:
+    /// - `to`: The account to receive the transfer.
+    /// - `amount`: The amount of balance to transfer.
+    ///
+    /// Emits `Transferred` event when successful.
+    #[pallet::weight(10_000)]
+    pub fn transfer(
+        origin: OriginFor<T>,
+        to: T::AccountId,
+        amount: u64,
+    ) -> DispatchResultWithPostInfo {
+        let sender = ensure_signed(origin)?;
+        let sender_balance = Self::get_balance(&sender);
+        let receiver_balance = Self::get_balance(&to);
+
+        // Calculate new balances.
+        let update_sender = sender_balance - amount;
+        let update_to = receiver_balance + amount;
+        [...]
+    }
+```
+
+The sender of the extrinsic can exploit this vulnerability by causing `update_sender` to underflow and artificially inflating their balance. 
+
+**Note**: This toy example has additional issues like the fact that that there is no check whether the `sender` has enough tokens to transfer `amount`. However, for the sake of simplicity, this example is sufficient. 
+
+# Mitigations
+- Use `checked` or `saturating` functions for arithmetic operations that should not overflow.
+    - [`CheckedAdd` trait](https://docs.rs/num/0.4.0/num/traits/trait.CheckedAdd.html)
+    - [`Saturating` trait](https://docs.rs/num/0.4.0/num/traits/trait.Saturating.html)
+
+# References
+- https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow
+- https://docs.substrate.io/reference/how-to-guides/basics/use-helper-functions/
