@@ -34,9 +34,9 @@ fn validate_unsigned(_source: TransactionSource, call: &Self::Call) -> Transacti
 }
 ```
 
-However, notice that there is nothing preventing an attacker from sending malicious price data. Both `block_number` and `price` can be set to arbitrary values. For `block_number`, it would be valuable to ensure that it is not a block number in the future; only price data for the current (or the past few blocks) can be submitted. Additionally, medianization can be used to ensure that the reported price is not severely affected by outliers. Finally, unsigned submissions can be throttled by enforcing a delay after each submission.
+However, notice that there is nothing preventing an attacker from sending malicious price data. Both `block_number` and `price` can be set to arbitrary values. For `block_number`, it would be valuable to ensure that it is not a block number in the future; only price data for the current block can be submitted. Additionally, medianization can be used to ensure that the reported price is not severely affected by outliers. Finally, unsigned submissions can be throttled by enforcing a delay after each submission.
 
-Note that the simplest solution would be to sign the offchain submissions so that the runtime can validate that a known OCW is sending the price submission transaction.
+Note that the simplest solution would be to sign the offchain submissions so that the runtime can validate that a known OCW is sending the price submission transactions.
 
 # Mitigations
 - Consider whether unsigned transactions is a requirement for the runtime that is being built. OCWs can also submit signed transactions or transactions with signed payloads.

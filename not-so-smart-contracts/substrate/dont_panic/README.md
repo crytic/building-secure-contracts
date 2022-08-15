@@ -3,7 +3,7 @@
 Panics occur when the node enters a state that it cannot handle and stops the program / process instead of trying to proceed. Panics can occur for a large variety of reasons such as out-of-bounds array access, incorrect data validation, type conversions, and much more. A well-designed Substrate node must NEVER panic! If a node panics, it opens up the possibility for a denial-of-service (DoS) attack.
 
 # Example
-In the [`pallet-dont-panic`](./pallet-overflow.rs) pallet, the `find_important_value` dispatchable checks to see if `useful_amounts[0]` is greater than `1_000`. If so, it sets the `ImportantVal` `StorageValue` to the value held in `useful_amounts[0]`. 
+In the [`pallet-dont-panic`](./pallet-dont-panic.rs) pallet, the `find_important_value` dispatchable checks to see if `useful_amounts[0]` is greater than `1_000`. If so, it sets the `ImportantVal` `StorageValue` to the value held in `useful_amounts[0]`. 
 
 ```rust
     /// Do some work

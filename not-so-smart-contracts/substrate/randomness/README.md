@@ -1,6 +1,6 @@
 # Bad Randomness
 
-To use randomness in a Substrate pallet, all you need to do is require a source of randomness in the `Config` trait of a pallet. This source of Randomness must implement the [`Randomness`](https://paritytech.github.io/substrate/master/frame_support/traits/trait.Randomness.html) trait. The trait provides two methods for gaining randomness.
+To use randomness in a Substrate pallet, all you need to do is require a source of randomness in the `Config` trait of a pallet. This source of Randomness must implement the [`Randomness`](https://paritytech.github.io/substrate/master/frame_support/traits/trait.Randomness.html) trait. The trait provides two methods for obtaining randomness.
 1. `random_seed`: This function takes no arguments and returns back a random value. Calling this value multiple times in a block will result in the same value.
 2. `random`: Takes in a byte-array (a.k.a "context-identifier") and returns a value that is as independent as possible from other contexts. 
 

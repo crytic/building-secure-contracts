@@ -1,6 +1,6 @@
 # Weights and Fees
 
-Weights and transaction fees are the two main ways to regulate the consumption of blockchain resources. The overuse of blockchain resources can allow a malicious actor to spam the network to cause a denial-of-service (DoS). Weights are used to manage the time it takes to validate the block. The higher the weight, the more "resources" / time the computation takes. Transaction fees provide an economic incentive to limit the number of resources used to perform operations; the fee for a given transaction is a function of the weight required by the transaction. 
+Weights and transaction fees are the two main ways to regulate the consumption of blockchain resources. The overuse of blockchain resources can allow a malicious actor to spam the network to cause a denial-of-service (DoS). Weights are used to manage the time it takes to validate the block. The larger the weight, the more "resources" / time the computation takes. Transaction fees provide an economic incentive to limit the number of resources used to perform operations; the fee for a given transaction is a function of the weight required by the transaction. 
 
 Weights can be fixed or a custom "weight annotation / function" can be implemented. A weight function can calculate the weight, for example, based on the number of database read / writes and the size of the input paramaters (e.g. a long `Vec<>`). To optimize the weight such that users do not pay too little or too much for a transaction, benchmarking can be used to empirically determine the correct weight in worst case scenarios.
 
@@ -35,8 +35,7 @@ In the example above, if the length of `amounts` (i.e. `useful_amounts`) is zero
 
 On the other hand, if an attacker sends a `useful_amounts` vector that is incredibly large, the returned `Weight` can become large enough such that the dispatchable takes up a large amount block execution time and prevents other transactions from being fit into the block. A fix for this would be to bound the maximum allowable length for `useful_amounts`. 
 
-**Note**: Custom fee functions can also be created. These functions should also be carefully evaluated and tested to ensure that the risk of DoS attacks is mitigated.
-
+**Note**: Custom _fee_ functions can also be created. These functions should also be carefully evaluated and tested to ensure that the risk of DoS attacks is mitigated.
 # Mitigations
 - Use [benchmarking](https://docs.substrate.io/main-docs/test/benchmark/) to empirically test the computational resources utilized by various dispatchable functions. Additionally, use benchmarking to define a lower and upper weight bound for each dispatchable. 
 - Create bounds for input arguments to prevent a transaction from taking up too many computational resources. For example, if a `Vec<>` is being taken as an input argument to a function, prevent the length of the `Vec<>` from being too large.
