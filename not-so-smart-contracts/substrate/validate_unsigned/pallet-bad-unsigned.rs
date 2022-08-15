@@ -8,7 +8,6 @@ use frame_system::{
 use sp_runtime::{
 	transaction_validity::{InvalidTransaction, TransactionValidity, ValidTransaction},
 };
-const UNSIGNED_TXS_PRIORITY: u64 = 110;
 
 pub use pallet::*;
 
