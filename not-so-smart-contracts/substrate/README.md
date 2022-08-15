@@ -22,6 +22,7 @@ Each _Not So Smart Pallet_ includes a standard set of information:
 | [Verify first](./verify_first/README.md) | Verify first, write last |
 | [Unsigned transaction validation](./validate_unsigned/README.md) | Insufficient validation of unsigned transactions |
 | [Bad randomness](./randomness/README.md) | Unsafe sources of randomness in Substrate |
+| [Bad origin](./origins/README.md) | Incorrect use of call origin can lead to bypassing access controls |
 
 ## Credits
 
