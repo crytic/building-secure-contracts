@@ -1,3 +1,5 @@
+/// Source: https://github.com/paritytech/substrate/blob/e8a7d161f39db70cb27fdad6c6e215cf493ebc3b/frame/examples/offchain-worker/src/lib.rs
+/// This example was re-purposed from the above source
 #![cfg_attr(not(feature = "std"), no_std)]
 
 use frame_support::traits::Get;
