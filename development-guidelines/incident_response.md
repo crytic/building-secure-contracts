@@ -22,9 +22,9 @@ Here, we provide recommendations around the formulation of an incident response 
 
 ## Incident Response Plan Resources 
 
-- [ ] [How to Hack the Yield Protocol](https://docs.yieldprotocol.com/#/operations/how_to_hack)
-- [ ] [Emergency Steps – Yearn](https://github.com/yearn/yearn-devdocs/blob/master/docs/developers/v2/EMERGENCY.md)
+- [How to Hack the Yield Protocol](https://docs.yieldprotocol.com/#/operations/how_to_hack)
+- [Emergency Steps – Yearn](https://github.com/yearn/yearn-devdocs/blob/master/docs/developers/v2/EMERGENCY.md)
 
 ## Well-handled IR Incidents 
 
-- [ ] [Yield Protocol](https://medium.com/yield-protocol/post-mortem-of-incident-on-august-5th-2022-7bb70dbb9ada)
+- [Yield Protocol](https://medium.com/yield-protocol/post-mortem-of-incident-on-august-5th-2022-7bb70dbb9ada)
