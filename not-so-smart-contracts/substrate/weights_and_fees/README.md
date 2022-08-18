@@ -4,6 +4,8 @@ Weights and transaction fees are the two main ways to regulate the consumption o
 
 Weights can be fixed or a custom "weight annotation / function" can be implemented. A weight function can calculate the weight, for example, based on the number of database read / writes and the size of the input paramaters (e.g. a long `Vec<>`). To optimize the weight such that users do not pay too little or too much for a transaction, benchmarking can be used to empirically determine the correct weight in worst case scenarios.
 
+Specifying the correct weight function and benchmarking it is crucial to protect the Substrate node from denial-of-service (DoS) attacks. Since fees are a function of weight, a bad weight function implies incorrect fees. For example, if some function performs heavy computation (which takes a lot of time) but specifies a very small weight, it is cheap to call that function. In this way an attacker can perform a low-cost attack while still stealing a large amount of block execution time. This will prevent regular transactions from being fit into those blocks. 
+
 # Example
 In the [`pallet-bad-weights`](./pallet-bad-weights.rs) pallet, a custom weight function, `MyWeightFunction`, is used to calculate the weight for a call to `do_work`. The weight required for a call to `do_work` is `10_000_000` times the length of the `useful_amounts` vector. 
 
@@ -23,7 +25,7 @@ One potential fix for this is to set a fixed weight if the length of `useful_amo
 impl WeighData<(&Vec<u64>,)> for MyWeightFunction {
     fn weigh_data(&self, (amounts,): (&Vec<u64>,)) -> Weight {
         if amounts.len() > 0 {
-            self.0.saturating_mul(amounts.len() as u64).into()
+            self.0 + self.0.saturating_mul(amounts.len() as u64).into()
         } else {
             self.0
         }
