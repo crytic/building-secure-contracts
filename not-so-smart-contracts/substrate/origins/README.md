@@ -1,6 +1,8 @@
 # Origins
 
-The origin of a call tells a dispatchable function where the call has come from. There are three types of origins that can used in the runtime:
+The origin of a call tells a dispatchable function where the call has come from. Origins are a way to implement access controls in the system. 
+
+There are three types of origins that can used in the runtime:
 
 ```rust
 pub enum RawOrigin<AccountId> {
@@ -10,7 +12,9 @@ pub enum RawOrigin<AccountId> {
 }
 ```
 
-Outside of the out-of-box origins, custom origins can also be created that are catered to a specific runtime. The primary use case for custom origins is to configure privileged access to dispatch calls in the runtime, outside of `RawOrigin::Root`.  
+Outside of the out-of-box origins, custom origins can also be created that are catered to a specific runtime. The primary use case for custom origins is to configure privileged access to dispatch calls in the runtime, outside of `RawOrigin::Root`. 
+
+Using privileged origins, like `RawOrigin::Root` or custom origins, can lead to access control violations if not used correctly. It is a common error to use `ensure_signed` in place of `ensure_root` which would allow any user to bypass the access control placed by using `ensure_root`.
 
 # Example
 In the [`pallet-bad-origin`](./pallet-bad-origin.rs) pallet, there is a `set_important_val` function that should be only callable by the `ForceOrigin` _custom_ origin type. This custom origin allows the pallet to specify that only a specific account can call `set_important_val`.
@@ -43,11 +47,10 @@ T::ForceOrigin::ensure_origin(origin.clone())?;
 let sender = ensure_signed(origin)?;
 ```
 
-
-
 # Mitigations
 - Ensure that the correct access controls are placed on privileged functions.
-- A thorough suite of unit tests should be implemented.
+- Develop user documentation on all risks associated with the system, including those associated with privileged users.
+- A thorough suite of unit tests that validates access controls is crucial.
 
 # References
 - https://docs.substrate.io/main-docs/build/origins/
