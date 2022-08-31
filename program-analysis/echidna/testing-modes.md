@@ -2,6 +2,12 @@
 
 Since Echidna offers several ways to write properties, often developers or auditors are wondering which testing mode should use. We will review how each mode works, as well as their advantages or disadvantages. 
 
+**Table of contents:**
+- [Boolean properties](#boolean-properties)
+- [Assertions](#assertions)
+- [Dapptest](#dapptest)
+- [Stateless vs Stateful](#stateless-vs-stateful)
+
 ## Boolean properties
 
 By default, the "property" testing mode is used, which reports failures using a special functions called properties:
@@ -110,7 +116,7 @@ function testStake(uint256 toStake) public {
 
 `testStake` checks some invariants on staking, but also ensures that the state of the contract is properly updated (e.g only allowing a user to stake at least `MINSTAKE`). 
 
-### Dapptest
+## Dapptest
 
 Using the "dapptest" testing mode, Echidna will report violations using certain functions following how dapptool and foundry work:
 * This mode uses any function name with one or more arguments, which will trigger a failure if they revert, except in one special case. This is, if the execution reverts with the special reason “FOUNDRY::ASSUME”, then the test will pass (this emulates how [the `assume` foundry cheat code works](https://github.com/gakonst/foundry/commit/7dcce93a38345f261d92297abf11fafd6a9e7a35#diff-47207bb2f6cf3c4ac054647e851a98a57286fb9bb37321200f91637262d3eabfR90-R96)). This pseudo-code summarizes how dapptests work:

@@ -7,6 +7,12 @@ we take care to avoid breaking some important underlying assumptions of transact
 That is why it is important to have a clear view of the system to test, and how transactions are going to be simulated. There are a few classifications for the testing approach. 
 We will start by two them, internal or external:
 
+**Table of contents:**
+- [Common testing approaches](#common-testing-approaches)
+  - [Internal testing](#internal-testing)
+  - [External testing](#external-testing)
+  - [Partial testing](#partial-testing)
+
 ## Internal testing
 In this testing approach, properties are defined inside the contract to test, with complete access to the internal state of the system.
 
@@ -103,7 +109,7 @@ filterFunctions: [“MockERC20.mint(uint256,address)”]
 Finally, there is another benefit for using this approach: it will force the developer or auditor to write properties using public data. 
 If an important property cannot be defined using public data, it could be an indication that users or other contracts will NOT be able to easily interact with the system to either perform some operation or verify that the system is in a valid state.
 
-### Partial Testing
+## Partial testing
 
 Ideally, testing a smart contract system uses the complete deployed system, with the same parameters that the developers intend to use. 
 Testing with the real code, it is always preferred, even if it is slower than doing something else (but perhaps not in the case that it is extremely slow). 
