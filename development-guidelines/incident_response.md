@@ -19,3 +19,12 @@ Here, we provide recommendations around the formulation of an incident response 
 - [ ] **Combine issues and determine whether new detection and mitigation scenarios are needed.**
 - [ ] **Perform periodic dry runs of specific scenarios in the incident response plan to find gaps and opportunities for improvement and to develop muscle memory.**
   - Document the intervals at which the team should perform dry runs of the various scenarios. For scenarios that are more likely to happen, perform dry runs more regularly. Create a template to be filled in after a dry run to describe the improvements that need to be made to the incident response.  
+
+## Incident Response Plan Resources 
+
+- [How to Hack the Yield Protocol](https://docs.yieldprotocol.com/#/operations/how_to_hack)
+- [Emergency Steps – Yearn](https://github.com/yearn/yearn-devdocs/blob/master/docs/developers/v2/EMERGENCY.md)
+
+## Well-handled IR Incidents 
+
+- [Yield Protocol](https://medium.com/yield-protocol/post-mortem-of-incident-on-august-5th-2022-7bb70dbb9ada)
