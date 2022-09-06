@@ -1,10 +1,10 @@
-# (Not So) Smart Contracts
+# (Not So) Smart Cosmos
 
-This repository contains examples of common Cosmos applications vulnerabilities, including code from real applications. Use Not So Smart Contracts to learn about Cosmos (Tendermint) vulnerabilities, as a reference when performing security reviews, and as a benchmark for security and analysis tools.
+This repository contains examples of common Cosmos applications vulnerabilities, including code from real applications. Use Not So Smart Cosmos to learn about Cosmos (Tendermint) vulnerabilities, as a reference when performing security reviews, and as a benchmark for security and analysis tools.
 
 ## Features
 
-Each _Not So Smart Contract_ includes a standard set of information:
+Each _Not So Smart Cosmos_ includes a standard set of information:
 
 * Description of the vulnerability type
 * Attack scenarios to exploit the vulnerability
