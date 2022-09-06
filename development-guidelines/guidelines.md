@@ -77,11 +77,11 @@ The architecture of your codebase should make your code easy to review. Avoid ar
 ### Testing and verification
 
 - **Write thorough unit-tests.** An extensive test suite is crucial to build high-quality software. 
-- **Write [Slither](https://github.com/crytic/slither), [Echidna](https://github.com/crytic/echidna) and [Manticore](https://github.com/trailofbits/manticore) custom checks and properties.** Automated tools will help ensure your contract is secure. Review the rest of this guide to learn how to write efficient checks and properties.
+- **Write [Slither](https://github.com/crytic/slither) and [Echidna](https://github.com/crytic/echidna) custom checks and properties.** Automated tools will help ensure your contract is secure. Review the rest of this guide to learn how to write efficient checks and properties.
 
 ### Solidity
 
-- **Favor Solidity 0.5 or 0.6.** In our opinion, Solidity 0.5 and 0.6 are more secure and have better built-in practices than 0.4. Solidity 0.7 is too young to be used in production and needs time to mature.
+- **Favor Solidity versions outlined in our [Slither Recommendations](https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity)** In our opinion, older Solidity are more secure and have better built-in practices. Newer Solidity versions may be ttoo young to be used in production and require additional time to mature.
 - **Use a stable release to compile; use the latest release to check for warnings.** Check that your code has no reported issues with the latest compiler version. However, Solidity has a fast release cycle and has a history of compiler bugs, so we do not recommend the latest version for deployment (see Slither’s [solc version recommendation](https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity)).
 - **Do not use inline assembly.** Assembly requires EVM expertise. Do not write EVM code if you have not _mastered_ the yellow paper.
 
