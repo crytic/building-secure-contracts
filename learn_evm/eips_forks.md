@@ -40,8 +40,8 @@ The following list every EIP associated to an Ethereum fork.
 | [London](https://github.com/ethereum/execution-specs/blob/a01c4c76e12fe9f0debf93bda7f67f002d77f8b4/network-upgrades/mainnet-upgrades/london.md) | [3198](https://eips.ethereum.org/EIPS/eip-3198)  | BASEFEE | X | |
 | [London](https://github.com/ethereum/execution-specs/blob/a01c4c76e12fe9f0debf93bda7f67f002d77f8b4/network-upgrades/mainnet-upgrades/london.md) | [3529](https://eips.ethereum.org/EIPS/eip-3529)  | Reduction in refunds | | X | Remove [gas tokens](https://gastoken.io/) benefits
 | [London](https://github.com/ethereum/execution-specs/blob/a01c4c76e12fe9f0debf93bda7f67f002d77f8b4/network-upgrades/mainnet-upgrades/london.md) | [3554](https://eips.ethereum.org/EIPS/eip-3554)  | Difficulty Bomb Delay to December 1st 2021 | | |
-| [Arrow Glacier](https://github.com/ethereum/execution-specs/blob/a01c4c76e12fe9f0debf93bda7f67f002d77f8b4/network-upgrades/mainnet-upgrades/arrow-glacier.md) | [4345](https://eips.ethereum.org/EIPS/eip-4345)  |  Difficulty Bomb Delay to June 2022 | | |
-
+| [Arrow Glacier](https://github.com/ethereum/execution-specs/blob/bfe84c9a9b24695f160b4686d3b4640786ee9bac/network-upgrades/mainnet-upgrades/arrow-glacier.md) | [4345](https://eips.ethereum.org/EIPS/eip-4345)  |  Difficulty Bomb Delay to June 2022 | | |
+| [Gray Glacier](https://github.com/ethereum/execution-specs/blob/bfe84c9a9b24695f160b4686d3b4640786ee9bac/network-upgrades/mainnet-upgrades/gray-glacier.md) | [5133](https://eips.ethereum.org/EIPS/eip-5133)  |  Difficulty Bomb Delay to mid-September 2022 | | |
 
 In this table:
 - `Opcode`: the EIP adds or removes an opcode
