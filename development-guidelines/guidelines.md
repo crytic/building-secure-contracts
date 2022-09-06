@@ -2,19 +2,20 @@
 
 Follow these high-level recommendations to build more secure smart contracts.
 
-* [Design (before development)](#design-guidelines)
-  * [Documentation and specifications](#documentation-and-specifications)
-  * [On-chain vs off-chain computation](#on-chain-vs-off-chain-computation)
-  * [Upgradeability](#upgradeability)
-* [Implementation (during development)](#implementation-guidelines)
-  * [Function composition](#function-composition)
-  * [Inheritance](#inheritance)
-  * [Events](#events)
-  * [Avoid known pitfalls](#avoid-known-pitfalls)
-  * [Dependencies](#dependencies)
-  * [Testing and verification](#testing-and-verification)
-  * [Solidity](#solidity)
-* [Deploymnent (after development)](#deployment-guidelines)
+- [Development Guidelines](#development-guidelines)
+  - [Design guidelines](#design-guidelines)
+    - [Documentation and specifications](#documentation-and-specifications)
+    - [On-chain vs off-chain computation](#on-chain-vs-off-chain-computation)
+    - [Upgradeability](#upgradeability)
+  - [Implementation guidelines](#implementation-guidelines)
+    - [Function composition](#function-composition)
+    - [Inheritance](#inheritance)
+    - [Events](#events)
+    - [Avoid known pitfalls](#avoid-known-pitfalls)
+    - [Dependencies](#dependencies)
+    - [Testing and verification](#testing-and-verification)
+    - [Solidity](#solidity)
+  - [Deployment guidelines](#deployment-guidelines)
 
 ## Design guidelines
 
@@ -77,7 +78,6 @@ The architecture of your codebase should make your code easy to review. Avoid ar
 
 - **Write thorough unit-tests.** An extensive test suite is crucial to build high-quality software. 
 - **Write [Slither](https://github.com/crytic/slither), [Echidna](https://github.com/crytic/echidna) and [Manticore](https://github.com/trailofbits/manticore) custom checks and properties.** Automated tools will help ensure your contract is secure. Review the rest of this guide to learn how to write efficient checks and properties.
-- **Use [crytic.io](https://crytic.io/).** Crytic integrates with Github, provides access to private Slither detectors, and runs custom property checks from Echidna.
 
 ### Solidity
 
