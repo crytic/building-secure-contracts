@@ -84,9 +84,17 @@ Another way to see where an assertion failed is using the coverage information. 
 The `e` marker indicates that Echidna collected a trace that ends with an assertion failure. As we can see, 
 the path ends in the assert, so it should fail there.
 
+## Why coverage information seems incorrect or incomplete?
+
+Coverage mappings can be imprecesie, however, if it fails completely, it could be that you are using the [`viaIR` optimization option](https://docs.soliditylang.org/en/v0.8.14/ir-breaking-changes.html?highlight=viaIR#solidity-ir-based-codegen-changes), which seems to have some unexpected impact on the solc maps that we are still investigating. As a workaround, disable `viaIR`. 
+
+## Echidna crashes showing ` NonEmpty.fromList: empty list`
+
+Echidna relies on the Solidity metadata to detect where each contract is deployed. Please do not disable it. If this is not the case, please [open an issue](https://github.com/crytic/echidna/issues) in our issue tracker.
+
 ## Echidna stopped working for some reason. How can I debug it? 
 
-Use “--format text” and open an issue with the error you see in your console or ask in the #ethereum channel at the EmpireHacking slack.
+Use `--format text` and open an issue with the error you see in your console or ask in the #ethereum channel at the EmpireHacking slack.
 
 ## I am not getting expected results from Echidna tests. What can I do? 
 
@@ -106,4 +114,4 @@ And for assertion mode:
     }
 ```
 
-If these are not failing, please open an issue so we can take a look.
+If these are not failing, please [open an issue](https://github.com/crytic/echidna/issues) so we can take a look.
