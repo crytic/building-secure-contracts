@@ -108,6 +108,7 @@ jobs:
         output-file: ${{ matrix.files }}.out
         solc-version: ${{ matrix.solc-version || '0.5.11' }}
         echidna-workdir: ${{ matrix.workdir }}
+        echidna-version: edge
     - name: Verify that the exit code is correct
       run: |
         if [[ ${{ steps.echidna.outcome }} = ${{ matrix.outcome }} ]]; then
