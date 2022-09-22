@@ -34,7 +34,7 @@ In this example, users can deposit tokens using `depositShares`, mint shares usi
 ```solidity
 contract Test {
   DeFi c;
-  ERC20 t;
+  ERC20 token;
 
   constructor() {
     c = DeFi(..);
@@ -120,7 +120,7 @@ Avoiding reverts doesn't mean that the contract is in a valid state. Let's add s
   function withdrawShares_never_reverts(uint256 val) public {
     if (c.getShares(address(this)) >= val) {
         try c.withdrawShares(val) { /* not reverted */ } catch { assert(false); }
-        assert(t.balanceOf(address(this)) > 0);
+        assert(token.balanceOf(address(this)) > 0);
     }
   }
   ...
@@ -143,7 +143,7 @@ In this generic example, it is unclear if there is a way to calculate how many s
         uint256 shares = c.getShares(address(this);
         assert(shares > 0);
         try c.withdrawShares(shares) { /* not reverted */ } catch { assert(false); }
-        assert(t.balanceOf(address(this)) == original_balance);
+        assert(token.balanceOf(address(this)) == original_balance);
     }
   }
   ...
