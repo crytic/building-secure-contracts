@@ -6,8 +6,8 @@ Follow these high-level recommendations to build more secure smart contracts.
   - [Design guidelines](#design-guidelines)
     - [Documentation and specifications](#documentation-and-specifications)
     - [On-chain vs off-chain computation](#on-chain-vs-off-chain-computation)
-    - [Delegatecall Proxy](#delegatecall-proxy)
     - [Upgradeability](#upgradeability)
+      - [Delegatecall Proxy](#delegatecall-proxy-pattern)
   - [Implementation guidelines](#implementation-guidelines)
     - [Function composition](#function-composition)
     - [Inheritance](#inheritance)
@@ -34,7 +34,18 @@ Documentation can be written at different levels, and should be updated while im
 
 - **Keep as much code as you can off-chain.** Keep the on-chain layer small. Pre-process data with code off-chain in such a way that verification on-chain is simple. Do you need an ordered list? Sort the list off-chain, then only check its order onchain.
 
-### Delegatecall Proxy
+### Upgradeability
+
+We discussed the different upgradeability solutions in [our blog post](https://blog.trailofbits.com/2018/09/05/contract-upgrade-anti-patterns/). In particular, if you are using delegatecall to achieve upgradability, carefully review all items of the above delegatecall proxy guidance. Make a deliberate choice to support upgradeability or not prior to writing any code. The decision will influence how you structure our code. In general, we recommend:
+
+- **Favoring [contract migration](https://blog.trailofbits.com/2018/10/29/how-contract-migration-works/) over upgradeability.** Migration system have many of the same advantages than upgradeable, without their drawbacks.
+- **Using the data separation pattern over the delegatecall proxy one.** If your project has a clear abstraction separation, upgradeability using data separation will necessitate only a few adjustments. The delegatecall proxy requires EVM expertise and is highly error-prone.
+- **Document the migration/upgrade procedure before the deployment.** If you have to react under stress without any guidelines, you will make mistakes. Write the procedure to follow ahead of time. It should include:
+  - The calls that initiate the new contracts
+  - Where are stored the keys and how to access them
+  - How to check the deployment! Develop and test a post-deployment script.
+
+#### Delegatecall Proxy Pattern
 
 The delegatecall opcode is a very sharp tool that must be used carefully. Many high-profile exploits utilize little-known edge cases and counter-intuitive aspects of the delegatecall proxy pattern. This section aims to outline the most important risks to keep in mind while developing such smart contract systems. Trail of Bits developed the [slither-check-upgradability](https://github.com/crytic/slither/wiki/Upgradeability-Checks) tool to aid in the development of secure delegatecall proxies, it performs safety checks relevant to both upgradable and immutable delegatecall proxies.
 
@@ -52,16 +63,6 @@ For more information regarding delegatecall proxies in general, reference our bl
 - [Breaking Aave Upgradeability](https://blog.trailofbits.com/2020/12/16/breaking-aave-upgradeability/): A write-up describing a subtle problem that we discovered in Aave `AToken` contracts that resulted from the interplay between delegatecall proxies, contact existence checks, and unsafe initialization.
 - [Contract Upgrade Risks and Recommendations](https://youtu.be/mebA5Qz9zeQ?t=353): A talk by Trail of Bits describing best-practices for developing upgradable delegatecall proxies. The section starting at 5:49 describes some general risks that also apply to non-upgradable proxies.
 
-### Upgradeability
-
-We discussed the different upgradeability solutions in [our blog post](https://blog.trailofbits.com/2018/09/05/contract-upgrade-anti-patterns/). In particular, if you are using delegatecall to achieve upgradability, carefully review all items of the above delegatecall proxy guidance. Make a deliberate choice to support upgradeability or not prior to writing any code. The decision will influence how you structure our code. In general, we recommend:
-
-- **Favoring [contract migration](https://blog.trailofbits.com/2018/10/29/how-contract-migration-works/) over upgradeability.** Migration system have many of the same advantages than upgradeable, without their drawbacks.
-- **Using the data separation pattern over the delegatecall proxy one.** If your project has a clear abstraction separation, upgradeability using data separation will necessitate only a few adjustments. The delegatecall proxy requires EVM expertise and is highly error-prone.
-- **Document the migration/upgrade procedure before the deployment.** If you have to react under stress without any guidelines, you will make mistakes. Write the procedure to follow ahead of time. It should include:
-  - The calls that initiate the new contracts
-  - Where are stored the keys and how to access them
-  - How to check the deployment! Develop and test a post-deployment script.
 
 ##  Implementation guidelines
 
