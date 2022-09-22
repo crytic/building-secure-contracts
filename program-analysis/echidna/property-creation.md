@@ -38,7 +38,7 @@ contract Test {
 
   constructor() {
     c = DeFi(..);
-    t.mint(address(this), ...);
+    token.mint(address(this), ...);
   }
   
   function getShares_never_reverts(uint256 val) public {
