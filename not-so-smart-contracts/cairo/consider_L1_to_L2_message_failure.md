@@ -1,4 +1,4 @@
-# Consider L2 to L1 message failure
+# Consider L1 to L2 message failure
 
 In Starknet, [Ethereum contracts can send messages from L1 to L2, using a bridge](https://www.cairo-lang.org/docs/hello_starknet/l1l2.html#messages-from-l1-to-l2). However, it is not guaranteed that the message will be processed by the sequencer. 
 For instance, a message can fail to be processed if there is a sudden spike in the gas price and the value provided is too low. For that reason, Starknet developers provided a 
