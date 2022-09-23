@@ -1,8 +1,16 @@
 # Access controls & account abstraction
 
-The account abstraction model used by StarkNet has some important differences from what Solidity developers might be used to. There are no EOA addresses in StarkNet, only contract addresses. Rather than interact with contracts directly, users will usually deploy a contract that authenticates them and makes further calls on the user's behalf. At its simplest, this contract checks that the transaction is signed by the expected key, but it could also represent a multisig or DAO, or have more complex logic for what kinds of transactions it will allow (e.g. deposits and withdrawals could be handled by separate contracts or it could prevent unprofitable trades).
+The account abstraction model used by StarkNet has some important differences from what Solidity developers might be used to. There are no EOA addresses in StarkNet, only contract addresses. Rather than interact with contracts directly, users will usually deploy a contract that authenticates them and makes further calls on the user's behalf. In the most simple case, this contract checks that the transaction is signed by the expected key, but it could also represent a multisig or DAO, or have more complex logic for what kinds of transactions it will allow (e.g. deposits and withdrawals could be handled by separate contracts or it could prevent unprofitable trades). Depending on the type of call, access controll should be implemented with different approaches:
 
-It is still possible to interact with contracts directly. But from the perspective of the contract, the caller's address will be 0. Since 0 is also the default value for uninitialized storage, it's possible to accidentally construct access control checks that fail open instead of properly restricting access to only the intended users.
+* If a contract is called from another L2 contract, [access control should be implemented using `get_caller_address()`](https://www.cairo-lang.org/docs/hello_starknet/user_auth.html#getting-the-caller-address).
+
+* If a contract has a function that should be called from L1 contract, [the `@l1_handler` should be used](https://starknet.io/docs/hello_starknet/l1l2.html#receiving-a-message-from-l1). This forces the first parameter of such function to be the address of the contract or EOA that performed the cross-chain call.
+
+Corner cases to consider:
+
+* It is still possible to interact with contracts directly (e.g. without using an account). From the perspective of the contract, the caller's address will be 0x0. Since 0x0 is also the default value for uninitialized storage, it's possible to accidentally construct access control checks that fail open instead of properly restricting access to only the intended users.
+
+* If a contract is called from L1, the access control should be only implemented using the caller address parameters and not `get_caller_address()` function, which will return 0x0.
 
 ## Example
 
@@ -34,6 +42,7 @@ end
 ## Mitigations
 
 - Add zero address checks. Note that this will prevent users from interacting with the contract directly.
+- Do not use `get_caller_address()` in functions that are supposed to be called from L1.
 
 ## External Examples
 
