@@ -6,7 +6,7 @@ For instance, a message can fail to be processed if there is a sudden spike in t
 
 # Example
 
-Suppose that the following code to initiate L2 deposits from L1, taking the tokens from the user
+Suppose that the following code to initiate L2 deposits from L1, taking the tokens from the user:
 
 ```solidity 
 IERC20 public constant token; //some token to deposit on L2
@@ -19,11 +19,10 @@ function depositToL2(uint256 to,  uint256 amount) public returns (bool) {
 }
 ```
 
-If the L2 message is never processed by the sequencer, users will never receive their tokens either in L1 or L2, so they need to way to cancel it.
+If a L1 message is never processed by the sequencer, users will never receive their tokens either in L1 or L2, so they need to way to cancel it.
 
 As a more real example, a recent [AAVE audit](https://github.com/aave-starknet-project/aave-starknet-bridge/pull/106#issue-1336925381) highlighed this issue and required to add code to cancel messages. 
 
 # Mitigations
 
-When sending a message from L1 to L2, consider the case where the message is never processed by the sequencer. This can block either the contract to reach certain state or users to retreive their funds. 
-Consider using `startL1ToL2MessageCancellation` and `cancelL1ToL2Message` to cancel ongoing messages. 
+When sending a message from L1 to L2, consider the case where a message is never processed by the sequencer. This can block either the contract to reach certain state or users to retreive their funds. Allow to use `startL1ToL2MessageCancellation` and `cancelL1ToL2Message` to cancel ongoing messages, if needed. 
