@@ -35,6 +35,7 @@ The second part is a set of exercises to solve.
   - [Exercise 5](./Exercise-5.md): Solving Damn Vulnerable DeFi - Unstoppable
   - [Exercise 6](./Exercise-6.md): Solving Damn Vulnerable DeFi - Naive Receiver
   - [Exercise 7](./Exercise-7.md): Solving Damn Vulnerable DeFi - Side Entrance
+
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Installation
