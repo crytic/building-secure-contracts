@@ -24,7 +24,7 @@ Contract InternalTest is System {
 }
 ```
 
-In this approach, Echidna generate will transactions from a simulated account to the target contract. This testing approach is particularly useful for simpler contracts that do not require a complex initialization and have a single entrypoint. 
+In this approach, Echidna will generate transactions from a simulated account to the target contract. This testing approach is particularly useful for simpler contracts that do not require a complex initialization and have a single entrypoint. 
 Additionally, properties can be easier to write, since properties can access the system's internal state.
  
 ## External testing
