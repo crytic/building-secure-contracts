@@ -37,7 +37,21 @@ This solution can be found in [exercises/exercise7/solution.sol](./exercises/exe
 
 <details>
 <summary>Solution Explained (spoilers ahead)</summary>
+
 The goal of the side entrance challenge is to realize that you can use the `deposit` function to repay your flashloan. With the current implementation the lender pool has no way of knowing if those funds are from borrowed funds or "normal" funds.
+
+Example Echidna output:
+```
+$ echidna-test . --contract E2E --config config.yaml
+...
+testPoolBalance(): failed!💥
+  Call sequence, shrinking (3003/5000):
+    setEnableDeposit(true,208)
+    flashLoan(1)
+    withdraw()
+    testPoolBalance()
+...
+```
 </details>
 
 
