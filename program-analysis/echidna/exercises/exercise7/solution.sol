@@ -9,9 +9,9 @@ contract E2E is IFlashLoanEtherReceiver {
 
     uint256 initialPoolBalance;
 
-    bool action0_enabled;
-    bool action1_enabled;
-    uint256 action1_amount;
+    bool enableWithdraw;
+    bool enableDeposit;
+    uint256 depositAmount;
 
     constructor() payable {
         pool = SideEntranceLenderPool(ADDRESS_POOL);
@@ -20,21 +20,21 @@ contract E2E is IFlashLoanEtherReceiver {
 
     receive() external payable {}
 
-    function setTestAction0(bool _enabled) public {
-        action0_enabled = _enabled;
+    function setEnableWithdraw(bool _enabled) public {
+        enableWithdraw = _enabled;
     }
 
-    function setTestAction1(bool _enabled, uint256 _amount) public {
-        action1_enabled = _enabled;
-        action1_amount = _amount;
+    function setEnableDeposit(bool _enabled, uint256 _amount) public {
+        enableDeposit = _enabled;
+        depositAmount = _amount;
     }
 
     function execute() external payable override {
-        if (action0_enabled) {
+        if (enableWithdraw) {
             pool.withdraw();
         }
-        if (action1_enabled) {
-            pool.deposit{value: action1_amount}();
+        if (enableDeposit) {
+            pool.deposit{value: depositAmount}();
         }
     }
 
