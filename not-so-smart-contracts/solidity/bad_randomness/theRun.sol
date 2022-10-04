@@ -53,43 +53,43 @@ contract TheRun {
 
     //------- Core of the game----------
     function participate(uint deposit) private {
-            //calculate the multiplier to apply to the future payout
+        //calculate the multiplier to apply to the future payout
 
-            uint totalMultiplier = minMultiplier; //initiate totalMultiplier
-            if (balance < 1 ether && players.length > 1) {
-                totalMultiplier += 100; // + 10 %
-            }
-            if ((players.length % 10) == 0 && players.length > 1) { //Every 10th participant gets a 10% bonus
-                totalMultiplier += 100; // + 10 %
-            }
+        uint totalMultiplier = minMultiplier; //initiate totalMultiplier
+        if (balance < 1 ether && players.length > 1) {
+            totalMultiplier += 100; // + 10 %
+        }
+        if ((players.length % 10) == 0 && players.length > 1) { //Every 10th participant gets a 10% bonus
+            totalMultiplier += 100; // + 10 %
+        }
 
-            //add new player in the queue !
-            players.push(Player(msg.sender, (deposit * totalMultiplier) / 1000, false));
+        //add new player in the queue !
+        players.push(Player(msg.sender, (deposit * totalMultiplier) / 1000, false));
 
-            //--- UPDATING CONTRACT STATS ----
-            winningPot += (deposit * potFrac) / 1000; // take some 3% to add for the winning pot !
-            fees += (deposit * feeFrac) / 1000; // collect maintenance fees 2%
-            balance += (deposit * (1000 - ( feeFrac + potFrac ))) / 1000; // update balance
+        //--- UPDATING CONTRACT STATS ----
+        winningPot += (deposit * potFrac) / 1000; // take some 3% to add for the winning pot !
+        fees += (deposit * feeFrac) / 1000; // collect maintenance fees 2%
+        balance += (deposit * (1000 - ( feeFrac + potFrac ))) / 1000; // update balance
 
-            //Classic payout for the participants
-            while (balance > players[payoutId].payout) {
-                lastPayout = players[payoutId].payout;
-                balance -= players[payoutId].payout; // update the balance
-                players[payoutId].paid=true;
-                players[payoutId].addr.transfer(lastPayout); // pay the man
+        //Classic payout for the participants
+        while (balance > players[payoutId].payout) {
+            lastPayout = players[payoutId].payout;
+            balance -= players[payoutId].payout; // update the balance
+            players[payoutId].paid=true;
+            players[payoutId].addr.transfer(lastPayout); // pay the man
+            // solhint-disable-next-line reentrancy
+            payoutId += 1;
+        }
+
+        // Winning the Pot :) Condition : paying at least 1 people with deposit > 2 ether and having luck !
+        if (( deposit > 1 ether ) && (deposit > players[payoutId].payout)) {
+            uint roll = random(100); // take a random number between 1 & 100
+            if (roll % 10 == 0 ) { // if lucky : Chances : 1 out of 10 !
                 // solhint-disable-next-line reentrancy
-                payoutId += 1;
+                winningPot = 0;
+                msg.sender.transfer(winningPot); // Bravo !
             }
-
-            // Winning the Pot :) Condition : paying at least 1 people with deposit > 2 ether and having luck !
-            if (( deposit > 1 ether ) && (deposit > players[payoutId].payout)) {
-                uint roll = random(100); // take a random number between 1 & 100
-                if (roll % 10 == 0 ) { // if lucky : Chances : 1 out of 10 !
-                    // solhint-disable-next-line reentrancy
-                    winningPot = 0;
-                    msg.sender.transfer(winningPot); // Bravo !
-                }
-            }
+        }
 
     }
 
@@ -132,35 +132,35 @@ contract TheRun {
 
     //---Contract informations
     function nextPayout() external constant returns(uint next) {
-      next = players[payoutId].payout /  1 wei;
+        next = players[payoutId].payout /  1 wei;
     }
 
     function watchFees() external constant returns(uint collectedFees) {
-      collectedFees = fees / 1 wei;
+        collectedFees = fees / 1 wei;
     }
 
     function watchWinningPot() external constant returns(uint winningPot) {
-      winningPot = winningPot / 1 wei;
+        winningPot = winningPot / 1 wei;
     }
 
     function watchLastPayout() external constant returns(uint payout) {
-      payout = lastPayout;
+        payout = lastPayout;
     }
 
     function totalOfPlayers() external constant returns(uint numberOfPlayers) {
-      numberOfPlayers = players.length;
+        numberOfPlayers = players.length;
     }
 
     function playerInfo(uint id) external constant returns(address player, uint payout, bool userPaid) {
-      if (id <= players.length) {
-          player = players[id].addr;
-          payout = players[id].payout / 1 wei;
-          userPaid=players[id].paid;
-      }
+        if (id <= players.length) {
+            player = players[id].addr;
+            payout = players[id].payout / 1 wei;
+            userPaid=players[id].paid;
+        }
     }
 
     function payoutQueueSize() external constant returns(uint queueSize) {
-      queueSize = players.length - payoutId;
+        queueSize = players.length - payoutId;
     }
 
 }

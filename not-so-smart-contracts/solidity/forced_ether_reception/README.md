@@ -14,15 +14,16 @@ contract Sender {
 }
 ```
 
+Alternatively, if a miner sets some contract as the block's `coinbase` then it's ether balance will be increased without executing any `fallback()` or `receive()` code that might be present.
+
 ## Example
 
-- The MyAdvancedToken contract in [coin.sol](coin.sol#L145) is vulnerable to this attack. It will stop the owner to perform the migration of the contract.
+- The MyAdvancedToken contract in [coin.sol](coin.sol#L145) is vulnerable to this attack. The owner will not be able to perform a migration of the contract if it receives ether outside of a call to `buy()`.
 
 ## Mitigations
 
-There is no way to block the reception of ether. The only mitigation is to avoid assuming how the balance of the contract
-increases and implement checks to handle this type of edge cases.
+There is no way to completely block the reception of ether. The only mitigation is to avoid assuming how the balance of the contract increases and implement checks to handle this type of edge cases.
 
 ## References
 
-- https://solidity.readthedocs.io/en/develop/security-considerations.html#sending-and-receiving-ether
+- [Solidity docs re sending & receiving ether](https://solidity.readthedocs.io/en/develop/security-considerations.html#sending-and-receiving-ether)
