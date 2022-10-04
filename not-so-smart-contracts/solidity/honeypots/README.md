@@ -10,14 +10,12 @@ Versions of the most recent compilers will emit warnings of most of these traps 
 
 Etherscan typically shows two transactions for a `GiftBox`-style honeypot. The first transaction is the contract creation, and the second is a call to a `setPassword` function that appears to set a "secret" `password` value. The secret can, of course, be easily observed on the blockchain, so the victim is tricked into submitting Ether with the correct value.
 
-[Beware Of Eth Gifting Contracts Etherscan](https://www.blockchainsemantics.com/blog/beware-of-eth-gifting-contracts-etherscan/)
-
 <details>
   <summary>Trap Spoiler</summary>
   Unbeknownst to the victim, the contract owner has already changed the stored hash of the secret, using an internal transaction with 0 value. Etherscan does not clearly display these 0 value internal transactions. The GiftBox owner might also be monitoring the mempool & would be prepared to front-run any withdrawals that submit the correct password;
 </details>
 
-## [King of the Hill](KOTH.sol)
+## [King of the Hill](KingOfTheKill.sol)
 
 At first glance this contract appears to be your average King of the Hill ponzi scheme. Participants contribute ether to the contract via the `stake()` function that keeps track of the latest `owner` and ether deposit that allowed them to become to the current owner. The `withdraw()` function employs an `onlyOwner` modifier, seemingly allowing only the last person recently throned the ability to transfer all funds out of the contract. Stumbling upon this contract on etherscan and seeing an existing balance, one might think that there is a chance to gain some easy ether by taking advantage of a quick `stake()` claim and subsequent `withdraw()`.
 

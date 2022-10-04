@@ -1,6 +1,6 @@
 pragma solidity ^0.8.17;
 
-contract NewYearsGift {
+contract GiftBox {
     string private message;
     bool public passHasBeenSet = false;
     address public sender;

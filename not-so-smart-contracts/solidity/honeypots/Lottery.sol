@@ -1,3 +1,5 @@
+pragma solidity ^0.4.26;
+
 /*
  * This is a distributed lottery that chooses random addresses as lucky addresses. If these
  * participate, they get the jackpot: 7 times the price of their bet.

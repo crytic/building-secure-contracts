@@ -17,7 +17,7 @@ contract Ownable {
 // CEO Throne .. The CEO with the highest stake gets the control over the contract
 // msg.value needs to be higher than largestStake when calling stake()
 
-contract CEOThrone is Ownable {
+contract KingOfTheKill is Ownable {
     address public owner;
     uint public largestStake;
 

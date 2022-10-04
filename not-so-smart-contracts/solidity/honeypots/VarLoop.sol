@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.26;
 
 contract Test1 {
     address public owner = msg.sender;
