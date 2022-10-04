@@ -1,16 +1,16 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.7.6;
 
 contract Overflow {
     uint private sellerBalance=0;
 
-    function add(uint value) returns (bool){
+    function unsafeAdd(uint value) public returns (bool){
         sellerBalance += value; // possible overflow
         // the following assertion will revert if the above overflows
         // assert(sellerBalance >= value);
     }
 
-    function safe_add(uint value) returns (bool){
-        require(value + sellerBalance >= sellerBalance);
+    function safeAdd(uint value) public returns (bool){
+        require(value + sellerBalance >= sellerBalance, "Overflow");
         sellerBalance += value;
     }
 }
