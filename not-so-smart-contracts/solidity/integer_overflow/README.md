@@ -1,6 +1,6 @@
 # Integer Overflow
 
-It is possible to cause `add` and `sub` to overflow (or underflow) on any type of integer in Solidity.  
+It is possible to cause `+` and `-` to overflow (or underflow) on any type of integer in Solidity versions <0.8.0 or within `unchecked` blocks of solidity >=0.8.0
 
 ## Attack Scenarios
 
@@ -12,13 +12,14 @@ the array and alter other variables in the contract.
 
 ## Mitigations
 
-- Use openZeppelin's [safeMath library](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol)
-- Validate all arithmetic
+- Use solidity >=0.8.0 and use `unchecked` blocks carefully and only where required.
+- If using solidity <0.8.0, use OpenZeppelin's [SafeMath library](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol) for arithmetic.
+- Validate all arithmetic with both manual review and property-based fuzz testing.
 
 ## Examples
 
 - In [integer_overflow_1](interger_overflow_1.sol), we give both unsafe and safe version of
 the `add` operation.
 
-- [A submission](https://github.com/Arachnid/uscc/tree/master/submissions-2017/doughoyte) to the Underhanded Solidity Coding Contest that explots the unsafe dynamic array bug outlined above
+- [A submission](https://github.com/Arachnid/uscc/tree/master/submissions-2017/doughoyte) to the Underhanded Solidity Coding Contest that exploits the unsafe dynamic array bug outlined above
 
