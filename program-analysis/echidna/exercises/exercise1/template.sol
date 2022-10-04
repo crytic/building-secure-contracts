@@ -1,17 +1,12 @@
 import "token.sol";
 
 contract TestToken is Token {
+    address echidna_caller = msg.sender;
 
-    constructor() public{
-        paused();
-        owner = address(0x0); // lose ownership
+    constructor() public {
+        balances[echidna_caller] = 10000;
     }
 
     // add the property
-
-    function echidna_no_transfer() public view returns(bool){
-        return is_paused == true;
-    }
-
-
+    function echidna_test_balance() public view returns (bool) {}
 }

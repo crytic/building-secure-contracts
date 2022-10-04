@@ -1,0 +1,7 @@
+# The deployer and sender must be the same for this example.
+# The deployer is the 'attacker' and is sent INITIAL_ATTACKER_BALANCE
+deployer: '0x30000'
+# Sender must be the same so that it can use the attacker balance to try to break the invariant. 
+sender: ['0x30000']
+# Allow for multi-abi use
+multi-abi: true

@@ -10,7 +10,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
   
-We will test the following contract *[exercises/token.sol](exercises/token.sol)*:
+We will test the following contract *[exercises/exercise1/token.sol](exercises/exercise1/token.sol)*:
 
 ```Solidity
  contract Ownership{
@@ -50,24 +50,25 @@ We will test the following contract *[exercises/token.sol](exercises/token.sol)*
 
 ```
 
-## Testing token's balance
+## Testing a token balance
 
 ### Goals
 
 - Add a property to check that `echidna_caller` cannot have more than an initial balance of 10000.
-- Once Echidna found the bug, fix the issue, and re-try your property with Echidna.
+- Once Echidna finds the bug, fix the issue, and re-check your property with Echidna.
 
-The skeleton for this exercise is (*[exercises/exercise1/exercise1.sol](./exercises/exercise1/exercise1.sol)*):
+The skeleton for this exercise is (*[exercises/exercise1/template.sol](./exercises/exercise1/template.sol)*):
 
 ```Solidity
      import "token.sol";
      contract TestToken is Token {
-       address echidna_caller = 0x00a329c0648769a73afac7f9381e08fb43dbea70;
+       address echidna_caller = msg.sender;
 
         constructor() public{
             balances[echidna_caller] = 10000;
          }
          // add the property
+        function echidna_test_balance() public view returns (bool) {}
       }
  ```
 

@@ -4,7 +4,7 @@ contract Ownership{
 
     address owner = msg.sender;
 
-    constructor() public{
+    function Owner() public{
         owner = msg.sender;
     }
 
