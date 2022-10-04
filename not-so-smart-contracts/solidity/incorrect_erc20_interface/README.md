@@ -1,4 +1,4 @@
-## Incorrect erc20 interface
+## Incorrect ERC20 interface
 
 ### Description
 Incorrect return values for ERC20 functions. A contract compiled with solidity > 0.4.22 interacting with these functions will fail to execute them, as the return value is missing.
@@ -16,6 +16,4 @@ contract Token{
 ### Recommendation
 - Set the appropriate return values and value-types for the defined ERC20 functions.
 - Use [Slither](https://github.com/crytic/slither/) or [crytic.io](https://crytic.io/) to detect the issue
-- Use `slither-check-erc` to ensure ERC's conformance
-
-
+- Use `slither-check-erc` to ensure ERC conformance

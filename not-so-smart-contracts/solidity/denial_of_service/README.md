@@ -1,8 +1,6 @@
 # Denial of Service
 
-A malicious contract can permanently stall another contract by failing
-in a strategic way. In particular, contracts that bulk perform transactions or updates using
-a `for` loop can be DoS'd if a call to another contract or `transfer` fails during the loop. 
+A malicious contract can permanently stall another contract by failing in a strategic way. In particular, contracts that bulk perform transactions or updates using a `for` loop can be DoS'd if a call to another contract or `transfer` fails during the loop. 
 
 ## Attack Scenarios
 
@@ -19,7 +17,7 @@ might run out of gas and revert.
 
 - Both [insecure](auction.sol#L4) and [secure](auction.sol#L26) versions of the auction contract mentioned above
 
-- Bulk refund functionality that is [suceptible to DoS](list_dos.sol#L3), and a [secure](list_dos.sol#L29) version
+- Bulk refund functionality that is [susceptible to DoS](list_dos.sol#L3), and a [secure](list_dos.sol#L29) version
 
 ## Mitigations
 

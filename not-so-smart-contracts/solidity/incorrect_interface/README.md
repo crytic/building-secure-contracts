@@ -1,14 +1,14 @@
 # Incorrect interface
 A contract interface defines functions with a different type signature than the implementation, causing two different method id's to be created.
-As a result, when the interfact is called, the fallback method will be executed.
+As a result, when the interface is called, the fallback method will be executed.
 
 ## Attack Scenario
 
-- The interface is incorrectly defined. `Alice.set(uint)` takes an `uint` in `Bob.sol` but `Alice.set(int)` a `int` in `Alice.sol`. The two interfaces will produce two differents method IDs. As a result, Bob will call the fallback function of Alice rather than of `set`.
+- The interface is incorrectly defined. `Alice.set(uint)` takes an `uint` in `Bob.sol` but `Alice.set(int)` a `int` in `Alice.sol`. The two interfaces will produce two different method IDs. As a result, Bob will call the fallback function of Alice rather than of `set`.
 
 ## Mitigations
 
-Verify that type signatures are identical between inferfaces and implementations.
+Verify that type signatures are identical between interfaces and implementations.
 
 ## Example
 
@@ -78,5 +78,4 @@ bob.set_fixed(alice.address, {from: eth.accounts[0]} )
 // print val: 42
 alice.val()
 ```
-
 

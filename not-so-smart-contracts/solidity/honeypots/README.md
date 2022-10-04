@@ -23,7 +23,7 @@ The contract takes advantage of the fact that the global variable balance on the
 
 The contract appears vulnerable to a constructor mismatch, allowing anyone to call the public method `Test1()` and double any ether they send to the function. The calculation involves a while loop which is strange, but the bounds conditions seem correct enough.
 
-One of the features of Solidity is that it seeks to mimic JavaScript in its language syntax and style. This is ostensibly to ease onboarding of developers with something familiar. In this case, the contract takes advantage of different semantics between Solidity and JavaScript to create type confusion. The var keyword allows the compiler to infer the type of the assignment when declaring a variable. In this instance, `i1` and `i2` are resolved to fact be `uint8`. As such, their maximum value will be 255 before overflow -- causing the loop condition `if(i1<i2)` to fail, sending at most 255 wei to the caller before terminating.
+One of the features of Solidity is that it seeks to mimic JavaScript in its language syntax and style. This is ostensibly to ease on-boarding of developers with something familiar. In this case, the contract takes advantage of different semantics between Solidity and JavaScript to create type confusion. The var keyword allows the compiler to infer the type of the assignment when declaring a variable. In this instance, `i1` and `i2` are resolved to fact be `uint8`. As such, their maximum value will be 255 before overflow -- causing the loop condition `if(i1<i2)` to fail, sending at most 255 wei to the caller before terminating.
 
 Fortunately the var keyword has been deprecated by the Solidity authors. 
 

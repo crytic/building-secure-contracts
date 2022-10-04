@@ -1,4 +1,4 @@
-## Incorrect erc721 interface
+## Incorrect ERC721 interface
 
 ### Description
 Incorrect return values for ERC721 functions. A contract compiled with solidity > 0.4.22 interacting with these functions will fail to execute them, as the return value is missing.
