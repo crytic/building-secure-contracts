@@ -12,7 +12,7 @@ Etherscan typically shows two transactions for a `GiftBox`-style honeypot. The f
 
 <details>
   <summary>Trap Spoiler</summary>
-  Unbeknownst to the victim, the contract owner has already changed the stored hash of the secret, using an internal transaction with 0 value. Etherscan does not clearly display these 0 value internal transactions. The GiftBox owner might also be monitoring the mempool & would be prepared to front-run any withdrawals that submit the correct password;
+  Unbeknownst to the victim, the contract owner has already changed the stored hash of the secret, using an internal transaction with 0 value. Etherscan does not clearly display these 0 value internal transactions. The GiftBox owner might also be monitoring the mempool & would be prepared to front-run any withdrawals that submit the correct password.
 </details>
 
 ## [King of the Hill](KingOfTheKill.sol)
