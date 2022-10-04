@@ -1,6 +1,7 @@
 ## Tautology or contradiction
 
 ### Description
+
 Expressions that are tautologies or contradictions.
 
 ### Exploit Scenario:
@@ -22,11 +23,11 @@ contract A {
 	}
 }
 ```
+
 `x` is an `uint256`, as a result `x >= 0` will be always true.
+
 `y` is an `uint8`, as a result `y <512` will be always true.  
 
-
 ### Mitigations
-- Avoid tautology
-- Use [Slither](https://github.com/crytic/slither/) or [crytic.io](https://crytic.io/) to detect the issue
+- Use [Slither](https://github.com/crytic/slither/) to detect tautologies.
 

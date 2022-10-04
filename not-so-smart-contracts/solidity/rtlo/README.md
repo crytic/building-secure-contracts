@@ -1,6 +1,7 @@
 ## Right-To-Left-Override character
 
 ### Description
+
 An attacker can manipulate the logic of the contract by using a right-to-left-override character (U+202E)
 
 ### Exploit Scenario:
@@ -31,9 +32,6 @@ contract Token
 
 `Token` uses the right-to-left-override character when calling `_withdraw`. As a result, the fee is incorrectly sent to `msg.sender`, and the token balance is sent to the owner.
 
-
-
 ### Mitigations
 - Special control characters must not be allowed.
-- Use [Slither](https://github.com/crytic/slither/) or [crytic.io](https://crytic.io/) to detect the issue
-
+- Use [slither](https://github.com/crytic/slither/) to detect the right-to-left-override character.

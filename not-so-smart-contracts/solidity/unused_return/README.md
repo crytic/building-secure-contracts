@@ -1,10 +1,10 @@
-## Unused return
+# Unused return
 
+## Description
 
-### Description
 The return value of an external call is not checked.
 
-### Exploit Scenario:
+## Exploit Scenario:
 
 ```solidity
 contract MyConc{
@@ -14,10 +14,9 @@ contract MyConc{
     }
 }
 ```
+
 `MyConc` calls `add` of SafeMath, but does not store the result in `a`. As a result, the computation has no effect.
 
-### Mitigations
+## Mitigations
 - Ensure that all the return values of the function calls are used.
-- Use [Slither](https://github.com/crytic/slither/) or [crytic.io](https://crytic.io/) to detect the issue
-
-
+- Use [Slither](https://github.com/crytic/slither/) to detect function calls without any effect.

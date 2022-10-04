@@ -1,17 +1,16 @@
 # Unprotected function
+
 Missing (or incorrectly used) modifier on a function allows an attacker to use sensitive functionality in the contract.
 
 ## Attack Scenario
 
-A contract with a `changeOwner` function does not label it as `private` and therefore
-allows anyone to become the contract owner.
+An [unprotected contract](Unprotected.sol) with a `changeOwner` function does not label it as `private` nor does it specify the `onlyOwner` modifier, therefore anyone can call `changeOwner` to take control of the contract.
 
 ## Mitigations
 
-Always specify a modifier for functions.
+Review all sensitive or administrative function and ensure that they have appropriate visibility & function modifiers.
 
-## Examples
-- An `onlyOwner` modifier is [defined but not used](Unprotected.sol), allowing anyone to become the `owner`
+## Historical Examples
 - April 2016: [Rubixi allows anyone to become owner](https://etherscan.io/address/0xe82719202e5965Cf5D9B6673B7503a3b92DE20be#code)
 - July 2017: [Parity Wallet](https://blog.zeppelin.solutions/on-the-parity-wallet-multisig-hack-405a8c12e8f7). For code, see [initWallet](WalletLibrary_source_code/WalletLibrary.sol)
 - BitGo Wallet v2 allows anyone to call tryInsertSequenceId. If you try close to MAXINT, no further transactions would be allowed. [Fix: make tryInsertSequenceId private.](https://github.com/BitGo/eth-multisig-v2/commit/8042188f08c879e06f097ae55c140e0aa7baaff8#diff-b498cc6fd64f83803c260abd8de0a8f5)

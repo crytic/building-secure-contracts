@@ -1,30 +1,23 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.8.17;
 
-contract Unprotected{
+contract Unprotected {
     address private owner;
 
-    modifier onlyowner {
-        require(msg.sender==owner);
+    modifier onlyOwner {
+        require(msg.sender==owner, "Permission denied");
         _;
     }
 
-    function Unprotected()
-        public 
-    {
+    constructor() {
         owner = msg.sender;
     }
 
-    // This function should be protected
-    function changeOwner(address _newOwner) 
-        public
-    {
+    // This function is missing the onlyOwner function modifier
+    function changeOwner(address _newOwner) public {
        owner = _newOwner;
     }
 
-    function changeOwner_fixed(address _newOwner) 
-        public 
-        onlyowner
-    {
+    function changeOwnerFixed(address _newOwner) public onlyOwner {
        owner = _newOwner;
     }
 }

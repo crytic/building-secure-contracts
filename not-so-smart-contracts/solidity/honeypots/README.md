@@ -59,7 +59,7 @@ Someone familiar with smart contract security and some of the more technical vul
 
 ## [VarLoop](VarLoop.sol)
 
-The contract appears vulnerable to a constructor mismatch, allowing anyone to call the public method `Test1()` and double any ether they send to the function. The calculation involves a while loop which is strange, but the bounds conditions seem correct enough.
+The contract appears vulnerable to an old-fashioned constructor mismatch, allowing anyone to call the public method `Test1()` and double any ether they send to the function. The calculation involves a while loop which is strange, but the bounds conditions seem correct enough.
 
 <details>
   <summary>Trap Spoiler</summary>
