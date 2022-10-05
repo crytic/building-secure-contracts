@@ -39,7 +39,55 @@ This solution can be found in [exercises/exercise7/solution.sol](./exercises/exe
 <summary>Solution Explained (spoilers ahead)</summary>
 
 The goal of the side entrance challenge is to realize that you can use the `deposit` function to repay your flashloan. With the current implementation the lender pool has no way of knowing if those funds are from borrowed funds or "normal" funds.
+  
+We instruct Echidna to do a flashloan. Using the `setEnableWithdraw` and `setEnableDeposit` Echidna will search for function(s) to call inside the flashloan callback to try and break the `testPoolBalance` property.
 
+Example deployment script using Hardhat:
+```javascript
+const hre = require("hardhat");
+const ethers = hre.ethers;
+
+async function main() {
+  const ETHER_IN_POOL = ethers.utils.parseEther("1000");
+
+  [deployer, attacker] = await ethers.getSigners();
+
+  const SideEntranceLenderPoolFactory = await ethers.getContractFactory(
+    "SideEntranceLenderPool",
+    deployer
+  );
+
+  pool = await SideEntranceLenderPoolFactory.deploy();
+  await pool.deployed();
+  console.log(`pool address ${pool.address}`);
+
+  await this.pool.deposit({ value: ETHER_IN_POOL });
+
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+```
+Make sure to add a localhost network to be able to deploy to Etheno. Example for Hardhat:
+```javascript
+  networks: {
+    localhost: {
+      url: "http://127.0.0.1:8545",
+    },
+  }
+```
+
+Now deploy to Etheno:
+```shell
+npx hardhat run scripts/deploy.js --network localhost
+```
+
+Don't forget to copy the initialization JSON file from Etheno to your fuzzing environment!
+  
 Example Echidna output:
 ```
 $ echidna-test . --contract E2E --config config.yaml
