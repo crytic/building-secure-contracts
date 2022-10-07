@@ -38,11 +38,13 @@ This solution can be found in [exercises/exercise7/solution.sol](./exercises/exe
 <details>
 <summary>Solution Explained (spoilers ahead)</summary>
 
-The goal of the side entrance challenge is to realize that you can use the `deposit` function to repay your flashloan. With the current implementation the lender pool has no way of knowing if those funds are from borrowed funds or "normal" funds.
+The goal of the side entrance challenge is to realize that the contract's accounting of its ETH balance is misconfigured. `balanceBefore` is used to track the balance of the contract before the flash loan BUT `address(this).balance` is used to track the balance of the contract after the flash loan. Thus, you can use the deposit function to repay your flash loan while still maintaining that the contract's total balance of ETH has not changed (i.e. `address(this).balance >= balanceBefore`). Since the ETH that was deposited is now owned by you, you can now also withdraw it and drain all the funds from the contract.
   
 We instruct Echidna to do a flashloan. Using the `setEnableWithdraw` and `setEnableDeposit` Echidna will search for function(s) to call inside the flashloan callback to try and break the `testPoolBalance` property.
+  
+At some point Echidna will identify that if (1) `deposit` is used to pay back the flash loan and (2) `withdraw` is called right after, the `testPoolBalance` property breaks.
 
-Example deployment script using Hardhat:
+To use Etheno, you can use an example deployment script like the one below via Hardhat:
 ```javascript
 const hre = require("hardhat");
 const ethers = hre.ethers;
@@ -81,12 +83,18 @@ Make sure to add a localhost network to be able to deploy to Etheno. Example for
   }
 ```
 
-Now deploy to Etheno:
+To deploy to Etheno run the following command:
+```shell
+etheno --ganache --ganache-args="--miner.blockGasLimit 10000000" -x init.json
+```
+In another shell run the following hardhat command:
 ```shell
 npx hardhat run scripts/deploy.js --network localhost
 ```
+  
+And then your shell command works fine.
 
-Don't forget to copy the initialization JSON file from Etheno to your fuzzing environment!
+Don't forget to copy the initialization JSON file (`init.json`) from Etheno to your fuzzing environment!
   
 Example Echidna output:
 ```
