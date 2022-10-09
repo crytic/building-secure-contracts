@@ -41,6 +41,10 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 Echidna can be installed through docker or using the pre-compiled binary.
 
+### MacOS
+
+You can install Echidna with `brew install echidna`. 
+
 ### Echidna through docker
 
 ```bash
