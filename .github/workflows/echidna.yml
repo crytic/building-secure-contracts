@@ -48,6 +48,7 @@ jobs:
             workdir: dvdefi/
             files: .
             config: naivereceiver.yaml
+            crytic-args: --hardhat-ignore-compile
             contract: NaiveReceiverEchidna
             outcome: failure
             expected: 'echidna_test_contract_balance:\s*failed'
@@ -55,6 +56,7 @@ jobs:
             workdir: dvdefi/
             files: .
             config: unstoppable.yaml
+            crytic-args: --hardhat-ignore-compile
             contract: UnstoppableEchidna
             outcome: failure
             expected: 'echidna_testFlashLoan:\s*failed'
@@ -126,9 +128,11 @@ jobs:
       with:
         node-version: 16
 
-    - name: Install dependencies
+    - name: Install dependencies and compile
       if: startsWith(matrix.workdir, 'dvdefi')
-      run: yarn install --frozen-lockfile
+      run: |
+        yarn install --frozen-lockfile
+        npx hardhat compile --force
       working-directory: ${{ matrix.workdir }}
 
     - name: Run Echidna
@@ -143,6 +147,7 @@ jobs:
         solc-version: ${{ matrix.solc-version || '0.5.11' }}
         echidna-workdir: ${{ matrix.workdir }}
         echidna-version: edge
+        crytic-args: ${{ matrix.crytic-args || '' }}
 
     - name: Verify that the exit code is correct
       run: |
