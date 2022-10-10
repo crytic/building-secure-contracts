@@ -4,7 +4,9 @@
 
 - [Exercise 6](#exercise-6)
   - [Setup](#setup)
-  - [Exercise](#exercise)
+  - [Context](#context)
+  - [Goals](#goals)
+  - [Hints](#hints)
   - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
@@ -15,8 +17,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Context
 
-The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/1.html.
-For the following, we assume that the reader is familiar with the challenge.
+The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/1.html, we assume that the reader is familiar with it.
 
 ## Goals
 
@@ -30,16 +31,6 @@ Only the following contracts are relevant:
   - `DamnValuableToken`
   - `UnstoppableLender`
   - `ReceiverUnstoppable`
-
-No skeleton will be provided for this exercise.
-
-## Goals
-
-- Setup the testing environment with the right contracts and necessary balances.
-- Add a property to check whether `UnstoppableLender` can always provide flash loans.
-- Create `config.yaml` with the necessary configuration option(s).
-- Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
-
 
 ## Hints
 
