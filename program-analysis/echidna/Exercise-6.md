@@ -28,9 +28,9 @@ The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/1
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
 Only the following contracts are relevant:
-  - `DamnValuableToken`
-  - `UnstoppableLender`
-  - `ReceiverUnstoppable`
+  - `contracts/DamnValuableToken.sol`
+  - `contracts/unstoppable/UnstoppableLender.sol`
+  - `contracts/unstoppable/ReceiverUnstoppable.sol`
 
 ## Hints
 
