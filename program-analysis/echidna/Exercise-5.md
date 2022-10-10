@@ -34,7 +34,7 @@ Only the following contracts are relevant:
 
 ## Hints
 
-We recommend to first try without reading the following hints. The hints are in the `hints` branch.
+We recommend to first try without reading the following hints. The hints are in the [`hints` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/tree/hints).
 
 - The invariant that we are looking for is "the balance of the receiver contract can not decrease"
 - Read what is the [multi abi option](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/common-testing-approaches.md#external-testing)
@@ -44,7 +44,7 @@ We recommend to first try without reading the following hints. The hints are in 
 
 ## Solution
 
-This solution can be found in [solutions](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/solutions/contracts/naive-receiver/NaiveReceiverEchidna.sol) branch.
+This solution can be found in [`solutions` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/solutions/contracts/naive-receiver/NaiveReceiverEchidna.sol).
 
 
 [ctf]: https://www.damnvulnerabledefi.xyz/
