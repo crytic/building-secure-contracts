@@ -4,7 +4,9 @@
 
 - [Exercise 5](#exercise-5)
   - [Setup](#setup)
-  - [Exercise](#exercise)
+  - [Context](#context)
+  - [Goals](#goals)
+  - [Hints](#hints)
   - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
@@ -15,8 +17,8 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Context
 
-The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/2.html.
-For the following, we assume that the reader is familiar with the challenge.
+The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/2.html, we assume that the reader is familiar with it.
+
 
 ## Goals
 
@@ -27,8 +29,8 @@ For the following, we assume that the reader is familiar with the challenge.
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
 Only the following contracts are relevant:
-  - `FlashLoanReceiver`
-  - `NaiveReceiverLenderPool.sol`
+  - `contracts/naive-receiver/FlashLoanReceiver.sol`
+  - `contracts/naive-receiver/NaiveReceiverLenderPool.sol`
 
 ## Hints
 
