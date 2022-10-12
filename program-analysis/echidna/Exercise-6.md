@@ -4,63 +4,79 @@
 
 - [Exercise 6](#exercise-6)
   - [Setup](#setup)
-  - [Exercise](#exercise)
+  - [Context](#context)
+  - [Goals](#goals)
+  - [Hints](#hints)
   - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Setup
+1. Clone the repo: `git clone https://github.com/crytic/damn-vulnerable-defi-echidna`
+2. install the dependencies via `yarn install`.
 
-1. Follow the instructions on the [Damn Vulnerable DeFi CTF][ctf] page, namely:
-    - clone the repo via `git clone https://github.com/tinchoabbate/damn-vulnerable-defi -b v2.0.0`, and
-    - install the dependencies via `yarn install`.
-2. To run Echidna on these contracts you must comment out the `dependencyCompiler` section in `hardhat.config.js`. Otherwise, the project will not compile with [`crytic-compile`](https://github.com/crytic/crytic-compile). See the example provided [here](./exercises/exercise6/example.hardhat.config.ts).
-3. Create a contract called `TestNaiveReceiverEchidna` in the `contracts/naive-receiver` directory.
-4. Analyze the `before` function in `test/naive-receiver/naive-receiver.challenge.js` to identify what initial setup needs to be done.
+## Context
 
-Hint: You don't need to make the setup very complex. It is possible to find the bug by examining just two contracts:
-  - `FlashLoanReceiver`
-  - `NaiveReceiverLenderPool.sol`
-
-No skeleton will be provided for this exercise.
+The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/1.html, we assume that the reader is familiar with it.
 
 ## Goals
 
 - Setup the testing environment with the right contracts and necessary balances.
-- Add a property to check whether the balance of the `FlashLoanReceiver` contract can change.
+- Analyze the before function in test/unstoppable/unstoppable.challenge.js to identify what initial setup needs to be done.
+- Add a property to check whether `UnstoppableLender` can always provide flash loans.
 - Create a `config.yaml` with the necessary configuration option(s).
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
-Hint: You might have to use the `multi-abi` configuration option in this exercise.
+Only the following contracts are relevant:
+  - `contracts/DamnValuableToken.sol`
+  - `contracts/unstoppable/UnstoppableLender.sol`
+  - `contracts/unstoppable/ReceiverUnstoppable.sol`
+
+## Hints
+
+We recommend to first try without reading the following hints. The hints are in the [`hints` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/tree/hints).
+
+- The invariant that we are looking for is "Flash loan can always be made"
+- Read what is the [multi abi option](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/common-testing-approaches.md#external-testing)
+- The `receiveTokens` callback function must be implemented
+- A template is provided in [contracts/unstoppable/UnstoppableEchidna.sol](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/contracts/unstoppable/UnstoppableEchidna.sol)
+- A config file is provided in [unstoppable.yaml](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/unstoppable.yaml)
+
+
+
 ## Solution
 
-This solution can be found in [exercises/exercise6/solution.sol](./exercises/exercise6/solution.sol)
+This solution can be found in the [`solutions` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/contracts/unstoppable/UnstoppableEchidna.sol).
 
 [ctf]: https://www.damnvulnerabledefi.xyz/
 
 <details>
 <summary>Solution Explained (spoilers ahead)</summary>
 
-Note: Please make sure that you have placed `solution.sol` (or `TestNaiveReceiverEchidna.sol`) in `contracts/naive-receiver`. 
 
+Note: Please make sure that you have placed `solution.sol` (or `UnstoppableEchidna.sol`) in `contracts/unstoppable`. 
 
-The goal of the naive receiver challenge is to realize that an arbitrary user can call request a flash loan for `FlashLoanReceiver`.
-In fact, this can be done even if the arbitrary user has no ether.
+The goal of the unstoppable challenge is to realize that `UnstoppableLender` has two modes of tracking its balance: `poolBalance` and `damnValuableToken.balanceOf(address(this))`.
 
-Echidna found this by simply calling `NaiveReceiverLenderPool.flashLoan()` with the address of `FlashLoanReceiver` and any arbitrary amount.
+`poolBalance` is added to when someone calls `depositTokens()`.
+
+However, a user can call `damnValuableToken.transfer()` directly and increase the `balanceOf(address(this))` without increasing `poolBalance`.
+
+Now, the two balance trackers are out-of-sync.
+
+When Echidna calls `pool.flashLoan(10)`, the assertion `assert(poolBalance == balanceBefore)` in `UnstoppableLender` will break and the pool can no longer provide flash loans.
 
 See example output below from Echidna:
 
 ```bash
-$ npx hardhat clean && npx hardhat compile --force && echidna-test . --contract TestNaiveReceiverEchidna --multi-abi --config contracts/naive-receiver/config.yaml
+$ echidna-test . --contract UnstoppableEchidna --config unstoppable.yaml
+
 ...
 
-echidna_test_contract_balance: failed!💥  
+echidna_testFlashLoan: failed!💥  
   Call sequence:
-    flashLoan(0x62d69f6867a0a084c6d313943dc22023bc263691,353073667)
+    transfer(0x62d69f6867a0a084c6d313943dc22023bc263691,1296000)
 
 ...
 ```
 </details>
-
-
