@@ -27,10 +27,16 @@ The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/1
 - Create a `config.yaml` with the necessary configuration option(s).
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
+### Descriptions
+
 Only the following contracts are relevant:
-  - `contracts/DamnValuableToken.sol`
-  - `contracts/unstoppable/UnstoppableLender.sol`
-  - `contracts/unstoppable/ReceiverUnstoppable.sol`
+  - [`contracts/DamnValuableToken.sol`](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/master/contracts/DamnValuableToken.sol): token used by the system
+  - [`contracts/unstoppable/UnstoppableLender.sol`](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/master/contracts/unstoppable/UnstoppableLender.sol): allow to take a flash loan and do a callback on the caller
+  - [`contracts/unstoppable/ReceiverUnstoppable.sol`](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/master/contracts/unstoppable/ReceiverUnstoppable.sol): user callback example
+
+Can you prevent `UnstoppableLender` from working?
+
+
 
 ## Hints
 
