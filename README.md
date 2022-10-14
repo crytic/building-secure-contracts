@@ -1,22 +1,24 @@
-# Building Secure Smart Contracts
+# Building Secure Smart Contracts - Devcon Edition
 
-![](https://github.com/crytic/building-secure-contracts/workflows/CI/badge.svg) ![](https://github.com/crytic/building-secure-contracts/workflows/Echidna/badge.svg)
 
-Follow our guidelines and best practices to write secure smart contracts.
+## Install Echidna
+- On MacOs: `brew install echidna`
+- On other systems: download from https://github.com/crytic/echidna/releases/tag/v2.0.3
 
-**Table of contents:**
+Consider using [eth-security-toolbox](https://github.com/trailofbits/eth-security-toolbox/) (docker) if you have troubles running Echidna.
 
-- [Development guidelines](./development-guidelines)
-  - [High-level best practices](./development-guidelines/guidelines.md): High-level best-practices for all smart contracts
-  - [Incident Response Recommendations](./development-guidelines/incident_response.md): Guidelines on how to formulate an incident response plan
-  - [Secure development workflow](./development-guidelines/workflow.md): A rough, high-level process to follow while you write code
-  - [Token integration checklist](./development-guidelines/token_integration.md): What to check when interacting with arbitrary token
-- [Learn EVM](./learn_evm): EVM technical knowledge
-  - [EIPs - forks](./learn_evm/eips_forks.md): summarize the EIPs included in each fork
-- [Program analysis](./program-analysis): How to use automated tools to secure contracts
-  - [Echidna](./program-analysis/echidna): a fuzzer that will check your contract's properties.
-  - [Slither](./program-analysis/slither): a static analyzer avaialable through a CLI and scriptable interface.
-  - [Manticore](./program-analysis/manticore): a symbolic execution engine that can prove the correctness properties.
-  - For each tool, this training material will provide:
-    - a theoretical introduction, a walkthrough of its API, and a set of exercises.
-    - exercises expected to require ~two hours to practically learn its operation.
+## Exercises
+- [Exercise 1](program-analysis/echidna/Exercise-1.md)
+- [Exercise 2](program-analysis/echidna/Exercise-2.md)
+- [Exercise 4](program-analysis/echidna/Exercise-4.md)
+- [Exercise 5](program-analysis/echidna/Exercise-5.md)
+- [Exercise 6](program-analysis/echidna/Exercise-6.md)
+
+## Additional information
+Consider using [solc-select](https://github.com/crytic/solc-select) to easily switch Solidity versions:
+- `pip3 install solc-select`: to install it
+- `solc-select install 0.7.0`: to install solc `0.7.0`
+- `solc-select use 0.7.0`: to switch to solc `0.7.0`
+
+[Building-secure-contracts](https://github.com/crytic/building-secure-contracts) contains additional exercises and guidelines that won't be covered during the Devcon workshop.
+
