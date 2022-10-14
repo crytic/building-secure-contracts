@@ -31,7 +31,7 @@ The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/2
 ### Descriptions
 Only the following contracts are relevant:
   - [`contracts/naive-receiver/NaiveReceiverLenderPool.sol`](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/master/contracts/naive-receiver/NaiveReceiverLenderPool.sol): it allows to take a flash loan for a fee
-  - [`contracts/naive-receiver/FlashLoanReceiver.sol`](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/master/contracts/naive-receiver/FlashLoanReceiver.sol): the user deploys a contract to interact with the flash loan receiver
+  - [`contracts/naive-receiver/FlashLoanReceiver.sol`](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/master/contracts/naive-receiver/FlashLoanReceiver.sol): the user deploys a contract to do flash loans with the lender pool
 
 The user deploys a FlashLoanReceiver with 10 eth. Can you drain the funds?
 
