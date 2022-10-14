@@ -12,6 +12,8 @@ Once you feel you understand the material in this README, proceed to the exercis
 - [Exercise 1](./exercise1.md): Function override protection
 - [Exercise 2](./exercise2.md): Check for access controls
 
+Watch Slither's [code walkthrough](https://www.youtube.com/watch?v=EUl3UlYSluU) to learn about its code structure.
+
 ## Installation
 
 Slither requires Python >= 3.6. It can be installed through pip or using docker.
