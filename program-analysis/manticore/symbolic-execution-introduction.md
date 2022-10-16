@@ -64,6 +64,6 @@ function safe_add(uint a, uint b) returns(uint c){
 The associated formula with overflow check would be:
 - `c = a + b AND (c >= a) AND (c=>b) AND (c < a OR c < b)`
 
-This formula cannot be solved; in other world this is a **proof** that in `safe_add`, `c` will always increase.
+This formula cannot be solved; in other words this is a **proof** that in `safe_add`, `c` will always increase.
 
 DSE is thereby a powerful tool, that can verify arbitrary constraints on your code.
