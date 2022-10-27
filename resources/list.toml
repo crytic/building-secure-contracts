@@ -1,0 +1,326 @@
+["Manticore: Symbolic execution for humans"]
+link = "https://blog.trailofbits.com/2017/04/27/manticore-symbolic-execution-for-humans/"
+date = "2017/04/27"
+category = ["tooling", "manticore"]
+description = "First release and introduction to Manticore (not adopted for EVM yet)"
+
+["Trail of Bits joins the Enterprise Ethereum Alliance"]
+link = "https://blog.trailofbits.com/2017/10/19/trail-of-bits-joins-the-enterprise-ethereum-alliance/"
+date = "2017/10/19"
+category = ["announcements"]
+description = "The first blockchain blogpost; announcement of OSS tools."
+
+["Hands on the Ethernaut CTF"]
+link = "https://blog.trailofbits.com/2017/11/06/hands-on-the-ethernaut-ctf/"
+date = "2017/11/06"
+category = ["general"]
+description = "Solutions for six challenges"
+
+["Videos from Ethereum-focused Empire Hacking"]
+link = "https://blog.trailofbits.com/2017/12/22/videos-from-ethereum-focused-empire-hacking/"
+date = "2017/12/22"
+category = ["presentations"]
+description = "Talks include: `A brief history of smart contract security`, `A CTF Field Guide for smart contracts`, `Automatic bug finding for the blockchain`, `Addressing infosec needs with blockchain technology`"
+
+
+["10 Rules for the Secure Use of Cryptocurrency Hardware Wallets"]
+link = "https://blog.trailofbits.com/2018/11/27/10-rules-for-the-secure-use-of-cryptocurrency-hardware-wallets/"
+date = "2018/11/27"
+category = ["general"]
+description = "Recommendations for the secure use of hardware wallets."
+
+["Return of the Blockchain Security Empire Hacking"]
+link = "https://blog.trailofbits.com/2018/11/19/return-of-the-blockchain-security-empire-hacking/"
+date = "2018/11/19"
+category = ["announcements"]
+description = ""
+
+["Trail of Bits @ Devcon IV Recap"]
+link = "https://blog.trailofbits.com/2018/11/16/trail-of-bits-devcon-iv-recap/"
+date = "2018/11/16"
+category = ["presentations"]
+description = "Talks include: `Using Manticore and Symbolic Execution to Find Smart Contract Bugs`, `Blockchain Autopsies`, `Current State of Security`"
+
+["How contract migration works"]
+link = "https://blog.trailofbits.com/2018/10/29/how-contract-migration-works/"
+date = "2018/10/29"
+category = ["upgradeability"]
+description = "Alternative to upgradability mechanism - moving data to a new contract"
+
+["Slither – a Solidity static analysis framework"]
+link = "https://blog.trailofbits.com/2018/10/19/slither-a-solidity-static-analysis-framework/"
+date = "2018/10/19"
+category = ["tooling", "slither"]
+description = "Introduction to Slither's API and printers"
+
+["Introduction to Verifiable Delay Functions (VDFs)"]
+link = "https://blog.trailofbits.com/2018/10/12/introduction-to-verifiable-delay-functions-vdfs/"
+date = "2018/10/12"
+category = ["consensus algorithms"]
+description = "Basics of VDFs - a class of hard to compute, not paralelizable, but easily verifiable functions"
+
+["Ethereum security guidance for all"]
+link = "https://blog.trailofbits.com/2018/10/04/ethereum-security-guidance-for-all/"
+date = "2018/10/04"
+category = ["announcements"]
+description = "Announcement of office hours, Blockchain Security Contacts, and Awesome Ethereum Security"
+
+["Rattle – an Ethereum EVM binary analysis framework"]
+link = "https://blog.trailofbits.com/2018/09/06/rattle-an-ethereum-evm-binary-analysis-framework/"
+date = "2018/09/06"
+category = ["tooling", "rattle"]
+description = "Turn EVM bytecode to infinite-register SSA form"
+
+["Contract upgrade anti-patterns"]
+link = "https://blog.trailofbits.com/2018/09/05/contract-upgrade-anti-patterns/"
+date = "2018/09/05"
+category = ["upgradeability"]
+description = "Discussion of risks and recommendations for Data Separation and Delegatecall Proxy patterns. Disclosure of vulnerability in Zeppelin Proxy contract."
+
+["State Machine Testing with Echidna"]
+link = "https://blog.trailofbits.com/2018/05/03/state-machine-testing-with-echidna/"
+date = "2018/05/03"
+category = ["tooling", "echidna"]
+description = "Example use case of Echidna's Haskell API"
+
+["How to prepare for a security review"]
+link = "https://blog.trailofbits.com/2018/04/06/how-to-prepare-for-a-security-audit/"
+date = "2018/04/06"
+category = ["general"]
+description = "Checklist for before having a security audit"
+
+["Use our suite of Ethereum security tools"]
+link = "https://blog.trailofbits.com/2018/03/23/use-our-suite-of-ethereum-security-tools/"
+date = "2018/03/23"
+category = ["tooling"]
+description = "Overview of our tools and documents: Not So Smart Contracts, Slither, Echidna, Manticore, EVM Opcode Database, Ethersplay, IDA-EVM, Rattle"
+
+["Echidna, a smart fuzzer for Ethereum"]
+link = "https://blog.trailofbits.com/2018/03/09/echidna-a-smart-fuzzer-for-ethereum/"
+date = "2018/03/09"
+category = ["tooling", "echidna"]
+description = "First release and introduction to Echidna"
+
+["Parity Technologies engages Trail of Bits"]
+link = "https://blog.trailofbits.com/2018/02/09/parity-technologies-engages-trail-of-bits/"
+date = "2018/02/09"
+category = ["announcements"]
+description = ""
+
+["Mainnet360: joint economic and security reviews with Prysm Group"]
+link = "https://blog.trailofbits.com/2019/12/09/introducing-mainnet360-a-joint-economic-and-security-assessment-with-prysm-group/"
+date = "2019/12/09"
+category = ["announcements"]
+description = ""
+
+["Announcing the Crytic $10k Research Prize"]
+link = "https://blog.trailofbits.com/2019/11/13/announcing-the-crytic-10k-research-prize/"
+date = "2019/11/13"
+category = ["announcements"]
+description = ""
+
+["Formal Analysis of the CBC Casper Consensus Algorithm with TLA+"]
+link = "https://blog.trailofbits.com/2019/10/25/formal-analysis-of-the-cbc-casper-consensus-algorithm-with-tla/"
+date = "2019/10/25"
+category = ["consensus algorithms"]
+description = "Verification of finality of the Correct By Construction (CBC) PoS consensus protocol"
+
+["Watch Your Language: Our First Vyper Audit"]
+link = "https://blog.trailofbits.com/2019/10/24/watch-your-language-our-first-vyper-audit/"
+date = "2019/10/24"
+category = ["general"]
+description = "Pros and cons of Vyper language and disclosure of vulnerability in the Vyper's compiler"
+
+["246 Findings From our Smart Contract Audits: An Executive Summary"]
+link = "https://blog.trailofbits.com/2019/08/08/246-findings-from-our-smart-contract-audits-an-executive-summary/"
+date = "2019/08/08"
+category = ["general"]
+description = "Publication of data aggregated from our audits. Discussion about possibility of automatic and manual detection of vulnerabilities, and usefulness of unit tests"
+
+["Crytic: Continuous Assurance for Smart Contracts"]
+link = "https://blog.trailofbits.com/2019/08/02/crytic-continuous-assurance-for-smart-contracts/"
+date = "2019/08/02"
+category = ["tooling", "crytic"]
+description = "New product that integrates static analysis with GitHub pipeline"
+
+["On LibraBFT’s use of broadcasts"]
+link = "https://blog.trailofbits.com/2019/07/12/librabft/"
+date = "2019/07/12"
+category = ["consensus algorithms"]
+description = "Liveness of LibraBFT and HotStuff algorithms"
+
+["Avoiding Smart Contract \"Gridlock\" with Slither"]
+link = "https://blog.trailofbits.com/2019/07/03/avoiding-smart-contract-gridlock-with-slither/"
+date = "2019/07/03"
+category = ["tooling", "slither"]
+description = "Description of a DoS vulnerability resulting from a strict equality check, and Slither's dangerous-strict-equality detector"
+
+["State of the Art Proof-of-Work: RandomX"]
+link = "https://blog.trailofbits.com/2019/07/02/state/"
+date = "2019/07/02"
+category = ["consensus algorithms"]
+description = "Summary of our audit of ASIC and GPU-resistant PoW algorithm"
+
+["Slither: The Leading Static Analyzer for Smart Contracts"]
+link = "https://blog.trailofbits.com/2019/05/27/slither-the-leading-static-analyzer-for-smart-contracts/"
+date = "2019/05/27"
+category = ["tooling", "slither"]
+description = "Slither design and comparison with other static analysis tools"
+
+["Empire Hacking: Ethereum Edition 2"]
+link = "https://blog.trailofbits.com/2019/01/18/empire-hacking-ethereum-edition-2/"
+date = "2019/01/18"
+category = ["presentations"]
+description = "Talks include: `Anatomy of an unsafe smart contract programming language`, `Evaluating digital asset security fundamentals`, `Contract upgrade risks and recommendations`, `How to buidl an enterprise-grade mainnet Ethereum client`, `Failures in on-chain privacy`, `Secure micropayment protocols`, `Designing the Gemini dollar: a regulated, upgradeable, transparent stablecoin`, `Property testing with Echidna and Manticore for secure smart contracts`, `Simple is hard: Making your awesome security thing usable`"
+
+["Breaking Aave Upgradeability"]
+link = "https://blog.trailofbits.com/2020/12/16/breaking-aave-upgradeability/"
+date = "2020/12/16"
+category = ["upgradeability"]
+description = "Description of Delegatecall Proxy vulnerability in formally-verified Aave contracts"
+
+["Good idea, bad design: How the Diamond standard falls short"]
+link = "https://blog.trailofbits.com/2020/10/30/good-idea-bad-design-how-the-diamond-standard-falls-short/"
+date = "2020/10/30"
+category = ["upgradeability"]
+description = "Audit of Diamond standard's implementation"
+
+["Efficient audits with machine learning and Slither-simil"]
+link = "https://blog.trailofbits.com/2020/10/23/efficient-audits-with-machine-learning-and-slither-simil/"
+date = "2020/10/23"
+category = ["tooling", "slither"]
+description = "Detect similar Solidity functions with Slither and ML"
+
+["Using Echidna to test a smart contract library"]
+link = "https://blog.trailofbits.com/2020/08/17/using-echidna-to-test-a-smart-contract-library/"
+date = "2020/08/17"
+category = ["tooling", "echidna"]
+description = "Designing and testing properties with differential fuzzing"
+
+["Symbolically Executing WebAssembly in Manticore"]
+link = "https://blog.trailofbits.com/2020/01/31/symbolically-executing-webassembly-in-manticore/"
+date = "2020/01/31"
+category = ["tooling", "manticore"]
+description = "Using symbolic analysis on an artificial WASM binary"
+
+["Manticore discovers the ENS bug"]
+link = "https://blog.trailofbits.com/2020/03/03/manticore-discovers-the-ens-bug/"
+date = "2020/03/03"
+category = ["tooling", "manticore"]
+description = "Using symbolic analysis to find vulnerability in Ethereum Name Service contract"
+
+["An Echidna for all Seasons"]
+link = "https://blog.trailofbits.com/2020/03/30/an-echidna-for-all-seasons/"
+date = "2020/03/30"
+category = ["tooling", "echidna"]
+description = "Announcement of new features in Echidna"
+
+["Announcing the 1st International Workshop on Smart Contract Analysis"]
+link = "https://blog.trailofbits.com/2020/04/23/announcing-the-1st-international-workshop-on-smart-contract-analysis/"
+date = "2020/04/23"
+category = ["announcements"]
+description = "Workshop co-organized with Northern Arizona University and co-located with ISSTA 2020"
+
+["Bug Hunting with Crytic"]
+link = "https://blog.trailofbits.com/2020/05/15/bug-hunting-with-crytic/"
+date = "2020/05/15"
+category = ["general"]
+description = "Description of 9 bugs found by Crytic in public projects"
+
+["Upgradeable contracts made safer with Crytic"]
+link = "https://blog.trailofbits.com/2020/06/12/upgradeable-contracts-made-safer-with-crytic/"
+date = "2020/06/12"
+category = ["tooling", "slither"]
+description = "17 new Slither detectors for upgradeable contracts"
+
+["Contract verification made easier"]
+link = "https://blog.trailofbits.com/2020/07/12/new-manticore-verifier-for-smart-contracts/"
+date = "2020/07/12"
+category = ["tooling", "manticore"]
+description = "Re-use Echidna properties with Manticore with manticore-verifier"
+
+["Accidentally stepping on a DeFi lego"]
+link = "https://blog.trailofbits.com/2020/08/05/accidentally-stepping-on-a-defi-lego/"
+date = "2020/08/05"
+category = ["general"]
+description = "Writeup of a vulnerability in yVault project"
+
+["Detecting MISO and Opyn’s msg.value reuse vulnerability with Slither"]
+link = "https://blog.trailofbits.com/2021/12/16/detecting-miso-and-opyns-msg-value-reuse-vulnerability-with-slither/"
+date = "2021/12/16"
+category = ["tooling", "slither"]
+description = "Description of Slither's new detectors: delegatecall-loop and msg-value-loop"
+
+["Motivating global stabilization"]
+link = "https://blog.trailofbits.com/2021/11/11/motivating-global-stabilization/"
+date = "2021/11/11"
+category = ["consensus algorithms"]
+description = "Review of Fischer, Lynch, and Paterson’s classic impossibility result and global stabilization time assumption"
+
+["Solar: Context-free, interactive analysis for Solidity"]
+link = "https://blog.trailofbits.com/2021/04/02/solar-context-free-interactive-analysis-for-solidity/"
+date = "2021/04/02"
+category = ["tooling"]
+description = "Proof-of-concept static analysis framework"
+
+["A Year in the Life of a Compiler Fuzzing Campaign"]
+link = "https://blog.trailofbits.com/2021/03/23/a-year-in-the-life-of-a-compiler-fuzzing-campaign/"
+date = "2021/03/23"
+category = ["fuzzing compilers"]
+description = "Results and feature of fuzzing solc"
+
+["Breaking the Solidity Compiler with a Fuzzer"]
+link = "https://blog.trailofbits.com/2020/06/05/breaking-the-solidity-compiler-with-a-fuzzer/"
+date = "2020/06/05"
+category = ["fuzzing compilers"]
+description = "Our approach to fuzzing solc"
+
+["Confessions of a smart contract paper reviewer"]
+link = "https://blog.trailofbits.com/2021/02/05/confessions-of-a-smart-contract-paper-reviewer/"
+date = "2021/02/05"
+category = ["general"]
+description = "Six requirements for a good research paper"
+
+["Porting the Solana eBPF JIT compiler to ARM64"]
+link = "https://blog.trailofbits.com/2022/10/12/solana-jit-compiler-ebpf-arm64/"
+date = "2022/10/12"
+category = ["general"]
+description = "Low-level writeup of the work done to make Solana compiler work on ARM64"
+
+["Using mutants to improve Slither"]
+link = "https://blog.trailofbits.com/2022/08/17/using-mutants-to-improve-slither/"
+date = "2022/08/17"
+category = ["tooling", "slither"]
+description = "Inserting random bugs into smart contracts and detecting them with various static analysis tools - to improve Slither's detectors"
+
+["Shedding smart contract storage with Slither"]
+link = "https://blog.trailofbits.com/2022/07/28/shedding-smart-contract-storage-with-slither/"
+date = "2022/07/28"
+category = ["tooling", "slither"]
+description = "Announcement of the slither-read-storage tool"
+
+["Managing risk in blockchain deployments"]
+link = "https://blog.trailofbits.com/2022/06/24/managing-risk-in-blockchain-deployments/"
+date = "2022/06/24"
+category = ["general"]
+description = "Summary of \"Do You Really Need a Blockchain? An Operational Risk Assessment\" report"
+
+["Are blockchains decentralized?"]
+link = "https://blog.trailofbits.com/2022/06/21/are-blockchains-decentralized/"
+date = "2022/06/21"
+category = ["general"]
+description = "Summary of \"Are Blockchains Decentralize? Unintended Centralities in Distributed Ledgers\" report"
+
+["Amarna: Static analysis for Cairo programs"]
+link = "https://blog.trailofbits.com/2022/04/20/amarna-static-analysis-for-cairo-programs/"
+date = "2022/04/20"
+category = ["tooling", "cairo"]
+description = "Overview of Cairo footguns and announcement of the new static analysis tool"
+
+["Optimizing a smart contract fuzzer"]
+link = "https://blog.trailofbits.com/2022/03/02/optimizing-a-smart-contract-fuzzer/"
+date = "2022/03/02"
+category = ["tooling", "echidna"]
+description = "Measuring and improving performance of Echidna (Haskell code)"
+
+

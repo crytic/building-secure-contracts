@@ -1,0 +1,53 @@
+["Reverie: An optimized zero-knowledge proof system"]
+link = "https://blog.trailofbits.com/2020/12/14/reverie-an-optimized-zero-knowledge-proof-system/"
+date = "2020/12/14"
+category = ["zkp"]
+description = "Rust implementation of the MPC-in-the-head proof system"
+
+["Reinventing Vulnerability Disclosure using Zero-knowledge Proofs"]
+link = "https://blog.trailofbits.com/2020/05/21/reinventing-vulnerability-disclosure-using-zero-knowledge-proofs/"
+date = "2020/05/21"
+category = ["zkp"]
+description = "Announcement of DARPA sponsored work on ZK proofs of exploitability"
+
+["Disclosing Shamir’s Secret Sharing vulnerabilities and announcing ZKDocs"]
+link = "https://blog.trailofbits.com/2021/12/21/disclosing-shamirs-secret-sharing-vulnerabilities-and-announcing-zkdocs/"
+date = "2021/12/21"
+category = ["zkp"]
+description = ""
+
+["Multi-Party Computation on Machine Learning"]
+link = "https://blog.trailofbits.com/2019/10/04/multi-party-computation-on-machine-learning/"
+date = "2019/10/04"
+category = ["zkp"]
+description = "Implementation of 3-party computation protocol for perceptron and support vector machine (SVM) algorithms"
+
+["Serving up zero-knowledge proofs"]
+link = "https://blog.trailofbits.com/2021/02/19/serving-up-zero-knowledge-proofs/"
+date = "2021/02/19"
+category = ["zkp"]
+description = "Fiat-Shamir transformation explained"
+
+["Coordinated disclosure of vulnerabilities affecting Girault, Bulletproofs, and PlonK"]
+link = "https://blog.trailofbits.com/2022/04/13/part-1-coordinated-disclosure-of-vulnerabilities-affecting-girault-bulletproofs-and-plonk/"
+date = "2022/04/13"
+category = ["zkp"]
+description = "Introducing new \"Frozen Heart\" class of vulnerabilities"
+
+["The Frozen Heart vulnerability in Girault’s proof of knowledge"]
+link = "https://blog.trailofbits.com/2022/04/14/the-frozen-heart-vulnerability-in-giraults-proof-of-knowledge/"
+date = "2022/04/14"
+category = ["zkp"]
+description = ""
+
+["The Frozen Heart vulnerability in Bulletproofs"]
+link = "https://blog.trailofbits.com/2022/04/15/the-frozen-heart-vulnerability-in-bulletproofs/"
+date = "2022/04/15"
+category = ["zkp"]
+description = ""
+
+["The Frozen Heart vulnerability in PlonK"]
+link = "https://blog.trailofbits.com/2022/04/18/the-frozen-heart-vulnerability-in-plonk/"
+date = "2022/04/18"
+category = ["zkp"]
+description = ""
