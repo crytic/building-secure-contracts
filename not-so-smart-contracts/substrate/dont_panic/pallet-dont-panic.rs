@@ -42,7 +42,7 @@ pub mod pallet {
 
 	#[pallet::call]
 	impl<T:Config> Pallet<T> {
-		/// Do some work
+		/// Find important value
 		///
 		/// Parameters:
 		/// - `useful_amounts`: A vector of u64 values in which there is a important value.
