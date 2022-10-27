@@ -1,4 +1,5 @@
 # Namespace Storage Variable Collsion
+NOTE: The following was possible until cairo-lang 0.10.0.
 
 In Cairo, it is possible to use namespaces to scope functions under an identifier. However, storage variables are not scoped by these namespaces. If a developer accidentally uses the same variable name in two different namespaces, it could lead to a storage collision.
 

@@ -1,4 +1,5 @@
 # Dangerous Public Imports in Libraries
+NOTE: The following was possible until cairo-lang 0.10.0.
 
 When a library is imported in Cairo, all functions can be called even if some of them are not declared in the import statement. As a result, it is possible to call functions that a developer may think is unexposed, leading to unexpected behavior.
 
