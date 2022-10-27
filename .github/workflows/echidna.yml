@@ -44,6 +44,22 @@ jobs:
             contract: Token
             outcome: failure
             expected: 'transfer(address,uint256):\s*failed'
+          - name: Exercise 5
+            workdir: dvdefi/
+            files: .
+            config: naivereceiver.yaml
+            crytic-args: --hardhat-ignore-compile
+            contract: NaiveReceiverEchidna
+            outcome: failure
+            expected: 'echidna_test_contract_balance:\s*failed'
+          - name: Exercise 6
+            workdir: dvdefi/
+            files: .
+            config: unstoppable.yaml
+            crytic-args: --hardhat-ignore-compile
+            contract: UnstoppableEchidna
+            outcome: failure
+            expected: 'echidna_testFlashLoan:\s*failed'
           - name: TestToken
             workdir: program-analysis/echidna/example/
             files: testtoken.sol
@@ -97,6 +113,28 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+
+    - name: Checkout Damn Vulnerable DeFi solutions
+      uses: actions/checkout@v3
+      if: startsWith(matrix.workdir, 'dvdefi')
+      with:
+        repository: crytic/damn-vulnerable-defi-echidna
+        ref: solutions
+        path: ${{ matrix.workdir }}
+
+    - name: Set up Nodejs
+      uses: actions/setup-node@v3
+      if: startsWith(matrix.workdir, 'dvdefi')
+      with:
+        node-version: 16
+
+    - name: Install dependencies and compile
+      if: startsWith(matrix.workdir, 'dvdefi')
+      run: |
+        yarn install --frozen-lockfile
+        npx hardhat compile --force
+      working-directory: ${{ matrix.workdir }}
+
     - name: Run Echidna
       uses: crytic/echidna-action@v2
       id: echidna
@@ -109,6 +147,8 @@ jobs:
         solc-version: ${{ matrix.solc-version || '0.5.11' }}
         echidna-workdir: ${{ matrix.workdir }}
         echidna-version: edge
+        crytic-args: ${{ matrix.crytic-args || '' }}
+
     - name: Verify that the exit code is correct
       run: |
         if [[ ${{ steps.echidna.outcome }} = ${{ matrix.outcome }} ]]; then
@@ -117,6 +157,7 @@ jobs:
           echo "Outcome mismatch. Expected ${{ matrix.outcome }} but got ${{ steps.echidna.outcome }}"
           exit 1
         fi
+
     - name: Verify that the output is correct
       run: |
         if grep -q "${{ matrix.expected }}" "${{ steps.echidna.outputs.output-file }}"; then
