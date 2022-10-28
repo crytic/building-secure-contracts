@@ -19,7 +19,7 @@ function depositToL2(uint256 to,  uint256 amount) public returns (bool) {
 }
 ```
 
-If a L1 message is never processed by the sequencer, users will never receive their tokens either in L1 or L2, so they need to way to cancel it.
+If a L1 message is never processed by the sequencer, users will never receive their tokens either in L1 or L2, so they need a way to cancel it.
 
 As a more real example, a recent [AAVE audit](https://github.com/aave-starknet-project/aave-starknet-bridge/pull/106#issue-1336925381) highlighed this issue and required to add code to cancel messages. 
 
