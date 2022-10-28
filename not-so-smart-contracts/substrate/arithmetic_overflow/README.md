@@ -32,7 +32,7 @@ In the [`pallet-overflow`](./pallet-overflow.rs) pallet, notice that the `transf
 
 The sender of the extrinsic can exploit this vulnerability by causing `update_sender` to underflow, which artificially inflates their balance. 
 
-**Note**: This toy example has additional issues like the fact that that there is no check whether the `sender` has enough tokens to transfer `amount`. However, for the sake of simplicity, this example is sufficient. 
+**Note**: Aside from the stronger mitigations mentioned below, a check to make sure that `sender` has at least `amount` balance would have also prevented an underflow.
 
 # Mitigations
 - Use `checked` or `saturating` functions for arithmetic operations.
