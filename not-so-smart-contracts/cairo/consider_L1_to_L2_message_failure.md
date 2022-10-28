@@ -25,4 +25,4 @@ As a more real example, a recent [AAVE audit](https://github.com/aave-starknet-p
 
 # Mitigations
 
-When sending a message from L1 to L2, consider the case where a message is never processed by the sequencer. This can block either the contract to reach certain state or users to retreive their funds. Allow to use `startL1ToL2MessageCancellation` and `cancelL1ToL2Message` to cancel ongoing messages, if needed. 
+When sending a message from L1 to L2, consider the case where a message is never processed by the sequencer. This can block either the contract to reach certain state or users to retrieve their funds. Allow to use `startL1ToL2MessageCancellation` and `cancelL1ToL2Message` to cancel ongoing messages, if needed. 
