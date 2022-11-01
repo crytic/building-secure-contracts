@@ -1,5 +1,3 @@
-initialize: init.json
-multi-abi: true
 testMode: assertion
 balanceContract: 10000000000000000000000
 testLimit: 100000000000
