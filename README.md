@@ -13,6 +13,11 @@ Follow our guidelines and best practices to write secure smart contracts.
   - [Token integration checklist](./development-guidelines/token_integration.md): What to check when interacting with arbitrary token
 - [Learn EVM](./learn_evm): EVM technical knowledge
   - [EIPs - forks](./learn_evm/eips_forks.md): summarize the EIPs included in each fork
+- [Not so smart contracts](./not-so-smart-contracts): Examples of smart contract common issues. Each issue contains a description, an example and recommendations
+   - [Algorand](./not-so-smart-contracts/algorand)
+   - [Cairo](./not-so-smart-contracts/cairo)
+   - [Cosmos](./not-so-smart-contracts/cosmos)
+   - [Substrate](./not-so-smart-contracts/Substrate)
 - [Program analysis](./program-analysis): How to use automated tools to secure contracts
   - [Echidna](./program-analysis/echidna): a fuzzer that will check your contract's properties.
   - [Slither](./program-analysis/slither): a static analyzer avaialable through a CLI and scriptable interface.
@@ -20,3 +25,5 @@ Follow our guidelines and best practices to write secure smart contracts.
   - For each tool, this training material will provide:
     - a theoretical introduction, a walkthrough of its API, and a set of exercises.
     - exercises expected to require ~two hours to practically learn its operation.
+- [Ressources](./ressources): Various online ressources
+   - [Trail of Bits blogposts](./resources/tob_blogposts.md) List of blockchain related blogpost made by Trail of Bits
