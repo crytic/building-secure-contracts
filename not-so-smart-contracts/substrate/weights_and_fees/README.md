@@ -24,11 +24,9 @@ One potential fix for this is to set a fixed weight if the length of `useful_amo
 ```rust
 impl WeighData<(&Vec<u64>,)> for MyWeightFunction {
     fn weigh_data(&self, (amounts,): (&Vec<u64>,)) -> Weight {
-        if amounts.len() > 0 {
-            self.0 + self.0.saturating_mul(amounts.len() as u64).into()
-        } else {
-            self.0
-        }
+        // The weight function is `y = mx + b` where `m` and `b` are both `self.0` (the static fee) and `x` is the length of the `amounts` array.
+        // If `amounts.len() == 0` then the weight is simply the static fee (i.e. `y = b`)
+        self.0 + self.0.saturating_mul(amounts.len() as u64).into()
     }
 }
 ```
