@@ -25,5 +25,5 @@ Follow our guidelines and best practices to write secure smart contracts.
   - For each tool, this training material will provide:
     - a theoretical introduction, a walkthrough of its API, and a set of exercises.
     - exercises expected to require ~two hours to practically learn its operation.
-- [Ressources](./ressources): Various online ressources
+- [Resources](./resources): Various online resources
    - [Trail of Bits blogposts](./resources/tob_blogposts.md) List of blockchain related blogpost made by Trail of Bits
