@@ -1,6 +1,4 @@
-# Building Secure Smart Contracts - Devcon Edition
-
-The slides are [here](https://github.com/crytic/building-secure-contracts/blob/devcon/Josselin%20Feist%2C%20Gustavo%20Grieco%20-%20Building%20Secure%20Contracts_%20Use%20Echidna%20Like%20a%20Pro.pdf).
+# Building Secure Smart Contracts - EthGathering Edition
 
 ## Install Echidna
 - On MacOs: `brew install echidna`
@@ -21,5 +19,5 @@ Consider using [solc-select](https://github.com/crytic/solc-select) to easily sw
 - `solc-select install 0.7.0`: to install solc `0.7.0`
 - `solc-select use 0.7.0`: to switch to solc `0.7.0`
 
-[Building-secure-contracts](https://github.com/crytic/building-secure-contracts) contains additional exercises and guidelines that won't be covered during the Devcon workshop.
+[Building-secure-contracts](https://github.com/crytic/building-secure-contracts) contains additional exercises and guidelines that won't be covered during the EthGathering workshop.
 
