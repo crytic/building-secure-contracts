@@ -13,7 +13,7 @@ contract PoolDeployer {
     }
 }
 
-contract E2E is IFlashLoanEtherReceiver {
+contract SideEntranceEchidna is IFlashLoanEtherReceiver {
     SideEntranceLenderPool pool;
 
     uint256 initialPoolBalance;
