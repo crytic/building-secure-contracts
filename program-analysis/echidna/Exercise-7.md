@@ -15,9 +15,8 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
     - clone the repo via `git clone https://github.com/tinchoabbate/damn-vulnerable-defi -b v2.0.0`, and
     - install the dependencies via `yarn install`.
 2. To run Echidna on these contracts you must comment out the `dependencyCompiler` section in `hardhat.config.js`. Otherwise, the project will not compile with [`crytic-compile`](https://github.com/crytic/crytic-compile). See the example provided [here](./exercises/exercise7/example.hardhat.config.ts).
-3. For this exercise we will be using Etheno to deploy the `SideEntranceLenderPool` contract. You can find more about Etheno [here](./end-to-end-testing.md).
-4. Analyze the `before` function in `test/side-entrance/side-entrance.challenge.js` to identify what initial setup needs to be done.
-5. Create a contract called `E2E` to be used for the end-to-end testing by Echidna.
+3. Analyze the `before` function in `test/side-entrance/side-entrance.challenge.js` to identify what initial setup needs to be done.
+4. Create a contract to be used for the property testing by Echidna.
 
 No skeleton will be provided for this exercise.
 
@@ -39,72 +38,27 @@ This solution can be found in [exercises/exercise7/solution.sol](./exercises/exe
 <summary>Solution Explained (spoilers ahead)</summary>
 
 The goal of the side entrance challenge is to realize that the contract's accounting of its ETH balance is misconfigured. `balanceBefore` is used to track the balance of the contract before the flash loan BUT `address(this).balance` is used to track the balance of the contract after the flash loan. Thus, you can use the deposit function to repay your flash loan while still maintaining that the contract's total balance of ETH has not changed (i.e. `address(this).balance >= balanceBefore`). Since the ETH that was deposited is now owned by you, you can now also withdraw it and drain all the funds from the contract.
-  
-We instruct Echidna to do a flashloan. Using the `setEnableWithdraw` and `setEnableDeposit` Echidna will search for function(s) to call inside the flashloan callback to try and break the `testPoolBalance` property.
+
+In order for Echidna to be able to interact with the `SideEntranceLenderPool`, it has to be deployed first. However, deploying and funding it from the contract to be used by Echidna won't work, as the funding transaction's `msg.sender` is the contract itself. This means that the owner of the funds is the Echidna contract and therefore it can remove the funds by calling `withdraw()`, without the need for the exploit. 
+
+To prevent that issue, a simple factory contract has to be created to deploy the pool without setting the Echidna property testing contract as the owner of the funds. This factory has a public function that deploys a `SideEntranceLenderPool`, funds it with the given amount, and return its address. Now, since the Echidna testing contract is not the owner of the funds, it cannot call `withdraw()` to empty the pool.
+
+Now that the challenge is set up as intended, we proceed to solve it by instructing Echidna to do a flashloan. Using the `setEnableWithdraw` and `setEnableDeposit` Echidna will search for function(s) to call inside the flashloan callback to try and break the `testPoolBalance` property.
   
 At some point Echidna will identify that if (1) `deposit` is used to pay back the flash loan and (2) `withdraw` is called right after, the `testPoolBalance` property breaks.
 
-To use Etheno, you can use an example deployment script like the one below via Hardhat:
-```javascript
-const hre = require("hardhat");
-const ethers = hre.ethers;
-
-async function main() {
-  const ETHER_IN_POOL = ethers.utils.parseEther("1000");
-
-  [deployer, attacker] = await ethers.getSigners();
-
-  const SideEntranceLenderPoolFactory = await ethers.getContractFactory(
-    "SideEntranceLenderPool",
-    deployer
-  );
-
-  pool = await SideEntranceLenderPoolFactory.deploy();
-  await pool.deployed();
-  console.log(`pool address ${pool.address}`);
-
-  await this.pool.deposit({ value: ETHER_IN_POOL });
-
-}
-
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
-```
-Make sure to add a localhost network to be able to deploy to Etheno. Example for Hardhat:
-```javascript
-  networks: {
-    localhost: {
-      url: "http://127.0.0.1:8545",
-    },
-  }
-```
-
-To deploy to Etheno run the following command:
-```shell
-etheno --ganache --ganache-args="--miner.blockGasLimit 10000000" -x init.json
-```
-In another shell run the following hardhat command:
-```shell
-npx hardhat run scripts/deploy.js --network localhost
-```
-  
-And then your shell command works fine.
-
-Don't forget to copy the initialization JSON file (`init.json`) from Etheno to your fuzzing environment!
-  
 Example Echidna output:
 ```
-$ echidna-test . --contract E2E --config config.yaml
+$ echidna-test . --contract EchidnaSideEntranceLenderPool --config config.yaml
 ...
-testPoolBalance(): failed!💥
-  Call sequence, shrinking (3003/5000):
-    setEnableDeposit(true,208)
+testPoolBalance(): failed!💥  
+  Call sequence:
+    execute() Value: 0x103
+    setEnableDeposit(true,256)
     flashLoan(1)
-    withdraw()
+    setEnableWithdraw(true)
+    setEnableDeposit(false,0)
+    execute()
     testPoolBalance()
 ...
 ```

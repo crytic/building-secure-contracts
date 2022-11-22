@@ -3,9 +3,18 @@ pragma solidity ^0.8.4;
 
 import "./side-entrance/SideEntranceLenderPool.sol";
 
-contract E2E is IFlashLoanEtherReceiver {
+contract PoolDeployer {
+    function deployNewPool() public payable returns (SideEntranceLenderPool) {
+        SideEntranceLenderPool p;
+        p = new SideEntranceLenderPool();
+        p.deposit{value: msg.value}();
+
+        return p;
+    }
+}
+
+contract SideEntranceEchidna is IFlashLoanEtherReceiver {
     SideEntranceLenderPool pool;
-    address ADDRESS_POOL = 0x1dC4c1cEFEF38a777b15aA20260a54E584b16C48;
 
     uint256 initialPoolBalance;
 
@@ -14,7 +23,11 @@ contract E2E is IFlashLoanEtherReceiver {
     uint256 depositAmount;
 
     constructor() payable {
-        pool = SideEntranceLenderPool(ADDRESS_POOL);
+        require(msg.value == 1000 ether);
+
+        PoolDeployer p = new PoolDeployer();
+
+        pool = p.deployNewPool{value: 1000 ether}();
         initialPoolBalance = address(pool).balance;
     }
 
@@ -45,4 +58,5 @@ contract E2E is IFlashLoanEtherReceiver {
     function testPoolBalance() public view {
         assert(address(pool).balance >= initialPoolBalance);
     }
+
 }
