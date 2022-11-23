@@ -89,13 +89,13 @@ from manticore.ethereum import ManticoreEVM
 m = ManticoreEVM()
 ```
 
-A non-contract account is created using [m.create_account](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.create_account):
+A non-contract account is created using [m.create_account](https://manticore.readthedocs.io/en/latest/evm.html#manticore.ethereum.ManticoreEVM.create_account):
 
 ```python3
 user_account = m.create_account(balance=1 * 10**18)
 ```
 
-A Solidity contract can be deployed using [m.solidity_create_contract](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.solidity_create_contract):
+A Solidity contract can be deployed using [m.solidity_create_contract](https://manticore.readthedocs.io/en/latest/evm.html#manticore.ethereum.ManticoreEVM.solidity_create_contract):
 
 ```python3
 source_code = '''
@@ -114,7 +114,7 @@ contract_account = m.solidity_create_contract(source_code, owner=user_account)
 
 #### Summary
 
-- You can create user and contract accounts with [m.create_account](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.create_account) and [m.solidity_create_contract](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.solidity_create_contract.
+- You can create user and contract accounts with [m.create_account](https://manticore.readthedocs.io/en/latest/evm.html#manticore.ethereum.ManticoreEVM.create_account) and [m.solidity_create_contract](https://manticore.readthedocs.io/en/latest/evm.html#manticore.ethereum.ManticoreEVM.solidity_create_contract).
 
 ### Executing transactions
 
@@ -125,7 +125,7 @@ Manticore supports two types of transaction:
 
 #### Raw transaction
 
-A raw transaction is executed using [m.transaction](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.transaction):
+A raw transaction is executed using [m.transaction](https://manticore.readthedocs.io/en/latest/evm.html#manticore.ethereum.ManticoreEVM.transaction):
 
 ```python3
 m.transaction(caller=user_account,
@@ -136,8 +136,8 @@ m.transaction(caller=user_account,
 
 The caller, the address, the data, or the value of the transaction can be either concrete or symbolic:
 
-- [m.make_symbolic_value](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.make_symbolic_value) creates a symbolic value.
-- [m.make_symbolic_buffer(size)](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.make_symbolic_buffer) creates a symbolic byte array.
+- [m.make_symbolic_value](https://manticore.readthedocs.io/en/latest/evm.html#manticore.ethereum.ManticoreEVM.make_symbolic_value) creates a symbolic value.
+- [m.make_symbolic_buffer(size)](https://manticore.readthedocs.io/en/latest/evm.html#manticore.ethereum.ManticoreEVM.make_symbolic_buffer) creates a symbolic byte array.
 
 For example:
 
@@ -181,7 +181,7 @@ print("Results are in {}".format(m.workspace))
 
 ### Terminate the Exploration
 
-To stop the exploration use [m.finalize()](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.finalize). No further transactions should be sent once this method is called and Manticore generates test cases for each of the path explored.
+To stop the exploration use [m.finalize()](https://manticore.readthedocs.io/en/latest/evm.html#manticore.ethereum.ManticoreEVM.finalize). No further transactions should be sent once this method is called and Manticore generates test cases for each of the path explored.
 
 ## Summary: Running under Manticore
 
