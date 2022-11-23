@@ -11,10 +11,9 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Setup
 
-1. Follow the instructions on the [Damn Vulnerable DeFi CTF][ctf] page, namely:
-    - clone the repo via `git clone https://github.com/tinchoabbate/damn-vulnerable-defi -b v2.0.0`, and
-    - install the dependencies via `yarn install`.
-2. To run Echidna on these contracts you must comment out the `dependencyCompiler` section in `hardhat.config.js`. Otherwise, the project will not compile with [`crytic-compile`](https://github.com/crytic/crytic-compile). See the example provided [here](./exercises/exercise7/example.hardhat.config.ts).
+## Setup
+1. Clone the repo: `git clone https://github.com/crytic/damn-vulnerable-defi-echidna`
+2. install the dependencies via `yarn install`.
 3. Analyze the `before` function in `test/side-entrance/side-entrance.challenge.js` to identify what initial setup needs to be done.
 4. Create a contract to be used for the property testing by Echidna.
 
