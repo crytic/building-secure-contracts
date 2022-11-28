@@ -42,6 +42,9 @@ The following list every EIP associated to an Ethereum fork.
 | [London](https://github.com/ethereum/execution-specs/blob/a01c4c76e12fe9f0debf93bda7f67f002d77f8b4/network-upgrades/mainnet-upgrades/london.md) | [3554](https://eips.ethereum.org/EIPS/eip-3554)  | Difficulty Bomb Delay to December 1st 2021 | | |
 | [Arrow Glacier](https://github.com/ethereum/execution-specs/blob/bfe84c9a9b24695f160b4686d3b4640786ee9bac/network-upgrades/mainnet-upgrades/arrow-glacier.md) | [4345](https://eips.ethereum.org/EIPS/eip-4345)  |  Difficulty Bomb Delay to June 2022 | | |
 | [Gray Glacier](https://github.com/ethereum/execution-specs/blob/bfe84c9a9b24695f160b4686d3b4640786ee9bac/network-upgrades/mainnet-upgrades/gray-glacier.md) | [5133](https://eips.ethereum.org/EIPS/eip-5133)  |  Difficulty Bomb Delay to mid-September 2022 | | |
+| [Paris](https://github.com/ethereum/execution-specs/blob/0a18c44ab6e567d74f2700ab1a3208644e08276b/network-upgrades/mainnet-upgrades/paris.md) | [3675](https://eips.ethereum.org/EIPS/eip-3675)  |  Upgrade consensus to Proof-of-Stake |  | | Changes to `DIFFICULTY` and `BLOCKHASH`
+| [Paris](https://github.com/ethereum/execution-specs/blob/0a18c44ab6e567d74f2700ab1a3208644e08276b/network-upgrades/mainnet-upgrades/paris.md) | [4399](https://eips.ethereum.org/EIPS/eip-4399)  |  Supplant DIFFICULTY opcode with PREVRANDAO | X | | `DIFFICULTY` becomes `PREVRANDAO`
+
 
 In this table:
 - `Opcode`: the EIP adds or removes an opcode
