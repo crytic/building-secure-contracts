@@ -64,6 +64,8 @@ cd /home/training
 
 ### Binary
 
-[https://github.com/crytic/echidna/releases/tag/v2.0.2](https://github.com/crytic/echidna/releases/tag/v2.0.2)
+Check for the lastest released binary here:
+
+[https://github.com/crytic/echidna/releases/latest](https://github.com/crytic/echidna/releases/latest)
 
 The solc version is important to ensure that these exercises work as expected, we tested them using version 0.5.11.
