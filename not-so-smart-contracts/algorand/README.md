@@ -16,7 +16,7 @@ Each _Not So Smart Contract_ includes a standard set of information:
 
 | Not So Smart Contract | Description | Applicable to smart signatures | Applicable to smart contracts |
 | --- | --- | --- | --- |
-| [Rekeying](rekeying) | Smart signatures are rekeyable | yes | yes* |
+| [Rekeying](rekeying) | Attacker rekeys an account | yes | yes |
 | [Unchecked Transaction Fees](unchecked_transaction_fee) | Attacker sets excessive fees for smart signature transactions | yes | no |
 | [Closing Account](closing_account) | Attacker closes smart signature accounts | yes | no |
 | [Closing Asset](closing_asset) | Attacker transfers entire asset balance of a smart signature | yes | no |
