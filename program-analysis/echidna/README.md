@@ -1,9 +1,8 @@
 # Echidna Tutorial
 
-The aim of this tutorial is to show how to use Echidna to automatically test smart contracts.
+The aim of this tutorial is to show how to use Echidna to automatically test smart contracts. 
 
-The first part introduces how to write properties for Echidna.
-The second part is a set of exercises to solve.
+Watch our [Fuzzing workshop](https://www.youtube.com/watch?v=QofNQxW_K08&list=PLciHOL_J7Iwqdja9UH4ZzE8dP1IxtsBXI) to learn through live coding sessions.
 
 **Table of contents:**
 
@@ -35,6 +34,7 @@ The second part is a set of exercises to solve.
   - [Exercise 5](./Exercise-5.md): Solving Damn Vulnerable DeFi - Unstoppable
   - [Exercise 6](./Exercise-6.md): Solving Damn Vulnerable DeFi - Naive Receiver
   - [Exercise 7](./Exercise-7.md): Solving Damn Vulnerable DeFi - Side Entrance
+  - [Exercise 8](./Exercise-8.md): Solving Damn Vulnerable DeFi - The Rewarder
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
