@@ -13,6 +13,7 @@ Contract accounts are accounts which are derived from the Teal code that is in c
 
 Similar issue affects the accounts that created a delegate signature by signing a Teal program. Delegator is only needed to sign the contract and any user with access to delegate signature can construct and submit transactions. Because of this, a malicious user can rekey the sender’s account if the Teal logic accepts a transaction with the rekey-to field set to the user controlled address.
 
+Note: From Teal v6, Applications can also be rekeyed by executing an inner transaction with "RekeyTo" field set to a non-zero address. Rekeying an application allows to bypass the application logic and directly transfer Algos and assets of the application account.
 ## Exploit Scenarios
 
 A user creates a delegate signature for recurring payments. Attacker rekeys the sender’s account by specifying the rekey-to field in a valid payment transaction.
@@ -43,3 +44,5 @@ def withdraw(
 - For the Teal programs written in Teal version 2 or greater, either used as delegate signature or contract account, include a check in the program that verifies rekey-to field to be equal to ZeroAddress or any intended address. Teal contracts written in Teal version 1 are not affected by this issue. Rekeying feature is introduced in version 2 and Algorand rejects transactions that use features introduced in the versions later than the executed Teal program version.
 
 - Use [Tealer](https://github.com/crytic/tealer) to detect this issue.
+
+- For Applications, verify that user provided value is not used for `RekeyTo` field of a inner transaction. Additionally, avoid rekeying an application to admin controlled address. This allows for the possibility of "rug pull" by a malicious admin.
