@@ -17,7 +17,7 @@ Follow our guidelines and best practices to write secure smart contracts.
    - [Algorand](./not-so-smart-contracts/algorand)
    - [Cairo](./not-so-smart-contracts/cairo)
    - [Cosmos](./not-so-smart-contracts/cosmos)
-   - [Substrate](./not-so-smart-contracts/Substrate)
+   - [Substrate](./not-so-smart-contracts/substrate)
 - [Program analysis](./program-analysis): How to use automated tools to secure contracts
   - [Echidna](./program-analysis/echidna): a fuzzer that will check your contract's properties.
   - [Slither](./program-analysis/slither): a static analyzer avaialable through a CLI and scriptable interface.
