@@ -47,7 +47,7 @@ Since `ExternalTest` defines no additional methods, running Echidna directly on 
 In this case, there are several alternatives:
 
 **Contract wrapper**: define specific operations to "wrap" the system to test. For every operation that we want Echidna to execute in the system to test, 
-we add one or more functions that performs external to it.
+we add one or more functions that performs external call to it.
 
 ```solidity
 contract ExternalTest {
