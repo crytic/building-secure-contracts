@@ -41,7 +41,7 @@ contract Test {
     token.mint(address(this), ...);
   }
   
-  function getShares_never_reverts(uint256 val) public {
+  function getShares_never_reverts() public {
       (bool b,) = c.call(abi.encodeWithSignature("getShares(address)", address(this)));
       assert(b);
   }
