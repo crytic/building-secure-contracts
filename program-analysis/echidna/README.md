@@ -19,6 +19,7 @@ Watch our [Fuzzing workshop](https://www.youtube.com/watch?v=QofNQxW_K08&list=PL
   - [Frequently Asked Questions](./frequently_asked_questions.md): Answers to common questions about Echidna
 - Advanced
   - [How to collect a corpus](./collecting-a-corpus.md): How to use Echidna to collect a corpus of transactions
+  - [How to use optimization mode](./optimization_mode.md): How to use Echidna to optimize a function
   - [How to detect high gas consumption](./finding-transactions-with-high-gas-consumption.md): How to find functions with high gas consumption.
   - [How to perform smart contract fuzzing at a large scale](./smart-contract-fuzzing-at-scale.md): How to use Echidna to run a long fuzzing campaign for complex smart contracts.
   - [How to test a library](https://blog.trailofbits.com/2020/08/17/using-echidna-to-test-a-smart-contract-library/): How Echidna was used to test the library in Set Protocol (blogpost)
