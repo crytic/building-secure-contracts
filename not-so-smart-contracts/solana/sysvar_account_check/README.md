@@ -76,4 +76,7 @@ Since version 1.8.0, the load_instruction_at function has been [deprecated](http
 Utilizing the latest Solana version and referencing checked functions, especially on sensitive parts of a contract is crucial even if potential attack vectors have been fixed post-audit. 
 Leaving the system exposed to any point of failure compromises the entire system's integrity, especially while the contracts are being constantly updated.
 
+## Resources:
+[samczsun's Wormhole exploit breakdown thread](https://twitter.com/samczsun/status/1489044939732406275)
+
 
