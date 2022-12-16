@@ -1,0 +1,10 @@
+- [ ] Enable and address all compiler/linter warnings
+- [ ] Increase unit and feature tests coverage
+- [ ] Remove dead code, unused variables, functions, libraries and other extraneous weights 
+- [ ] Provide external documentation and past security reviews / bug findings (if any)
+- [ ] Use inline comments (preferably natspec for solidity)
+- [ ] Label and describe your tests
+- [ ] Document compilation and deployment process
+- [ ] For solidity code, ensure slither runs successfully (document any required intermediate setup process if any)
+- [ ] Ensure that the commit hash / branch/ release for the audit has been provided before the review commencement date
+- [ ] Ensure all engineers assigned to the audit review have been invited to all relevant repositories before commencement date
