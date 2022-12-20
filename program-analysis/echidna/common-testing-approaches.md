@@ -5,7 +5,7 @@ This is caused by the existence of multiple accounts interacting with one or man
 While a fuzzer can simulate the Ethereum Virtual Machine and can potentially use any account with any feature (e.g. a an unlimited amount of ETH), 
 we take care to avoid breaking some important underlying assumptions of transactions that are impossible in Ethereum (e.g. for instance using msg.sender as the zero address). 
 That is why it is important to have a clear view of the system to test, and how transactions are going to be simulated. There are a few classifications for the testing approach. 
-We will start by two them, internal or external:
+We will start with two of them, internal and external:
 
 **Table of contents:**
 - [Common testing approaches](#common-testing-approaches)
@@ -47,7 +47,7 @@ Since `ExternalTest` defines no additional methods, running Echidna directly on 
 In this case, there are several alternatives:
 
 **Contract wrapper**: define specific operations to "wrap" the system to test. For every operation that we want Echidna to execute in the system to test, 
-we add one or more functions that performs external to it.
+we add one or more functions that performs external call to it.
 
 ```solidity
 contract ExternalTest {
