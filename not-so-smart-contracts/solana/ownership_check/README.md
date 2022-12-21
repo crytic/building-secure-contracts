@@ -32,7 +32,7 @@ fn set_owner(program_id: &Pubkey, new_owner: Pubkey, accounts: &[AccountInfo]) -
 ## Mitigation  
 
 ```rust
-  	if current_owner.owner != program_id {
+  	if EXPECTED_ACCOUNT.owner != program_id {
     	return Err(ProgramError::IncorrectProgramId);
 	}
 ```
