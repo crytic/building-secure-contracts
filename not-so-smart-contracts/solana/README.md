@@ -15,6 +15,8 @@ Each _Not So Smart Contract_ includes a standard set of information:
 ## Vulnerabilities
 | Not So Smart Contract | Description |
 | --- | --- |
+| [Ownership Check](ownership_check) | Broken access control due to missing ownership validation |
+| [Signer Check](signer_check) | Broken access control due to missing signer validation |
 | [Sysvar Account Check](sysvar_account_check) | Sysvar accounts are vulnerable to being spoofed |
 
 ## Credits
