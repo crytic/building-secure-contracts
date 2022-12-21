@@ -33,7 +33,7 @@ fn set_owner(program_id: &Pubkey, new_owner: Pubkey, accounts: &[AccountInfo]) -
 
 ```rust
   	if current_owner.owner != program_id {
-    	return Err(InvalidAccountOwner.into());
+    	return Err(ProgramError::IncorrectProgramId);
 	}
 ```
 For further reading on different forms of account verification in Solana and implementation refer to the [Solana Cookbook](https://solanacookbook.com/references/programs.html#how-to-verify-accounts)
