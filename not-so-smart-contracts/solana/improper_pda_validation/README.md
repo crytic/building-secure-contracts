@@ -1,5 +1,5 @@
 
-# Improper PDA bump seed validation
+# [WIP] Improper PDA bump seed validation
 
 PDAs (Program Derived Addresses) are, by definition, [program-controlled](https://docs.solana.com/terminology#program-derived-account-pda) accounts and therefore can be used to sign without the need to provide a private key. PDAs are generated through a set of seeds and a program id, which are then collectively hashed to verify that the key doesn't lie on the ed25519 curve (curve used by Solana to sign transactions). 
 
