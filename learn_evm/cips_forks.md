@@ -1,4 +1,4 @@
-[WIP] The following lists every CIP associated to a Celo fork.
+[WIP] The following lists every CIP associated to a Celo fork. Celo is an EVM-compatible chain.
 | Fork  | CIP/EIP  | What it does 
 |---|---|---|
  [Churrito](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0024.md)| [EIP 211](https://eips.ethereum.org/EIPS/eip-211)| Create `RETURNDATASIZE` and `RETURNDATACOPY` opcodes
