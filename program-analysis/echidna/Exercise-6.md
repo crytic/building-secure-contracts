@@ -46,7 +46,7 @@ We recommend to first try without reading the following hints. The hints are in 
 
 ## Solution
 
-This solution can be found in the [`solutions` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/contracts/unstoppable/UnstoppableEchidna.sol).
+This solution can be found in the [`solutions` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/solutions/contracts/unstoppable/UnstoppableEchidna.sol).
 
 [ctf]: https://www.damnvulnerabledefi.xyz/
 
