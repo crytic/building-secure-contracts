@@ -1,0 +1,27 @@
+[WIP] The following lists every CIP associated to a Celo fork.
+| Fork  | CIP/EIP  | What it does 
+|---|---|---|
+ [Churrito](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0024.md)| [EIP 211](https://eips.ethereum.org/EIPS/eip-211)| Create `RETURNDATASIZE` and `RETURNDATACOPY` opcodes
+ [Donut](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0027.md)| [CIP 25](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0025.md)| Add Ed25519 precompile
+ [Donut](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0027.md)| [CIP 31 - *copied from EIP-2539*](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0031.md) | Add precompile for BLS12-381 curve operations
+ [Donut](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0027.md)| [CIP 30 - *copied from EIP-2539*](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0030.md) | Add precompile for BLS12-377 curve operations
+ [Donut](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0027.md)| [CIP 20](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0020.md) | Add extensible hash function precompile
+ [Donut](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0027.md)| [CIP 21](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0021.md) | Add governable lookback window
+ [Donut](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0027.md)| [CIP 22](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0022.md) | Upgrade epoch SNARK data 
+ [Donut](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0027.md)| [CIP 26](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0026.md) | Add precompile to return BLS pubkey of given validator
+ [Donut](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0027.md)| [CIP 28](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0028.md) | Split etherbase into separate addresses 
+ [Donut](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0027.md)| [CIP 35](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0035.md) | Add support for Ethereum-compatible transactions
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [EIP 2565](https://eips.ethereum.org/EIPS/eip-2565) | Define gas cost of ModExp precompile
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [CIP 48 - *modified from EIP 2929*](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0048.md) | Gas repricing
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [EIP 2718](https://eips.ethereum.org/EIPS/eip-2718) | Introduce typed transaction envelope
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [EIP 2930](https://eips.ethereum.org/EIPS/eip-2930) | Introduce optional access lists
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [CIP 42 - *modified from EIP 1559*](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0042.md) | Fee market changes
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [EIP 3529](https://eips.ethereum.org/EIPS/eip-3529) | Reduction in gas refunds
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [EIP 3541](https://eips.ethereum.org/EIPS/eip-3541) | Reject deployment of contract code starting with the `0xEF` byte
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [CIP 43](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0043.md) | Block Context
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [CIP 47](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0047.md) | Modify round change timeout formula 
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [CIP 45](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0045.md) | Modify transaction fee check
+ [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [CIP 50](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0050.md) | Make replay protection optional
+
+
+
