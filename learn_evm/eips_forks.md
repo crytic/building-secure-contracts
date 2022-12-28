@@ -1,4 +1,4 @@
-The following list every EIP associated to an Ethereum fork.
+The following lists every EIP associated to an Ethereum fork.
 
 | Fork  | EIP  | What it does  | Opcode | Gas | Notes
 |---|---|---|---|---|---|
