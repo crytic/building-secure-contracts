@@ -118,3 +118,5 @@ Seed: -6168343983565830424
 Testing with `multi-abi` is a useful tool for complex systems that require the user to interact with more than one contract, as we mentioned earlier. Another use case is for deployed contracts that require interactions to be initiated by specific addresses: for those, specifying the `sender` configuration setting allows to send the transactions from the correct account.
 
 A side-effect of using `multi-abi` is that the search space grows with the number of functions that can be called. This, combined with high values of sequence lengths, can make the fuzzing test not so thorough, because the dimension of the search space is simply too big to reasonably explore. Finally, adding more functions as fuzzing candidates makes the campaigns to take up more execution time.
+
+A final remark is that `multi-abi` testing in assertion mode ignores all assert failures from the contracts not under test. This is shown in `Flag.test_fail()` function: even though it explicitly asserts false, the Echidna test ignores it.
