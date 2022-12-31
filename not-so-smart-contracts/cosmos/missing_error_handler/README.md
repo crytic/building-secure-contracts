@@ -42,5 +42,6 @@ func (k msgServer) ApproveLoan(goCtx context.Context, msg *types.MsgApproveLoan)
 
 ## External examples
 - [ignite's tutorials](https://github.com/ignite/cli/issues/2828). 
+- [Fadeev's Loan Project](https://github.com/fadeev/loan/blob/master/x/loan/keeper/msg_server_approve_loan.go)
 - [JackalLabs](https://github.com/JackalLabs/canine-chain/issues/8).
 - [OllO](https://github.com/OllO-Station/ollo/issues/20)
