@@ -16,17 +16,17 @@ Follow our guidelines and best practices to write secure smart contracts.
     - [Forks <> CIPs](./learn_evm/cips_forks.md): Summarize the CIPs and EIPs included in each Celo fork *(EVM-compatible chain)*
     - [Upgrades <> TIPs](./learn_evm/tips_upgrades.md): Summarize the TIPs included in each TRON upgrade *(EVM-compatible chain)*
 
-- [Not so smart contracts](./not-so-smart-contracts): Examples of smart contract common issues. Each issue contains a description, an example and recommendations
+- [Not so smart contracts](./not-so-smart-contracts): Examples of common smart contract issues. Each issue contains a description, example and recommendation.
    - [Algorand](./not-so-smart-contracts/algorand)
    - [Cairo](./not-so-smart-contracts/cairo)
    - [Cosmos](./not-so-smart-contracts/cosmos)
    - [Substrate](./not-so-smart-contracts/substrate)
 - [Program analysis](./program-analysis): How to use automated tools to secure contracts
   - [Echidna](./program-analysis/echidna): a fuzzer that will check your contract's properties.
-  - [Slither](./program-analysis/slither): a static analyzer avaialable through a CLI and scriptable interface.
+  - [Slither](./program-analysis/slither): a static analyzer available through a CLI and scriptable interface.
   - [Manticore](./program-analysis/manticore): a symbolic execution engine that can prove the correctness properties.
   - For each tool, this training material will provide:
     - a theoretical introduction, a walkthrough of its API, and a set of exercises.
     - exercises expected to require ~two hours to practically learn its operation.
 - [Resources](./resources): Various online resources
-   - [Trail of Bits blogposts](./resources/tob_blogposts.md) List of blockchain related blogpost made by Trail of Bits
+   - [Trail of Bits blogposts](./resources/tob_blogposts.md): List of blockchain related blogposts made by Trail of Bits
