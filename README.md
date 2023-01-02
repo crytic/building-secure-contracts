@@ -12,7 +12,10 @@ Follow our guidelines and best practices to write secure smart contracts.
   - [Secure development workflow](./development-guidelines/workflow.md): A rough, high-level process to follow while you write code
   - [Token integration checklist](./development-guidelines/token_integration.md): What to check when interacting with arbitrary token
 - [Learn EVM](./learn_evm): EVM technical knowledge
-  - [EIPs - forks](./learn_evm/eips_forks.md): summarize the EIPs included in each fork
+  - [Forks <> EIPs](./learn_evm/eips_forks.md): Summarize the EIPs included in each Ethereum fork
+    - [Forks <> CIPs](./learn_evm/cips_forks.md): Summarize the CIPs and EIPs included in each Celo fork *(EVM-compatible chain)*
+    - [Upgrades <> TIPs](./learn_evm/tips_upgrades.md): Summarize the TIPs included in each TRON upgrade *(EVM-compatible chain)*
+
 - [Not so smart contracts](./not-so-smart-contracts): Examples of smart contract common issues. Each issue contains a description, an example and recommendations
    - [Algorand](./not-so-smart-contracts/algorand)
    - [Cairo](./not-so-smart-contracts/cairo)
