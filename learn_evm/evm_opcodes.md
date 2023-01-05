@@ -203,3 +203,14 @@ Pops 2 elements from the stack and pushes the second element onto the stack shif
 
 Saves a word to the EVM memory. Pops 2 elements from stack - the first element being the word memory address where the saved value (second element popped from stack) will be stored. 
 
+### EQ
+Pops 2 elements off the stack and pushes the value 1 to the stack in case they're equal, otherwise the value 0.
+
+### JUMPI (Jump If)
+Conditional - Pops 2 elements from the stack, the first element being the jump location and the second being the value 0 (false) or 1 (true). If the value’s 1 the PC will be altered and the jump executed. Otherwise, the value will be 0 and the PC will remain the same and execution unaltered.
+
+### SSTORE
+Pops 2 elements off the stack, the first element being the key and the second being the value which is then stored at the storage slot represented from the first element (key). 
+
+### SLOAD
+Pops 1 element off the stack, that being the key which is the storage slot and returns the read value stored there. 
