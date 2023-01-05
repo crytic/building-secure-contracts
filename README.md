@@ -13,6 +13,7 @@ Follow our guidelines and best practices to write secure smart contracts.
   - [Token integration checklist](./development-guidelines/token_integration.md): What to check when interacting with arbitrary token
 - [Learn EVM](./learn_evm): EVM technical knowledge
   - [EIPs - forks](./learn_evm/eips_forks.md): summarize the EIPs included in each fork
+  - [EVM Opcodes](./learn_evm/evm_opcodes.md): Details on all EVM opcodes
 - [Not so smart contracts](./not-so-smart-contracts): Examples of smart contract common issues. Each issue contains a description, an example and recommendations
    - [Algorand](./not-so-smart-contracts/algorand)
    - [Cairo](./not-so-smart-contracts/cairo)
