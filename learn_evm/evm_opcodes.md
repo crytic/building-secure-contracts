@@ -191,4 +191,15 @@ Pseudocode: `push(s[0]+s[1])`
 
 The following X bytes are read from PC, placed into a word, then this word is pushed onto the stack.
 
-### CALL
+### SHR
+
+Pops 2 elements from the stack and pushes the second element onto the stack shifted right by the shift amount (first element). 
+
+### SHL
+
+Pops 2 elements from the stack and pushes the second element onto the stack shifted left by the shift amount (first element).  
+
+### MSTORE
+
+Saves a word to the EVM memory. Pops 2 elements from stack - the first element being the word memory address where the saved value (second element popped from stack) will be stored. 
+
