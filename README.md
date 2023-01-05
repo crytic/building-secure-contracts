@@ -15,6 +15,7 @@ Follow our guidelines and best practices to write secure smart contracts.
   - [Forks <> EIPs](./learn_evm/eips_forks.md): Summarize the EIPs included in each Ethereum fork
     - [Forks <> CIPs](./learn_evm/cips_forks.md): Summarize the CIPs and EIPs included in each Celo fork *(EVM-compatible chain)*
     - [Upgrades <> TIPs](./learn_evm/tips_upgrades.md): Summarize the TIPs included in each TRON upgrade *(EVM-compatible chain)*
+    - [Forks <> BEPs](./learn_evm/beps_forks.md): Summarize the BEPs included in each BSC fork *(EVM-compatible chain)*
 
 - [Not so smart contracts](./not-so-smart-contracts): Examples of common smart contract issues. Each issue contains a description, example and recommendation.
    - [Algorand](./not-so-smart-contracts/algorand)
