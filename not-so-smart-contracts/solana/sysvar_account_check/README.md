@@ -39,8 +39,8 @@ Utilizing the latest Solana version and referencing checked functions, especiall
 Leaving the system exposed to any point of failure compromises the entire system's integrity, especially while the contracts are being constantly updated.
 
 Here is the code showing the sysvar account checks added between unchecked and checked functions:
-- [load_instruction_at vs load_instruction_at_checked](https://docs.rs/solana-program/1.13.5/src/solana_program/sysvar/instructions.rs.html#186-205)
-- [load_current_index vs load_current_index_checked](https://docs.rs/solana-program/1.13.5/src/solana_program/sysvar/instructions.rs.html#107-128)
+- [load_instruction_at](https://docs.rs/solana-program/1.13.5/src/solana_program/sysvar/instructions.rs.html#186-188) vs [load_instruction_at_checked](https://docs.rs/solana-program/1.13.5/src/solana_program/sysvar/instructions.rs.html#192-205)
+- [load_current_index](https://docs.rs/solana-program/1.13.5/src/solana_program/sysvar/instructions.rs.html#107-112) vs [load_current_index_checked](https://docs.rs/solana-program/1.13.5/src/solana_program/sysvar/instructions.rs.html#116-128)
 
 ---
 ## Example: Wormhole Exploit (February 2022)
