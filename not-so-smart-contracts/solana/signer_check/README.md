@@ -6,7 +6,7 @@ In case certain permissions are required to perform a sensitive function of the 
 
 ## Exploit Scenario
 The following contract updates the current market owner with a new one. Unfortunately, the only check being done here is against the current owner’s public key prior to setting a new owner. 
-Therefore, a malicious actor can set themselves as the new owner without being the actual market owner. This is because the current owner’s private key isn’t being verified considering the contract doesn’t check that the attacker has signed or not.
+Therefore, a malicious actor can set themselves as the new owner without being the actual market owner. This is because the current owner’s private key isn’t being verified considering the contract doesn’t check whether the account holder has signed or not.
 
 ### Example Contract 
 ```rust
