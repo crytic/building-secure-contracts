@@ -9,24 +9,19 @@ Here, `load_current_index` and `load_instruction_at` are functions that don't ve
 
 ### Example Contract 
 ```rust
-pub fn verify_signatures(
-account_info: &AccountInfo
-  ) -> ProgramResult {
-  
-  let index = solana_program::sysvar::instructions::load_current_index(
+pub fn verify_signatures(account_info: &AccountInfo) -> ProgramResult {
+    let index = solana_program::sysvar::instructions::load_current_index(
         &account_info.try_borrow_mut_data()?,
-);
-  
-  let secp_instruction = sysvar::instructions::load_instruction_at(
-      (index - 1) as usize,
-      &account_info.try_borrow_mut_data()?,
-);
+    );
 
-  if secp_instruction.program_id != secp256k1_program::id() {
-    return Err(InvalidSecpInstruction.into());
-  }
-
-  ...
+    let secp_instruction = sysvar::instructions::load_instruction_at(
+        (index - 1) as usize,
+        &account_info.try_borrow_mut_data()?,
+    );
+    if secp_instruction.program_id != secp256k1_program::id() {
+        return Err(InvalidSecpInstruction.into());
+    }
+    ...
 }
 ```
 Refer to [Mitigation](https://github.com/crytic/building-secure-contracts/tree/master/not-so-smart-contracts/solana/sysvar_account_check#Mitigation) to understand what's wrong with these functions and how sysvar account checks were added.
