@@ -17,7 +17,7 @@ fn set_owner(program_id: &Pubkey, new_owner: Pubkey, accounts: &[AccountInfo]) -
 	let mut market = Market::unpack(&market_info.data.borrow())?;
  
 	if &market.owner != current_owner.pubkey {
-    	return Err(InvalidMarketOwner.into());
+    	    return Err(InvalidMarketOwner.into());
 	}
 	market.owner = new_owner;
 
