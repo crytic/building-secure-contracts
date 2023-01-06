@@ -5,7 +5,7 @@ PDAs (Program Derived Addresses) are, by definition, [program-controlled](https:
 
 Values on this elliptic curve have a corresponding private key, which wouldn't make it a PDA. In the case a public key lying on the elliptic curve is found, our 32-byte address is modified through the addition of a bump to "bump" it off the curve. A bump, represented by a singular byte iterating through 255 to 0 is added onto our input until an address that doesn’t lie on the elliptic curve is generated, meaning that we’ve found an address without an associated private key. 
 
-The issue arises with seeds being able to have multiple bumps, thus allowing varying PDAs that are valid from the same seed. An attacker can create a PDA with fabricated data - the program ID and seeds are the same as the expected PDA but with different bump seeds. Without any explicit check against the bump seed itself, the program leaves itself vulnerable to the attacker tricking the program into thinking they’re the expected PDA and thus interacting with the contract on behalf of them.
+The issue arises with seeds being able to have multiple bumps, thus allowing varying PDAs that are valid from the same seed. An attacker can create a PDA with fabricated data - the program ID and seeds are the same as for the expected PDA but with different bump seeds. Without any explicit check against the bump seed itself, the program leaves itself vulnerable to the attacker tricking the program into thinking they’re the expected PDA and thus interacting with the contract on behalf of them.
 
 View ToB's lint implementation for the bump seed canonicalization issue [here](https://github.com/crytic/solana-lints/tree/master/lints/bump_seed_canonicalization).
 
