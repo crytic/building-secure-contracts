@@ -20,7 +20,7 @@ let program_address = Pubkey::create_program_address(&[key.to_le_bytes().as_ref(
 ```
 ## Mitigation
 
-The `find_program_address` function continously checks the expected value (via passing in the intended bump seed) and will return an error in the case the PDA address and/or bump don't match with the expected values. 
+The `find_program_address` function finds the largest bump seeds for which there exists a corresponding PDA (i.e., an address not on the ed25519 curve), and returns both the address and the bump seed. The function panics in the case that no PDA address can be found.
 
 ```rust
         let (address, system_bump) = Pubkey::find_program_address(&[key.to_le_bytes().as_ref()], program_id);
