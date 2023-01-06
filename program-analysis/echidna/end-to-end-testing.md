@@ -27,13 +27,13 @@ $ npm i truffle
 If `ganache` is not installed, add it manually. In our example, we will run: 
 
 ```
-$ npm i ganache
+$ npm -g i ganache
 ```
 
 Other projects using yarn will require:
 
 ```
-$ yarn add ganache
+$ yarn global add ganache
 ```
 
 Ensure that `$ ganache --version` outputs `ganache v7.3.2` or greater.
