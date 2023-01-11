@@ -16,12 +16,14 @@ Follow our guidelines and best practices to write secure smart contracts.
     - [Forks <> CIPs](./learn_evm/cips_forks.md): Summarize the CIPs and EIPs included in each Celo fork *(EVM-compatible chain)*
     - [Upgrades <> TIPs](./learn_evm/tips_upgrades.md): Summarize the TIPs included in each TRON upgrade *(EVM-compatible chain)*
     - [Forks <> BEPs](./learn_evm/beps_forks.md): Summarize the BEPs included in each BSC fork *(EVM-compatible chain)*
-
-- [Not so smart contracts](./not-so-smart-contracts): Examples of common smart contract issues. Each issue contains a description, example and recommendation.
+  - [EIPs - forks](./learn_evm/eips_forks.md): summarize the EIPs included in each fork
+  - [EVM Opcodes](./learn_evm/evm_opcodes.md): Details on all EVM opcodes
+- [Not so smart contracts](./not-so-smart-contracts): Examples of smart contract common issues. Each issue contains a description, an example and recommendations
    - [Algorand](./not-so-smart-contracts/algorand)
    - [Cairo](./not-so-smart-contracts/cairo)
    - [Cosmos](./not-so-smart-contracts/cosmos)
    - [Substrate](./not-so-smart-contracts/substrate)
+   - [Solana](./not-so-smart-contracts/solana)
 - [Program analysis](./program-analysis): How to use automated tools to secure contracts
   - [Echidna](./program-analysis/echidna): a fuzzer that will check your contract's properties.
   - [Slither](./program-analysis/slither): a static analyzer available through a CLI and scriptable interface.
