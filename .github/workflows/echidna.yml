@@ -162,7 +162,7 @@ jobs:
         output-file: ${{ matrix.files }}.out
         solc-version: ${{ matrix.solc-version || '0.5.11' }}
         echidna-workdir: ${{ matrix.workdir }}
-        echidna-version: edge
+        echidna-version: latest
         crytic-args: ${{ matrix.crytic-args || '' }}
 
     - name: Verify that the exit code is correct
