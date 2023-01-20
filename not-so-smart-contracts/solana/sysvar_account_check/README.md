@@ -3,11 +3,11 @@ The sysvar (system account) account is often used while validating access contro
 
 ## Exploit Scenario
 
-secp256k1 is an elliptic curve used by a number of blockchains for signatures. Validating signatures is crucial as by bypassing signature checks, an attacker can gain access to restricted functions that could lead to drainage of funds. 
+secp256k1 is an elliptic curve used by a number of blockchains for signatures. Validating signatures is crucial as by bypassing signature checks, an attacker can gain access to restricted functions that could lead to drainage of funds.
 
-Here, `load_current_index` and `load_instruction_at` are functions that don't verify that the inputted sysvar account is authorized, therefore allowing serialized maliciously fabricated data to sucessfully spoof as an authorized secp256k1 signature. 
+Here, `load_current_index` and `load_instruction_at` are functions that don't verify that the inputted sysvar account is authorized, therefore allowing serialized maliciously fabricated data to sucessfully spoof as an authorized secp256k1 signature.
 
-### Example Contract 
+### Example Contract
 ```rust
 pub fn verify_signatures(account_info: &AccountInfo) -> ProgramResult {
     let index = solana_program::sysvar::instructions::load_current_index(
@@ -30,7 +30,7 @@ Refer to [Mitigation](https://github.com/crytic/building-secure-contracts/tree/m
 - Solana libraries should be running on version 1.8.1 and up
 - Use `load_instruction_at_checked` and `load_current_index_checked`
 
-Utilizing the latest Solana version and referencing checked functions, especially on sensitive parts of a contract is crucial even if potential attack vectors have been fixed post-audit. 
+Utilizing the latest Solana version and referencing checked functions, especially on sensitive parts of a contract is crucial even if potential attack vectors have been fixed post-audit.
 Leaving the system exposed to any point of failure compromises the entire system's integrity, especially while the contracts are being constantly updated.
 
 Here is the code showing the sysvar account checks added between unchecked and checked functions:
@@ -43,7 +43,7 @@ Here is the code showing the sysvar account checks added between unchecked and c
 
 **Note: The following analysis is condensed down to be present this attack vector as clearly as possible, and certain details might’ve been left out for the sake of simplification**
 
-The Wormhole hack serves to be one of the most memorable exploits in terms of impact DeFi has ever seen. 
+The Wormhole hack serves to be one of the most memorable exploits in terms of impact DeFi has ever seen.
 
 This exploit also happens to incorporate a missing sysvar account check that allowed the attacker to:
 1. Spoof Guardian signatures as valid
