@@ -44,7 +44,7 @@ contract Incrementor {
 }
 ```
 
-We could also use a special event called `AssertionFailed` with any number of parameters to let Echidna know about a failed assertion without using `assert`. This will works in any contract. For instance:
+We could also use a special event called `AssertionFailed` with any number of parameters to let Echidna know about a failed assertion without using `assert`. This will work in any contract. For instance:
 
 ```solidity
 contract Incrementor {
