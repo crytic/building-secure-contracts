@@ -4,7 +4,7 @@
 
 - [Exercise 7](#exercise-7)
   - [Setup](#setup)
-  - [Exercise](#exercise)
+  - [Goals](#goals)
   - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum

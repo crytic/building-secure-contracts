@@ -5,7 +5,7 @@ This exercise requires to finish the [exercise 1](Exercise-1.md).
 **Table of contents:**
 
 - [Targeted contract](#targeted-contract)
-- [Exercise](#exercice)
+- [Exercise](#testing-access-control)
 - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum

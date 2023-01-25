@@ -5,7 +5,7 @@
 - [Introduction](#introduction)
 - [A first approach](#a-first-approach)
 - [Enhacing postcondition checks](#enhacing-postcondition-checks)
-- [Combining properties](combining-properties)
+- [Combining properties](#combining-properties)
 - [Summary: How to write good properties](#summary-how-to-write-good-properties)
 
 ## Introduction
