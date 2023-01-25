@@ -17,7 +17,7 @@ We will test the following contract *[exercises/exercise2/token.sol](./exercises
 ```Solidity
  contract Ownership{
     address owner = msg.sender;
-    function Owner(){
+    function Owner() public {
          owner = msg.sender;
      }
      modifier isOwner(){
