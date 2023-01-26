@@ -9,21 +9,20 @@ Therefore, a malicious actor can set themselves as the new authority without bei
 
 ### Example Contract
 ```rust
-fn set_authority(program_id: &Pubkey, new_authority: Pubkey, accounts: &[AccountInfo]) -> ProgramResult {
-	let account_info_iter = &mut accounts.iter();
-	let market_info = next_account_info(account_info_iter)?;
-	let current_authority = next_account_info(account_info_iter)?;
+fn pay_escrow(_program_id: &Pubkey, accounts: &[AccountInfo], _instruction_data: &[u8]) -> ProgramResult {
+    let account_info_iter = &mut accounts.iter();
+    let state_info = next_account_info(account_info_iter)?;
+    let escrow_vault_info = next_account_info(account_info_iter)?;
+    let escrow_receiver_info = next_account_info(account_info_iter)?;
 
-	let mut market = Market::unpack(&market_info.data.borrow())?;
+    let state = State::deserialize(&mut &**state_info.data.borrow())?;
 
-	if &market.authority != current_authority.pubkey {
-    	    return Err(InvalidMarketAuthority.into());
-	}
-	market.authority = new_authority;
+    if state.escrow_state == EscrowState::Complete {
+        **escrow_vault_info.try_borrow_mut_lamports()? -= state.amount;
+        **escrow_receiver_info.try_borrow_mut_lamports()? += state.amount;
+    }
 
-  ...
-
-	Ok(())
+    Ok(())
 }
 ```
 *Inspired by [SPL Lending Program](https://github.com/solana-labs/solana-program-library/tree/master/token-lending/program)*
