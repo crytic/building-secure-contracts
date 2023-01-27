@@ -26,7 +26,7 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0x09`](#mulmod) | MULMOD | Modulo multiplication operation | - | 8 |
 | [`0x0a`](#exp) | EXP | Exponential operation | - | 10* |
 | [`0x0b`](#signextend) | SIGNEXTEND | Extend length of two's complement signed integer | - | 5 |
-| [`0x0c`](#unused) - `0x0f` | Unused | Unused | - |
+| `0x0c` - `0x0f` | Unused | Unused | - |
 | [`0x10`](#lt) | LT | Less-than comparison | - | 3 |
 | [`0x11`](#gt) | GT | Greater-than comparison | - | 3 |
 | [`0x12`](#slt) | SLT | Signed less-than comparison | - | 3 |
@@ -42,7 +42,7 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0x1c`](#shr) | SHR | Logical Shift Right | [EIP145](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-145.md) | 3 |
 | [`0x1d`](#sar) | SAR | Arithmetic Shift Right | [EIP145](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-145.md) | 3 |
 | [`0x20`](#keccak256) | KECCAK256 | Compute Keccak-256 hash | - | 30* |
-| [`0x21`](#unused) - `0x2f`| Unused | Unused |
+| `0x21` - `0x2f`| Unused | Unused |
 | [`0x30`](#address) | ADDRESS | Get address of currently executing account | - | 2 |
 | [`0x31`](#balance) | BALANCE | Get balance of the given account | - | 700 |
 | [`0x32`](#origin) | ORIGIN | Get execution origination address | - | 2 |
@@ -66,7 +66,7 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0x44`](#difficulty) | DIFFICULTY | Get the block's difficulty | - | 2 |
 | [`0x45`](#gaslimit) | GASLIMIT | Get the block's gas limit | - | 2 |
 | [`0x46`](#chainid) | CHAINID | Returns the current chain’s EIP-155 unique identifier | [EIP 1344](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1344.md) | 2 |
-| [`0x47`](#unused) - `0x4f` | Unused | - |
+| `0x47` - `0x4f` | Unused | - |
 | [`0x48`](#basefee) | BASEFEE | Returns the value of the base fee of the current block it is executing in. | [EIP 3198](https://eips.ethereum.org/EIPS/eip-3198) | 2 |
 | [`0x50`](#pop) | POP | Remove word from stack | - | 2 |
 | [`0x51`](#mload) | MLOAD | Load word from memory | - | 3* |
@@ -80,7 +80,7 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0x59`](#msize) | MSIZE | Get the size of active memory in bytes | - | 2 |
 | [`0x5a`](#gas) | GAS | Get the amount of available gas, including the corresponding reduction for the cost of this instruction | - | 2 |
 | [`0x5b`](#jumpdest) | JUMPDEST | Mark a valid destination for jumps | - | 1 |
-| [`0x5c`](#unused) - `0x5f` | Unused | - |
+| `0x5c` - `0x5f` | Unused | - |
 | [`0x60`](#push1) | PUSH1 | Place 1 byte item on stack | - | 3 |
 | [`0x61`](#push2) | PUSH2 | Place 2-byte item on stack | - | 3 |
 | [`0x62`](#push3) | PUSH3 | Place 3-byte item on stack | - | 3 |
@@ -150,7 +150,7 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0xa2`](#log2) | LOG2 | Append log record with two topics | - | 1125 |
 | [`0xa3`](#log3) | LOG3 | Append log record with three topics | - | 1500 |
 | [`0xa4`](#log4) | LOG4 | Append log record with four topics | - | 1875 |
-| [`0xa5`](#unused) - `0xaf` | Unused | - |
+| `0xa5` - `0xaf` | Unused | - |
 | [`0xb0`](#jumpto) | JUMPTO | Tentative [libevmasm has different numbers](https://github.com/ethereum/solidity/blob/c61610302aa2bfa029715b534719d25fe3949059/libevmasm/Instruction.h#L176)| [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
 | [`0xb1`](#jumpif) | JUMPIF | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
 | [`0xb2`](#jumpsub) | JUMPSUB | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
@@ -160,20 +160,20 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0xb8`](#returnsub) | RETURNSUB | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
 | [`0xb9`](#putlocal) | PUTLOCAL | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
 | [`0xba`](#getlocal) | GETLOCAL | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
-| [`0xbb`](#unused) - `0xe0` | Unused | - |
+| `0xbb` - `0xe0` | Unused | - |
 | [`0xe1`](#sloadbytes) | SLOADBYTES | Only referenced in pyethereum | - | - |
 | [`0xe2`](#sstorebytes) | SSTOREBYTES | Only referenced in pyethereum | - | - |
 | [`0xe3`](#ssize) | SSIZE | Only referenced in pyethereum | - | - |
-| [`0xe4`](#unused) - `0xef` | Unused | - |
+| `0xe4` - `0xef` | Unused | - |
 | [`0xf0`](#create) | CREATE | Create a new account with associated code | - | 32000 |
 | [`0xf1`](#call) | CALL | Message-call into an account | - | Complicated |
 | [`0xf2`](#callcode) | CALLCODE | Message-call into this account with alternative account's code | - | Complicated |
 | [`0xf3`](#return) | RETURN | Halt execution returning output data | - | 0 |
 | [`0xf4`](#delegatecall) | DELEGATECALL | Message-call into this account with an alternative account's code, but persisting into this account with an alternative account's code | - | Complicated |
 | [`0xf5`](#create2) | CREATE2 | Create a new account and set creation address to `sha3(sender + sha3(init code)) % 2**160` | - |
-| [`0xf6`](#unused) - `0xf9` | Unused | - | - |
+| `0xf6` - `0xf9` | Unused | - | - |
 | [`0xfa`](#staticcall) | STATICCALL | Similar to CALL, but does not modify state | - | 40 |
-| [`0xfb`](#unused) | Unused | - | - |
+| `0xfb` | Unused | - | - |
 | [`0xfc`](#txexecgas) | TXEXECGAS | Not in yellow paper FIXME | - | - |
 | [`0xfd`](#revert) | REVERT | Stop execution and revert state changes, without consuming all provided gas and providing a reason | - | 0 |
 | [`0xfe`](#invalid) | INVALID | Designated invalid instruction | - | 0 |
