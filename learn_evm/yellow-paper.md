@@ -1,13 +1,11 @@
 
 # Ethereum Yellow Paper
 
-So, you want to read the yellow paper. Before we dive in, keep in mind that the yellow paper is out of date and some in the community might refer to it as being depreciated. Check out the [BRANCHES.md](https://github.com/ethereum/yellowpaper/blob/master/BRANCHES.md) file of the [`yellowpaper` repository on github](https://github.com/ethereum/yellowpaper) to stay up-to-date on how closely this document tracks the latest version of the Ethereum protocol. At the time of writing, the yellow paper is up to date with the Berlin hardfork which occurred in April 2021.
+So, you want to read the yellow paper. Before we dive in, keep in mind that the yellow paper is out of date and some in the community might refer to it as being depreciated. Check out the [BRANCHES.md](https://github.com/ethereum/yellowpaper/blob/master/BRANCHES.md) file of the [`yellowpaper` repository on github](https://github.com/ethereum/yellowpaper) to stay up-to-date on how closely this document tracks the latest version of the Ethereum protocol. At the time of writing, the yellow paper is up to date with the Berlin hardfork which occurred in April 2021. For an overview of all Ethereum forks and which EIPs are included in each of them, see the [EIPs Forks](./eips_forks.md) page.
 
 For a more up-to-date reference, check out the [Ethereum Specification](https://ethereum.github.io/execution-specs/autoapi/ethereum/) which features a detailed description of each opcode *for each hardfork* in addition to reference implementations written in python.
 
 That said, the yellow paper is still a rich resource for ramping up on the fundamentals of the Ethereum protocol. This document aims to provide some guidance and assistance in deciphering Ethereum's flagship specification.
-
-As you review the following, keep in mind that additions and corrections are welcome and are covered by bounties from Trail of Bits. Join us in #ethereum on the [Empire Hacking Slack](https://empireslacking.herokuapp.com) to discuss Ethereum specifications and tool development.
 
 ## Mathematical Symbols
 
