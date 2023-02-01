@@ -5,7 +5,7 @@ This exercise requires to finish [exercise 1](./Exercise-1.md) and [exercise 2](
 **Table of contents:**
 
 - [Targeted contract](#targeted-contract)
-- [Exercise](#exercice)
+- [Exercise](#testing-with-custom-initialization)
 - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum

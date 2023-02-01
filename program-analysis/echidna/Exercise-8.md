@@ -40,7 +40,7 @@ We recommend to first try without reading the following hints. The hints are in 
 - The invariant that we are looking for is "an attacker cannot get almost whole amount of rewards"
 - Read what is the [multi abi option](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/common-testing-approaches.md#external-testing)
 - A template is provided in [contracts/the-rewarder/EchidnaRewarder.sol](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/contracts/the-rewarder/EchidnaRewarder.sol)
-- A config file is provided in [the-rewarder.yaml](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/the-rewarder.yaml)
+- A config file is provided in [the-rewarder.yaml](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/solutions/the-rewarder.yaml)
 
 ## Solution
 

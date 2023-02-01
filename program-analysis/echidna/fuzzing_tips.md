@@ -2,8 +2,8 @@
 
 The following describe fuzzing tips to make Echidna more efficient:
 
-- **To filter the values range of inputs, use `%`**. See [Filtering inputs](#filtering_inputs).
-- **When dynamic arrays are needed, use push/pop**. See [Dealing with dynamic arrays](#dealing_with_dynamic_arrays).
+- **To filter the values range of inputs, use `%`**. See [Filtering inputs](#filtering-inputs).
+- **When dynamic arrays are needed, use push/pop**. See [Dealing with dynamic arrays](#dealing-with-dynamic-arrays).
 
 ## Filtering inputs
 
