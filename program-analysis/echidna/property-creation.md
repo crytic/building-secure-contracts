@@ -162,7 +162,7 @@ We want Echidna to spend most of the execution exploring the contract to test. S
 ```solidity
   function depositShares_never_reverts(uint256 val) public {
     if(token.balanceOf(address(this)) > 0) {
-      val = val % token.balanceOf(address(this));
+      val = val % (token.balanceOf(address(this)) + 1);
       try c.depositShares(val) { /* not reverted */ } catch { assert(false); }
       assert(c.getShares(address(this)) > 0);
     } else {
