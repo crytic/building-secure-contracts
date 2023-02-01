@@ -121,4 +121,4 @@ if no_bug_found:
 
 All the code above you can find into the [examples/example_constraint.py](./examples/example_constraint.py)
 
-The next step is to follow the [exercises](./exercises.md).
+The next step is to follow the [exercises](./exercises).
