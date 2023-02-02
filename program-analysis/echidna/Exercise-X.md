@@ -91,7 +91,7 @@ If you are stuck at any point, feel free to look at the following hints. You can
 <details>
   <summary>5th invariant </summary>
 
-   The player should not be able to burn tokens before the `timelock`.
+   The player should not be able to burn (lock) tokens before the `timelock`.
 
 </details>
 
@@ -296,11 +296,11 @@ Run Echidna and check the corpus. Now we have fully covered this property.
 <details>
   <summary>5th property</summary>
   
-  Player should not `burn` tokens before the `timeLock` period.
-  What is token burning?
-  
-  You can burn tokens by sending them to the `0` address or by sending them to a non existent address. Sending to the `0` address is not possible because of the `0` address checks in the `ERC20` OZ standard. Sending them to any address shouldn't be possible as well because of the `timeLock`.
-  
+  Player should not `burn` (lock) tokens before the `timeLock` period.
+  The `ERC20` used in this exercise does not implement a public `burn` functionality, so the actual burning (removing from the total supply) is not possible.
+
+  The only way a player could lock the tokens is by sending them to a non-existent address.
+
   This property would be invalidated if any of our previous property were invalidated (which seems to not be the case at the moment). Let's leave this property for now and move on.
 
 </details>
