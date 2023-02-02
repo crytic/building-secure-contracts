@@ -1,0 +1,4 @@
+testMode: assertion
+corpusDir: "src/crytic/corpus"
+testLimit: 50000 
+multi-abi: true
