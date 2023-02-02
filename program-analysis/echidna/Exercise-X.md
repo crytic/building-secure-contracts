@@ -31,6 +31,17 @@ src
 
 Depending on your framework, the `NaughtCoin` contract will be in the `src` folder (Foundry) or `contracts` (Hardhat). OpenZeppelin dependencies are in the `level-utils` folder, and all Echidna-related files are in the `crytic` folder.
 
+The config file used in this exercise looks as follows:
+
+```yaml
+testMode: assertion
+corpusDir: "src/crytic/corpus"
+testLimit: 50000 
+multi-abi: true
+```
+
+The use of `assertions` is recommended for more flexibility when writing properties. The `multi-abi` allows Echidna to call any function, not just the properties you will write. Thanks to `multi-abi`, Echidna can figure out that it needs to call the `approve` or `increaseAllowance` before making a transfer. You should always collect a corpus, as it gives the necessary context to make sure that your properties are correct.
+
 ### Exercise goals
 
 The main goal is to make the player's balance equal to `0`.  You might know the answer right away. However, the purpose of this exercise is to define the whole system using properties in an iterative way. Start small and see what you can find. Expand over time. Here are some steps that you may take:
