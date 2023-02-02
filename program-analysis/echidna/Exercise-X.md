@@ -415,7 +415,7 @@ Add a `Player(address player)` event to your contract and emit it in your proper
 <details>
   <summary>Fixing a bug part 2</summary>
   
-The player's address is `0x0000...3000`. Echidna is making calls from multiple accounts. It was able to increase the allowance of an address `0x000...1000` and make a call to `transferFrom(player, 0x000...1000, amount)`. This is expected!
+The player's address is `0x30000`. Echidna is making calls from multiple accounts. It was able to increase the allowance of an address `0x10000` and make a call to `transferFrom(player, 0x10000, amount)`. This is expected!
 
 The `lockTokens` modifier does not prevent others from making transfers, only the player is constrained.
 
