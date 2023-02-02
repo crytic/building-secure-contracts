@@ -96,7 +96,7 @@ If you are stuck at any point, feel free to look at the following hints. You can
 <details>
   <summary>Example state setup</summary>
 
-   ```
+   ```solidity
    // SPDX-License-Identifier: MIT
   pragma solidity ^0.8.0;
   
@@ -118,7 +118,7 @@ If you are stuck at any point, feel free to look at the following hints. You can
 <details>
   <summary>See if Echidna works as expected</summary>
 
-   ```
+   ```solidity
    function always_true() public pure {
         assert(true);
     }
@@ -131,7 +131,7 @@ If you are stuck at any point, feel free to look at the following hints. You can
 <details>
   <summary>1st property</summary>
 
-   ```
+   ```solidity
    function token_is_deployed() public {
         assert(address(naughtCoin) != address(0));
     }
@@ -142,7 +142,7 @@ If you are stuck at any point, feel free to look at the following hints. You can
 <details>
   <summary>2nd property</summary>
 
-   ```
+   ```solidity
    function sender_balance_is_equal_to_initial_supply() public {
         assert(naughtCoin.balanceOf(player) == naughtCoin.INITIAL_SUPPLY());
     }
@@ -155,7 +155,7 @@ If you are stuck at any point, feel free to look at the following hints. You can
   
   In plain English we have defined this invariant as The player token balance should equal the initial supply if the current `block.timestamp < timelock`. The second part of this sentence specifies exactly when this property should be tested.
   
-   ```
+   ```solidity
    function sender_balance_is_equal_to_initial_supply() public {
         // pre-conditions
         uint256 currentTime = block.timestamp;
@@ -179,7 +179,7 @@ If you are stuck at any point, feel free to look at the following hints. You can
 
    For this property we also need to add an additional pre-condition. We need to check player's and bob's balance before transferring tokens, to have something to compare to in the post-conditions.
 
-   ```
+   ```solidity
    function transfer_should_fail_before_timelock_period(uint256 amount) public {
         // pre-conditions
         uint256 playerBalanceBefore = naughtCoin.balanceOf(player);
@@ -229,10 +229,10 @@ Run Echidna and check the corpus. Is this a good property?
 
 - If `transfer` failed, that's okay. Keep going.
 - If `transfer` succeeded, we don't want that, emit the `AssertionFailed` and check post-conditions as usual.
- 
+
  Add the `event AssertionFailed(uint256 amount);` at the top of your contract.
- 
-   ```
+
+   ```solidity
    function transfer_should_fail_before_timelock_period(uint256 amount)
         public
     {
@@ -265,7 +265,7 @@ Run Echidna and check the corpus. Now we have fully covered this property.
   
   According to the ERC20 spec, the `approve` function should not fail if the caller has enough tokens to make the approval.
   
-   ```
+   ```solidity
    function approve_should_not_fail_if_caller_has_enough_tokens(uint256 amount)
         public
     {
@@ -301,7 +301,7 @@ Run Echidna and check the corpus. Now we have fully covered this property.
   
   This property in its base form is the same as the one with `transfer` function.
   
-   ```
+   ```solidity
    function transfer_from_should_fail_before_timelock_period(uint256 amount)
         public
     {
@@ -341,7 +341,7 @@ Try to write a property for the `transferFrom` function.
 
  This property will check basic token arithmetics. The `transferFrom` works, so let's test that the user balances are updated correctly and reflect token transfers.
   
-   ```
+   ```solidity
    function no_free_tokens_in_transfer_from(uint256 amount) public {
         // pre-conditions
         uint256 playerBalanceBefore = naughtCoin.balanceOf(player);
@@ -361,7 +361,7 @@ Try to write a property for the `transferFrom` function.
  If you run Echidna now, the `playerBalance == initialSupply` property fails.
  Echidna was able to find a call sequence to invalidate this property.
 
- ```
+ ```solidity
   assertion in sender_balance_is_equal_to_initial_supply(): FAILED! with ErrorRevert                                   
   │                                                                                                                      │
   │ Call sequence:                                                                                                       │
@@ -385,7 +385,7 @@ Last step is to fix a bug that you have found. Try to fix it and re-run your pro
 <details>
   <summary>Fixing a bug part 1</summary>
 
-```
+```solidity
 function transferFrom(
         address _from,
         address _to,
@@ -408,7 +408,7 @@ The player's address is `0x0000...3000`. Echidna is making calls from multiple a
 
 The `lockTokens` modifier does not prevent others from making transfers, only the player is constrained.
 
-```
+```solidity
 // Prevent the initial owner from transferring tokens until the timelock has passed
     modifier lockTokens() {
         if (msg.sender == player) {
@@ -422,7 +422,7 @@ The `lockTokens` modifier does not prevent others from making transfers, only th
 
 To test this you can change the modifier to be:
 
-```
+```solidity
 // Prevent the initial owner from transferring tokens until the timelock has passed
     modifier lockTokens() {
         if (msg.sender == player) {
