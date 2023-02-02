@@ -84,7 +84,7 @@ If you are stuck at any point, feel free to look at the following hints. You can
 <details>
   <summary>4th invariant </summary>
 
-   The `approve` function should never fail if the caller has a sufficient token balance.
+   The `approve` function called by a `player` should never fail.
 
 </details>
 
@@ -274,20 +274,15 @@ Run Echidna and check the corpus. Now we have fully covered this property.
 <details>
   <summary>4th property</summary>
   
-  According to the ERC20 spec, the `approve` function should not fail if the caller has enough tokens to make the approval.
-  
+   The `approve` function called by a `player` should not fail (even if the `player` currently does not have enough tokens). You can think of it as signing a blank cheque: "I as a player, allow Bob to spend the `amount` of my funds in one or more transactions".
+   According to the [OZ ERC20 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) this function should only fail if the `0` address is involved.
+
    ```solidity
-   function approve_should_not_fail_if_caller_has_enough_tokens(uint256 amount)
-        public
-    {
-        // pre-conditions
-        uint256 playerBalance = naughtCoin.balanceOf(player);
-        if (playerBalance >= amount) {
-            // actions
-            bool success1 = naughtCoin.approve(bob, amount);
-            // post-conditions
-            assert(success1);
-        }
+   function player_approval_should_not_fail(uint256 amount) public {
+        // actions
+        bool success1 = naughtCoin.approve(bob, amount);
+        // post-conditions
+        assert(success1);
     }
    ```
 
