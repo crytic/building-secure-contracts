@@ -4,8 +4,8 @@ Accounts in Solana include metadata of an owner. These owners are identified by 
 This malicious account will inherently have a different program ID as owner, but considering there’s no check that the program ID is the same, as long as the other preconditions are passed, the attacker can trick the program into thinking their malicious account is the expected account.
 
 ## Exploit Scenario
-The following contract updates the current market authority with a new one. Unfortunately, the only check being done here is against the current authority’s public key prior to setting a new authority.
-Therefore, a malicious actor can set themselves as the new authority without being the actual market authority. This is because the ownership of the market authority account isn’t being fully verified against itself by program ID. Since there’s no check that the market is owned by the program itself, an attacker can pass in their own fabricated account with spoofed data which is then verified against the public key of the current authority’s account, making it easy for the attacker to set themselves as the new authority.
+The following contract allows funds to be dispersed from an escrow account vault, provided the escrow account's state is `Complete`. Unfortunately, there is no check that the `State` account is owned by the program.
+Therefore, a malicious actor can pass in their own fabricated `State` account with spoofed data, allowing the attacker to send the vault's funds to themselves.
 
 ### Example Contract
 ```rust
