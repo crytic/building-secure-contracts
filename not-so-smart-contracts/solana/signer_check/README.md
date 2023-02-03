@@ -12,10 +12,14 @@ Therefore, a malicious actor can set the state to `Complete`, without needing ac
 fn pay_escrow(_program_id: &Pubkey, accounts: &[AccountInfo], _instruction_data: &[u8]) -> ProgramResult {
     let account_info_iter = &mut accounts.iter();
     let state_info = next_account_info(account_info_iter)?;
+    let authority = next_account_info(account_info_iter)?;
 
     let mut state = State::deserialize(&mut &**state_info.data.borrow())?;
-    state.escrow_state = EscrowState::Complete;
-    state.serialize(&mut &mut **state_info.data.borrow_mut())?;
+    
+    if state.authority == authority.key {
+        state.escrow_state = EscrowState::Complete;
+        state.serialize(&mut &mut **state_info.data.borrow_mut())?;
+    }
 
     Ok(())
 }
