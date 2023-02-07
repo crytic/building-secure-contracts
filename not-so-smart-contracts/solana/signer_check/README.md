@@ -16,12 +16,14 @@ fn complete_escrow(_program_id: &Pubkey, accounts: &[AccountInfo], _instruction_
 
     let mut state = State::deserialize(&mut &**state_info.data.borrow())?;
     
-    if &state.authority == authority.key {
-        state.escrow_state = EscrowState::Complete;
-        state.serialize(&mut &mut **state_info.data.borrow_mut())?;
-	return Ok(());
+    if state.authority != *authority.key {
+        return Err(ProgramError::IncorrectAuthority);
     }
-    Err(ProgramError::IncorrectAuthority)
+    
+    state.escrow_state = EscrowState::Complete;
+    state.serialize(&mut &mut **state_info.data.borrow_mut())?;
+    
+    Ok(())
     
 }
 ```
