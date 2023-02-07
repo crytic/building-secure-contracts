@@ -19,9 +19,10 @@ fn complete_escrow(_program_id: &Pubkey, accounts: &[AccountInfo], _instruction_
     if &state.authority == authority.key {
         state.escrow_state = EscrowState::Complete;
         state.serialize(&mut &mut **state_info.data.borrow_mut())?;
+	return Ok(())
     }
-
-    Ok(())
+    Err(ProgramError::IncorrectAuthority);
+    
 }
 ```
 *Inspired by [SPL Lending Program](https://github.com/solana-labs/solana-program-library/tree/master/token-lending/program)*
