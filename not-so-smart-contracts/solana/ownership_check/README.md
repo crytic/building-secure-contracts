@@ -1,35 +1,33 @@
 # Missing Ownership Check
-Accounts in Solana include metadata of an owner. These owners are identified by their own program ID. Without sufficient checks that the expected program ID matches that of the passed in account, an attacker can fabricate account data to pass any other preconditions and bypass the ownership check. 
+Accounts in Solana include metadata of an owner. These owners are identified by their own program ID. Without sufficient checks that the expected program ID matches that of the passed in account, an attacker can fabricate an account with spoofed data to pass any other preconditions.
 
-This malicious account will inherently have a different program ID, but considering there’s no check that the program ID is the same, as long as the other preconditions are passed the attacker can trick the program into thinking their malicious account is the expected authorized account.
+This malicious account will inherently have a different program ID as owner, but considering there’s no check that the program ID is the same, as long as the other preconditions are passed, the attacker can trick the program into thinking their malicious account is the expected account.
 
 ## Exploit Scenario
-The following contract updates the current market owner with a new one. Unfortunately, the only check being done here is against the current owner’s public key prior to setting a new owner. 
-Therefore, a malicious actor can set themselves as the new owner without being the actual market owner. This is because the ownership of the market owner account isn’t being fully verified against itself by program ID. Since there’s no check that the market is the one owned by the program itself, an attacker can pass in their own fabricated account data which is then verified against a public key of the current owner’s account, making it easy to set themselves as the new owner. 
+The following contract allows funds to be dispersed from an escrow account vault, provided the escrow account's state is `Complete`. Unfortunately, there is no check that the `State` account is owned by the program.
+Therefore, a malicious actor can pass in their own fabricated `State` account with spoofed data, allowing the attacker to send the vault's funds to themselves.
 
-### Example Contract 
+### Example Contract
 ```rust
-fn set_owner(program_id: &Pubkey, new_owner: Pubkey, accounts: &[AccountInfo]) -> ProgramResult {
-	let account_info_iter = &mut accounts.iter();
-	let market_info = next_account_info(account_info_iter)?;
-	let current_owner = next_account_info(account_info_iter)?;
+fn pay_escrow(_program_id: &Pubkey, accounts: &[AccountInfo], _instruction_data: &[u8]) -> ProgramResult {
+    let account_info_iter = &mut accounts.iter();
+    let state_info = next_account_info(account_info_iter)?;
+    let escrow_vault_info = next_account_info(account_info_iter)?;
+    let escrow_receiver_info = next_account_info(account_info_iter)?;
 
-	let mut market = Market::unpack(&market_info.data.borrow())?;
- 
-	if &market.owner != current_owner.pubkey {
-    	    return Err(InvalidMarketOwner.into());
-	}
-	market.owner = new_owner;
+    let state = State::deserialize(&mut &**state_info.data.borrow())?;
 
-  ...
- 
-	Ok(())
+    if state.escrow_state == EscrowState::Complete {
+        **escrow_vault_info.try_borrow_mut_lamports()? -= state.amount;
+        **escrow_receiver_info.try_borrow_mut_lamports()? += state.amount;
+    }
 
+    Ok(())
 }
 ```
 *Inspired by [SPL Lending Program](https://github.com/solana-labs/solana-program-library/tree/master/token-lending/program)*
 
-## Mitigation  
+## Mitigation
 
 ```rust
   	if EXPECTED_ACCOUNT.owner != program_id {
