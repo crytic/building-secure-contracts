@@ -2,8 +2,8 @@
 
 **Table of contents:**
 
-- [Targeted contract](#Targeted-contract)
-- [Exercise](#exercise)
+- [Targeted contract](#targeted-contract)
+- [Exercise](#testing-a-token-balance)
 - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum

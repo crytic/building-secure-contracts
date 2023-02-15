@@ -25,7 +25,7 @@ Follow the pattern initilization, exploration and property for the script.
 
 - `m.ready_states` returns the list of state alive
 - `Operators.AND(a, b)` allows to create and AND condition
-- You can use the template proposed in [exercise1/template.sol](./exercise1/template.sol)
+- You can use the template proposed in [exercise1/template.py](./exercise1/template.py)
 
 ### Solution
 

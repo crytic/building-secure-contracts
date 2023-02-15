@@ -5,8 +5,8 @@
 - [Proxy pattern](#proxy-pattern)
 - [Run Echidna](#run-echidna)
 - [Differential fuzzing](#differential-fuzzing)
-- [Generic proxy pattern](#generic-proxy-pattern)
-- [Summary: Testing bytecode](#summary-testing-bytecode)
+- [Generic proxy pattern](#generic-proxy-code)
+- [Summary: Testing bytecode](#summary-testing-contracts-without-source-code)
 
 ## Introduction
 

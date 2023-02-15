@@ -56,7 +56,7 @@ Coverage per isolated transaction will be possible, however, it is incomplete vi
 
 ## How to know which type of testing should be used? (boolean properties, assertions, etc)
 
-Check the [tutorial on selecting the right test mode](https://github.com/crytic/building-secure-contracts/edit/dev-internal-asserts/program-analysis/echidna/testing-modes.md)
+Check the [tutorial on selecting the right test mode](testing-modes.md)
 
 ## Why does Echidna return “Property X failed with no transactions made” when running one or more tests?
 

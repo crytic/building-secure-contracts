@@ -24,7 +24,7 @@ Each _Not So Smart Cosmos_ includes a standard set of information:
 | [Broken bookkeeping](broken_bookkeeping) | Exploit mismatch between different modules' views on balances |
 | [Rounding errors](rounding_errors) | Bugs related to imprecision of finite precision arithmetic |
 | [Unregistered message handler](unregistered_msg_handler) | Broken functionality because of unregistered msg handler |
-
+| [Missing error handler](missing_error_handler) | Missing error handling leads to successful execution of a transaction that should have failed |
 ## Credits
 
 These examples are developed and maintained by [Trail of Bits](https://www.trailofbits.com/).

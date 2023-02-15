@@ -1,0 +1,8 @@
+testMode: assertion
+balanceContract: 1000000000000000000000
+testLimit: 100000000000
+
+deployer: "0x10000"
+psender: "0x10000"
+contractAddr: "0x10000"
+sender: ["0x10000"]

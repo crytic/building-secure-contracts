@@ -5,7 +5,7 @@
 - [Introduction](#introduction)
 - [A first approach](#a-first-approach)
 - [Enhacing postcondition checks](#enhacing-postcondition-checks)
-- [Combining properties](combining-properties)
+- [Combining properties](#combining-properties)
 - [Summary: How to write good properties](#summary-how-to-write-good-properties)
 
 ## Introduction
@@ -41,7 +41,7 @@ contract Test {
     token.mint(address(this), ...);
   }
   
-  function getShares_never_reverts(uint256 val) public {
+  function getShares_never_reverts() public {
       (bool b,) = c.call(abi.encodeWithSignature("getShares(address)", address(this)));
       assert(b);
   }
@@ -162,7 +162,7 @@ We want Echidna to spend most of the execution exploring the contract to test. S
 ```solidity
   function depositShares_never_reverts(uint256 val) public {
     if(token.balanceOf(address(this)) > 0) {
-      val = val % token.balanceOf(address(this));
+      val = val % (token.balanceOf(address(this)) + 1);
       try c.depositShares(val) { /* not reverted */ } catch { assert(false); }
       assert(c.getShares(address(this)) > 0);
     } else {

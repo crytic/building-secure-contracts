@@ -5,7 +5,7 @@ This exercise requires to finish the [exercise 1](Exercise-1.md).
 **Table of contents:**
 
 - [Targeted contract](#targeted-contract)
-- [Exercise](#exercice)
+- [Exercise](#testing-access-control)
 - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
@@ -17,7 +17,7 @@ We will test the following contract *[exercises/exercise2/token.sol](./exercises
 ```Solidity
  contract Ownership{
     address owner = msg.sender;
-    function Owner(){
+    function Owner() public {
          owner = msg.sender;
      }
      modifier isOwner(){

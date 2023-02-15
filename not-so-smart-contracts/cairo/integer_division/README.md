@@ -8,24 +8,28 @@ Consider the following functions that normalize a user's token balance to a huma
 
 ```cairo
 @external
-func bad_normalize_tokens{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (normalized_balance : felt):
-    let (user) = get_caller_address()
+func bad_normalize_tokens{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
+    normalized_balance: felt
+) {
+    let (user) = get_caller_address();
 
-    let (user_current_balance) = user_balances.read(user)
-    let (normalized_balance) = user_current_balance / 10**18
+    let (user_current_balance) = user_balances.read(user);
+    let (normalized_balance) = user_current_balance / 10 ** 18;
 
-    return (normalized_balance)
-end
+    return (normalized_balance,);
+}
 
 @external
-func better_normalize_tokens{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (normalized_balance : Uint256):
-    let (user) = get_caller_address()
+func better_normalize_tokens{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
+    normalized_balance: Uint256
+) {
+    let (user) = get_caller_address();
 
-    let (user_current_balance) = user_balances.read(user)
-    let (normalized_balance, _) = uint256_unsigned_div_rem(user_current_balance, 10**18)
+    let (user_current_balance) = user_balances.read(user);
+    let (normalized_balance, _) = uint256_unsigned_div_rem(user_current_balance, 10 ** 18);
 
-    return (normalized_balance)
-end
+    return (normalized_balance,);
+}
 ```
 
 ## Mitigations

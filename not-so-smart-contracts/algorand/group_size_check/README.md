@@ -40,3 +40,5 @@ def split_and_withdraw(
 - Verify that the group size of an atomic transfer is the intended size in the contracts.
 
 - Use [Tealer](https://github.com/crytic/tealer) to detect this issue.
+
+- Favor using ABI for smart contracts and relative indexes to verify the group transaction.

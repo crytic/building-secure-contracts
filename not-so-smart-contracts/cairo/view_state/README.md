@@ -1,6 +1,6 @@
 # State modifications in a view function
 
-StarkNet provides the @view decorator to signal that a function should not make state modifications. However, this is [not currently enforced by the compiler](https://starknet.io/docs/hello_starknet/intro.html). Developers should take care when designing view functions but also when calling functions in other contracts as they may result in unexpected behavior if they do include state modifications accidentally.
+StarkNet provides the @view decorator to signal that a function should not make state modifications. However, this is [not currently enforced by the compiler](https://www.cairo-lang.org/docs/hello_starknet/intro.html). Developers should take care when designing view functions but also when calling functions in other contracts as they may result in unexpected behavior if they do include state modifications accidentally.
 
 ## Example
 
@@ -8,13 +8,15 @@ Consider the following function that's declared as a `@view`. It may have origin
 
 ```cairo
 @view
-func bad_get_nonce{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (nonce : felt):
-    let (user) = get_caller_address()
-    let (nonce) = user_nonces.read(user)
-    user_nonces.write(user, nonce + 1)
+func bad_get_nonce{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
+    nonce: felt
+) {
+    let (user) = get_caller_address();
+    let (nonce) = user_nonces.read(user);
+    user_nonces.write(user, nonce + 1);
 
-    return (nonce)
-end
+    return (nonce);
+}
 ```
 
 ## Mitigations
