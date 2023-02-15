@@ -21,9 +21,9 @@ Visually inspect critical security features of your code:
 
 Document critical security properties and use automated test generators to evaluate them:
 
-- [ ] Learn to [document security properties for your code](/program-analysis/). It's tough as first, but it's the single most important activity for achieving a good outcome. It's also a prerequisite for using any of the advanced techniques in this tutorial.
+- [ ] Learn to [document security properties for your code](../program-analysis/). It's tough as first, but it's the single most important activity for achieving a good outcome. It's also a prerequisite for using any of the advanced techniques in this tutorial.
 - [ ] Define security properties in Solidity, for use with [Echidna](https://github.com/crytic/echidna) and [Manticore](https://manticore.readthedocs.io/en/latest/verifier.html). Focus on your state machine, access controls, arithmetic operations, external interactions, and standards conformance.
-- [ ] Define security properties with [Slither's Python API](/program-analysis/slither). Focus on inheritance, variable dependencies, access controls, and other structural issues.
+- [ ] Define security properties with [Slither's Python API](../program-analysis/slither). Focus on inheritance, variable dependencies, access controls, and other structural issues.
 
 Finally, be mindful of issues that automated tools cannot easily find:
 
