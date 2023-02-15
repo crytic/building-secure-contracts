@@ -28,7 +28,7 @@ As `f()` contains two paths, a DSE will construct two differents path predicates
 - Path 1: `a == 65`
 - Path 2: `Not (a == 65)`
 
-Each path predicate is a mathematical formula that can be given to a so-called [SMT solver](https://github.com/trailofbits/building-secure-contracts/blob/master/program-analysis/determine-properties.md), which will try to solve the equation. For `Path 1`, the solver will say that the path can be explored with `a = 65`. For `Path 2`, the solver can give `a` any value other than 65, for example `a = 0`.
+Each path predicate is a mathematical formula that can be given to a so-called [SMT solver](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/manticore/symbolic-execution-introduction.md), which will try to solve the equation. For `Path 1`, the solver will say that the path can be explored with `a = 65`. For `Path 2`, the solver can give `a` any value other than 65, for example `a = 0`.
 
 ### Verifying properties
 Manticore allows a full control over all the execution of each path. As a result, it allows to add arbirtray contraints to almost anything. This control allows for the creation of properties on the contract.

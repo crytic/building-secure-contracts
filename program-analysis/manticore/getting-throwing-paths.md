@@ -2,10 +2,12 @@
 
 **Table of contents:**
 
-- [Introduction](#introduction)
-- [Using state information](#using-state-information)
-- [How to generate testcase](#how-to-generate-testcase)
-- [Summary: Getting Throwing Path](#summary-getting-throwing-path)
+- [Getting Throwing Path](#getting-throwing-path)
+  - [Introduction](#introduction)
+  - [Using state information](#using-state-information)
+  - [How to generate testcase](#how-to-generate-testcase)
+  - [Summary](#summary)
+  - [Summary: Getting Throwing Path](#summary-getting-throwing-path)
 
 
 ## Introduction
@@ -51,7 +53,7 @@ data = ABI.deserialize("uint", data)
 
 ## How to generate testcase
 
-Use [m.generate_testcase(state, name)](https://manticore.readthedocs.io/en/latest/api.html#manticore.ethereum.ManticoreEVM.generate_testcase) to generate testcase:
+Use [m.generate_testcase(state, name)](https://github.com/trailofbits/manticore/blob/dc8c3c822bbd50adabe50cafef38457505c0bc7b/manticore/ethereum/manticore.py#L1572) to generate testcase:
 
 ```python3
 m.generate_testcase(state, 'BugFound')

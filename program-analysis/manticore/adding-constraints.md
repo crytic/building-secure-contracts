@@ -2,11 +2,14 @@
 
 **Table of contents:**
 
-- [Introduction](#introduction)
-- [Operators](#Operators)
-- [Constraints](#constraints)
-- [Checking Constraint](#checking-constraint)
-- [Summary: Adding Constraints](#summary-adding-constraints)
+- [Adding Constraints](#adding-constraints)
+  - [Introduction](#introduction)
+  - [Operators](#operators)
+  - [Constraints](#constraints)
+    - [Global constraint](#global-constraint)
+    - [State constraint](#state-constraint)
+  - [Checking Constraint](#checking-constraint)
+  - [Summary: Adding Constraints](#summary-adding-constraints)
 
 ## Introduction
 
@@ -68,7 +71,7 @@ m.transaction(caller=user_account,
 
 ### State constraint
 
-Use [state.constrain(constraint)](https://manticore.readthedocs.io/en/latest/api.html?highlight=operator#manticore.core.state.StateBase.constrain) to add a constraint to a specific state
+Use [state.constrain(constraint)](https://manticore.readthedocs.io/en/latest/states.html?highlight=statebase#manticore.core.state.StateBase.constrain) to add a constraint to a specific state
 It can be used to constrain the state after its exploration to check some property on it.
 
 ## Checking Constraint

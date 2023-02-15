@@ -1,8 +1,8 @@
 # Consider L1 to L2 message failure
 
-In Starknet, [Ethereum contracts can send messages from L1 to L2, using a bridge](https://starknet.io/docs/hello_starknet/l1l2.html#messages-from-l1-to-l2). However, it is not guaranteed that the message will be processed by the sequencer. 
+In Starknet, [Ethereum contracts can send messages from L1 to L2, using a bridge](https://docs.starknet.io/documentation/architecture_and_concepts/L1-L2_Communication/messaging-mechanism/). However, it is not guaranteed that the message will be processed by the sequencer. 
 For instance, a message can fail to be processed if there is a sudden spike in the gas price and the value provided is too low. For that reason, Starknet developers provided a 
-[API to cancel on-going messages](https://docs.starknet.io/docs/L1-L2%20Communication/messaging-mechanism/#l1--l2-messages)
+[API to cancel on-going messages](https://docs.starknet.io/documentation/architecture_and_concepts/L1-L2_Communication/messaging-mechanism/#l2-l1_message_cancellation)
 
 # Example
 

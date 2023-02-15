@@ -4,7 +4,7 @@ To use randomness in a Substrate pallet, all you need to do is require a source 
 1. `random_seed`: This function takes no arguments and returns back a random value. Calling this value multiple times in a block will result in the same value.
 2. `random`: Takes in a byte-array (a.k.a "context-identifier") and returns a value that is as independent as possible from other contexts. 
 
-Substrate provides the [Randomness Collective Flip Pallet](https://paritytech.github.io/substrate/master/pallet_randomness_collective_flip/index.html) and a Verifiable Random Function implementation in the [BABE pallet](https://paritytech.github.io/substrate/master/pallet_babe/index.html). Developers can also choose to build their own source of randomness.
+Substrate provides the [Randomness Collective Flip Pallet](https://docs.rs/pallet-randomness-collective-flip/latest/pallet_randomness_collective_flip/) and a Verifiable Random Function implementation in the [BABE pallet](https://paritytech.github.io/substrate/master/pallet_babe/index.html). Developers can also choose to build their own source of randomness.
 
 A bad source of randomness can lead to a variety of exploits such as the theft of funds or undefined system behavior. 
 
