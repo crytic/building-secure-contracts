@@ -2,7 +2,7 @@
 
 The account abstraction model used by StarkNet has some important differences from what Solidity developers might be used to. There are no EOA addresses in StarkNet, only contract addresses. Rather than interact with contracts directly, users will usually deploy a contract that authenticates them and makes further calls on the user's behalf. In the most simple case, this contract checks that the transaction is signed by the expected key, but it could also represent a multisig or DAO, or have more complex logic for what kinds of transactions it will allow (e.g. deposits and withdrawals could be handled by separate contracts or it could prevent unprofitable trades). Depending on the type of call, access controll should be implemented with different approaches:
 
-* If a contract is called from another L2 contract, [access control should be implemented using `get_caller_address()`](https://www.cairo-lang.org/docs/hello_starknet/user_auth.html#getting-the-caller-address).
+* If a contract is called from another L2 contract, [access control should be implemented using `get_caller_address()`](https://www.cairo-lang.org/docs/hello_starknet/user_auth.html#getting-the-caller-address). This will make sure the address of the caller is correctly computed.
 
 * It is still possible to interact with contracts directly (e.g. without using an account). From the perspective of the contract, the caller's address will be 0x0. Since 0x0 is also the default value for uninitialized storage, it's possible to accidentally construct access control checks that fail open instead of properly restricting access to only the intended users.
 
