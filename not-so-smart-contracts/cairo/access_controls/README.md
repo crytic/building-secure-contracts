@@ -38,7 +38,7 @@ end
 
 - Add zero address checks. Note that this will prevent users from interacting with the contract directly.
 - Do not use `get_caller_address()` in functions that are supposed to be called from L1.
-- If a contract has a function that should be called from L1 contract, [the `@l1_handler` should be used](https://starknet.io/docs/hello_starknet/l1l2.html#receiving-a-message-from-l1). This forces the first parameter of such function to be the address of the contract or EOA that performed the cross-chain call.
+- If a contract has a function that should be called from L1 contract, [the `@l1_handler` should be used](https://docs.starknet.io/documentation/getting_started/l1l2/#receiving-a-message-from-l1). This forces the first parameter of such function to be the address of the contract or EOA that performed the cross-chain call.
 
 ## External Examples
 
