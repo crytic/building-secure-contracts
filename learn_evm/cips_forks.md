@@ -1,4 +1,5 @@
 The following lists every CIP associated to a Celo fork. Celo is an EVM-compatible chain.
+
 | Fork  | CIP/EIP  | What it does 
 |---|---|---|
  [Churrito](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0024.md)| [EIP 211](https://eips.ethereum.org/EIPS/eip-211)| Create `RETURNDATASIZE` and `RETURNDATACOPY` opcodes
@@ -22,6 +23,3 @@ The following lists every CIP associated to a Celo fork. Celo is an EVM-compatib
  [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [CIP 47](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0047.md) | Modify round change timeout formula 
  [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [CIP 45](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0045.md) | Modify transaction fee check
  [Espresso](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0041.md)| [CIP 50](https://github.com/celo-org/celo-proposals/blob/master/CIPs/cip-0050.md) | Make replay protection optional
-
-
-
