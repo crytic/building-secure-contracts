@@ -446,3 +446,333 @@ To test this you can change the modifier to be:
 No property fails now.
 
 </details>
+
+## Advanced Setup
+
+This section will cover a more advanced setup for testing `NaughtCoin` `ERC20`.
+
+### Prerequisites
+
+Watch these two Echidna workshops in particular. The setup that we will use is explained in great detail there:
+
+- [Intro to AMM's invariants](https://www.youtube.com/live/n0RaKKVTGvA?feature=share)
+- [AMM fuzzing](https://www.youtube.com/live/OPDA0L9SeNI?feature=share)
+
+This is not required, but the first two workshops explain the concept of fuzzing in much greater detail than any tutorial could. If you haven't watched them, do it, it's worth it.
+
+- [Introduction to fuzzing](https://www.youtube.com/live/bhb_y80iF8w?feature=share)
+- [Fuzzing Arithmetics](https://www.youtube.com/live/9P7sqE6hILM?feature=share)
+
+### Why bother with a more complex setup?
+
+Apart from a better code separation (grouping the code into logically separated pieces), an advanced setup comes with a couple of benefits:
+
+- For complex codebases, you will often need to create some helper functions. Either to set the correct contract state ([This is what Justin does with the `_doApproval` function](https://www.youtube.com/watch?v=OPDA0L9SeNI&t=4237s)) or to remove code duplication in your properties. If you often repeat yourself and have the same logic in multiple properties, you can make your code [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) by moving some of that logic to the `Setup` contract.
+- Creating a `User` contract gives you more flexibility when defining how users interact with each other or with the contract. If there are groups of users with certain privileges, you can create contracts like `Admin`, `Moderator`, `PriviledgedUser` etc. and give them access to certain functionalities.
+
+### Exercise Setup
+
+After you watch Justin's intro to AMM's invariants, try to create your own `Setup` contract in a separate file, `Setup.sol`.
+
+The file structure remains the same as in the introductory section.
+
+### Exercise Goals
+
+1. Create the `Setup` contract with the appropriate state.
+2. Re-write your properties from the previous section using `proxies`.
+
+You can experiment with different ways of handling external calls. Instead of return value checks, you can use `try`/`catch`.
+
+### Step by step solution
+
+As before, you can reveal particular steps without spoiling the final solution.
+
+<details>
+  <summary>Setup contract</summary>
+
+   This contract will be almost identical to what Justin did in the workshop.
+
+   ```solidity
+   // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import {NaughtCoin} from "../NaughtCoin.sol";
+
+contract User {
+    function proxy(address target, bytes memory data)
+        public
+        returns (bool success, bytes memory returnData)
+    {
+        return target.call(data);
+    }
+}
+
+contract Setup {
+    NaughtCoin token;
+    User player;
+    User bob;
+
+    constructor() {
+        player = new User();
+        bob = new User();
+        token = new NaughtCoin(address(player));
+    }
+
+    function _between(
+        uint256 amount,
+        uint256 low,
+        uint256 high
+    ) internal pure returns (uint256) {
+        return (low + (amount % (high - low + 1)));
+    }
+}
+   ```
+
+   In the introductory section we have used two addresses for `player` and `bob`. Now we are going to have two instances of the `User` contract: `player` and `bob`.
+
+</details>
+
+<details>
+  <summary>Making sure that Echidna works</summary>
+  
+  ```solidity
+  // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import {NaughtCoin} from "src/NaughtCoin.sol";
+import {Setup} from "./Setup.sol";
+
+contract ExternalTestAdvanced is Setup {
+    function always_true() public pure {
+        assert(true);
+    }
+}
+  ```
+
+   Run Echidna and see if it starts.
+
+</details>
+
+<details>
+  <summary>The 1st property</summary>
+  
+  The 1st property remains the same.
+  
+  ```solidity
+  function token_should_be_deployed() public view {
+        assert(address(token) != address(0));
+    }
+  ```
+
+</details>
+
+<details>
+  <summary>The 2nd property</summary>
+  
+  The 2nd property remains the same.
+  
+  ```solidity
+  function player_balance_is_equal_to_initial_supply() public view {
+        assert(token.balanceOf(address(player)) == token.INITIAL_SUPPLY());
+    }
+  ```
+
+</details>
+
+<details>
+  <summary>The 3rd property</summary>
+  
+  The 3rd property is slightly different. We have bounded the amount of tokens to be transferred between the value of `0` and the initial supply.
+
+  ```solidity
+   function token_transfer_should_fail_before_timelock_period(uint256 amount)
+        public
+    {
+        amount = _between(amount, 0, token.INITIAL_SUPPLY());
+
+        // pre-conditions
+        uint256 currentTime = block.timestamp;
+        uint256 playerBalanceBefore = token.balanceOf(address(player));
+        uint256 bobBalanceBefore = token.balanceOf(address(bob));
+
+        if (currentTime < token.timeLock()) {
+            // action
+            try
+                player.proxy(
+                    address(token),
+                    abi.encodeWithSelector(
+                        token.transfer.selector,
+                        address(bob),
+                        amount
+                    )
+                )
+            returns (bool success, bytes memory returnData) {
+                // optional log to silent unused return param warning
+                // emit Log(returnData);
+                assert(!success);
+            } catch {
+                /* reverted */
+            }
+
+            // post-conditions
+            assert(token.balanceOf(address(player)) == playerBalanceBefore);
+            assert(token.balanceOf(address(bob)) == bobBalanceBefore);
+        }
+    }
+  ```
+  
+</details>
+
+<details>
+  <summary>The 4th property</summary>
+  
+  In the `try`/`catch` block we are making sure that the approval never reverts. This is not enough. You can enhance the post conditions to make sure that the `allowance` is updated.
+  
+  ```solidity
+  function player_approval_should_never_fail(uint256 amount) public {
+        // actions
+        try
+            player.proxy(
+                address(token),
+                abi.encodeWithSelector(
+                    token.approve.selector,
+                    address(bob),
+                    amount
+                )
+            )
+        {
+            /* success */
+        } catch {
+            assert(false);
+        }
+
+        // post-conditions
+        uint256 bobAllowanceAfter = token.allowance(
+            address(player),
+            address(bob)
+        );
+        assert(bobAllowanceAfter == amount);
+    }
+  ```
+  
+  You can also improve this property by allowing Echidna to approve different addresses.
+  
+  ```solidity
+  function player_approval_should_never_fail(address person, uint256 amount)
+        public
+    {
+        // pre-conditions
+        if (person != address(0)) {
+            // actions
+            try
+                player.proxy(
+                    address(token),
+                    abi.encodeWithSelector(
+                        token.approve.selector,
+                        person,
+                        amount
+                    )
+                )
+            {
+                /* success */
+            } catch {
+                assert(false);
+            }
+
+            // post-conditions
+            uint256 personAllowanceAfter = token.allowance(
+                address(player),
+                address(person)
+            );
+            assert(personAllowanceAfter == amount);
+        }
+    }
+  ```
+
+</details>
+
+<details>
+  <summary>The 6th property</summary>
+  
+  We are intentionally skipping the 5th property again.
+  Echidna is able to invalidate the assertion inside the `try` block. The `transferFrom` function can be executed successfully. As you can see there is no need to set the `approval` manually. You can experiment with binding the `amount` to different values like `0` and `1`.
+  
+  Notice that we are using the `AssertionFailed` event to make sure that our post-conditions are checked. If instead you would have done `assert(success)`, Echidna would not be able to find out that it can decrease player balance.
+  
+  ```solidity
+  function transfer_from_should_fail_before_timelock_period(uint256 amount)
+        public
+    {
+        amount = _between(amount, 0, token.INITIAL_SUPPLY());
+
+        // pre-conditions
+        uint256 currentTime = block.timestamp;
+        uint256 playerBalanceBefore = token.balanceOf(address(player));
+        uint256 bobBalanceBefore = token.balanceOf(address(bob));
+
+        if (currentTime < token.timeLock()) {
+            // action
+            try
+                player.proxy(
+                    address(token),
+                    abi.encodeWithSelector(
+                        token.transferFrom.selector,
+                        address(player),
+                        address(bob),
+                        amount
+                    )
+                )
+            returns (bool success, bytes memory returnData) {
+                emit Log(returnData);
+                if (success) {
+                 emit AssertionFailed(amount);
+                }
+            } catch {
+                /* reverted */
+            }
+
+            // post-conditions
+            assert(token.balanceOf(address(player)) == playerBalanceBefore);
+            assert(token.balanceOf(address(bob)) == bobBalanceBefore);
+        }
+    }
+  ```
+
+</details>
+
+<details>
+  <summary>The 7th property</summary>
+  
+  Thanks to this property Echidna is able to invalidate other properties. In the `try`/`catch` block we only really care about the success case (since we know that `transferFrom` can succeed). We are ensuring that internal accounting works properly.
+  
+  ```solidity
+  function test_no_free_tokens_in_transfer_from(uint256 amount) public {
+        // pre-conditions
+        uint256 playerBalanceBefore = token.balanceOf(address(player));
+        uint256 bobBalanceBefore = token.balanceOf(address(bob));
+
+        // actions
+        try
+            player.proxy(
+                address(token),
+                abi.encodeWithSelector(
+                    token.transferFrom.selector,
+                    address(player),
+                    address(bob),
+                    amount
+                )
+            )
+        returns (bool success, bytes memory returnData) {
+            emit Log(returnData);
+            require(success);
+        } catch {}
+
+        // post-conditions
+        uint256 playerBalanceAfter = token.balanceOf(address(player));
+        uint256 bobBalanceAfter = token.balanceOf(address(bob));
+        assert(playerBalanceAfter == playerBalanceBefore - amount);
+        assert(bobBalanceAfter == bobBalanceBefore + amount);
+    }
+  ```
+
+</details>
