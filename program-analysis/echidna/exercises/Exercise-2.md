@@ -12,7 +12,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
   
-We will test the following contract *[exercises/exercise2/token.sol](./exercises/exercise2/token.sol)*:
+We will test the following contract *[./exercise2/token.sol](./exercise2/token.sol)*:
 
 ```Solidity
  contract Ownership{
@@ -60,7 +60,7 @@ We will test the following contract *[exercises/exercise2/token.sol](./exercises
 - Add a property to check that the contract cannot be unpaused.
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
-The skeleton for this exercise is (*[exercises/exercise2/template.sol](./exercises/exercise2/template.sol)*):
+The skeleton for this exercise is (*[./exercise2/template.sol](./exercise2/template.sol)*):
 
 ```Solidity
    import "token.sol";
@@ -77,4 +77,4 @@ The skeleton for this exercise is (*[exercises/exercise2/template.sol](./exercis
 
 ## Solution
 
- This solution can be found in [./exercises/exercise2/solution.sol](./exercises/exercise2/solution.sol)
+ This solution can be found in [./exercise2/solution.sol](./exercise2/solution.sol)

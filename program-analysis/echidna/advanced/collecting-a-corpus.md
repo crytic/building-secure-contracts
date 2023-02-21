@@ -2,13 +2,14 @@
 
 **Table of contents:**
 
-- [Introduction](#introduction)
-- [Collecting a corpus](#collecting-a-corpus)
-- [Seeding a corpus](#seeding-a-corpus)
+- [Collecting, visualizing and modifying an Echidna corpus](#collecting-visualizing-and-modifying-an-echidna-corpus)
+  - [Introduction](#introduction)
+  - [Collecting a corpus](#collecting-a-corpus)
+  - [Seeding a corpus](#seeding-a-corpus)
 
 ## Introduction
 
-We will see how to collect and use a corpus of transactions with Echidna. The target is the following smart contract (*[example/magic.sol](./example/magic.sol)*):
+We will see how to collect and use a corpus of transactions with Echidna. The target is the following smart contract (*[../example/magic.sol](../example/magic.sol)*):
 
 ```Solidity
 contract C {

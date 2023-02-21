@@ -12,7 +12,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
   
-We will test the following contract *[exercises/exercise3/token.sol](./exercises/exercise3/token.sol)*:
+We will test the following contract *[./exercise3/token.sol](./exercise3/token.sol)*:
 
 ```Solidity
  contract Ownership{
@@ -55,7 +55,7 @@ We will test the following contract *[exercises/exercise3/token.sol](./exercises
 
 ## Testing with custom initialization
 
-Consider the following extension of the token (*[exercises/exercise3/mintable.sol](./exercises/exercise3/mintable.sol)*):
+Consider the following extension of the token (*[./exercise3/mintable.sol](./exercise3/mintable.sol)*):
 
 ```Solidity
    import "token.sol";
@@ -75,7 +75,7 @@ Consider the following extension of the token (*[exercises/exercise3/mintable.so
     }
 ```
 
-The [version of token.sol](./exercises/exercise3/token.sol#L1) contains the fixes of the previous exercises.
+The [version of token.sol](./exercise3/token.sol#L1) contains the fixes of the previous exercises.
 
 ### Goals
 
@@ -83,7 +83,7 @@ The [version of token.sol](./exercises/exercise3/token.sol#L1) contains the fixe
 - Add a property to check if `echidna_caller` can mint more than 10,000 tokens.
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
-The skeleton for this exercise is (*[exercises/exercise3/template.sol](./exercises/exercise3/template.sol)*):
+The skeleton for this exercise is (*[./exercise3/template.sol](./exercise3/template.sol)*):
 
 ```Solidity
    import "mintable.sol";
@@ -100,4 +100,4 @@ The skeleton for this exercise is (*[exercises/exercise3/template.sol](./exercis
 
 ## Solution
 
- This solution can be found in [./exercises/exercise3/solution.sol](./exercises/exercise3/solution.sol)
+ This solution can be found in [./exercise3/solution.sol](./exercise3/solution.sol)

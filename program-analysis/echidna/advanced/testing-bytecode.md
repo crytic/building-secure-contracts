@@ -1,12 +1,14 @@
 # How to test bytecode only contracts
 
 **Table of contents:**
-- [Introduction](#introduction)
-- [Proxy pattern](#proxy-pattern)
-- [Run Echidna](#run-echidna)
-- [Differential fuzzing](#differential-fuzzing)
-- [Generic proxy pattern](#generic-proxy-code)
-- [Summary: Testing bytecode](#summary-testing-contracts-without-source-code)
+- [How to test bytecode only contracts](#how-to-test-bytecode-only-contracts)
+  - [Introduction](#introduction)
+  - [Proxy pattern](#proxy-pattern)
+  - [Run Echidna](#run-echidna)
+    - [Target source code](#target-source-code)
+  - [Differential fuzzing](#differential-fuzzing)
+  - [Generic Proxy code](#generic-proxy-code)
+  - [Summary: Testing contracts without source code](#summary-testing-contracts-without-source-code)
 
 ## Introduction
 
@@ -157,7 +159,7 @@ contract SolidityVersion{
 }
 ```
 
-Here we run Echidna with the [assertion mode](./assertion-checking.md):
+Here we run Echidna with the [assertion mode](../basic/assertion-checking.md):
 ```
 $ echidna-test  vyper.sol --config config.yaml --contract SolidityVersion --test-mode assertion
 assertion in test: passed! 🎉

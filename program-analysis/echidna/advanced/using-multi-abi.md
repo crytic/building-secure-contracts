@@ -2,11 +2,14 @@
 
 **Table of contents:**
 
-- [Introduction](#introduction)
-- [What is `multi-abi` testing?](#what-is-multi-abi-testing)
-- [When and how to use `multi-abi`](#when-and-how-to-use-multi-abi)
-- [Run Echidna](#run-echidna)
-- [Use cases and conclusions](#use-cases-and-conclusions)
+- [Understanding and using `multi-abi` in Echidna](#understanding-and-using-multi-abi-in-echidna)
+  - [Introduction](#introduction)
+  - [What is `multi-abi` testing?](#what-is-multi-abi-testing)
+  - [When and how to use `multi-abi`](#when-and-how-to-use-multi-abi)
+  - [Run Echidna](#run-echidna)
+    - [Example run with `multi-abi` set to `false`](#example-run-with-multi-abi-set-to-false)
+    - [Example run with `multi-abi` set to `true`](#example-run-with-multi-abi-set-to-true)
+  - [Use cases and conclusions](#use-cases-and-conclusions)
 
 ## Introduction
 
@@ -28,7 +31,7 @@ This is where `multi-abi` testing is useful: It allows Echidna to call functions
 
 ## Run Echidna
 
-We will use a simple example to show how `multi-abi` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [`multiabi.sol`](example/multiabi.sol).
+We will use a simple example to show how `multi-abi` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [`../example/multiabi.sol`](../example/multiabi.sol).
 
 The `Flag` contract contains a boolean flag that is only set if `flip()` is called, and a getter function that returns the value of the flag. For now, ignore `test_fail()`, we will talk about this function later.
 
@@ -68,7 +71,7 @@ contract EchidnaTest {
 }
 ```
 
-In a non `multi-abi` fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `multi-abi` testing, the invariant is broken. You can access [`multiabi.yaml` here](example/multiabi.yaml).
+In a non `multi-abi` fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `multi-abi` testing, the invariant is broken. You can access [`../example/multiabi.yaml` here](../example/multiabi.yaml).
 
 ```yaml
 testMode: assertion

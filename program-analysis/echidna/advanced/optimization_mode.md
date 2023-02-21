@@ -2,8 +2,9 @@
 
 **Table of contents:**
 
-- [Introduction](#introduction)
-- [Optimizing with Echidna](#optimizing-with-echidna)
+- [Using optimization mode to find local maximums](#using-optimization-mode-to-find-local-maximums)
+  - [Introduction](#introduction)
+  - [Optimizing with Echidna](#optimizing-with-echidna)
 
 ## Introduction
 
@@ -22,7 +23,7 @@ and returns a `int256`. Echidna will try find a sequence of transactions to maxi
 
 ## Optimizing with Echidna
 
-In this example, the target is the following smart contract (*[example/opt.sol](./example/opt.sol)*):
+In this example, the target is the following smart contract (*[../example/opt.sol](../example/opt.sol)*):
 
 ```solidity
 contract TestDutchAuctionOptimization {

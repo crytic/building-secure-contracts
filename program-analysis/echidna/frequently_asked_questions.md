@@ -21,7 +21,7 @@ If everything here works, but Echidna still fails, please open an issue in our i
 
 Echidna uses fuzzing testing which runs for a fixed amount of transactions (or a global timeout). 
 Users should specify a suitable number of transactions or a timeout (in seconds), depending on the amount of resources available for a fuzzing campaign 
-and the complexity of the code.  Determining the best amount of time to run a fuzzer is still an [open research question](https://blog.trailofbits.com/2021/03/23/a-year-in-the-life-of-a-compiler-fuzzing-campaign/), however, [monitoring the code coverage of your smart contracts](./collecting-a-corpus.md) can be a good way to determinate if the fuzzing campaign should be extended.
+and the complexity of the code.  Determining the best amount of time to run a fuzzer is still an [open research question](https://blog.trailofbits.com/2021/03/23/a-year-in-the-life-of-a-compiler-fuzzing-campaign/), however, [monitoring the code coverage of your smart contracts](./advanced/collecting-a-corpus.md) can be a good way to determinate if the fuzzing campaign should be extended.
 
 ## Why has Echidna not implemented fuzzing of smart contract constructors with parameters?
 
@@ -56,7 +56,7 @@ Coverage per isolated transaction will be possible, however, it is incomplete vi
 
 ## How to know which type of testing should be used? (boolean properties, assertions, etc)
 
-Check the [tutorial on selecting the right test mode](testing-modes.md)
+Check the [tutorial on selecting the right test mode](./basic/testing-modes.md)
 
 ## Why does Echidna return “Property X failed with no transactions made” when running one or more tests?
 

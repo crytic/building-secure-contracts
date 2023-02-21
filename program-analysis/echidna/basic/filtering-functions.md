@@ -2,15 +2,16 @@
 
 **Table of contents:**
 
-- [Introduction](#introduction)
-- [Filtering functions](#filtering-functions)
+- [Filtering functions to call during a fuzzing campaign](#filtering-functions-to-call-during-a-fuzzing-campaign)
+  - [Introduction](#introduction)
+  - [Filtering functions](#filtering-functions)
 - [Run Echidna](#run-echidna)
-- [Summary: Filtering functions](#summary-filtering-functions)
+  - [Summary: Filtering functions](#summary-filtering-functions)
 
 ## Introduction
 
 We will see how to filter the functions to be fuzzed.
-The target is the following smart contract (*[example/multi.sol](./example/multi.sol)*): 
+The target is the following smart contract (*[../example/multi.sol](../example/multi.sol)*): 
 
 ```solidity
 contract C {

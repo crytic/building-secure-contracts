@@ -43,4 +43,4 @@ First we will call `permit()` on our Mock ERC20 token with the signature generat
 
 ## Code
 
-The full example code can be found [here](example/TestDepositWithPermit.sol).
+The full example code can be found [here](../example/TestDepositWithPermit.sol).
