@@ -29,7 +29,7 @@ No skeleton will be provided for this exercise.
 Hint: It might help to start with doing a manual flashloan to get familiar with the workings of the target contract.
 ## Solution
 
-This solution can be found in [exercises/exercise7/solution.sol](./exercises/exercise7/solution.sol)
+This solution can be found in [./exercise7/solution.sol](./exercise7/solution.sol)
 
 [ctf]: https://www.damnvulnerabledefi.xyz/
 

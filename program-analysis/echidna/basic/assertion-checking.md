@@ -2,11 +2,12 @@
 
 **Table of contents:**
 
-- [Introduction](#introduction)
-- [Write an assertion](#write-an-assertion)
-- [Run Echidna](#run-echidna)
-- [When and how to use assertions](#when-and-how-to-use-assertions)
-- [Summary: Assertion checking](#summary-assertion-checking)
+- [How to test assertions with Echidna](#how-to-test-assertions-with-echidna)
+  - [Introduction](#introduction)
+  - [Write an assertion](#write-an-assertion)
+  - [Run Echidna](#run-echidna)
+  - [When and how to use assertions](#when-and-how-to-use-assertions)
+  - [Summary: Assertion Checking](#summary-assertion-checking)
 
 ## Introduction
 
@@ -29,7 +30,7 @@ contract Incrementor {
 }
 ```
 
-We want to make sure that `tmp` is less than or equal to `counter` after returning its difference. We could write an Echidna property, but we will need to store the `tmp` value somewhere. Instead, we could use an assertion like this one (*[example/assert.sol](./example/assert.sol)*):
+We want to make sure that `tmp` is less than or equal to `counter` after returning its difference. We could write an Echidna property, but we will need to store the `tmp` value somewhere. Instead, we could use an assertion like this one (*[../example/assert.sol](../example/assert.sol)*):
 
 ```solidity
 contract Incrementor {

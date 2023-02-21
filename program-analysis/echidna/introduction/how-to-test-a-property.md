@@ -2,16 +2,17 @@
 
 **Table of contents:**
 
-- [Introduction](#introduction)
-- [Write a property](#write-a-property)
-- [Initiate a contract](#initiate-a-contract)
-- [Run Echidna](#run-echidna)
-- [Summary: Testing a property](#summary-testing-a-property)
+- [Testing a Property with Echidna](#testing-a-property-with-echidna)
+  - [Introduction](#introduction)
+  - [Write a property](#write-a-property)
+  - [Initiate a contract](#initiate-a-contract)
+  - [Run Echidna](#run-echidna)
+  - [Summary: Testing a property](#summary-testing-a-property)
 
 
 ## Introduction
 
-We will see how to test a smart contract with Echidna. The target is the following smart contract (*[example/token.sol](./example/token.sol)*):
+We will see how to test a smart contract with Echidna. The target is the following smart contract (*[../example/token.sol](../example/token.sol)*):
 
 ```Solidity
    contract Token{
@@ -66,7 +67,7 @@ Use inheritance to separate your contract from your properties:
      }
 ```
 
-*[example/testtoken.sol](./example/testtoken.sol)* implements the property and inherits from the token.
+*[../example/testtoken.sol](../example/testtoken.sol)* implements the property and inherits from the token.
 
 ## Initiate a contract
 

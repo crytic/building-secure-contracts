@@ -2,15 +2,16 @@
 
 **Table of contents:**
 
-- [Introduction](#introduction)
-- [Measuring Gas Consumption](#measuring-gas-consumption)
+- [Finding transactions with high gas consumption](#finding-transactions-with-high-gas-consumption)
+  - [Introduction](#introduction)
+  - [Measuring Gas Consumption](#measuring-gas-consumption)
 - [Run Echidna](#run-echidna)
 - [Filtering Out Gas-Reducing Calls](#filtering-out-gas-reducing-calls)
-- [Summary: Finding transactions with high gas consumption](#summary-finding-transactions-with-high-gas-consumption)
+  - [Summary: Finding transactions with high gas consumption](#summary-finding-transactions-with-high-gas-consumption)
 
 ## Introduction
 
-We will see how to find the transactions with high gas consumption with Echidna. The target is the following smart contract (*[example/gas.sol](./example/gas.sol)*):
+We will see how to find the transactions with high gas consumption with Echidna. The target is the following smart contract (*[../example/gas.sol](../example/gas.sol)*):
 
 ```solidity
 contract C {
@@ -49,7 +50,7 @@ Seed: 2320549945714142710
 
 ## Measuring Gas Consumption
 
-To enable Echidna's gas consumption feature, create a configuration file [`config.yaml`](./example/gas.yaml):
+To enable Echidna's gas consumption feature, create a configuration file [`../example/gas.yaml`](../example/gas.yaml):
 
 ```yaml
 estimateGas: true
@@ -85,10 +86,10 @@ Seed: -325611019680165325
 
 # Filtering Out Gas-Reducing Calls
 
-The tutorial on [filtering functions to call during a fuzzing campaign](./filtering-functions.md) shows how to
+The tutorial on [filtering functions to call during a fuzzing campaign](../basic/filtering-functions.md) shows how to
 remove some functions during testing.  
 This can be critical for getting an accurate gas estimate.
-Consider the following example (*[example/pushpop.sol](./example/pushpop.sol)*):
+Consider the following example (*[example/pushpop.sol](../example/pushpop.sol)*):
 
 ```solidity
 contract C {
@@ -113,7 +114,7 @@ contract C {
   }
 }
 ```
-If Echidna uses this [`config.yaml`](./example/pushpop.yaml), it can call all functions and won't easily find transactions with high gas cost:
+If Echidna uses this [`config.yaml`](../example/pushpop.yaml), it can call all functions and won't easily find transactions with high gas cost:
 
 ```
 $ echidna-test pushpop.sol --config config.yaml
@@ -128,7 +129,7 @@ push used a maximum of 40839 gas
 ```
 
 That's because the cost depends on the size of `addrs` and random calls tend to leave the array almost empty.
-Blacklisting `pop` and `clear`, however, gives us much better results (*[example/blacklistpushpop.yaml](./example/blacklistpushpop.yaml)*):
+Blacklisting `pop` and `clear`, however, gives us much better results (*[../example/blacklistpushpop.yaml](../example/blacklistpushpop.yaml)*):
 
 ```yaml
 estimateGas: true
