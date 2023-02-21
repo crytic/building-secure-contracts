@@ -38,7 +38,7 @@ We recommend to first try without reading the following hints. The hints are in 
 
 - Remember that sometimes you have to supply the test contract with Ether. Read more in [the Echidna wiki](https://github.com/crytic/echidna/wiki/Config) and look at [the default config setup](https://github.com/crytic/echidna/blob/master/tests/solidity/basic/default.yaml).
 - The invariant that we are looking for is "the balance of the receiver contract can not decrease" 
-- Read what is the [multi abi option](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/common-testing-approaches.md#external-testing)
+- Read what is the [multi abi option](../basic/common-testing-approaches.md#external-testing)
 - A template is provided in [contracts/naive-receiver/NaiveReceiverEchidna.sol](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/contracts/naive-receiver/NaiveReceiverEchidna.sol)
 - A config file is provided in [naivereceiver.yaml](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/naivereceiver.yaml)
 
