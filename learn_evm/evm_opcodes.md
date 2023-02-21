@@ -39,7 +39,7 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0x1b`](#shl) | SHL | Shift Left | [EIP145](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-145.md) | 3 |
 | [`0x1c`](#shr) | SHR | Logical Shift Right | [EIP145](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-145.md) | 3 |
 | [`0x1d`](#sar) | SAR | Arithmetic Shift Right | [EIP145](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-145.md) | 3 |
-| [`0x20`](#sha3) | KECCAK256 | Compute Keccak-256 hash | - | 30* |
+| [`0x20`](#keccak256) | KECCAK256 | Compute Keccak-256 hash | - | 30* |
 | `0x21` - `0x2f`| Unused | Unused |
 | [`0x30`](#address) | ADDRESS | Get address of currently executing account | - | 2 |
 | [`0x31`](#balance) | BALANCE | Get balance of the given account | - | 700 |
@@ -74,7 +74,7 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0x55`](#sstore) | SSTORE | Save word to storage | - | 20000** |
 | [`0x56`](#jump) | JUMP | Alter the program counter | - | 8 |
 | [`0x57`](#jumpi) | JUMPI | Conditionally alter the program counter | - | 10 |
-| [`0x58`](#getpc) | GETPC | Get the value of the program counter prior to the increment | - | 2 |
+| [`0x58`](#pc) | PC | Get the value of the program counter prior to the increment | - | 2 |
 | [`0x59`](#msize) | MSIZE | Get the size of active memory in bytes | - | 2 |
 | [`0x5a`](#gas) | GAS | Get the amount of available gas, including the corresponding reduction for the cost of this instruction | - | 2 |
 | [`0x5b`](#jumpdest) | JUMPDEST | Mark a valid destination for jumps | - | 1 |
@@ -149,19 +149,19 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0xa3`](#log3) | LOG3 | Append log record with three topics | - | 1500 |
 | [`0xa4`](#log4) | LOG4 | Append log record with four topics | - | 1875 |
 | `0xa5` - `0xaf` | Unused | - |
-| [`0xb0`](#jumpto) | JUMPTO | Tentative [libevmasm has different numbers](https://github.com/ethereum/solidity/blob/c61610302aa2bfa029715b534719d25fe3949059/libevmasm/Instruction.h#L176)| [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
-| [`0xb1`](#jumpif) | JUMPIF | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
-| [`0xb2`](#jumpsub) | JUMPSUB | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
-| [`0xb4`](#jumpsubv) | JUMPSUBV | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
-| [`0xb5`](#beginsub) | BEGINSUB | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
-| [`0xb6`](#begindata) | BEGINDATA | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
-| [`0xb8`](#returnsub) | RETURNSUB | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
-| [`0xb9`](#putlocal) | PUTLOCAL | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
-| [`0xba`](#getlocal) | GETLOCAL | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
+| `0xb0` | JUMPTO | Tentative [libevmasm has different numbers](https://github.com/ethereum/solidity/blob/c61610302aa2bfa029715b534719d25fe3949059/libevmasm/Instruction.h#L176)| [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
+| `0xb1` | JUMPIF | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
+| `0xb2` | JUMPSUB | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
+| `0xb4` | JUMPSUBV | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
+| `0xb5` | BEGINSUB | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
+| `0xb6` | BEGINDATA | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
+| `0xb8` | RETURNSUB | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
+| `0xb9` | PUTLOCAL | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
+| `0xba` | GETLOCAL | Tentative | [EIP 615](https://github.com/ethereum/EIPs/blob/606405b5ab7aa28d8191958504e8aad4649666c9/EIPS/eip-615.md) |
 | `0xbb` - `0xe0` | Unused | - |
-| [`0xe1`](#sloadbytes) | SLOADBYTES | Only referenced in pyethereum | - | - |
-| [`0xe2`](#sstorebytes) | SSTOREBYTES | Only referenced in pyethereum | - | - |
-| [`0xe3`](#ssize) | SSIZE | Only referenced in pyethereum | - | - |
+| `0xe1` | SLOADBYTES | Only referenced in pyethereum | - | - |
+| `0xe2` | SSTOREBYTES | Only referenced in pyethereum | - | - |
+| `0xe3` | SSIZE | Only referenced in pyethereum | - | - |
 | `0xe4` - `0xef` | Unused | - |
 | [`0xf0`](#create) | CREATE | Create a new account with associated code | - | 32000 |
 | [`0xf1`](#call) | CALL | Message-call into an account | - | Complicated |
@@ -172,9 +172,8 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | `0xf6` - `0xf9` | Unused | - | - |
 | [`0xfa`](#staticcall) | STATICCALL | Similar to CALL, but does not modify state | - | 40 |
 | `0xfb` | Unused | - | - |
-| [`0xfc`](#txexecgas) | TXEXECGAS | Not in yellow paper FIXME | - | - |
 | [`0xfd`](#revert) | REVERT | Stop execution and revert state changes, without consuming all provided gas and providing a reason | - | 0 |
-| [`0xfe`](#invalid) | INVALID | Designated invalid instruction | - | 0 |
+| `0xfe` | INVALID | Designated invalid instruction | - | 0 |
 | [`0xff`](#selfdestruct) | SELFDESTRUCT | Halt execution and register account for later deletion | - | 5000* | 
 
 ## Instruction Details
@@ -408,7 +407,7 @@ res = value >> shift
 value: int256
 
 -----
-### SHA3
+### KECCAK256
 **0x20**
 
 (offset, len) => (hash)
