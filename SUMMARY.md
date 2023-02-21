@@ -16,7 +16,7 @@
         - [Forks <> CIPs](./learn_evm/cips_forks.md)
         - [Upgrades <> TIPs](./learn_evm/tips_upgrades.md)
         - [Forks <> BEPs](./learn_evm/beps_forks.md)
-- [Not so smart contracts]()
+- [Not so smart contracts](./not-so-smart-contracts/README.md)
     - [Algorand](./not-so-smart-contracts/algorand/README.md)
         - [Rekeying](./not-so-smart-contracts/algorand/rekeying/README.md)
         - [Unchecked Transaction Fees](./not-so-smart-contracts/algorand/unchecked_transaction_fee/README.md)
