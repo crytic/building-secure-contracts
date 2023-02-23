@@ -16,13 +16,13 @@ Each _Not So Smart Pallet_ includes a standard set of information:
 
 | Not So Smart Pallet | Description |
 | --- | --- |
-| [Arithmetic overflow](./arithmetic_overflow/README.md) | Integer overflow due to incorrect use of arithmetic operators |
-| [Don't panic!](./dont_panic/README.md) | System panics create a potential DoS attack vector  |
-| [Weights and fees](./weights_and_fees/README.md) | Incorrect weight calculations can create a potential DoS attack vector |
-| [Verify first](./verify_first/README.md) | Verify first, write last |
-| [Unsigned transaction validation](./validate_unsigned/README.md) | Insufficient validation of unsigned transactions |
-| [Bad randomness](./randomness/README.md) | Unsafe sources of randomness in Substrate |
-| [Bad origin](./origins/README.md) | Incorrect use of call origin can lead to bypassing access controls |
+| [Arithmetic overflow](arithmetic_overflow) | Integer overflow due to incorrect use of arithmetic operators |
+| [Don't panic!](dont_panic) | System panics create a potential DoS attack vector  |
+| [Weights and fees](weights_and_fees) | Incorrect weight calculations can create a potential DoS attack vector |
+| [Verify first](verify_first) | Verify first, write last |
+| [Unsigned transaction validation](validate_unsigned) | Insufficient validation of unsigned transactions |
+| [Bad randomness](randomness) | Unsafe sources of randomness in Substrate |
+| [Bad origin](origins) | Incorrect use of call origin can lead to bypassing access controls |
 
 ## Credits
 
