@@ -1,3 +1,6 @@
 testMode: assertion
 testLimit: 50000
+# echidna < 2.1
 multi-abi: true
+# echidna >= 2.1
+allContracts: true
