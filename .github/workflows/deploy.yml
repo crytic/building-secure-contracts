@@ -10,15 +10,17 @@ jobs:
     permissions:
       contents: read
     runs-on: ubuntu-latest
+
+    env:
+      CARGO_TERM_COLOR: always
+
     steps:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
     - name: Install mdbook
       run: |
-        mkdir mdbook
-        curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.14/mdbook-v0.4.14-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook
-        echo `pwd`/mdbook >> $GITHUB_PATH
+        cargo install --git https://github.com/montyly/mdBook.git mdbook || true
     - name: Build artifacts
       run: mdbook build
     - name: Upload artifact
