@@ -4,7 +4,7 @@ language = "en"
 multilingual = false
 src = "."
 title = "Building Secure Contracts"
-description = "Follow our guidelines and best practices to write secure smart contracts."
+description = "This repository, brought to you by Trail of Bits, outlines our guidelines and best practices to write secure smart contracts."
 
 [output.html]
 git-repository-url = "https://github.com/crytic/building-secure-contracts"
