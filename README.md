@@ -2,7 +2,9 @@
 
 ![](https://github.com/crytic/building-secure-contracts/workflows/CI/badge.svg) ![](https://github.com/crytic/building-secure-contracts/workflows/Echidna/badge.svg)
 
-Follow our guidelines and best practices to write secure smart contracts.
+This repository, brought to you by [Trail of Bits](https://www.trailofbits.com/), outlines guidelines and best practices to write secure smart contracts.
+
+We welcome contributions, and you can contribute by following our [contributing guidelines](https://github.com/crytic/building-secure-contracts/blob/master/CONTRIBUTING.md).
 
 **Table of contents:**
 
@@ -34,3 +36,7 @@ Follow our guidelines and best practices to write secure smart contracts.
     - exercises expected to require ~two hours to practically learn its operation.
 - [Resources](./resources): Various online resources
    - [Trail of Bits blogposts](./resources/tob_blogposts.md): List of blockchain related blogposts made by Trail of Bits
+
+
+# License
+secure-contracts and building-secure-contracts are licensed and distributed under the [AGPLv3 license](https://github.com/crytic/building-secure-contracts/blob/master/LICENSE). Contact us if you're looking for an exception to the terms.
