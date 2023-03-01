@@ -16,8 +16,8 @@ We will see how to test a smart contract with Echidna. The target is the followi
 
 ```Solidity
    contract Token{
-      mapping(address => uint) public balances;
-      function airdrop() public{
+     mapping(address => uint) public balances;
+     function airdrop() public{
           balances[msg.sender] = 1000;
      }
      function consume() public{
@@ -101,12 +101,13 @@ $ echidna-test contract.sol --contract MyContract
 The following summarizes the run of Echidna on our example:
 
 ```Solidity
-     contract TestToken is Token{
+     contract TestToken is Token {
          constructor() public {}
-             function echidna_balance_under_1000() public view returns(bool){
+         
+         function echidna_balance_under_1000() public view returns(bool) {
                 return balances[msg.sender] <= 1000;
-             }
-       }
+         }
+     }
 ```
 
 ```bash
