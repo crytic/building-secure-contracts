@@ -2,6 +2,10 @@ name: Echidna
 
 on:
   push:
+    paths-ignore:
+      - "**.md"
+      - "**.rs"
+      - "**.py"
     branches:
       - master
       - dev
