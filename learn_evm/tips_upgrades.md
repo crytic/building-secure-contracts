@@ -66,5 +66,8 @@ TRON is an EVM-compatible chain.
  [GreatVoyage-v4.6.0(Socrates)](https://github.com/tronprotocol/java-tron/releases/tag/GreatVoyage-v4.6.0) | [476](https://github.com/tronprotocol/TIPs/blob/master/tip-476.md)  | Optimize delegate data structure
  [GreatVoyage-v4.6.0(Socrates)](https://github.com/tronprotocol/java-tron/releases/tag/GreatVoyage-v4.6.0) | [387](https://github.com/tronprotocol/TIPs/blob/master/tip-387.md)  | Add transaction memo fee
  [GreatVoyage-v4.6.0(Socrates)](https://github.com/tronprotocol/java-tron/releases/tag/GreatVoyage-v4.6.0) | [465](https://github.com/tronprotocol/TIPs/blob/master/tip-465.md)  | Optimize reward calculation algorithm
+ [GreatVoyage-v4.7.0.1(Aristotle)](https://github.com/tronprotocol/java-tron/releases/tag/GreatVoyage-v4.7.0.1) | [467](https://github.com/tronprotocol/tips/blob/master/tip-467.md)  | Stake 2.0 - the new stake mechanism
+[GreatVoyage-v4.7.0.1(Aristotle)](https://github.com/tronprotocol/java-tron/releases/tag/GreatVoyage-v4.7.0.1) | [491](https://github.com/tronprotocol/tips/blob/master/tip-491.md)  | Support dynamic energy model
+[GreatVoyage-v4.7.0.1(Aristotle)](https://github.com/tronprotocol/java-tron/releases/tag/GreatVoyage-v4.7.0.1) | [474](https://github.com/tronprotocol/tips/blob/master/tip-474.md)  | Optimize the return value of chainid opcode
 
 
