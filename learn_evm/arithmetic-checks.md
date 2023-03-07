@@ -65,6 +65,7 @@ If `a` exceeds this value, we can conclude that `a + b` will overflow.
 An alternative (and slightly more efficient) approach to computing the maximum value of `a` is to invert the bits on `b`.
 
 ```solidity
+/// @notice versions >=0.8.0 && <0.8.16 with compiler optimizations
 function checkedAddUint2(uint256 a, uint256 b) public pure returns (uint256 c) {
     unchecked {
         c = a + b;
@@ -73,8 +74,6 @@ function checkedAddUint2(uint256 a, uint256 b) public pure returns (uint256 c) {
     }
 }
 ```
-
-> This code is produced by the compiler with optimizations turned on for versions <0.8.16.
 
 This is equivalent, because `type(uint256).max` is a 256-bit integer with all its bits set to `1`.
 Subtracting `b` from `type(uint256).max` can be viewed as inverting each bit in `b`.
@@ -218,6 +217,7 @@ function checkedAddInt2(int256 a, int256 b) public pure returns (int256 c) {
 ```
 
 Nevertheless, by utilizing `xor`, which is the bitwise exclusive-or operation, we can combine these checks into one.
+The code is written in assembly, because Solidity lacks an `xor` operation for boolean values.
 
 ```solidity
 function checkedAddInt3(int256 a, int256 b) public pure returns (int256 c) {
@@ -237,8 +237,6 @@ function checkedAddInt3(int256 a, int256 b) public pure returns (int256 c) {
     }
 }
 ```
-
-The code is written in assembly, because Solidity lacks an `xor` operation for boolean values.
 
 A different approach to detecting overflow in addition is to observe that adding two integers with different signs will never overflow.
 This reduces the check to the case when both summands have the same sign.
@@ -279,6 +277,7 @@ function checkedSubUint(uint256 a, uint256 b) public pure returns (uint256 c) {
 
 We could, like before, perform the check on the result itself using `if (c > a) arithmeticError();`, because subtracting a positive value from `a` should yield a value less than or equal to `a`. 
 However, in this case, we don't save any operations. 
+
 Just as with addition, for signed integers, we can combine the checks for both scenarios into a single check using `xor`.
 
 ```solidity
@@ -316,7 +315,7 @@ function checkedMulUint1(uint256 a, uint256 b) public pure returns (uint256 c) {
 
 > It's important to note that the Solidity compiler always includes a division by zero check for all division and modulo operations, regardless of the presence of an unchecked block. 
 > The EVM itself simply returns `0` when dividing by `0`, and this also applies to inline-assembly. 
-> If the order of the boolean expressions is evaluated in reverse order, it could cause an arithmetic check to incorrectly revert when a=0.
+> If the order of the boolean expressions is evaluated in reverse order, it could cause an arithmetic check to incorrectly revert when `a = 0`.
 
 We can compute the maximum value for `b` as long as `a` is non-zero. However, if `a` is zero, we know that the result will be zero as well, and there is no need to check for overflow. 
 Like before, we can also make use of the result and try to reconstruct one multiplicand from it. This is possible if the product didn't overflow and the first multiplicand is non-zero.
@@ -332,7 +331,7 @@ function checkedMulUint2(uint256 a, uint256 b) public pure returns (uint256 c) {
 }
 ```
 
-For reference, we can further remove the addition division by zero check by writing the code in assembly.
+For reference, we can further remove the additional division by zero check by writing the code in assembly.
 
 ```solidity
 function checkedMulUint3(uint256 a, uint256 b) public pure returns (uint256 c) {
@@ -371,7 +370,7 @@ function checkedMulInt(int256 a, int256 b) public pure returns (int256 c) {
 }
 ```
 
-Newer Solidity versions optimize the process by using the computed product.
+Newer Solidity versions optimize the process by utilizing the computed product in the check.
 
 ```solidity
 /// @notice versions >=0.8.17
@@ -385,8 +384,8 @@ function checkedMulInt2(int256 a, int256 b) public pure returns (int256 c) {
 }
 ```
 
-When it comes to integer multiplication, it's important to check for `a < 0` and `b == type(int256).min`.
-The actual case is limited to `a == -1` and `b == type(int256).min`, where the product `c` will overflow.
+When it comes to integer multiplication, it's important to handle the case hen `a < 0` and `b == type(int256).min`.
+The actual case, where the product `c` will overflow, is limited to `a == -1` and `b == type(int256).min`.
 This is because `-b` cannot be represented as a positive signed integer, as previously mentioned.
 
 ## Arithmetic checks for addition with sub-32-byte types
@@ -402,7 +401,8 @@ On a 64-bit system, integer addition works in the same way as before.
 = 0x0000000000000001 // int64(1)
 ```
 
-However, when performing the same calculations on a 256-bit machine, we need to extend the sign of the int64 value over all unused bits.
+However, when performing the same calculations on a 256-bit machine, we need to extend the sign of the int64 value over all unused bits,
+otherwise the value won't be interpreted correctly.
 
 ```solidity
                                    extended sign ──┐┌── 64-bit information
@@ -422,11 +422,11 @@ For example, when performing addition without knowing what the upper bits are se
 = 0x????????????????????????????????????????????????0000000000000001 // int64(1)
 ```
 
-It is crucial to be mindful of when to clean the bits before and after operations. 
-By default, Solidity takes care of cleaning the bits before operations on smaller types and lets the optimizer remove any redundant steps. 
-However, values accessed after operations included by the compiler are not guaranteed to be clean. In particular, this is the case for addition with small data types. 
-The bit cleaning steps will be removed by the compiler, even without optimizations, if a variable is only accessed in a subsequent assembly block. 
-Refer to the [Solidity documentation](https://docs.soliditylang.org/en/v0.8.18/internals/variable_cleanup.html#cleaning-up-variables) for further information on this matter.
+> It is crucial to be mindful of when to clean the bits before and after operations. 
+> By default, Solidity takes care of cleaning the bits before operations on smaller types and lets the optimizer remove any redundant steps. 
+> However, values accessed after operations included by the compiler are not guaranteed to be clean. In particular, this is the case for addition with small data types. 
+> The bit cleaning steps will be removed by the optimizer (even without optimizations enabled) if a variable is only accessed in a subsequent assembly block. 
+> Refer to the [Solidity documentation](https://docs.soliditylang.org/en/v0.8.18/internals/variable_cleanup.html#cleaning-up-variables) for further information on this matter.
 
 When performing arithmetic checks in the same way as before, it is necessary to include a step to clean the bits on the sum. 
 One approach to achieve this is by performing `signextend(7, value)`, which extends the sign of a 64-bit (7 + 1 = 8 bytes) integer over all upper bits.
@@ -454,7 +454,7 @@ function checkedAddInt64_1(int64 a, int64 b) public pure returns (int64 c) {
 ```
 
 If we remove the line that includes `c := signextend(7, c)` the overflow check will not function correctly.
-This is because Solidity does not take into account the fact that the variable is used in an assembly block, so the compiler removes the bit cleaning operation, even if the Yul code includes it after the addition.
+This is because Solidity does not take into account the fact that the variable is used in an assembly block, so the optimizer removes the bit cleaning operation, even if the Yul code includes it after the addition.
 
 One thing to keep in mind is that since we are performing a 64-bit addition in 256 bits, we practically have access to the carry/overflow bits.
 If our computed value does not overflow, then it will fall within the correct bounds `type(int64).min <= c <= type(int64).max`.
@@ -478,7 +478,7 @@ function checkedAddInt64_2(int64 a, int64 b) public pure returns (int64 c) {
 
 There are a few ways to verify that the result in its 256-bit representation will fit into the expected data type. 
 This is only true when all upper bits are the same. 
-The most direct method, as with integer overflow, involves checking the lower and upper bounds of the value.
+The most direct method, as just shown, involves checking the lower and upper bounds of the value.
 
 ```solidity
 /// @notice Check used in int64 addition for version >= 0.8.16.
@@ -487,7 +487,7 @@ function overflowInt64(int256 value) public pure returns (bool overflow) {
 }
 ```
 
-We can simplify the comparison process to a single operator if we're able to shift the disjointed number domain back so that it's connected. 
+We can simplify the expression to a single comparison if we're able to shift the disjointed number domain back so that it's connected. 
 To accomplish this, we subtract the smallest negative int64 `type(int64).min` from a value (or add the underlying unsigned value). 
 A better way to understand this is by visualizing the signed integer number domain in relation to the unsigned domain (which is demonstrated here using int128).
 
@@ -530,7 +530,7 @@ function overflowInt64_2(int256 value) public pure returns (bool overflow) {
 }
 ```
 
-In this case the verbose assembly code might actually be easier to follow than the Solidity code which can sometimes contain implicit operations.
+In this case the verbose assembly code might actually be easier to follow than the Solidity code which sometimes contains implicit operations.
 
 ```solidity
 int64 constant INT64_MIN = -0x8000000000000000;
@@ -544,7 +544,7 @@ function overflowInt64_2_yul(int256 value) public pure returns (bool overflow) {
 ```
 
 As mentioned earlier, this approach is only effective for negative numbers when all of their upper bits are set to `1`, allowing us to overflow back into the positive domain. 
-An alternative and more straightforward method would be to verify that all of the upper bits are equivalent to the sign bit.
+An alternative and more straightforward method would be to simply verify that all of the upper bits are equivalent to the sign bit for all integers.
 
 ```solidity
 function overflowInt64_3(int256 value) public pure returns (bool overflow) {
@@ -618,7 +618,7 @@ function checkedMulInt64(int64 a, int64 b) public pure returns (int64 c) {
 
 However, if the maximum value of a product exceeds 256 bits, then this method won't be effective. 
 This happens, for instance, when working with int192. The product `type(int192).min * type(int192).min` requires 192 + 192 = 384 bits to be stored, which exceeds the maximum of 256 bits. 
-Overflow occurs in 256 bits, resulting in a `0`, and it won't be logical to check if the result fits into 192 bits.
+Overflow occurs in 256 bits, which loses information, and it won't be logical to check if the result fits into 192 bits.
 In this scenario, we can depend on the previous checks and, for example, attempt to reconstruct one of the multiplicands.
 
 ```solidity
@@ -636,7 +636,7 @@ Once more, we must consider the two special circumstances:
 1. When one of the multiplicands is zero (`a == 0`), the other multiplicand cannot be retrieved. However, this case never results in overflow.
 2. Even if the multiplication is correct in 256 bits, the calculation overflows when only examining the least-significant 192 bits if the first multiplicand is minus one (`a = -1`) and the other multiplicand is the minimum value.
 
-The second exceptional scenario is still relevant since it is possible to encounter overflow when only considering the least-significant 192 bits, despite the multiplication being correct in 256 bits.
+An example might help explain the second case.
 
 ```solidity
   0xffffffffffffffff800000000000000000000000000000000000000000000000 // type(int192).min
@@ -644,8 +644,8 @@ The second exceptional scenario is still relevant since it is possible to encoun
 = 0x0000000000000000800000000000000000000000000000000000000000000000 // type(int192).min (when seen as a int192)
 ```
 
-To handle this particular case, we can always start by sign-extending or cleaning the result before attempting to reconstruct the other multiplicand.
-This removes one of the checks.
+A way to handle this is to always start by sign-extending or cleaning the result before attempting to reconstruct the other multiplicand.
+This then removes the need for checking the special condition.
 
 ```solidity
 /// @notice version >= 0.8.17
