@@ -1,12 +1,12 @@
 
-# Exercice 1 : Arithmetic rounding
+# Exercise 1 : Arithmetic rounding
 
 Use Manticore to find an input allowing an attacker to generate free tokens in [exercise1/token.sol](./exercise1/token.sol).
 Propose a fix of the contract, and test your fix using your Manticore script.
 
 ## Proposed scenario
 
-Follow the pattern initilization, exploration and property for the script.
+Follow the pattern initialization, exploration and property for the script.
 
 ## Initialization
 
