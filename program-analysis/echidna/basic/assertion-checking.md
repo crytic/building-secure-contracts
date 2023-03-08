@@ -15,7 +15,7 @@ In this short tutorial, we will show you how to use Echidna to check assertions 
 
 ## Write an assertion
 
-Let's suppose we have a contract like this one: 
+Let's suppose we have a contract like this one:
 
 ```solidity
 contract Incrementor {
@@ -30,7 +30,7 @@ contract Incrementor {
 }
 ```
 
-We want to make sure that `tmp` is less than or equal to `counter` after returning its difference. We could write an Echidna property, but we will need to store the `tmp` value somewhere. Instead, we could use an assertion like this one (*[../example/assert.sol](../example/assert.sol)*):
+We want to make sure that `tmp` is less than or equal to `counter` after returning its difference. We could write an Echidna property, but we will need to store the `tmp` value somewhere. Instead, we could use an assertion like this one (_[../example/assert.sol](../example/assert.sol)_):
 
 ```solidity
 contract Incrementor {
@@ -64,7 +64,7 @@ contract Incrementor {
 
 ## Run Echidna
 
-To enable the assertion failure testing in Echidna, you can use `--test-mode assertion` directly from the command line. 
+To enable the assertion failure testing in Echidna, you can use `--test-mode assertion` directly from the command line.
 
 Otherwise, you can create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config), `config.yaml`, with `testMode` set for assertion checking:
 
@@ -77,7 +77,7 @@ When we run this contract with Echidna, we obtain the expected results:
 ```
 $ echidna-test assert.sol --test-mode assertion
 Analyzing contract: assert.sol:Incrementor
-assertion in inc: failed!💥  
+assertion in inc: failed!💥
   Call sequence, shrinking (2596/5000):
     inc(21711016731996786641919559689128982722488122124807605757398297001483711807488)
     inc(7237005577332262213973186563042994240829374041602535252466099000494570602496)
@@ -90,7 +90,7 @@ As you can see, Echidna reports an assertion failure in the `inc` function. Addi
 
 ## When and how to use assertions
 
-Assertions can be used as alternatives to explicit properties if the conditions to check are directly related to the correct use of some operation `f`. Adding assertions after some code will enforce that the check happens immediately after it was executed: 
+Assertions can be used as alternatives to explicit properties if the conditions to check are directly related to the correct use of some operation `f`. Adding assertions after some code will enforce that the check happens immediately after it was executed:
 
 ```solidity
 function f(..) public {
@@ -105,16 +105,16 @@ On the contrary, using an explicit boolean property will randomly execute transa
 
 ```solidity
 function echidna_assert_after_f() public returns (bool) {
-    f(..); 
+    f(..);
     return(condition);
 }
 ```
 
 However, there are some issues:
 
-* It does not compile if `f` is declared as `internal` or `external`
-* It is unclear which arguments should be used to call `f`
-* The property will fail if `f` reverts, 
+- It does not compile if `f` is declared as `internal` or `external`
+- It is unclear which arguments should be used to call `f`
+- The property will fail if `f` reverts,
 
 Assertions can help to overcome this possible issues. For instance, they can be easily detected when calling internal or public functions:
 
@@ -140,8 +140,8 @@ function f(..) public {
 
 In general, we recommend following [John Regehr's advice](https://blog.regehr.org/archives/1091) on using assertions:
 
-* Do not force any side effects during the assertion checking. For instance: `assert(ChangeStateAndReturn() == 1)`
-* Do not assert obvious statements. For instance `assert(var >= 0)` where `var` is declared as `uint`.
+- Do not force any side effects during the assertion checking. For instance: `assert(ChangeStateAndReturn() == 1)`
+- Do not assert obvious statements. For instance `assert(var >= 0)` where `var` is declared as `uint`.
 
 Finally, please **do not use** `require` instead of `assert`, since Echidna will not be able to detect it (but the contract will revert anyway).
 
@@ -165,7 +165,7 @@ contract Incrementor {
 ```bash
 $ echidna-test assert.sol --test-mode assertion
 Analyzing contract: assert.sol:Incrementor
-assertion in inc: failed!💥  
+assertion in inc: failed!💥
   Call sequence, shrinking (2596/5000):
     inc(21711016731996786641919559689128982722488122124807605757398297001483711807488)
     inc(7237005577332262213973186563042994240829374041602535252466099000494570602496)

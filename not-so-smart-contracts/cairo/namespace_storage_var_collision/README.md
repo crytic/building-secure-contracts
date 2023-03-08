@@ -1,11 +1,12 @@
 # Namespace Storage Variable Collsion
+
 NOTE: The following was possible until cairo-lang 0.10.0.
 
 In Cairo, it is possible to use namespaces to scope functions under an identifier. However, storage variables are not scoped by these namespaces. If a developer accidentally uses the same variable name in two different namespaces, it could lead to a storage collision.
 
-# Example 
+# Example
 
-The following example has been copied from [here](https://gist.github.com/koloz193/18cb491167e844e9a28ac69825f68975). Suppose we have two different namespaces `A` and `B`, both with the same `balance` storage variable. In addition, both namespaces have respective functions `increase_balance()` and `get_balance()` to increment the storage variable and retrieve it respectively. When either `increase_balance_a` or `increase_balance_b()` is called, the expected behavior would be to have two seperate storage variables have their balance increased respectively. However, because storage variables are not scoped by namespaces, there will be one `balance` variable updated twice: 
+The following example has been copied from [here](https://gist.github.com/koloz193/18cb491167e844e9a28ac69825f68975). Suppose we have two different namespaces `A` and `B`, both with the same `balance` storage variable. In addition, both namespaces have respective functions `increase_balance()` and `get_balance()` to increment the storage variable and retrieve it respectively. When either `increase_balance_a` or `increase_balance_b()` is called, the expected behavior would be to have two seperate storage variables have their balance increased respectively. However, because storage variables are not scoped by namespaces, there will be one `balance` variable updated twice:
 
 ```cairo
 %lang starknet

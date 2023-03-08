@@ -11,8 +11,8 @@ This exercise requires to finish [exercise 1](./Exercise-1.md) and [exercise 2](
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
-  
-We will test the following contract *[./exercise3/token.sol](./exercise3/token.sol)*:
+
+We will test the following contract _[./exercise3/token.sol](./exercise3/token.sol)_:
 
 ```Solidity
  contract Ownership{
@@ -55,7 +55,7 @@ We will test the following contract *[./exercise3/token.sol](./exercise3/token.s
 
 ## Testing with custom initialization
 
-Consider the following extension of the token (*[./exercise3/mintable.sol](./exercise3/mintable.sol)*):
+Consider the following extension of the token (_[./exercise3/mintable.sol](./exercise3/mintable.sol)_):
 
 ```Solidity
    import "token.sol";
@@ -83,7 +83,7 @@ The [version of token.sol](./exercise3/token.sol#L1) contains the fixes of the p
 - Add a property to check if `echidna_caller` can mint more than 10,000 tokens.
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
-The skeleton for this exercise is (*[./exercise3/template.sol](./exercise3/template.sol)*):
+The skeleton for this exercise is (_[./exercise3/template.sol](./exercise3/template.sol)_):
 
 ```Solidity
    import "mintable.sol";
@@ -100,4 +100,4 @@ The skeleton for this exercise is (*[./exercise3/template.sol](./exercise3/templ
 
 ## Solution
 
- This solution can be found in [./exercise3/solution.sol](./exercise3/solution.sol)
+This solution can be found in [./exercise3/solution.sol](./exercise3/solution.sol)

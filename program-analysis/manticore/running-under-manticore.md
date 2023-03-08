@@ -7,10 +7,9 @@
 - [Manipulate a smart contract through the API](#manipulate-a-smart-contract-through-the-api)
 - [Summary: Running under Manticore](#summary-running-under-manticore)
 
-
 ## Introduction
 
-We will see how to explore a smart contract with the Manticore API. The target is the following smart contract (*[examples/example.sol](./examples/example.sol)*):
+We will see how to explore a smart contract with the Manticore API. The target is the following smart contract (_[examples/example.sol](./examples/example.sol)_):
 
 ```Solidity
 pragma solidity >=0.4.24 <0.6.0;
@@ -30,7 +29,6 @@ You can run Manticore directly on the smart contract by the following command (`
 ```bash
 $ manticore project
 ```
-
 
 You will get the output of testcases like this one (the order may change):
 
@@ -52,21 +50,21 @@ transactions until it does not explore new paths on the contract. Manticore does
 
 Manticore will output the information in a `mcore_*` directory. Among other, you will find in this directory:
 
- - `global.summary`: coverage and compiler warnings
- - `test_XXXXX.summary`: coverage, last instruction, account balances per test case
- - `test_XXXXX.tx`: detailed list of transactions per test case
+- `global.summary`: coverage and compiler warnings
+- `test_XXXXX.summary`: coverage, last instruction, account balances per test case
+- `test_XXXXX.tx`: detailed list of transactions per test case
 
 Here Manticore founds 7 test cases, which correspond to (the filename order may change):
 
-|                  |    Transaction 0   |   Transaction 1   |  Transaction 2    | Result |
-|:----------------:|:------------------:|:-----------------:|-------------------|:------:|
-| **test_00000000.tx** | Contract  creation | f(!=65)           |  f(!=65)          | STOP |
-| **test_00000001.tx** | Contract  creation | fallback function             |                   | REVERT |
-| **test_00000002.tx** | Contract  creation |                   |                   | RETURN |
-| **test_00000003.tx** | Contract  creation | f(65)             |                   | REVERT   |
-| **test_00000004.tx** | Contract  creation | f(!=65)           |                   | STOP |
-| **test_00000005.tx** | Contract  creation | f(!=65)           | f(65)             | REVERT   |
-| **test_00000006.tx** | Contract  creation | f(!=65)           | fallback function             | REVERT   |
+|                      |   Transaction 0   |   Transaction 1   | Transaction 2     | Result |
+| :------------------: | :---------------: | :---------------: | ----------------- | :----: |
+| **test_00000000.tx** | Contract creation |      f(!=65)      | f(!=65)           |  STOP  |
+| **test_00000001.tx** | Contract creation | fallback function |                   | REVERT |
+| **test_00000002.tx** | Contract creation |                   |                   | RETURN |
+| **test_00000003.tx** | Contract creation |       f(65)       |                   | REVERT |
+| **test_00000004.tx** | Contract creation |      f(!=65)      |                   |  STOP  |
+| **test_00000005.tx** | Contract creation |      f(!=65)      | f(65)             | REVERT |
+| **test_00000006.tx** | Contract creation |      f(!=65)      | fallback function | REVERT |
 
 _Exploration summary f(!=65) denotes f called with any value different than 65._
 
@@ -74,10 +72,9 @@ As you can notice, Manticore generates an unique test case for every successful 
 
 Use the `--quick-mode` flag if you want fast code exploration (it disable bug detectors, gas computation, ...)
 
-
 ## Manipulate a smart contract through the API
 
-This section describes details how to manipulate a smart contract through the Manticore Python API. You can create new file with python extension ```*.py``` and write the necessary code by adding the API commands (basics of which will be described below) into this file and then run it with the command ```$ python3 *.py```. Also you can execute the commands below directly into the python console, to run the console use the command ```$ python3```.
+This section describes details how to manipulate a smart contract through the Manticore Python API. You can create new file with python extension `*.py` and write the necessary code by adding the API commands (basics of which will be described below) into this file and then run it with the command `$ python3 *.py`. Also you can execute the commands below directly into the python console, to run the console use the command `$ python3`.
 
 ### Creating Accounts
 
@@ -169,7 +166,6 @@ If `value` of the transaction is not specified, it is 0 by default.
 - Arguments of a transaction can be concrete or symbolic
 - A raw transaction will explore all the functions
 - Function can be called by their name
-
 
 ### Workspace
 

@@ -12,6 +12,7 @@
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Setup
+
 1. Clone the repo: `git clone https://github.com/crytic/damn-vulnerable-defi-echidna`
 2. install the dependencies via `yarn install`.
 
@@ -28,9 +29,10 @@ The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/1
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
 Only the following contracts are relevant:
-  - `contracts/DamnValuableToken.sol`
-  - `contracts/unstoppable/UnstoppableLender.sol`
-  - `contracts/unstoppable/ReceiverUnstoppable.sol`
+
+- `contracts/DamnValuableToken.sol`
+- `contracts/unstoppable/UnstoppableLender.sol`
+- `contracts/unstoppable/ReceiverUnstoppable.sol`
 
 ## Hints
 
@@ -42,8 +44,6 @@ We recommend to first try without reading the following hints. The hints are in 
 - A template is provided in [contracts/unstoppable/UnstoppableEchidna.sol](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/contracts/unstoppable/UnstoppableEchidna.sol)
 - A config file is provided in [unstoppable.yaml](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/unstoppable.yaml)
 
-
-
 ## Solution
 
 This solution can be found in the [`solutions` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/solutions/contracts/unstoppable/UnstoppableEchidna.sol).
@@ -53,8 +53,7 @@ This solution can be found in the [`solutions` branch](https://github.com/crytic
 <details>
 <summary>Solution Explained (spoilers ahead)</summary>
 
-
-Note: Please make sure that you have placed `solution.sol` (or `UnstoppableEchidna.sol`) in `contracts/unstoppable`. 
+Note: Please make sure that you have placed `solution.sol` (or `UnstoppableEchidna.sol`) in `contracts/unstoppable`.
 
 The goal of the unstoppable challenge is to realize that `UnstoppableLender` has two modes of tracking its balance: `poolBalance` and `damnValuableToken.balanceOf(address(this))`.
 
@@ -73,10 +72,11 @@ $ echidna-test . --contract UnstoppableEchidna --config unstoppable.yaml
 
 ...
 
-echidna_testFlashLoan: failed!💥  
+echidna_testFlashLoan: failed!💥
   Call sequence:
     transfer(0x62d69f6867a0a084c6d313943dc22023bc263691,1296000)
 
 ...
 ```
+
 </details>

@@ -1,4 +1,3 @@
-
 # Exercice 1 : Arithmetic
 
 Use Manticore to find an input allowing an attacker to generate free tokens in [exercise1/token.sol](./exercise1/token.sol).

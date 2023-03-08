@@ -11,7 +11,7 @@
 
 ## Introduction
 
-We will see how to find the transactions with high gas consumption with Echidna. The target is the following smart contract (*[../example/gas.sol](../example/gas.sol)*):
+We will see how to find the transactions with high gas consumption with Echidna. The target is the following smart contract (_[../example/gas.sol](../example/gas.sol)_):
 
 ```solidity
 contract C {
@@ -35,7 +35,8 @@ contract C {
 
 }
 ```
-Here `expensive` can have a large gas consumption. 
+
+Here `expensive` can have a large gas consumption.
 
 Currently, Echidna always needs a property to test: here `echidna_test` always returns `true`.
 We can run Echidna to verify this:
@@ -56,7 +57,7 @@ To enable Echidna's gas consumption feature, create a configuration file [`../ex
 estimateGas: true
 ```
 
-In this example, we will also reduce the size of the transaction sequence to make the results easier to understand: 
+In this example, we will also reduce the size of the transaction sequence to make the results easier to understand:
 
 ```yaml
 seqLen: 2
@@ -68,7 +69,7 @@ estimateGas: true
 Once we have the configuration file created, we can run Echidna like this:
 
 ```
-$ echidna-test gas.sol --config config.yaml 
+$ echidna-test gas.sol --config config.yaml
 ...
 echidna_test: passed! 🎉
 
@@ -89,7 +90,7 @@ Seed: -325611019680165325
 The tutorial on [filtering functions to call during a fuzzing campaign](../basic/filtering-functions.md) shows how to
 remove some functions during testing.  
 This can be critical for getting an accurate gas estimate.
-Consider the following example (*[example/pushpop.sol](../example/pushpop.sol)*):
+Consider the following example (_[example/pushpop.sol](../example/pushpop.sol)_):
 
 ```solidity
 contract C {
@@ -114,6 +115,7 @@ contract C {
   }
 }
 ```
+
 If Echidna uses this [`config.yaml`](../example/pushpop.yaml), it can call all functions and won't easily find transactions with high gas cost:
 
 ```
@@ -129,7 +131,7 @@ push used a maximum of 40839 gas
 ```
 
 That's because the cost depends on the size of `addrs` and random calls tend to leave the array almost empty.
-Blacklisting `pop` and `clear`, however, gives us much better results (*[../example/blacklistpushpop.yaml](../example/blacklistpushpop.yaml)*):
+Blacklisting `pop` and `clear`, however, gives us much better results (_[../example/blacklistpushpop.yaml](../example/blacklistpushpop.yaml)_):
 
 ```yaml
 estimateGas: true
@@ -154,7 +156,7 @@ estimateGas: true
 ```
 
 ```bash
-$ echidna-test contract.sol --config config.yaml 
+$ echidna-test contract.sol --config config.yaml
 ...
 ```
 

@@ -16,10 +16,9 @@ function operation(uint index, ...) public{
 }
 ```
 
-If `require(index <= 10**18)` is used instead, many transactions generated will revert, slowing the fuzzer. 
+If `require(index <= 10**18)` is used instead, many transactions generated will revert, slowing the fuzzer.
 
 This can also be generalized define a min and max range, for example:
-
 
 ```solidity
 function operation(uint balance, ...) public{
@@ -76,4 +75,4 @@ This will work well to test arrays with a small amount of elements; however, it 
 filterFunctions: ["C.pop()"]
 ```
 
-This is enough for small scale testing. A more general solution is available using a specific testing technique called [*swarm testing*](https://www.cs.utah.edu/~regehr/papers/swarm12.pdf). This allows to run a long testing campaign with some tool but randomly shuffling the configuration of it. In case of Echidna, swarm testing runs with different config files, where it blacklists some number of random functions from the contract before testing. We offer swarm testing and scalability with [echidna-parade](https://github.com/crytic/echidna-parade), our dedicated tool for fuzzing smart contracts. A specific tutorial in the use of echidna-parade is available [here](./advanced/smart-contract-fuzzing-at-scale.md).
+This is enough for small scale testing. A more general solution is available using a specific testing technique called [_swarm testing_](https://www.cs.utah.edu/~regehr/papers/swarm12.pdf). This allows to run a long testing campaign with some tool but randomly shuffling the configuration of it. In case of Echidna, swarm testing runs with different config files, where it blacklists some number of random functions from the contract before testing. We offer swarm testing and scalability with [echidna-parade](https://github.com/crytic/echidna-parade), our dedicated tool for fuzzing smart contracts. A specific tutorial in the use of echidna-parade is available [here](./advanced/smart-contract-fuzzing-at-scale.md).

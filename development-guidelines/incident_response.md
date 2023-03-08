@@ -1,6 +1,6 @@
-# Incident Response Recommendations 
+# Incident Response Recommendations
 
-Here, we provide recommendations around the formulation of an incident response plan. 
+Here, we provide recommendations around the formulation of an incident response plan.
 
 - [ ] **Identify who (either specific people or roles) is responsible for carrying out the mitigations (deploying smart contracts, pausing contracts, upgrading the front end, etc.).**
   - Specifying these roles will strengthen the incident response plan and ease the execution of mitigating actions when necessary.
@@ -13,18 +13,18 @@ Here, we provide recommendations around the formulation of an incident response 
   - For each language and component, describe the noteworthy sources for vulnerability news. Subscribe to updates for each source. Consider creating a special private Discord/Slack channel with a bot that will post the latest vulnerability news; this will help the team keep track of updates all in one place. Also consider assigning specific team members to keep track of the vulnerability news of a specific component of the system.
 - [ ] **Consider scenarios involving issues that would indirectly affect the system.**
 - [ ] **Determine when and how the team would reach out to and onboard external parties (auditors, affected users, other protocol developers, etc.).**
-  - Some issues may require collaboration with external parties to efficiently remediate them. 
+  - Some issues may require collaboration with external parties to efficiently remediate them.
 - [ ] **Define contract behavior that is considered abnormal for off-chain monitoring.**
   - Consider adding more resilient solutions for detection and mitigation, especially in terms of specific alternate endpoints and queries for different data as well as status pages and support contacts for affected services.
 - [ ] **Combine issues and determine whether new detection and mitigation scenarios are needed.**
 - [ ] **Perform periodic dry runs of specific scenarios in the incident response plan to find gaps and opportunities for improvement and to develop muscle memory.**
-  - Document the intervals at which the team should perform dry runs of the various scenarios. For scenarios that are more likely to happen, perform dry runs more regularly. Create a template to be filled in after a dry run to describe the improvements that need to be made to the incident response.  
+  - Document the intervals at which the team should perform dry runs of the various scenarios. For scenarios that are more likely to happen, perform dry runs more regularly. Create a template to be filled in after a dry run to describe the improvements that need to be made to the incident response.
 
-## Incident Response Plan Resources 
+## Incident Response Plan Resources
 
 - [How to Hack the Yield Protocol](https://docs.yieldprotocol.com/#/operations/how_to_hack)
 - [Emergency Steps – Yearn](https://github.com/yearn/yearn-devdocs/blob/master/docs/developers/v2/EMERGENCY.md)
 
-## Well-handled IR Incidents 
+## Well-handled IR Incidents
 
 - [Yield Protocol](https://medium.com/yield-protocol/post-mortem-of-incident-on-august-5th-2022-7bb70dbb9ada)

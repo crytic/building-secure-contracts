@@ -1,4 +1,5 @@
 # Exercice 1 : Function overridden protection
+
 The goal is to create a script that fills a missing feature of Solidity: function overriding protection.
 
 [exercises/exercise1/coin.sol](exercises/exercise1/coin.sol) contains a function that must never be overridden:

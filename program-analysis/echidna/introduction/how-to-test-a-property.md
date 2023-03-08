@@ -9,10 +9,9 @@
   - [Run Echidna](#run-echidna)
   - [Summary: Testing a property](#summary-testing-a-property)
 
-
 ## Introduction
 
-We will see how to test a smart contract with Echidna. The target is the following smart contract (*[../example/token.sol](../example/token.sol)*):
+We will see how to test a smart contract with Echidna. The target is the following smart contract (_[../example/token.sol](../example/token.sol)_):
 
 ```Solidity
    contract Token{
@@ -28,7 +27,7 @@ We will see how to test a smart contract with Echidna. The target is the followi
           balances[msg.sender] += 1;
      }
    }
-  
+
 ```
 
 We will make the assumption that this token has the following properties:
@@ -40,13 +39,15 @@ We will make the assumption that this token has the following properties:
 ## Write a property
 
 Echidna properties are Solidity functions. A property must:
+
 - Have no argument
 - Return true if it is successful
 - Have its name starting with `echidna`
 
 Echidna will:
+
 - Automatically generate arbitrary transactions to test the property.
-- Report any transactions leading a property to return false or throw an error. 
+- Report any transactions leading a property to return false or throw an error.
 - Discard side-effects when calling a property (i.e. if the property changes a state variable, it is discarded after the test)
 
 The following property checks that the caller can have no more than 1000 tokens:
@@ -67,7 +68,7 @@ Use inheritance to separate your contract from your properties:
      }
 ```
 
-*[../example/testtoken.sol](../example/testtoken.sol)* implements the property and inherits from the token.
+_[../example/testtoken.sol](../example/testtoken.sol)_ implements the property and inherits from the token.
 
 ## Initiate a contract
 
@@ -113,7 +114,7 @@ The following summarizes the run of Echidna on our example:
 $ echidna-test testtoken.sol --contract TestToken
 ...
 
-echidna_balance_under_1000: failed!💥  
+echidna_balance_under_1000: failed!💥
   Call sequence, shrinking (1205/5000):
     airdrop()
     backdoor()

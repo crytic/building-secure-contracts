@@ -4,7 +4,7 @@ In the legacy version of the `Msg Service`, all messages have to be registered i
 
 In [the recent Cosmos version manual registration is no longer needed](https://docs.cosmos.network/v0.47/building-modules/msg-services).
 
-## Example 
+## Example
 
 There is one message handler missing.
 
@@ -178,4 +178,5 @@ And it is the `CancelCall` msg.
 - Deploy static-analysis tests in CI pipeline for all manually maintained code that must be repeated in multiple files/methods
 
 ## External examples
+
 - The bug occured in the [Gravity Bridge](https://github.com/code-423n4/2021-08-gravitybridge-findings/issues/64). It was impossible to send evidence of malicious behavior, which impacted Gravity Bridge's security model.

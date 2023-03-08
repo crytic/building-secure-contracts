@@ -1,8 +1,9 @@
 # Incorrect Felt Comparison
 
 In Cairo, there are two methods for the less than or equal to comparison operator: `assert_le` and `assert_nn_le`:
+
 - `assert_le` asserts that a number `a` is less than or equal to `b`, regardless of the size of `a`
-- `assert_nn_le` additionally asserts that `a` is [non-negative](https://github.com/starkware-libs/cairo-lang/blob/9889fbd522edc5eff603356e1912e20642ae20af/src/starkware/cairo/common/math.cairo#L71), i.e. not greater than or equal to the `RANGE_CHECK_BOUND` value of `2^128`. 
+- `assert_nn_le` additionally asserts that `a` is [non-negative](https://github.com/starkware-libs/cairo-lang/blob/9889fbd522edc5eff603356e1912e20642ae20af/src/starkware/cairo/common/math.cairo#L71), i.e. not greater than or equal to the `RANGE_CHECK_BOUND` value of `2^128`.
 
 `assert_nn_le` works to compare unsigned integers but with a value less than `2^128` (e.g. an [Uint256](https://github.com/starkware-libs/cairo-lang/blob/9889fbd522edc5eff603356e1912e20642ae20af/src/starkware/cairo/common/uint256.cairo#L9-L14) field). To compare felts as unsigned integer over the entire range (0, P], `assert_le_felt` should be used. Note these functions exist also with the `is_` prefix where they return 1 (TRUE) or 0 (FALSE).
 
@@ -36,13 +37,12 @@ func better_comparison{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 
     return ();
 
-    
+
 }
 ```
 
-
-
 # Mitigations
-- Review all felt comparisons closely. 
-- Determine what sort of behavior the comparison should have, and if `assert_nn_le` or `assert_le_felt` is more appropriate. 
+
+- Review all felt comparisons closely.
+- Determine what sort of behavior the comparison should have, and if `assert_nn_le` or `assert_le_felt` is more appropriate.
 - Use `assert_le` if you explicitly want to make comparison between signed integers - otherwise explicitely document why it is used over `assert_nn_le`

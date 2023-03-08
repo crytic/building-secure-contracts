@@ -11,7 +11,7 @@
 ## Introduction
 
 We will see how to filter the functions to be fuzzed.
-The target is the following smart contract (*[../example/multi.sol](../example/multi.sol)*): 
+The target is the following smart contract (_[../example/multi.sol](../example/multi.sol)_):
 
 ```solidity
 contract C {
@@ -63,12 +63,12 @@ contract C {
 }
 ```
 
-This small example forces Echidna to find a certain sequence of transactions to change a state variable. 
+This small example forces Echidna to find a certain sequence of transactions to change a state variable.
 This is hard for a fuzzer (it is recommended to use a symbolic execution tool like [Manticore](https://github.com/trailofbits/manticore)).
 We can run Echidna to verify this:
 
 ```
-$ echidna-test multi.sol 
+$ echidna-test multi.sol
 ...
 echidna_state4: passed! 🎉
 Seed: -3684648582249875403
@@ -76,9 +76,9 @@ Seed: -3684648582249875403
 
 ## Filtering functions
 
-Echidna has trouble finding the correct sequence to test this contract because the two reset functions (`reset1` and `reset2`) will set all the state variables to `false`. 
-However, we can use a special Echidna feature to either blacklist the `reset` functions or to whitelist only the `f`, `g`, 
-`h` and `i` functions. 
+Echidna has trouble finding the correct sequence to test this contract because the two reset functions (`reset1` and `reset2`) will set all the state variables to `false`.
+However, we can use a special Echidna feature to either blacklist the `reset` functions or to whitelist only the `f`, `g`,
+`h` and `i` functions.
 
 To blacklist functions, we can use this configuration file:
 
@@ -102,9 +102,9 @@ filterFunctions: ["C.f(uint256)", "C.g(uint256)", "C.h(uint256)", "C.i()"]
 To run Echidna with a configuration file `blacklist.yaml`:
 
 ```
-$ echidna-test multi.sol --config blacklist.yaml 
+$ echidna-test multi.sol --config blacklist.yaml
 ...
-echidna_state4: failed!💥  
+echidna_state4: failed!💥
   Call sequence:
     f(12)
     g(8)
@@ -112,8 +112,7 @@ echidna_state4: failed!💥
     i()
 ```
 
-Echidna will find the sequence of transactions to falsify the property almost immediately. 
-
+Echidna will find the sequence of transactions to falsify the property almost immediately.
 
 ## Summary: Filtering functions
 
@@ -125,7 +124,7 @@ filterFunctions: ["C.f1()", "C.f2()", "C.f3()"]
 ```
 
 ```bash
-$ echidna-test contract.sol --config config.yaml 
+$ echidna-test contract.sol --config config.yaml
 ...
 ```
 

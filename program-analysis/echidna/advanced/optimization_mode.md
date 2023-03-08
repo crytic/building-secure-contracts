@@ -8,10 +8,10 @@
 
 ## Introduction
 
-We will see how to perform function optimization using Echidna. This tutorial will require Echidna 2.0.5 or greater, 
+We will see how to perform function optimization using Echidna. This tutorial will require Echidna 2.0.5 or greater,
 so make sure you have update it before starting.
 
-Optimization mode is a experimental feature that allows to define a special function which takes no arguments 
+Optimization mode is a experimental feature that allows to define a special function which takes no arguments
 and returns a `int256`. Echidna will try find a sequence of transactions to maximize the value returned:
 
 ```solidity
@@ -23,7 +23,7 @@ and returns a `int256`. Echidna will try find a sequence of transactions to maxi
 
 ## Optimizing with Echidna
 
-In this example, the target is the following smart contract (*[../example/opt.sol](../example/opt.sol)*):
+In this example, the target is the following smart contract (_[../example/opt.sol](../example/opt.sol)_):
 
 ```solidity
 contract TestDutchAuctionOptimization {
@@ -77,7 +77,7 @@ echidna_opt_price_difference: max value: 1076841
 
 The resulting max value is not unique, running in longer campaign will likely result in a larger value.
 
-Regarding the command line, the optimization mode is enabled using `--test-mode optimization`. additionally, we included the following tweaks: 
+Regarding the command line, the optimization mode is enabled using `--test-mode optimization`. additionally, we included the following tweaks:
 
 1. Use only one transaction (we know that the function is stateless)
 2. Use a large shrink limit in order to obtain a better value during the minimization of the complexity of the input.

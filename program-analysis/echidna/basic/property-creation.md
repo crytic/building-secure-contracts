@@ -16,7 +16,7 @@ In this short tutorial, we will detail some ideas to write interesting or useful
 
 One of the simplest properties to write using Echidna is to throw an assertion when some function is expected to revert/return.
 
-Let's suppose we have a contract interface like the one below: 
+Let's suppose we have a contract interface like the one below:
 
 ```solidity
 interface DeFi {
@@ -40,7 +40,7 @@ contract Test {
     c = DeFi(..);
     token.mint(address(this), ...);
   }
-  
+
   function getShares_never_reverts() public {
       (bool b,) = c.call(abi.encodeWithSignature("getShares(address)", address(this)));
       assert(b);
@@ -52,38 +52,37 @@ contract Test {
         assert(b);
     }
   }
-  
+
   function withdrawShares_never_reverts(uint256 val) public {
     if (c.getShares(address(this)) >= val) {
         (bool b,) = c.call(abi.encodeWithSignature("withdrawShares(uint256)", val));
         assert(b);
     }
   }
-  
+
   function depositShares_can_revert(uint256 val) public {
     if (token.balanceOf(address(this)) < val) {
         (bool b,) = c.call(abi.encodeWithSignature("depositShares(uint256)", val));
         assert(!b);
     }
   }
-  
+
   function withdrawShares_can_revert(uint256 val) public {
     if (c.getShares(address(this)) < val) {
         (bool b,) = c.call(abi.encodeWithSignature("withdrawShares(uint256)", val));
         assert(!b);
     }
   }
-  
+
 }
 ```
 
-After you have writen your first version of properties, run Echidna to make sure they work as expected. During this tutorial, we will improve them step by step. It is strongly recommended to run the fuzzer at each step to increase the probability of detecting any potential issues. 
+After you have writen your first version of properties, run Echidna to make sure they work as expected. During this tutorial, we will improve them step by step. It is strongly recommended to run the fuzzer at each step to increase the probability of detecting any potential issues.
 
 Perhaps you think these properties are too low level to be useful, particularly if the code has a good coverage in terms of unit tests.
 But you will be surprised how often an unexpected revert/return uncovers a complex and severe issue. Moreover, we will see how these properties can be improved to cover more complex post-conditions.
 
 Before we continue, we will improve these properties using [try/catch](https://docs.soliditylang.org/en/v0.6.0/control-structures.html#try-catch). The use of a low-level call forces us to manually encode the data, which can be error prone (an error will always cause calls to revert). Note, this will only work if the codebase is using solc 0.6.0 or later:
-
 
 ```solidity
   ...
@@ -92,20 +91,20 @@ Before we continue, we will improve these properties using [try/catch](https://d
         try c.depositShares(val) { /* not reverted */ } catch { assert(false); }
     }
   }
-  
+
   function depositShares_can_revert(uint256 val) public {
     if (token.balanceOf(address(this)) < val) {
         try c.depositShares(val) { assert(false); } catch { /* reverted */ }
     }
   }
   ...
-  
+
 }
 ```
 
 ## Enhacing postcondition checks
 
-If the previous properties are passing, this means that the pre-conditions are good enough, however the post-conditions are not very precise. 
+If the previous properties are passing, this means that the pre-conditions are good enough, however the post-conditions are not very precise.
 Avoiding reverts doesn't mean that the contract is in a valid state. Let's add some basic preconditions:
 
 ```solidity
@@ -116,7 +115,7 @@ Avoiding reverts doesn't mean that the contract is in a valid state. Let's add s
         assert(c.getShares(address(this)) > 0);
     }
   }
-  
+
   function withdrawShares_never_reverts(uint256 val) public {
     if (c.getShares(address(this)) >= val) {
         try c.withdrawShares(val) { /* not reverted */ } catch { assert(false); }
@@ -124,7 +123,7 @@ Avoiding reverts doesn't mean that the contract is in a valid state. Let's add s
     }
   }
   ...
-  
+
 }
 ```
 
@@ -132,12 +131,12 @@ Uhm, it looks like it is not that easy to specify the value of shares/tokens obt
 
 ## Combining properties
 
-In this generic example, it is unclear if there is a way to calculate how many shares or tokens we should receive after executing the deposit/withdraw operations. Of course, if we have that information, we should use it. In any case, what we can do here is to combine these two properties into a single one to be able check more precisely it's preconditions. 
+In this generic example, it is unclear if there is a way to calculate how many shares or tokens we should receive after executing the deposit/withdraw operations. Of course, if we have that information, we should use it. In any case, what we can do here is to combine these two properties into a single one to be able check more precisely it's preconditions.
 
 ```solidity
   ...
   function deposit_withdraw_shares_never_reverts(uint256 val) public {
-    uint256 original_balance = token.balanceOf(address(this)); 
+    uint256 original_balance = token.balanceOf(address(this));
     if (original_balance >= val) {
         try c.depositShares(val) { /* not reverted */ } catch { assert(false); }
         uint256 shares = c.getShares(address(this);
@@ -147,7 +146,7 @@ In this generic example, it is unclear if there is a way to calculate how many s
     }
   }
   ...
-  
+
 }
 ```
 
@@ -175,4 +174,4 @@ Additionally, combining properties does not mean that we will have to remove sim
 
 ## Summary: How to write good properties
 
-It is usually a good idea to start writing simple properties first and then improving them to make them more precise and easier to read. At each step you should run a short fuzzing campaign to make sure they work as expected and try to catch issues early during the development of your smart contracts. 
+It is usually a good idea to start writing simple properties first and then improving them to make them more precise and easier to read. At each step you should run a short fuzzing campaign to make sure they work as expected and try to catch issues early during the development of your smart contracts.

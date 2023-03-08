@@ -14,7 +14,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
 
-We will test the following contract *[./exercise4/token.sol](./exercise4/token.sol)*:
+We will test the following contract _[./exercise4/token.sol](./exercise4/token.sol)_:
 
 ```Solidity
  contract Ownership{
@@ -66,7 +66,7 @@ Add asserts to ensure that after calling `transfer`:
 Once Echidna finds the bug, fix the issue, and re-try your assertion with Echidna.
 
 This exercise is similar to the [first one](Exercise-1.md), but using assertions instead of explicit properties.  
-However, in this exercise, it is easier to modify the original token contract (*[./exercise4/token.sol](./exercise4/token.sol)*).
+However, in this exercise, it is easier to modify the original token contract (_[./exercise4/token.sol](./exercise4/token.sol)_).
 
 ## Solution
 
