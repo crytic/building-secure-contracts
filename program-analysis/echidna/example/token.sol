@@ -1,18 +1,16 @@
+contract Token {
+    mapping(address => uint256) public balances;
 
-
-contract Token{
-
-    mapping(address => uint) public balances;
-    function airdrop() public{
+    function airdrop() public {
         balances[msg.sender] = 1000;
     }
 
-    function consume() public{ 
-        require(balances[msg.sender]>0);
+    function consume() public {
+        require(balances[msg.sender] > 0);
         balances[msg.sender] -= 1;
     }
 
-    function backdoor() public{
+    function backdoor() public {
         balances[msg.sender] += 1;
     }
 }

@@ -1,21 +1,17 @@
 import "token.sol";
 
-contract MintableToken is Token{
+contract MintableToken is Token {
+    int256 totalMinted;
+    int256 totalMintable;
 
-    int totalMinted;
-    int totalMintable;
-
-    constructor(int _totalMintable) public {
+    constructor(int256 _totalMintable) public {
         totalMintable = _totalMintable;
     }
 
-    function mint(uint value) isOwner() public {
-
-        require(int(value) + totalMinted < totalMintable);
-        totalMinted += int(value);
+    function mint(uint256 value) public isOwner {
+        require(int256(value) + totalMinted < totalMintable);
+        totalMinted += int256(value);
 
         balances[msg.sender] += value;
-     
     }
-
 }

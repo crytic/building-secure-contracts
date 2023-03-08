@@ -16,6 +16,7 @@ contract Ownership {
 
 contract Pausable is Ownership {
     bool is_paused;
+
     modifier ifNotPaused() {
         require(!is_paused);
         _;

@@ -1,10 +1,10 @@
 contract Incrementor {
-  uint private counter = 2**200;
+    uint256 private counter = 2 ** 200;
 
-  function inc(uint val) public returns (uint){
-    uint tmp = counter;
-    counter += val;
-    assert (tmp <= counter);
-    return (counter - tmp);
-  }
+    function inc(uint256 val) public returns (uint256) {
+        uint256 tmp = counter;
+        counter += val;
+        assert(tmp <= counter);
+        return (counter - tmp);
+    }
 }

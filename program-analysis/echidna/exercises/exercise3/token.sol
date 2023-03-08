@@ -1,42 +1,39 @@
 // Note: The issues from exercise 1 and 2 are fixed
 
-contract Ownership{
-
+contract Ownership {
     address owner = msg.sender;
 
     constructor() public {
         owner = msg.sender;
     }
 
-    modifier isOwner(){
+    modifier isOwner() {
         require(owner == msg.sender);
         _;
     }
 }
 
-contract Pausable is Ownership{
-
+contract Pausable is Ownership {
     bool is_paused;
 
-    modifier ifNotPaused(){
+    modifier ifNotPaused() {
         require(!is_paused);
         _;
     }
 
-    function paused() isOwner public{
+    function paused() public isOwner {
         is_paused = true;
     }
 
-    function resume() isOwner public{
+    function resume() public isOwner {
         is_paused = false;
     }
-
 }
 
-contract Token is Pausable{
-    mapping(address => uint) public balances;
+contract Token is Pausable {
+    mapping(address => uint256) public balances;
 
-    function transfer(address to, uint value) ifNotPaused public{
+    function transfer(address to, uint256 value) public ifNotPaused {
         require(balances[msg.sender] >= value);
         balances[msg.sender] -= value;
         balances[to] += value;

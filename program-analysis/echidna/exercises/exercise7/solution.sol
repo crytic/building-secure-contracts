@@ -58,5 +58,4 @@ contract SideEntranceEchidna is IFlashLoanEtherReceiver {
     function testPoolBalance() public view {
         assert(address(pool).balance >= initialPoolBalance);
     }
-
 }
