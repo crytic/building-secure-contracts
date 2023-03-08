@@ -27,7 +27,7 @@ contract Simple {
 You can run Manticore directly on the smart contract by the following command (`project` can be a Solidity File, or a project directory):
 
 ```bash
-$ manticore project
+manticore project
 ```
 
 You will get the output of testcases like this one (the order may change):

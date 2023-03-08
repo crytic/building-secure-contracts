@@ -83,7 +83,7 @@ The proxy:
 ## Run Echidna
 
 ```bash
-$ echidna-test bytecode_only.sol --contract TestBytecodeOnly
+echidna-test bytecode_only.sol --contract TestBytecodeOnly
 echidna_test_balance: failed!💥
   Call sequence:
     transfer(0x0,1002)
@@ -170,7 +170,7 @@ contract SolidityVersion {
 Here we run Echidna with the [assertion mode](../basic/assertion-checking.md):
 
 ```
-$ echidna-test  vyper.sol --config config.yaml --contract SolidityVersion --test-mode assertion
+echidna-test  vyper.sol --config config.yaml --contract SolidityVersion --test-mode assertion
 assertion in test: passed! 🎉
 ```
 

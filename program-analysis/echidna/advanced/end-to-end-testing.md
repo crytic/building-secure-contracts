@@ -19,21 +19,21 @@ Before stating, make sure you have the latest releases from [Echidna](https://gi
 Then, install the packages to compile the project:
 
 ```
-$ git clone https://github.com/truffle-box/drizzle-box
-$ cd drizzle-box
-$ npm i truffle
+git clone https://github.com/truffle-box/drizzle-box
+cd drizzle-box
+npm i truffle
 ```
 
 If `ganache` is not installed, add it manually. In our example, we will run:
 
 ```
-$ npm -g i ganache
+npm -g i ganache
 ```
 
 Other projects using yarn will require:
 
 ```
-$ yarn global add ganache
+yarn global add ganache
 ```
 
 Ensure that `$ ganache --version` outputs `ganache v7.3.2` or greater.
@@ -81,7 +81,7 @@ Before starting to write interesting properties, it is necessary to to collect a
 First, start Etheno:
 
 ```bash
-$ etheno --ganache --ganache-args="--miner.blockGasLimit 10000000" -x init.json
+etheno --ganache --ganache-args="--miner.blockGasLimit 10000000" -x init.json
 ```
 
 By default the following Ganache arguments are set via Etheno:
@@ -93,9 +93,9 @@ By default the following Ganache arguments are set via Etheno:
 **NOTE:** If you are using Docker to run etheno, the commands should be:
 
 ```bash
-$ docker run -it -p 8545:8545 -v ~/etheno:/home/etheno/ trailofbits/etheno
+docker run -it -p 8545:8545 -v ~/etheno:/home/etheno/ trailofbits/etheno
 (you will now be working within the Docker instance)
-$ etheno --ganache --ganache-args="--miner.blockGasLimit 10000000" -x init.json
+etheno --ganache --ganache-args="--miner.blockGasLimit 10000000" -x init.json
 ```
 
 - The `-p` in the _first command_ publishes (i.e. exposes) port 8545 from inside the Docker container out to port 8545 on the host.
@@ -109,19 +109,19 @@ Additionally, if Etheno fails to produce any output, then it failed to execute `
 Meanwhile, in another terminal, run _one_ test or the deployment process. How to run it depends on how the project was developed. For instance, for truffle, use:
 
 ```
-$ truffle test test/test.js
+truffle test test/test.js
 ```
 
 for buidler:
 
 ```
-$ buidler test test/test.js --network localhost
+buidler test test/test.js --network localhost
 ```
 
 In the Drizzle example, we will run:
 
 ```
-$ truffle test test/simplestorage.js --network develop.
+truffle test test/simplestorage.js --network develop.
 ```
 
 After Etheno finishes, gently kill it by using Ctrl+c (or Command+C on Mac). It will save the `init.json` file. If your test fails for some reason or you want to run a different one, restart Etheno and re-run the test.
@@ -155,7 +155,7 @@ cryticArgs: ["--truffle-build-directory", "app/src/contracts/"] # needed by driz
 Then, running Echidna shows the results immediately:
 
 ```
-$ echidna-test . --contract E2E --config echidna.yaml
+echidna-test . --contract E2E --config echidna.yaml
 ...
 crytic_const_storage: failed!💥
   Call sequence:

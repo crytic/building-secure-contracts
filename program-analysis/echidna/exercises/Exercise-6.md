@@ -68,7 +68,7 @@ When Echidna calls `pool.flashLoan(10)`, the assertion `assert(poolBalance == ba
 See example output below from Echidna:
 
 ```bash
-$ echidna-test . --contract UnstoppableEchidna --config unstoppable.yaml
+echidna-test . --contract UnstoppableEchidna --config unstoppable.yaml
 
 ...
 

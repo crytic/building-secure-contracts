@@ -51,7 +51,7 @@ At some point Echidna will identify that if (1) `deposit` is used to pay back th
 Example Echidna output:
 
 ```
-$ echidna-test . --contract EchidnaSideEntranceLenderPool --config config.yaml
+echidna-test . --contract EchidnaSideEntranceLenderPool --config config.yaml
 ...
 testPoolBalance(): failed!💥
   Call sequence:

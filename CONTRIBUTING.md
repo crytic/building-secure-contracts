@@ -44,13 +44,13 @@ We run [markdown-link-check](https://github.com/tcort/markdown-link-check) to en
 To install `markdown-link-check`:
 
 ```bash
-$ npm install -g markdown-link-check
+npm install -g markdown-link-check
 ```
 
 To run `markdown-link-check`:
 
 ```bash
-$ find . -name \*.md -print0 | xargs -0 -n1 markdown-link-check
+find . -name \*.md -print0 | xargs -0 -n1 markdown-link-check
 ```
 
 ## Create the book
@@ -60,8 +60,8 @@ We use `mdbook` to generate [secure-contracts.com](https://secure-contracts.com/
 To run it locally:
 
 ```
-$ cargo install --git https://github.com/montyly/mdBook.git mdbook
-$ mdbook build
+cargo install --git https://github.com/montyly/mdBook.git mdbook
+mdbook build
 ```
 
 Note: we use https://github.com/montyly/mdBook.git, which contains https://github.com/rust-lang/mdBook/pull/1584.

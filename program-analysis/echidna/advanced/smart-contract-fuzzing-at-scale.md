@@ -23,16 +23,16 @@ First, obtain a dedicated server with at least 32 GB of RAM and as many cores as
 Then, using that user (`echidna`), install some basic dependencies:
 
 ```
-$ sudo apt install unzip python3-pip
+sudo apt install unzip python3-pip
 ```
 
 Then install everything necessary to build your smart contract(s) as well `slither` and `echidna-parade`. For instance:
 
 ```
-$ pip3 install solc-select
-$ solc-select install all
-$ pip3 install slither_analyzer
-$ pip3 install echidna_parade
+pip3 install solc-select
+solc-select install all
+pip3 install slither_analyzer
+pip3 install echidna_parade
 ```
 
 Add `$PATH=$PATH:/home/echidna/.local/bin` at the end of `/home/echidna/.bashrc`
@@ -40,9 +40,9 @@ Add `$PATH=$PATH:/home/echidna/.local/bin` at the end of `/home/echidna/.bashrc`
 Next, install Echidna. The easiest way is to download the latest precompiled Echidna release, uncompress it, and move it to `/home/echidna/.local/bin`:
 
 ```
-$ wget "https://github.com/crytic/echidna/releases/download/v2.0.0/echidna-test-2.0.0-Ubuntu-18.04.tar.gz"
-$ tar -xf echidna-test-2.0.0-Ubuntu-18.04.tar.gz
-$ mv echidna-test /home/echidna/.local/bin
+wget "https://github.com/crytic/echidna/releases/download/v2.0.0/echidna-test-2.0.0-Ubuntu-18.04.tar.gz"
+tar -xf echidna-test-2.0.0-Ubuntu-18.04.tar.gz
+mv echidna-test /home/echidna/.local/bin
 ```
 
 ## 2. Start a short fuzzing campaign
@@ -92,7 +92,7 @@ We will show it with an example, where:
 Finally, we will log the stdout and stderr in `parade.log` and `parade.err` and fork the process to let it run forever.
 
 ```
-$ echidna-parade test.sol --config exploration.yaml --initial_time 3600 --gen_time 1800 --timeout -1 --ncores 8 --contract C > parade.log 2> parade.err &
+echidna-parade test.sol --config exploration.yaml --initial_time 3600 --gen_time 1800 --timeout -1 --ncores 8 --contract C > parade.log 2> parade.err &
 ```
 
 **After you run this command, exit the shell so you won't kill it accidentally if your connection fails.**
@@ -105,7 +105,7 @@ In this step, we can add more properties while Echidna is exploring the contract
 Also, we can tweak the code to improve coverage, but before starting that, we need to know how to monitor our fuzzing campaign. We can use this command:
 
 ```
-$ watch "grep 'COLLECTING NEW COVERAGE' parade.log | tail -n 30"
+watch "grep 'COLLECTING NEW COVERAGE' parade.log | tail -n 30"
 ```
 
 When new coverage is found, you will see something like this:
@@ -126,7 +126,7 @@ For examples on how to help Echidna to improve its coverage, please review the [
 To monitor failed properties, use this command:
 
 ```
-$ watch "grep 'FAIL' parade.log | tail -n 30"
+watch "grep 'FAIL' parade.log | tail -n 30"
 ```
 
 When failed properties are found, you will see something like this:
@@ -146,5 +146,5 @@ parade.181140/gen.180.3 FAILED
 When you are satisfied with the coverage results, you can terminate the continuous campaign using:
 
 ```
-$ killall echidna-parade echidna
+killall echidna-parade echidna
 ```

@@ -88,13 +88,13 @@ We do not need any particular initialization in our current example. As a result
 Echidna is launched with:
 
 ```bash
-$ echidna-test contract.sol
+echidna-test contract.sol
 ```
 
 If `contract.sol` contains multiple contracts, you can specify the target:
 
 ```bash
-$ echidna-test contract.sol --contract MyContract
+echidna-test contract.sol --contract MyContract
 ```
 
 ## Summary: Testing a property
@@ -111,7 +111,7 @@ The following summarizes the run of Echidna on our example:
 ```
 
 ```bash
-$ echidna-test testtoken.sol --contract TestToken
+echidna-test testtoken.sol --contract TestToken
 ...
 
 echidna_balance_under_1000: failed!💥

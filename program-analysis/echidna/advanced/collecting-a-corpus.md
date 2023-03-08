@@ -34,7 +34,7 @@ This small example forces Echidna to find certain values to change a state varia
 We can run Echidna to verify this:
 
 ```
-$ echidna-test magic.sol
+echidna-test magic.sol
 ...
 
 echidna_magic_values: passed! 🎉
@@ -49,7 +49,7 @@ However, we can still use Echidna to collect corpus when running this fuzzing ca
 To enable the corpus collection, create a corpus directory:
 
 ```
-$ mkdir corpus-magic
+mkdir corpus-magic
 ```
 
 And an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config) `config.yaml`:
@@ -61,7 +61,7 @@ corpusDir: "corpus-magic"
 Now we can run our tool and check the collected corpus:
 
 ```
-$ echidna-test magic.sol --config config.yaml
+echidna-test magic.sol --config config.yaml
 ```
 
 Echidna still cannot find the correct magic value. We can verify where it gets stuck reviewing the `corpus-magic/covered.*.txt` file:
@@ -140,13 +140,13 @@ Echidna needs some help in order to deal with the `magic` function. We are going
 parameters for it:
 
 ```
-$ cp corpus-magic/coverage/2712688662897926208.txt corpus-magic/coverage/new.txt
+cp corpus-magic/coverage/2712688662897926208.txt corpus-magic/coverage/new.txt
 ```
 
 We will modify `new.txt` to call `magic(42,129,333,0)`. Now, we can re-run Echidna:
 
 ```
-$ echidna-test magic.sol --config config.yaml
+echidna-test magic.sol --config config.yaml
 ...
 echidna_magic_values: failed!💥
   Call sequence:
