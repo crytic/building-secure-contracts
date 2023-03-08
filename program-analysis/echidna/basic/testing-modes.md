@@ -20,25 +20,23 @@ By default, the "property" testing mode is used, which reports failures using a 
 
 ```solidity
 function echidna_property() public returns (bool) { // No arguments are required
-
     // The following statements can trigger a failure if they revert
-    publicFunction(..);
-    internalFunction(..);
-    contract.function(..);
+    publicFunction(...);
+    internalFunction(...);
+    contract.function(...);
 
     // The following statement can trigger a failure depending on the returned value
-    return ..;
+    return ...;
 } // side effects are *not* preserved
 
 function echidna_revert_property() public returns (bool) { // No arguments is required
-
     // The following statements can *never* trigger a failure
-    publicFunction(..);
-    internalFunction(..);
-    contract.function(..);
+    publicFunction(...);
+    internalFunction(...);
+    contract.function(...);
 
     // The following statement will *always* trigger a failure regardless of the value returned
-    return ..;
+    return ...;
 } // side effects are *not* preserved
 ```
 
@@ -65,19 +63,18 @@ Using the "assertion" testing mode, Echidna will report an assert violation if:
 - An `AssertionFailed` event (with any number of parameters) is emitted by any contract. This pseudo-code summarizes how assertions work:
 
 ```solidity
-function checkInvariant(..) public { // Any number of arguments is supported
-
+function checkInvariant(...) public { // Any number of arguments is supported
     // The following statements can trigger a failure using `assert`
-    assert(..);
-    publicFunction(..);
-    internalFunction(..);
+    assert(...);
+    publicFunction(...);
+    internalFunction(...);
 
     // The following statement will always trigger a failure even if the execution ends with a revert
-    emits AssertionFailed(..);
+    emits AssertionFailed(...);
 
     // The following statement will *only* trigger a failure using `assert` if using solc 0.8.x or newer
-    // To make sure it works in older versions, use the AssertionFailed(..) event
-    anotherContract.function(..);
+    // To make sure it works in older versions, use the AssertionFailed(...) event
+    anotherContract.function(...);
 
 } // side effects are preserved
 ```
@@ -96,8 +93,9 @@ Functions checking assertions do not require any particular name and are execute
 
 ```solidity
 function deposit(uint256 tokens) public {
-  assert(tokens > 0); // should be strictly positive
-  ..
+    assert(tokens > 0); // should be strictly positive
+    ...
+}
 ```
 
 Developers _should_ avoid doing that and use `require` instead, but if that is not possible because you are calling some contract that is outside your control, you can use the `AssertionFailure` event.
@@ -110,8 +108,7 @@ You should use assertions if your invariant is more natural to be expressed usin
 function testStake(uint256 toStake) public {
     uint256 balance = balanceOf(msg.sender);
     toStake = toStake % (balance + 1);
-    if (toStake < MINSTAKE)                             // Pre: minimal stake is required
-      return;
+    if (toStake < MINSTAKE) return;                     // Pre: minimal stake is required
     stake(msg.sender, toStake);                         // Action: token staking
     assert(staked(msg.sender) == toStake);              // Post: staking amount is toStake
     assert(balanceOf(msg.sender) == balance - toStake); // Post: balance decreased
@@ -132,6 +129,7 @@ function checkDappTest(..) public { // One or more arguments are required
     publicFunction(..);
     internalFunction(..);
     anotherContract.function(..);
+
     // The following statement will never trigger a failure
     require(.., “FOUNDRY::ASSUME”);
 }

@@ -19,14 +19,14 @@ Let's suppose we have a contract like this one:
 
 ```solidity
 contract Incrementor {
-  uint private counter = 2**200;
+    uint256 private counter = 2 ** 200;
 
-  function inc(uint val) public returns (uint){
-    uint tmp = counter;
-    counter += val;
-    // tmp <= counter
-    return (counter - tmp);
-  }
+    function inc(uint256 val) public returns (uint256) {
+        uint256 tmp = counter;
+        counter += val;
+        // tmp <= counter
+        return (counter - tmp);
+    }
 }
 ```
 
@@ -34,14 +34,14 @@ We want to make sure that `tmp` is less than or equal to `counter` after returni
 
 ```solidity
 contract Incrementor {
-  uint private counter = 2**200;
+    uint256 private counter = 2 ** 200;
 
-  function inc(uint val) public returns (uint){
-    uint tmp = counter;
-    counter += val;
-    assert (tmp <= counter);
-    return (counter - tmp);
-  }
+    function inc(uint256 val) public returns (uint256) {
+        uint256 tmp = counter;
+        counter += val;
+        assert(tmp <= counter);
+        return (counter - tmp);
+    }
 }
 ```
 
@@ -49,16 +49,18 @@ We could also use a special event called `AssertionFailed` with any number of pa
 
 ```solidity
 contract Incrementor {
-  event AssertionFailed(uint);
-  uint private counter = 2**200;
+    event AssertionFailed(uint256);
 
-  function inc(uint val) public returns (uint){
-    uint tmp = counter;
-    counter += val;
-    if (tmp > counter)
-      emit AssertionFailed(counter);
-    return (counter - tmp);
-  }
+    uint256 private counter = 2 ** 200;
+
+    function inc(uint256 val) public returns (uint256) {
+        uint256 tmp = counter;
+        counter += val;
+        if (tmp > counter) {
+            emit AssertionFailed(counter);
+        }
+        return (counter - tmp);
+    }
 }
 ```
 
@@ -93,7 +95,7 @@ As you can see, Echidna reports an assertion failure in the `inc` function. Addi
 Assertions can be used as alternatives to explicit properties if the conditions to check are directly related to the correct use of some operation `f`. Adding assertions after some code will enforce that the check happens immediately after it was executed:
 
 ```solidity
-function f(..) public {
+function f(...) public {
     // some complex code
     ...
     assert (condition);
@@ -105,7 +107,7 @@ On the contrary, using an explicit boolean property will randomly execute transa
 
 ```solidity
 function echidna_assert_after_f() public returns (bool) {
-    f(..);
+    f(...);
     return(condition);
 }
 ```
@@ -122,7 +124,7 @@ Assertions can help to overcome this possible issues. For instance, they can be 
 function f(..) public {
     // some complex code
     ...
-    g(..) // this contains an assert
+    g(...) // this contains an assert
     ...
 }
 ```
@@ -130,10 +132,10 @@ function f(..) public {
 If `g` is external, then assertion failure can be **only detected in Solidity 0.8.x or later**.
 
 ```solidity
-function f(..) public {
+function f(...) public {
     // some complex code
     ...
-    contract.g(..) // this contains an assert
+    contract.g(...) // this contains an assert
     ...
 }
 ```
@@ -141,7 +143,7 @@ function f(..) public {
 In general, we recommend following [John Regehr's advice](https://blog.regehr.org/archives/1091) on using assertions:
 
 - Do not force any side effects during the assertion checking. For instance: `assert(ChangeStateAndReturn() == 1)`
-- Do not assert obvious statements. For instance `assert(var >= 0)` where `var` is declared as `uint`.
+- Do not assert obvious statements. For instance `assert(var >= 0)` where `var` is declared as `uint256`.
 
 Finally, please **do not use** `require` instead of `assert`, since Echidna will not be able to detect it (but the contract will revert anyway).
 
@@ -151,14 +153,14 @@ The following summarizes the run of Echidna on our example (remember to use 0.7.
 
 ```solidity
 contract Incrementor {
-  uint private counter = 2**200;
+    uint256 private counter = 2 ** 200;
 
-  function inc(uint val) public returns (uint){
-    uint tmp = counter;
-    counter += val;
-    assert (tmp <= counter);
-    return (counter - tmp);
-  }
+    function inc(uint256 val) public returns (uint256) {
+        uint256 tmp = counter;
+        counter += val;
+        assert(tmp <= counter);
+        return (counter - tmp);
+    }
 }
 ```
 

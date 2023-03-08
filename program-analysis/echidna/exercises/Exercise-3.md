@@ -15,36 +15,36 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 We will test the following contract _[./exercise3/token.sol](./exercise3/token.sol)_:
 
 ```Solidity
- contract Ownership{
+ contract Ownership {
     address owner = msg.sender;
     constructor() public {
         owner = msg.sender;
     }
-     modifier isOwner(){
+     modifier isOwner() {
          require(owner == msg.sender);
          _;
       }
    }
 
-  contract Pausable is Ownership{
+  contract Pausable is Ownership {
      bool is_paused;
-     modifier ifNotPaused(){
+     modifier ifNotPaused() {
           require(!is_paused);
           _;
       }
 
-      function paused() isOwner public{
+      function paused() isOwner public {
           is_paused = true;
       }
 
-      function resume() isOwner public{
+      function resume() isOwner public {
           is_paused = false;
       }
    }
 
-   contract Token is Pausable{
-      mapping(address => uint) public balances;
-      function transfer(address to, uint value) ifNotPaused public{
+   contract Token is Pausable {
+      mapping(address => uint256) public balances;
+      function transfer(address to, uint256 value) ifNotPaused public {
             require(balances[msg.sender] >= value);
             balances[msg.sender] -= value;
             balances[to] += value;
@@ -59,7 +59,7 @@ Consider the following extension of the token (_[./exercise3/mintable.sol](./exe
 
 ```Solidity
    import "token.sol";
-   contract MintableToken is Token{
+   contract MintableToken is Token {
       int totalMinted;
       int totalMintable;
 
@@ -67,7 +67,7 @@ Consider the following extension of the token (_[./exercise3/mintable.sol](./exe
          totalMintable = _totalMintable;
       }
 
-      function mint(uint value) isOwner() public{
+      function mint(uint256 value) isOwner() public {
           require(int(value) + totalMinted < totalMintable);
           totalMinted += int(value);
           balances[msg.sender] += value;

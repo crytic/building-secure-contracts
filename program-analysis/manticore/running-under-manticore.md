@@ -14,7 +14,7 @@ We will see how to explore a smart contract with the Manticore API. The target i
 ```Solidity
 pragma solidity >=0.4.24 <0.6.0;
 contract Simple {
-    function f(uint a) payable public{
+    function f(uint256 a) payable public {
         if (a == 65) {
             revert();
         }
@@ -98,7 +98,7 @@ A Solidity contract can be deployed using [m.solidity_create_contract](https://m
 source_code = '''
 pragma solidity >=0.4.24 <0.6.0;
 contract Simple {
-    function f(uint a) payable public{
+    function f(uint256 a) payable public {
         if (a == 65) {
             revert();
         }
@@ -152,7 +152,7 @@ If the data is symbolic, Manticore will explore all the functions of the contrac
 #### Named transaction
 
 Functions can be executed through their name.
-To execute `f(uint var)` with a symbolic value, from user_account, and with 0 ether, use:
+To execute `f(uint256 var)` with a symbolic value, from user_account, and with 0 ether, use:
 
 ```python3
 symbolic_var = m.make_symbolic_value()

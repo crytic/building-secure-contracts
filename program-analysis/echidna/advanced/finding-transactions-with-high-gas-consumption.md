@@ -15,24 +15,25 @@ We will see how to find the transactions with high gas consumption with Echidna.
 
 ```solidity
 contract C {
-  uint state;
+    uint256 state;
 
-  function expensive(uint8 times) internal {
-    for(uint8 i=0; i < times; i++)
-      state = state + i;
-  }
+    function expensive(uint8 times) internal {
+        for (uint8 i = 0; i < times; i++) {
+            state = state + i;
+        }
+    }
 
-  function f(uint x, uint y, uint8 times) public {
-    if (x == 42 && y == 123)
-      expensive(times);
-    else
-      state = 0;
-  }
+    function f(uint256 x, uint256 y, uint8 times) public {
+        if (x == 42 && y == 123) {
+            expensive(times);
+        } else {
+            state = 0;
+        }
+    }
 
-  function echidna_test() public returns (bool) {
-    return true;
-  }
-
+    function echidna_test() public returns (bool) {
+        return true;
+    }
 }
 ```
 
@@ -101,10 +102,10 @@ contract C {
   function pop() public {
     addrs.pop();
   }
-  function clear() public{
+  function clear() public {
     addrs.length = 0;
   }
-  function check() public{
+  function check() public {
     for(uint256 i = 0; i < addrs.length; i++)
       for(uint256 j = i+1; j < addrs.length; j++)
         if (addrs[i] == addrs[j])

@@ -16,7 +16,7 @@ We will now improve [the previous example](running-under-manticore.md) and gener
 ```Solidity
 pragma solidity >=0.4.24 <0.6.0;
 contract Simple {
-    function f(uint a) payable public{
+    function f(uint256 a) payable public {
         if (a == 65) {
             revert();
         }
@@ -47,7 +47,7 @@ The data returned by the last transaction is an array, which can be converted to
 
 ```python
 data = state.platform.transactions[0].return_data
-data = ABI.deserialize("uint", data)
+data = ABI.deserialize("uint256", data)
 ```
 
 ## How to generate testcase

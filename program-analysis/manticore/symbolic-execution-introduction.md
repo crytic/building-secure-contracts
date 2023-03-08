@@ -16,12 +16,10 @@ This approach produces no false positives in the sense that all identified progr
 To get an insigh of how DSE works, consider the following example:
 
 ```solidity
-function f(uint a){
-
-  if (a == 65) {
-      // A bug is present
-  }
-
+function f(uint256 a) {
+    if (a == 65) {
+        // A bug is present
+    }
 }
 ```
 
@@ -39,9 +37,9 @@ Manticore allows a full control over all the execution of each path. As a result
 Consider the following example:
 
 ```solidity
-function unsafe_add(uint a, uint b) returns(uint c){
-  c = a + b; // no overflow protection
-  return c;
+function unsafe_add(uint256 a, uint256 b) returns (uint256 c) {
+    c = a + b; // no overflow protection
+    return c;
 }
 ```
 
@@ -58,11 +56,11 @@ If it is possible to find a valuation of `a` and `b` for which the path predicat
 If you consider a fixed version:
 
 ```solidity
-function safe_add(uint a, uint b) returns(uint c){
-  c = a + b;
-  require(c>=a);
-  require(c>=b);
-  return c;
+function safe_add(uint256 a, uint256 b) returns (uint256 c) {
+    c = a + b;
+    require(c >= a);
+    require(c >= b);
+    return c;
 }
 ```
 

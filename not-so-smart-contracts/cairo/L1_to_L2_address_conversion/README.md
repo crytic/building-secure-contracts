@@ -8,19 +8,20 @@ Suppose that the following code to initiate L2 deposits from L1. The first examp
 
 ```solidity
 uint256 public constant STARKNET_FIELD_PRIME; // the prime order P of the elliptic curve used
-IERC20 public constant token; //some token to deposit on L2
+IERC20 public constant token; // some token to deposit on L2
+
 event Deposited(uint256 sender, uint256 amount);
 
-function badDepositToL2(uint256 to,  uint256 amount) public returns (bool) {
-    token.transferFrom(to, address(this),amount);
-    emit Deposited(to,amount); // this message gets processed on L2
+function badDepositToL2(uint256 to, uint256 amount) public returns (bool) {
+    token.transferFrom(to, address(this), amount);
+    emit Deposited(to, amount); // this message gets processed on L2
     return true;
 }
 
-function betterDepositToL2(uint256 to,  uint256 amount) public returns (bool) {
-    require(to !=0 && to < STARKNET_FIELD_PRIME, "invalid address"); //verifies 0 < to < P
-    token.transferFrom(to, address(this),amount);
-    emit Deposited(to,amount); // this message gets processed on L2
+function betterDepositToL2(uint256 to, uint256 amount) public returns (bool) {
+    require(to != 0 && to < STARKNET_FIELD_PRIME, "invalid address"); // verifies 0 < to < P
+    token.transferFrom(to, address(this), amount);
+    emit Deposited(to, amount); // this message gets processed on L2
     return true;
 }
 ```

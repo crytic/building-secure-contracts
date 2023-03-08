@@ -58,16 +58,15 @@ The test harness will instantiate a new `Flag`, and the invariant under test wil
 
 ```solidity
 contract EchidnaTest {
-   Flag f;
+    Flag f;
 
-   constructor() {
-      f = new Flag();
-   }
+    constructor() {
+        f = new Flag();
+    }
 
-   function test_flag_is_false() public {
-      assert(f.get() == false);
-   }
-
+    function test_flag_is_false() public {
+        assert(f.get() == false);
+    }
 }
 ```
 

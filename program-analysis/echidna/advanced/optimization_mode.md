@@ -15,10 +15,10 @@ Optimization mode is a experimental feature that allows to define a special func
 and returns a `int256`. Echidna will try find a sequence of transactions to maximize the value returned:
 
 ```solidity
-    function echidna_opt_function() public view returns (int256) {
-        // if it reverts, Echidna will assumed it returned type(int256).min
-        return ..;
-    }
+function echidna_opt_function() public view returns (int256) {
+    // if it reverts, Echidna will assumed it returned type(int256).min
+    return ...;
+}
 ```
 
 ## Optimizing with Echidna
@@ -29,23 +29,15 @@ In this example, the target is the following smart contract (_[../example/opt.so
 contract TestDutchAuctionOptimization {
     int256 maxPriceDifference;
 
-    function setMaxPriceDifference(
-        uint256 startPrice,
-        uint256 endPrice,
-        uint256 startTime,
-        uint256 endTime
-    ) public {
-        if (endTime < (startTime + 900)) {
-            revert();
-        }
-        if (startPrice <= endPrice) {
-            revert();
-        }
-        uint256 numerator = (startPrice - endPrice) *
-            (block.timestamp - startTime);
+    function setMaxPriceDifference(uint256 startPrice, uint256 endPrice, uint256 startTime, uint256 endTime) public {
+        if (endTime < (startTime + 900)) revert();
+        if (startPrice <= endPrice) revert();
+
+        uint256 numerator = (startPrice - endPrice) * (block.timestamp - startTime);
         uint256 denominator = endTime - startTime;
         uint256 stepDecrease = numerator / denominator;
         uint256 currentAuctionPrice = startPrice - stepDecrease;
+
         if (currentAuctionPrice < endPrice) {
             maxPriceDifference = int256(endPrice - currentAuctionPrice);
         }

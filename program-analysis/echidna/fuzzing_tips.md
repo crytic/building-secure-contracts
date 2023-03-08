@@ -10,7 +10,7 @@ The following describe fuzzing tips to make Echidna more efficient:
 To filter inputs, `%` is more efficient than adding `require` or `if` statements. For example, if you are a fuzzing a `operation(uint256 index, ..)` where `index` is supposed to be less than `10**18`, use:
 
 ```solidity
-function operation(uint index, ...) public{
+function operation(uint256 index, ...) public {
    index = index % 10**18
    ...
 }
@@ -21,7 +21,7 @@ If `require(index <= 10**18)` is used instead, many transactions generated will 
 This can also be generalized define a min and max range, for example:
 
 ```solidity
-function operation(uint balance, ...) public{
+function operation(uint256 balance, ...) public {
    balance = MIN_BALANCE + balance % (MAX_BALANCE - MIN_BALANCE);
    ...
 }
@@ -30,11 +30,11 @@ function operation(uint balance, ...) public{
 Will ensure that `balance` is always between `MIN_BALANCE` and `MAX_BALANCE`, without discarding any generated transactions. As expected, this will speed up the exploration, but at the cost of avoiding certain paths in your code. To overcome this issue, the usual solution is to have two functions:
 
 ```solidity
-function operation(uint balance, ...) public{
+function operation(uint256 balance, ...) public {
    ... // original code
 }
 
-function safeOperation(uint balance, ...) public{
+function safeOperation(uint256 balance, ...) public {
    balance = MIN_BALANCE + balance % (MAX_BALANCE - MIN_BALANCE); // safe balance
    ...
 }
@@ -47,24 +47,25 @@ So Echidna is free to use any of these, exploring safe and unsafe usage of the i
 When a dynamic array is used as input, Echidna will limit the size of it to 32 elements:
 
 ```solidity
-function operation(uint256[] data, ...) public{
+function operation(uint256[] calldata data, ...) public {
    ... // use of data
 }
 ```
 
-This is because deserializing dynamic arrays is slow and can take some amount of memory during the execution. Dynamic arrays are also problematic since they are hard to mutate. Despite this, Echidna includes some specific mutators to remove/repeat elements or cut elements. These mutators are performed using the collected corpus. In general, we suggest the use of `push(..)` and `pop()` functions to handle the exploration of dynamic arrays used as inputs:
+This is because deserializing dynamic arrays is slow and can take some amount of memory during the execution. Dynamic arrays are also problematic since they are hard to mutate. Despite this, Echidna includes some specific mutators to remove/repeat elements or cut elements. These mutators are performed using the collected corpus. In general, we suggest the use of `push(...)` and `pop()` functions to handle the exploration of dynamic arrays used as inputs:
 
 ```solidity
 private uint256[] data;
-function push(uint256 x) public{
+
+function push(uint256 x) public {
    data.push(x);
 }
 
-function pop() public{
+function pop() public {
    data.pop();
 }
 
-function operation(...) public{
+function operation(...) public {
    ... // use of data
 }
 ```

@@ -9,12 +9,12 @@ For instance, a message can fail to be processed if there is a sudden spike in t
 Suppose that the following code to initiate L2 deposits from L1, taking the tokens from the user:
 
 ```solidity
-IERC20 public constant token; //some token to deposit on L2
+IERC20 public constant token; // some token to deposit on L2
 
-function depositToL2(uint256 to,  uint256 amount) public returns (bool) {
+function depositToL2(uint256 to, uint256 amount) public returns (bool) {
     require(token.transferFrom(to, address(this), amount));
-    ..
-    StarknetCore.sendMessageToL2(..);
+    ...
+    StarknetCore.sendMessageToL2(...);
     return true;
 }
 ```

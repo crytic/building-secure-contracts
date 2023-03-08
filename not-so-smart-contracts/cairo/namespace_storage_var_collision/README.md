@@ -17,7 +17,7 @@ from openzeppelin.a import A
 from openzeppelin.b import B
 
 @external
-func increase_balance_a{
+func increase_balance_a {
         syscall_ptr : felt*, pedersen_ptr : HashBuiltin*,
         range_check_ptr}(amount : felt):
     A.increase_balance(amount)
@@ -25,7 +25,7 @@ func increase_balance_a{
 end
 
 @external
-func increase_balance_b{
+func increase_balance_b {
         syscall_ptr : felt*, pedersen_ptr : HashBuiltin*,
         range_check_ptr}(amount : felt):
     B.increase_balance(amount)
@@ -33,7 +33,7 @@ func increase_balance_b{
 end
 
 @view
-func get_balance_a{
+func get_balance_a {
         syscall_ptr : felt*, pedersen_ptr : HashBuiltin*,
         range_check_ptr}() -> (res : felt):
     let (res) = A.get_balance()
@@ -41,7 +41,7 @@ func get_balance_a{
 end
 
 @view
-func get_balance_b{
+func get_balance_b {
         syscall_ptr : felt*, pedersen_ptr : HashBuiltin*,
         range_check_ptr}() -> (res : felt):
     let (res) = B.get_balance()

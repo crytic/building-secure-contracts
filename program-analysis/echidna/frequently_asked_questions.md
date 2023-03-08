@@ -102,17 +102,17 @@ Use `--format text` and open an issue with the error you see in your console or 
 Sometimes it is useful to create small properties or assertions to test that the tool executed them correctly. For instance, for property mode:
 
 ```solidity
-    function echidna_test() public returns (bool) {
-       return false;
-    }
+function echidna_test() public returns (bool) {
+    return false;
+}
 ```
 
 And for assertion mode:
 
 ```solidity
-    function test_assert_false() public {
-       assert(false);
-    }
+function test_assert_false() public {
+    assert(false);
+}
 ```
 
 If these are not failing, please [open an issue](https://github.com/crytic/echidna/issues) so we can take a look.

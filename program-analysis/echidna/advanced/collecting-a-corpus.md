@@ -13,19 +13,19 @@ We will see how to collect and use a corpus of transactions with Echidna. The ta
 
 ```Solidity
 contract C {
-  bool value_found = false;
-  function magic(uint magic_1, uint magic_2, uint magic_3, uint magic_4) public {
-    require(magic_1 == 42);
-    require(magic_2 == 129);
-    require(magic_3 == magic_4+333);
-    value_found = true;
-    return;
-  }
+    bool value_found = false;
 
-  function echidna_magic_values() public returns (bool) {
-    return !value_found;
-  }
+    function magic(uint256 magic_1, uint256 magic_2, uint256 magic_3, uint256 magic_4) public {
+        require(magic_1 == 42);
+        require(magic_2 == 129);
+        require(magic_3 == magic_4 + 333);
+        value_found = true;
+        return;
+    }
 
+    function echidna_magic_values() public returns (bool) {
+        return !value_found;
+    }
 }
 ```
 
@@ -69,7 +69,7 @@ Echidna still cannot find the correct magic value. We can verify where it gets s
 ```
 r   |contract C {
   bool value_found = false;
-r   |  function magic(uint magic_1, uint magic_2, uint magic_3, uint magic_4) public {
+r   |  function magic(uint256 magic_1, uint256 magic_2, uint256 magic_3, uint256 magic_4) public {
 r   |    require(magic_1 == 42);
 r   |    require(magic_2 == 129);
 r   |    require(magic_3 == magic_4+333);
@@ -164,7 +164,7 @@ This time, the property is violated immediately. We can verify that another `cov
 ```
 *r  |contract C {
   bool value_found = false;
-*r  |  function magic(uint magic_1, uint magic_2, uint magic_3, uint magic_4) public {
+*r  |  function magic(uint256 magic_1, uint256 magic_2, uint256 magic_3, uint256 magic_4) public {
 *r  |    require(magic_1 == 42);
 *r  |    require(magic_2 == 129);
 *r  |    require(magic_3 == magic_4+333);

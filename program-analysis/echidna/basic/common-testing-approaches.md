@@ -19,9 +19,9 @@ We will start with two of them, internal and external:
 In this testing approach, properties are defined inside the contract to test, with complete access to the internal state of the system.
 
 ```solidity
-Contract InternalTest is System {
+contract InternalTest is System {
     function echidna_state_greater_than_X() public returns (bool) {
-       return stateVar > X;
+        return stateVar > X;
     }
 }
 ```
@@ -36,10 +36,11 @@ In the external testing approach, properties are tested using external calls fro
 ```solidity
 contract ExternalTest {
     constructor() public {
-       addr = address(0x...);
+        addr = address(0x...);
     }
+
     function echidna_state_greater_than_X() public returns (bool) {
-       return System(addr).stateVar() > X;
+        return System(addr).stateVar() > X;
     }
 }
 ```
@@ -55,15 +56,15 @@ we add one or more functions that performs external call to it.
 ```solidity
 contract ExternalTest {
     constructor() public {
-       addr = ..;
+       addr = ...;
     }
 
     function method(...) public returns (...) {
-       return System(addr).method(..);
+        return System(addr).method();
     }
 
     function echidna_state_greater_than_X() public returns (bool) {
-       return System(addr).stateVar() > X;
+        return System(addr).stateVar() > X;
     }
 }
 ```
@@ -78,9 +79,11 @@ There are two important points to consider in this approach:
 ```solidity
 contract ExternalTest {
     ...
+
     function methodUsingF(..., uint256 x) public returns (...) {
        return System(addr).method(.., f(x));
     }
+
     ...
 }
 ```
@@ -91,14 +94,15 @@ For instance, if we have a property to ensure that the amount of tokens is limit
 
 ```solidity
 contract ExternalTest {
-    constructor() public {
-       addr = ..;
-       MockERC20(..).mint(..);
+    constructor() {
+       addr = ...;
+       MockERC20(...).mint(...);
     }
 
     function echidna_limited_supply() public returns (bool) {
        return System(addr).balanceOf(...) <= X;
     }
+
     ...
 }
 ```
@@ -130,15 +134,14 @@ mathematical libraries.
 **Function override**: Solidity allows to override functions, in order to change the functionality of a piece of code, without affecting the rest of the code base. We can use this to disable certain functions in our tests, in order to allow testing using Echidna:
 
 ```solidity
-Contract InternalTestOverridingSignatures is System {
-
-    function verifySignature(..) public returns (bool) override {
-      return true; // signatures are always valid
+contract InternalTestOverridingSignatures is System {
+    function verifySignature(...) public override returns (bool) {
+        return true; // signatures are always valid
     }
 
     function echidna_state_greater_than_X() public returns (bool) {
-       executeSomethingWithSignature(..)
-       return stateVar > X;
+        executeSomethingWithSignature(...);
+        return stateVar > X;
     }
 }
 ```
@@ -147,14 +150,16 @@ Contract InternalTestOverridingSignatures is System {
 Instead of using the code as it is, we will create a “model” of the system in Solidity, using mostly the original code. While there is no defined list of steps to build a model, we can show a generic example. Let’s assume we have a complex system that include this piece of code:
 
 ```solidity
-Contract System {
-    …
+contract System {
+    ...
+
     function calculateSomething() public returns (uint256) {
-       if (booleanState) {
-           stateSomething = (uint256State1 * uint256State2) / 2**128;
-           return stateSomething / uint128State;
-       }
-       …
+        if (booleanState) {
+            stateSomething = (uint256State1 * uint256State2) / 2 ** 128;
+            return stateSomething / uint128State;
+        }
+
+        ...
     }
 }
 ```
@@ -164,14 +169,13 @@ We are going to create a model (e.g. copy, paste and modify the original code in
 transformed into a parameter:
 
 ```solidity
-Contract SystemModel {
-
-    function calculateSomething(bool boolState, uint256 uint256State1, …) public returns (uint256) {
-       if (boolState) {
-           stateSomething = (uint256State1 * uint256State2) / 2**128;
-           return stateSomething / uint128State;
-       }
-       …
+contract SystemModel {
+    function calculateSomething(bool boolState, uint256 uint256State1, ...) public returns (uint256) {
+        if (boolState) {
+            stateSomething = (uint256State1 * uint256State2) / 2 ** 128;
+            return stateSomething / uint128State;
+        }
+        ...
     }
 }
 ```

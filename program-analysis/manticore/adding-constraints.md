@@ -19,7 +19,7 @@ documentation of `f()` states that the function is never called with `a == 65`, 
 ```Solidity
 pragma solidity >=0.4.24 <0.6.0;
 contract Simple {
-    function f(uint a) payable public{
+    function f(uint256 a) payable public {
         if (a == 65) {
             revert();
         }

@@ -14,16 +14,16 @@
 We will see how to test a smart contract with Echidna. The target is the following smart contract (_[../example/token.sol](../example/token.sol)_):
 
 ```Solidity
-   contract Token{
-      mapping(address => uint) public balances;
-      function airdrop() public{
+   contract Token {
+      mapping(address => uint256) public balances;
+      function airdrop() public {
           balances[msg.sender] = 1000;
      }
-     function consume() public{
+     function consume() public {
           require(balances[msg.sender]>0);
           balances[msg.sender] -= 1;
      }
-     function backdoor() public{
+     function backdoor() public {
           balances[msg.sender] += 1;
      }
    }
@@ -53,7 +53,7 @@ Echidna will:
 The following property checks that the caller can have no more than 1000 tokens:
 
 ```Solidity
-    function echidna_balance_under_1000() public view returns(bool){
+    function echidna_balance_under_1000() public view returns (bool) {
          return balances[msg.sender] <= 1000;
     }
 ```
@@ -61,8 +61,8 @@ The following property checks that the caller can have no more than 1000 tokens:
 Use inheritance to separate your contract from your properties:
 
 ```Solidity
-    contract TestToken is Token{
-         function echidna_balance_under_1000() public view returns(bool){
+    contract TestToken is Token {
+         function echidna_balance_under_1000() public view returns (bool) {
                return balances[msg.sender] <= 1000;
           }
      }
@@ -102,9 +102,9 @@ $ echidna-test contract.sol --contract MyContract
 The following summarizes the run of Echidna on our example:
 
 ```Solidity
-     contract TestToken is Token{
+     contract TestToken is Token {
          constructor() public {}
-             function echidna_balance_under_1000() public view returns(bool){
+             function echidna_balance_under_1000() public view returns (bool) {
                 return balances[msg.sender] <= 1000;
              }
        }

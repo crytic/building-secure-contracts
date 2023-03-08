@@ -21,8 +21,8 @@ AST are used every time the compiler parses code. It is probably the most basic 
 In a nutshell, an AST is a structured tree where, usually, each leaf contains a variable or a constant and internal nodes are operands or control flow operations. Consider the following code:
 
 ```solidity
-function safeAdd(uint a, uint b) pure internal returns(uint){
-    if(a + b <= a){
+function safeAdd(uint256 a, uint256 b) pure internal returns (uint256) {
+    if(a + b <= a) {
         revert();
     }
     return a + b;
@@ -106,7 +106,7 @@ An example of data dependency usage can be found in the [dangerous strict equali
 If your analysis navigates through the CFG and follows the edges, you are likely to see already visited nodes. For example, if a loop is presented as shown below:
 
 ```solidity
-for(uint i; i < range; ++){
+for(uint256 i; i < range; ++) {
     variable_a += 1
 }
 ```

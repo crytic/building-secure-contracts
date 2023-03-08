@@ -13,36 +13,36 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 We will test the following contract _[./exercise1/token.sol](./exercise1/token.sol)_:
 
 ```Solidity
- contract Ownership{
+ contract Ownership {
     address owner = msg.sender;
-    function Owner(){
+    function Owner() {
          owner = msg.sender;
      }
-     modifier isOwner(){
+     modifier isOwner() {
          require(owner == msg.sender);
          _;
       }
    }
 
-  contract Pausable is Ownership{
+  contract Pausable is Ownership {
      bool is_paused;
-     modifier ifNotPaused(){
+     modifier ifNotPaused() {
               require(!is_paused);
               _;
       }
 
-      function paused() isOwner public{
+      function paused() isOwner public {
           is_paused = true;
       }
 
-      function resume() isOwner public{
+      function resume() isOwner public {
           is_paused = false;
       }
    }
 
-   contract Token is Pausable{
-      mapping(address => uint) public balances;
-      function transfer(address to, uint value) ifNotPaused public{
+   contract Token is Pausable {
+      mapping(address => uint256) public balances;
+      function transfer(address to, uint256 value) ifNotPaused public {
            balances[msg.sender] -= value;
            balances[to] += value;
        }
@@ -64,7 +64,7 @@ The skeleton for this exercise is (_[./exercise1/template.sol](./exercise1/templ
      contract TestToken is Token {
        address echidna_caller = msg.sender;
 
-        constructor() public{
+        constructor() public {
             balances[echidna_caller] = 10000;
          }
          // add the property

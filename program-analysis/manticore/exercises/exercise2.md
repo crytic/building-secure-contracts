@@ -31,7 +31,7 @@ state.platform.transactions[-1].return_data
 - The data returned needs to be deserialized:
 
 ```python
-data = ABI.deserialize("uint", data)
+data = ABI.deserialize("uint256", data)
 ```
 
 - You can use the template proposed in [exercise2/template.py](./exercise2/template.py)

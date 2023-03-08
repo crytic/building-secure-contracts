@@ -20,18 +20,18 @@ contract C {
   bool state3 = false;
   bool state4 = false;
 
-  function f(uint x) public {
+  function f(uint256 x) public {
     require(x == 12);
     state1 = true;
   }
 
-  function g(uint x) public {
+  function g(uint256 x) public {
     require(state1);
     require(x == 8);
     state2 = true;
   }
 
-  function h(uint x) public {
+  function h(uint256 x) public {
     require(state2);
     require(x == 42);
     state3 = true;
@@ -59,7 +59,6 @@ contract C {
   function echidna_state4() public returns (bool) {
     return (!state4);
   }
-
 }
 ```
 
