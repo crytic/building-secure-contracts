@@ -1,0 +1,93 @@
+# .github/workflows/pr-preview.yml
+name: Deploy PR previews
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+    paths:
+      - '**/*.md'
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    if: github.event.action == 'opened' || github.event.action == 'reopened'  || github.event.action == 'synchronize'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master branch
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 0
+      - name: Install mdbook
+        run: |
+          cargo install --git https://github.com/montyly/mdBook.git mdbook || true
+      - name: Build artifacts
+        run: mdbook build
+      - name: Cache master build artifacts
+        uses: actions/cache/save@v3
+        with:
+          path: ./book
+          key: master-book
+      - name: Checkout pull request 
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Install mdbook
+        run: |
+          cargo install --git https://github.com/montyly/mdBook.git mdbook || true
+      - name: Build artifacts
+        run: mdbook build
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./book/
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore master build artifacts from cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ./book
+          key: master-book
+      - name: Move preview contents into the master book
+        run: mv ./pr-preview ./book
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./book
+  deploy:
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: deploy-preview
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+  cleanup:
+    if: github.event.action == 'closed' || github.event.action == 'merged'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Delete directory
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git rm -r pr-preview/pr-${{ github.event.pull_request.number }}
+          git commit -m "Delete directory pr-${{ github.event.pull_request.number }}"
+          git push
