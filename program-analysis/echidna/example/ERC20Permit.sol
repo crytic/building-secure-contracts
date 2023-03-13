@@ -108,10 +108,15 @@ abstract contract ERC20Permit {
                               EIP-2612 LOGIC
     //////////////////////////////////////////////////////////////*/
 
-    function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
-        public
-        virtual
-    {
+    function permit(
+        address owner,
+        address spender,
+        uint256 value,
+        uint256 deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) public virtual {
         require(deadline >= block.timestamp, "PERMIT_DEADLINE_EXPIRED");
 
         // Unchecked because the only math done is incrementing
@@ -154,15 +159,16 @@ abstract contract ERC20Permit {
     }
 
     function computeDomainSeparator() internal view virtual returns (bytes32) {
-        return keccak256(
-            abi.encode(
-                keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"),
-                keccak256(bytes(name)),
-                keccak256("1"),
-                block.chainid,
-                address(this)
-            )
-        );
+        return
+            keccak256(
+                abi.encode(
+                    keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"),
+                    keccak256(bytes(name)),
+                    keccak256("1"),
+                    block.chainid,
+                    address(this)
+                )
+            );
     }
 
     /*///////////////////////////////////////////////////////////////

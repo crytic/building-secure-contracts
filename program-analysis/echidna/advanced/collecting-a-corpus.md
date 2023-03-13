@@ -91,44 +91,44 @@ To find a workaround, let's take a look at the corpus it collected. For instance
 
 ```json
 [
-  {
-    "_gas'": "0xffffffff",
-    "_delay": ["0x13647", "0xccf6"],
-    "_src": "00a329c0648769a73afac7f9381e08fb43dbea70",
-    "_dst": "00a329c0648769a73afac7f9381e08fb43dbea72",
-    "_value": "0x0",
-    "_call": {
-      "tag": "SolCall",
-      "contents": [
-        "magic",
-        [
-          {
+    {
+        "_gas'": "0xffffffff",
+        "_delay": ["0x13647", "0xccf6"],
+        "_src": "00a329c0648769a73afac7f9381e08fb43dbea70",
+        "_dst": "00a329c0648769a73afac7f9381e08fb43dbea72",
+        "_value": "0x0",
+        "_call": {
+            "tag": "SolCall",
             "contents": [
-              256,
-              "93723985220345906694500679277863898678726808528711107336895287282192244575836"
-            ],
-            "tag": "AbiUInt"
-          },
-          {
-            "contents": [256, "334"],
-            "tag": "AbiUInt"
-          },
-          {
-            "contents": [
-              256,
-              "68093943901352437066264791224433559271778087297543421781073458233697135179558"
-            ],
-            "tag": "AbiUInt"
-          },
-          {
-            "tag": "AbiUInt",
-            "contents": [256, "332"]
-          }
-        ]
-      ]
-    },
-    "_gasprice'": "0xa904461f1"
-  }
+                "magic",
+                [
+                    {
+                        "contents": [
+                            256,
+                            "93723985220345906694500679277863898678726808528711107336895287282192244575836"
+                        ],
+                        "tag": "AbiUInt"
+                    },
+                    {
+                        "contents": [256, "334"],
+                        "tag": "AbiUInt"
+                    },
+                    {
+                        "contents": [
+                            256,
+                            "68093943901352437066264791224433559271778087297543421781073458233697135179558"
+                        ],
+                        "tag": "AbiUInt"
+                    },
+                    {
+                        "tag": "AbiUInt",
+                        "contents": [256, "332"]
+                    }
+                ]
+            ]
+        },
+        "_gasprice'": "0xa904461f1"
+    }
 ]
 ```
 

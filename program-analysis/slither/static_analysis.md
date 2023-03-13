@@ -21,8 +21,8 @@ AST are used every time the compiler parses code. It is probably the most basic 
 In a nutshell, an AST is a structured tree where, usually, each leaf contains a variable or a constant and internal nodes are operands or control flow operations. Consider the following code:
 
 ```solidity
-function safeAdd(uint256 a, uint256 b) pure internal returns (uint256) {
-    if(a + b <= a) {
+function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+    if (a + b <= a) {
         revert();
     }
     return a + b;

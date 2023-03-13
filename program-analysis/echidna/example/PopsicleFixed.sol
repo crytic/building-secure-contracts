@@ -149,13 +149,11 @@ contract PopsicleFixed is ERC20 {
         return transferFrom(msg.sender, recipient, amount);
     }
 
-    function transferFrom(address sender, address recipient, uint256 amount)
-        public
-        override
-        updateVault(sender)
-        updateVault(recipient)
-        returns (bool)
-    {
+    function transferFrom(
+        address sender,
+        address recipient,
+        uint256 amount
+    ) public override updateVault(sender) updateVault(recipient) returns (bool) {
         require(balances[sender] >= amount);
         balances[sender] = balances[sender] - amount;
         balances[recipient] = balances[recipient] + amount;

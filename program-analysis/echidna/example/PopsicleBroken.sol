@@ -4,7 +4,7 @@ pragma solidity ^0.8.4;
  * This file was sourced from Certora: https://demo.certora.com/
  */
 /**
- * This example is based on a bug in Popsicle Finance which was exploited by an attacker in August 2021: https://twitter.com/PopsicleFinance/status/1422748604524019713?s=20.  
+ * This example is based on a bug in Popsicle Finance which was exploited by an attacker in August 2021: https://twitter.com/PopsicleFinance/status/1422748604524019713?s=20.
  *  The attacker managed to drain approximately $20.7 million in tokens from the project’s Sorbetto Fragola pool.
  *
  */

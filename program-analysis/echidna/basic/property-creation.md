@@ -23,9 +23,13 @@ interface DeFi {
     ERC20 t;
 
     function getShares(address user) external returns (uint256);
+
     function createShares(uint256 val) external returns (uint256);
+
     function depositShares(uint256 val) external;
+
     function withdrawShares(uint256 val) external;
+
     function transferShares(address to) external;
 }
 ```
@@ -88,8 +92,9 @@ Before we continue, we will improve these properties using [try/catch](https://d
 ```solidity
 function depositShares_never_reverts(uint256 val) public {
     if (token.balanceOf(address(this)) >= val) {
-        try defi.depositShares(val) { /* not reverted */ }
-        catch {
+        try defi.depositShares(val) {
+            /* not reverted */
+        } catch {
             assert(false);
         }
     }
@@ -99,7 +104,9 @@ function depositShares_can_revert(uint256 val) public {
     if (token.balanceOf(address(this)) < val) {
         try defi.depositShares(val) {
             assert(false);
-        } catch { /* reverted */ }
+        } catch {
+            /* reverted */
+        }
     }
 }
 ```
@@ -112,8 +119,9 @@ Avoiding reverts doesn't mean that the contract is in a valid state. Let's add s
 ```solidity
 function depositShares_never_reverts(uint256 val) public {
     if (token.balanceOf(address(this)) >= val) {
-        try defi.depositShares(val) { /* not reverted */ }
-        catch {
+        try defi.depositShares(val) {
+            /* not reverted */
+        } catch {
             assert(false);
         }
         assert(defi.getShares(address(this)) > 0);
@@ -122,8 +130,9 @@ function depositShares_never_reverts(uint256 val) public {
 
 function withdrawShares_never_reverts(uint256 val) public {
     if (defi.getShares(address(this)) >= val) {
-        try defi.withdrawShares(val) { /* not reverted */ }
-        catch {
+        try defi.withdrawShares(val) {
+            /* not reverted */
+        } catch {
             assert(false);
         }
         assert(token.balanceOf(address(this)) > 0);
@@ -141,14 +150,16 @@ In this generic example, it is unclear if there is a way to calculate how many s
 function deposit_withdraw_shares_never_reverts(uint256 val) public {
     uint256 original_balance = token.balanceOf(address(this));
     if (original_balance >= val) {
-        try defi.depositShares(val) { /* not reverted */ }
-        catch {
+        try defi.depositShares(val) {
+            /* not reverted */
+        } catch {
             assert(false);
         }
         uint256 shares = defi.getShares(address(this));
         assert(shares > 0);
-        try defi.withdrawShares(shares) { /* not reverted */ }
-        catch {
+        try defi.withdrawShares(shares) {
+            /* not reverted */
+        } catch {
             assert(false);
         }
         assert(token.balanceOf(address(this)) == original_balance);

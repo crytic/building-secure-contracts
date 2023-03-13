@@ -60,17 +60,17 @@ This small contract allows to set the `storedData` state variable. As expected, 
 const SimpleStorage = artifacts.require("SimpleStorage");
 
 contract("SimpleStorage", (accounts) => {
-  it("...should store the value 89.", async () => {
-    const simpleStorageInstance = await SimpleStorage.deployed();
+    it("...should store the value 89.", async () => {
+        const simpleStorageInstance = await SimpleStorage.deployed();
 
-    // Set value of 89
-    await simpleStorageInstance.set(89, { from: accounts[0] });
+        // Set value of 89
+        await simpleStorageInstance.set(89, { from: accounts[0] });
 
-    // Get stored value
-    const storedData = await simpleStorageInstance.storedData.call();
+        // Get stored value
+        const storedData = await simpleStorageInstance.storedData.call();
 
-    assert.equal(storedData, 89, "The value 89 was not stored.");
-  });
+        assert.equal(storedData, 89, "The value 89 was not stored.");
+    });
 });
 ```
 
@@ -134,10 +134,11 @@ Once we have a json file with saved transactions, we can verify that the `Simple
 import "../SimpleStorage.sol";
 
 contract E2E {
-        SimpleStorage st = SimpleStorage(0x871DD7C2B4b25E1Aa18728e9D5f2Af4C4e431f5c);
-        function crytic_const_storage() public returns (bool) {
-            return st.storedData() == 89;
-        }
+    SimpleStorage st = SimpleStorage(0x871DD7C2B4b25E1Aa18728e9D5f2Af4C4e431f5c);
+
+    function crytic_const_storage() public returns (bool) {
+        return st.storedData() == 89;
+    }
 }
 ```
 

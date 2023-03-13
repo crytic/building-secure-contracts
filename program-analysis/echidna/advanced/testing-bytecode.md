@@ -27,7 +27,9 @@ For which we only know the ABI:
 ```solidity
 interface Target {
     function totalSupply() external returns (uint256);
+
     function balanceOf(address) external returns (uint256);
+
     function transfer(address, uint256) external;
 }
 ```
@@ -42,7 +44,9 @@ Instead we will use a proxy contract:
 ```solidity
 interface Target {
     function totalSupply() external returns (uint256);
+
     function balanceOf(address) external returns (uint256);
+
     function transfer(address, uint256) external;
 }
 
@@ -52,8 +56,8 @@ contract TestBytecodeOnly {
     constructor() {
         address targetAddress;
         // init bytecode
-        bytes memory targetCreationBytecode =
-            hex"608060405234801561001057600080fd5b506103e86000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055506103e86001819055506101fa8061006e6000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806318160ddd1461004657806370a0823114610064578063a9059cbb146100bc575b600080fd5b61004e61010a565b6040518082815260200191505060405180910390f35b6100a66004803603602081101561007a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610110565b6040518082815260200191505060405180910390f35b610108600480360360408110156100d257600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610128565b005b60015481565b60006020528060005260406000206000915090505481565b806000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008282540392505081905550806000808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008282540192505081905550505056fe";
+        bytes
+            memory targetCreationBytecode = hex"608060405234801561001057600080fd5b506103e86000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055506103e86001819055506101fa8061006e6000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806318160ddd1461004657806370a0823114610064578063a9059cbb146100bc575b600080fd5b61004e61010a565b6040518082815260200191505060405180910390f35b6100a66004803603602081101561007a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610110565b6040518082815260200191505060405180910390f35b610108600480360360408110156100d257600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610128565b005b60015481565b60006020528060005260406000206000915090505481565b806000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008282540392505081905550806000808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008282540192505081905550505056fe";
 
         uint256 size = targetCreationBytecode.length;
 
@@ -127,8 +131,8 @@ def my_func(a: uint256, b: uint256, c: uint256) -> uint256:
 
 ```solidity
 contract SolidityVersion {
-    function my_func(uint256 a, uint256 b, uint256 c) view public {
-        return a * b / c;
+    function my_func(uint256 a, uint256 b, uint256 c) public view {
+        return (a * b) / c;
     }
 }
 ```
@@ -137,7 +141,7 @@ We can test that they return always the same values using the proxy pattern:
 
 ```solidity
 interface Target {
-  function my_func(uint256, uint256, uint256) external returns (uint256);
+    function my_func(uint256, uint256, uint256) external returns (uint256);
 }
 
 contract SolidityVersion {
@@ -147,7 +151,8 @@ contract SolidityVersion {
         address target_addr;
 
         // vyper bytecode
-        bytes memory targetCreationBytecode = hex"61007756341561000a57600080fd5b60043610156100185761006d565b600035601c52630ff198a3600051141561006c57600435602435808202821582848304141761004657600080fd5b80905090509050604435808061005b57600080fd5b82049050905060005260206000f350005b5b60006000fd5b61000461007703610004600039610004610077036000f3";
+        bytes
+            memory targetCreationBytecode = hex"61007756341561000a57600080fd5b60043610156100185761006d565b600035601c52630ff198a3600051141561006c57600435602435808202821582848304141761004657600080fd5b80905090509050604435808061005b57600080fd5b82049050905060005260206000f350005b5b60006000fd5b61000461007703610004600039610004610077036000f3";
 
         uint256 size = targetCreationBytecode.length;
 
@@ -161,8 +166,8 @@ contract SolidityVersion {
         assert(my_func(a, b, c) == target.my_func(a, b, c));
     }
 
-    function my_func(uint256 a, uint256 b, uint256 c) view internal returns (uint256) {
-        return a * b / c;
+    function my_func(uint256 a, uint256 b, uint256 c) internal view returns (uint256) {
+        return (a * b) / c;
     }
 }
 ```
@@ -180,7 +185,7 @@ Adapt the following code to your needs:
 
 ```solidity
 interface Target {
-  // public/external functions
+    // public/external functions
 }
 
 contract TestBytecodeOnly {
@@ -202,7 +207,7 @@ contract TestBytecodeOnly {
     // Add helper functions to call the target's functions from the proxy
 
     function echidna_test() public returns (bool) {
-      // The property to test
+        // The property to test
     }
 }
 ```

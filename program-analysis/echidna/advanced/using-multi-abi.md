@@ -37,20 +37,19 @@ The `Flag` contract contains a boolean flag that is only set if `flip()` is call
 
 ```solidity
 contract Flag {
+    bool flag = false;
 
-   bool flag = false;
+    function flip() public {
+        flag = !flag;
+    }
 
-   function flip() public {
-       flag = !flag;
-   }
-
-   function get() public returns (bool) {
+    function get() public returns (bool) {
         return flag;
-   }
+    }
 
-   function test_fail() public {
-       assert(false);
-   }
+    function test_fail() public {
+        assert(false);
+    }
 }
 ```
 

@@ -22,10 +22,11 @@ contract TestDepositWithPermit {
     }
 
     //helper method to get signature, signs with private key 2
-    function getSignature(address owner, address spender, uint256 assetAmount)
-        internal
-        returns (uint8 v, bytes32 r, bytes32 s)
-    {
+    function getSignature(
+        address owner,
+        address spender,
+        uint256 assetAmount
+    ) internal returns (uint8 v, bytes32 r, bytes32 s) {
         bytes32 digest = keccak256(
             abi.encodePacked(
                 "\x19\x01",
@@ -54,12 +55,10 @@ contract TestDepositWithPermit {
 
         emit LogBalance(previousOwnerBalance, previousCallerBalance);
         (uint8 v, bytes32 r, bytes32 s) = getSignature(OWNER, address(this), amount);
-        try asset.permit(OWNER, address(this), amount, block.timestamp, v, r, s) {}
-        catch {
+        try asset.permit(OWNER, address(this), amount, block.timestamp, v, r, s) {} catch {
             emit AssertionFailed("signature is invalid");
         }
-        try asset.transferFrom(OWNER, address(this), amount) {}
-        catch {
+        try asset.transferFrom(OWNER, address(this), amount) {} catch {
             emit AssertionFailed("transferFrom reverted");
         }
         uint256 currentOwnerBalance = asset.balanceOf(OWNER);
