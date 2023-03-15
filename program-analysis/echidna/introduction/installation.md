@@ -6,6 +6,10 @@ Echidna can be installed through docker or using the pre-compiled binary.
 
 You can install Echidna with `brew install echidna`. 
 
+## Windows
+
+You can install Echidna with `pip install echidna`. 
+
 ## Echidna through docker
 
 ```bash
