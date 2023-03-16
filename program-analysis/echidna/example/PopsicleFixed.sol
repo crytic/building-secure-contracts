@@ -175,7 +175,7 @@ contract PopsicleFixed is ERC20 {
     }
 
     // An Echidna assertion test to test the equivalence of user balances before and after a transfer.
-    /// @dev To run this with Echidna: $ echidna-test PopsicleFixed.sol --contract PopsicleFixed --test-mode assertion
+    /// @dev To run this with Echidna: $ echidna PopsicleFixed.sol --contract PopsicleFixed --test-mode assertion
     function totalBalanceAfterTransferIsPreserved(address user, uint256 amount) public {
         // This slows down Echidna, but ensures that the user is not the zero-address.
         if (user == address(0)) {
@@ -202,7 +202,7 @@ contract PopsicleFixed is ERC20 {
     }
 
     // An Echidna assertion test to test the equivalence of user balances before and after a transferFrom.
-    /// @dev To run this with Echidna: $ echidna-test PopsicleFixed.sol --contract PopsicleFixed --test-mode assertion
+    /// @dev To run this with Echidna: $ echidna PopsicleFixed.sol --contract PopsicleFixed --test-mode assertion
     function totalBalanceAfterTransferFromIsPreserved(address user, uint256 amount) public {
         // This slows down Echidna, but ensures that the user is not the zero-address.
         if (user == address(0)) {

@@ -77,7 +77,7 @@ testMode: assertion
 When we run this contract with Echidna, we obtain the expected results:
 
 ```
-echidna-test assert.sol --test-mode assertion
+echidna assert.sol --test-mode assertion
 Analyzing contract: assert.sol:Incrementor
 assertion in inc: failed!💥
   Call sequence, shrinking (2596/5000):
@@ -165,7 +165,7 @@ contract Incrementor {
 ```
 
 ```bash
-echidna-test assert.sol --test-mode assertion
+echidna assert.sol --test-mode assertion
 Analyzing contract: assert.sol:Incrementor
 assertion in inc: failed!💥
   Call sequence, shrinking (2596/5000):

@@ -43,7 +43,7 @@ Currently, Echidna always needs a property to test: here `echidna_test` always r
 We can run Echidna to verify this:
 
 ```
-echidna-test gas.sol
+echidna gas.sol
 ...
 echidna_test: passed! 🎉
 
@@ -70,7 +70,7 @@ estimateGas: true
 Once we have the configuration file created, we can run Echidna like this:
 
 ```
-echidna-test gas.sol --config config.yaml
+echidna gas.sol --config config.yaml
 ...
 echidna_test: passed! 🎉
 
@@ -81,7 +81,6 @@ f used a maximum of 1333608 gas
 Unique instructions: 157
 Unique codehashes: 1
 Seed: -325611019680165325
-
 ```
 
 - The gas shown is an estimation provided by [HEVM](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-).
@@ -123,7 +122,7 @@ contract C {
 If Echidna uses this [`config.yaml`](../example/pushpop.yaml), it can call all functions and won't easily find transactions with high gas cost:
 
 ```
-echidna-test pushpop.sol --config config.yaml
+echidna pushpop.sol --config config.yaml
 ...
 pop used a maximum of 10746 gas
 ...
@@ -144,7 +143,7 @@ filterFunctions: ["C.pop()", "C.clear()"]
 ```
 
 ```
-echidna-test pushpop.sol --config config.yaml
+echidna pushpop.sol --config config.yaml
 ...
 push used a maximum of 40839 gas
 ...
@@ -160,7 +159,7 @@ estimateGas: true
 ```
 
 ```bash
-echidna-test contract.sol --config config.yaml
+echidna contract.sol --config config.yaml
 ...
 ```
 

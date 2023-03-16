@@ -77,12 +77,12 @@ testLimit: 50000
 multi-abi: true
 ```
 
-To run the Echidna tests, run `echidna-test multiabi.sol --contract EchidnaTest --config multiabi.yaml` from the `example` directory. Alternatively, you can specify `--multi-abi` in the command line instead of using a configuration file.
+To run the Echidna tests, run `echidna multiabi.sol --contract EchidnaTest --config multiabi.yaml` from the `example` directory. Alternatively, you can specify `--multi-abi` in the command line instead of using a configuration file.
 
 ### Example run with `multi-abi` set to `false`
 
 ```
-echidna-test multiabi.sol --contract EchidnaTest --config multiabi.yaml
+echidna multiabi.sol --contract EchidnaTest --config multiabi.yaml
 Analyzing contract: building-secure-contracts/program-analysis/echidna/example/multiabi.sol:EchidnaTest
 test_flag_is_false():  passed! 🎉
 AssertionFailed(..):  passed! 🎉
@@ -96,7 +96,7 @@ Seed: -8252538430849362039
 ### Example run with `multi-abi` set to `true`
 
 ```
-echidna-test multiabi.sol --contract EchidnaTest --config multiabi.yaml
+echidna multiabi.sol --contract EchidnaTest --config multiabi.yaml
 Analyzing contract: building-secure-contracts/program-analysis/echidna/example/multiabi.sol:EchidnaTest
 test_flag_is_false(): failed!💥
   Call sequence:

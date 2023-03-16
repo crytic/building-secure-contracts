@@ -60,7 +60,7 @@ Echidna found this by simply calling `NaiveReceiverLenderPool.flashLoan()` with 
 See example output below from Echidna:
 
 ```bash
-echidna-test . --contract NaiveReceiverEchidna --config naivereceiver.yaml
+echidna . --contract NaiveReceiverEchidna --config naivereceiver.yaml
 ...
 
 echidna_test_contract_balance: failed!💥

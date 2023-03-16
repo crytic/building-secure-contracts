@@ -58,7 +58,7 @@ met, the function will revert, without changing the actual value.
 To run this example:
 
 ```
-echidna-test opt.sol --test-mode optimization --test-limit 100000 --seq-len 1 --corpus-dir corpus --shrink-limit 50000
+echidna opt.sol --test-mode optimization --test-limit 100000 --seq-len 1 --corpus-dir corpus --shrink-limit 50000
 ...
 echidna_opt_price_difference: max value: 1076841
 
@@ -77,7 +77,7 @@ Regarding the command line, the optimization mode is enabled using `--test-mode 
 Every time Echidna is executed using the corpus directory, the last input that produces the maximum value should be re-used from the `reproducers` directory:
 
 ```
-echidna-test opt.sol --test-mode optimization --test-limit 100000 --seq-len 1 --corpus-dir corpus --shrink-limit 50000
+echidna opt.sol --test-mode optimization --test-limit 100000 --seq-len 1 --corpus-dir corpus --shrink-limit 50000
 Loaded total of 1 transactions from corpus/reproducers/
 Loaded total of 9 transactions from corpus/coverage/
 Analyzing contract: /home/g/Code/echidna/opt.sol:TestDutchAuctionOptimization

@@ -67,7 +67,7 @@ This is hard for a fuzzer (it is recommended to use a symbolic execution tool li
 We can run Echidna to verify this:
 
 ```
-echidna-test multi.sol
+echidna multi.sol
 ...
 echidna_state4: passed! 🎉
 Seed: -3684648582249875403
@@ -101,7 +101,7 @@ filterFunctions: ["C.f(uint256)", "C.g(uint256)", "C.h(uint256)", "C.i()"]
 To run Echidna with a configuration file `blacklist.yaml`:
 
 ```
-echidna-test multi.sol --config blacklist.yaml
+echidna multi.sol --config blacklist.yaml
 ...
 echidna_state4: failed!💥
   Call sequence:
@@ -123,7 +123,7 @@ filterFunctions: ["C.f1()", "C.f2()", "C.f3()"]
 ```
 
 ```bash
-echidna-test contract.sol --config config.yaml
+echidna contract.sol --config config.yaml
 ...
 ```
 
