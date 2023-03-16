@@ -12,7 +12,7 @@ on:
   pull_request:
   schedule:
     # run CI every day even if no PRs/merges occur
-    - cron:  '0 12 * * *'
+    - cron: "0 12 * * *"
 
 jobs:
   tests:
@@ -83,7 +83,7 @@ jobs:
             files: gas.sol
             config: gas.yaml
             outcome: success
-            expected: 'f(42,123,'
+            expected: "f(42,123,"
             flaky: true
           - name: Multi
             workdir: program-analysis/echidna/example/
@@ -131,59 +131,59 @@ jobs:
             expected: 'test_flag_is_false():\s*failed'
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Checkout Damn Vulnerable DeFi solutions
-      uses: actions/checkout@v3
-      if: startsWith(matrix.workdir, 'dvdefi')
-      with:
-        repository: crytic/damn-vulnerable-defi-echidna
-        ref: solutions
-        path: ${{ matrix.workdir }}
+      - name: Checkout Damn Vulnerable DeFi solutions
+        uses: actions/checkout@v3
+        if: startsWith(matrix.workdir, 'dvdefi')
+        with:
+          repository: crytic/damn-vulnerable-defi-echidna
+          ref: solutions
+          path: ${{ matrix.workdir }}
 
-    - name: Set up Nodejs
-      uses: actions/setup-node@v3
-      if: startsWith(matrix.workdir, 'dvdefi')
-      with:
-        node-version: 16
+      - name: Set up Nodejs
+        uses: actions/setup-node@v3
+        if: startsWith(matrix.workdir, 'dvdefi')
+        with:
+          node-version: 16
 
-    - name: Install dependencies and compile
-      if: startsWith(matrix.workdir, 'dvdefi')
-      run: |
-        yarn install --frozen-lockfile
-        npx hardhat compile --force
-      working-directory: ${{ matrix.workdir }}
+      - name: Install dependencies and compile
+        if: startsWith(matrix.workdir, 'dvdefi')
+        run: |
+          yarn install --frozen-lockfile
+          npx hardhat compile --force
+        working-directory: ${{ matrix.workdir }}
 
-    - name: Run Echidna
-      uses: crytic/echidna-action@v2
-      id: echidna
-      continue-on-error: true
-      with:
-        files: ${{ matrix.files }}
-        contract: ${{ matrix.contract }}
-        config: ${{ matrix.config }}
-        output-file: ${{ matrix.files }}.out
-        solc-version: ${{ matrix.solc-version || '0.5.11' }}
-        echidna-workdir: ${{ matrix.workdir }}
-        echidna-version: edge
-        crytic-args: ${{ matrix.crytic-args || '' }}
+      - name: Run Echidna
+        uses: crytic/echidna-action@v2
+        id: echidna
+        continue-on-error: true
+        with:
+          files: ${{ matrix.files }}
+          contract: ${{ matrix.contract }}
+          config: ${{ matrix.config }}
+          output-file: ${{ matrix.files }}.out
+          solc-version: ${{ matrix.solc-version || '0.5.11' }}
+          echidna-workdir: ${{ matrix.workdir }}
+          echidna-version: edge
+          crytic-args: ${{ matrix.crytic-args || '' }}
 
-    - name: Verify that the exit code is correct
-      run: |
-        if [[ ${{ steps.echidna.outcome }} = ${{ matrix.outcome }} ]]; then
-          echo "Outcome matches"
-        else
-          echo "Outcome mismatch. Expected ${{ matrix.outcome }} but got ${{ steps.echidna.outcome }}"
-          exit 1
-        fi
+      - name: Verify that the exit code is correct
+        run: |
+          if [[ ${{ steps.echidna.outcome }} = ${{ matrix.outcome }} ]]; then
+            echo "Outcome matches"
+          else
+            echo "Outcome mismatch. Expected ${{ matrix.outcome }} but got ${{ steps.echidna.outcome }}"
+            exit 1
+          fi
 
-    - name: Verify that the output is correct
-      run: |
-        if grep -q "${{ matrix.expected }}" "${{ steps.echidna.outputs.output-file }}"; then
-          echo "Output matches"
-        else
-          echo "Output mismatch. Expected something matching '${{ matrix.expected }}'. Got the following:"
-          cat "${{ steps.echidna.outputs.output-file }}"
-          exit 1
-        fi
+      - name: Verify that the output is correct
+        run: |
+          if grep -q "${{ matrix.expected }}" "${{ steps.echidna.outputs.output-file }}"; then
+            echo "Output matches"
+          else
+            echo "Output mismatch. Expected something matching '${{ matrix.expected }}'. Got the following:"
+            cat "${{ steps.echidna.outputs.output-file }}"
+            exit 1
+          fi

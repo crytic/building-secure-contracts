@@ -15,18 +15,18 @@ jobs:
       CARGO_TERM_COLOR: always
 
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Install mdbook
-      run: |
-        cargo install --git https://github.com/montyly/mdBook.git mdbook || true
-    - name: Build artifacts
-      run: mdbook build
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v1
-      with:
-        path: ./book
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install mdbook
+        run: |
+          cargo install --git https://github.com/montyly/mdBook.git mdbook || true
+      - name: Build artifacts
+        run: mdbook build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./book
   deploy:
     permissions:
       pages: write
