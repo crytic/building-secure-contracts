@@ -95,11 +95,11 @@ As you can see, Echidna reports an assertion failure in the `inc` function. Addi
 Assertions can be used as alternatives to explicit properties if the conditions to check are directly related to the correct use of some operation `f`. Adding assertions after some code will enforce that the check happens immediately after it was executed:
 
 ```solidity
-function f(...) public {
+function f(bytes memory args) public {
     // some complex code
-    ...
-    assert (condition);
-    ...
+    // ...
+    assert(condition);
+    // ...
 }
 ```
 
@@ -107,8 +107,8 @@ On the contrary, using an explicit boolean property will randomly execute transa
 
 ```solidity
 function echidna_assert_after_f() public returns (bool) {
-    f(...);
-    return(condition);
+    f(args);
+    return (condition);
 }
 ```
 
@@ -121,22 +121,22 @@ However, there are some issues:
 Assertions can help to overcome this possible issues. For instance, they can be easily detected when calling internal or public functions:
 
 ```solidity
-function f(..) public {
+function f(bytes memory args) public {
     // some complex code
-    ...
-    g(...) // this contains an assert
-    ...
+    // ...
+    g(otherArgs) // this contains an assert
+    // ...
 }
 ```
 
 If `g` is external, then assertion failure can be **only detected in Solidity 0.8.x or later**.
 
 ```solidity
-function f(...) public {
+function f(bytes memory args) public {
     // some complex code
-    ...
-    contract.g(...) // this contains an assert
-    ...
+    // ...
+    contract.g(otherArgs) // this contains an assert
+    // ...
 }
 ```
 

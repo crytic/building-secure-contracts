@@ -31,12 +31,12 @@ Will ensure that `balance` is always between `MIN_BALANCE` and `MAX_BALANCE`, wi
 
 ```solidity
 function operation(uint256 balance) public {
-   // ...
+    // ...
 }
 
 function safeOperation(uint256 balance) public {
-   balance = MIN_BALANCE + balance % (MAX_BALANCE - MIN_BALANCE); // safe balance
-   ...
+    balance = MIN_BALANCE + (balance % (MAX_BALANCE - MIN_BALANCE)); // safe balance
+    // ...
 }
 ```
 

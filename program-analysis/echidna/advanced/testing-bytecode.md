@@ -148,7 +148,7 @@ contract SolidityVersion {
     Target target;
 
     constructor() public {
-        address target_addr;
+        address targetAddress;
 
         // vyper bytecode
         bytes
@@ -157,9 +157,9 @@ contract SolidityVersion {
         uint256 size = targetCreationBytecode.length;
 
         assembly {
-            target_addr := create(0, add(targetCreationBytecode, 0x20), size) // Skip the 32 bytes encoded length.
+            targetAddress := create(0, add(targetCreationBytecode, 0x20), size) // Skip the 32 bytes encoded length.
         }
-        target = Target(target_addr);
+        target = Target(targetAddress);
     }
 
     function test(uint256 a, uint256 b, uint256 c) public returns (bool) {
@@ -192,16 +192,16 @@ contract TestBytecodeOnly {
     Target target;
 
     constructor() public {
-        address target_addr;
+        address targetAddress;
         // init bytecode
         bytes memory targetCreationBytecode = hex"";
 
         uint256 size = targetCreationBytecode.length;
 
         assembly {
-            target_addr := create(0, add(targetCreationBytecode, 0x20), size) // Skip the 32 bytes encoded length.
+            targetAddress := create(0, add(targetCreationBytecode, 0x20), size) // Skip the 32 bytes encoded length.
         }
-        target = Target(target_addr);
+        target = Target(targetAddress);
     }
 
     // Add helper functions to call the target's functions from the proxy

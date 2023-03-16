@@ -2,10 +2,9 @@
 
 **Table of contents:**
 
-- [Collecting, visualizing and modifying an Echidna corpus](#collecting-visualizing-and-modifying-an-echidna-corpus)
-  - [Introduction](#introduction)
-  - [Collecting a corpus](#collecting-a-corpus)
-  - [Seeding a corpus](#seeding-a-corpus)
+- [Introduction](#introduction)
+- [Collecting a corpus](#collecting-a-corpus)
+- [Seeding a corpus](#seeding-a-corpus)
 
 ## Introduction
 

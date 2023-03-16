@@ -36,7 +36,7 @@ In the external testing approach, properties are tested using external calls fro
 ```solidity
 contract ExternalTest {
     constructor() public {
-        addr = address(0x...);
+        addr = address(0x1234);
     }
 
     function echidna_state_greater_than_X() public returns (bool) {
@@ -56,7 +56,7 @@ we add one or more functions that performs external call to it.
 ```solidity
 contract ExternalTest {
     constructor() public {
-       addr = ...;
+       // addr = ...;
     }
 
     function method(...) public returns (...) {
@@ -78,7 +78,7 @@ There are two important points to consider in this approach:
 
 ```solidity
 contract ExternalTest {
-    ...
+    // ...
 
     function methodUsingF(..., uint256 x) public returns (...) {
        return System(addr).method(.., f(x));

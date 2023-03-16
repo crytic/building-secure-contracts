@@ -17,7 +17,7 @@ and returns a `int256`. Echidna will try find a sequence of transactions to maxi
 ```solidity
 function echidna_opt_function() public view returns (int256) {
     // if it reverts, Echidna will assumed it returned type(int256).min
-    return ...;
+    return value;
 }
 ```
 

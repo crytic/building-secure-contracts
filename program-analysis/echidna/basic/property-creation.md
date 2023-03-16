@@ -2,11 +2,13 @@
 
 **Table of contents:**
 
-- [Introduction](#introduction)
-- [A first approach](#a-first-approach)
-- [Enhacing postcondition checks](#enhacing-postcondition-checks)
-- [Combining properties](#combining-properties)
-- [Summary: How to write good properties](#summary-how-to-write-good-properties)
+- [How to write good properties step by step](#how-to-write-good-properties-step-by-step)
+  - [Introduction](#introduction)
+  - [A first approach](#a-first-approach)
+  - [Enhacing postcondition checks](#enhacing-postcondition-checks)
+  - [Combining properties](#combining-properties)
+  - [Final considerations](#final-considerations)
+  - [Summary: How to write good properties](#summary-how-to-write-good-properties)
 
 ## Introduction
 
@@ -82,7 +84,7 @@ contract Test {
 
 ```
 
-After you have writen your first version of properties, run Echidna to make sure they work as expected. During this tutorial, we will improve them step by step. It is strongly recommended to run the fuzzer at each step to increase the probability of detecting any potential issues.
+After you have written your first version of properties, run Echidna to make sure they work as expected. During this tutorial, we will improve them step by step. It is strongly recommended to run the fuzzer at each step to increase the probability of detecting any potential issues.
 
 Perhaps you think these properties are too low level to be useful, particularly if the code has a good coverage in terms of unit tests.
 But you will be surprised how often an unexpected revert/return uncovers a complex and severe issue. Moreover, we will see how these properties can be improved to cover more complex post-conditions.
