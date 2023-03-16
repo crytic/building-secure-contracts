@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity ^0.5.3;
+
 // Note: The issues from exercise 1 and 2 are fixed
 
 contract Ownership {

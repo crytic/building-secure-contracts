@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity ^0.5.3;
+
 contract C {
     address[] addrs;
 
@@ -16,7 +19,7 @@ contract C {
     function check() public {
         for (uint256 i = 0; i < addrs.length; i++) {
             for (uint256 j = i + 1; j < addrs.length; j++) {
-                if (addrs[i] == addrs[j]) addrs[j] = address(0x0);
+                if (addrs[i] == addrs[j]) addrs[j] = address(0);
             }
         }
     }

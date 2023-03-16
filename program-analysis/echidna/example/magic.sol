@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity ^0.5.3;
+
 contract C {
     bool value_found = false;
 
