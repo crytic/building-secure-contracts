@@ -11,7 +11,7 @@
 
 We will see how to collect and use a corpus of transactions with Echidna. The target is the following smart contract (_[../example/magic.sol](../example/magic.sol)_):
 
-```Solidity
+```solidity
 contract C {
     bool value_found = false;
 

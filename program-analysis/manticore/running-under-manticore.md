@@ -11,10 +11,11 @@
 
 We will see how to explore a smart contract with the Manticore API. The target is the following smart contract (_[examples/example.sol](./examples/example.sol)_):
 
-```Solidity
+```solidity
 pragma solidity >=0.4.24 <0.6.0;
+
 contract Simple {
-    function f(uint256 a) payable public {
+    function f(uint256 a) public payable {
         if (a == 65) {
             revert();
         }

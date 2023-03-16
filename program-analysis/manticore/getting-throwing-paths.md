@@ -13,10 +13,11 @@
 
 We will now improve [the previous example](running-under-manticore.md) and generate specific inputs for the paths raising an exception in `f()`. The target is still the following smart contract (_[examples/example.sol](./examples/example.sol)_):
 
-```Solidity
+```solidity
 pragma solidity >=0.4.24 <0.6.0;
+
 contract Simple {
-    function f(uint256 a) payable public {
+    function f(uint256 a) public payable {
         if (a == 65) {
             revert();
         }
