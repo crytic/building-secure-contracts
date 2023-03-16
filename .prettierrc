@@ -1,16 +1,15 @@
 {
-    "overrides": [
-        {
-            "files": "*.md",
-            "options": {
-                "tabWidth": 2
-            }
-        },
-        {
-            "files": "*.sol",
-            "options": {
-                "tabWidth": 4
-            }
-        }
+  "embeddedLanguageFormatting": "off",
+  "printWidth": 80,
+  "tabWidth": 2,
+  "plugins": ["prettier-plugin-solidity"],
+  "trailingComma": "none",
+  "overrides":
+    [
+      { "files": "*.sol", "options": { "tabWidth": 4, "printWidth": 120 } },
+      {
+        "files": "*.json",
+        "options": { "tabWidth": 2, "printWidth": 120, "trailingComma": "none" }
+      }
     ]
 }
