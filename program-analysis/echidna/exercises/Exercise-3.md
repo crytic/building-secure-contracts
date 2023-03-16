@@ -4,9 +4,11 @@ This exercise requires to finish [exercise 1](./Exercise-1.md) and [exercise 2](
 
 **Table of contents:**
 
-- [Targeted contract](#targeted-contract)
-- [Exercise](#testing-with-custom-initialization)
-- [Solution](#solution)
+- [Exercise 3](#exercise-3)
+  - [Targeted contract](#targeted-contract)
+  - [Testing with custom initialization](#testing-with-custom-initialization)
+    - [Goals](#goals)
+  - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
@@ -14,89 +16,105 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 We will test the following contract _[./exercise3/token.sol](./exercise3/token.sol)_:
 
-```Solidity
- contract Ownership {
-    address owner = msg.sender;
-    constructor() public {
-        owner = msg.sender;
+```solidity
+pragma solidity ^0.8.0;
+
+/// @notice The issues from exercise 1 and 2 are fixed.
+
+contract Ownable {
+    address public owner = msg.sender;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Ownable: Caller is not the owner.");
+        _;
     }
-     modifier isOwner() {
-         require(owner == msg.sender);
-         _;
-      }
-   }
+}
 
-  contract Pausable is Ownership {
-     bool is_paused;
-     modifier ifNotPaused() {
-          require(!is_paused);
-          _;
-      }
+contract Pausable is Ownable {
+    bool private _paused;
 
-      function paused() isOwner public {
-          is_paused = true;
-      }
-
-      function resume() isOwner public {
-          is_paused = false;
-      }
-   }
-
-   contract Token is Pausable {
-      mapping(address => uint256) public balances;
-      function transfer(address to, uint256 value) ifNotPaused public {
-            require(balances[msg.sender] >= value);
-            balances[msg.sender] -= value;
-            balances[to] += value;
-       }
+    function paused() public view returns (bool) {
+        return _paused;
     }
 
+    function pause() public onlyOwner {
+        _paused = true;
+    }
+
+    function resume() public onlyOwner {
+        _paused = false;
+    }
+
+    modifier whenNotPaused() {
+        require(!_paused, "Pausable: Contract is paused.");
+        _;
+    }
+}
+
+contract Token is Ownable, Pausable {
+    mapping(address => uint256) public balances;
+
+    function transfer(address to, uint256 value) public whenNotPaused {
+        balances[msg.sender] -= value;
+        balances[to] += value;
+    }
+}
 ```
 
 ## Testing with custom initialization
 
 Consider the following extension of the token (_[./exercise3/mintable.sol](./exercise3/mintable.sol)_):
 
-```Solidity
-   import "token.sol";
-   contract MintableToken is Token {
-      int totalMinted;
-      int totalMintable;
+```solidity
+import "token.sol";
 
-      constructor(int _totalMintable) public {
-         totalMintable = _totalMintable;
-      }
+contract MintableToken is Token {
+    int totalMinted;
+    int totalMintable;
 
-      function mint(uint256 value) isOwner() public {
-          require(int(value) + totalMinted < totalMintable);
-          totalMinted += int(value);
-          balances[msg.sender] += value;
-       }
+    constructor(int _totalMintable) public {
+        totalMintable = _totalMintable;
     }
+
+    function mint(uint256 value) public isOwner {
+        require(int(value) + totalMinted < totalMintable);
+        totalMinted += int(value);
+        balances[msg.sender] += value;
+    }
+}
 ```
 
 The [version of token.sol](./exercise3/token.sol#L1) contains the fixes of the previous exercises.
 
 ### Goals
 
-- Create a scenario, where `echidna_caller (msg.sender)` becomes the owner of the contract at construction, and `totalMintable` is set to 10,000. Recall that Echidna needs a constructor without argument.
-- Add a property to check if `echidna_caller` can mint more than 10,000 tokens.
+- Create a scenario, where `echidna (tx.origin)` becomes the owner of the contract at construction, and `totalMintable` is set to 10,000. Recall that Echidna needs a constructor without argument.
+- Add a property to check if `echidna` can mint more than 10,000 tokens.
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
 The skeleton for this exercise is (_[./exercise3/template.sol](./exercise3/template.sol)_):
 
-```Solidity
-   import "mintable.sol";
-   contract TestToken is MintableToken {
-      address echidna_caller = msg.sender;
+````solidity
+pragma solidity ^0.8.0;
 
-      // update the constructor
-      constructor() public {}
+import "./mintable.sol";
 
-      // add the property
-      function echidna_test_balance() public view returns (bool) {}
-   }
-```
+/// @dev Run the template with
+///      ```
+///      solc-select use 0.8.16
+///      echidna program-analysis/echidna/exercises/exercise3/template.sol --contract TestToken
+///      ```
+contract TestToken is MintableToken {
+    address echidna = msg.sender;
+
+    // TODO: update the constructor
+    constructor(int256 totalMintable) MintableToken(totalMintable) {}
+
+    function echidna_test_balance() public view returns (bool) {
+        // TODO: add the property
+    }
+}
+````
 
 ## Solution
 

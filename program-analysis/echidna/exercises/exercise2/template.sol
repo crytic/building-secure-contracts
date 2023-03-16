@@ -1,14 +1,20 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.5.3;
+pragma solidity ^0.8.0;
 
 import "./token.sol";
 
+/// @dev Run the template with
+///      ```
+///      solc-select use 0.8.0
+///      echidna program-analysis/echidna/exercises/exercise2/template.sol
+///      ```
 contract TestToken is Token {
-    constructor() public {
-        paused(); // pause the contract
-        owner = address(0x0); // lose ownership
+    constructor() {
+        pause(); // pause the contract
+        owner = address(0); // lose ownership
     }
 
-    // add the property
-    function echidna_cannot_be_unpaused() public view returns (bool) {}
+    function echidna_cannot_be_unpause() public view returns (bool) {
+        // TODO: add the property
+    }
 }

@@ -16,42 +16,51 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 We will test the following contract _[./exercise4/token.sol](./exercise4/token.sol)_:
 
-```Solidity
- contract Ownership {
-    address owner = msg.sender;
-    function Owner() public {
-         owner = msg.sender;
-     }
-     modifier isOwner() {
-         require(owner == msg.sender);
-         _;
-      }
-   }
+```solidity
+pragma solidity ^0.5.3;
 
-  contract Pausable is Ownership {
-     bool is_paused;
-     modifier ifNotPaused() {
-              require(!is_paused);
-              _;
-      }
+contract Ownable {
+    address public owner = msg.sender;
 
-      function paused() isOwner public {
-          is_paused = true;
-      }
-
-      function resume() isOwner public {
-          is_paused = false;
-      }
-   }
-
-   contract Token is Pausable {
-      mapping(address => uint256) public balances;
-      function transfer(address to, uint256 value) ifNotPaused public {
-           balances[msg.sender] -= value;
-           balances[to] += value;
-       }
+    function transferOwnership(address newOwner) public onlyOwner {
+        owner = newOwner;
     }
 
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Ownable: Caller is not the owner.");
+        _;
+    }
+}
+
+contract Pausable is Ownable {
+    bool private _paused;
+
+    function paused() public view returns (bool) {
+        return _paused;
+    }
+
+    function pause() public onlyOwner {
+        _paused = true;
+    }
+
+    function resume() public onlyOwner {
+        _paused = false;
+    }
+
+    modifier whenNotPaused() {
+        require(!_paused, "Pausable: Contract is paused.");
+        _;
+    }
+}
+
+contract Token is Ownable, Pausable {
+    mapping(address => uint256) public balances;
+
+    function transfer(address to, uint256 value) public whenNotPaused {
+        balances[msg.sender] -= value;
+        balances[to] += value;
+    }
+}
 ```
 
 ## Exercise
@@ -65,8 +74,29 @@ Add asserts to ensure that after calling `transfer`:
 
 Once Echidna finds the bug, fix the issue, and re-try your assertion with Echidna.
 
-This exercise is similar to the [first one](Exercise-1.md), but using assertions instead of explicit properties.  
-However, in this exercise, it is easier to modify the original token contract (_[./exercise4/token.sol](./exercise4/token.sol)_).
+This exercise is similar to the [first one](Exercise-1.md), but using assertions instead of explicit properties.
+
+The skeleton for this exercise is (_[./exercise4/template.sol](./exercise4/template.sol)_):
+
+````solidity
+pragma solidity ^0.5.3;
+
+import "./token.sol";
+
+/// @dev Run the template with
+///      ```
+///      solc-select use 0.5.3
+///      echidna program-analysis/echidna/exercises/exercise4/template.sol --contract TestToken --test-mode assertion
+///      ```
+contract TestToken is Token {
+    function transfer(address to, uint256 value) public {
+        // TODO: include `assert(condition)` statements that
+        // detect a breaking invariant on a transfer.
+        // Hint: you may use the following to wrap the original function.
+        super.transfer(to, value);
+    }
+}
+````
 
 ## Solution
 

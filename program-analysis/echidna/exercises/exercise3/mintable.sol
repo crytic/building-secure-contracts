@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.5.3;
+pragma solidity ^0.8.0;
 
 import "./token.sol";
 
 contract MintableToken is Token {
-    int256 totalMinted;
-    int256 totalMintable;
+    int256 public totalMinted;
+    int256 public immutable totalMintable;
 
-    constructor(int256 _totalMintable) public {
-        totalMintable = _totalMintable;
+    constructor(int256 totalMintable_) {
+        totalMintable = totalMintable_;
     }
 
-    function mint(uint256 value) public isOwner {
+    function mint(uint256 value) public onlyOwner {
         require(int256(value) + totalMinted < totalMintable);
         totalMinted += int256(value);
 
