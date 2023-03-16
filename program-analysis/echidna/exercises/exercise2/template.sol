@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.5.3;
 
-import "token.sol";
+import "./token.sol";
 
 contract TestToken is Token {
     constructor() public {
