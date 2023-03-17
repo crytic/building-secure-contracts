@@ -37,20 +37,24 @@ Below is a rough outline of building-secure-contracts's structure:
 └── ...
 ```
 
-## Linters
+## Linting and formatting
 
-We run [markdown-link-check](https://github.com/tcort/markdown-link-check) to ensure all the markdown links are correct.
-
-To install `markdown-link-check`:
+To install the formatters and linters, run:
 
 ```bash
-npm install -g markdown-link-check
+npm install
 ```
 
-To run `markdown-link-check`:
+The formatter is run with:
 
 ```bash
-find . -name \*.md -print0 | xargs -0 -n1 markdown-link-check
+npm run format
+```
+
+The linter is run with:
+
+```bash
+npm run lint
 ```
 
 ## Create the book
