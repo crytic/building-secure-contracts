@@ -33,7 +33,7 @@ This small example forces Echidna to find certain values to change a state varia
 We can run Echidna to verify this:
 
 ```
-echidna-test magic.sol
+echidna magic.sol
 ...
 
 echidna_magic_values: passed! 🎉
@@ -60,7 +60,7 @@ corpusDir: "corpus-magic"
 Now we can run our tool and check the collected corpus:
 
 ```
-echidna-test magic.sol --config config.yaml
+echidna magic.sol --config config.yaml
 ```
 
 Echidna still cannot find the correct magic value. We can verify where it gets stuck reviewing the `corpus-magic/covered.*.txt` file:
@@ -145,7 +145,7 @@ cp corpus-magic/coverage/2712688662897926208.txt corpus-magic/coverage/new.txt
 We will modify `new.txt` to call `magic(42,129,333,0)`. Now, we can re-run Echidna:
 
 ```
-echidna-test magic.sol --config config.yaml
+echidna magic.sol --config config.yaml
 ...
 echidna_magic_values: failed!💥
   Call sequence:

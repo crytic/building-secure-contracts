@@ -156,14 +156,14 @@ cryticArgs: ["--truffle-build-directory", "app/src/contracts/"] # needed by driz
 Then, running Echidna shows the results immediately:
 
 ```
-echidna-test . --contract E2E --config echidna.yaml
+echidna . --contract E2E --config echidna.yaml
 ...
 crytic_const_storage: failed!💥
   Call sequence:
     (0x871dd7c2b4b25e1aa18728e9d5f2af4c4e431f5c).set(0) from: 0x0000000000000000000000000000000000010000
 ```
 
-For this last step, make sure you are using `.` as a target for `echidna-test`. If you use the path to the `E2E.sol` file instead, then Echidna will not be able get information from all the deployed contracts to call the `set(uint256)` function and the property will never fail.
+For this last step, make sure you are using `.` as a target for `echidna`. If you use the path to the `E2E.sol` file instead, then Echidna will not be able get information from all the deployed contracts to call the `set(uint256)` function and the property will never fail.
 
 ## Key considerations:
 
