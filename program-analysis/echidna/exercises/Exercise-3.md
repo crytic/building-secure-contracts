@@ -17,7 +17,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 We will test the following contract _[./exercise3/token.sol](./exercise3/token.sol)_:
 
 ```solidity
-pragma solidity ^0.8.0;
+pragma solidity ^0.5.0;
 
 /// @notice The issues from exercise 1 and 2 are fixed.
 
@@ -66,19 +66,22 @@ contract Token is Ownable, Pausable {
 Consider the following extension of the token (_[./exercise3/mintable.sol](./exercise3/mintable.sol)_):
 
 ```solidity
-import "token.sol";
+pragma solidity ^0.5.0;
+
+import "./token.sol";
 
 contract MintableToken is Token {
-    int totalMinted;
-    int totalMintable;
+    int256 public totalMinted;
+    int256 public totalMintable;
 
-    constructor(int _totalMintable) public {
-        totalMintable = _totalMintable;
+    constructor(int256 totalMintable_) public {
+        totalMintable = totalMintable_;
     }
 
-    function mint(uint256 value) public isOwner {
-        require(int(value) + totalMinted < totalMintable);
-        totalMinted += int(value);
+    function mint(uint256 value) public onlyOwner {
+        require(int256(value) + totalMinted < totalMintable);
+        totalMinted += int256(value);
+
         balances[msg.sender] += value;
     }
 }
@@ -95,20 +98,20 @@ The [version of token.sol](./exercise3/token.sol#L1) contains the fixes of the p
 The skeleton for this exercise is (_[./exercise3/template.sol](./exercise3/template.sol)_):
 
 ````solidity
-pragma solidity ^0.8.0;
+pragma solidity ^0.5.0;
 
 import "./mintable.sol";
 
 /// @dev Run the template with
 ///      ```
-///      solc-select use 0.8.16
+///      solc-select use 0.5.0
 ///      echidna program-analysis/echidna/exercises/exercise3/template.sol --contract TestToken
 ///      ```
 contract TestToken is MintableToken {
     address echidna = msg.sender;
 
     // TODO: update the constructor
-    constructor(int256 totalMintable) MintableToken(totalMintable) {}
+    constructor(int256 totalMintable) public MintableToken(totalMintable) {}
 
     function echidna_test_balance() public view returns (bool) {
         // TODO: add the property

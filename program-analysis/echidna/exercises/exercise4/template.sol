@@ -1,12 +1,16 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.5.3;
+pragma solidity ^0.5.0;
 
 import "./token.sol";
 
 /// @dev Run the template with
 ///      ```
-///      solc-select use 0.5.3
+///      solc-select use 0.5.0
 ///      echidna program-analysis/echidna/exercises/exercise4/template.sol --contract TestToken --test-mode assertion
+///      ```
+///      or by providing a config
+///      ```
+///      echidna program-analysis/echidna/exercises/exercise4/template.sol --contract TestToken --config program-analysis/echidna/exercises/exercise4/config.yaml
 ///      ```
 contract TestToken is Token {
     function transfer(address to, uint256 value) public {

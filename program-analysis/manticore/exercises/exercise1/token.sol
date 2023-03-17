@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.5.3;
+pragma solidity ^0.5.0;
 
 contract CryticCoin {
     mapping(address => uint256) balances;

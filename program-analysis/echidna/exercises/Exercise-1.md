@@ -15,7 +15,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 We will test the following contract _[./exercise1/token.sol](./exercise1/token.sol)_:
 
 ```solidity
-pragma solidity ^0.5.3;
+pragma solidity ^0.5.0;
 
 contract Ownable {
     address public owner = msg.sender;
@@ -67,11 +67,13 @@ contract Token is Ownable, Pausable {
 The skeleton for this exercise is (_[./exercise1/template.sol](./exercise1/template.sol)_):
 
 ````solidity
+pragma solidity ^0.5.0;
+
 import "./token.sol";
 
 /// @dev Run the template with
 ///      ```
-///      solc-select use 0.5.3
+///      solc-select use 0.5.0
 ///      echidna program-analysis/echidna/exercises/exercise1/template.sol
 ///      ```
 contract TestToken is Token {

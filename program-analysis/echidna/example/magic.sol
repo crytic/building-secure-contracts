@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.5.3;
+pragma solidity ^0.5.0;
 
 contract C {
     bool value_found = false;
@@ -12,7 +12,7 @@ contract C {
         return;
     }
 
-    function echidna_magic_values() public returns (bool) {
+    function echidna_magic_values() public view returns (bool) {
         return !value_found;
     }
 }

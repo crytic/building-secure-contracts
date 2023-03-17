@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.5.3;
+pragma solidity ^0.5.0;
 
 contract C {
     address[] addrs;
@@ -24,7 +24,7 @@ contract C {
         }
     }
 
-    function echidna_test() public returns (bool) {
+    function echidna_test() public pure returns (bool) {
         return true;
     }
 }
