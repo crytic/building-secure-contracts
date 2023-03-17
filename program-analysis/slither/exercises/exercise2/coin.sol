@@ -15,8 +15,9 @@ contract Owned {
 }
 
 contract Coin is Owned {
+    uint256 decimals = 18;
+
     mapping(address => uint256) balances;
-    uint256 decimals = 1 ** 18;
 
     event Mint(address indexed destination, uint256 amount);
 
@@ -45,7 +46,7 @@ contract Coin is Owned {
 
     /// @notice Return the user's balance
     /// @param dst User address
-    function balanceOf(address dst) public returns (uint256) {
-        return balances[msg.sender];
+    function balanceOf(address dst) public view returns (uint256) {
+        return balances[dst];
     }
 }
