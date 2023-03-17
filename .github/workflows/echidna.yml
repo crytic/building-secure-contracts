@@ -45,7 +45,7 @@ jobs:
             workdir: program-analysis/echidna/exercises/exercise4/
             files: solution.sol
             config: config.yaml
-            contract: Token
+            contract: TestToken
             outcome: failure
             expected: 'transfer(address,uint256):\s*failed'
           - name: Exercise 5
