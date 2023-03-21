@@ -1,25 +1,27 @@
-# Understanding and using `multi-abi` in Echidna
+# Understanding and using `allContracts` in Echidna
 
 **Table of contents:**
 
-- [Understanding and using `multi-abi` in Echidna](#understanding-and-using-multi-abi-in-echidna)
+- [Understanding and using `allContracts` in Echidna](#understanding-and-using-allcontracts-in-echidna)
   - [Introduction](#introduction)
-  - [What is `multi-abi` testing?](#what-is-multi-abi-testing)
-  - [When and how to use `multi-abi`](#when-and-how-to-use-multi-abi)
+  - [What is `allContracts` testing?](#what-is-allcontracts-testing)
+  - [When and how to use `allContracts`](#when-and-how-to-use-allcontracts)
   - [Run Echidna](#run-echidna)
-    - [Example run with `multi-abi` set to `false`](#example-run-with-multi-abi-set-to-false)
-    - [Example run with `multi-abi` set to `true`](#example-run-with-multi-abi-set-to-true)
+    - [Example run with `allContracts` set to `false`](#example-run-with-allcontracts-set-to-false)
+    - [Example run with `allContracts` set to `true`](#example-run-with-allcontracts-set-to-true)
   - [Use cases and conclusions](#use-cases-and-conclusions)
 
 ## Introduction
 
-This tutorial is written as a hands-on guide to using `multi-abi` testing in Echidna. You will learn what `multi-abi` testing is, how to use it in your tests, and what to expect from its usage.
+This tutorial is written as a hands-on guide to using `allContracts` testing in Echidna. You will learn what `allContracts` testing is, how to use it in your tests, and what to expect from its usage.
 
-## What is `multi-abi` testing?
+**Important note**: this feature used to be called `multi-abi` but it was later renamed to `allContracts` in Echidna 2.1.0. As expected, this version or later is required for this tutorial.
+
+## What is `allContracts` testing?
 
 It is a testing mode that allows Echidna to call functions from any contract not directly under test. The ABI for the contract must be known, and it must have been deployed by the contract under test.
 
-## When and how to use `multi-abi`
+## When and how to use `allContracts`
 
 By default, Echidna calls functions from the contract to be analyzed, sending the transactions randomly from addresses `0x10000`, `0x20000` and `0x30000`.
 
@@ -27,11 +29,11 @@ In some systems, the user has to interact with other contracts prior to calling 
 
 A fuzzing campaign meant to test this example protocol contract won't be able to modify users allowances, therefore most of the interactions with the protocol won't be tested correctly.
 
-This is where `multi-abi` testing is useful: It allows Echidna to call functions from other contracts (not just from the contract under test), sending the transactions from the same accounts that will interact with the target contract.
+This is where `allContracts` testing is useful: It allows Echidna to call functions from other contracts (not just from the contract under test), sending the transactions from the same accounts that will interact with the target contract.
 
 ## Run Echidna
 
-We will use a simple example to show how `multi-abi` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [`../example/multiabi.sol`](../example/multiabi.sol).
+We will use a simple example to show how `allContracts` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [`../example/multiabi.sol`](../example/multiabi.sol).
 
 The `Flag` contract contains a boolean flag that is only set if `flip()` is called, and a getter function that returns the value of the flag. For now, ignore `test_fail()`, we will talk about this function later.
 
@@ -71,17 +73,17 @@ contract EchidnaTest {
 }
 ```
 
-In a non `multi-abi` fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `multi-abi` testing, the invariant is broken. You can access [`../example/multiabi.yaml` here](../example/multiabi.yaml).
+In a non `allContracts` fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [`../example/multiabi.yaml` here](../example/multiabi.yaml).
 
 ```yaml
 testMode: assertion
 testLimit: 50000
-multi-abi: true
+allContracts: true
 ```
 
-To run the Echidna tests, run `echidna-test multiabi.sol --contract EchidnaTest --config multiabi.yaml` from the `example` directory. Alternatively, you can specify `--multi-abi` in the command line instead of using a configuration file.
+To run the Echidna tests, run `echidna-test multiabi.sol --contract EchidnaTest --config multiabi.yaml` from the `example` directory. Alternatively, you can specify `--all-contracts` in the command line instead of using a configuration file.
 
-### Example run with `multi-abi` set to `false`
+### Example run with `allContracts` set to `false`
 
 ```
 $ echidna-test multiabi.sol --contract EchidnaTest --config multiabi.yaml 
@@ -95,7 +97,7 @@ Corpus size: 2
 Seed: -8252538430849362039
 ```
 
-### Example run with `multi-abi` set to `true`
+### Example run with `allContracts` set to `true`
 
 ```
 $ echidna-test multiabi.sol --contract EchidnaTest --config multiabi.yaml 
@@ -118,8 +120,8 @@ Seed: -6168343983565830424
 
 ## Use cases and conclusions
 
-Testing with `multi-abi` is a useful tool for complex systems that require the user to interact with more than one contract, as we mentioned earlier. Another use case is for deployed contracts that require interactions to be initiated by specific addresses: for those, specifying the `sender` configuration setting allows to send the transactions from the correct account.
+Testing with `allContracts` is a useful tool for complex systems that require the user to interact with more than one contract, as we mentioned earlier. Another use case is for deployed contracts that require interactions to be initiated by specific addresses: for those, specifying the `sender` configuration setting allows to send the transactions from the correct account.
 
-A side-effect of using `multi-abi` is that the search space grows with the number of functions that can be called. This, combined with high values of sequence lengths, can make the fuzzing test not so thorough, because the dimension of the search space is simply too big to reasonably explore. Finally, adding more functions as fuzzing candidates makes the campaigns to take up more execution time.
+A side-effect of using `allContracts` is that the search space grows with the number of functions that can be called. This, combined with high values of sequence lengths, can make the fuzzing test not so thorough, because the dimension of the search space is simply too big to reasonably explore. Finally, adding more functions as fuzzing candidates makes the campaigns to take up more execution time.
 
-A final remark is that `multi-abi` testing in assertion mode ignores all assert failures from the contracts not under test. This is shown in `Flag.test_fail()` function: even though it explicitly asserts false, the Echidna test ignores it.
+A final remark is that `allContracts` testing in assertion mode ignores all assert failures from the contracts not under test. This is shown in `Flag.test_fail()` function: even though it explicitly asserts false, the Echidna test ignores it.
