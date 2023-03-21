@@ -5,4 +5,4 @@
 - [How to filter functions](./filtering-functions.md): How to filters the functions to be fuzzed
 - [How to test assertions](./assertion-checking.md): How to test assertions with Echidna
 - [How to write good properties step by step](./property-creation.md): How to iteratively improve property testing
-- [How to write properties that use ether](./working-with-ether.md): How to use ether during fuzzing campaigns
+- [How to write properties that use ether](./working-with-eth.md): How to use ether during fuzzing campaigns
