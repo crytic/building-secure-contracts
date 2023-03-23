@@ -80,7 +80,7 @@ This is equivalent, because `type(uint256).max` is a 256-bit integer with all it
 Subtracting `b` from `type(uint256).max` can be viewed as inverting each bit in `b`.
 This can be demonstrated by the transformation `~b = ~(0 ^ b) = ~0 ^ b = MAX ^ b = MAX - b`.
 
-> It's worth noting that `a - b = a ^ b` is **NOT** a general rule, except in special cases, such as when one of the values `MAX`.
+> It's worth noting that `a - b = a ^ b` is **NOT** a general rule, except in special cases, such as when one of the values equals `MAX`.
 > We also obtain the relation `~b + 1 = 0 - b = -b` if we add `1` mod `2**256` to both sides of the previous equation.
 
 By computing the result of the addition first and then performing a check on the sum,
@@ -218,8 +218,8 @@ function checkedAddInt2(int256 a, int256 b) public pure returns (int256 c) {
 }
 ```
 
-Nevertheless, by utilizing `xor`, which is the bitwise exclusive-or operation, we can combine these checks into one.
-The code is written in assembly, because Solidity lacks an `xor` operation for boolean values.
+Nevertheless, using the boolean exclusive-or lets us combine these checks into one step.
+Solidity doesn't have a built-in operation for boolean values, but we can still make use of it through inline-assembly. In doing so, we need to take care that both inputs are actually boolean (either 0 or 1), as the xor operation works bitwise and isn't restricted to boolean values.
 
 ```solidity
 function checkedAddInt3(int256 a, int256 b) public pure returns (int256 c) {
@@ -384,7 +384,7 @@ function checkedMulInt2(int256 a, int256 b) public pure returns (int256 c) {
 }
 ```
 
-When it comes to integer multiplication, it's important to handle the case hen `a < 0` and `b == type(int256).min`.
+When it comes to integer multiplication, it's important to handle the case when `a < 0` and `b == type(int256).min`.
 The actual case, where the product `c` will overflow, is limited to `a == -1` and `b == type(int256).min`.
 This is because `-b` cannot be represented as a positive signed integer, as previously mentioned.
 
@@ -422,11 +422,11 @@ For example, when performing addition without knowing what the upper bits are se
 = 0x????????????????????????????????????????????????0000000000000001 // int64(1)
 ```
 
-> It is crucial to be mindful of when to clean the bits before and after operations.
-> By default, Solidity takes care of cleaning the bits before operations on smaller types and lets the optimizer remove any redundant steps.
-> However, values accessed after operations included by the compiler are not guaranteed to be clean. In particular, this is the case for addition with small data types.
-> The bit cleaning steps will be removed by the optimizer (even without optimizations enabled) if a variable is only accessed in a subsequent assembly block.
-> Refer to the [Solidity documentation](https://docs.soliditylang.org/en/v0.8.18/internals/variable_cleanup.html#cleaning-up-variables) for further information on this matter.
+It is crucial to be mindful of when to clean the bits before and after operations.
+By default, Solidity takes care of cleaning the bits before operations on smaller types and lets the optimizer remove any redundant steps.
+However, values accessed after operations included by the compiler are not guaranteed to be clean. In particular, this is the case for addition with small data types.
+The bit cleaning steps will be removed by the optimizer (even without optimizations enabled) if a variable is only accessed in a subsequent assembly block.
+Refer to the [Solidity documentation](https://docs.soliditylang.org/en/v0.8.18/internals/variable_cleanup.html#cleaning-up-variables) for further information on this matter.
 
 When performing arithmetic checks in the same way as before, it is necessary to include a step to clean the bits on the sum.
 One approach to achieve this is by performing `signextend(7, value)`, which extends the sign of a 64-bit (7 + 1 = 8 bytes) integer over all upper bits.
