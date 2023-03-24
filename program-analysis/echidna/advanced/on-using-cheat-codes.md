@@ -5,20 +5,19 @@
 - [How and when to use cheat codes](#how-and-when-to-use-cheat-codes)
   - [Introduction](#introduction)
   - [Cheat codes available in Echidna](#cheat-codes-available-in-echidna)
-  - [Advise on using cheat codes](#advise-on-using-cheat-codes)
+  - [Advice on using cheat codes](#advice-on-using-cheat-codes)
 
 ## Introduction
 
-When solidity smart contract testing is performed from Solidity itself, usually requires some "help" in order to tackle some EVM/Solidity limitations. 
-Cheat code are special functions that allow to change the state of the EVM in ways that are not posible in production. These were introduced by Dapptools in
-hevm and adopted (and expanded) in other projects such as Foundry.
+When testing smart contracts in Solidity itself, it can be helpful to use cheat codes in order to overcome some of the limitations of the EVM/Solidity.
+Cheat codes are special functions that allow to change the state of the EVM in ways that are not posible in production. These were introduced by Dapptools in hevm and adopted (and expanded) in other projects such as Foundry.
 
 ## Cheat codes available in Echidna
 
 Since Echidna uses [hevm](https://github.com/ethereum/hevm), all the supported list of cheat code is documented here: https://hevm.dev/controlling-the-unit-testing-environment.html#cheat-codes. 
 If a new cheat code is added in the future, Echidna only needs to update the hevm version and everything should work out of the box.   
 
-As an example, this is code "simulates" the use of another sender for the external call using "prank":
+As an example, the `prank` cheat code is able to set the `msg.sender` address in the context of the next external call:
 
 ```solidity
 interface IHevm {
@@ -32,16 +31,16 @@ contract TestPrank {
   
   function prankContract() public payable {
     hevm.prank(address(0x42424242);
-    c.f();
+    c.f(); // `c` will be called with `msg.sender = 0x42424242`
   }
 }
 ```
 
 A specific example on the use of `sign` cheat code is available [here in our documentation](hevm-cheats-to-test-permit.md).
 
-## Advise on how and when using cheat codes
+## Advice on how and when using cheat codes
 
-While we provide support for the use of cheat codes, these should be used responsabily. We offer the following advise on the use of cheat codes:
+While we provide support for the use of cheat codes, these should be used responsibly. We offer the following advice on the use of cheat codes:
 
 * It should be used only if Echidna will not perform the same action with a native feature. For instance, Echidna automatically increases the timestamp and block number. There are [some reports of the optimizer interfering with (re)computation of the block.number or timestamp](https://github.com/ethereum/solidity/issues/12963#issuecomment-1110162425), which could generate incorrect tests when using cheat codes.
 Using the corresponding built-in Echidna features should never intefer with the optimization level or any other compiler feature (if this happens, then it is a bug).
