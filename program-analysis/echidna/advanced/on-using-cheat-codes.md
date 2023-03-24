@@ -5,7 +5,7 @@
 - [How and when to use cheat codes](#how-and-when-to-use-cheat-codes)
   - [Introduction](#introduction)
   - [Cheat codes available in Echidna](#cheat-codes-available-in-echidna)
-  - [Advice on using cheat codes](#advice-on-using-cheat-codes)
+  - [Advice on the use of cheat codes](#advice-on-the-use-of-cheat-codes)
 
 ## Introduction
 
@@ -37,7 +37,7 @@ contract TestPrank {
 
 A specific example on the use of `sign` cheat code is available [here in our documentation](hevm-cheats-to-test-permit.md).
 
-## Advice on how and when using cheat codes
+## Advice on the use of cheat codes
 
 While we provide support for the use of cheat codes, these should be used responsibly. We offer the following advice on the use of cheat codes:
 
