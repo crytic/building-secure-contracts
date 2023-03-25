@@ -17,7 +17,7 @@ on:
 jobs:
   tests:
     name: ${{ matrix.name }}
-    continue-on-error: ${{ matrix.flaky == true }}
+    continue-on-error: ${{ matrix.flaky || false }}
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
@@ -121,6 +121,7 @@ jobs:
             contract: TestDepositWithPermit
             outcome: success
             expected: 'testERC20PermitDeposit(uint256):\s*passed'
+            flaky: true
           - name: MultiABI
             workdir: program-analysis/echidna/example/
             files: multiabi.sol
