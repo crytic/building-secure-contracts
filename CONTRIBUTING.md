@@ -60,7 +60,7 @@ npm run lint
 To run the individual linters, use:
 
 - `npm run lint:format` to check the formatting
-- `npm run lint:links` to check for invalid links in markdown
+- `npm run lint:links` to check for invalid links in markdown files
 
 ## Create the book
 
