@@ -15,4 +15,3 @@ Consider the following function that validates a signature for EIP712-style perm
 - Consider using the [OpenZeppelin Contracts for Cairo Account contract](https://github.com/OpenZeppelin/cairo-contracts/blob/main/docs/modules/ROOT/pages/accounts.adoc) or another existing account contract implementation.
 
 ## External Examples
-

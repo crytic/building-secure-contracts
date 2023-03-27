@@ -10,7 +10,7 @@ on:
   pull_request:
   schedule:
     # run CI every day even if no PRs/merges occur
-    - cron:  '0 12 * * *'
+    - cron: "0 12 * * *"
 
 jobs:
   tests:
@@ -20,18 +20,18 @@ jobs:
       matrix:
         type: ["slither", "manticore"]
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.8
-    - name: Install dependencies
-      run: |
-        pip install solc-select
-        solc-select install 0.5.11
-        solc-select use 0.5.11
-    - name: Run Tests
-      env:
-        TEST_TYPE: ${{ matrix.type }}
-      run: |
-        bash program-analysis/${TEST_TYPE}/scripts/gh_action_test.sh
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          pip install solc-select
+          solc-select install 0.5.11
+          solc-select use 0.5.11
+      - name: Run Tests
+        env:
+          TEST_TYPE: ${{ matrix.type }}
+        run: |
+          bash program-analysis/${TEST_TYPE}/scripts/gh_action_test.sh

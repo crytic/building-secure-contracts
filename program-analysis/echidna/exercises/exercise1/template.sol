@@ -3,13 +3,21 @@ pragma solidity <0.8.0;
 
 import "token.sol";
 
+import "./token.sol";
+
+/// @dev Run the template with
+///      ```
+///      solc-select use 0.5.0
+///      echidna program-analysis/echidna/exercises/exercise1/template.sol
+///      ```
 contract TestToken is Token {
-    address echidna_caller = msg.sender;
+    address echidna = tx.origin;
 
     constructor() public {
-        balances[echidna_caller] = 10000;
+        balances[echidna] = 10000;
     }
 
-    // add the property
-    function echidna_test_balance() public view returns (bool) {}
+    function echidna_test_balance() public view returns (bool) {
+        // TODO: add the property
+    }
 }

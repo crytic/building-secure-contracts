@@ -1,4 +1,3 @@
-
 # Tracing Utils
 
 ## Transaction Tracing
@@ -43,7 +42,7 @@ The output of the above features a list of opcode executions, a snippet of which
 ```
 {
   "structLogs": [
-    ...,  
+    ...,
     {
       "index": 191,
       "pc": 3645,
@@ -75,7 +74,7 @@ The output of the above features a list of opcode executions, a snippet of which
         "7d7d4dc7c32ad4c905ab39fc25c4323c4a85e4b1b17a396514e6b88ee8b814e8": "00000000000000000000000000000000000000000000014af3e50252dfc40000"
       }
     },
-    ...,  
+    ...,
   ],
   "gas": 34718,
   "failed": false,
@@ -84,14 +83,15 @@ The output of the above features a list of opcode executions, a snippet of which
 ```
 
 An overview of the fields for opcode execution trace:
+
 - `index`: The index we added, indicates that the above opcode was the 191st one executed. Helpful for staying oriented as you jump around the trace.
 - `pc`: program counter eg this opcode exists at index `3645` of the contract bytecode. You'll notice that `pc` increments by one for many common opcodes, by more than one for PUSH opcodes, and is reset entirely by JUMP/JUMP opcodes.
 - `op`: name of the opcode, because most of the actual data is hex-encoded, using grep or ctrl-f to search through the trace for opcode names is an effective strategy.
-- `gas`: remaining gas *before* the opcode is executed
+- `gas`: remaining gas _before_ the opcode is executed
 - `gasCost`: cost of this operation, for CALL & similar opcodes, this cost takes into account all gas spent by the child execution frame.
 - `depth`: each call creates a new child execution frame & this variable tracks how many sub-frames exist. Generally, CALL opcodes increase the depth and RETURN opcodes decrease it.
-- `stack`: a snapshot of the entire stack *before* the opcode executes
-- `memory`: a snapshot of the entire memory *before* the opcode executes
+- `stack`: a snapshot of the entire stack _before_ the opcode executes
+- `memory`: a snapshot of the entire memory _before_ the opcode executes
 - `storage`: an accumulation of all state changes made during the execution of the transaction being traced
 
 One big challenge of navigating such a transaction trace is matching opcode executions to higher-level solidity code. An effective first step is to identify uncommon opcodes which correspond to easily identified logic of the source code. Generally, expensive operations are relatively uncommon so SLOAD and SSTORE are good ones to scan for first and match against places where state variables are being read or written in solidity. Alternatively, CALL and related opcodes are relatively uncommon and can be matched with calls to other contracts in the source code.

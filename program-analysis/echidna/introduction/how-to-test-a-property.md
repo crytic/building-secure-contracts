@@ -9,26 +9,27 @@
   - [Run Echidna](#run-echidna)
   - [Summary: Testing a property](#summary-testing-a-property)
 
-
 ## Introduction
 
-We will see how to test a smart contract with Echidna. The target is the following smart contract (*[../example/token.sol](../example/token.sol)*):
+We will see how to test a smart contract with Echidna. The target is the following smart contract (_[../example/token.sol](../example/token.sol)_):
 
-```Solidity
-   contract Token{
-      mapping(address => uint) public balances;
-      function airdrop() public{
-          balances[msg.sender] = 1000;
-     }
-     function consume() public{
-          require(balances[msg.sender]>0);
-          balances[msg.sender] -= 1;
-     }
-     function backdoor() public{
-          balances[msg.sender] += 1;
-     }
-   }
-  
+```solidity
+contract Token {
+    mapping(address => uint256) public balances;
+
+    function airdrop() public {
+        balances[msg.sender] = 1000;
+    }
+
+    function consume() public {
+        require(balances[msg.sender] > 0);
+        balances[msg.sender] -= 1;
+    }
+
+    function backdoor() public {
+        balances[msg.sender] += 1;
+    }
+}
 ```
 
 We will make the assumption that this token has the following properties:
@@ -40,34 +41,36 @@ We will make the assumption that this token has the following properties:
 ## Write a property
 
 Echidna properties are Solidity functions. A property must:
+
 - Have no argument
 - Return true if it is successful
 - Have its name starting with `echidna`
 
 Echidna will:
+
 - Automatically generate arbitrary transactions to test the property.
-- Report any transactions leading a property to return false or throw an error. 
+- Report any transactions leading a property to return false or throw an error.
 - Discard side-effects when calling a property (i.e. if the property changes a state variable, it is discarded after the test)
 
 The following property checks that the caller can have no more than 1000 tokens:
 
-```Solidity
-    function echidna_balance_under_1000() public view returns(bool){
-         return balances[msg.sender] <= 1000;
-    }
+```solidity
+function echidna_balance_under_1000() public view returns (bool) {
+    return balances[msg.sender] <= 1000;
+}
 ```
 
 Use inheritance to separate your contract from your properties:
 
-```Solidity
-    contract TestToken is Token{
-         function echidna_balance_under_1000() public view returns(bool){
-               return balances[msg.sender] <= 1000;
-          }
-     }
+```solidity
+contract TestToken is Token {
+    function echidna_balance_under_1000() public view returns (bool) {
+        return balances[msg.sender] <= 1000;
+    }
+}
 ```
 
-*[../example/testtoken.sol](../example/testtoken.sol)* implements the property and inherits from the token.
+_[../example/testtoken.sol](../example/testtoken.sol)_ implements the property and inherits from the token.
 
 ## Initiate a contract
 
@@ -87,33 +90,34 @@ We do not need any particular initialization in our current example. As a result
 Echidna is launched with:
 
 ```bash
-$ echidna-test contract.sol
+echidna contract.sol
 ```
 
 If `contract.sol` contains multiple contracts, you can specify the target:
 
 ```bash
-$ echidna-test contract.sol --contract MyContract
+echidna contract.sol --contract MyContract
 ```
 
 ## Summary: Testing a property
 
 The following summarizes the run of Echidna on our example:
 
-```Solidity
-     contract TestToken is Token{
-         constructor() public {}
-             function echidna_balance_under_1000() public view returns(bool){
-                return balances[msg.sender] <= 1000;
-             }
-       }
+```solidity
+contract TestToken is Token {
+    constructor() public {}
+
+    function echidna_balance_under_1000() public view returns (bool) {
+        return balances[msg.sender] <= 1000;
+    }
+}
 ```
 
 ```bash
-$ echidna-test testtoken.sol --contract TestToken
+echidna testtoken.sol --contract TestToken
 ...
 
-echidna_balance_under_1000: failed!💥  
+echidna_balance_under_1000: failed!💥
   Call sequence, shrinking (1205/5000):
     airdrop()
     backdoor()

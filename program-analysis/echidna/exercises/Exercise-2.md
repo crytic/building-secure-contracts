@@ -4,77 +4,97 @@ This exercise requires to finish the [exercise 1](Exercise-1.md).
 
 **Table of contents:**
 
-- [Targeted contract](#targeted-contract)
-- [Exercise](#testing-access-control)
-- [Solution](#solution)
+- [Exercise 2](#exercise-2)
+  - [Targeted contract](#targeted-contract)
+  - [Testing access control](#testing-access-control)
+    - [Goals](#goals)
+  - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
-  
-We will test the following contract *[./exercise2/token.sol](./exercise2/token.sol)*:
 
-```Solidity
- contract Ownership{
-    address owner = msg.sender;
+We will test the following contract _[./exercise2/token.sol](./exercise2/token.sol)_:
+
+```solidity
+pragma solidity ^0.5.0;
+
+contract Ownable {
+    address public owner = msg.sender;
+
     function Owner() public {
-         owner = msg.sender;
-     }
-     modifier isOwner(){
-         require(owner == msg.sender);
-         _;
-      }
-   }
-
-  contract Pausable is Ownership{
-     bool is_paused;
-     modifier ifNotPaused(){
-               require(!is_paused);
-               _;
-      }
-
-      function paused() isOwner public{
-          is_paused = true;
-      }
-
-      function resume() isOwner public{
-          is_paused = false;
-      }
-   }
-
-   contract Token is Pausable{
-      mapping(address => uint) public balances;
-      function transfer(address to, uint value) ifNotPaused public{
-           balances[msg.sender] -= value;
-           balances[to] += value;
-       }
+        owner = msg.sender;
     }
 
+    modifier onlyOwner() {
+        require(owner == msg.sender);
+        _;
+    }
+}
+
+contract Pausable is Ownable {
+    bool private _paused;
+
+    function paused() public view returns (bool) {
+        return _paused;
+    }
+
+    function pause() public onlyOwner {
+        _paused = true;
+    }
+
+    function resume() public onlyOwner {
+        _paused = false;
+    }
+
+    modifier whenNotPaused() {
+        require(!_paused, "Pausable: Contract is paused.");
+        _;
+    }
+}
+
+contract Token is Ownable, Pausable {
+    mapping(address => uint256) public balances;
+
+    function transfer(address to, uint256 value) public whenNotPaused {
+        balances[msg.sender] -= value;
+        balances[to] += value;
+    }
+}
 ```
-     
+
 ## Testing access control
 
 ### Goals
 
-- Consider `paused()` to be called at deployment, and the ownership removed.
+- Consider `pause()` to be called at deployment, and the ownership removed.
 - Add a property to check that the contract cannot be unpaused.
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
-The skeleton for this exercise is (*[./exercise2/template.sol](./exercise2/template.sol)*):
+The skeleton for this exercise is (_[./exercise2/template.sol](./exercise2/template.sol)_):
 
-```Solidity
-   import "token.sol";
-   contract TestToken is Token {
-      address echidna_caller = msg.sender;
-      constructor(){
-         paused(); // pause the contract
-         owner = 0x0; // lose ownership
-       }
-      // add the property
-      function echidna_no_transfer() public view returns (bool) {}
-   }
-```
+````solidity
+pragma solidity ^0.5.0;
+
+import "./token.sol";
+
+/// @dev Run the template with
+///      ```
+///      solc-select use 0.5.0
+///      echidna program-analysis/echidna/exercises/exercise2/template.sol
+///      ```
+contract TestToken is Token {
+    constructor() public {
+        pause(); // pause the contract
+        owner = address(0); // lose ownership
+    }
+
+    function echidna_cannot_be_unpause() public view returns (bool) {
+        // TODO: add the property
+    }
+}
+````
 
 ## Solution
 
- This solution can be found in [./exercise2/solution.sol](./exercise2/solution.sol)
+This solution can be found in [./exercise2/solution.sol](./exercise2/solution.sol)
