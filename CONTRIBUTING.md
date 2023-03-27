@@ -45,13 +45,13 @@ To install the formatters and linters, run:
 npm install
 ```
 
-The run the formatter, use:
+To run the formatter, use:
 
 ```bash
 npm run format
 ```
 
-The run the linters, use:
+To run the linters, use:
 
 ```bash
 npm run lint
