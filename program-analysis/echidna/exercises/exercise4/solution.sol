@@ -33,7 +33,14 @@ contract Pausable is Ownership {
 contract Token is Pausable {
     mapping(address => uint256) public balances;
 
+    constructor()  {
+        balances[msg.sender] = 10000;
+    }
+
     function transfer(address to, uint256 value) public ifNotPaused {
+        require(msg.sender != to);
+        require(balances[msg.sender] >= value);
+
         uint256 initial_balance_from = balances[msg.sender];
         uint256 initial_balance_to = balances[to];
 
@@ -42,5 +49,9 @@ contract Token is Pausable {
 
         assert(balances[msg.sender] <= initial_balance_from);
         assert(balances[to] >= initial_balance_to);
+
+        /// you can use below assertion to check precisely.
+        // assert(balances[msg.sender] == initial_balance_from - value);
+        // assert(balances[to] == initial_balance_to + value);
     }
 }
