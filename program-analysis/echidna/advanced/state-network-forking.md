@@ -76,7 +76,7 @@ Fetching Solidity source map for contract at address 0x4Ddc2D193948926D02f9B1fE9
 ```
 
 While the source code for the [cETH contract is available](https://etherscan.io/address/0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5#code), their source maps are NOT. 
-In order to generate the coverage report for fetched contract, **both** source code and source maping should be available. In such case, there will be a new directory inside the corpus to show coverage for each contract that was fetched. All the cases, coverage is available for the user-provided contracts:
+In order to generate the coverage report for a fetched contract, **both** source code and source mapping should be available. In that case, there will be a new directory inside the corpus directory to show coverage for each contract that was fetched. In any case, the coverage report will be always available for the user-provided contracts, such as this one:
 
 ```
 20 |     |
