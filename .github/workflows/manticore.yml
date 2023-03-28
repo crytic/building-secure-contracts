@@ -3,11 +3,13 @@ name: Run Manticore tests
 on:
   push:
     paths:
+      - ".github/workflows/manticore.yml"
       - "program-analysis/manticore/**/*.py"
     branches:
       - master
   pull_request:
     paths:
+      - ".github/workflows/manticore.yml"
       - "program-analysis/manticore/**/*.py"
   schedule:
     # run CI every day even if no PRs/merges occur
@@ -30,7 +32,5 @@ jobs:
           solc-select install 0.5.11
           solc-select use 0.5.11
       - name: Run Tests
-        env:
-          TEST_TYPE: manticore
         run: |
           bash program-analysis/manticore/scripts/gh_action_test.sh
