@@ -9,4 +9,4 @@
 - [How to use hevm cheats to test permit](./hevm-cheats-to-test-permit.md): How to test code that depends on ecrecover signatures using hevm cheat codes
 - [How to seed Echidna with unit tests](./end-to-end-testing.md): How to use existing unit tests to seed Echidna
 - [Understanding and using `multi-abi`](./using-multi-abi.md): What is `multi-abi` testing, and how can it be used
-- [How to do state network fuzzing](./state-network-forking.md): How Echidna can use the state of blockchain during a fuzzing campaign
+- [How to do on-chain fuzzing with state forking](./state-network-forking.md): How Echidna can use the state of blockchain during a fuzzing campaign
