@@ -14,7 +14,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
 
-We will test the following contract _[./exercise2/token.sol](./exercise2/token.sol)_:
+We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise2/token.sol)_:
 
 ```solidity
 pragma solidity ^0.5.0;
@@ -71,7 +71,7 @@ contract Token is Ownable, Pausable {
 - Add a property to check that the contract cannot be unpaused.
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
-The skeleton for this exercise is (_[./exercise2/template.sol](./exercise2/template.sol)_):
+The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise2/template.sol)_):
 
 ````solidity
 pragma solidity ^0.5.0;
@@ -97,4 +97,4 @@ contract TestToken is Token {
 
 ## Solution
 
-This solution can be found in [./exercise2/solution.sol](./exercise2/solution.sol)
+This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise2/solution.sol)

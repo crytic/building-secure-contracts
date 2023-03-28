@@ -11,7 +11,7 @@
 ## Introduction
 
 We will see how to filter the functions to be fuzzed.
-The target is the following smart contract (_[../example/multi.sol](../example/multi.sol)_):
+The target is the following smart contract (_[multi.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multi.sol)_):
 
 ```solidity
 contract C {

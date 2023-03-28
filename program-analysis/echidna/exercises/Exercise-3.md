@@ -14,7 +14,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
 
-We will test the following contract _[./exercise3/token.sol](./exercise3/token.sol)_:
+We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/token.sol)_:
 
 ```solidity
 pragma solidity ^0.5.0;
@@ -63,7 +63,7 @@ contract Token is Ownable, Pausable {
 
 ## Testing with custom initialization
 
-Consider the following extension of the token (_[./exercise3/mintable.sol](./exercise3/mintable.sol)_):
+Consider the following extension of the token (_[mintable.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/mintable.sol)_):
 
 ```solidity
 pragma solidity ^0.5.0;
@@ -87,7 +87,7 @@ contract MintableToken is Token {
 }
 ```
 
-The [version of token.sol](./exercise3/token.sol#L1) contains the fixes of the previous exercises.
+The [version of token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/token.sol#L1) contains the fixes of the previous exercises.
 
 ### Goals
 
@@ -95,7 +95,7 @@ The [version of token.sol](./exercise3/token.sol#L1) contains the fixes of the p
 - Add a property to check if `echidna` can mint more than 10,000 tokens.
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
-The skeleton for this exercise is (_[./exercise3/template.sol](./exercise3/template.sol)_):
+The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/template.sol)_):
 
 ````solidity
 pragma solidity ^0.5.0;
@@ -121,4 +121,4 @@ contract TestToken is MintableToken {
 
 ## Solution
 
-This solution can be found in [./exercise3/solution.sol](./exercise3/solution.sol)
+This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/solution.sol)

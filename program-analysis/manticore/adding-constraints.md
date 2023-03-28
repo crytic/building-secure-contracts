@@ -14,7 +14,7 @@
 ## Introduction
 
 We will see how to constrain the exploration. We will make the assumption that the
-documentation of `f()` states that the function is never called with `a == 65`, so any bug with `a == 65` is not a real bug. The target is still the following smart contract (_[examples/example.sol](./examples/example.sol)_):
+documentation of `f()` states that the function is never called with `a == 65`, so any bug with `a == 65` is not a real bug. The target is still the following smart contract (_[example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)_):
 
 ```solidity
 pragma solidity >=0.4.24 <0.6.0;
@@ -122,6 +122,6 @@ if no_bug_found:
     print(f'No bug found')
 ```
 
-All the code above you can find into the [examples/example_constraint.py](./examples/example_constraint.py)
+All the code above you can find into the [example_constraint.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example_constraint.py)
 
 The next step is to follow the [exercises](./exercises).

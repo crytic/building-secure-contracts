@@ -1,6 +1,6 @@
 # Exercise 1 : Arithmetic rounding
 
-Use Manticore to find an input allowing an attacker to generate free tokens in [exercise1/token.sol](./exercise1/token.sol).
+Use Manticore to find an input allowing an attacker to generate free tokens in [token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise1/token.sol).
 Propose a fix of the contract, and test your fix using your Manticore script.
 
 ## Proposed scenario
@@ -24,8 +24,8 @@ Follow the pattern initialization, exploration and property for the script.
 
 - `m.ready_states` returns the list of state alive
 - `Operators.AND(a, b)` allows to create and AND condition
-- You can use the template proposed in [exercise1/template.py](./exercise1/template.py)
+- You can use the template proposed in [template.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise1/template.py)
 
 ## Solution
 
-[exercise1/solution.py](./exercise1/solution.py)
+[solution.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise1/solution.py)

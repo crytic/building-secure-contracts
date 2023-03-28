@@ -128,7 +128,7 @@ After Etheno finishes, gently kill it by using Ctrl+c (or Command+C on Mac). It 
 
 ## Writing and running a property
 
-Once we have a json file with saved transactions, we can verify that the `SimpleStorage` contract is deployed at `0x871DD7C2B4b25E1Aa18728e9D5f2Af4C4e431f5c`, so we can easily write a contract (`./contracts/crytic/E2E.sol`) with a simple a property to test it:
+Once we have a json file with saved transactions, we can verify that the `SimpleStorage` contract is deployed at `0x871DD7C2B4b25E1Aa18728e9D5f2Af4C4e431f5c`, so we can easily write a contract contracts/crytic/E2E.sol with a simple a property to test it:
 
 ```solidity
 import "../SimpleStorage.sol";

@@ -8,7 +8,7 @@ Specifying the correct weight function and benchmarking it is crucial to protect
 
 # Example
 
-In the [`pallet-bad-weights`](./pallet-bad-weights.rs) pallet, a custom weight function, `MyWeightFunction`, is used to calculate the weight for a call to `do_work`. The weight required for a call to `do_work` is `10_000_000` times the length of the `useful_amounts` vector.
+In the [`pallet-bad-weights`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/weights_and_fees/pallet-bad-weights.rs) pallet, a custom weight function, `MyWeightFunction`, is used to calculate the weight for a call to `do_work`. The weight required for a call to `do_work` is `10_000_000` times the length of the `useful_amounts` vector.
 
 ```rust
 impl WeighData<(&Vec<u64>,)> for MyWeightFunction {
