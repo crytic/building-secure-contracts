@@ -45,17 +45,22 @@ To install the formatters and linters, run:
 npm install
 ```
 
-The formatter is run with:
+To run the formatter, use:
 
 ```bash
 npm run format
 ```
 
-The linter is run with:
+To run the linters, use:
 
 ```bash
 npm run lint
 ```
+
+To run the individual linters, use:
+
+- `npm run lint:format` to check the formatting
+- `npm run lint:links` to check for invalid links in markdown files
 
 ## Create the book
 

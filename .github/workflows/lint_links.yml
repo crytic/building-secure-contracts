@@ -1,10 +1,9 @@
-name: Check Markdown links
+name: Lint Check Markdown Links
 
 on:
   push:
     branches:
       - master
-      - dev
   pull_request:
   schedule:
     # run CI at 09:00, on day 1 of the month even if no PRs/merges occur
