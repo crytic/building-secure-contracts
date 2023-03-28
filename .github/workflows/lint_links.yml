@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "**.md"
   pull_request:
+    paths:
+      - "**.md"
   schedule:
     # run CI at 09:00, on day 1 of the month even if no PRs/merges occur
     - cron: "0 9 1 * *"
