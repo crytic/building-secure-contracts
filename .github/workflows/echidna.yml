@@ -1,15 +1,14 @@
-name: Echidna
+name: Run Echidna tests
 
 on:
   push:
-    paths-ignore:
-      - "**.md"
-      - "**.rs"
-      - "**.py"
+    paths:
+      - "program-analysis/echidna/**/*.sol"
     branches:
       - master
-      - dev
   pull_request:
+    paths:
+      - "program-analysis/echidna/**/*.sol"
   schedule:
     # run CI every day even if no PRs/merges occur
     - cron: "0 12 * * *"

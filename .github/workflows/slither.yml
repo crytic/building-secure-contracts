@@ -1,13 +1,14 @@
-name: CI
+name: Run Slither tests
 
 on:
   push:
-    paths-ignore:
-      - "**.md"
+    paths:
+      - "program-analysis/slither/**/*.py"
     branches:
       - master
-      - dev
   pull_request:
+    paths:
+      - "program-analysis/slither/**/*.py"
   schedule:
     # run CI every day even if no PRs/merges occur
     - cron: "0 12 * * *"
@@ -17,8 +18,6 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
-      matrix:
-        type: ["slither", "manticore"]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python 3.8
@@ -32,6 +31,6 @@ jobs:
           solc-select use 0.5.11
       - name: Run Tests
         env:
-          TEST_TYPE: ${{ matrix.type }}
+          TEST_TYPE: slither
         run: |
-          bash program-analysis/${TEST_TYPE}/scripts/gh_action_test.sh
+          bash program-analysis/slither/scripts/gh_action_test.sh
