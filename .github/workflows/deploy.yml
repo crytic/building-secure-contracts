@@ -3,8 +3,10 @@ on:
   push:
     branches:
       - master
-    paths:
-      - "**.md"
+    ignore-paths:
+      - "**.rs"
+      - "**.py"
+      - "**.sol"
   workflow_dispatch:
 
 jobs:
