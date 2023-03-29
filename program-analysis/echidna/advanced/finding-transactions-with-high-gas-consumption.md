@@ -52,7 +52,7 @@ Seed: 2320549945714142710
 
 ## Measuring Gas Consumption
 
-To enable Echidna's gas consumption feature, create a configuration file [https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/gas.yaml](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/gas.yaml):
+To enable Echidna's gas consumption feature, create a configuration file [gas.yaml](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/gas.yaml):
 
 ```yaml
 estimateGas: true
