@@ -11,7 +11,7 @@ A bad source of randomness can lead to a variety of exploits such as the theft o
 
 # Example
 
-The [`pallet-bad-lottery`](./pallet-bad-lottery.rs) pallet is a simplified "lottery" system that requires one to guess the next random number. If they guess correctly, they are the winner of the lottery.
+The [`pallet-bad-lottery`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/randomness/pallet-bad-lottery.rs) pallet is a simplified "lottery" system that requires one to guess the next random number. If they guess correctly, they are the winner of the lottery.
 
 ```rust
 #[pallet::call]

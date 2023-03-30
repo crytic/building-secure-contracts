@@ -11,7 +11,7 @@
 
 ## Introduction
 
-We will now improve [the previous example](running-under-manticore.md) and generate specific inputs for the paths raising an exception in `f()`. The target is still the following smart contract (_[examples/example.sol](./examples/example.sol)_):
+We will now improve [the previous example](running-under-manticore.md) and generate specific inputs for the paths raising an exception in `f()`. The target is still the following smart contract (_[example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)_):
 
 ```solidity
 pragma solidity >=0.4.24 <0.6.0;
@@ -91,7 +91,7 @@ for state in m.terminated_states:
         m.generate_testcase(state, 'ThrowFound')
 ```
 
-All the code above you can find into the [examples/example_throw.py](./examples/example_throw.py)
+All the code above you can find into the [example_throw.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example_throw.py)
 
 The next step is to [add constraints](./adding-constraints.md) to the state.
 

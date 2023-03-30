@@ -11,7 +11,7 @@
 
 ## Introduction
 
-We will see how to find the transactions with high gas consumption with Echidna. The target is the following smart contract (_[../example/gas.sol](../example/gas.sol)_):
+We will see how to find the transactions with high gas consumption with Echidna. The target is the following smart contract (_[gas.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/gas.sol)_):
 
 ```solidity
 contract C {
@@ -52,7 +52,7 @@ Seed: 2320549945714142710
 
 ## Measuring Gas Consumption
 
-To enable Echidna's gas consumption feature, create a configuration file [`../example/gas.yaml`](../example/gas.yaml):
+To enable Echidna's gas consumption feature, create a configuration file [gas.yaml](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/gas.yaml):
 
 ```yaml
 estimateGas: true
@@ -90,7 +90,7 @@ Seed: -325611019680165325
 The tutorial on [filtering functions to call during a fuzzing campaign](../basic/filtering-functions.md) shows how to
 remove some functions during testing.  
 This can be critical for getting an accurate gas estimate.
-Consider the following example (_[example/pushpop.sol](../example/pushpop.sol)_):
+Consider the following example (_[example/pushpop.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/pushpop.sol)_):
 
 ```solidity
 contract C {
@@ -119,7 +119,7 @@ contract C {
 }
 ```
 
-If Echidna uses this [`config.yaml`](../example/pushpop.yaml), it can call all functions and won't easily find transactions with high gas cost:
+If Echidna uses this [`config.yaml`](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/pushpop.yaml), it can call all functions and won't easily find transactions with high gas cost:
 
 ```
 echidna pushpop.sol --config config.yaml
@@ -134,7 +134,7 @@ push used a maximum of 40839 gas
 ```
 
 That's because the cost depends on the size of `addrs` and random calls tend to leave the array almost empty.
-Blacklisting `pop` and `clear`, however, gives us much better results (_[../example/blacklistpushpop.yaml](../example/blacklistpushpop.yaml)_):
+Blacklisting `pop` and `clear`, however, gives us much better results (_[blacklistpushpop.yaml](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/blacklistpushpop.yaml)_):
 
 ```yaml
 estimateGas: true

@@ -42,4 +42,4 @@ A `Function` or a `Modifier` object has:
 
 ### Example: Print Basic Information
 
-[print_basic_information.py](./examples/print_basic_information.py) shows how to print basic information about a project.
+[print_basic_information.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/slither/examples/print_basic_information.py) shows how to print basic information about a project.

@@ -31,7 +31,7 @@ Hint: It might help to start with doing a manual flashloan to get familiar with 
 
 ## Solution
 
-This solution can be found in [./exercise7/solution.sol](./exercise7/solution.sol)
+This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise7/solution.sol)
 
 [ctf]: https://www.damnvulnerabledefi.xyz/
 

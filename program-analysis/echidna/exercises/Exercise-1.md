@@ -12,7 +12,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
 
-We will test the following contract _[./exercise1/token.sol](./exercise1/token.sol)_:
+We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise1/token.sol)_:
 
 ```solidity
 pragma solidity ^0.5.0;
@@ -64,7 +64,7 @@ contract Token is Ownable, Pausable {
 - Add a property to check that the address `echidna` cannot have more than an initial balance of 10000.
 - Once Echidna finds the bug, fix the issue, and re-check your property with Echidna.
 
-The skeleton for this exercise is (_[./exercise1/template.sol](./exercise1/template.sol)_):
+The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise1/template.sol)_):
 
 ````solidity
 pragma solidity ^0.5.0;
@@ -91,4 +91,4 @@ contract TestToken is Token {
 
 ## Solution
 
-This solution can be found in [./exercise1/solution.sol](./exercise1/solution.sol)
+This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise1/solution.sol)
