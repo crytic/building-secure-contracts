@@ -12,13 +12,13 @@
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Setup
+
 1. Clone the repo: `git clone https://github.com/crytic/damn-vulnerable-defi-echidna`
 2. install the dependencies via `yarn install`.
 
 ## Context
 
 The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/2.html, we assume that the reader is familiar with it.
-
 
 ## Goals
 
@@ -29,24 +29,23 @@ The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/2
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
 Only the following contracts are relevant:
-  - `contracts/naive-receiver/FlashLoanReceiver.sol`
-  - `contracts/naive-receiver/NaiveReceiverLenderPool.sol`
+
+- `contracts/naive-receiver/FlashLoanReceiver.sol`
+- `contracts/naive-receiver/NaiveReceiverLenderPool.sol`
 
 ## Hints
 
 We recommend to first try without reading the following hints. The hints are in the [`hints` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/tree/hints).
 
 - Remember that sometimes you have to supply the test contract with Ether. Read more in [the Echidna wiki](https://github.com/crytic/echidna/wiki/Config) and look at [the default config setup](https://github.com/crytic/echidna/blob/master/tests/solidity/basic/default.yaml).
-- The invariant that we are looking for is "the balance of the receiver contract can not decrease" 
+- The invariant that we are looking for is "the balance of the receiver contract can not decrease"
 - Read what is the [multi abi option](../basic/common-testing-approaches.md#external-testing)
 - A template is provided in [contracts/naive-receiver/NaiveReceiverEchidna.sol](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/contracts/naive-receiver/NaiveReceiverEchidna.sol)
 - A config file is provided in [naivereceiver.yaml](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/naivereceiver.yaml)
 
-
 ## Solution
 
 This solution can be found in [`solutions` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/solutions/contracts/naive-receiver/NaiveReceiverEchidna.sol).
-
 
 [ctf]: https://www.damnvulnerabledefi.xyz/
 
@@ -61,15 +60,14 @@ Echidna found this by simply calling `NaiveReceiverLenderPool.flashLoan()` with 
 See example output below from Echidna:
 
 ```bash
-$ echidna-test . --contract NaiveReceiverEchidna --config naivereceiver.yaml
+echidna . --contract NaiveReceiverEchidna --config naivereceiver.yaml
 ...
 
-echidna_test_contract_balance: failed!💥  
+echidna_test_contract_balance: failed!💥
   Call sequence:
     flashLoan(0x62d69f6867a0a084c6d313943dc22023bc263691,353073667)
 
 ...
 ```
+
 </details>
-
-

@@ -1,37 +1,44 @@
-contract Ownership {
-    address owner = msg.sender;
+// SPDX-License-Identifier: AGPL-3.0
+pragma solidity ^0.5.0;
 
-    function Owner() public {
-        owner = msg.sender;
+contract Ownable {
+    address public owner = msg.sender;
+
+    function transferOwnership(address newOwner) public onlyOwner {
+        owner = newOwner;
     }
 
-    modifier isOwner() {
-        require(owner == msg.sender);
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Ownable: Caller is not the owner.");
         _;
     }
 }
 
-contract Pausable is Ownership {
-    bool is_paused;
+contract Pausable is Ownable {
+    bool private _paused;
 
-    modifier ifNotPaused() {
-        require(!is_paused);
+    function paused() public view returns (bool) {
+        return _paused;
+    }
+
+    function pause() public onlyOwner {
+        _paused = true;
+    }
+
+    function resume() public onlyOwner {
+        _paused = false;
+    }
+
+    modifier whenNotPaused() {
+        require(!_paused, "Pausable: Contract is paused.");
         _;
-    }
-
-    function paused() public isOwner {
-        is_paused = true;
-    }
-
-    function resume() public isOwner {
-        is_paused = false;
     }
 }
 
-contract Token is Pausable {
+contract Token is Ownable, Pausable {
     mapping(address => uint256) public balances;
 
-    function transfer(address to, uint256 value) public ifNotPaused {
+    function transfer(address to, uint256 value) public whenNotPaused {
         balances[msg.sender] -= value;
         balances[to] += value;
     }

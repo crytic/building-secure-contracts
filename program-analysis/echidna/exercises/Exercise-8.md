@@ -58,7 +58,7 @@ Echidna reveals this vulnerability by finding the right order of two function, s
 See example output below from Echidna:
 
 ```bash
-$ echidna-test . --contract EchidnaRewarder --config ./the-rewarder.yaml
+echidna . --contract EchidnaRewarder --config ./the-rewarder.yaml
 ...
 
 testRewards(): failed!💥

@@ -6,23 +6,23 @@ This repository contains examples of common Substrate pallet vulnerabilities. Us
 
 Each _Not So Smart Pallet_ includes a standard set of information:
 
-* Description of the vulnerability type
-* Attack scenarios to exploit the vulnerability
-* Recommendations to eliminate or mitigate the vulnerability
-* A mock pallet that exhibits the flaw
-* References to third-party resources with more information
+- Description of the vulnerability type
+- Attack scenarios to exploit the vulnerability
+- Recommendations to eliminate or mitigate the vulnerability
+- A mock pallet that exhibits the flaw
+- References to third-party resources with more information
 
 ## Vulnerabilities
 
-| Not So Smart Pallet | Description |
-| --- | --- |
-| [Arithmetic overflow](arithmetic_overflow) | Integer overflow due to incorrect use of arithmetic operators |
-| [Don't panic!](dont_panic) | System panics create a potential DoS attack vector  |
-| [Weights and fees](weights_and_fees) | Incorrect weight calculations can create a potential DoS attack vector |
-| [Verify first](verify_first) | Verify first, write last |
-| [Unsigned transaction validation](validate_unsigned) | Insufficient validation of unsigned transactions |
-| [Bad randomness](randomness) | Unsafe sources of randomness in Substrate |
-| [Bad origin](origins) | Incorrect use of call origin can lead to bypassing access controls |
+| Not So Smart Pallet                                  | Description                                                            |
+| ---------------------------------------------------- | ---------------------------------------------------------------------- |
+| [Arithmetic overflow](arithmetic_overflow)           | Integer overflow due to incorrect use of arithmetic operators          |
+| [Don't panic!](dont_panic)                           | System panics create a potential DoS attack vector                     |
+| [Weights and fees](weights_and_fees)                 | Incorrect weight calculations can create a potential DoS attack vector |
+| [Verify first](verify_first)                         | Verify first, write last                                               |
+| [Unsigned transaction validation](validate_unsigned) | Insufficient validation of unsigned transactions                       |
+| [Bad randomness](randomness)                         | Unsafe sources of randomness in Substrate                              |
+| [Bad origin](origins)                                | Incorrect use of call origin can lead to bypassing access controls     |
 
 ## Credits
 

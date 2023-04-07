@@ -13,8 +13,10 @@ Substrate does not cache state prior to extrinsic dispatch. Instead, state chang
   // all event emissions & storage writes go here
 }
 ```
+
 # Example
-In the [`pallet-verify-first`](./pallet-verify-first.rs) pallet, the `init` dispatchable is used to set up the `TotalSupply` of the token and transfer them to the `sender`. `init` should be only called once. Thus, the `Init` boolean is set to `true` when it is called initially. If `init` is called more than once, the transaction will throw an error because `Init` is already `true`.
+
+In the [`pallet-verify-first`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/verify_first/pallet-verify-first.rs) pallet, the `init` dispatchable is used to set up the `TotalSupply` of the token and transfer them to the `sender`. `init` should be only called once. Thus, the `Init` boolean is set to `true` when it is called initially. If `init` is called more than once, the transaction will throw an error because `Init` is already `true`.
 
 ```rust
 /// Initialize the token
@@ -26,7 +28,7 @@ pub fn init(
     supply: u64
 ) -> DispatchResultWithPostInfo {
     let sender = ensure_signed(origin)?;
-    
+
     if supply > 0 {
         <TotalSupply<T>>::put(&supply);
     }
@@ -38,7 +40,7 @@ pub fn init(
 
     // Set Init StorageValue to `true`
     Init::<T>::put(true);
-    
+
     // Emit event
     Self::deposit_event(Event::Initialized(sender));
 
@@ -49,6 +51,9 @@ pub fn init(
 However, notice that the setting of `TotalSupply` and the transfer of funds happens before the check on `Init`. This violates the "Verify First, Write Last" practice. In an older version of Substrate, this would allow a malicious `sender` to call `init` multiple times and change the value of `TotalSupply` and their balance of the token.
 
 # Mitigations
+
 - Follow the "Verify First, Write Last" practice by doing all the necessary data validation before performing state changes and emitting events.
+
 # References
+
 - https://docs.substrate.io/main-docs/build/runtime-storage/#best-practices

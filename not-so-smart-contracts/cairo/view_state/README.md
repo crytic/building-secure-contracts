@@ -4,7 +4,7 @@ StarkNet provides the @view decorator to signal that a function should not make 
 
 ## Example
 
-Consider the following function that's declared as a `@view`. It may have originally been intended as an actual view function but was later repurposed to fetch a nonce _and also increment it in the process_ to ensure a nonce is never repeated when building a signature. 
+Consider the following function that's declared as a `@view`. It may have originally been intended as an actual view function but was later repurposed to fetch a nonce _and also increment it in the process_ to ensure a nonce is never repeated when building a signature.
 
 ```cairo
 @view

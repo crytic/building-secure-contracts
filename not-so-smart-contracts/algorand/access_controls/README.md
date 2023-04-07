@@ -4,7 +4,7 @@ Lack of appropriate checks for application calls of type UpdateApplication and D
 
 ## Description
 
-When an application call is successful, additional operations are executed based on the OnComplete field. If the OnComplete field is set to UpdateApplication the approval and clear programs of the application are replaced with the programs specified in the transaction. Similarly, if the OnComplete field is set to DeleteApplication, application parameters are deleted. 
+When an application call is successful, additional operations are executed based on the OnComplete field. If the OnComplete field is set to UpdateApplication the approval and clear programs of the application are replaced with the programs specified in the transaction. Similarly, if the OnComplete field is set to DeleteApplication, application parameters are deleted.
 This allows attackers to update or delete the application if proper access controls are not enforced in the application.
 
 ## Exploit Scenarios

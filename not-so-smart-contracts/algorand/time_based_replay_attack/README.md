@@ -1,6 +1,6 @@
 # Time-based Replay Attack
 
-Lack of check for lease field in smart signatures that intend to approve a single transaction in the particular period allows attackers to submit multiple valid transactions in that period. 
+Lack of check for lease field in smart signatures that intend to approve a single transaction in the particular period allows attackers to submit multiple valid transactions in that period.
 
 ## Description
 
