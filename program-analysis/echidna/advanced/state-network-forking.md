@@ -9,44 +9,46 @@
 
 ## Example
 
-One of the most anticipated features of Echidna 2.1.0 is the state network forking. This means that Echidna can run starting with an existing blockchain state provided by an external RPC service (Infura, Alchemy, local node, etc). 
+One of the most anticipated features of Echidna 2.1.0 is the state network forking. This means that Echidna can run starting with an existing blockchain state provided by an external RPC service (Infura, Alchemy, local node, etc).
 This enables users to speed up the fuzzing setup when using already deployed contracts. For instance:
 
 ```solidity
 interface IHevm {
     function warp(uint256 newTimestamp) external;
+
     function roll(uint256 newNumber) external;
 }
 
 interface Compound {
-  function mint() external payable;
-  function balanceOf(address) external view returns (uint256);
+    function mint() external payable;
+
+    function balanceOf(address) external view returns (uint256);
 }
 
 contract TestCompoundEthMint {
-  address constant HEVM_ADDRESS = 0x7109709ECfa91a80626fF3989D68f67F5b1DD12D;
-  IHevm hevm = IHevm(HEVM_ADDRESS);
-  Compound comp = Compound(0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5);
+    address constant HEVM_ADDRESS = 0x7109709ECfa91a80626fF3989D68f67F5b1DD12D;
+    IHevm hevm = IHevm(HEVM_ADDRESS);
+    Compound comp = Compound(0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5);
 
-  constructor() {
-    hevm.roll(16771449);  // sets the correct block number
-    hevm.warp(1678131671); // sets the expected timestamp for the block number
-  }
-  
-  function assertNoBalance() public payable {
-    require(comp.balanceOf(address(this)) == 0);
-    comp.mint{value: msg.value}();
-    assert(comp.balanceOf(address(this)) == 0);
-  }
+    constructor() {
+        hevm.roll(16771449); // sets the correct block number
+        hevm.warp(1678131671); // sets the expected timestamp for the block number
+    }
+
+    function assertNoBalance() public payable {
+        require(comp.balanceOf(address(this)) == 0);
+        comp.mint{ value: msg.value }();
+        assert(comp.balanceOf(address(this)) == 0);
+    }
 }
 ```
 
-This test will fail if the call to [Compound ETH](https://etherscan.io/token/0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5) `mint` function succeeds and the balance of the contract increases. In order to use this feature, the user needs to specify the RPC endpoint for Echidna to use before running the fuzzing campaign. This requires using the `ECHIDNA_RPC_URL` and `ECHIDNA_RPC_BLOCK` environment variables:  
+This test will fail if the call to [Compound ETH](https://etherscan.io/token/0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5) `mint` function succeeds and the balance of the contract increases. In order to use this feature, the user needs to specify the RPC endpoint for Echidna to use before running the fuzzing campaign. This requires using the `ECHIDNA_RPC_URL` and `ECHIDNA_RPC_BLOCK` environment variables:
 
 ```
 $ ECHIDNA_RPC_URL=http://.. ECHIDNA_RPC_BLOCK=16771449 echidna compound.sol --test-mode assertion --contract TestCompoundEthMint
 ...
-assertNoBalance(): failed!💥  
+assertNoBalance(): failed!💥
   Call sequence, shrinking (885/5000):
     assertNoBalance() Value: 0xd0411a5
 ```
@@ -55,7 +57,7 @@ Echidna will query contract code or storage slots as needed from the provided RP
 
 ## Corpus and RPC cache
 
-If a corpus directory is used (e.g. `--corpus-dir corpus`), Echidna will save the fetched information inside the `cache` directory. 
+If a corpus directory is used (e.g. `--corpus-dir corpus`), Echidna will save the fetched information inside the `cache` directory.
 This will speed up subsequent runs, since the data does not need to be fetched from the RPC. It is recommended to use this feature, in particular if the testing is performed as part of the CI tests.
 
 ```
@@ -75,7 +77,7 @@ Success!
 Fetching Solidity source map for contract at address 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5... Error!
 ```
 
-While the source code for the [cETH contract is available](https://etherscan.io/address/0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5#code), their source maps are NOT. 
+While the source code for the [cETH contract is available](https://etherscan.io/address/0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5#code), their source maps are NOT.
 In order to generate the coverage report for a fetched contract, **both** source code and source mapping should be available. In that case, there will be a new directory inside the corpus directory to show coverage for each contract that was fetched. In any case, the coverage report will be always available for the user-provided contracts, such as this one:
 
 ```
@@ -86,4 +88,3 @@ In order to generate the coverage report for a fetched contract, **both** source
 24 | *r  |     assert(comp.balanceOf(address(this)) == 0);
 25 |     |   }
 ```
-
