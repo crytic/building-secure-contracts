@@ -10,32 +10,32 @@
 
 ## Introduction
 
-We will see how to use ETH during the fuzzing fuzzed. The following smart contract will be used as example: 
+We will see how to use ETH during the fuzzing fuzzed. The following smart contract will be used as example:
 
 ```solidity
 contract C {
-  function pay() payable public {
-    require(msg.value == 12000);
-  }
+    function pay() public payable {
+        require(msg.value == 12000);
+    }
 
-  function echidna_has_some_value() public returns (bool) {
-    return (address(this).balance != 12000);
-  }
+    function echidna_has_some_value() public returns (bool) {
+        return (address(this).balance != 12000);
+    }
 }
 ```
 
-This code forces Echidna to send a particular amount of eth as value in the `pay` function. 
+This code forces Echidna to send a particular amount of eth as value in the `pay` function.
 Echidna will do this for each payable function in the target function (or any contract if `allContracts` is enabled):
 
 ```
-$ echidna balanceSender.sol 
+$ echidna balanceSender.sol
 ...
-echidna_has_some_value: failed!💥  
+echidna_has_some_value: failed!💥
   Call sequence:
     pay() Value: 0x2ee0
 ```
 
-Echidna will show the value amount in hexadecimal. 
+Echidna will show the value amount in hexadecimal.
 
 ## Controlling the amount of ether in payable functions
 
@@ -43,18 +43,18 @@ The amount of ether to send in each payable function will be randomly selected, 
 with a default of 100 eth per transaction:
 
 ```yaml
-maxValue: 100000000000000000000 
+maxValue: 100000000000000000000
 ```
 
-This means that each transaction will contain, at most, 100 eth in value. However, there is no maximum that will be used in total. 
-The maximum amount to receive will be determined by the number of transactions. If you are using 100 transactions (`--seq-len 100`), 
-then the maximum amount of ether in transactions will be 100 * 100 eth.
+This means that each transaction will contain, at most, 100 eth in value. However, there is no maximum that will be used in total.
+The maximum amount to receive will be determined by the number of transactions. If you are using 100 transactions (`--seq-len 100`),
+then the maximum amount of ether in transactions will be 100 \* 100 eth.
 
-Keep in mind that the balance of the senders (e.g. `msg.sender.balance`) is a fixed value that will NOT change between transactions. 
+Keep in mind that the balance of the senders (e.g. `msg.sender.balance`) is a fixed value that will NOT change between transactions.
 This value is determined by the following config option:
 
 ```yaml
-balanceAddr: 0xffffffff 
+balanceAddr: 0xffffffff
 ```
 
 ## Controlling the amount of ether in contracts
@@ -63,26 +63,27 @@ Another approach to handle ether will be allow the testing contract to receive c
 
 ```solidity
 contract A {
-  C internal c;
-  constructor() payable public {
-    require(msg.value == 12000);
-    c = new C();
-  }
+    C internal c;
 
-  function payToContract(uint256 toPay) public {
-     toPay = toPay % (address(this).balance + 1);
-     c.pay{value: toPay}();
-  }
+    constructor() public payable {
+        require(msg.value == 12000);
+        c = new C();
+    }
 
-  function echidna_C_has_some_value() public returns (bool) {
-    return (address(c).balance != 12000);
-  }
+    function payToContract(uint256 toPay) public {
+        toPay = toPay % (address(this).balance + 1);
+        c.pay{ value: toPay }();
+    }
+
+    function echidna_C_has_some_value() public returns (bool) {
+        return (address(c).balance != 12000);
+    }
 }
 
 contract C {
-  function pay() payable public {
-    require(msg.value == 12000);
-  }
+    function pay() public payable {
+        require(msg.value == 12000);
+    }
 }
 ```
 
@@ -94,7 +95,7 @@ $ echidna balanceContract.sol
 echidna: Deploying the contract 0x00a329c0648769A73afAc7F9381E08FB43dBEA72 failed (revert, out-of-gas, sending ether to an non-payable constructor, etc.):
 ```
 
-We need to define the amount to send during the contract creation: 
+We need to define the amount to send during the contract creation:
 
 ```yaml
 balanceContract: 12000
@@ -103,16 +104,16 @@ balanceContract: 12000
 We can re-run echidna, using that config file, to obtain the expected result:
 
 ```
-$ echidna balanceContract.sol --config balanceContract.yaml 
+$ echidna balanceContract.sol --config balanceContract.yaml
 ...
-echidna_C_has_some_value: failed!💥  
+echidna_C_has_some_value: failed!💥
   Call sequence:
     payToContract(12000)
 ```
 
 ## Summary: Working with ether
 
-Echidna has two options for using ether during a fuzzing campaign. 
+Echidna has two options for using ether during a fuzzing campaign.
 
-* `maxValue` to set the max amount of ether per transaction
-* `contractBalance` to set the initial amount of ether that the testing contract receives in the constructor.
+- `maxValue` to set the max amount of ether per transaction
+- `contractBalance` to set the initial amount of ether that the testing contract receives in the constructor.
