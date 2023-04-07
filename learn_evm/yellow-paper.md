@@ -1,9 +1,8 @@
-
 # Ethereum Yellow Paper
 
 So, you want to read the yellow paper. Before we dive in, keep in mind that the yellow paper is out of date and some in the community might refer to it as being depreciated. Check out the [BRANCHES.md](https://github.com/ethereum/yellowpaper/blob/master/BRANCHES.md) file of the [`yellowpaper` repository on github](https://github.com/ethereum/yellowpaper) to stay up-to-date on how closely this document tracks the latest version of the Ethereum protocol. At the time of writing, the yellow paper is up to date with the Berlin hardfork which occurred in April 2021. For an overview of all Ethereum forks and which EIPs are included in each of them, see the [EIPs Forks](./eips_forks.md) page.
 
-For a more up-to-date reference, check out the [Ethereum Specification](https://ethereum.github.io/execution-specs/autoapi/ethereum/) which features a detailed description of each opcode *for each hardfork* in addition to reference implementations written in python.
+For a more up-to-date reference, check out the [Ethereum Specification](https://ethereum.github.io/execution-specs/autoapi/ethereum/) which features a detailed description of each opcode _for each hardfork_ in addition to reference implementations written in python.
 
 That said, the yellow paper is still a rich resource for ramping up on the fundamentals of the Ethereum protocol. This document aims to provide some guidance and assistance in deciphering Ethereum's flagship specification.
 
@@ -11,35 +10,35 @@ That said, the yellow paper is still a rich resource for ramping up on the funda
 
 One challenging part of the yellow paper, for those of us who are not so well trained in formal mathematics, is comprehending the mathematical symbols. A cheat-sheet of some of these symbols is provided below
 
- - `∃`: there exists
- - `∀`: for all
- - `∧`: and
- - `∨`: or
+- `∃`: there exists
+- `∀`: for all
+- `∧`: and
+- `∨`: or
 
 And some more Ethereum-specific symbols:
 
- - `N_{H}`: 1,150,000 aka block number at which the protocol was upgraded from homestead to frontier.
- - `T`: a transaction eg `T = { n: nonce, p: gasPrice, g: gasLimit, t: to, v: value, i: initBytecode, d: data }`
- - `S()`: returns the sender of a transaction eg `S(T) = T.from`
- - `Λ`: (lambda) account creation function
- - `KEC`: Keccak SHA-3 hash function
- - `RLP`: Recursive Length Prefix encoding
+- `N_{H}`: 1,150,000 aka block number at which the protocol was upgraded from homestead to frontier.
+- `T`: a transaction eg `T = { n: nonce, p: gasPrice, g: gasLimit, t: to, v: value, i: initBytecode, d: data }`
+- `S()`: returns the sender of a transaction eg `S(T) = T.from`
+- `Λ`: (lambda) account creation function
+- `KEC`: Keccak SHA-3 hash function
+- `RLP`: Recursive Length Prefix encoding
 
 ## High-level glossary
 
 The following are symbols and function representations that provide a high-level description of ethereum. Many of these symbols represent a data structure, the details of which are described in subsequent sections.
 
- - `σ`: ethereum world state
- - `B`: block
- - `μ`: EVM state
- - `A`: accumulated transaction sub-state
- - `I`: execution environment
- - `o`: output of `H(μ,I)` ie null if we're good to go or a set of data if execution should halt
- - `Υ(σ,T) => σ'`: the transaction-level state transition function
- - `Π(σ,B) => σ'`: the block-level state transition function, processes all transactions then finalizes with Ω
- - `Ω(B,σ) => σ`: block-finalisation state transition function
- - `O(σ,μ,A,I)`: one iteration of the execution cycle
- - `H(μ,I) => o`: outputs null while execution should continue or a series if execution should halt.
+- `σ`: ethereum world state
+- `B`: block
+- `μ`: EVM state
+- `A`: accumulated transaction sub-state
+- `I`: execution environment
+- `o`: output of `H(μ,I)` ie null if we're good to go or a set of data if execution should halt
+- `Υ(σ,T) => σ'`: the transaction-level state transition function
+- `Π(σ,B) => σ'`: the block-level state transition function, processes all transactions then finalizes with Ω
+- `Ω(B,σ) => σ`: block-finalisation state transition function
+- `O(σ,μ,A,I)`: one iteration of the execution cycle
+- `H(μ,I) => o`: outputs null while execution should continue or a series if execution should halt.
 
 ## Ethereum World-State: σ
 

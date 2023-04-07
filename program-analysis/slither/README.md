@@ -25,6 +25,7 @@ pip3 install --user slither-analyzer
 ```
 
 ### Docker
+
 Slither through docker:
 
 ```bash
@@ -32,7 +33,7 @@ docker pull trailofbits/eth-security-toolbox
 docker run -it -v "$PWD":/home/trufflecon trailofbits/eth-security-toolbox
 ```
 
-*The last command runs eth-security-toolbox in a docker that has access to your current directory. You can change the files from your host, and run the tools on the files from the docker*
+_The last command runs eth-security-toolbox in a docker that has access to your current directory. You can change the files from your host, and run the tools on the files from the docker_
 
 Inside docker, run:
 
@@ -45,7 +46,7 @@ cd /home/trufflecon/
 
 **Command line versus user-defined scripts.** Slither comes with a set of predefined detectors that find many common bugs. Calling Slither from the command line will run all the detectors, no detailed knowledge of static analysis needed:
 
-```bash 
+```bash
 slither project_paths
 ```
 

@@ -33,47 +33,45 @@ This is where `allContracts` testing is useful: It allows Echidna to call functi
 
 ## Run Echidna
 
-We will use a simple example to show how `allContracts` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [`../example/multiabi.sol`](../example/multiabi.sol).
+We will use a simple example to show how `allContracts` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [multiabi.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multiabi.sol).
 
 The `Flag` contract contains a boolean flag that is only set if `flip()` is called, and a getter function that returns the value of the flag. For now, ignore `test_fail()`, we will talk about this function later.
 
 ```solidity
 contract Flag {
+    bool flag = false;
 
-   bool flag = false;
+    function flip() public {
+        flag = !flag;
+    }
 
-   function flip() public {
-       flag = !flag;
-   }
-
-   function get() public returns (bool) {
+    function get() public returns (bool) {
         return flag;
-   }
+    }
 
-   function test_fail() public {
-       assert(false);
-   }
+    function test_fail() public {
+        assert(false);
+    }
 }
 ```
 
-The test harness will instantiate a new `Flag`, and the invariant under test will be that `f.get()` (that is, the boolean value of the flag) is always false. 
+The test harness will instantiate a new `Flag`, and the invariant under test will be that `f.get()` (that is, the boolean value of the flag) is always false.
 
 ```solidity
 contract EchidnaTest {
-   Flag f;
+    Flag f;
 
-   constructor() {
-      f = new Flag();
-   }
+    constructor() {
+        f = new Flag();
+    }
 
-   function test_flag_is_false() public {
-      assert(f.get() == false);
-   }
-
+    function test_flag_is_false() public {
+        assert(f.get() == false);
+    }
 }
 ```
 
-In a non `allContracts` fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [`../example/multiabi.yaml` here](../example/multiabi.yaml).
+In a non `allContracts` fuzzing campaign,  Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [multiabi.yaml here](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multiabi.yaml).
 
 ```yaml
 testMode: assertion
@@ -81,12 +79,13 @@ testLimit: 50000
 allContracts: true
 ```
 
-To run the Echidna tests, run `echidna-test multiabi.sol --contract EchidnaTest --config multiabi.yaml` from the `example` directory. Alternatively, you can specify `--all-contracts` in the command line instead of using a configuration file.
+
+To run the Echidna tests, run `echidna multiabi.sol --contract EchidnaTest --config multiabi.yaml` from the `example` directory. Alternatively, you can specify `--all-contracts` in the command line instead of using a configuration file.
 
 ### Example run with `allContracts` set to `false`
 
 ```
-$ echidna-test multiabi.sol --contract EchidnaTest --config multiabi.yaml 
+echidna multiabi.sol --contract EchidnaTest --config multiabi.yaml
 Analyzing contract: building-secure-contracts/program-analysis/echidna/example/multiabi.sol:EchidnaTest
 test_flag_is_false():  passed! 🎉
 AssertionFailed(..):  passed! 🎉
@@ -100,9 +99,9 @@ Seed: -8252538430849362039
 ### Example run with `allContracts` set to `true`
 
 ```
-$ echidna-test multiabi.sol --contract EchidnaTest --config multiabi.yaml 
+echidna multiabi.sol --contract EchidnaTest --config multiabi.yaml
 Analyzing contract: building-secure-contracts/program-analysis/echidna/example/multiabi.sol:EchidnaTest
-test_flag_is_false(): failed!💥  
+test_flag_is_false(): failed!💥
   Call sequence:
     flip()
     flip()

@@ -3,10 +3,11 @@
 Application developers must take care of correct rounding of numbers, especially if the rounding impacts tokens amounts.
 
 Cosmos-sdk offers two custom types for dealing with numbers:
-* `sdk.Int` (`sdk.UInt`) type for integral numbers
-* `sdk.Dec` type for decimal arithmetic
 
-The `sdk.Dec` type [has problems with precision and does not guarantee associativity](https://github.com/cosmos/cosmos-sdk/issues/7773), so it must be used carefully. But even if a more robust library for decimal numbers is deployed in the cosmos-sdk, rounding may be unavoidable. 
+- `sdk.Int` (`sdk.UInt`) type for integral numbers
+- `sdk.Dec` type for decimal arithmetic
+
+The `sdk.Dec` type [has problems with precision and does not guarantee associativity](https://github.com/cosmos/cosmos-sdk/issues/7773), so it must be used carefully. But even if a more robust library for decimal numbers is deployed in the cosmos-sdk, rounding may be unavoidable.
 
 ## Example
 

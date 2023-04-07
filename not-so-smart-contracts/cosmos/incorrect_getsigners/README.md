@@ -5,12 +5,12 @@ where locations of the keys [are specified in `GetSigners` methods](https://docs
 
 In the simplest case there is just one signer required, and its address is simple to use correctly.
 However, in more complex scenarios like when multiple signatures are required or a delegation schema is implemented,
-it is possible to make mistakes about what addresses in the transaction (the message) are actually authenticated. 
+it is possible to make mistakes about what addresses in the transaction (the message) are actually authenticated.
 
 Fortunately, mistakes in `GetSigners` should make part of application's intended functionality not working,
-making it easy to spot the bug.  
+making it easy to spot the bug.
 
-## Example 
+## Example
 
 The example application allows an author to create posts. A post can be created with a `MsgCreatePost` message, which has `signer` and `author` fields.
 

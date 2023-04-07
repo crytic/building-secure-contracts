@@ -48,8 +48,7 @@ service Msg {
 
 There is the `Pause` message, which allows privileged users to stop the pool.
 
-Once a bug in pool's implementation is discovered, attackers and the pool's operators will compete for whose message is first executed (`Swap` vs `Pause`). Prioritizing `Pause` messages will help pool's operators to prevent exploitation, but in this case it won't stop the attackers completely. They can outrun the `Pause` message by order of magnitude - so the priority will not matter -  or even cooperate with a malicious validator node - who can order his mempool in an arbitrary way.
-
+Once a bug in pool's implementation is discovered, attackers and the pool's operators will compete for whose message is first executed (`Swap` vs `Pause`). Prioritizing `Pause` messages will help pool's operators to prevent exploitation, but in this case it won't stop the attackers completely. They can outrun the `Pause` message by order of magnitude - so the priority will not matter - or even cooperate with a malicious validator node - who can order his mempool in an arbitrary way.
 
 ## Mitigations
 
@@ -58,5 +57,6 @@ Once a bug in pool's implementation is discovered, attackers and the pool's oper
 - Alternatively, charge a high fee for prioritized transactions to disincentivize attackers.
 
 ## External examples
+
 - [Terra Money's oracle messages were not prioritized](https://cryptorisks.substack.com/p/ust-december-2021) (search for "priority"). It was [fixed with modifications to Tendermint](https://github.com/terra-money/tendermint/commit/6805b4866bdbd6933000eb0e761acbf15edd8ed6).
 - [Umee oracle and orchestrator messages were not prioritized](https://github.com/trailofbits/publications/blob/master/reviews/Umee.pdf) (search for finding TOB-UMEE-20 and TOB-UMEE-31).

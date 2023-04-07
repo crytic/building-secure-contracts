@@ -58,13 +58,13 @@ The delegatecall opcode is a very sharp tool that must be used carefully. Many h
 - **Contract Existence Checks**: All [low-level calls](https://docs.soliditylang.org/en/latest/control-structures.html?highlight=existence#error-handling-assert-require-revert-and-exceptions), not just delegatecall, will return true against an address with empty bytecode. This might cause callers to be misled to think that a call performed a meaningful operation when it did not or it might result in important safety checks being silently skipped. Be aware that while a contract’s constructor is running, its bytecode remains empty until the end of constructor execution. We recommend that you rigorously verify that all low-level calls are properly protected against nonexistent contracts, keeping in mind that most proxy libraries (such as the one written by Openzeppelin) do not perform contract existence checks automatically.
 
 For more information regarding delegatecall proxies in general, reference our blog posts and presentations:
+
 - [Contract Upgradability Anti-Patterns](https://blog.trailofbits.com/2018/09/05/contract-upgrade-anti-patterns/): Describes the difference between a downstream data contract and delegatecall proxies which use an upstream data contract and how these patterns impact upgradability.
 - [How the Diamond standard falls short](https://blog.trailofbits.com/2020/10/30/good-idea-bad-design-how-the-diamond-standard-falls-short/): This post dives deep into delegatecall risks which apply to all contracts, not just those that follow the diamond standard.
 - [Breaking Aave Upgradeability](https://blog.trailofbits.com/2020/12/16/breaking-aave-upgradeability/): A write-up describing a subtle problem that we discovered in Aave `AToken` contracts that resulted from the interplay between delegatecall proxies, contact existence checks, and unsafe initialization.
 - [Contract Upgrade Risks and Recommendations](https://youtu.be/mebA5Qz9zeQ?t=353): A talk by Trail of Bits describing best-practices for developing upgradable delegatecall proxies. The section starting at 5:49 describes some general risks that also apply to non-upgradable proxies.
 
-
-##  Implementation guidelines
+## Implementation guidelines
 
 **Strive for simplicity.** Always use the simplest solution that fits your purpose. Any member of your team should be able to understand your solution.
 
@@ -96,7 +96,7 @@ The architecture of your codebase should make your code easy to review. Avoid ar
 
 ### Testing and verification
 
-- **Write thorough unit-tests.** An extensive test suite is crucial to build high-quality software. 
+- **Write thorough unit-tests.** An extensive test suite is crucial to build high-quality software.
 - **Write [Slither](https://github.com/crytic/slither) and [Echidna](https://github.com/crytic/echidna) custom checks and properties.** Automated tools will help ensure your contract is secure. Review the rest of this guide to learn how to write efficient checks and properties.
 
 ### Solidity

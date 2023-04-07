@@ -1,15 +1,19 @@
 # Contributing to Building-secure-contracts
+
 First, thanks for your interest in contributing to Building-secure-contracts! We welcome and appreciate all contributions, including bug reports, feature suggestions, tutorials/blog posts, and code improvements.
 
 If you're unsure where to start, we recommend our [`good first issue`](https://github.com/crytic/building-secure-contracts/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [`help wanted`](https://github.com/crytic/building-secure-contracts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issue labels.
 
 ## Bug reports and feature suggestions
+
 Bug reports and feature suggestions can be submitted to our issue tracker. For bug reports, attaching the contract that caused the bug will help us in debugging and resolving the issue quickly. If you find a security vulnerability, do not open an issue; email opensource@trailofbits.com instead.
 
 ## Questions
+
 Questions can be submitted to the issue tracker, but you may get a faster response if you ask in our [chat room](https://empireslacking.herokuapp.com/) (in the #ethereum channel).
 
 ## Code
+
 building-secure-contracts uses the pull request contribution model. Please make an account on Github, fork this repo, and submit code contributions via pull request. For more documentation, look [here](https://guides.github.com/activities/forking/).
 
 Some pull request guidelines:
@@ -22,6 +26,7 @@ Some pull request guidelines:
 ## Directory Structure
 
 Below is a rough outline of building-secure-contracts's structure:
+
 ```text
 .
 ├── development-guidelnes # High-level best-practices for all smart contracts
@@ -32,30 +37,40 @@ Below is a rough outline of building-secure-contracts's structure:
 └── ...
 ```
 
-## Linters
+## Linting and formatting
 
-We run [markdown-link-check](https://github.com/tcort/markdown-link-check) to ensure all the markdown links are correct. 
-
-To install `markdown-link-check`:
-```bash
-$ npm install -g markdown-link-check
-```
-
-To run `markdown-link-check`:
+To install the formatters and linters, run:
 
 ```bash
-$ find . -name \*.md -print0 | xargs -0 -n1 markdown-link-check
+npm install
 ```
+
+To run the formatter, use:
+
+```bash
+npm run format
+```
+
+To run the linters, use:
+
+```bash
+npm run lint
+```
+
+To run the individual linters, use:
+
+- `npm run lint:format` to check the formatting
+- `npm run lint:links` to check for invalid links in markdown files
 
 ## Create the book
 
 We use `mdbook` to generate [secure-contracts.com](https://secure-contracts.com/).
 
 To run it locally:
-```
-$ cargo install --git https://github.com/montyly/mdBook.git mdbook
-$ mdbook build
-```
 
+```
+cargo install --git https://github.com/montyly/mdBook.git mdbook
+mdbook build
+```
 
 Note: we use https://github.com/montyly/mdBook.git, which contains https://github.com/rust-lang/mdBook/pull/1584.
