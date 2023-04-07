@@ -1,0 +1,11 @@
+{
+  "tabWidth": 2,
+  "printWidth": 80,
+  "embeddedLanguageFormatting": "off",
+  "plugins": ["prettier-plugin-solidity"],
+  "overrides":
+    [
+      { "files": "*.sol", "options": { "tabWidth": 4, "printWidth": 120 } },
+      { "files": ["*.json", ".prettierrc"], "options": { "tabWidth": 2, "printWidth": 120, "trailingComma": "none" } }
+    ]
+}

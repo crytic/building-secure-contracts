@@ -1,21 +1,20 @@
-import "token.sol";
+// SPDX-License-Identifier: AGPL-3.0
+pragma solidity ^0.5.0;
 
-contract MintableToken is Token{
+import "./token.sol";
 
-    int totalMinted;
-    int totalMintable;
+contract MintableToken is Token {
+    int256 public totalMinted;
+    int256 public totalMintable;
 
-    constructor(int _totalMintable) public {
-        totalMintable = _totalMintable;
+    constructor(int256 totalMintable_) public {
+        totalMintable = totalMintable_;
     }
 
-    function mint(uint value) isOwner() public {
-
-        require(int(value) + totalMinted < totalMintable);
-        totalMinted += int(value);
+    function mint(uint256 value) public onlyOwner {
+        require(int256(value) + totalMinted < totalMintable);
+        totalMinted += int256(value);
 
         balances[msg.sender] += value;
-     
     }
-
 }

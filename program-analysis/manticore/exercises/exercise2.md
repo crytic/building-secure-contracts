@@ -31,11 +31,11 @@ state.platform.transactions[-1].return_data
 - The data returned needs to be deserialized:
 
 ```python
-data = ABI.deserialize("uint", data)
+data = ABI.deserialize("uint256", data)
 ```
 
-- You can use the template proposed in [exercise2/template.py](./exercise2/template.py)
+- You can use the template proposed in [template.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise2/template.py)
 
 ## Solution
 
-[exercise2/solution.py](./exercise2/solution.py).
+[solution.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise2/solution.py).

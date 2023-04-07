@@ -8,44 +8,36 @@
 
 ## Introduction
 
-We will see how to perform function optimization using Echidna. This tutorial will require Echidna 2.0.5 or greater, 
+We will see how to perform function optimization using Echidna. This tutorial will require Echidna 2.0.5 or greater,
 so make sure you have update it before starting.
 
-Optimization mode is a experimental feature that allows to define a special function which takes no arguments 
+Optimization mode is a experimental feature that allows to define a special function which takes no arguments
 and returns a `int256`. Echidna will try find a sequence of transactions to maximize the value returned:
 
 ```solidity
-    function echidna_opt_function() public view returns (int256) {
-        // if it reverts, Echidna will assumed it returned type(int256).min
-        return ..;
-    }
+function echidna_opt_function() public view returns (int256) {
+    // if it reverts, Echidna will assumed it returned type(int256).min
+    return value;
+}
 ```
 
 ## Optimizing with Echidna
 
-In this example, the target is the following smart contract (*[../example/opt.sol](../example/opt.sol)*):
+In this example, the target is the following smart contract (_[opt.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/opt.sol)_):
 
 ```solidity
 contract TestDutchAuctionOptimization {
     int256 maxPriceDifference;
 
-    function setMaxPriceDifference(
-        uint256 startPrice,
-        uint256 endPrice,
-        uint256 startTime,
-        uint256 endTime
-    ) public {
-        if (endTime < (startTime + 900)) {
-            revert();
-        }
-        if (startPrice <= endPrice) {
-            revert();
-        }
-        uint256 numerator = (startPrice - endPrice) *
-            (block.timestamp - startTime);
+    function setMaxPriceDifference(uint256 startPrice, uint256 endPrice, uint256 startTime, uint256 endTime) public {
+        if (endTime < (startTime + 900)) revert();
+        if (startPrice <= endPrice) revert();
+
+        uint256 numerator = (startPrice - endPrice) * (block.timestamp - startTime);
         uint256 denominator = endTime - startTime;
         uint256 stepDecrease = numerator / denominator;
         uint256 currentAuctionPrice = startPrice - stepDecrease;
+
         if (currentAuctionPrice < endPrice) {
             maxPriceDifference = int256(endPrice - currentAuctionPrice);
         }
@@ -66,7 +58,7 @@ met, the function will revert, without changing the actual value.
 To run this example:
 
 ```
-$ echidna-test opt.sol --test-mode optimization --test-limit 100000 --seq-len 1 --corpus-dir corpus --shrink-limit 50000
+echidna opt.sol --test-mode optimization --test-limit 100000 --seq-len 1 --corpus-dir corpus --shrink-limit 50000
 ...
 echidna_opt_price_difference: max value: 1076841
 
@@ -77,7 +69,7 @@ echidna_opt_price_difference: max value: 1076841
 
 The resulting max value is not unique, running in longer campaign will likely result in a larger value.
 
-Regarding the command line, the optimization mode is enabled using `--test-mode optimization`. additionally, we included the following tweaks: 
+Regarding the command line, the optimization mode is enabled using `--test-mode optimization`. additionally, we included the following tweaks:
 
 1. Use only one transaction (we know that the function is stateless)
 2. Use a large shrink limit in order to obtain a better value during the minimization of the complexity of the input.
@@ -85,7 +77,7 @@ Regarding the command line, the optimization mode is enabled using `--test-mode 
 Every time Echidna is executed using the corpus directory, the last input that produces the maximum value should be re-used from the `reproducers` directory:
 
 ```
-$ echidna-test opt.sol --test-mode optimization --test-limit 100000 --seq-len 1 --corpus-dir corpus --shrink-limit 50000
+echidna opt.sol --test-mode optimization --test-limit 100000 --seq-len 1 --corpus-dir corpus --shrink-limit 50000
 Loaded total of 1 transactions from corpus/reproducers/
 Loaded total of 9 transactions from corpus/coverage/
 Analyzing contract: /home/g/Code/echidna/opt.sol:TestDutchAuctionOptimization
