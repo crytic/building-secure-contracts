@@ -36,4 +36,4 @@ def withdraw(
 
 ## Recommendations
 
-- Force the transaction fee to be `0` and use fee pooling. If the users should be able to call the smart signature outside of a group, force the transaction fee to be minimum transaction fee:  `global MinTxnFee`.
+- Force the transaction fee to be `0` and use fee pooling. If the users should be able to call the smart signature outside of a group, force the transaction fee to be minimum transaction fee: `global MinTxnFee`.

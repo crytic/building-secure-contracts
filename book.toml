@@ -13,6 +13,7 @@ edit-url-template = "https://github.com/crytic/building-secure-contracts/edit/ma
 cname = "crytic.github.io/building-secure-contracts"
 no-section-label = true
 additional-css = ["static/custom.css"]
+additional-js = ["static/script.js"]
 default-theme = "light"
 
 [output.html.fold]

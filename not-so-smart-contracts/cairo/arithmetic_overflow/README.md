@@ -6,7 +6,6 @@ StarkNet also provides the Uint256 module which offers a more typical 256-bit in
 
 ## Attack Scenarios
 
-
 ## Mitigations
 
 - Always add checks for overflow when working with felts or Uint256s directly.

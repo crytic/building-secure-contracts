@@ -39,7 +39,7 @@ To follow this checklist, use the below output from Slither for the token:
 - [ ] **The owner cannot blacklist the contract.** Malicious or compromised owners can trap contracts relying on tokens with a blacklist. Identify blacklisting features by hand.
 - [ ] **The team behind the token is known and can be held responsible for abuse.** Contracts with anonymous development teams or teams that reside in legal shelters require a higher standard of review.
 
-## ERC20 tokens 
+## ERC20 tokens
 
 ### ERC20 conformity checks
 
@@ -55,6 +55,7 @@ Slither includes a utility, [`slither-prop`](https://github.com/crytic/slither/w
 - [ ] **The contract passes all unit tests and security properties from `slither-prop`.** Run the generated unit tests and then check the properties with [Echidna](https://github.com/crytic/echidna) and [Manticore](https://manticore.readthedocs.io/en/latest/verifier.html).
 
 ### Risks of ERC20 Extensions
+
 The behavior of certain contracts may differ from the original ERC specification. Conduct a manual review of the following conditions:
 
 - [ ] **The token is not an ERC777 token and has no external function call in `transfer` or `transferFrom`.** External calls in the transfer functions can lead to reentrancies.
@@ -71,7 +72,7 @@ Reviews of token scarcity issues must be executed manually. Check for the follow
 - [ ] **Users understand the risks associated with a large amount of funds or flash loans.** Contracts relying on the token balance must account for attackers with a large amount of funds or attacks executed through flash loans.
 - [ ] **The token does not allow flash minting.** Flash minting can lead to substantial swings in the balance and the total supply, which necessitate strict and comprehensive overflow checks in the operation of the token.
 
-## ERC721 tokens 
+## ERC721 tokens
 
 ### ERC721 Conformity Checks
 

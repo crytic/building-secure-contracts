@@ -1,12 +1,13 @@
 # Unsigned Transaction Validation
 
-There are three types of transactions allowed in a Substrate runtime: signed, unsigned, and inherent. An unsigned transaction does not require a signature and does not include information about who sent the transaction. This is naturally problematic because there is no by-default deterrent to spam or replay attacks. Because of this, Substrate allows users to create custom functions to validate unsigned transaction. However, incorrect or improper validation of an unsigned transaction can allow _anyone_ to perform potentially malicious actions. Usually, unsigned transactions are allowed only for select parties (e.g., off-chain workers (OCW)). But, if improper data validation of an unsigned transaction allows a malicious actor to spoof data as if it came from an OCW, this can lead to unexpected behavior. Additionally, improper validation opens up the possibility to replay attacks where the same transaction can be sent to the transaction pool again and again to perform some malicious action repeatedly.  
+There are three types of transactions allowed in a Substrate runtime: signed, unsigned, and inherent. An unsigned transaction does not require a signature and does not include information about who sent the transaction. This is naturally problematic because there is no by-default deterrent to spam or replay attacks. Because of this, Substrate allows users to create custom functions to validate unsigned transaction. However, incorrect or improper validation of an unsigned transaction can allow _anyone_ to perform potentially malicious actions. Usually, unsigned transactions are allowed only for select parties (e.g., off-chain workers (OCW)). But, if improper data validation of an unsigned transaction allows a malicious actor to spoof data as if it came from an OCW, this can lead to unexpected behavior. Additionally, improper validation opens up the possibility to replay attacks where the same transaction can be sent to the transaction pool again and again to perform some malicious action repeatedly.
 
 The validation of an unsigned transaction must be provided by the pallet that chooses to accept them. To allow unsigned transactions, a pallet must implement the [`frame_support::unsigned::ValidateUnsigned`](https://paritytech.github.io/substrate/master/frame_support/attr.pallet.html#validate-unsigned-palletvalidate_unsigned-optional) trait. The `validate_unsigned` function, which must be implemented as part of the `ValidateUnsigned` trait, will provide the logic necessary to ensure that the transaction is valid. An off chain worker (OCW) can be implemented directly in a pallet using the `offchain_worker` [hook](https://paritytech.github.io/substrate/master/frame_support/attr.pallet.html#hooks-pallethooks-optional). The OCW can send an unsigned transaction by calling [`SubmitTransaction::submit_unsigned_transaction`](https://paritytech.github.io/substrate/master/frame_system/offchain/struct.SubmitTransaction.html). Upon submission, the `validate_unsigned` function will ensure that the transaction is valid and then pass the transaction on towards towards the final dispatchable function.
 
 # Example
 
-The [`pallet-bad-unsigned`](./pallet-bad-unsigned.rs) pallet is an example that showcases improper unsigned transaction validation. The pallet tracks the average, rolling price of some "asset"; this price data is being retrieved by an OCW. The `fetch_price` function, which is called by the OCW, naively returns 100 as the current price (note that an [HTTP request](https://github.com/paritytech/substrate/blob/e8a7d161f39db70cb27fdad6c6e215cf493ebc3b/frame/examples/offchain-worker/src/lib.rs#L572-L625) can be made here for true price data). The `validate_unsigned` function (see below) simply validates that the `Call` is being made to `submit_price_unsigned` and nothing else. 
+The [`pallet-bad-unsigned`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/validate_unsigned/pallet-bad-unsigned.rs) pallet is an example that showcases improper unsigned transaction validation. The pallet tracks the average, rolling price of some "asset"; this price data is being retrieved by an OCW. The `fetch_price` function, which is called by the OCW, naively returns 100 as the current price (note that an [HTTP request](https://github.com/paritytech/substrate/blob/e8a7d161f39db70cb27fdad6c6e215cf493ebc3b/frame/examples/offchain-worker/src/lib.rs#L572-L625) can be made here for true price data). The `validate_unsigned` function (see below) simply validates that the `Call` is being made to `submit_price_unsigned` and nothing else.
+
 ```rust
 /// By default unsigned transactions are disallowed, but implementing the validator
 /// here we make sure that some particular calls (the ones produced by offchain worker)
@@ -39,9 +40,12 @@ However, notice that there is nothing preventing an attacker from sending malici
 Note that the simplest solution would be to sign the offchain submissions so that the runtime can validate that a known OCW is sending the price submission transactions.
 
 # Mitigations
+
 - Consider whether unsigned transactions is a requirement for the runtime that is being built. OCWs can also submit signed transactions or transactions with signed payloads.
-- Ensure that each parameter provided to `validate_unsigned` is validated to prevent the runtime from entering a state that is vulnerable or undefined.  
+- Ensure that each parameter provided to `validate_unsigned` is validated to prevent the runtime from entering a state that is vulnerable or undefined.
+
 # References
+
 - https://docs.substrate.io/main-docs/fundamentals/transaction-types/#unsigned-transactions
 - https://docs.substrate.io/main-docs/fundamentals/offchain-operations/
 - https://github.com/paritytech/substrate/blob/polkadot-v0.9.26/frame/examples/offchain-worker/src/lib.rs

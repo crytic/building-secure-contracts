@@ -1,20 +1,19 @@
-name: Check Markdown links
+name: Lint Check Markdown Links
 
 on:
   push:
     branches:
       - master
-      - dev
   pull_request:
   schedule:
     # run CI at 09:00, on day 1 of the month even if no PRs/merges occur
-    - cron:  '0 9 1 * *'
+    - cron: "0 9 1 * *"
 
 jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: gaurav-nelson/github-action-markdown-link-check@v1
-      with:
-        use-quiet-mode: 'yes'
+      - uses: actions/checkout@master
+      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: "yes"

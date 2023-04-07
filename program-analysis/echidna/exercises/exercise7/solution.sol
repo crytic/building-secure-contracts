@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: AGPL-3.0
 pragma solidity ^0.8.4;
 
 import "./side-entrance/SideEntranceLenderPool.sol";
@@ -58,5 +58,4 @@ contract SideEntranceEchidna is IFlashLoanEtherReceiver {
     function testPoolBalance() public view {
         assert(address(pool).balance >= initialPoolBalance);
     }
-
 }

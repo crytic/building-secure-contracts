@@ -1,14 +1,20 @@
-import "token.sol";
+// SPDX-License-Identifier: AGPL-3.0
+pragma solidity ^0.5.0;
 
-/// @dev to run: $ echidna-test solution.sol
+import "./token.sol";
+
+/// @dev Run the solution with
+///      ```
+///      solc-select use 0.5.0
+///      echidna program-analysis/echidna/exercises/exercise1/solution.sol
+///      ```
 contract TestToken is Token {
     constructor() public {
-        paused();
-        owner = address(0x0); // lose ownership
+        pause(); // pause the contract
+        owner = address(0); // lose ownership
     }
 
-    // add the property
     function echidna_no_transfer() public view returns (bool) {
-        return is_paused == true;
+        return paused() == true;
     }
 }

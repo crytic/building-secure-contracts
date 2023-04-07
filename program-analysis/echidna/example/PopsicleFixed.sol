@@ -1,12 +1,14 @@
-pragma solidity ^0.8.4;
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.0;
 
 /**
- This file was sourced from Certora: https://demo.certora.com/
+ * This file was sourced from Certora: https://demo.certora.com/
  */
 /**
- This example is based on a bug in Popsicle Finance which was exploited by an attacker in August 2021: https://twitter.com/PopsicleFinance/status/1422748604524019713?s=20.
- The attacker managed to drain approximately $20.7 million in tokens from the project’s Sorbetto Fragola pool.
-***/
+ * This example is based on a bug in Popsicle Finance which was exploited by an attacker in August 2021: https://twitter.com/PopsicleFinance/status/1422748604524019713?s=20.
+ *  The attacker managed to drain approximately $20.7 million in tokens from the project’s Sorbetto Fragola pool.
+ *
+ */
 
 contract ERC20 {
     uint256 total;
@@ -40,21 +42,13 @@ contract ERC20 {
         return balances[account];
     }
 
-    function transfer(address recipient, uint256 amount)
-        external
-        virtual
-        returns (bool)
-    {
+    function transfer(address recipient, uint256 amount) external virtual returns (bool) {
         balances[msg.sender] = sub(balances[msg.sender], amount);
         balances[recipient] = add(balances[recipient], amount);
         return true;
     }
 
-    function allowanceOf(address owner, address spender)
-        external
-        view
-        returns (uint256)
-    {
+    function allowanceOf(address owner, address spender) external view returns (uint256) {
         return allowance[owner][spender];
     }
 
@@ -63,17 +57,10 @@ contract ERC20 {
         return true;
     }
 
-    function transferFrom(
-        address sender,
-        address recipient,
-        uint256 amount
-    ) external virtual returns (bool) {
+    function transferFrom(address sender, address recipient, uint256 amount) external virtual returns (bool) {
         balances[sender] = sub(balances[sender], amount);
         balances[recipient] = add(balances[recipient], amount);
-        allowance[sender][msg.sender] = sub(
-            allowance[sender][msg.sender],
-            amount
-        );
+        allowance[sender][msg.sender] = sub(allowance[sender][msg.sender], amount);
         return true;
     }
 
@@ -83,9 +70,7 @@ contract ERC20 {
         allowance[msg.sender][to_user] += inc_amount;
     }
 
-    function decrease_allowance(address from_user, uint256 dec_amount)
-        external
-    {
+    function decrease_allowance(address from_user, uint256 dec_amount) external {
         require(allowance[msg.sender][from_user] >= dec_amount);
         allowance[msg.sender][from_user] -= dec_amount;
         allowance[msg.sender][msg.sender] += dec_amount;
@@ -124,8 +109,7 @@ contract PopsicleFixed is ERC20 {
     }
 
     modifier updateVault(address user) {
-        uint256 reward = balances[user] *
-            (totalFeesEarned - accounts[user].latestUpdate);
+        uint256 reward = balances[user] * (totalFeesEarned - accounts[user].latestUpdate);
         accounts[user].latestUpdate = totalFeesEarned;
         accounts[user].rewards += reward;
         _;
@@ -133,8 +117,7 @@ contract PopsicleFixed is ERC20 {
 
     function deposit() public payable {
         uint256 amount = msg.value;
-        uint256 reward = balances[msg.sender] *
-            (totalFeesEarned - accounts[msg.sender].latestUpdate);
+        uint256 reward = balances[msg.sender] * (totalFeesEarned - accounts[msg.sender].latestUpdate);
         accounts[msg.sender].latestUpdate = totalFeesEarned;
         accounts[msg.sender].rewards += reward;
         mint(msg.sender, amount);
@@ -143,8 +126,7 @@ contract PopsicleFixed is ERC20 {
 
     function withdraw(uint256 amount) public {
         require(balances[msg.sender] >= amount);
-        uint256 reward = amount *
-            (totalFeesEarned - accounts[msg.sender].latestUpdate);
+        uint256 reward = amount * (totalFeesEarned - accounts[msg.sender].latestUpdate);
         burn(msg.sender, amount);
         accounts[msg.sender].rewards += reward;
         emit Withdraw(msg.sender, amount);
@@ -152,11 +134,8 @@ contract PopsicleFixed is ERC20 {
 
     function collectFees() public {
         require(totalFeesEarned >= accounts[msg.sender].latestUpdate);
-        uint256 fee_per_share = totalFeesEarned -
-            accounts[msg.sender].latestUpdate;
-        uint256 to_pay = fee_per_share *
-            balances[msg.sender] +
-            accounts[msg.sender].rewards;
+        uint256 fee_per_share = totalFeesEarned - accounts[msg.sender].latestUpdate;
+        uint256 to_pay = fee_per_share * balances[msg.sender] + accounts[msg.sender].rewards;
         accounts[msg.sender].latestUpdate = totalFeesEarned;
         accounts[msg.sender].rewards = 0;
         msg.sender.call{value: to_pay}("");
@@ -167,11 +146,7 @@ contract PopsicleFixed is ERC20 {
         totalFeesEarned += 1;
     }
 
-    function transfer(address recipient, uint256 amount)
-        public
-        override
-        returns (bool)
-    {
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
         return transferFrom(msg.sender, recipient, amount);
     }
 
@@ -179,13 +154,7 @@ contract PopsicleFixed is ERC20 {
         address sender,
         address recipient,
         uint256 amount
-    )
-        public
-        override
-        updateVault(sender)
-        updateVault(recipient)
-        returns (bool)
-    {
+    ) public override updateVault(sender) updateVault(recipient) returns (bool) {
         require(balances[sender] >= amount);
         balances[sender] = balances[sender] - amount;
         balances[recipient] = balances[recipient] + amount;
@@ -193,10 +162,7 @@ contract PopsicleFixed is ERC20 {
     }
 
     function currentBalance(address user) public view returns (uint256) {
-        return
-            accounts[user].rewards +
-            balances[user] *
-            (totalFeesEarned - accounts[user].latestUpdate);
+        return accounts[user].rewards + balances[user] * (totalFeesEarned - accounts[user].latestUpdate);
     }
 
     function ethBalance(address user) public view returns (uint256) {
@@ -209,19 +175,15 @@ contract PopsicleFixed is ERC20 {
     }
 
     // An Echidna assertion test to test the equivalence of user balances before and after a transfer.
-    /// @dev To run this with Echidna: $ echidna-test PopsicleFixed.sol --contract PopsicleFixed --test-mode assertion
-    function totalBalanceAfterTransferIsPreserved(address user, uint256 amount)
-        public
-    {
+    /// @dev To run this with Echidna: $ echidna PopsicleFixed.sol --contract PopsicleFixed --test-mode assertion
+    function totalBalanceAfterTransferIsPreserved(address user, uint256 amount) public {
         // This slows down Echidna, but ensures that the user is not the zero-address.
         if (user == address(0)) {
             return;
         }
 
         // Get the balance of msg.sender + user in ETH and tokens before the transfer.
-        uint256 totalBalanceOfUsersBeforeTransfer = totalBalanceOfUser(
-            msg.sender
-        ) + totalBalanceOfUser(user);
+        uint256 totalBalanceOfUsersBeforeTransfer = totalBalanceOfUser(msg.sender) + totalBalanceOfUser(user);
 
         // Emit an event with the total balance of both users BEFORE the transfer function call.
         emit TotalBalanceOfUsers(totalBalanceOfUsersBeforeTransfer);
@@ -230,35 +192,25 @@ contract PopsicleFixed is ERC20 {
         transfer(user, amount);
 
         // Get the balance of msg.sender + user in ETH and tokens after the transfer.
-        uint256 totalBalanceOfUsersAfterTransfer = totalBalanceOfUser(
-            msg.sender
-        ) + totalBalanceOfUser(user);
+        uint256 totalBalanceOfUsersAfterTransfer = totalBalanceOfUser(msg.sender) + totalBalanceOfUser(user);
 
         // Emit an event with the total balance of both users AFTER the transfer function call.
         emit TotalBalanceOfUsers(totalBalanceOfUsersAfterTransfer);
 
         // Assert that the balance before and balance after should be equal to each other.
-        assert(
-            totalBalanceOfUsersBeforeTransfer ==
-                totalBalanceOfUsersAfterTransfer
-        );
+        assert(totalBalanceOfUsersBeforeTransfer == totalBalanceOfUsersAfterTransfer);
     }
 
     // An Echidna assertion test to test the equivalence of user balances before and after a transferFrom.
-    /// @dev To run this with Echidna: $ echidna-test PopsicleFixed.sol --contract PopsicleFixed --test-mode assertion
-    function totalBalanceAfterTransferFromIsPreserved(
-        address user,
-        uint256 amount
-    ) public {
+    /// @dev To run this with Echidna: $ echidna PopsicleFixed.sol --contract PopsicleFixed --test-mode assertion
+    function totalBalanceAfterTransferFromIsPreserved(address user, uint256 amount) public {
         // This slows down Echidna, but ensures that the user is not the zero-address.
         if (user == address(0)) {
             return;
         }
 
         // Get the balance of msg.sender + user in ETH and tokens before the transferFrom.
-        uint256 totalBalanceOfUsersBeforeTransfer = totalBalanceOfUser(
-            msg.sender
-        ) + totalBalanceOfUser(user);
+        uint256 totalBalanceOfUsersBeforeTransfer = totalBalanceOfUser(msg.sender) + totalBalanceOfUser(user);
 
         // Emit an event with the total balance of both users BEFORE the transferFrom function call.
         emit TotalBalanceOfUsers(totalBalanceOfUsersBeforeTransfer);
@@ -267,17 +219,12 @@ contract PopsicleFixed is ERC20 {
         transferFrom(msg.sender, user, amount);
 
         // Get the balance of msg.sender + user in ETH and tokens after the transferFrom.
-        uint256 totalBalanceOfUsersAfterTransfer = totalBalanceOfUser(
-            msg.sender
-        ) + totalBalanceOfUser(user);
+        uint256 totalBalanceOfUsersAfterTransfer = totalBalanceOfUser(msg.sender) + totalBalanceOfUser(user);
 
         // Emit an event with the total balance of both users AFTER the transferFrom function call.
         emit TotalBalanceOfUsers(totalBalanceOfUsersAfterTransfer);
 
         // Assert that the balance before and balance after should be equal to each other.
-        assert(
-            totalBalanceOfUsersBeforeTransfer ==
-                totalBalanceOfUsersAfterTransfer
-        );
+        assert(totalBalanceOfUsersBeforeTransfer == totalBalanceOfUsersAfterTransfer);
     }
 }
