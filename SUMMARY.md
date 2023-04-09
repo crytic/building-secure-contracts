@@ -77,6 +77,7 @@
       - [How to detect high gas consumption](./program-analysis/echidna/advanced/finding-transactions-with-high-gas-consumption.md)
       - [How to perform smart contract fuzzing at a large scale](./program-analysis/echidna/advanced/smart-contract-fuzzing-at-scale.md)
       - [How to test bytecode-only contracts](./program-analysis/echidna/advanced/testing-bytecode.md)
+      - [How and when to use cheat codes](program-analysis/echidna/advanced/on-using-cheat-codes.md)
       - [How to use hevm cheats to test permit](./program-analysis/echidna/advanced/hevm-cheats-to-test-permit.md)
       - [How to seed Echidna with unit tests](./program-analysis/echidna/advanced/end-to-end-testing.md)
       - [Understanding and using `multi-abi`](./program-analysis/echidna/advanced/using-multi-abi.md)
