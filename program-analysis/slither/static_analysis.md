@@ -1,4 +1,3 @@
-
 ## Static analysis
 
 The capabilities and design of the Slither static analysis framework has been described in blog posts ([1](https://blog.trailofbits.com/2018/10/19/slither-a-solidity-static-analysis-framework/), [2](https://blog.trailofbits.com/2019/05/27/slither-the-leading-static-analyzer-for-smart-contracts/)) and an [academic paper](https://github.com/trailofbits/publications/blob/master/papers/wetseb19.pdf).
@@ -19,11 +18,11 @@ In contrast to a dynamic analysis, which reasons about a single execution path, 
 
 AST are used every time the compiler parses code. It is probably the most basic structure upon which static analysis can be performed.
 
-In a nutshell, an AST is a structured tree where, usually, each leaf contains a variable or a constant and internal nodes are operands or control flow operations. Consider the following code: 
+In a nutshell, an AST is a structured tree where, usually, each leaf contains a variable or a constant and internal nodes are operands or control flow operations. Consider the following code:
 
 ```solidity
-function safeAdd(uint a, uint b) pure internal returns(uint){
-    if(a + b <= a){
+function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+    if (a + b <= a) {
         revert();
     }
     return a + b;
@@ -69,7 +68,7 @@ Many other code representations exist. Each representation has advantages and dr
 
 ### Analysis
 
-The simplest type of analyses you can perform with Slither are syntactic analyses. 
+The simplest type of analyses you can perform with Slither are syntactic analyses.
 
 ### Syntax analysis
 
@@ -107,12 +106,12 @@ An example of data dependency usage can be found in the [dangerous strict equali
 If your analysis navigates through the CFG and follows the edges, you are likely to see already visited nodes. For example, if a loop is presented as shown below:
 
 ```solidity
-for(uint i; i < range; ++){
+for(uint256 i; i < range; ++) {
     variable_a += 1
 }
 ```
 
-Your analysis will need to know when to stop. There are two main strategies here: (1) iterate on each node a finite number of times, (2) compute a so-called *fixpoint*. A fixpoint basically means that analyzing this node does not provide any meaningful information. 
+Your analysis will need to know when to stop. There are two main strategies here: (1) iterate on each node a finite number of times, (2) compute a so-called _fixpoint_. A fixpoint basically means that analyzing this node does not provide any meaningful information.
 
 An example of fixpoint used can be found in the reentrancy detectors: Slither explores the nodes, and look for externals calls, write and read to storage. Once it has reached a fixpoint ([reentrancy.py#L125-L131](https://github.com/crytic/slither/blob/master/slither/detectors/reentrancy/reentrancy.py#L125-L131)), it stops the exploration, and analyze the results to see if a reentrancy is present, through different reentrancy patterns ([reentrancy_benign.py](https://github.com/crytic/slither/blob/b275bcc824b1b932310cf03b6bfb1a1fef0ebae1/slither/detectors/reentrancy/reentrancy_benign.py), [reentrancy_read_before_write.py](https://github.com/crytic/slither/blob/b275bcc824b1b932310cf03b6bfb1a1fef0ebae1/slither/detectors/reentrancy/reentrancy_read_before_write.py), [reentrancy_eth.py](https://github.com/crytic/slither/blob/b275bcc824b1b932310cf03b6bfb1a1fef0ebae1/slither/detectors/reentrancy/reentrancy_eth.py)).
 

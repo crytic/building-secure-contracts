@@ -19,15 +19,15 @@ We welcome contributions, and you can contribute by following our [contributing 
   - [Arithmetic Checks](./learn_evm/arithmetic-checks.md): A guide to performing arithmetic checks in the EVM
   - [Yellow Paper Guidance](./learn_evm/yellow-paper.md): Symbol reference for more easily reading the Ethereum yellow paper
   - [Forks <> EIPs](./learn_evm/eips_forks.md): Summarize the EIPs included in each Ethereum fork
-    - [Forks <> CIPs](./learn_evm/cips_forks.md): Summarize the CIPs and EIPs included in each Celo fork *(EVM-compatible chain)*
-    - [Upgrades <> TIPs](./learn_evm/tips_upgrades.md): Summarize the TIPs included in each TRON upgrade *(EVM-compatible chain)*
-    - [Forks <> BEPs](./learn_evm/beps_forks.md): Summarize the BEPs included in each BSC fork *(EVM-compatible chain)*
+    - [Forks <> CIPs](./learn_evm/cips_forks.md): Summarize the CIPs and EIPs included in each Celo fork _(EVM-compatible chain)_
+    - [Upgrades <> TIPs](./learn_evm/tips_upgrades.md): Summarize the TIPs included in each TRON upgrade _(EVM-compatible chain)_
+    - [Forks <> BEPs](./learn_evm/beps_forks.md): Summarize the BEPs included in each BSC fork _(EVM-compatible chain)_
 - [Not so smart contracts](./not-so-smart-contracts): Examples of smart contract common issues. Each issue contains a description, an example and recommendations
-   - [Algorand](./not-so-smart-contracts/algorand)
-   - [Cairo](./not-so-smart-contracts/cairo)
-   - [Cosmos](./not-so-smart-contracts/cosmos)
-   - [Substrate](./not-so-smart-contracts/substrate)
-   - [Solana](./not-so-smart-contracts/solana)
+  - [Algorand](./not-so-smart-contracts/algorand)
+  - [Cairo](./not-so-smart-contracts/cairo)
+  - [Cosmos](./not-so-smart-contracts/cosmos)
+  - [Substrate](./not-so-smart-contracts/substrate)
+  - [Solana](./not-so-smart-contracts/solana)
 - [Program analysis](./program-analysis): How to use automated tools to secure contracts
   - [Echidna](./program-analysis/echidna): a fuzzer that will check your contract's properties.
   - [Slither](./program-analysis/slither): a static analyzer available through a CLI and scriptable interface.
@@ -36,8 +36,8 @@ We welcome contributions, and you can contribute by following our [contributing 
     - a theoretical introduction, a walkthrough of its API, and a set of exercises.
     - exercises expected to require ~two hours to practically learn its operation.
 - [Resources](./resources): Various online resources
-   - [Trail of Bits blogposts](./resources/tob_blogposts.md): List of blockchain related blogposts made by Trail of Bits
-
+  - [Trail of Bits blogposts](./resources/tob_blogposts.md): List of blockchain related blogposts made by Trail of Bits
 
 # License
+
 secure-contracts and building-secure-contracts are licensed and distributed under the [AGPLv3 license](https://github.com/crytic/building-secure-contracts/blob/master/LICENSE). Contact us if you're looking for an exception to the terms.

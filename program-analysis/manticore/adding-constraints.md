@@ -14,12 +14,13 @@
 ## Introduction
 
 We will see how to constrain the exploration. We will make the assumption that the
-documentation of `f()` states that the function is never called with `a == 65`, so any bug with `a == 65` is not a real bug. The target is still the following smart contract (*[examples/example.sol](./examples/example.sol)*):
+documentation of `f()` states that the function is never called with `a == 65`, so any bug with `a == 65` is not a real bug. The target is still the following smart contract (_[examples/example.sol](./examples/example.sol)_):
 
-```Solidity
+```solidity
 pragma solidity >=0.4.24 <0.6.0;
+
 contract Simple {
-    function f(uint a) payable public{
+    function f(uint256 a) public payable {
         if (a == 65) {
             revert();
         }
@@ -50,7 +51,6 @@ from manticore.core.smtlib import Operators
 last_return = Operators.CONCAT(256, *last_return)
 ```
 
-
 ## Constraints
 
 You can use constraints globally or for a specific state.
@@ -76,8 +76,8 @@ It can be used to constrain the state after its exploration to check some proper
 
 ## Checking Constraint
 
-Use `solver.check(state.constraints)` to know if a constraint is still feasible. 
-For example, the following will constraint  symbolic_value to be different from 65 and check if the state is still feasible:
+Use `solver.check(state.constraints)` to know if a constraint is still feasible.
+For example, the following will constraint symbolic_value to be different from 65 and check if the state is still feasible:
 
 ```python3
 state.constrain(symbolic_var != 65)
