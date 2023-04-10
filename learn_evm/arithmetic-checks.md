@@ -158,7 +158,7 @@ However, the negative domain is shifted to lie "above" the positive domain.
 $$uint256 \text{ domain}$$
 
 $$
-├\underset{0}{─}────────────────────────────\underset{\hskip -1.5em 2^{256} - 1}{─}┤
+├\underset{0}{─}────────────────────────────\underset{\hskip -2em 2^{256} - 1}{─}┤
 $$
 
 ```solidity
@@ -516,7 +516,7 @@ A better way to understand this is by visualizing the signed integer number doma
 $$uint256 \text{ domain}$$
 
 $$
-├\underset{0}{─}────────────────────────────\underset{\hskip -1.5em 2^{256} - 1}{─}┤
+├\underset{0}{─}────────────────────────────\underset{\hskip -2em 2^{256} - 1}{─}┤
 $$
 
 $$int256 \text{ domain}$$
@@ -554,7 +554,7 @@ $$
 Note that the scales of the number ranges above do not accurately depict the magnitude of numbers that are representable with the different types and only serves as a visualization.
 We are able to represent twice as many numbers with only one additional bit. Yet, the uint256 domain has twice the number of bits compared to uint128.
 
-After subtracting `type(int128).min` we get the following, connected set of values.
+After subtracting `type(int128).min` (or adding $2^{127}$) and essentially shifting the domains to the right, we get the following, connected set of values.
 
 $$
 ├\underset{0}─────────────\underset{\hskip -2em 2^{128}-1}─┤
