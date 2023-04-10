@@ -1,22 +1,28 @@
 # A Guide on Performing Arithmetic Checks in the EVM
 
-The EVM is a peculiar machine that many of us have come to love and hate for all its quirks.
-One such quirk is the absence of native arithmetic checks, which are typically present in most architectures and virtual machines through the use of carry bits or an overflow flag.
-The EVM treats all stack values as uint256 types.
-Although opcodes for signed integers (such as `sdiv`, `smod`, `slt`, `sgt`, etc.) exist,
-arithmetic checks must be implemented within the constraints of the EVM.
+The Ethereum Virtual Machine (EVM) distinguishes itself from traditional computer systems and virtual machines through several unique aspects.
+One notable variation is its treatment of arithmetic checks.
+While most architectures and virtual machines offer access to carry bits or an overflow flag,
+these features are not present in the EVM.
+As a result, developers must manually incorporate these safeguards within the machine's constraints.
 
-> Note: [EIP-1051](https://eips.ethereum.org/EIPS/eip-1051)'s goal is to introduce the opcodes `ovf` and `sovf`.
-> These would provide built-in overflow flags. However, the EIP's current status is stagnant.
+Starting with Solidity version 0.8.0 the compiler includes over and underflow protection in all arithmetic operations by default.
+Prior to version 0.8.0, developers had to implement these checks manually, often using a library known as [SafeMath](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol), originally developed by OpenZeppelin.
+Much like how SafeMath works, the compiler inserts arithmetic checks through additional operations.
 
-Since Solidity version 0.8.0 the compiler includes over and underflow protection in all arithmetic operations by default.
-Before version 0.8.0, these checks had to be implemented manually - a commonly used library is called [SafeMath](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol), originally developed by OpenZeppelin.
-Much like how SafeMath works, arithmetic checks are inserted by the compiler through additional operations.
+In this article, we'll explore many ways to perform arithmetic checks within the EVM.
+This guide is designed for those with a keen interest in bit manipulations and seek a deeper understanding of the EVM's inner workings.
+It is assumed that you have a basic understanding of bitwise arithmetic and Solidity opcodes.
 
-> **Disclaimer:** Please note that this post is for educational purposes.
+Some additional references for complementary reading are:
+
+- [evm.codes](https://evm.codes)
+- [Understanding Two's Complement](https://www.geeksforgeeks.org/twos-complement/)
+
+> **Disclaimer:** Please note that this article is for educational purposes.
 > It is not our intention to encourage micro optimizations in order to save gas,
-> as this can potentially lead to the introduction of new bugs that are difficult to detect and may compromise the security and stability of the protocol.
-> As a protocol developer, it is important to prioritize the safety and security of the protocol over [premature optimization](https://www.youtube.com/watch?v=tKbV6BpH-C8).
+> as this can potentially lead to the introduction of new bugs that are difficult to detect and may compromise the security and stability of a protocol.
+> As a developer, it is important to prioritize the safety and security of the protocol over [premature optimization](https://www.youtube.com/watch?v=tKbV6BpH-C8).
 > In situations where the code for the protocol is still evolving, including redundant checks for critical operations may be a good practice.
 > However, we do encourage experimentation with these operations for educational purposes.
 
@@ -30,7 +36,7 @@ Alternatively, by using the `--ir` flag, we can examine the Yul code that is gen
 > This provides an opportunity to examine the Yul code and gain a better understanding of how arithmetic checks are executed in Solidity.
 > However, it's important to keep in mind that the final bytecode may differ slightly when compiler optimizations are turned on.
 
-To illustrate how the compiler detects overflow in unsigned integer addition, consider the following example of Yul code that is produced by the compiler.
+To illustrate how the compiler detects overflow in unsigned integer addition, consider the following example of Yul code that is produced by the compiler before version 0.8.16.
 
 ```solidity
 function checked_add_t_uint256(x, y) -> sum {
@@ -84,7 +90,8 @@ This can be demonstrated by the transformation `~b = ~(0 ^ b) = ~0 ^ b = MAX ^ b
 > We also obtain the relation `~b + 1 = 0 - b = -b` if we add `1` mod `2**256` to both sides of the previous equation.
 
 By computing the result of the addition first and then performing a check on the sum,
-modern versions of Solidity can eliminate the need for performing extra arithmetic operations in the comparison.
+we eliminate the need for performing extra arithmetic operations in the comparison.
+This is how the compiler implements arithmetic checks for unsigned integer addition in versions 0.8.16 and later.
 
 ```solidity
 /// @notice versions >=0.8.16
@@ -104,7 +111,7 @@ An important observation is that `a > a + b` (mod `2**256`) for `b > 0` is only 
 
 ## Arithmetic checks for int256 addition
 
-The Solidity compiler generates the following (equivalent) code for detecting overflow in signed integer addition:
+The Solidity compiler generates the following (equivalent) code for detecting overflow in signed integer addition below version 0.8.16.
 
 ```solidity
 /// @notice versions >=0.8.0 && <0.8.16
@@ -148,13 +155,27 @@ The first bit of an integer represents the sign, with `0` indicating a positive 
 For positive integers (those with a sign bit of `0`), their binary representation is the same as their unsigned bit representation.
 However, the negative domain is shifted to lie "above" the positive domain.
 
-```
-| -------------------------------- uint256 -------------------------------- |
-0 --------------------------------------------------------------------- uint256_max
+$$uint256 \text{ domain}$$
 
-| --------- positive int256 --------- | --------- negative int256 --------- |
-0 ------------------------ int256_max | int256_min ------------------------ -1
+$$
+├\underset{0}{─}────────────────────────────\underset{\hskip -1.5em 2^{256} - 1}{─}┤
+$$
+
+```solidity
+0x0000000000000000000000000000000000000000000000000000000000000000 // 0
+0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff // uint256_max
 ```
+
+$$int256 \text{ domain}$$
+
+$$
+\overset{\hskip 1em positive}{
+    ├\underset{0}{─}────────────\underset{\hskip -2em 2^{255} - 1}{─}┤
+}
+\overset{\hskip 1em negative}{
+    ├────\underset{\hskip -3.5em - 2^{255}}─────────\underset{\hskip -0.4 em -1}{─}┤
+}
+$$
 
 ```solidity
 0x0000000000000000000000000000000000000000000000000000000000000000 // 0
@@ -163,14 +184,14 @@ However, the negative domain is shifted to lie "above" the positive domain.
 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff // -1
 ```
 
-The maximum positive integer that can be represented in a two's complement system using int256 is
-`0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff` which is equal to half of the maximum value that can be represented using uint256.
+The maximum positive integer that can be represented in a two's complement system using 256 bits is
+`0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff` which is roughly equal to half of the maximum value that can be represented using uint256.
 The most significant bit of this number is `0`, while all other bits are `1`.
 
 On the other hand, all negative numbers start with a `1` as their first bit.
-If we look at the underlying hex representation of these numbers, they are all greater than or equal to the smallest integer that can be represented using int256, which is `0x8000000000000000000000000000000000000000000000000000000000000000` (equal to `1` shifted 255 bits to the left).
+If we look at the underlying hex representation of these numbers, they are all greater than or equal to the smallest integer that can be represented using int256, which is `0x8000000000000000000000000000000000000000000000000000000000000000`. The integer's binary representation is a `1` followed by 255 `0`'s.
 
-To obtain the negative value of an integer in a two's complement system, we can flip all the underlying bits and add `1`: `-a = ~a + 1`.
+To obtain the negative value of an integer in a two's complement system, we flip the underlying bits and add `1`: `-a = ~a + 1`.
 An example illustrates this.
 
 ```solidity
@@ -201,7 +222,7 @@ Finally, looking at the underlying bit (or hex) representation highlights the im
 = 0x0000000000000000000000000000000000000000000000000000000000000000
 ```
 
-Newer versions of Solidity prevent integer overflow by using the computed result `c = a + b` to check for overflow/underflow.
+Starting with Solidity versions 0.8.16, integer overflow is prevented by using the computed result `c = a + b` to check for overflow/underflow.
 However, unlike unsigned addition, signed addition requires two separate checks instead of one.
 
 ```solidity
@@ -218,8 +239,9 @@ function checkedAddInt2(int256 a, int256 b) public pure returns (int256 c) {
 }
 ```
 
-Nevertheless, using the boolean exclusive-or lets us combine these checks into one step.
-Solidity doesn't have a built-in operation for boolean values, but we can still make use of it through inline-assembly. In doing so, we need to take care that both inputs are actually boolean (either 0 or 1), as the xor operation works bitwise and isn't restricted to boolean values.
+Nevertheless, by utilizing the boolean exclusive-or, we can combine these checks into a single step.
+While Solidity doesn't permit the `xor` operation for boolean values, it can still be employed through inline-assembly.
+While doing so, it is crucial to ensure that both inputs are genuinely boolean (either `0` or `1`), as the xor operation functions bitwise and is not limited to only boolean values.
 
 ```solidity
 function checkedAddInt3(int256 a, int256 b) public pure returns (int256 c) {
@@ -313,9 +335,9 @@ function checkedMulUint1(uint256 a, uint256 b) public pure returns (uint256 c) {
 }
 ```
 
-> It's important to note that the Solidity compiler always includes a division by zero check for all division and modulo operations, regardless of the presence of an unchecked block.
-> The EVM itself simply returns `0` when dividing by `0`, and this also applies to inline-assembly.
-> If the order of the boolean expressions is evaluated in reverse order, it could cause an arithmetic check to incorrectly revert when `a = 0`.
+> The Solidity compiler always includes a zero check for all division and modulo operations, irrespective of whether an unchecked block is present.
+> The EVM itself, however, returns `0` when dividing by `0`, which applies to inline-assembly as well.
+> Evaluating the boolean expression `a != 0 && b > type(uint256).max / a` in reverse order would cause an incorrect reversion when `a = 0`.
 
 We can compute the maximum value for `b` as long as `a` is non-zero. However, if `a` is zero, we know that the result will be zero as well, and there is no need to check for overflow.
 Like before, we can also make use of the result and try to reconstruct one multiplicand from it. This is possible if the product didn't overflow and the first multiplicand is non-zero.
@@ -353,7 +375,7 @@ function checkedMulUint3(uint256 a, uint256 b) public pure returns (uint256 c) {
 
 ## Arithmetic checks for int256 multiplication
 
-In older versions, the Solidity compiler uses four separate checks to detect integer multiplication overflow.
+In versions before 0.8.17, the Solidity compiler uses four separate checks to detect integer multiplication overflow.
 The produced Yul code is equivalent to the following high-level Solidity code.
 
 ```solidity
@@ -370,7 +392,7 @@ function checkedMulInt(int256 a, int256 b) public pure returns (int256 c) {
 }
 ```
 
-Newer Solidity versions optimize the process by utilizing the computed product in the check.
+Since Solidity version 0.8.17, the check is performed by utilizing the computed product in the check.
 
 ```solidity
 /// @notice versions >=0.8.17
@@ -414,7 +436,7 @@ otherwise the value won't be interpreted correctly.
 It's worth noting that not all operations require clean upper bits.
 In fact, even if the upper bits are dirty, we can still get correct results for addition.
 However, the sum will usually contain dirty upper bits that will need to be cleaned.
-For example, when performing addition without knowing what the upper bits are set to, we get the following result.
+For example, we can perform addition without knowledge of the upper bits.
 
 ```solidity
   0x????????????????????????????????????????????????fffffffffffffffe // int64(-2)
@@ -425,7 +447,7 @@ For example, when performing addition without knowing what the upper bits are se
 It is crucial to be mindful of when to clean the bits before and after operations.
 By default, Solidity takes care of cleaning the bits before operations on smaller types and lets the optimizer remove any redundant steps.
 However, values accessed after operations included by the compiler are not guaranteed to be clean. In particular, this is the case for addition with small data types.
-The bit cleaning steps will be removed by the optimizer (even without optimizations enabled) if a variable is only accessed in a subsequent assembly block.
+For example, the bit cleaning steps will be removed by the optimizer (even without optimizations enabled) if a variable is only accessed in a subsequent assembly block.
 Refer to the [Solidity documentation](https://docs.soliditylang.org/en/v0.8.18/internals/variable_cleanup.html#cleaning-up-variables) for further information on this matter.
 
 When performing arithmetic checks in the same way as before, it is necessary to include a step to clean the bits on the sum.
@@ -491,33 +513,59 @@ We can simplify the expression to a single comparison if we're able to shift the
 To accomplish this, we subtract the smallest negative int64 `type(int64).min` from a value (or add the underlying unsigned value).
 A better way to understand this is by visualizing the signed integer number domain in relation to the unsigned domain (which is demonstrated here using int128).
 
-```
-| -------------------------------- uint256 -------------------------------- |
-0 --------------------------------------------------------------------- uint256_max
+$$uint256 \text{ domain}$$
 
-| --------- positive int256 --------- | --------- negative int256 --------- |
-0 ------------------------ int256_max | int256_min ------------------------ -1
-```
+$$
+├\underset{0}{─}────────────────────────────\underset{\hskip -1.5em 2^{256} - 1}{─}┤
+$$
+
+$$int256 \text{ domain}$$
+
+$$
+\overset{\hskip 1em positive}{
+    ├\underset{0}{─}────────────\underset{\hskip -2em 2^{255} - 1}{─}┤
+}
+\overset{\hskip 1em negative}{
+    ├────\underset{\hskip -3.5em - 2^{255}}─────────\underset{\hskip -0.4 em -1}{─}┤
+}
+$$
 
 The domain for uint128/int128 can be visualized as follows.
 
-```
-| ------------ uint128 -------------- |                                     |
-0 ----------------------- uint128_max |                                     |
+$$uint128 \text{ domain}$$
 
-| -- pos int128 -- |                                     | -- neg int128 -- |
-0 ----- int128_max |                                     | int128_min ----- -1
-```
+$$
+├\underset{0}─────────────\underset{\hskip -2em 2^{128}-1}─┤
+\phantom{───────────────}┆
+$$
+
+$$int128 \text{ domain}$$
+
+$$
+\overset{\hskip 1em positive}{
+    ├\underset{0}{─}────\underset{\hskip -2em 2^{127} - 1}{─}┤
+}
+\phantom{────────────────}
+\overset{\hskip 1em negative}{
+    ├────\underset{\hskip -3.5em - 2^{127}}─\underset{\hskip -0.4 em -1}{─}┤
+}
+$$
+
+Note that the scales of the number ranges above do not accurately depict the magnitude of numbers that are representable with the different types and only serves as a visualization.
+We are able to represent twice as many numbers with only one additional bit. Yet, the uint256 domain has twice the number of bits compared to uint128.
 
 After subtracting `type(int128).min` we get the following, connected set of values.
 
-```
-| ------------ uint128 -------------- |                                     |
-0 ----------------------- uint128_max |                                     |
+$$
+├\underset{0}─────────────\underset{\hskip -2em 2^{128}-1}─┤
+\phantom{───────────────}┆
+$$
 
-| -- neg int128 -- | -- pos int128 -- |                                     |
-int128_min ----- -1| 0 --- int128_max |                                     |
-```
+$$
+\overset{\hskip 1em negative}{├──────┤}
+\overset{\hskip 1em positive}{├──────┤}
+\phantom{───────────────}┆
+$$
 
 If we interpret the shifted value as an unsigned integer, we only need to check whether it exceeds the maximum unsigned integer `type(uint128).max`.
 The corresponding check in Solidity is shown below.
@@ -596,10 +644,12 @@ function checkedAddInt64_2(int64 a, int64 b) public pure returns (int64 c) {
 }
 ```
 
+One further optimization that we could perform is to add `-type(int64).min` instead of subtracting `type(int64).min`. This would not reduce computation costs, however it could end up reducing bytecode size. This is because when we subtract `-type(int64).min`, we need to push 32 bytes (`0xffffffffffffffffffffffffffffffffffffffffffffffff8000000000000000`), whereas when we add `-type(int64).min`, we only end up pushing 8 bytes (`0x8000000000000000`). However, as soon as we turn on compiler optimizations, the produced bytecode ends up being the same.
+
 ## Arithmetic checks for multiplication with sub-32-byte types
 
 If the product `c = a * b` can be calculated in 256 bits without the possibility of overflowing, we can once again verify whether the result can fit into the anticipated data type.
-This is also the way Solidity handles the check in newer versions.
+This is also the way Solidity handles the check in versions 0.8.17 and later.
 
 ```solidity
 /// @notice version >= 0.8.17
@@ -666,3 +716,10 @@ function checkedMulInt192_2(int192 a, int192 b) public pure returns (int192 c) {
     }
 }
 ```
+
+## Conclusion
+
+In conclusion, this article has provided a comprehensive examination of arithmetic checks within the Ethereum Virtual Machine, delving into various Solidity opcodes and optimizations for assembly code. We have explored some of the intricacies of implementing arithmetic checks for both uint256 and int256 addition, subtraction, and multiplication, as well as for sub-32-byte types.
+Furthermore, we have highlighted some caveats to be aware of when working with assembly to avoid potential pitfalls.
+
+The purpose of this article is to deepen one's familiarity of low-level arithmetic, thereby improving the security of Solidity code by equipping developers to better assess and grasp the assumptions present in these operations. It is crucial to remember that custom low-level optimizations should be integrated only after rigorous manual analysis, fuzzing, and symbolic verification.
