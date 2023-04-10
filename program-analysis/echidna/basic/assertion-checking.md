@@ -30,7 +30,7 @@ contract Incrementor {
 }
 ```
 
-We want to make sure that `tmp` is less than or equal to `counter` after returning its difference. We could write an Echidna property, but we will need to store the `tmp` value somewhere. Instead, we could use an assertion like this one (_[../example/assert.sol](../example/assert.sol)_):
+We want to make sure that `tmp` is less than or equal to `counter` after returning its difference. We could write an Echidna property, but we will need to store the `tmp` value somewhere. Instead, we could use an assertion like this one (_[assert.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/assert.sol)_):
 
 ```solidity
 contract Incrementor {

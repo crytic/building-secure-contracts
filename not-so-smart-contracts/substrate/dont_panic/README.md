@@ -4,7 +4,7 @@ Panics occur when the node enters a state that it cannot handle and stops the pr
 
 # Example
 
-In the [`pallet-dont-panic`](./pallet-dont-panic.rs) pallet, the `find_important_value` dispatchable checks to see if `useful_amounts[0]` is greater than `1_000`. If so, it sets the `ImportantVal` `StorageValue` to the value held in `useful_amounts[0]`.
+In the [`pallet-dont-panic`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/dont_panic/pallet-dont-panic.rs) pallet, the `find_important_value` dispatchable checks to see if `useful_amounts[0]` is greater than `1_000`. If so, it sets the `ImportantVal` `StorageValue` to the value held in `useful_amounts[0]`.
 
 ```rust
     /// Do some work

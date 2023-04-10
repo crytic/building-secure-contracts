@@ -31,7 +31,7 @@ This is where `multi-abi` testing is useful: It allows Echidna to call functions
 
 ## Run Echidna
 
-We will use a simple example to show how `multi-abi` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [`../example/multiabi.sol`](../example/multiabi.sol).
+We will use a simple example to show how `multi-abi` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [multiabi.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multiabi.sol).
 
 The `Flag` contract contains a boolean flag that is only set if `flip()` is called, and a getter function that returns the value of the flag. For now, ignore `test_fail()`, we will talk about this function later.
 
@@ -69,7 +69,7 @@ contract EchidnaTest {
 }
 ```
 
-In a non `multi-abi` fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `multi-abi` testing, the invariant is broken. You can access [`../example/multiabi.yaml` here](../example/multiabi.yaml).
+In a non `multi-abi` fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `multi-abi` testing, the invariant is broken. You can access [multiabi.yaml here](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multiabi.yaml).
 
 ```yaml
 testMode: assertion

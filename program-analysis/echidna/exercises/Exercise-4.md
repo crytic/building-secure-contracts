@@ -14,7 +14,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
 
-We will test the following contract _[./exercise4/token.sol](./exercise4/token.sol)_:
+We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/token.sol)_:
 
 ```solidity
 pragma solidity ^0.5.0;
@@ -76,7 +76,7 @@ Once Echidna finds the bug, fix the issue, and re-try your assertion with Echidn
 
 This exercise is similar to the [first one](Exercise-1.md), but using assertions instead of explicit properties.
 
-The skeleton for this exercise is (_[./exercise4/template.sol](./exercise4/template.sol)_):
+The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/template.sol)_):
 
 ````solidity
 pragma solidity ^0.5.0;
@@ -100,4 +100,4 @@ contract TestToken is Token {
 
 ## Solution
 
-This solution can be found in [./exercise4/solution.sol](./exercise4/solution.sol)
+This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/solution.sol)
