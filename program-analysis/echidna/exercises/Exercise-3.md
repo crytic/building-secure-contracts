@@ -1,6 +1,6 @@
 # Exercise 3
 
-This exercise requires to finish [exercise 1](./Exercise-1.md) and [exercise 2](./Exercise-2.md)
+This exercise requires completing [exercise 1](./Exercise-1.md) and [exercise 2](./Exercise-2.md).
 
 **Table of contents:**
 
@@ -19,7 +19,7 @@ We will test the following contract _[token.sol](https://github.com/crytic/build
 ```solidity
 pragma solidity ^0.5.0;
 
-/// @notice The issues from exercise 1 and 2 are fixed.
+/// @notice The issues from exercises 1 and 2 are fixed.
 
 contract Ownable {
     address public owner = msg.sender;
@@ -87,17 +87,17 @@ contract MintableToken is Token {
 }
 ```
 
-The [version of token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/token.sol#L1) contains the fixes of the previous exercises.
+The [version of token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/token.sol#L1) contains the fixes from the previous exercises.
 
 ### Goals
 
-- Create a scenario, where `echidna (tx.origin)` becomes the owner of the contract at construction, and `totalMintable` is set to 10,000. Recall that Echidna needs a constructor without argument.
+- Create a scenario where `echidna (tx.origin)` becomes the owner of the contract at construction, and `totalMintable` is set to 10,000. Remember that Echidna needs a constructor without arguments.
 - Add a property to check if `echidna` can mint more than 10,000 tokens.
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
-The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/template.sol)_):
+The skeleton for this exercise is [template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/template.sol):
 
-````solidity
+```solidity
 pragma solidity ^0.5.0;
 
 import "./mintable.sol";
@@ -117,8 +117,8 @@ contract TestToken is MintableToken {
         // TODO: add the property
     }
 }
-````
+```
 
 ## Solution
 
-This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/solution.sol)
+This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/solution.sol).

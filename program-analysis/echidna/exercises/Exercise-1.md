@@ -1,16 +1,16 @@
 # Exercise 1
 
-**Table of contents:**
+**Table of Contents:**
 
 - [Exercise 1](#exercise-1)
-  - [Targeted contract](#targeted-contract)
-  - [Testing a token balance](#testing-a-token-balance)
+  - [Targeted Contract](#targeted-contract)
+  - [Testing a Token Balance](#testing-a-token-balance)
     - [Goals](#goals)
   - [Solution](#solution)
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
-## Targeted contract
+## Targeted Contract
 
 We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise1/token.sol)_:
 
@@ -57,16 +57,16 @@ contract Token is Ownable, Pausable {
 }
 ```
 
-## Testing a token balance
+## Testing a Token Balance
 
 ### Goals
 
-- Add a property to check that the address `echidna` cannot have more than an initial balance of 10000.
-- Once Echidna finds the bug, fix the issue, and re-check your property with Echidna.
+- Add a property to check that the address `echidna` cannot have more than an initial balance of 10,000.
+- After Echidna finds the bug, fix the issue, and re-check your property with Echidna.
 
 The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise1/template.sol)_):
 
-````solidity
+```solidity
 pragma solidity ^0.5.0;
 
 import "./token.sol";
@@ -87,8 +87,8 @@ contract TestToken is Token {
         // TODO: add the property
     }
 }
-````
+```
 
 ## Solution
 
-This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise1/solution.sol)
+This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise1/solution.sol).

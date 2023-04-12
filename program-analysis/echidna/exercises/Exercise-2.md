@@ -1,6 +1,6 @@
 # Exercise 2
 
-This exercise requires to finish the [exercise 1](Exercise-1.md).
+This exercise requires completing [exercise 1](Exercise-1.md).
 
 **Table of contents:**
 
@@ -14,7 +14,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
 
-We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise2/token.sol)_:
+We will test the following contract, _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise2/token.sol)_:
 
 ```solidity
 pragma solidity ^0.5.0;
@@ -67,13 +67,13 @@ contract Token is Ownable, Pausable {
 
 ### Goals
 
-- Consider `pause()` to be called at deployment, and the ownership removed.
+- Assume `pause()` is called at deployment, and the ownership is removed.
 - Add a property to check that the contract cannot be unpaused.
-- Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
+- When Echidna finds the bug, fix the issue and retry your property with Echidna.
 
 The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise2/template.sol)_):
 
-````solidity
+```solidity
 pragma solidity ^0.5.0;
 
 import "./token.sol";
@@ -93,8 +93,8 @@ contract TestToken is Token {
         // TODO: add the property
     }
 }
-````
+```
 
 ## Solution
 
-This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise2/solution.sol)
+The solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise2/solution.sol).

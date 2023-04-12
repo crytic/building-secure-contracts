@@ -14,7 +14,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 
 ## Targeted contract
 
-We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/token.sol)_:
+We will test the following contract, _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/token.sol)_:
 
 ```solidity
 pragma solidity ^0.5.0;
@@ -27,7 +27,7 @@ contract Ownable {
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Ownable: Caller is not the owner.");
+        require(msg.sender == owner, "Ownable: Caller is not the owner");
         _;
     }
 }
@@ -48,7 +48,7 @@ contract Pausable is Ownable {
     }
 
     modifier whenNotPaused() {
-        require(!_paused, "Pausable: Contract is paused.");
+        require(!_paused, "Pausable: Contract is paused");
         _;
     }
 }
@@ -67,18 +67,18 @@ contract Token is Ownable, Pausable {
 
 ### Goals
 
-Add asserts to ensure that after calling `transfer`:
+Add assertions to ensure that after calling `transfer`:
 
 - `msg.sender` must have its initial balance or less.
 - `to` must have its initial balance or more.
 
 Once Echidna finds the bug, fix the issue, and re-try your assertion with Echidna.
 
-This exercise is similar to the [first one](Exercise-1.md), but using assertions instead of explicit properties.
+This exercise is similar to the [first one](Exercise-1.md), but it uses assertions instead of explicit properties.
 
-The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/template.sol)_):
+The skeleton for this exercise is ([template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/template.sol)):
 
-````solidity
+```solidity
 pragma solidity ^0.5.0;
 
 import "./token.sol";
@@ -96,7 +96,7 @@ contract TestToken is Token {
         super.transfer(to, value);
     }
 }
-````
+```
 
 ## Solution
 
