@@ -1,21 +1,25 @@
 # Installation
 
-Echidna can be installed through docker or using the pre-compiled binary.
+Echidna can be installed either through Docker or by using the pre-compiled binary.
 
 ## MacOS
 
-You can install Echidna with `brew install echidna`.
+To install Echidna on MacOS, simply run the following command: 
 
-## Echidna through docker
+`brew install echidna`.
+
+## Echidna via Docker
+
+To install Echidna using Docker, execute the following commands:
 
 ```bash
 docker pull trailofbits/eth-security-toolbox
 docker run -it -v "$PWD":/home/training trailofbits/eth-security-toolbox
 ```
 
-_The last command runs eth-security-toolbox in a docker container that has access to your current directory. You can change the files from your host and run the tools on the files through the container_
+_The last command runs the eth-security-toolbox in a Docker container, which will have access to your current directory. This allows you to modify the files on your host machine and run the tools on those files within the container._
 
-Inside docker, run :
+Inside Docker, execute the following commands:
 
 ```bash
 solc-select use 0.5.11
@@ -24,8 +28,8 @@ cd /home/training
 
 ## Binary
 
-Check for the latest released binary here:
+You can find the latest released binary here:
 
 [https://github.com/crytic/echidna/releases/latest](https://github.com/crytic/echidna/releases/latest)
 
-The solc version is important to ensure that these exercises work as expected, we tested them using version 0.5.11.
+It's essential to use the correct solc version to ensure that these exercises work as expected. We have tested them using version 0.5.11.
