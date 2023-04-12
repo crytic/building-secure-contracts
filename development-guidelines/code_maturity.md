@@ -15,9 +15,8 @@ As technologies and tooling improve, standards and best practices evolve, and th
   - [Authentication / access controls](#authentication--access-controls)
   - [Complexity management](#complexity-management)
   - [Decentralization](#decentralization)
-- [Documentation](#documentation)
+  - [Documentation](#documentation)
   - [Transaction ordering risks](#transaction-ordering-risks)
-    - [Weak](#weak-6)
   - [Low-level manipulation](#low-level-manipulation)
   - [Testing and verification](#testing-and-verification)
 
@@ -40,9 +39,7 @@ _How are ratings determined?_ While the process for assigning ratings can vary d
 
 ## Arithmetic
 
-<!-- omit from toc -->
-
-### Weak
+### Weak <!-- omit from toc -->
 
 A weak arithmetic maturity reflects the lack of a systematic approach toward ensuring the correctness of the operations and reducing the risks of arithmetic-related flaws such as overflow, rounding, precision loss, and trapping. Specific criteria include, but are not limited to, the following:
 
@@ -52,9 +49,7 @@ A weak arithmetic maturity reflects the lack of a systematic approach toward ens
 - No explicit testing strategy has been identified to increase confidence in the system’s arithmetic.
 - The testing does not cover critical—or several—arithmetic edge cases.
 
-<!-- omit from toc -->
-
-### Moderate
+### Moderate <!-- omit from toc -->
 
 This rating indicates that the codebase follows best practices, but lacks a systematic approach toward ensuring the correctness of the arithmetic operations. The code is well structured to facilitate the testing of operations, and multiple testing techniques are used. Specific criteria include, but are not limited to, the following:
 
@@ -67,9 +62,7 @@ This rating indicates that the codebase follows best practices, but lacks a syst
 - Arithmetic operations are structured through stateless functions to facilitate their testing.
 - System parameters are bounded, the ranges are explained, and their impacts are propagated through the documentation/specification.
 
-<!-- omit from toc -->
-
-### Satisfactory
+### Satisfactory <!-- omit from toc -->
 
 Arithmetic-related risks are clearly identified and understood. A theoretical analysis ensures that the code is consistent with the specification. Specific criteria include, but are not limited to, the following:
 The system meets all moderate criteria.
@@ -83,9 +76,7 @@ The system meets all moderate criteria.
 
 “Auditing” refers to the proper use of events and monitoring procedures within the system.
 
-<!-- omit from toc -->
-
-### Weak
+### Weak <!-- omit from toc -->
 
 The system has no strategy towards emitting or using events. Specific criteria include, but are not limited to, the following:
 
@@ -93,9 +84,7 @@ The system has no strategy towards emitting or using events. Specific criteria i
 - There are no clear or consistent guidelines for event-emitting functions.
 - The same events are reused for different purposes.
 
-<!-- omit from toc -->
-
-### Moderate
+### Moderate <!-- omit from toc -->
 
 The system is built to be monitored. An off-chain infrastructure for detecting unexpected behavior is in place, and the team can be notified about events. Clear documentation highlights how the events should be used by third parties. Specific criteria include, but are not limited to, the following:
 
@@ -106,9 +95,7 @@ The system is built to be monitored. An off-chain infrastructure for detecting u
 - The monitoring documentation describes how to review logs in order to audit a failure.
 - An [incident response plan](https://github.com/crytic/building-secure-contracts/blob/master/development-guidelines/incident_response.md) describes how the protocol’s actors must react in case of failure.
 
-<!-- omit from toc -->
-
-### Satisfactory
+### Satisfactory <!-- omit from toc -->
 
 The system is well monitored, and processes are in place to react in case of defect or failure. Specific criteria include, but are not limited to, the following:
 The system meets all moderate criteria.
@@ -121,9 +108,7 @@ The system meets all moderate criteria.
 
 “Authentication / access controls” refers to the use of robust access controls to handle identification and authorization and to ensure safe interactions with the system.
 
-<!-- omit from toc -->
-
-### Weak
+### Weak <!-- omit from toc -->
 
 The expected access controls are unclear or inconsistent; one address may be in control of the entire system, and there is no indication of additional safeguards for this account. Specific criteria include, but are not limited to, the following:
 No access controls are in place for privileged functions, or some privileged functions lack access controls.
@@ -131,24 +116,20 @@ No access controls are in place for privileged functions, or some privileged fun
 - There are no differentiated privileged actors or roles.
 - All privileged functions are callable by one address, and there is no indication that this address will have further access controls (e.g., multisig).
 
-<!-- omit from toc -->
-
-### Moderate
+### Moderate <!-- omit from toc -->
 
 The system adheres to best practices, the major actors are documented and tested, and risks are limited through a clear separation of privileges. Specific criteria include, but are not limited to, the following:
 None of the weak criteria apply to the codebase.
 
 - All privileged functions have some form of access control.
-- The principle of least privilege is followed for all components.
+- The principle of [least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege) is followed for all components.
 - There are different roles in the system, and privileges for different roles do not overlap.
 - There is clear documentation about the actors and their respective privileges in the system.
 - Tests cover every actor-specific privilege.
 - Roles can be revoked (if applicable).
 - Two-step processes are used for privileged operations performed by Externally Owned Accounts (EOA).
 
-<!-- omit from toc -->
-
-### Satisfactory
+### Satisfactory <!-- omit from toc -->
 
 All actors and roles are clearly documented, including their expected privileges, and the implementation is consistent with all expected behavior and thoroughly tested. All known risks are highlighted and visible to users. Specific criteria include, but are not limited to, the following:
 
@@ -162,9 +143,7 @@ All actors and roles are clearly documented, including their expected privileges
 
 “Complexity management” refers to the separation of logic into functions with a clear purpose. The presence of clear structures designed to manage system complexity, including the separation of system logic into clearly defined functions, is the central focus when evaluating the system with respect to this category.
 
-<!-- omit from toc -->
-
-### Weak
+### Weak <!-- omit from toc -->
 
 The code has unnecessary complexity (e.g., failure to adhere to well-established software development practices) that hinders automated and/or manual review. Specific criteria include, but are not limited to, the following:
 
@@ -173,23 +152,19 @@ The code has unnecessary complexity (e.g., failure to adhere to well-established
 - Functions have unnecessary redundant code/code duplication.
 - Contracts have a complex inheritance tree.
 
-<!-- omit from toc -->
-
-### Moderate
+### Moderate <!-- omit from toc -->
 
 The most complex parts of the codebase are well identified, and their complexity is reduced as much as possible. Specific criteria include, but are not limited to, the following:
 None of the weak criteria apply to the codebase.
 
-- Functions have a high cyclomatic complexity (≥11).
+- Functions have a high cyclomatic complexity ([≥11](https://en.wikipedia.org/wiki/Cyclomatic_complexity#Interpretation)).
 - Critical functions are well scoped, making them easy to understand and test.
 - Redundant code in the system is limited and justified.
 - Inputs and their expected values are clear, and validation is performed where necessary.
 - A clear and documented naming convention is in place for functions, variables, and other identifiers, and the codebase clearly adheres to the convention.
 - Types are not used to enforce correctness.
 
-<!-- omit from toc -->
-
-## Satisfactory
+## Satisfactory <!-- omit from toc -->
 
 The code has little or no unnecessary complexity, any necessary complexity is well documented, and all code is easy to test. Specific criteria include, but are not limited to, the following:
 
@@ -204,9 +179,7 @@ The code has little or no unnecessary complexity, any necessary complexity is we
 
 > A note on upgradeability: Upgradeability is often an important feature to consider when reviewing the decentralization of a system. While upgradeability is not, at a fundamental or theoretical level, incompatible with decentralization, it is, in practice, an obstacle in realizing robust system decentralization. Upgradeable systems that aim to be decentralized have additional requirements to demonstrate that their upgradeable components do not impact their decentralization.
 
-<!-- omit from toc -->
-
-## Weak
+## Weak <!-- omit from toc -->
 
 The system has several points of centrality that may not be clearly visible to the users. Specific criteria include, but are not limited to, the following:
 
@@ -216,9 +189,7 @@ The system has several points of centrality that may not be clearly visible to t
 - System parameters can be changed at any time by a single entity.
 - Permission/authorization by a centralized actor is required to use the contracts.
 
-<!-- omit from toc -->
-
-## Moderate
+## Moderate <!-- omit from toc -->
 
 Centralization risks are identified, justified and documented, and users might choose to not follow an upgrade. Specific criteria include, but are not limited to, the following:
 
@@ -228,9 +199,7 @@ Centralization risks are identified, justified and documented, and users might c
 - Privileged actors are not able to unilaterally move funds out of, or trap funds in, the protocol.
 - All privileges are documented.
 
-<!-- omit from toc -->
-
-## Satisfactory
+## Satisfactory <!-- omit from toc -->
 
 The system provides clear justification to demonstrate its path toward decentralization. Specific criteria include, but are not limited to the following:
 
@@ -240,13 +209,11 @@ The system provides clear justification to demonstrate its path toward decentral
 - Risks related to external contract interactions are documented.
 - The critical configuration parameters are immutable once deployed, or the users have a documented path to opt out of the changes or exit the system if they are updated.
 
-# Documentation
+## Documentation
 
 “Documentation” refers to the presence of comprehensive and readable codebase documentation, including inline code comments, the roles and responsibilities of system entities, system invariants, use cases, expected system behavior, and data flow diagrams.
 
-<!-- omit from toc -->
-
-### Weak
+### Weak <!-- omit from toc -->
 
 Minimal documentation is present, or documentation is clearly incomplete or outdated. Specific criteria include, but are not limited to, the following:
 
@@ -255,9 +222,7 @@ Minimal documentation is present, or documentation is clearly incomplete or outd
 - Documentation is not publicly available. (Note that this applies only to codebases meant for general public usage.)
 - Documentation depends directly on a set of artificial terms or words that are not clearly explained.
 
-<!-- omit from toc -->
-
-### Moderate
+### Moderate <!-- omit from toc -->
 
 The documentation adheres to best practices. Important components are documented; the documentation exists at different levels (such as inline code comments, NatSpec, and system documentation); and there is consistency across all documentation. Specific criteria include, but are not limited to, the following:
 
@@ -272,9 +237,7 @@ The documentation adheres to best practices. Important components are documented
 - All critical code blocks are documented.
 - Known risks and system limitations are documented.
 
-<!-- omit from toc -->
-
-### Satisfactory
+### Satisfactory <!-- omit from toc -->
 
 Thorough documentation exists spanning all of the areas required for a moderate rating, as well as system corner cases, detailed aspects of users stories, and all features. The documentation matches the code. Specific criteria include, but are not limited to, the following:
 
@@ -290,9 +253,7 @@ Thorough documentation exists spanning all of the areas required for a moderate 
 
 “Transaction ordering risks” refers to the resilience against malicious ordering of the transactions. This includes toxic forms of Miner Extractable Value (MEV), such as front-running, sandwiching, forced liquidations, and oracle attacks.
 
-<!-- omit from toc -->
-
-### Weak
+### Weak <!-- omit from toc -->
 
 There are unexpected/undocumented risks that arise due to the ordering of transactions. Specific criteria include, but are not limited to, the following:
 
@@ -301,9 +262,7 @@ There are unexpected/undocumented risks that arise due to the ordering of transa
 - The system relies on unjustified constraints to prevent MEV extraction.
 - The system makes unproven assumptions about which attributes may or may not be manipulatable by an MEV extractor.
 
-<!-- omit from toc -->
-
-### Moderate
+### Moderate <!-- omit from toc -->
 
 Risks related to transaction ordering are identified and, when applicable, limited through on-chain mitigations. Specific criteria include, but are not limited to, the following:
 
@@ -313,9 +272,7 @@ Risks related to transaction ordering are identified and, when applicable, limit
 - The testing strategy emphasizes transaction ordering risks.
 - The system uses tamper-resistant oracles.
 
-<!-- omit from toc -->
-
-### Satisfactory
+### Satisfactory <!-- omit from toc -->
 
 All transaction ordering risks are documented and clearly justified. The known risks are highlighted through documentation and tests and are visible to the users. Specific criteria include, but are not limited to, the following:
 
@@ -328,17 +285,13 @@ All transaction ordering risks are documented and clearly justified. The known r
 
 “Low-level manipulation” refers to the usage of low-level operations (e.g., assembly code, bitwise operations, low-level calls) and relevant justification within the codebase.
 
-<!-- omit from toc -->
-
-### Weak
+### Weak <!-- omit from toc -->
 
 The code uses unjustified low-level manipulations. Specific criteria include, but are not limited to, the following:
 
 - Usage of assembly code or low-level manipulation is not justified; most can likely be replaced by high-level code.
 
-<!-- omit from toc -->
-
-### Moderate
+### Moderate <!-- omit from toc -->
 
 Low level operations are justified and limited. Extra documentation and testing is provided for them. Specific criteria include, but are not limited to, the following:
 
@@ -348,9 +301,7 @@ Low level operations are justified and limited. Extra documentation and testing 
 - The code does not re-implement well-established, low-level library functionality without justification (e.g., OZ’s SafeERC20).
 - A high-level implementation reference exists for each function with complex assembly code.
 
-<!-- omit from toc -->
-
-### Satisfactory
+### Satisfactory <!-- omit from toc -->
 
 Thorough documentation, justification, and testing exists to increase confidence in all usage of assembly code and low-level manipulation. Implementations are validated with automated testing against a reference implementation. Specific criteria include, but are not limited to, the following:
 
@@ -362,9 +313,7 @@ Thorough documentation, justification, and testing exists to increase confidence
 
 “Testing and verification” refers to the robustness of testing procedures of techniques (including unit tests, integration tests, fuzzing, and symbolic execution) as well as the amount of test coverage.
 
-<!-- omit from toc -->
-
-### Weak
+### Weak <!-- omit from toc -->
 
 Testing is limited and covers only some of the “happy paths.” Specific criteria include, but are not limited to, the following:
 
@@ -372,9 +321,7 @@ Testing is limited and covers only some of the “happy paths.” Specific crite
 - Provided tests fail for the codebase.
 - There is insufficient or non-existent documentation to run the test suite “out of the box.”
 
-<!-- omit from toc -->
-
-### Moderate
+### Moderate <!-- omit from toc -->
 
 Testing adheres to best practices and covers a large majority of the code. An automated testing technique is used to increase the confidence of the most critical components. Specific criteria include, but are not limited to, the following:
 
@@ -387,9 +334,7 @@ Testing adheres to best practices and covers a large majority of the code. An au
 - Integration tests are implemented, if applicable.
 - Test code follows best practices and does not trigger warnings by the compiler or static analysis tools.
 
-<!-- omit from toc -->
-
-### Satisfactory
+### Satisfactory <!-- omit from toc -->
 
 Testing is clearly an important part of codebase development. Tests include unit tests and end-to-end testing. Code properties are clearly identified and validated with an automated testing technique. Specific criteria include, but are not limited to, the following:
 
