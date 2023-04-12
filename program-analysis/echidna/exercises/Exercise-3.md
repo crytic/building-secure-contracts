@@ -97,7 +97,7 @@ The [version of token.sol](https://github.com/crytic/building-secure-contracts/t
 
 The skeleton for this exercise is [template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/template.sol):
 
-```solidity
+````solidity
 pragma solidity ^0.5.0;
 
 import "./mintable.sol";
@@ -117,7 +117,7 @@ contract TestToken is MintableToken {
         // TODO: add the property
     }
 }
-```
+````
 
 ## Solution
 

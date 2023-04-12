@@ -78,7 +78,7 @@ This exercise is similar to the [first one](Exercise-1.md), but it uses assertio
 
 The skeleton for this exercise is ([template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/template.sol)):
 
-```solidity
+````solidity
 pragma solidity ^0.5.0;
 
 import "./token.sol";
@@ -96,7 +96,7 @@ contract TestToken is Token {
         super.transfer(to, value);
     }
 }
-```
+````
 
 ## Solution
 

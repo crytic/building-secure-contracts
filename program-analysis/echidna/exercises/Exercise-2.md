@@ -73,7 +73,7 @@ contract Token is Ownable, Pausable {
 
 The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise2/template.sol)_):
 
-```solidity
+````solidity
 pragma solidity ^0.5.0;
 
 import "./token.sol";
@@ -93,7 +93,7 @@ contract TestToken is Token {
         // TODO: add the property
     }
 }
-```
+````
 
 ## Solution
 
