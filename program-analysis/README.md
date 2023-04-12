@@ -52,17 +52,20 @@ The broad areas frequently relevant for smart contracts include:
 
 - **State machine.** Most contracts can be represented as a state machine. Consider checking that (1) no invalid state can be reached, (2) if a state is valid, then it can be reached, and (3) no state traps the contract.
   - Echidna and Manticore are the tools to favor for testing state-machine specifications.
-  
 - **Access controls.** If your system has privileged users (e.g., an owner, controllers, ...), you must ensure that (1) each user can only perform the authorized actions and (2) no user can block actions from a more privileged user.
+
   - Slither, Echidna, and Manticore can check for correct access controls. For example, Slither can check that only whitelisted functions lack the onlyOwner modifier. Echidna and Manticore are useful for more complex access control, such as permission being given only if the contract reaches a specific state.
 
 - **Arithmetic operations.** Checking the soundness of arithmetic operations is critical. Using `SafeMath` everywhere is a good step to prevent overflow/underflow, but you must still consider other arithmetic flaws, including rounding issues and flaws that trap the contract.
+
   - Manticore is the best choice here. Echidna can be used if the arithmetic is out-of-scope of the SMT solver.
 
 - **Inheritance correctness.** Solidity contracts rely heavily on multiple inheritance. Mistakes like a shadowing function missing a `super` call and misinterpreted c3 linearization order can quickly be introduced.
+
   - Slither is the tool for detecting these issues.
 
 - **External interactions.** Contracts interact with each other, and some external contracts should not be trusted. For example, if your contract relies on external oracles, will it remain secure if half the available oracles are compromised?
+
   - Manticore and Echidna are the best choices for testing external interactions with your contracts. Manticore has a built-in mechanism to stub external contracts.
 
 - **Standard conformance.** Ethereum standards (e.g., ERC20) have a history of design flaws. Be aware of the limitations of the standard you are building on.
