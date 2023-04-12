@@ -1,43 +1,43 @@
-# Contributing to Building-secure-contracts
+# Contributing to Building-Secure-Contracts
 
-First, thanks for your interest in contributing to Building-secure-contracts! We welcome and appreciate all contributions, including bug reports, feature suggestions, tutorials/blog posts, and code improvements.
+First, thank you for your interest in contributing to Building-Secure-Contracts! We appreciate and warmly welcome all contributions, which include bug reports, feature suggestions, tutorials/blog posts, and code improvements.
 
-If you're unsure where to start, we recommend our [`good first issue`](https://github.com/crytic/building-secure-contracts/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [`help wanted`](https://github.com/crytic/building-secure-contracts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issue labels.
+If you're not sure where to begin, we recommend checking out our [`good first issue`](https://github.com/crytic/building-secure-contracts/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [`help wanted`](https://github.com/crytic/building-secure-contracts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issue labels.
 
-## Bug reports and feature suggestions
+## Bug Reports and Feature Suggestions
 
-Bug reports and feature suggestions can be submitted to our issue tracker. For bug reports, attaching the contract that caused the bug will help us in debugging and resolving the issue quickly. If you find a security vulnerability, do not open an issue; email opensource@trailofbits.com instead.
+Please submit bug reports and feature suggestions to our issue tracker. When reporting a bug, attaching the contract causing the issue is helpful for efficient debugging and resolution. If you discover a security vulnerability, do not open an issue; instead, email opensource@trailofbits.com.
 
 ## Questions
 
-Questions can be submitted to the issue tracker, but you may get a faster response if you ask in our [chat room](https://empireslacking.herokuapp.com/) (in the #ethereum channel).
+You can submit questions to the issue tracker, but you might receive a quicker response if you ask in our [chat room](https://empireslacking.herokuapp.com/) (in the #ethereum channel).
 
-## Code
+## Code Contributions
 
-building-secure-contracts uses the pull request contribution model. Please make an account on Github, fork this repo, and submit code contributions via pull request. For more documentation, look [here](https://guides.github.com/activities/forking/).
+Building-Secure-Contracts follows the pull request contribution model. Create an account on Github, fork this repo, and submit code contributions through pull requests. For additional documentation, refer [here](https://guides.github.com/activities/forking/).
 
 Some pull request guidelines:
 
-- Minimize irrelevant changes (formatting, whitespace, etc) to code that would otherwise not be touched by this patch. Save formatting or style corrections for a separate pull request that does not make any semantic changes.
-- When possible, large changes should be split up into smaller focused pull requests.
-- Fill out the pull request description with a summary of what your patch does, key changes that have been made, and any further points of discussion, if applicable.
-- Title your pull request with a brief description of what it's changing. "Fixes #123" is a good comment to add to the description, but makes for an unclear title on its own.
+- Limit unnecessary changes (formatting, whitespace, etc.) to code unrelated to the patch. Save formatting or style corrections for a separate pull request, which doesn't include any semantic changes.
+- When possible, break down large changes into smaller, focused pull requests.
+- Complete the pull request description with an overview of your patch, including key modifications, and any further discussion points if relevant.
+- Use a concise title to describe your pull request's changes. "Fixes #123" is suitable for adding to the description, but not as a standalone title.
 
 ## Directory Structure
 
-Below is a rough outline of building-secure-contracts's structure:
+Here's a basic overview of Building-Secure-Contracts' structure:
 
 ```text
 .
-├── development-guidelnes # High-level best-practices for all smart contracts
+├── development-guidelnes # High-level best practices for all smart contracts
 ├── learn_evm # EVM technical knowledge
-├── not-so-smart-contracts # Examples of smart contract common issues. Each issue contains a description, an example and recommendations
-├── program-analysis # How to use automated tools to secure contracts
-├── ressources # Various online resources
+├── not-so-smart-contracts # Examples of common smart contract issues, including descriptions, examples, and recommendations
+├── program-analysis # How to utilize automated tools for securing contracts
+├── resources # Various online resources
 └── ...
 ```
 
-## Linting and formatting
+## Linting and Formatting
 
 To install the formatters and linters, run:
 
@@ -45,26 +45,26 @@ To install the formatters and linters, run:
 npm install
 ```
 
-To run the formatter, use:
+To use the formatter, run:
 
 ```bash
 npm run format
 ```
 
-To run the linters, use:
+To use the linters, run:
 
 ```bash
 npm run lint
 ```
 
-To run the individual linters, use:
+To use individual linters, run:
 
 - `npm run lint:format` to check the formatting
-- `npm run lint:links` to check for invalid links in markdown files
+- `npm run lint:links` to verify the validity of links in markdown files
 
-## Create the book
+## Creating the Book
 
-We use `mdbook` to generate [secure-contracts.com](https://secure-contracts.com/).
+We utilize `mdbook` to generate [secure-contracts.com](https://secure-contracts.com/).
 
 To run it locally:
 
@@ -73,4 +73,4 @@ cargo install --git https://github.com/montyly/mdBook.git mdbook
 mdbook build
 ```
 
-Note: we use https://github.com/montyly/mdBook.git, which contains https://github.com/rust-lang/mdBook/pull/1584.
+Note: We use https://github.com/montyly/mdBook.git, which contains https://github.com/rust-lang/mdBook/pull/1584.
