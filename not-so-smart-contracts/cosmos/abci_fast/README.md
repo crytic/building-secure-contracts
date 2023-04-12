@@ -1,10 +1,10 @@
-# Slow ABCI methods
+# Slow ABCI Methods
 
-ABCI methods (like `EndBlocker`) [are not constrained by `gas`](https://docs.cosmos.network/v0.45/basics/app-anatomy.html#beginblocker-and-endblocker). Therefore, it is essential to ensure that they always will finish in a reasonable time. Otherwise, the chain will halt.
+ABCI methods (such as `EndBlocker`) [are not constrained by `gas`](https://docs.cosmos.network/v0.45/basics/app-anatomy.html#beginblocker-and-endblocker). Therefore, it is crucial to ensure that they always finish in a reasonable time; otherwise, the chain will halt.
 
 ## Example
 
-Below you can find part of a tokens lending application. Before a block is executed, the `BeginBlocker` method charges an interest for each borrower.
+Below is a part of a token lending application. The `BeginBlocker` method charges interest for each borrower before a block is executed.
 
 ```go
 func BeginBlocker(ctx sdk.Context, k keeper.Keeper) {
@@ -28,15 +28,14 @@ func accrueInterest(ctx sdk.Context, k keeper.Keeper) {
 }
 ```
 
-The `accrueInterest` contains multiple nested for loops and is obviously too complex to be efficient. Mischievous
-users can take a lot of small loans to slow down computation to a point where the chain is not able to keep up with blocks production and halts.
+The `accrueInterest` function contains multiple nested for loops, making it too complex to be efficient. Malicious users can take many small loans to slow down computation to the point where the chain cannot keep up with block production and halts.
 
 ## Mitigations
 
-- Estimate computational complexity of all implemented ABCI methods and ensure that they will scale correctly with the application's usage growth
-- Implement stress tests for the ABCI methods
-- [Ensure that minimal fees are enforced on all messages](https://docs.cosmos.network/v0.46/basics/gas-fees.html#introduction-to-gas-and-fees) to prevent spam
+- Estimate the computational complexity of all implemented ABCI methods and ensure that they will scale correctly with the application's usage growth.
+- Implement stress tests for the ABCI methods.
+- [Ensure that minimal fees are enforced on all messages](https://docs.cosmos.network/v0.46/basics/gas-fees.html#introduction-to-gas-and-fees) to prevent spam.
 
-## External examples
+## External Examples
 
 - [Gravity Bridge's `slashing` method was executed in the `EndBlocker` and contained a computationally expensive, nested loop](https://github.com/althea-net/cosmos-gravity-bridge/issues/347).

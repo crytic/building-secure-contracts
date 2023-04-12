@@ -1,7 +1,6 @@
 # Non-determinism
 
-Non-determinism in conensus-relevant code will cause the blockchain to halt.
-There are quite a few sources of non-determinism, some of which are specific to the Go language:
+Non-determinism in consensus-relevant code can cause the blockchain to halt. Various sources of non-determinism exist, with some specific to the Go language:
 
 - [`range` iterations over an unordered map or other operations involving unordered structures](https://lev.pm/posts/2020-04-18-golang-map-randomness/)
 - [Implementation (platform) dependent types like `int`](https://go.dev/ref/spec#Numeric_types) or `filepath.Ext`
@@ -14,7 +13,7 @@ There are quite a few sources of non-determinism, some of which are specific to 
 
 ## Example
 
-Below we can see an iteration over a `amounts` `map`. If `k.GetPool` fails for more than one `asset`, then different nodes will fail with different errors, causing the chain to halt.
+The following example demonstrates an iteration over a `map` of `amounts`. If `k.GetPool` fails for more than one `asset`, different nodes will produce different errors, causing the chain to halt.
 
 ```go
 func (k msgServer) CheckAmounts(goCtx context.Context, msg *types.MsgCheckAmounts) (*types.MsgCheckAmountsResponse, error) {
@@ -42,15 +41,15 @@ func (k msgServer) CheckAmounts(goCtx context.Context, msg *types.MsgCheckAmount
 }
 ```
 
-Even if we fix the `map` problem, it is still possible that the `total` overflows for nodes running on 32-bit architectures earlier than for the rest of the nodes, again causing the chain split.
+Even after fixing the `map` issue, the `total` overflow may occur for nodes running on 32-bit architectures earlier than others, causing a chain split.
 
 ## Mitigations
 
 - Use static analysis, for example [custom CodeQL rules](https://github.com/crypto-com/cosmos-sdk-codeql)
 - Test your application with nodes running on various architectures or require nodes to run on a specific one
-- Prepare and test procedures for recovering from a blockchain split
+- Develop and test procedures for recovering from a blockchain split
 
 ## External examples
 
-- [ThorChain halt due to "iteration over a map error-ing at different indexes"](https://gitlab.com/thorchain/thornode/-/issues/1169)
-- [Cyber's had problems with `float64` type](https://github.com/cybercongress/go-cyber/issues/66)
+- [ThorChain halted due to "iteration over a map error-ing at different indexes"](https://gitlab.com/thorchain/thornode/-/issues/1169)
+- [Cyber encountered problems with the `float64` type](https://github.com/cybercongress/go-cyber/issues/66)

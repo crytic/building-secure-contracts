@@ -1,10 +1,10 @@
-# Missing error handler
+# Missing Error Handler
 
-The idiomatic way of handling errors in `Go` is to compare the returned error to nil. This way of checking for errors gives the programmer a lot of control. However, when error handling is ignored it can also lead to numerous problems. The impact of this is most obvious in method calls in the `bankKeeper` module, which even causes some accounts with insufficient balances to perform `SendCoin` operations normally without triggering a transaction failure.
+The idiomatic way of handling errors in `Go` involves comparing the returned error to nil. This error-checking method provides the programmer with a significant level of control. However, ignoring error handling can result in various issues. The effects are particularly evident in method calls in the `bankKeeper` module, where some accounts with insufficient balances still carry out `SendCoin` operations normally, without triggering a transaction failure.
 
 ## Example
 
-In the following code, `k.bankKeeper.SendCoins(ctx, sender, receiver, amount)` does not have any return values being used, including `err`. This results in `SendCoin` not being able to prevent the transaction from executing even if there is an `error` due to insufficient balance in `SendCoin`.
+In the code snippet below, `k.bankKeeper.SendCoins(ctx, sender, receiver, amount)` does not utilize any return values, including `err`. Consequently, `SendCoin` cannot prevent the transaction from executing, even if there is an `error` caused by an insufficient balance in `SendCoin`.
 
 ```golang
 func (k msgServer) Transfer(goCtx context.Context, msg *types.MsgTransfer) (*types.MsgTransferResponse, error) {
@@ -17,11 +17,11 @@ func (k msgServer) Transfer(goCtx context.Context, msg *types.MsgTransfer) (*typ
 
 ## Mitigations
 
-- Implement the error handling process instead of missing it
+- Implement the error handling process, rather than omitting it.
 
-## External examples
+## External Examples
 
-- [ignite's tutorials](https://github.com/ignite/cli/issues/2828).
+- [Ignite's Tutorials](https://github.com/ignite/cli/issues/2828)
 - [Fadeev's Loan Project](https://github.com/fadeev/loan/blob/master/x/loan/keeper/msg_server_approve_loan.go)
-- [JackalLabs](https://github.com/JackalLabs/canine-chain/issues/8).
-- [OllO](https://github.com/OllO-Station/ollo/issues/20)
+- [JackalLabs](https://github.com/JackalLabs/canine-chain/issues/8)
+- [OllO Station](https://github.com/OllO-Station/ollo/issues/20)

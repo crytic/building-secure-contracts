@@ -1,18 +1,14 @@
-# Incorrect Signers
+# Addressing Incorrect Signers
 
-In Cosmos, transaction's signature(s) are validated against public keys (addresses) taken from the transaction itself,
-where locations of the keys [are specified in `GetSigners` methods](https://docs.cosmos.network/v0.46/core/transactions.html#signing-transactions).
+In Cosmos, a transaction's signatures are validated against public keys (addresses) extracted from the transaction itself, with the key locations [specified in `GetSigners` methods](https://docs.cosmos.network/v0.46/core/transactions.html#signing-transactions).
 
-In the simplest case there is just one signer required, and its address is simple to use correctly.
-However, in more complex scenarios like when multiple signatures are required or a delegation schema is implemented,
-it is possible to make mistakes about what addresses in the transaction (the message) are actually authenticated.
+For simple cases where only one signer is needed, using the correct address is straightforward. However, in more complex scenarios involving multiple signatures or delegation schemas, it's possible to make mistakes in determining which addresses in the transaction (the message) are being authenticated.
 
-Fortunately, mistakes in `GetSigners` should make part of application's intended functionality not working,
-making it easy to spot the bug.
+Thankfully, errors in `GetSigners` typically result in a portion of the application's intended functionality not working, making it easier to identify the issue.
 
 ## Example
 
-The example application allows an author to create posts. A post can be created with a `MsgCreatePost` message, which has `signer` and `author` fields.
+Consider an example application that allows authors to create posts. A post can be created using a `MsgCreatePost` message, which includes `signer` and `author` fields.
 
 ```proto
 service Msg {
@@ -38,7 +34,7 @@ message Post {
 }
 ```
 
-The `signer` field is used for signature verification - as can be seen in `GetSigners` method below.
+The `signer` field is used for signature verification, as demonstrated in the `GetSigners` method below.
 
 ```go
 func (msg *MsgCreatePost) GetSigners() []sdk.AccAddress {
@@ -63,7 +59,7 @@ func (msg *MsgCreatePost) ValidateBasic() error {
 }
 ```
 
-The `author` field is saved along with the post's content:
+The `author` field is stored along with the post content:
 
 ```go
 func (k msgServer) CreatePost(goCtx context.Context, msg *types.MsgCreatePost) (*types.MsgCreatePostResponse, error) {
@@ -81,9 +77,9 @@ func (k msgServer) CreatePost(goCtx context.Context, msg *types.MsgCreatePost) (
 }
 ```
 
-The bug here - mismatch between the message signer address and the stored address - allows users to impersonate other users by sending an arbitrary `author` field.
+In this example, the bug involves a mismatch between the message signer address and the stored address, allowing users to impersonate others by providing an arbitrary `author` field.
 
-## Mitigations
+## Mitigation Strategies
 
-- Keep signers-related logic simple
-- Implement basic sanity tests for all functionalities
+- Keep the logic related to signers simple.
+- Implement basic sanity tests for all functionalities.
