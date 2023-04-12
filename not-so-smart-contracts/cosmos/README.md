@@ -14,17 +14,17 @@ Each _Not So Smart Cosmos_ entry provides a standard set of information:
 
 ## Vulnerabilities
 
-| Not So Smart Contract                                  | Description                                                                                   |
-| ------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
-| [Incorrect signers](incorrect_getsigners)              | Broken access controls due to incorrect signer validation                                     |
-| [Non-determinism](non_determinism)                     | Consensus failure due to non-determinism                                                      |
-| [Not prioritized messages](messages_priority)          | Risks arising from use of non-prioritized message types                                      |
-| [Slow ABCI methods](abci_fast)                         | Consensus failure due to slow ABCI methods                                                    |
-| [ABCI methods panic](abci_panic)                       | Chain halt due to panic in ABCI methods                                                       |
-| [Broken bookkeeping](broken_bookkeeping)               | Exploiting mismatch between different modules' views on balances                              |
-| [Rounding errors](rounding_errors)                     | Bugs related to imprecision in finite precision arithmetic                                    |
-| [Unregistered message handler](unregistered_msg_handler)| Broken functionality due to unregistered msg handler                                          |
-| [Missing error handler](missing_error_handler)         | Missing error handling results in the successful execution of a transaction that should fail |
+| Not So Smart Contract                                    | Description                                                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| [Incorrect signers](incorrect_getsigners)                | Broken access controls due to incorrect signer validation                                    |
+| [Non-determinism](non_determinism)                       | Consensus failure due to non-determinism                                                     |
+| [Not prioritized messages](messages_priority)            | Risks arising from use of non-prioritized message types                                      |
+| [Slow ABCI methods](abci_fast)                           | Consensus failure due to slow ABCI methods                                                   |
+| [ABCI methods panic](abci_panic)                         | Chain halt due to panic in ABCI methods                                                      |
+| [Broken bookkeeping](broken_bookkeeping)                 | Exploiting mismatch between different modules' views on balances                             |
+| [Rounding errors](rounding_errors)                       | Bugs related to imprecision in finite precision arithmetic                                   |
+| [Unregistered message handler](unregistered_msg_handler) | Broken functionality due to unregistered msg handler                                         |
+| [Missing error handler](missing_error_handler)           | Missing error handling results in the successful execution of a transaction that should fail |
 
 ## Credits
 
