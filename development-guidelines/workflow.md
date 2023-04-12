@@ -7,7 +7,7 @@ Follow this high-level process while writing your smart contracts for enhanced s
 - Review your contracts using [Slither](https://github.com/crytic/slither), which has over 70 built-in detectors for common vulnerabilities. Run it on every check-in with new code and ensure it gets a clean report (or use triage mode to silence certain issues).
 
 2. **Consider special features of your contract:**
- 
+
 - If your contracts are upgradeable, review your upgradeability code for flaws using [`slither-check-upgradeability`](https://github.com/crytic/slither/wiki/Upgradeability-Checks) or [Crytic](https://blog.trailofbits.com/2020/06/12/upgradeable-contracts-made-safer-with-crytic/). We have documented 17 ways upgrades can go sideways.
 - If your contracts claim to conform to ERCs, check them with [`slither-check-erc`](https://github.com/crytic/slither/wiki/ERC-Conformance). This tool instantly identifies deviations from six common specs.
 - If you have unit tests in Truffle, enrich them with [`slither-prop`](https://github.com/crytic/slither/wiki/Property-generation). It automatically generates a robust suite of security properties for features of ERC20 based on your specific code.
