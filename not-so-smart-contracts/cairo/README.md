@@ -14,17 +14,17 @@ Each _Not So Smart Contract_ consists of a standard set of information:
 
 ## Vulnerabilities
 
-| Not So Smart Contract                                                           | Description                                                 |
-| ------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| [Improper access controls](access_controls)                                     | Flawed access controls due to StarkNet account abstraction  |
-| [Integer division errors](integer_division)                                     | Unforeseen results from division in a finite field          |
-| [View state modifications](view_state)                                          | Lack of prevention for state modifications in view functions|
-| [Arithmetic overflow](arithmetic_overflow)                                      | Insecure arithmetic in Cairo by default                      |
-| [Signature replays](replay_protection)                                          | Necessary robust reuse protection due to account abstraction|
-| [L1 to L2 Address Conversion](L1_to_L2_address_conversion)                      | Essential L2 address checks for L1 to L2 messaging          |
-| [Incorrect Felt Comparison](incorrect_felt_comparison)                          | Unexpected results from felt comparison                      |
-| [Namespace Storage Var Collision](namespace_storage_var_collision)              | Storage variables unscoped by namespaces                     |
-| [Dangerous Public Imports in Libraries](dangerous_public_imports_in_libraries) | Ability to call nonimported external functions              |
+| Not So Smart Contract                                                          | Description                                                  |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------ |
+| [Improper access controls](access_controls)                                    | Flawed access controls due to StarkNet account abstraction   |
+| [Integer division errors](integer_division)                                    | Unforeseen results from division in a finite field           |
+| [View state modifications](view_state)                                         | Lack of prevention for state modifications in view functions |
+| [Arithmetic overflow](arithmetic_overflow)                                     | Insecure arithmetic in Cairo by default                      |
+| [Signature replays](replay_protection)                                         | Necessary robust reuse protection due to account abstraction |
+| [L1 to L2 Address Conversion](L1_to_L2_address_conversion)                     | Essential L2 address checks for L1 to L2 messaging           |
+| [Incorrect Felt Comparison](incorrect_felt_comparison)                         | Unexpected results from felt comparison                      |
+| [Namespace Storage Var Collision](namespace_storage_var_collision)             | Storage variables unscoped by namespaces                     |
+| [Dangerous Public Imports in Libraries](dangerous_public_imports_in_libraries) | Ability to call nonimported external functions               |
 
 ## Credits
 
