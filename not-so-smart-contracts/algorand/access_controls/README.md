@@ -1,18 +1,17 @@
 # Access Controls
 
-Lack of appropriate checks for application calls of type UpdateApplication and DeleteApplication allows attackers to update application’s code or delete an application entirely.
+Inadequate checks for application calls of type UpdateApplication and DeleteApplication can allow attackers to alter an application's code or delete it entirely.
 
 ## Description
 
-When an application call is successful, additional operations are executed based on the OnComplete field. If the OnComplete field is set to UpdateApplication the approval and clear programs of the application are replaced with the programs specified in the transaction. Similarly, if the OnComplete field is set to DeleteApplication, application parameters are deleted.
-This allows attackers to update or delete the application if proper access controls are not enforced in the application.
+When an application call is successful, further operations are carried out based on the OnComplete field. If the OnComplete field is set to UpdateApplication, the approval and clear programs of the application get replaced with the programs specified in the transaction. Likewise, if the OnComplete field is set to DeleteApplication, the application parameters get deleted. This can let attackers update or delete the application if proper access controls are not in place.
 
 ## Exploit Scenarios
 
-A stateful contract serves as a liquidity pool for a pair of tokens. Users can deposit the tokens to get the liquidity tokens and can get back their funds with rewards through a burn operation. The contract does not enforce restrictions for UpdateApplication type application calls. Attacker updates the approval program with a malicious program that transfers all assets in the pool to the attacker's address.
+A stateful contract functions as a liquidity pool for two tokens. Users can deposit these tokens to acquire liquidity tokens and can retrieve their funds along with rewards via a burn operation. The contract, however, does not enforce any restrictions for UpdateApplication type application calls. An attacker can update the approval program with a malicious program that transfers all the assets in the pool to their address.
 
 ## Recommendations
 
-- Set proper access controls and apply various checks before approving applications calls of type UpdateApplication and DeleteApplication.
+- Implement appropriate access controls and conduct various checks before approving application calls of type UpdateApplication and DeleteApplication.
 
-- Use [Tealer](https://github.com/crytic/tealer) to detect this issue.
+- Utilize [Tealer](https://github.com/crytic/tealer) to identify this issue.

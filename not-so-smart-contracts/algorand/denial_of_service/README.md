@@ -1,18 +1,18 @@
 # Denial of Service
 
-When a contract does not verify whether an account has opted in to an asset and attempts to transfer that asset, an attacker can DoS other users if the contract's operation is to transfer asset to multiple accounts.
+A denial of service (DoS) attack can occur when a contract does not verify whether an account has opted into an asset and then attempts to transfer that asset. If the contract's operation involves transferring an asset to multiple accounts, an attacker can use this weakness to launch a DoS attack against other users.
 
 ## Description
 
-A user must explicitly opt-in to receive any particular Algorand Standard Asset(ASAs). A user may also opt out of an ASA. A transaction will fail if it attempts to transfer tokens to an account that didn’t opt in to that asset. This could be leveraged by attackers to DOS a contract if the contract’s operation depends on successful transfer of an asset to the attacker owned address.
+A user must explicitly opt into receiving any particular Algorand Standard Asset (ASA). A user may also choose to opt out of an ASA. A transaction will fail if it attempts to transfer tokens to an account that has not opted into that asset. Attackers can exploit this vulnerability by launching a DoS attack on a contract if the contract's operation depends on a successful asset transfer to an attacker-owned address.
 
 ## Exploit Scenarios
 
-Contract attempts to transfer assets to multiple users. One user is not opted in to the asset. The transfer operation fails for all users.
+A contract tries to transfer assets to multiple users. However, one user has not opted into the asset, causing the transfer operation to fail for all users.
 
 ## Examples
 
-Note: This code contains several other vulnerabilities, see [Rekeying](../rekeying), [Unchecked Transaction Fees](../unchecked_transaction_fee), [Closing Asset](../closing_asset), [Group Size Check](../group_size_check), [Time-based Replay Attack](../time_based_replay_attack), [Asset Id Check](../asset_id_check)
+Note: This code contains several other vulnerabilities. See [Rekeying](../rekeying), [Unchecked Transaction Fees](../unchecked_transaction_fee), [Closing Asset](../closing_asset), [Group Size Check](../group_size_check), [Time-based Replay Attack](../time_based_replay_attack), and [Asset ID Check](../asset_id_check)
 
 ```py
 def split_and_withdraw_asset(
@@ -37,4 +37,4 @@ def split_and_withdraw_asset(
 
 ## Recommendations
 
-Use pull over push pattern for transferring assets to users.
+Employ the pull-over-push pattern for transferring assets to users.
