@@ -4,7 +4,7 @@ Echidna can be installed either through Docker or by using the pre-compiled bina
 
 ## MacOS
 
-To install Echidna on MacOS, simply run the following command: 
+To install Echidna on MacOS, simply run the following command:
 
 `brew install echidna`.
 

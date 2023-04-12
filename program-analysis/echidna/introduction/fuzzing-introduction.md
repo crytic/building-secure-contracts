@@ -9,7 +9,7 @@ Fuzzing is a well-known technique in the security community. It involves generat
 Beyond purely random input generation, there are many techniques and strategies used for generating good inputs, including:
 
 - **Obtaining feedback from each execution and guiding input generation with it**. For example, if a newly generated input leads to the discovery of a new path, it makes sense to generate new inputs closer to it.
-- **Generating input with respect to a structural constraint**. For instance, if your input contains a header with a checksum, it makes sense to let the fuzzer generate input that validates the checksum.  
+- **Generating input with respect to a structural constraint**. For instance, if your input contains a header with a checksum, it makes sense to let the fuzzer generate input that validates the checksum.
 - **Using known inputs to generate new inputs**. If you have access to a large dataset of valid input, your fuzzer can generate new inputs from them, rather than starting from scratch for each generation. These are usually called _seeds_.
 
 ## Property-Based Fuzzing
