@@ -1,21 +1,21 @@
-# How to test assertions with Echidna
+# How to Test Assertions with Echidna
 
 **Table of contents:**
 
-- [How to test assertions with Echidna](#how-to-test-assertions-with-echidna)
+- [How to Test Assertions with Echidna](#how-to-test-assertions-with-echidna)
   - [Introduction](#introduction)
-  - [Write an assertion](#write-an-assertion)
+  - [Write an Assertion](#write-an-assertion)
   - [Run Echidna](#run-echidna)
-  - [When and how to use assertions](#when-and-how-to-use-assertions)
+  - [When and How to Use Assertions](#when-and-how-to-use-assertions)
   - [Summary: Assertion Checking](#summary-assertion-checking)
 
 ## Introduction
 
-In this short tutorial, we will show you how to use Echidna to check assertions in smart contracts. For this example, make sure you use Solidity 0.7.x or older. If you run them with Solidity 0.8.x, the test will never fail.
+In this short tutorial, we will demonstrate how to use Echidna to check assertions in smart contracts. For this example, be sure to use Solidity 0.7.x or older. If you run them with Solidity 0.8.x, the test will never fail.
 
-## Write an assertion
+## Write an Assertion
 
-Let's suppose we have a contract like this one:
+Let's assume we have a contract like this one:
 
 ```solidity
 contract Incrementor {
@@ -30,7 +30,7 @@ contract Incrementor {
 }
 ```
 
-We want to make sure that `tmp` is less than or equal to `counter` after returning its difference. We could write an Echidna property, but we will need to store the `tmp` value somewhere. Instead, we could use an assertion like this one (_[assert.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/assert.sol)_):
+We want to ensure that `tmp` is less than or equal to `counter` after returning its difference. We could write an Echidna property, but we would need to store the `tmp` value somewhere. Instead, we can use an assertion like this one (_[assert.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/assert.sol)_):
 
 ```solidity
 contract Incrementor {
@@ -45,7 +45,7 @@ contract Incrementor {
 }
 ```
 
-We could also use a special event called `AssertionFailed` with any number of parameters to let Echidna know about a failed assertion without using `assert`. This will work in any contract. For instance:
+We can also use a special event called `AssertionFailed` with any number of parameters to inform Echidna about a failed assertion without using `assert`. This will work in any contract. For example:
 
 ```solidity
 contract Incrementor {
@@ -66,15 +66,15 @@ contract Incrementor {
 
 ## Run Echidna
 
-To enable the assertion failure testing in Echidna, you can use `--test-mode assertion` directly from the command line.
+To enable assertion failure testing in Echidna, you can use `--test-mode assertion` directly from the command line.
 
-Otherwise, you can create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config), `config.yaml`, with `testMode` set for assertion checking:
+Alternatively, you can create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config), `config.yaml`, with `testMode` set for assertion checking:
 
 ```yaml
 testMode: assertion
 ```
 
-When we run this contract with Echidna, we obtain the expected results:
+When we run this contract with Echidna, we receive the expected results:
 
 ```
 echidna assert.sol --test-mode assertion
@@ -88,11 +88,11 @@ assertion in inc: failed!💥
 Seed: 1806480648350826486
 ```
 
-As you can see, Echidna reports an assertion failure in the `inc` function. Adding more than one assertion per function is possible, however, Echidna cannot tell which assertion failed.
+As you can see, Echidna reports an assertion failure in the `inc` function. It is possible to add multiple assertions per function; however, Echidna cannot determine which assertion failed.
 
-## When and how to use assertions
+## When and How to Use Assertions
 
-Assertions can be used as alternatives to explicit properties if the conditions to check are directly related to the correct use of some operation `f`. Adding assertions after some code will enforce that the check happens immediately after it was executed:
+Assertions can be used as alternatives to explicit properties if the conditions to check are directly related to the correct use of some operation `f`. Adding assertions after some code will enforce that the check happens immediately after it is executed:
 
 ```solidity
 function f(bytes memory args) public {
@@ -103,7 +103,7 @@ function f(bytes memory args) public {
 }
 ```
 
-On the contrary, using an explicit boolean property will randomly execute transactions and there is no easy way to enforce exactly when it will be checked. It is still possible to do this workaround:
+In contrast, using an explicit Boolean property will randomly execute transactions, and there is no easy way to enforce exactly when it will be checked. It is still possible to use this workaround:
 
 ```solidity
 function echidna_assert_after_f() public returns (bool) {
@@ -116,9 +116,9 @@ However, there are some issues:
 
 - It does not compile if `f` is declared as `internal` or `external`
 - It is unclear which arguments should be used to call `f`
-- The property will fail if `f` reverts,
+- The property will fail if `f` reverts
 
-Assertions can help to overcome this possible issues. For instance, they can be easily detected when calling internal or public functions:
+Assertions can help overcome these potential issues. For instance, they can be easily detected when calling internal or public functions:
 
 ```solidity
 function f(bytes memory args) public {
@@ -176,4 +176,4 @@ assertion in inc: failed!💥
 Seed: 1806480648350826486
 ```
 
-Echidna found that the assertion in `inc` can fail if this function is called multiple times with large arguments.
+Echidna discovered that the assertion in `inc` can fail if this function is called multiple times with large arguments.

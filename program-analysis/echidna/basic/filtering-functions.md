@@ -1,17 +1,16 @@
-# Filtering functions to call during a fuzzing campaign
+# Filtering Functions for Fuzzing Campaigns
 
 **Table of contents:**
 
-- [Filtering functions to call during a fuzzing campaign](#filtering-functions-to-call-during-a-fuzzing-campaign)
+- [Filtering Functions for Fuzzing Campaigns](#filtering-functions-for-fuzzing-campaigns)
   - [Introduction](#introduction)
   - [Filtering functions](#filtering-functions)
-- [Run Echidna](#run-echidna)
+- [Running Echidna](#running-echidna)
   - [Summary: Filtering functions](#summary-filtering-functions)
 
 ## Introduction
 
-We will see how to filter the functions to be fuzzed.
-The target is the following smart contract (_[multi.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multi.sol)_):
+In this article, we'll demonstrate how to filter specific functions to be fuzzed using Echidna. We'll use the following smart contract _[multi.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multi.sol)_ as our target:
 
 ```solidity
 contract C {
@@ -62,9 +61,7 @@ contract C {
 }
 ```
 
-This small example forces Echidna to find a certain sequence of transactions to change a state variable.
-This is hard for a fuzzer (it is recommended to use a symbolic execution tool like [Manticore](https://github.com/trailofbits/manticore)).
-We can run Echidna to verify this:
+The small contract above requires Echidna to find a specific sequence of transactions to modify a certain state variable, which is difficult for a fuzzer. It's recommended to use a symbolic execution tool like [Manticore](https://github.com/trailofbits/manticore) in such cases. Let's run Echidna to verify this:
 
 ```
 echidna multi.sol
@@ -73,20 +70,18 @@ echidna_state4: passed! 🎉
 Seed: -3684648582249875403
 ```
 
-## Filtering functions
+## Filtering Functions
 
-Echidna has trouble finding the correct sequence to test this contract because the two reset functions (`reset1` and `reset2`) will set all the state variables to `false`.
-However, we can use a special Echidna feature to either blacklist the `reset` functions or to whitelist only the `f`, `g`,
-`h` and `i` functions.
+Echidna has difficulty finding the correct sequence to test this contract because the two reset functions (`reset1` and `reset2`) revert all state variables to `false`. However, we can use a special Echidna feature to either blacklist the `reset` functions or whitelist only the `f`, `g`, `h`, and `i` functions.
 
-To blacklist functions, we can use this configuration file:
+To blacklist functions, we can use the following configuration file:
 
 ```yaml
 filterBlacklist: true
 filterFunctions: ["C.reset1()", "C.reset2()"]
 ```
 
-Another approach to filter functions is to list the whitelisted functions. To do that, we can use this configuration file:
+Alternatively, we can whitelist specific functions by listing them in the configuration file:
 
 ```yaml
 filterBlacklist: false
@@ -94,9 +89,9 @@ filterFunctions: ["C.f(uint256)", "C.g(uint256)", "C.h(uint256)", "C.i()"]
 ```
 
 - `filterBlacklist` is `true` by default.
-- Filtering will be performed by full function name (contract name + "." + ABI function signature). If you have `f()` and `f(uint256)`, you can specify exactly which function to filter.
+- Filtering will be performed based on the full function name (contract name + "." + ABI function signature). If you have `f()` and `f(uint256)`, you can specify exactly which function to filter.
 
-# Run Echidna
+# Running Echidna
 
 To run Echidna with a configuration file `blacklist.yaml`:
 
@@ -111,9 +106,9 @@ echidna_state4: failed!💥
     i()
 ```
 
-Echidna will find the sequence of transactions to falsify the property almost immediately.
+Echidna will quickly discover the sequence of transactions required to falsify the property.
 
-## Summary: Filtering functions
+## Summary: Filtering Functions
 
 Echidna can either blacklist or whitelist functions to call during a fuzzing campaign using:
 
@@ -127,4 +122,4 @@ echidna contract.sol --config config.yaml
 ...
 ```
 
-According to the value of the `filterBlacklist` boolean, Echidna will start a fuzzing campaign by either blacklisting `C.f1()`, `C.f2()` and `C.f3()` or by _only_ calling those functions.
+Depending on the value of the `filterBlacklist` boolean, Echidna will start a fuzzing campaign by either blacklisting `C.f1()`, `C.f2()`, and `C.f3()` or by _only_ calling those functions.
