@@ -1,14 +1,14 @@
 # (Not So) Smart Pallets
 
-This repository contains examples of common Substrate pallet vulnerabilities. Use Not So Smart Pallets to learn about Substrate vulnerabilities, as a reference when performing security reviews, and as a benchmark for security and analysis tools.
+This repository contains examples of common vulnerabilities in Substrate pallets. Use the Not So Smart Pallets to learn about Substrate vulnerabilities, as a reference for performing security reviews, and as a benchmark for security analysis tools.
 
 ## Features
 
 Each _Not So Smart Pallet_ includes a standard set of information:
 
 - Description of the vulnerability type
-- Attack scenarios to exploit the vulnerability
-- Recommendations to eliminate or mitigate the vulnerability
+- Attack scenarios for exploiting the vulnerability
+- Recommendations for eliminating or mitigating the vulnerability
 - A mock pallet that exhibits the flaw
 - References to third-party resources with more information
 
@@ -28,4 +28,4 @@ Each _Not So Smart Pallet_ includes a standard set of information:
 
 These examples are developed and maintained by [Trail of Bits](https://www.trailofbits.com/).
 
-If you have questions, problems, or just want to learn more, then join the #ethereum channel on the [Empire Hacking Slack](https://empireslacking.herokuapp.com/) or [contact us](https://www.trailofbits.com/contact/) directly.
+If you have questions, need assistance, or just want to learn more, then join the #ethereum channel on the [Empire Hacking Slack](https://empireslacking.herokuapp.com/) or [contact us](https://www.trailofbits.com/contact/) directly.
