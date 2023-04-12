@@ -3,6 +3,7 @@
 [Introduction](./README.md)
 
 - [Development-guidelines](./development-guidelines/README.md)
+  - [Code Maturity](./development-guidelines/code_maturity.md)
   - [High-level best practices](./development-guidelines/guidelines.md)
   - [Token integration checklist](./development-guidelines/token_integration.md)
   - [Incident Response Recommendations](./development-guidelines/incident_response.md)

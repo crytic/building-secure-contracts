@@ -9,6 +9,7 @@ We welcome contributions, and you can contribute by following our [contributing 
 **Table of contents:**
 
 - [Development guidelines](./development-guidelines)
+  - [Code Maturity](./development-guidelines/code_maturity.md): Criteria for developers and security engineers to use when evaluating a codebase’s maturity
   - [High-level best practices](./development-guidelines/guidelines.md): High-level best-practices for all smart contracts
   - [Incident Response Recommendations](./development-guidelines/incident_response.md): Guidelines on how to formulate an incident response plan
   - [Secure development workflow](./development-guidelines/workflow.md): A rough, high-level process to follow while you write code
