@@ -1,4 +1,4 @@
-# Collecting, visualizing and modifying an Echidna corpus
+# Collecting, Visualizing, and Modifying an Echidna Corpus
 
 **Table of contents:**
 
@@ -8,7 +8,7 @@
 
 ## Introduction
 
-We will see how to collect and use a corpus of transactions with Echidna. The target is the following smart contract (_[magic.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/magic.sol)_):
+In this guide, we will explore how to collect and use a corpus of transactions with Echidna. Our target is the following smart contract, _[magic.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/magic.sol)_:
 
 ```solidity
 contract C {
@@ -22,48 +22,35 @@ contract C {
         return;
     }
 
-    function echidna_magic_values() public returns (bool) {
+    function echidna_magic_values() public view returns (bool) {
         return !value_found;
     }
 }
 ```
 
-This small example forces Echidna to find certain values to change a state variable. This is hard for a fuzzer
-(it is recommended to use a symbolic execution tool like [Manticore](https://github.com/trailofbits/manticore)).
-We can run Echidna to verify this:
-
-```
-echidna magic.sol
-...
-
-echidna_magic_values: passed! 🎉
-
-Seed: 2221503356319272685
-```
-
-However, we can still use Echidna to collect corpus when running this fuzzing campaign.
+This small example requires Echidna to find specific values to change a state variable. While this is challenging for a fuzzer (it is advised to use a symbolic execution tool like [Manticore](https://github.com/trailofbits/manticore)), we can still employ Echidna to collect corpus during this fuzzing campaign.
 
 ## Collecting a corpus
 
-To enable the corpus collection, create a corpus directory:
+To enable corpus collection, first, create a corpus directory:
 
 ```
 mkdir corpus-magic
 ```
 
-And an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config) `config.yaml`:
+Next, create an [Echidna configuration file](https://github.com/crytic/echidna/wiki/Config) called `config.yaml`:
 
 ```yaml
 corpusDir: "corpus-magic"
 ```
 
-Now we can run our tool and check the collected corpus:
+Now, run the tool and inspect the collected corpus:
 
 ```
-echidna magic.sol --config config.yaml
+echidna-test magic.sol --config config.yaml
 ```
 
-Echidna still cannot find the correct magic value. We can verify where it gets stuck reviewing the `corpus-magic/covered.*.txt` file:
+Echidna is still unable to find the correct magic value. To understand where it gets stuck, review the `corpus-magic/covered.*.txt` file:
 
 ```
 r   |contract C {
@@ -83,10 +70,9 @@ r   |    require(magic_3 == magic_4+333);
 }
 ```
 
-The label `r` on the left of each line shows that Echidna is able to reach these lines but it ends in a revert.
-As you can see, the fuzzer gets stuck at the last `require`.
+The label `r` on the left of each line indicates that Echidna can reach these lines, but they result in a revert. As you can see, the fuzzer gets stuck at the last `require`.
 
-To find a workaround, let's take a look at the corpus it collected. For instance, one of these files was:
+To find a workaround, let's examine the collected corpus. For instance, one of these files contains:
 
 ```json
 [
@@ -131,26 +117,24 @@ To find a workaround, let's take a look at the corpus it collected. For instance
 ]
 ```
 
-Clearly, this input will not trigger the failure in our property. In the next step, we will see how to modify it for that.
+This input will not trigger the failure in our property. In the next step, we will show how to modify it for that purpose.
 
 ## Seeding a corpus
 
-Echidna needs some help in order to deal with the `magic` function. We are going to copy and modify the input to use suitable
-parameters for it:
+To handle the `magic` function, Echidna needs some assistance. We will copy and modify the input to utilize appropriate parameters:
 
 ```
 cp corpus-magic/coverage/2712688662897926208.txt corpus-magic/coverage/new.txt
 ```
 
-We will modify `new.txt` to call `magic(42,129,333,0)`. Now, we can re-run Echidna:
+Modify `new.txt` to call `magic(42,129,333,0)`. Now, re-run Echidna:
 
 ```
-echidna magic.sol --config config.yaml
+echidna-test magic.sol --config config.yaml
 ...
 echidna_magic_values: failed!💥
   Call sequence:
     magic(42,129,333,0)
-
 
 Unique instructions: 142
 Unique codehashes: 1
@@ -158,7 +142,7 @@ Seed: -7293830866560616537
 
 ```
 
-This time, the property is violated immediately. We can verify that another `covered.*.txt` file is created showing another trace (labeled with `*`) that Echidna executed which finished with a return at the end of the `magic` function.
+This time, the property fails immediately. We can verify that another `covered.*.txt` file is created, showing a different trace (labeled with `*`) that Echidna executed, which ended with a return at the end of the `magic` function.
 
 ```
 *r  |contract C {

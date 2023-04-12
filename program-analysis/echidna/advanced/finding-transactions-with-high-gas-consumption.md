@@ -1,17 +1,17 @@
-# Finding transactions with high gas consumption
+# Identifying High Gas Consumption Transactions
 
 **Table of contents:**
 
-- [Finding transactions with high gas consumption](#finding-transactions-with-high-gas-consumption)
+- [Identifying high gas consumption transactions](#identifying-high-gas-consumption-transactions)
   - [Introduction](#introduction)
   - [Measuring Gas Consumption](#measuring-gas-consumption)
-- [Run Echidna](#run-echidna)
-- [Filtering Out Gas-Reducing Calls](#filtering-out-gas-reducing-calls)
-  - [Summary: Finding transactions with high gas consumption](#summary-finding-transactions-with-high-gas-consumption)
+- [Executing Echidna](#executing-echidna)
+- [Excluding Gas-Reducing Calls](#excluding-gas-reducing-calls)
+  - [Summary: Identifying high gas consumption transactions](#summary-identifying-high-gas-consumption-transactions)
 
 ## Introduction
 
-We will see how to find the transactions with high gas consumption with Echidna. The target is the following smart contract (_[gas.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/gas.sol)_):
+This guide demonstrates how to identify transactions with high gas consumption using Echidna. The target is the following smart contract ([gas.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/gas.sol)):
 
 ```solidity
 contract C {
@@ -37,9 +37,9 @@ contract C {
 }
 ```
 
-Here `expensive` can have a large gas consumption.
+The `expensive` function can have significant gas consumption.
 
-Currently, Echidna always needs a property to test: here `echidna_test` always returns `true`.
+Currently, Echidna always requires a property to test - in this case, `echidna_test` always returns `true`.
 We can run Echidna to verify this:
 
 ```
@@ -58,16 +58,16 @@ To enable Echidna's gas consumption feature, create a configuration file [gas.ya
 estimateGas: true
 ```
 
-In this example, we will also reduce the size of the transaction sequence to make the results easier to understand:
+In this example, we'll also reduce the size of the transaction sequence for easier interpretation:
 
 ```yaml
 seqLen: 2
 estimateGas: true
 ```
 
-# Run Echidna
+# Executing Echidna
 
-Once we have the configuration file created, we can run Echidna like this:
+With the configuration file created, we can run Echidna as follows:
 
 ```
 echidna gas.sol --config config.yaml
@@ -83,14 +83,13 @@ Unique codehashes: 1
 Seed: -325611019680165325
 ```
 
-- The gas shown is an estimation provided by [HEVM](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-).
+- The displayed gas is an estimation provided by [HEVM](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-).
 
-# Filtering Out Gas-Reducing Calls
+# Excluding Gas-Reducing Calls
 
-The tutorial on [filtering functions to call during a fuzzing campaign](../basic/filtering-functions.md) shows how to
-remove some functions during testing.  
-This can be critical for getting an accurate gas estimate.
-Consider the following example (_[example/pushpop.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/pushpop.sol)_):
+The tutorial on [filtering functions to call during a fuzzing campaign](../basic/filtering-functions.md) demonstrates how to remove certain functions during testing.
+This can be crucial for obtaining accurate gas estimates.
+Consider the following example ([example/pushpop.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/pushpop.sol)):
 
 ```solidity
 contract C {
@@ -119,7 +118,7 @@ contract C {
 }
 ```
 
-If Echidna uses this [`config.yaml`](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/pushpop.yaml), it can call all functions and won't easily find transactions with high gas cost:
+With this [`config.yaml`](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/pushpop.yaml), Echidna can call all functions but won't easily identify transactions with high gas consumption:
 
 ```
 echidna pushpop.sol --config config.yaml
@@ -133,8 +132,8 @@ clear used a maximum of 35916 gas
 push used a maximum of 40839 gas
 ```
 
-That's because the cost depends on the size of `addrs` and random calls tend to leave the array almost empty.
-Blacklisting `pop` and `clear`, however, gives us much better results (_[blacklistpushpop.yaml](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/blacklistpushpop.yaml)_):
+This occurs because the cost depends on the size of `addrs`, and random calls tend to leave the array almost empty.
+By blacklisting `pop` and `clear`, we obtain better results ([blacklistpushpop.yaml](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/blacklistpushpop.yaml)):
 
 ```yaml
 estimateGas: true
@@ -150,9 +149,9 @@ push used a maximum of 40839 gas
 check used a maximum of 1484472 gas
 ```
 
-## Summary: Finding transactions with high gas consumption
+## Summary: Identifying high gas consumption transactions
 
-Echidna can find transactions with high gas consumption using the `estimateGas` configuration option:
+Echidna can identify transactions with high gas consumption using the `estimateGas` configuration option:
 
 ```yaml
 estimateGas: true
@@ -163,4 +162,4 @@ echidna contract.sol --config config.yaml
 ...
 ```
 
-Once the fuzzing campaign is over, Echidna will report a sequence with the maximum gas consumption for every function.
+After completing the fuzzing campaign, Echidna will report a sequence with the maximum gas consumption for each function.

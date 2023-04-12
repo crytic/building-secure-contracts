@@ -1,22 +1,20 @@
-# Using optimization mode to find local maximums
+# Finding Local Maximums Using Optimization Mode
 
-**Table of contents:**
+**Table of Contents:**
 
-- [Using optimization mode to find local maximums](#using-optimization-mode-to-find-local-maximums)
+- [Finding Local Maximums Using Optimization Mode](#finding-local-maximums-using-optimization-mode)
   - [Introduction](#introduction)
   - [Optimizing with Echidna](#optimizing-with-echidna)
 
 ## Introduction
 
-We will see how to perform function optimization using Echidna. This tutorial will require Echidna 2.0.5 or greater,
-so make sure you have update it before starting.
+In this tutorial, we will explore how to perform function optimization using Echidna. Please ensure you have updated Echidna to version 2.0.5 or greater before proceeding.
 
-Optimization mode is a experimental feature that allows to define a special function which takes no arguments
-and returns a `int256`. Echidna will try find a sequence of transactions to maximize the value returned:
+Optimization mode is an experimental feature that enables the definition of a special function, taking no arguments and returning an `int256`. Echidna will attempt to find a sequence of transactions to maximize the value returned:
 
 ```solidity
 function echidna_opt_function() public view returns (int256) {
-    // if it reverts, Echidna will assumed it returned type(int256).min
+    // If it reverts, Echidna will assume it returned type(int256).min
     return value;
 }
 ```
@@ -52,8 +50,7 @@ contract TestDutchAuctionOptimization {
 }
 ```
 
-This small example forces Echidna to maximize certain price difference given some preconditions. If the preconditions are not
-met, the function will revert, without changing the actual value.
+This small example directs Echidna to maximize a specific price difference given certain preconditions. If the preconditions are not met, the function will revert without changing the actual value.
 
 To run this example:
 
@@ -67,14 +64,14 @@ echidna_opt_price_difference: max value: 1076841
 
 ```
 
-The resulting max value is not unique, running in longer campaign will likely result in a larger value.
+The resulting max value is not unique; running a longer campaign will likely yield a larger value.
 
-Regarding the command line, the optimization mode is enabled using `--test-mode optimization`. additionally, we included the following tweaks:
+Regarding the command line, optimization mode is enabled using `--test-mode optimization`. Additionally, we included the following tweaks:
 
-1. Use only one transaction (we know that the function is stateless)
-2. Use a large shrink limit in order to obtain a better value during the minimization of the complexity of the input.
+1. Use only one transaction (as we know the function is stateless).
+2. Use a large shrink limit to obtain a better value during input complexity minimization.
 
-Every time Echidna is executed using the corpus directory, the last input that produces the maximum value should be re-used from the `reproducers` directory:
+Each time Echidna is executed using the corpus directory, the last input producing the maximum value should be reused from the `reproducers` directory:
 
 ```
 echidna opt.sol --test-mode optimization --test-limit 100000 --seq-len 1 --corpus-dir corpus --shrink-limit 50000

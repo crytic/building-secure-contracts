@@ -1,16 +1,16 @@
 # Echidna Tutorial
 
-The aim of this tutorial is to show how to use Echidna to automatically test smart contracts.
+The objective of this tutorial is to demonstrate how to use Echidna to automatically test smart contracts.
 
-Watch our [Fuzzing workshop](https://www.youtube.com/watch?v=QofNQxW_K08&list=PLciHOL_J7Iwqdja9UH4ZzE8dP1IxtsBXI) to learn through live coding sessions.
+To learn through live coding sessions, watch our [Fuzzing workshop](https://www.youtube.com/watch?v=QofNQxW_K08&list=PLciHOL_J7Iwqdja9UH4ZzE8dP1IxtsBXI).
 
-**Table of contents:**
+**Table of Contents:**
 
-- [Introduction](introduction): Introductory material to fuzzing and Echidna
-- [Basic](basic): Learn the first steps on how to use Echidna
-- [Advanced](advanced): Learn advanced features of Echidna
-- [Fuzzing tips](./fuzzing_tips.md): General fuzzing tips
-- [Frequently Asked Questions](./frequently_asked_questions.md): Answers to common questions about Echidna
-- [Exercises](exercises): Exercises
+- [Introduction](introduction): Introductory material on fuzzing and Echidna
+- [Basic](basic): Discover the initial steps for using Echidna
+- [Advanced](advanced): Explore the advanced features of Echidna
+- [Fuzzing tips](./fuzzing_tips.md): General fuzzing recommendations
+- [Frequently Asked Questions](./frequently_asked_questions.md): Responses to common questions about Echidna
+- [Exercises](exercises): Practical exercises to enhance your understanding
 
 Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
