@@ -106,12 +106,12 @@ You should use assertions if your invariant is more naturally expressed using ar
 
 ```solidity
 function testStake(uint256 toStake) public {
-  uint256 balance = balanceOf(msg.sender);
-  toStake = toStake % (balance + 1);
-  if (toStake < MINSTAKE) return; // Pre: minimal stake is required
-  stake(msg.sender, toStake); // Action: token staking
-  assert(staked(msg.sender) == toStake); // Post: staking amount is toStake
-  assert(balanceOf(msg.sender) == balance - toStake); // Post: balance decreased
+    uint256 balance = balanceOf(msg.sender);
+    toStake = toStake % (balance + 1);
+    if (toStake < MINSTAKE) return; // Pre: minimal stake is required
+    stake(msg.sender, toStake); // Action: token staking
+    assert(staked(msg.sender) == toStake); // Post: staking amount is toStake
+    assert(balanceOf(msg.sender) == balance - toStake); // Post: balance decreased
 }
 ```
 
