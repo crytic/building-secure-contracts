@@ -1,4 +1,4 @@
-# Running under Manticore
+## Running under Manticore
 
 **Table of contents:**
 
@@ -9,7 +9,7 @@
 
 ## Introduction
 
-We will see how to explore a smart contract with the Manticore API. The target is the following smart contract (_[example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)_):
+In this article, we will explore a smart contract with the Manticore API. The target is the following smart contract (_[example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)_):
 
 ```solidity
 pragma solidity >=0.4.24 <0.6.0;
@@ -25,7 +25,7 @@ contract Simple {
 
 ## Run a standalone exploration
 
-You can run Manticore directly on the smart contract by the following command (`project` can be a Solidity File, or a project directory):
+You can run Manticore directly on the smart contract using the following command (`project` can be a Solidity file or a project director):
 
 ```bash
 manticore project
@@ -46,16 +46,15 @@ You will get the output of testcases like this one (the order may change):
 ...
 ```
 
-Without additional information, Manticore will explore the contract with new symbolic
-transactions until it does not explore new paths on the contract. Manticore does not run new transactions after a failing one (e.g: after a revert).
+Without additional information, Manticore will explore the contract with new symbolic transactions until no new paths on the contract are found. Manticore does not run new transactions after a failing one (e.g., after a revert).
 
-Manticore will output the information in a `mcore_*` directory. Among other, you will find in this directory:
+Manticore will output the information in a `mcore_*` directory. Among other things, you will find the following in this directory:
 
 - `global.summary`: coverage and compiler warnings
 - `test_XXXXX.summary`: coverage, last instruction, account balances per test case
 - `test_XXXXX.tx`: detailed list of transactions per test case
 
-Here Manticore founds 7 test cases, which correspond to (the filename order may change):
+Here, Manticore founds 7 test cases, which correspond to (the filename order may change):
 
 |                      |   Transaction 0   |   Transaction 1   | Transaction 2     | Result |
 | :------------------: | :---------------: | :---------------: | ----------------- | :----: |
@@ -67,19 +66,19 @@ Here Manticore founds 7 test cases, which correspond to (the filename order may 
 | **test_00000005.tx** | Contract creation |      f(!=65)      | f(65)             | REVERT |
 | **test_00000006.tx** | Contract creation |      f(!=65)      | fallback function | REVERT |
 
-_Exploration summary f(!=65) denotes f called with any value different than 65._
+*Exploration summary: f(!=65) denotes f called with any value different than 65._
 
-As you can notice, Manticore generates an unique test case for every successful or reverted transaction.
+As you can see, Manticore generates a unique test case for every successful or reverted transaction.
 
-Use the `--quick-mode` flag if you want fast code exploration (it disable bug detectors, gas computation, ...)
+Use the `--quick-mode` flag if you want fast code exploration (it disables bug detectors, gas computation, etc.)
 
 ## Manipulate a smart contract through the API
 
-This section describes details how to manipulate a smart contract through the Manticore Python API. You can create new file with python extension `*.py` and write the necessary code by adding the API commands (basics of which will be described below) into this file and then run it with the command `$ python3 *.py`. Also you can execute the commands below directly into the python console, to run the console use the command `$ python3`.
+This section details how to manipulate a smart contract through the Manticore Python API. You can create a new file with a python extension `*.py` and write the necessary code by adding the API commands (basics of which will be described below) into this file and then run it with the command `$ python3 *.py`. Alternatively, you can execute the commands below directly into the python console. To run the console, use the command `$ python3`.
 
 ### Creating Accounts
 
-The first thing you should do is to initiate a new blockchain with the following commands:
+The first thing you should do is initiate a new blockchain with the following commands:
 
 ```python3
 from manticore.ethereum import ManticoreEVM
@@ -116,7 +115,7 @@ contract_account = m.solidity_create_contract(source_code, owner=user_account)
 
 ### Executing transactions
 
-Manticore supports two types of transaction:
+Manticore supports two types of transactions:
 
 - Raw transaction: all the functions are explored
 - Named transaction: only one function is explored
@@ -148,19 +147,19 @@ m.transaction(caller=user_account,
               value=symbolic_value)
 ```
 
-If the data is symbolic, Manticore will explore all the functions of the contract during the transaction execution. It will be helpful to see the Fallback Function explanation in the [Hands on the Ethernaut CTF](https://blog.trailofbits.com/2017/11/06/hands-on-the-ethernaut-ctf/) article for understanding how the function selection works.
+If the data is symbolic, Manticore will explore all the functions of the contract during the transaction execution. It would be helpful to see the Fallback Function explanation in the [Hands on the Ethernaut CTF](https://blog.trailofbits.com/2017/11/06/hands-on-the-ethernaut-ctf/) article to understand how function selection works.
 
 #### Named transaction
 
 Functions can be executed through their name.
-To execute `f(uint256 var)` with a symbolic value, from user_account, and with 0 ether, use:
+To execute `f(uint256 var)` with a symbolic value from the user_account and with 0 ether, use:
 
 ```python3
 symbolic_var = m.make_symbolic_value()
 contract_account.f(symbolic_var, caller=user_account, value=0)
 ```
 
-If `value` of the transaction is not specified, it is 0 by default.
+If the `value` of the transaction is not specified, it is 0 by default.
 
 #### Summary
 
@@ -170,7 +169,7 @@ If `value` of the transaction is not specified, it is 0 by default.
 
 ### Workspace
 
-`m.workspace` is the directory used as output directory for all the files generated:
+`m.workspace` is the directory used as the output directory for all the files generated:
 
 ```python3
 print("Results are in {}".format(m.workspace))
@@ -178,11 +177,11 @@ print("Results are in {}".format(m.workspace))
 
 ### Terminate the Exploration
 
-To stop the exploration use [m.finalize()](https://manticore.readthedocs.io/en/latest/evm.html#manticore.ethereum.ManticoreEVM.finalize). No further transactions should be sent once this method is called and Manticore generates test cases for each of the path explored.
+To stop the exploration, use [m.finalize()](https://manticore.readthedocs.io/en/latest/evm.html#manticore.ethereum.ManticoreEVM.finalize). No further transactions should be sent once this method is called, and Manticore generates test cases for each of the paths explored.
 
 ## Summary: Running under Manticore
 
-Putting all the previous steps together, we obtain:
+Putting all the previous steps together, we get:
 
 ```python3
 from manticore.ethereum import ManticoreEVM
@@ -202,6 +201,6 @@ print("Results are in {}".format(m.workspace))
 m.finalize() # stop the exploration
 ```
 
-All the code above you can find into the [example_run.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example_run.py)
+All the code above can be found in [example_run.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example_run.py)
 
-The next step is to [accessing the paths](./getting-throwing-paths.md).
+The next step is to [access the paths](./getting-throwing-paths.md).
