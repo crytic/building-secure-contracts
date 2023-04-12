@@ -1,30 +1,30 @@
 # Incident Response Recommendations
 
-Here, we provide recommendations around the formulation of an incident response plan.
+In this article, we provide recommendations for formulating a robust incident response plan.
 
-- [ ] **Identify who (either specific people or roles) is responsible for carrying out the mitigations (deploying smart contracts, pausing contracts, upgrading the front end, etc.).**
-  - Specifying these roles will strengthen the incident response plan and ease the execution of mitigating actions when necessary.
-- [ ] **Document internal processes for situations in which a deployed remediation does not work or introduces a new bug.**
-  - Consider adding a fallback scenario that describes an action plan in the event of a failed remediation.
-- [ ] **Clearly describe the intended process of contract deployment.**
-- [ ] **Consider whether and under what circumstances your company will make affected users whole after certain issues occur.**
-  - Some scenarios to consider include an individual or aggregate loss, a loss resulting from user error, a contract flaw, and a third-party contract flaw.
-- [ ] **Document how you plan to keep up to date on new issues, both to inform future development and to secure the deployment toolchain and the external on-chain and off-chain services that the system relies on.**
-  - For each language and component, describe the noteworthy sources for vulnerability news. Subscribe to updates for each source. Consider creating a special private Discord/Slack channel with a bot that will post the latest vulnerability news; this will help the team keep track of updates all in one place. Also consider assigning specific team members to keep track of the vulnerability news of a specific component of the system.
-- [ ] **Consider scenarios involving issues that would indirectly affect the system.**
-- [ ] **Determine when and how the team would reach out to and onboard external parties (auditors, affected users, other protocol developers, etc.).**
-  - Some issues may require collaboration with external parties to efficiently remediate them.
-- [ ] **Define contract behavior that is considered abnormal for off-chain monitoring.**
-  - Consider adding more resilient solutions for detection and mitigation, especially in terms of specific alternate endpoints and queries for different data as well as status pages and support contacts for affected services.
-- [ ] **Combine issues and determine whether new detection and mitigation scenarios are needed.**
-- [ ] **Perform periodic dry runs of specific scenarios in the incident response plan to find gaps and opportunities for improvement and to develop muscle memory.**
-  - Document the intervals at which the team should perform dry runs of the various scenarios. For scenarios that are more likely to happen, perform dry runs more regularly. Create a template to be filled in after a dry run to describe the improvements that need to be made to the incident response.
+- [ ] **Identify specific individuals or roles responsible for carrying out the mitigations (deploying smart contracts, pausing contracts, upgrading the front end, etc.).**
+  - Defining these roles will enhance the incident response plan and facilitate the execution of mitigation actions when necessary.
+- [ ] **Document internal processes in cases where deployed remediation fails or introduces new bugs.**
+  - Consider developing a fallback plan that outlines an action strategy for failed remediation attempts.
+- [ ] **Provide a clear description of the intended contract deployment process.**
+- [ ] **Contemplate whether and under what circumstances your company will compensate affected users in the event of certain issues.**
+  - Some situations to consider include individual or aggregate losses, losses resulting from user error, contract flaws, and third-party contract defects.
+- [ ] **Outline a plan for staying informed about new issues, so as to ensure future development and the security of the deployment toolchain and the external on-chain and off-chain services your system depends on.**
+  - For each language and component, identify reputable sources of vulnerability news. Subscribe to updates for each source. Consider creating a private Discord or Slack channel with a bot that posts the latest vulnerability news to help your team stay informed in a centralized location. Additionally, consider assigning specific team members to track vulnerability news for particular system components.
+- [ ] **Examine scenarios involving issues that would indirectly affect the system.**
+- [ ] **Decide when and how the team should seek assistance from or collaborate with external parties (auditors, affected users, other protocol developers, etc.).**
+  - Some problems may necessitate cooperation with external parties for efficient resolution.
+- [ ] **Define abnormal contract behavior for off-chain monitoring purposes.**
+  - Consider implementing more robust detection and mitigation solutions, including specific alternate endpoints, queries for diverse data, status pages, and support contacts for impacted services.
+- [ ] **Combine issues to evaluate whether new detection and mitigation scenarios are necessary.**
+- [ ] **Conduct periodic dry runs of specific scenarios in the incident response plan to identify gaps and improvement opportunities, and build muscle memory.**
+  - Establish intervals for performing dry runs for each scenario. Conduct more frequent dry runs for scenarios with higher likelihoods of occurrence. Create a template to document improvements required after each dry run for the incident response plan.
 
 ## Incident Response Plan Resources
 
 - [How to Hack the Yield Protocol](https://docs.yieldprotocol.com/#/operations/how_to_hack)
 - [Emergency Steps – Yearn](https://github.com/yearn/yearn-devdocs/blob/master/docs/developers/v2/EMERGENCY.md)
 
-## Well-handled IR Incidents
+## Examples of Well-Handled Incident Response Incidents
 
 - [Yield Protocol](https://medium.com/yield-protocol/post-mortem-of-incident-on-august-5th-2022-7bb70dbb9ada)
