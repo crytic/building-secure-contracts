@@ -1,42 +1,42 @@
 # A Guide on Performing Arithmetic Checks in the EVM
 
 The Ethereum Virtual Machine (EVM) distinguishes itself from traditional computer systems and virtual machines through several unique aspects.
-One notable variation is its treatment of arithmetic checks.
-While most architectures and virtual machines offer access to carry bits or an overflow flag,
-these features are not present in the EVM.
-As a result, developers must manually incorporate these safeguards within the machine's constraints.
+One notable difference is its treatment of arithmetic checks.
+While most architectures and virtual machines provide access to carry bits or an overflow flag,
+these features are absent in the EVM.
+Consequently, developers must manually incorporate these safeguards within the machine's constraints.
 
-Starting with Solidity version 0.8.0 the compiler includes over and underflow protection in all arithmetic operations by default.
-Prior to version 0.8.0, developers had to implement these checks manually, often using a library known as [SafeMath](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol), originally developed by OpenZeppelin.
-Much like how SafeMath works, the compiler inserts arithmetic checks through additional operations.
+Starting with Solidity version 0.8.0 the compiler automatically includes over and underflow protection in all arithmetic operations.
+Prior to version 0.8.0, developers were required to implement these checks manually, often using a library known as [SafeMath](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol), originally developed by OpenZeppelin.
+The compiler incorporates arithmetic checks in a manner similar to SafeMath, through additional operations.
 
-In this article, we'll explore many ways to perform arithmetic checks within the EVM.
-This guide is designed for those with a keen interest in bit manipulations and seek a deeper understanding of the EVM's inner workings.
-It is assumed that you have a basic understanding of bitwise arithmetic and Solidity opcodes.
+As the Solidity language has evolved, the compiler has generated increasingly optimized code for arithmetic checks. This trend is also observed in smart contract development in general, where highly optimized arithmetic code written in low-level assembly is becoming more common. However, there is still a lack of comprehensive resources explaining the nuances of how the EVM handles arithmetic for signed and unsigned integers of 256 bits and less.
 
-Some additional references for complementary reading are:
+This article serves as a guide for gaining a deeper understanding of arithmetic in the EVM by exploring various ways to perform arithmetic checks. We'll learn more about the two's complement system and some lesser-known opcodes. This article is designed for those curious about the EVM's inner workings and those interested in bit manipulations in general. A basic understanding of bitwise arithmetic and Solidity opcodes is assumed.
+
+Additional references for complementary reading are:
 
 - [evm.codes](https://evm.codes)
 - [Understanding Two's Complement](https://www.geeksforgeeks.org/twos-complement/)
 
 > **Disclaimer:** Please note that this article is for educational purposes.
 > It is not our intention to encourage micro optimizations in order to save gas,
-> as this can potentially lead to the introduction of new bugs that are difficult to detect and may compromise the security and stability of a protocol.
-> As a developer, it is important to prioritize the safety and security of the protocol over [premature optimization](https://www.youtube.com/watch?v=tKbV6BpH-C8).
-> In situations where the code for the protocol is still evolving, including redundant checks for critical operations may be a good practice.
+> as this can potentially introduce new, hard-to-detect bugs that may compromise the security and stability of a protocol.
+> As a developer, prioritize the safety and security of the protocol over [premature optimizations](https://www.youtube.com/watch?v=tKbV6BpH-C8).
+> Including redundant checks for critical operations may be a good practice when the protocol code is still evolving.
 > However, we do encourage experimentation with these operations for educational purposes.
 
 ## Arithmetic checks for uint256 addition
 
-To investigate how the solc compiler implements arithmetic checks, we can compile the code with the `--asm` flag and inspect the resulting bytecode.
-Alternatively, by using the `--ir` flag, we can examine the Yul code that is generated as an intermediate representation (IR).
+To examine how the solc compiler implements arithmetic checks, we can compile the code with the `--asm` flag and inspect the resulting bytecode.
+Alternatively, using the `--ir` flag allows us to examine the Yul code that is generated as an intermediate representation (IR).
 
-> It's worth noting that Solidity aims to make the new Yul pipeline the standard.
+> Note that Solidity aims to make the new Yul pipeline the standard.
 > Certain operations (including arithmetic checks) are always included as Yul code, regardless of whether the code is compiled with the new pipeline using `--via-ir`.
 > This provides an opportunity to examine the Yul code and gain a better understanding of how arithmetic checks are executed in Solidity.
-> However, it's important to keep in mind that the final bytecode may differ slightly when compiler optimizations are turned on.
+> However, keep in mind that the final bytecode may differ slightly when compiler optimizations are turned on.
 
-To illustrate how the compiler detects overflow in unsigned integer addition, consider the following example of Yul code that is produced by the compiler before version 0.8.16.
+To illustrate how the compiler detects overflow in unsigned integer addition, consider the following example of Yul code produced by the compiler before version 0.8.16.
 
 ```solidity
 function checked_add_t_uint256(x, y) -> sum {
@@ -50,7 +50,7 @@ function checked_add_t_uint256(x, y) -> sum {
 }
 ```
 
-To enhance readability, we can interpret the Yul code back into high-level Solidity code.
+To improve readability, we can translate the Yul code back into high-level Solidity code.
 
 ```solidity
 /// @notice versions >=0.8.0 && <0.8.16
@@ -65,11 +65,11 @@ function checkedAddUint1(uint256 a, uint256 b) public pure returns (uint256 c) {
 
 > Solidity's arithmetic errors are encoded as `abi.encodeWithSignature("Panic(uint256)", 0x11)`.
 
-The check for overflow in unsigned integer addition involves calculating the largest value that one summand can be added to the other without resulting in an overflow.
-Specifically, in this case, the maximum value that `a` can have is `type(uint256).max - b`.
+The check for overflow in unsigned integer addition involves calculating the largest value that one summand can have when added to the other without causing an overflow.
+Specifically, in this case, the maximum value `a` can have is `type(uint256).max - b`.
 If `a` exceeds this value, we can conclude that `a + b` will overflow.
 
-An alternative (and slightly more efficient) approach to computing the maximum value of `a` is to invert the bits on `b`.
+An alternative and slightly more efficient approach for computing the maximum value of `a` involves inverting the bits of `b`.
 
 ```solidity
 /// @notice versions >=0.8.0 && <0.8.16 with compiler optimizations
@@ -82,15 +82,14 @@ function checkedAddUint2(uint256 a, uint256 b) public pure returns (uint256 c) {
 }
 ```
 
-This is equivalent, because `type(uint256).max` is a 256-bit integer with all its bits set to `1`.
+This is process is equivalent, because `type(uint256).max` is a 256-bit integer with all its bits set to `1`.
 Subtracting `b` from `type(uint256).max` can be viewed as inverting each bit in `b`.
-This can be demonstrated by the transformation `~b = ~(0 ^ b) = ~0 ^ b = MAX ^ b = MAX - b`.
+This transformation is demonstrated by `~b = ~(0 ^ b) = ~0 ^ b = MAX ^ b = MAX - b`.
 
-> It's worth noting that `a - b = a ^ b` is **NOT** a general rule, except in special cases, such as when one of the values equals `MAX`.
-> We also obtain the relation `~b + 1 = 0 - b = -b` if we add `1` mod `2**256` to both sides of the previous equation.
+> Note that `a - b = a ^ b` is **NOT** a general rule, except in special cases, such as when one of the values equals `type(uint256).max`.
+> The relation `~b + 1 = 0 - b = -b` is also obtained if we add `1` mod `2**256` to both sides of the previous equation.
 
-By computing the result of the addition first and then performing a check on the sum,
-we eliminate the need for performing extra arithmetic operations in the comparison.
+By first calculating the result of the addition and then performing a check on the sum, the need performing extra arithmetic operations are removed.
 This is how the compiler implements arithmetic checks for unsigned integer addition in versions 0.8.16 and later.
 
 ```solidity
@@ -104,14 +103,14 @@ function checkedAddUint(uint256 a, uint256 b) public pure returns (uint256 c) {
 }
 ```
 
-Overflow is detected when the sum is smaller than one of its summands.
+Overflow is detected when the sum is smaller than one of its addends.
 In other words, if `a > a + b`, then overflow has occurred.
-A full proof of this requires verifying that overflow occurs if and only if `a > a + b`.
+To fully prove this, it is necessary to verify that overflow occurs if and only if `a > a + b`.
 An important observation is that `a > a + b` (mod `2**256`) for `b > 0` is only possible when `b >= 2**256`, which exceeds the maximum possible value.
 
 ## Arithmetic checks for int256 addition
 
-The Solidity compiler generates the following (equivalent) code for detecting overflow in signed integer addition below version 0.8.16.
+The Solidity compiler generates the following (equivalent) code for detecting overflow in signed integer addition for versions below 0.8.16.
 
 ```solidity
 /// @notice versions >=0.8.0 && <0.8.16
@@ -127,7 +126,7 @@ function checkedAddInt(int256 a, int256 b) public pure returns (int256 c) {
 }
 ```
 
-Like before, we can compute the maximum and minimum value of a summand given that the other summand is either positive or negative.
+Similar to the previous example, we can compute the maximum and minimum value of one addend, given that the other is either positive or negative.
 
 For reference, this is the Yul code that is produced when compiling via IR.
 
@@ -145,12 +144,12 @@ function checked_add_t_int256(x, y) -> sum {
 }
 ```
 
-It's important to note that when comparing signed values, we must use the opcodes `slt` (signed less than) and `sgt` (signed greater than) to avoid interpreting signed integers as unsigned integers.
-Solidity will automatically insert the correct opcode based on the type of the value. This applies to other signed operations as well.
+It's important to note that when comparing signed values, the opcodes `slt` (signed less than) and `sgt` (signed greater than) must be used to avoid interpreting signed integers as unsigned integers.
+Solidity will automatically insert the correct opcode based on the value's type. This applies to other signed operations as well.
 
 ### Quick primer on a two's complement system
 
-In a two's complement system, the range of possible integers is divided into two halves: the positive and negative domain.
+In a two's complement system, the range of possible integers is divided into two halves: the positive and negative domains.
 The first bit of an integer represents the sign, with `0` indicating a positive number and `1` indicating a negative number.
 For positive integers (those with a sign bit of `0`), their binary representation is the same as their unsigned bit representation.
 However, the negative domain is shifted to lie "above" the positive domain.
@@ -203,15 +202,14 @@ An example illustrates this.
 To verify that `-a + a = 0` holds for all integers, we can use the property of two's complement arithmetic that `-a = ~a + 1`.
 By substituting this into the equation, we get `-a + a = (~a + 1) + a = MAX + 1 = 0`, where `MAX` is the maximum integer value.
 
-There is a unique case that needs special attention in two's complement arithmetic.
-The smallest possible integer `int256).min = 0x8000000000000000000000000000000000000000000000000000000000000000 = -57896044618658097711785492504343953926634992332820282019728792003956564819968`
-does not have a positive inverse for addition, making it the only negative number with this property.
+In two's complement arithmetic, there is a unique case that warrants special attention. The smallest possible integer `int256).min = 0x8000000000000000000000000000000000000000000000000000000000000000 = -57896044618658097711785492504343953926634992332820282019728792003956564819968`
+does not have a positive inverse, making it the only negative number with this property.
 
-Interestingly, if we try to compute `-type(int256).min`, we get the same number, as `-type(int256).min = ~type(int256).min + 1 = type(int256).min`.
+Interestingly, if we try to compute `-type(int256).min`, we obtain the same number, as `-type(int256).min = ~type(int256).min + 1 = type(int256).min`.
 This means there are two fixed points for additive inverses: `-0 = 0` and `-type(int256).min = type(int256).min`.
 It's important to note that Solidity's arithmetic checks will throw an error when evaluating `-type(int256).min` (outside of unchecked blocks).
 
-Finally, looking at the underlying bit (or hex) representation highlights the importance of using the correct operators for signed integers, such as `slt` instead of `lt`, to avoid misinterpreting negative values as large numbers.
+Examining the underlying bit (or hex) representation emphasizes the importance of using the correct operators for signed integers, such as `slt` instead of `lt`, to prevent misinterpreting negative values as large numbers.
 
 ```solidity
   0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff // int256(-1) or type(uint256).max
@@ -223,7 +221,7 @@ Finally, looking at the underlying bit (or hex) representation highlights the im
 ```
 
 Starting with Solidity versions 0.8.16, integer overflow is prevented by using the computed result `c = a + b` to check for overflow/underflow.
-However, unlike unsigned addition, signed addition requires two separate checks instead of one.
+However, signed addition requires two separate checks instead of one, unlike unsigned addition.
 
 ```solidity
 /// @notice versions >=0.8.16
@@ -240,8 +238,8 @@ function checkedAddInt2(int256 a, int256 b) public pure returns (int256 c) {
 ```
 
 Nevertheless, by utilizing the boolean exclusive-or, we can combine these checks into a single step.
-While Solidity doesn't permit the `xor` operation for boolean values, it can still be employed through inline-assembly.
-While doing so, it is crucial to ensure that both inputs are genuinely boolean (either `0` or `1`), as the xor operation functions bitwise and is not limited to only boolean values.
+Although Solidity does not allow the `xor` operation for boolean values, it can be used in inline-assembly.
+While doing so, it is important to validate our assumptions that both inputs are genuinely boolean (either `0` or `1`), as the xor operation functions bitwise and is not limited to only boolean values.
 
 ```solidity
 function checkedAddInt3(int256 a, int256 b) public pure returns (int256 c) {
@@ -262,9 +260,9 @@ function checkedAddInt3(int256 a, int256 b) public pure returns (int256 c) {
 }
 ```
 
-A different approach to detecting overflow in addition is to observe that adding two integers with different signs will never overflow.
-This reduces the check to the case when both summands have the same sign.
-If the sign of the sum is different from one of the summands, the result has overflowed.
+An alternative approach to detecting overflow in addition is based on the observation that adding two integers with different signs will never result in an overflow.
+This simplifies the check to the case when both operands have the same sign.
+If the sign of the sum differs from one of the operands, the result has overflowed.
 
 ```solidity
 function checkedAddInt4(int256 a, int256 b) public pure returns (int256 c) {
@@ -279,13 +277,13 @@ function checkedAddInt4(int256 a, int256 b) public pure returns (int256 c) {
 }
 ```
 
-Rather than checking the sign bit explicitly, which can be achieved by shifting the value to the right by 255 bits and checking that it is non-zero,
+Instead of checking the sign bit explicitly, which can be done by shifting the value to the right by 255 bits and verifying that it is non-zero,
 we can use the `slt` operation to compare the value with `0`.
 
 ## Arithmetic checks for uint256 subtraction
 
-The process of checking for underflow in subtraction is akin to that of addition.
-If we subtract `a - b`, and `b` is greater than `a`, we have an underflow situation.
+The process of checking for underflow in subtraction is similar to that of addition.
+When subtracting `a - b`, and `b` is greater than `a`, an underflow occurs.
 
 ```solidity
 function checkedSubUint(uint256 a, uint256 b) public pure returns (uint256 c) {
@@ -297,10 +295,10 @@ function checkedSubUint(uint256 a, uint256 b) public pure returns (uint256 c) {
 }
 ```
 
-We could, like before, perform the check on the result itself using `if (c > a) arithmeticError();`, because subtracting a positive value from `a` should yield a value less than or equal to `a`.
+Alternatively, we could perform the check on the result itself using `if (c > a) arithmeticError();`, because subtracting a positive value from `a` should yield a value less than or equal to `a`.
 However, in this case, we don't save any operations.
 
-Just as with addition, for signed integers, we can combine the checks for both scenarios into a single check using `xor`.
+Similar to addition, for signed integers, we can combine the checks for both scenarios into a single check using `xor`.
 
 ```solidity
 function checkedSubInt(int256 a, int256 b) public pure returns (int256 c) {
@@ -322,7 +320,7 @@ function checkedSubInt(int256 a, int256 b) public pure returns (int256 c) {
 
 ## Arithmetic checks for uint256 multiplication
 
-To detect overflow when multiplying two unsigned integers, we can again use the approach of computing the maximum possible value of a multiplicand and check that it isn't exceeded.
+To detect overflow when multiplying two unsigned integers, we can use the approach of computing the maximum possible value of a multiplicand and check that it isn't exceeded.
 
 ```solidity
 /// @notice versions >=0.8.0 && <0.8.17
@@ -433,10 +431,7 @@ otherwise the value won't be interpreted correctly.
 = 0x0000000000000000000000000000000000000000000000000000000000000001 // int64(1)
 ```
 
-It's worth noting that not all operations require clean upper bits.
-In fact, even if the upper bits are dirty, we can still get correct results for addition.
-However, the sum will usually contain dirty upper bits that will need to be cleaned.
-For example, we can perform addition without knowledge of the upper bits.
+It's worth noting that not all operations require clean upper bits. In fact, even if the upper bits are dirty, we can still get correct results for addition. However, the sum will usually contain dirty upper bits that will need to be cleaned. For example, we can perform addition without knowledge of the upper bits.
 
 ```solidity
   0x????????????????????????????????????????????????fffffffffffffffe // int64(-2)
@@ -476,7 +471,7 @@ function checkedAddInt64_1(int64 a, int64 b) public pure returns (int64 c) {
 ```
 
 If we remove the line that includes `c := signextend(7, c)` the overflow check will not function correctly.
-This is because Solidity does not take into account the fact that the variable is used in an assembly block, so the optimizer removes the bit cleaning operation, even if the Yul code includes it after the addition.
+This is because Solidity does not take into account the fact that the variable is used in an assembly block, and the optimizer removes the bit cleaning operation, even if the Yul code includes it after the addition.
 
 One thing to keep in mind is that since we are performing a 64-bit addition in 256 bits, we practically have access to the carry/overflow bits.
 If our computed value does not overflow, then it will fall within the correct bounds `type(int64).min <= c <= type(int64).max`.
@@ -500,7 +495,7 @@ function checkedAddInt64_2(int64 a, int64 b) public pure returns (int64 c) {
 
 There are a few ways to verify that the result in its 256-bit representation will fit into the expected data type.
 This is only true when all upper bits are the same.
-The most direct method, as just shown, involves checking the lower and upper bounds of the value.
+The most direct method, as previously shown, involves verifying both the lower and upper bounds.
 
 ```solidity
 /// @notice Check used in int64 addition for version >= 0.8.16.
@@ -509,7 +504,7 @@ function overflowInt64(int256 value) public pure returns (bool overflow) {
 }
 ```
 
-We can simplify the expression to a single comparison if we're able to shift the disjointed number domain back so that it's connected.
+We can simplify the expression to a single comparison if we can shift the disjointed number domain back so that it's connected.
 To accomplish this, we subtract the smallest negative int64 `type(int64).min` from a value (or add the underlying unsigned value).
 A better way to understand this is by visualizing the signed integer number domain in relation to the unsigned domain (which is demonstrated here using int128).
 
@@ -551,8 +546,7 @@ $$
 }
 $$
 
-Note that the scales of the number ranges above do not accurately depict the magnitude of numbers that are representable with the different types and only serves as a visualization.
-We are able to represent twice as many numbers with only one additional bit. Yet, the uint256 domain has twice the number of bits compared to uint128.
+Note that the scales of the number ranges in the previous section do not accurately depict the magnitude of numbers that are representable with the different types and only serve as a visualization. We can represent twice as many numbers with only one additional bit, yet the uint256 domain has twice the number of bits compared to uint128.
 
 After subtracting `type(int128).min` (or adding $2^{127}$) and essentially shifting the domains to the right, we get the following, connected set of values.
 
@@ -600,7 +594,7 @@ function overflowInt64_3(int256 value) public pure returns (bool overflow) {
 }
 ```
 
-In Yul, the equivalent code would resemble the following.
+In Yul, the equivalent resembles the following.
 
 ```solidity
 function overflowInt64_3_yul(int256 value) public pure returns (bool overflow) {
@@ -624,7 +618,7 @@ function overflowInt64_4_yul(int256 value) public pure returns (bool overflow) {
 }
 ```
 
-Finally, a full example for detecting signed 64-bit integer overflow, implemented in Solidity can be seen below.
+Finally, a full example for detecting signed 64-bit integer overflow, implemented in Solidity can be seen below:
 
 ```solidity
 function checkedAddInt64_2(int64 a, int64 b) public pure returns (int64 c) {
@@ -648,8 +642,7 @@ One further optimization that we could perform is to add `-type(int64).min` inst
 
 ## Arithmetic checks for multiplication with sub-32-byte types
 
-If the product `c = a * b` can be calculated in 256 bits without the possibility of overflowing, we can once again verify whether the result can fit into the anticipated data type.
-This is also the way Solidity handles the check in versions 0.8.17 and later.
+When the product `c = a * b` can be calculated in 256 bits without the possibility of overflowing, we can verify whether the result can fit into the anticipated data type. This is also the way Solidity handles the check in versions 0.8.17 and later.
 
 ```solidity
 /// @notice version >= 0.8.17
@@ -668,8 +661,8 @@ function checkedMulInt64(int64 a, int64 b) public pure returns (int64 c) {
 
 However, if the maximum value of a product exceeds 256 bits, then this method won't be effective.
 This happens, for instance, when working with int192. The product `type(int192).min * type(int192).min` requires 192 + 192 = 384 bits to be stored, which exceeds the maximum of 256 bits.
-Overflow occurs in 256 bits, which loses information, and it won't be logical to check if the result fits into 192 bits.
-In this scenario, we can depend on the previous checks and, for example, attempt to reconstruct one of the multiplicands.
+Overflow occurs in 256 bits, causing a loss of information, and it won't be logical to check if the result fits into 192 bits.
+In this scenario, we can rely on the previous checks and, for example, attempt to reconstruct one of the multiplicands.
 
 ```solidity
 function checkedMulInt192_1(int192 a, int192 b) public pure returns (int192 c) {
@@ -682,10 +675,10 @@ function checkedMulInt192_1(int192 a, int192 b) public pure returns (int192 c) {
 }
 ```
 
-Once more, we must consider the two special circumstances:
+We must consider the two special circumstances:
 
 1. When one of the multiplicands is zero (`a == 0`), the other multiplicand cannot be retrieved. However, this case never results in overflow.
-2. Even if the multiplication is correct in 256 bits, the calculation overflows when only examining the least-significant 192 bits if the first multiplicand is minus one (`a = -1`) and the other multiplicand is the minimum value.
+2. Even if the multiplication is correct in 256 bits, the calculation overflows when only examining the least-significant 192 bits if the first multiplicand is negative one (`a = -1`) and the other multiplicand is the minimum value.
 
 An example might help explain the second case.
 
@@ -695,8 +688,8 @@ An example might help explain the second case.
 = 0x0000000000000000800000000000000000000000000000000000000000000000 // type(int192).min (when seen as a int192)
 ```
 
-A way to handle this is to always start by sign-extending or cleaning the result before attempting to reconstruct the other multiplicand.
-This then removes the need for checking the special condition.
+A method to address this issue is to always start by sign-extending or cleaning the result before attempting to reconstruct the other multiplicand.
+By doing so, it eliminates the need to check for the special condition.
 
 ```solidity
 /// @notice version >= 0.8.17
@@ -719,7 +712,6 @@ function checkedMulInt192_2(int192 a, int192 b) public pure returns (int192 c) {
 
 ## Conclusion
 
-In conclusion, this article has provided a comprehensive examination of arithmetic checks within the Ethereum Virtual Machine, delving into various Solidity opcodes and optimizations for assembly code. We have explored some of the intricacies of implementing arithmetic checks for both uint256 and int256 addition, subtraction, and multiplication, as well as for sub-32-byte types.
-Furthermore, we have highlighted some caveats to be aware of when working with assembly to avoid potential pitfalls.
+In conclusion, we hope this article has served as an informative guide on signed integer arithmetic within the EVM and the two's complement system. We have seen the added complexity that is introduced when performing checked arithmetic on signed integers compared to unsigned ones and when dealing with sub-32 byte types.
 
-The purpose of this article is to deepen one's familiarity of low-level arithmetic, thereby improving the security of Solidity code by equipping developers to better assess and grasp the assumptions present in these operations. It is crucial to remember that custom low-level optimizations should be integrated only after rigorous manual analysis, fuzzing, and symbolic verification.
+As the trend in Solidity smart contract development leans towards low-level optimizations, it is important to emphasize the diligence required when implementing these techniques. The aim of this article is to deepen one's understanding of low-level arithmetic, thereby improving the security of Solidity code by enabling developers to better assess and comprehend the assumptions present in these operations. However, it is crucial to remember that custom low-level optimizations should be integrated only after rigorous manual analysis, fuzzing, and symbolic verification. Additionally, any non-obvious assumptions should always be clearly documented.
