@@ -1,10 +1,10 @@
 # A Guide on Performing Arithmetic Checks in the EVM
 
-The Ethereum Virtual Machine (EVM) distinguishes itself from traditional computer systems and virtual machines through several unique aspects.
+The Ethereum Virtual Machine (EVM) distinguishes itself from other virtual machines and computer systems through several unique aspects.
 One notable difference is its treatment of arithmetic checks.
 While most architectures and virtual machines provide access to carry bits or an overflow flag,
 these features are absent in the EVM.
-Consequently, developers must manually incorporate these safeguards within the machine's constraints.
+Consequently, these safeguards must be incorporated within the machine's constraints.
 
 Starting with Solidity version 0.8.0 the compiler automatically includes over and underflow protection in all arithmetic operations.
 Prior to version 0.8.0, developers were required to implement these checks manually, often using a library known as [SafeMath](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol), originally developed by OpenZeppelin.
@@ -712,6 +712,12 @@ function checkedMulInt192_2(int192 a, int192 b) public pure returns (int192 c) {
 
 ## Conclusion
 
-In conclusion, we hope this article has served as an informative guide on signed integer arithmetic within the EVM and the two's complement system. We have seen the added complexity that is introduced when performing checked arithmetic on signed integers compared to unsigned ones and when dealing with sub-32 byte types.
+In conclusion, we hope this article has served as an informative guide on signed integer arithmetic within the EVM and the two's complement system.
+We have explored:
 
-As the trend in Solidity smart contract development leans towards low-level optimizations, it is important to emphasize the diligence required when implementing these techniques. The aim of this article is to deepen one's understanding of low-level arithmetic, thereby improving the security of Solidity code by enabling developers to better assess and comprehend the assumptions present in these operations. However, it is crucial to remember that custom low-level optimizations should be integrated only after rigorous manual analysis, fuzzing, and symbolic verification. Additionally, any non-obvious assumptions should always be clearly documented.
+- the added complexity from handling signed over unsigned integers
+- the intricacies involved in managing sub 32-byte types
+- the significance of `signextend` and opcodes related to signed integers
+- the importance of bit-cleaning
+
+As the trend in Solidity smart contract development continues towards low-level optimizations, it is important to emphasize the diligence required when implementing these techniques. The aim of this article is to deepen one's understanding of low-level arithmetic, thereby improving the security of Solidity code by enabling developers to better assess and comprehend the assumptions present in these operations. Nevertheless, it is crucial to integrate custom low-level optimizations only after thorough manual analysis, fuzzing, and symbolic verification, and to document any non-obvious assumptions.
