@@ -720,4 +720,4 @@ We have explored:
 - the significance of `signextend` and opcodes related to signed integers
 - the importance of bit-cleaning
 
-As the trend in Solidity smart contract development continues towards low-level optimizations, it is important to emphasize the diligence required when implementing these techniques. The aim of this article is to deepen one's understanding of low-level arithmetic, thereby improving the security of Solidity code by enabling developers to better assess and comprehend the assumptions present in these operations. Nevertheless, it is crucial to integrate custom low-level optimizations only after thorough manual analysis, fuzzing, and symbolic verification, and to document any non-obvious assumptions.
+While low-level optimizations are attractive, they are also heavily error-prone. This article aims to deepen one's understanding of low-level arithmetic, to reduce these risks. Nevertheless, it is crucial to integrate custom low-level optimizations only after thorough manual analysis, automated testing, and to document any non-obvious assumptions.
