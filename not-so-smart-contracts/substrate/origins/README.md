@@ -58,6 +58,6 @@ let sender = ensure_signed(origin)?;
 # References
 
 - https://docs.substrate.io/main-docs/build/origins/
-- https://docs.substrate.io/tutorials/work-with-pallets/specify-the-origin-for-a-call/
+- https://docs.substrate.io/tutorials/build-application-logic/specify-the-origin-for-a-call/
 - https://paritytech.github.io/substrate/master/pallet_sudo/index.html#
 - https://paritytech.github.io/substrate/master/pallet_democracy/index.html
