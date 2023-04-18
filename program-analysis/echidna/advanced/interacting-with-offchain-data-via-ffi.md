@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Since the implementation of the HEVM cheat codes in Echidna, it is possible to interact with off-chain data by means of the `ffi` cheatcode. This function allows the caller to execute an arbitrary command on the system running Echidna and read its output, enabling the possibility of getting external data into a fuzzing campaign.
+It is possible for Echidna to interact with off-chain data by means of the `ffi` cheatcode. This function allows the caller to execute an arbitrary command on the system running Echidna and read its output, enabling the possibility of getting external data into a fuzzing campaign.
 
 ## A word of caution
 
@@ -34,11 +34,11 @@ Some of the use cases for `ffi` are:
 
 This example will show how to create a simple call to an external executable, passing some values as parameters, and read its output. Keep in mind that the return values of the called program should be an abi-encoded data chunk that can be later decoded via `abi.decode()`. No newlines are allowed in the return values.
 
-Before digging into the example, there's something else to keep in mind: When interacting with external processes, you will need to convert from Solidity data types to string, to pass values as arguments to the off-chain executable. You can use the [crytic/properties](https://github.com/crytic/properties) helpers for converting.
+Before digging into the example, there's something else to keep in mind: When interacting with external processes, you will need to convert from Solidity data types to string, to pass values as arguments to the off-chain executable. You can use the [crytic/properties](https://github.com/crytic/properties) `toString` [helpers](https://github.com/crytic/properties/blob/main/contracts/util/PropertiesHelper.sol#L447) for converting.
 
 For the example we will be creating a python example script that returns a random `uint256` value and a `bytes32` hash calculated from an integer input value. This doesn't represent a "useful" use case, but will be enough to show how the `ffi` cheatcode is used. Finally, we won't perform sanity checks for data types or values, we will just assume the input data will be correct.
 
-(This script was tested with Python 3.11, Web3 6.0.0 and eth-abi 4.0.0. Some functions had different names in prior versions of the libraries)
+This script was tested with Python 3.11, Web3 6.0.0 and eth-abi 4.0.0. Some functions had different names in prior versions of the libraries.
 
 ```python
 import sys
