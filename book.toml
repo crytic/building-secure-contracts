@@ -15,6 +15,7 @@ no-section-label = true
 additional-css = ["static/custom.css"]
 additional-js = ["static/script.js"]
 default-theme = "light"
+mathjax-support = true
 
 [output.html.fold]
 enable = true
