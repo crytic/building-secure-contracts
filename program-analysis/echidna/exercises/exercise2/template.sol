@@ -13,7 +13,6 @@ contract LibraryMathEchidna {
 		reserve.liquidity = 3 ether;
 		isSetup = true;
 	}
-	//"safe"-version of reserve_add_funds (1-uint128.max)
 	function reserve_add_funds(uint256 delRisky, uint256 delStable) public returns (LiquidityTracker.Data memory preReserve, uint256 delLiquidity){
 		//************************* Pre-Conditions *************************/
 		//************************* Action *************************/
