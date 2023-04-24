@@ -2,6 +2,8 @@
 pragma solidity 0.8.0;
 import "./LiquidityTracker.sol";
 
+// solc-select use 0.8.0
+// echidna template.sol --contract LibraryMathEchidna --test-mode assertion
 contract LibraryMathEchidna { 
 	LiquidityTracker.Data private reserve; // (0,0,0,0,0,0,0)
 	event LogUint256(string msg, uint256);
@@ -15,9 +17,11 @@ contract LibraryMathEchidna {
 	}
 	function reserve_add_funds(uint256 delRisky, uint256 delStable) public returns (LiquidityTracker.Data memory preReserve, uint256 delLiquidity){
 		//************************* Pre-Conditions *************************/
+		// reserves are non-0 
 		//************************* Action *************************/
 		delLiquidity = LiquidityTracker.add_funds(reserve,delRisky,delStable);
 		//************************* Post-Conditions *************************/
+		// reserves increase 
 	}
 	function reserve_remove_funds(uint256 delLiquidity) public returns (uint256 removeRisky, uint256 removeStable) {
 		//************************* Pre-Conditions *************************/
