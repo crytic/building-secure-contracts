@@ -10,7 +10,7 @@
 
 ## Introduction
 
-We will see how to use ether during the fuzzing fuzzed. The following smart contract will be used as example:
+We will see how to use ether during a fuzzing campaign. The following smart contract will be used as example:
 
 ```solidity
 contract C {
