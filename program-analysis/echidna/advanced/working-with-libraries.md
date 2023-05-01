@@ -6,18 +6,17 @@
 - [Example code](#example-code)
 - [Deploying libraries](#deploying-libraries)
 - [Linking libraries](#linking-libraries)
+- [Summary](#summary)
 
 ## Introduction
 
-One important feature used Solidity introduced a brand new concept of smart contract library. While this feature is not extremely popular, a good amount of contracts use them to structure code and reduce the amount of bytecode deployed.
-Before continue, it is very recommended to review [the official Solidity documentation](https://docs.soliditylang.org/en/v0.8.19/contracts.html#libraries) to make sure
+Solidity introduced a the concept of a smart contract library. Before continue, it is very recommended to review [the official Solidity documentation](https://docs.soliditylang.org/en/v0.8.19/contracts.html#libraries) to make sure
 you understand how libraries are created and deployed. When a user creates a library, Solidity will do one of these two options:
 
 - If all the functions are internal, the library is compiled into bytecode and added into the contracts that use it.
 - If there are some external functions, the library should be deployed into some address. Finally, the bytecode calling the library should be linked.
 
-If your libraries only contain internal functions, then Echidna will work correctly and you don't need to do anything extra to start your testing (you can skip the rest of the tutorial).
-However, if you need to use libraries that needed to be deployed (and the bytecode needs to be linked), then you will need this tutorial.
+The following is only needed if your codebase uses libraries that need to be linked. However, if you need to use libraries that needed to be deployed (and the bytecode needs to be linked), then you will need this tutorial.
 
 ## Example code
 
@@ -50,7 +49,7 @@ to pass to `crytic-compile` from Echidna:
 cryticArgs: ["--compile-libraries=(ConvertLib,0x1f)"]
 ```
 
-Going back to the example, if we have both config options in a single config file (`echidna.yaml), we can run the metacoin contract 
+Going back to the example, if we have both config options in a single config file (`echidna.yaml`), we can run the metacoin contract 
 in `exploration` mode:
 
 ```
@@ -65,7 +64,7 @@ We can use the coverage report to verify that function using the library (`getBa
  30 |     |     }
 ```
 
-However, the code of library itself will not have their coverage displayed correctly:
+However, the code of the library itself will not have their coverage displayed correctly:
 
 ```
  6 |     | library ConvertLib{
@@ -77,3 +76,7 @@ However, the code of library itself will not have their coverage displayed corre
 ```
 
 This is caused by the usage of `delegatecall` to execute contract code and unfortunately we do not have a workaround for it right now.
+
+## Summary
+
+Working with libraries in Echidna is supported. It involves to deploy the library to a particular address using `deployContracts` and then asking `crytic-compile` to link the bytecode with the same address using `--compile-libraries` command line.
