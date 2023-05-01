@@ -126,9 +126,9 @@ jobs:
             expected: 'testERC20PermitDeposit(uint256):\s*passed'
           - name: MultiABI
             workdir: program-analysis/echidna/example/
-            files: multiabi.sol
+            files: allContracts.sol
             solc-version: 0.8.0
-            config: multiabi.yaml
+            config: allContracts.yaml
             contract: EchidnaTest
             outcome: failure
             expected: 'test_flag_is_false():\s*failed'
