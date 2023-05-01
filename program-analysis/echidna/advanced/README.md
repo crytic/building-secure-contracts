@@ -8,4 +8,4 @@
 - [How to test bytecode-only contracts](./testing-bytecode.md): How to fuzz a contract without bytecode or to perform differential fuzzing between Solidity and Vyper
 - [How to use hevm cheats to test permit](./hevm-cheats-to-test-permit.md): How to test code that depends on ecrecover signatures using hevm cheat codes
 - [How to seed Echidna with unit tests](./end-to-end-testing.md): How to use existing unit tests to seed Echidna
-- [Understanding and using `multi-abi`](./using-multi-abi.md): What is `multi-abi` testing, and how can it be used
+- [Understanding and using `allContracts`](./using-all-contracts.md): What is `allContracts` testing, and how can it be used
