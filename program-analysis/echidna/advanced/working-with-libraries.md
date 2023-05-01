@@ -49,7 +49,7 @@ to pass to `crytic-compile` from Echidna:
 cryticArgs: ["--compile-libraries=(ConvertLib,0x1f)"]
 ```
 
-Going back to the example, if we have both config options in a single config file (`echidna.yaml`), we can run the metacoin contract 
+Going back to the example, if we have both config options in a single config file (`echidna.yaml`), we can run the metacoin contract
 in `exploration` mode:
 
 ```
