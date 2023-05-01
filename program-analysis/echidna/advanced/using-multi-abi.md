@@ -71,14 +71,13 @@ contract EchidnaTest {
 }
 ```
 
-In a non `allContracts` fuzzing campaign,  Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [allContracts.yaml here](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/allContracts.yaml).
+Without using `allContracts` in a fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [allContracts.yaml here](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/allContracts.yaml).
 
 ```yaml
 testMode: assertion
 testLimit: 50000
 allContracts: true
 ```
-
 
 To run the Echidna tests, run `echidna allContracts.sol --contract EchidnaTest --config allContracts.yaml` from the `example` directory. Alternatively, you can specify `--all-contracts` in the command line instead of using a configuration file.
 
