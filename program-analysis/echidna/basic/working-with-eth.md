@@ -48,7 +48,7 @@ maxValue: 100000000000000000000
 
 This means that each transaction will contain, at most, 100 ether in value. However, there is no maximum that will be used in total.
 The maximum amount to receive will be determined by the number of transactions. If you are using 100 transactions (`--seq-len 100`),
-then the total amount of ether used for all the transactions will be between 0 and 100 * 100 ethers.
+then the total amount of ether used for all the transactions will be between 0 and 100 \* 100 ethers.
 
 Keep in mind that the balance of the senders (e.g. `msg.sender.balance`) is a fixed value that will NOT change between transactions.
 This value is determined by the following config option:
