@@ -6,7 +6,7 @@ The validation of an unsigned transaction must be provided by the pallet that ch
 
 # Example
 
-The [`pallet-bad-unsigned`](./pallet-bad-unsigned.rs) pallet is an example that showcases improper unsigned transaction validation. The pallet tracks the average, rolling price of some "asset"; this price data is being retrieved by an OCW. The `fetch_price` function, which is called by the OCW, naively returns 100 as the current price (note that an [HTTP request](https://github.com/paritytech/substrate/blob/e8a7d161f39db70cb27fdad6c6e215cf493ebc3b/frame/examples/offchain-worker/src/lib.rs#L572-L625) can be made here for true price data). The `validate_unsigned` function (see below) simply validates that the `Call` is being made to `submit_price_unsigned` and nothing else.
+The [`pallet-bad-unsigned`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/validate_unsigned/pallet-bad-unsigned.rs) pallet is an example that showcases improper unsigned transaction validation. The pallet tracks the average, rolling price of some "asset"; this price data is being retrieved by an OCW. The `fetch_price` function, which is called by the OCW, naively returns 100 as the current price (note that an [HTTP request](https://github.com/paritytech/substrate/blob/e8a7d161f39db70cb27fdad6c6e215cf493ebc3b/frame/examples/offchain-worker/src/lib.rs#L572-L625) can be made here for true price data). The `validate_unsigned` function (see below) simply validates that the `Call` is being made to `submit_price_unsigned` and nothing else.
 
 ```rust
 /// By default unsigned transactions are disallowed, but implementing the validator
@@ -49,5 +49,5 @@ Note that the simplest solution would be to sign the offchain submissions so tha
 - https://docs.substrate.io/main-docs/fundamentals/transaction-types/#unsigned-transactions
 - https://docs.substrate.io/main-docs/fundamentals/offchain-operations/
 - https://github.com/paritytech/substrate/blob/polkadot-v0.9.26/frame/examples/offchain-worker/src/lib.rs
-- https://docs.substrate.io/tutorials/work-with-pallets/add-offchain-workers/
+- https://docs.substrate.io/tutorials/build-application-logic/add-offchain-workers/
 - https://docs.substrate.io/reference/how-to-guides/offchain-workers/offchain-http-requests/

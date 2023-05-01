@@ -8,7 +8,7 @@
 
 ## Introduction
 
-We will see how to collect and use a corpus of transactions with Echidna. The target is the following smart contract (_[../example/magic.sol](../example/magic.sol)_):
+We will see how to collect and use a corpus of transactions with Echidna. The target is the following smart contract (_[magic.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/magic.sol)_):
 
 ```solidity
 contract C {

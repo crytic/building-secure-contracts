@@ -16,7 +16,7 @@ Substrate does not cache state prior to extrinsic dispatch. Instead, state chang
 
 # Example
 
-In the [`pallet-verify-first`](./pallet-verify-first.rs) pallet, the `init` dispatchable is used to set up the `TotalSupply` of the token and transfer them to the `sender`. `init` should be only called once. Thus, the `Init` boolean is set to `true` when it is called initially. If `init` is called more than once, the transaction will throw an error because `Init` is already `true`.
+In the [`pallet-verify-first`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/verify_first/pallet-verify-first.rs) pallet, the `init` dispatchable is used to set up the `TotalSupply` of the token and transfer them to the `sender`. `init` should be only called once. Thus, the `Init` boolean is set to `true` when it is called initially. If `init` is called more than once, the transaction will throw an error because `Init` is already `true`.
 
 ```rust
 /// Initialize the token

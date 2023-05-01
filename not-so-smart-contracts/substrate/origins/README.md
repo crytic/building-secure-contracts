@@ -18,7 +18,7 @@ Using privileged origins, like `RawOrigin::Root` or custom origins, can lead to 
 
 # Example
 
-In the [`pallet-bad-origin`](./pallet-bad-origin.rs) pallet, there is a `set_important_val` function that should be only callable by the `ForceOrigin` _custom_ origin type. This custom origin allows the pallet to specify that only a specific account can call `set_important_val`.
+In the [`pallet-bad-origin`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/origins/pallet-bad-origin.rs) pallet, there is a `set_important_val` function that should be only callable by the `ForceOrigin` _custom_ origin type. This custom origin allows the pallet to specify that only a specific account can call `set_important_val`.
 
 ```rust
 #[pallet::call]
@@ -58,6 +58,6 @@ let sender = ensure_signed(origin)?;
 # References
 
 - https://docs.substrate.io/main-docs/build/origins/
-- https://docs.substrate.io/tutorials/work-with-pallets/specify-the-origin-for-a-call/
+- https://docs.substrate.io/tutorials/build-application-logic/specify-the-origin-for-a-call/
 - https://paritytech.github.io/substrate/master/pallet_sudo/index.html#
 - https://paritytech.github.io/substrate/master/pallet_democracy/index.html

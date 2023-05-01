@@ -11,7 +11,7 @@
 
 ## Introduction
 
-We will see how to test a smart contract with Echidna. The target is the following smart contract (_[../example/token.sol](../example/token.sol)_):
+We will see how to test a smart contract with Echidna. The target is the following smart contract (_[token.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/token.sol)_):
 
 ```solidity
 contract Token {
@@ -70,7 +70,7 @@ contract TestToken is Token {
 }
 ```
 
-_[../example/testtoken.sol](../example/testtoken.sol)_ implements the property and inherits from the token.
+_[testtoken.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/testtoken.sol)_ implements the property and inherits from the token.
 
 ## Initiate a contract
 

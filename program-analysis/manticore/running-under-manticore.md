@@ -9,7 +9,7 @@
 
 ## Introduction
 
-We will see how to explore a smart contract with the Manticore API. The target is the following smart contract (_[examples/example.sol](./examples/example.sol)_):
+We will see how to explore a smart contract with the Manticore API. The target is the following smart contract (_[example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)_):
 
 ```solidity
 pragma solidity >=0.4.24 <0.6.0;
@@ -202,6 +202,6 @@ print("Results are in {}".format(m.workspace))
 m.finalize() # stop the exploration
 ```
 
-All the code above you can find into the [examples/example_run.py](./examples/example_run.py)
+All the code above you can find into the [example_run.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example_run.py)
 
 The next step is to [accessing the paths](./getting-throwing-paths.md).

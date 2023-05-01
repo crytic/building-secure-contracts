@@ -23,7 +23,7 @@ function echidna_opt_function() public view returns (int256) {
 
 ## Optimizing with Echidna
 
-In this example, the target is the following smart contract (_[../example/opt.sol](../example/opt.sol)_):
+In this example, the target is the following smart contract (_[opt.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/opt.sol)_):
 
 ```solidity
 contract TestDutchAuctionOptimization {

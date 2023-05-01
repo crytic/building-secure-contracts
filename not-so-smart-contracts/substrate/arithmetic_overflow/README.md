@@ -4,7 +4,7 @@ Arithmetic overflow in Substrate occurs when arithmetic operations are performed
 
 # Example
 
-In the [`pallet-overflow`](./pallet-overflow.rs) pallet, notice that the `transfer` function sets `update_sender` and `update_to` using primitive arithmetic operations.
+In the [`pallet-overflow`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/arithmetic_overflow/pallet-overflow.rs) pallet, notice that the `transfer` function sets `update_sender` and `update_to` using primitive arithmetic operations.
 
 ```rust
    /// Allow minting account to transfer a given balance to another account.

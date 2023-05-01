@@ -24,7 +24,7 @@ cd /home/training
 
 ## Binary
 
-Check for the lastest released binary here:
+Check for the latest released binary here:
 
 [https://github.com/crytic/echidna/releases/latest](https://github.com/crytic/echidna/releases/latest)
 
