@@ -33,7 +33,7 @@ This is where `allContracts` testing is useful: It allows Echidna to call functi
 
 ## Run Echidna
 
-We will use a simple example to show how `allContracts` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [multiabi.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multiabi.sol).
+We will use a simple example to show how `allContracts` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [allContracts.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/allContracts.sol).
 
 The `Flag` contract contains a boolean flag that is only set if `flip()` is called, and a getter function that returns the value of the flag. For now, ignore `test_fail()`, we will talk about this function later.
 
@@ -71,7 +71,7 @@ contract EchidnaTest {
 }
 ```
 
-In a non `allContracts` fuzzing campaign,  Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [multiabi.yaml here](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multiabi.yaml).
+In a non `allContracts` fuzzing campaign,  Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [allContracts.yaml here](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/allContracts.yaml).
 
 ```yaml
 testMode: assertion
@@ -80,13 +80,13 @@ allContracts: true
 ```
 
 
-To run the Echidna tests, run `echidna multiabi.sol --contract EchidnaTest --config multiabi.yaml` from the `example` directory. Alternatively, you can specify `--all-contracts` in the command line instead of using a configuration file.
+To run the Echidna tests, run `echidna allContracts.sol --contract EchidnaTest --config allContracts.yaml` from the `example` directory. Alternatively, you can specify `--all-contracts` in the command line instead of using a configuration file.
 
 ### Example run with `allContracts` set to `false`
 
 ```
-echidna multiabi.sol --contract EchidnaTest --config multiabi.yaml
-Analyzing contract: building-secure-contracts/program-analysis/echidna/example/multiabi.sol:EchidnaTest
+echidna allContracts.sol --contract EchidnaTest --config allContracts.yaml
+Analyzing contract: building-secure-contracts/program-analysis/echidna/example/allContracts.sol:EchidnaTest
 test_flag_is_false():  passed! 🎉
 AssertionFailed(..):  passed! 🎉
 
@@ -99,8 +99,8 @@ Seed: -8252538430849362039
 ### Example run with `allContracts` set to `true`
 
 ```
-echidna multiabi.sol --contract EchidnaTest --config multiabi.yaml
-Analyzing contract: building-secure-contracts/program-analysis/echidna/example/multiabi.sol:EchidnaTest
+echidna allContracts.sol --contract EchidnaTest --config allContracts.yaml
+Analyzing contract: building-secure-contracts/program-analysis/echidna/example/allContracts.sol:EchidnaTest
 test_flag_is_false(): failed!💥
   Call sequence:
     flip()
