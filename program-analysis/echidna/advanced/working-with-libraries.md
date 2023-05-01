@@ -75,7 +75,7 @@ However, the code of the library itself will not have their coverage displayed c
 11 |     | }
 ```
 
-This is caused by the usage of `delegatecall` to execute contract code and unfortunately we do not have a workaround for it right now.
+This is caused by the usage of `delegatecall` to execute contract code and [unfortunately we do not have a workaround for it right now](https://github.com/crytic/echidna/issues/1042).
 
 ## Summary
 
