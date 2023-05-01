@@ -10,7 +10,7 @@
 
 ## Introduction
 
-We will see how to use ETH during the fuzzing fuzzed. The following smart contract will be used as example:
+We will see how to use ether during the fuzzing fuzzed. The following smart contract will be used as example:
 
 ```solidity
 contract C {
@@ -24,7 +24,7 @@ contract C {
 }
 ```
 
-This code forces Echidna to send a particular amount of eth as value in the `pay` function.
+This code forces Echidna to send a particular amount of ether as value in the `pay` function.
 Echidna will do this for each payable function in the target function (or any contract if `allContracts` is enabled):
 
 ```
@@ -40,15 +40,15 @@ Echidna will show the value amount in hexadecimal.
 ## Controlling the amount of ether in payable functions
 
 The amount of ether to send in each payable function will be randomly selected, but with a maximum value determined by the `maxValue` value
-with a default of 100 eth per transaction:
+with a default of 100 ether per transaction:
 
 ```yaml
 maxValue: 100000000000000000000
 ```
 
-This means that each transaction will contain, at most, 100 eth in value. However, there is no maximum that will be used in total.
+This means that each transaction will contain, at most, 100 ether in value. However, there is no maximum that will be used in total.
 The maximum amount to receive will be determined by the number of transactions. If you are using 100 transactions (`--seq-len 100`),
-then the maximum amount of ether in transactions will be 100 \* 100 eth.
+then the maximum amount of ether in transactions will be 100 \* 100 ether.
 
 Keep in mind that the balance of the senders (e.g. `msg.sender.balance`) is a fixed value that will NOT change between transactions.
 This value is determined by the following config option:
