@@ -3,14 +3,18 @@
 **Table of contents:**
 
 - [On-chain fuzzing with state forking](#on-chain-fuzzing-with-state-forking)
+  - [Introduction](#introduction)
   - [Example](#example)
   - [Corpus and RPC cache](#corpus-and-rpc-cache)
   - [Coverage and Etherscan integration](#coverage-and-etherscan-integration)
 
+## Introduction
+
+Echidna recently added support for state network forking, starting from the 2.1.0 release. In a few words, our fuzzer can run a campaign starting with an existing blockchain state provided by an external RPC service (Infura, Alchemy, local node, etc). This enables users to speed up the fuzzing setup when using already deployed contracts. 
+
 ## Example
 
-One of the most anticipated features of Echidna 2.1.0 is the state network forking. This means that Echidna can run starting with an existing blockchain state provided by an external RPC service (Infura, Alchemy, local node, etc).
-This enables users to speed up the fuzzing setup when using already deployed contracts. For instance:
+In the following contract, an assertion will fail if the call to [Compound ETH](https://etherscan.io/token/0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5) `mint` function succeeds and the balance of the contract increases.
 
 ```solidity
 interface IHevm {
@@ -43,7 +47,7 @@ contract TestCompoundEthMint {
 }
 ```
 
-This test will fail if the call to [Compound ETH](https://etherscan.io/token/0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5) `mint` function succeeds and the balance of the contract increases. In order to use this feature, the user needs to specify the RPC endpoint for Echidna to use before running the fuzzing campaign. This requires using the `ECHIDNA_RPC_URL` and `ECHIDNA_RPC_BLOCK` environment variables:
+In order to use this feature, the user needs to specify the RPC endpoint for Echidna to use before running the fuzzing campaign. This requires using the `ECHIDNA_RPC_URL` and `ECHIDNA_RPC_BLOCK` environment variables:
 
 ```
 $ ECHIDNA_RPC_URL=http://.. ECHIDNA_RPC_BLOCK=16771449 echidna compound.sol --test-mode assertion --contract TestCompoundEthMint
@@ -54,6 +58,8 @@ assertNoBalance(): failed!💥
 ```
 
 Echidna will query contract code or storage slots as needed from the provided RPC node. You can press the key `f` key to see which contracts/slots are fetched.
+
+Please note that only the state specified in the `ECHIDNA_RPC_BLOCK` will be fetched. If Echidna increases the block number, it is all just simulated locally but its state is still loaded from the initially set RPC block.
 
 ## Corpus and RPC cache
 
