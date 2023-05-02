@@ -1,15 +1,18 @@
-name: Echidna
+name: Run Echidna tests
 
 on:
   push:
-    paths-ignore:
-      - "**.md"
-      - "**.rs"
-      - "**.py"
+    paths:
+      - ".github/workflows/echidna.yml"
+      - "program-analysis/echidna/**/*.sol"
+      - "program-analysis/echidna/**/*.yml"
     branches:
       - master
-      - dev
   pull_request:
+    paths:
+      - ".github/workflows/echidna.yml"
+      - "program-analysis/echidna/**/*.sol"
+      - "program-analysis/echidna/**/*.yml"
   schedule:
     # run CI every day even if no PRs/merges occur
     - cron: "0 12 * * *"

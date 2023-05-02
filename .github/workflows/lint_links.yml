@@ -4,7 +4,13 @@ on:
   push:
     branches:
       - master
+    paths:
+      - ".github/workflows/lint_links.yml"
+      - "**.md"
   pull_request:
+    paths:
+      - ".github/workflows/lint_links.yml"
+      - "**.md"
   schedule:
     # run CI at 09:00, on day 1 of the month even if no PRs/merges occur
     - cron: "0 9 1 * *"
