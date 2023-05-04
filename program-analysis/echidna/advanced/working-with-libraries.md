@@ -39,10 +39,7 @@ The address where the library should be deployed is arbitrary, but it should be 
 
 ## Linking libraries
 
-Before a contract can use a deployed library, its bytecode requires to be linked. This procedure requries to replace a particular string place holder
-in the bytecode by the address of the deployed library. Normally, either solc or the compilation framework (e.g. truffle) will take care of this.
-However, in our case, we will use `crytic-compile`, since it is easier to handle all cases from different frameworks just adding one new argument
-to pass to `crytic-compile` from Echidna:
+Before a contract can use a deployed library, its bytecode requires to be linked (e.g set the address that points to the deployed library contract). Normally, a compilation framework (e.g. truffle) will take care of this. However, in our case, we will use `crytic-compile`, since it is easier to handle all cases from different frameworks just adding one new argument to pass to `crytic-compile` from Echidna:
 
 ```yaml
 cryticArgs: ["--compile-libraries=(ConvertLib,0x1f)"]
