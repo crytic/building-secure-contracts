@@ -10,13 +10,12 @@
 
 ## Introduction
 
-Solidity introduced a the concept of a smart contract library. Before continue, it is very recommended to review [the official Solidity documentation](https://docs.soliditylang.org/en/v0.8.19/contracts.html#libraries) to make sure
-you understand how libraries are created and deployed. When a user creates a library, Solidity will do one of these two options:
+Solidity support two types of libraries ([see the documentation](https://docs.soliditylang.org/en/v0.8.19/contracts.html#libraries)):
 
 - If all the functions are internal, the library is compiled into bytecode and added into the contracts that use it.
 - If there are some external functions, the library should be deployed into some address. Finally, the bytecode calling the library should be linked.
 
-The following is only needed if your codebase uses libraries that need to be linked. However, if you need to use libraries that needed to be deployed (and the bytecode needs to be linked), then you will need this tutorial.
+The following is only needed if your codebase uses libraries that need to be linked.
 
 ## Example code
 
