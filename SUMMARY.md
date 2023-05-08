@@ -71,6 +71,7 @@
       - [How to filter functions](./program-analysis/echidna/basic/filtering-functions.md)
       - [How to test assertions](./program-analysis/echidna/basic/assertion-checking.md)
       - [How to write good properties step by step](./program-analysis/echidna/basic/property-creation.md)
+      - [How to write properties that use ether](./program-analysis/echidna/basic/working-with-eth.md)
     - [Advanced](./program-analysis/echidna/advanced/README.md)
       - [How to collect a corpus](./program-analysis/echidna/advanced/collecting-a-corpus.md)
       - [How to use optimization mode](./program-analysis/echidna/advanced/optimization_mode.md)
