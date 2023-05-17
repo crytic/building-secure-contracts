@@ -157,7 +157,7 @@ However, the negative domain is shifted to lie "above" the positive domain.
 $$uint256 \text{ domain}$$
 
 $$
-├\underset{0}{─}────────────────────────────\underset{\hskip -2em 2^{256} - 1}{─}┤
+├\underset{0}{─}────────────────────────────\underset{\hskip -1.5em 2^{256} - 1}{─}┤
 $$
 
 ```solidity
@@ -168,10 +168,10 @@ $$
 $$int256 \text{ domain}$$
 
 $$
-\overset{\hskip 1em positive}{
-    ├\underset{0}{─}────────────\underset{\hskip -2em 2^{255} - 1}{─}┤
+\overset{positive}{
+    ├\underset{0}{─}────────────\underset{\hskip -1.5em 2^{255} - 1}{─}┤
 }
-\overset{\hskip 1em negative}{
+\overset{negative}{
     ├────\underset{\hskip -3.5em - 2^{255}}─────────\underset{\hskip -0.4 em -1}{─}┤
 }
 $$
@@ -184,11 +184,11 @@ $$
 ```
 
 The maximum positive integer that can be represented in a two's complement system using 256 bits is
-`0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff` which is roughly equal to half of the maximum value that can be represented using uint256.
+`0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff` which is roughly equal to half of the maximum value that can be represented using `uint256`.
 The most significant bit of this number is `0`, while all other bits are `1`.
 
 On the other hand, all negative numbers start with a `1` as their first bit.
-If we look at the underlying hex representation of these numbers, they are all greater than or equal to the smallest integer that can be represented using int256, which is `0x8000000000000000000000000000000000000000000000000000000000000000`. The integer's binary representation is a `1` followed by 255 `0`'s.
+If we look at the underlying hex representation of these numbers, they are all greater than or equal to the smallest integer that can be represented using `int256`, which is `0x8000000000000000000000000000000000000000000000000000000000000000`. The integer's binary representation is a `1` followed by 255 `0`'s.
 
 To obtain the negative value of an integer in a two's complement system, we flip the underlying bits and add `1`: `-a = ~a + 1`.
 An example illustrates this.
@@ -421,7 +421,7 @@ On a 64-bit system, integer addition works in the same way as before.
 = 0x0000000000000001 // int64(1)
 ```
 
-However, when performing the same calculations on a 256-bit machine, we need to extend the sign of the int64 value over all unused bits,
+However, when performing the same calculations on a 256-bit machine, we need to extend the sign of the `int64` value over all unused bits,
 otherwise the value won't be interpreted correctly.
 
 ```solidity
@@ -505,59 +505,59 @@ function overflowInt64(int256 value) public pure returns (bool overflow) {
 ```
 
 We can simplify the expression to a single comparison if we can shift the disjointed number domain back so that it's connected.
-To accomplish this, we subtract the smallest negative int64 `type(int64).min` from a value (or add the underlying unsigned value).
-A better way to understand this is by visualizing the signed integer number domain in relation to the unsigned domain (which is demonstrated here using int128).
+To accomplish this, we subtract the smallest negative `int64` (`type(int64).min`) from a value (or add the underlying unsigned value).
+A better way to understand this is by visualizing the signed integer number domain in relation to the unsigned domain (which is demonstrated here using `int128`).
 
 $$uint256 \text{ domain}$$
 
 $$
-├\underset{0}{─}────────────────────────────\underset{\hskip -2em 2^{256} - 1}{─}┤
+├\underset{0}{─}────────────────────────────\underset{\hskip -1.5em 2^{256} - 1}{─}┤
 $$
 
 $$int256 \text{ domain}$$
 
 $$
-\overset{\hskip 1em positive}{
-    ├\underset{0}{─}────────────\underset{\hskip -2em 2^{255} - 1}{─}┤
+\overset{positive}{
+    ├\underset{0}{─}────────────\underset{\hskip -1.5em 2^{255} - 1}{─}┤
 }
-\overset{\hskip 1em negative}{
+\overset{negative}{
     ├────\underset{\hskip -3.5em - 2^{255}}─────────\underset{\hskip -0.4 em -1}{─}┤
 }
 $$
 
-The domain for uint128/int128 can be visualized as follows.
+The domain for `uint128`/`int128` can be visualized as follows.
 
 $$uint128 \text{ domain}$$
 
 $$
-├\underset{0}─────────────\underset{\hskip -2em 2^{128}-1}─┤
+├\underset{0}─────────────\underset{\hskip -1.5em 2^{128}-1}─┤
 \phantom{───────────────}┆
 $$
 
 $$int128 \text{ domain}$$
 
 $$
-\overset{\hskip 1em positive}{
-    ├\underset{0}{─}────\underset{\hskip -2em 2^{127} - 1}{─}┤
+\overset{positive}{
+    ├\underset{0}{─}────\underset{\hskip -1.5em 2^{127} - 1}{─}┤
 }
 \phantom{────────────────}
-\overset{\hskip 1em negative}{
+\overset{negative}{
     ├────\underset{\hskip -3.5em - 2^{127}}─\underset{\hskip -0.4 em -1}{─}┤
 }
 $$
 
 Note that the scales of the number ranges in the previous section do not accurately depict the magnitude of numbers that are representable with the different types and only serve as a visualization. We can represent twice as many numbers with only one additional bit, yet the uint256 domain has twice the number of bits compared to uint128.
 
-After subtracting `type(int128).min` (or adding $2^{127}$) and essentially shifting the domains to the right, we get the following, connected set of values.
+After subtracting `type(int128).min` (or adding `2**127`) and essentially shifting the domains to the right, we get the following, connected set of values.
 
 $$
-├\underset{0}─────────────\underset{\hskip -2em 2^{128}-1}─┤
+├\underset{0}─────────────\underset{\hskip -1.5em 2^{128}-1}─┤
 \phantom{───────────────}┆
 $$
 
 $$
-\overset{\hskip 1em negative}{├──────┤}
-\overset{\hskip 1em positive}{├──────┤}
+\overset{negative}{├──────┤}
+\overset{positive}{├──────┤}
 \phantom{───────────────}┆
 $$
 
@@ -685,7 +685,7 @@ An example might help explain the second case.
 ```solidity
   0xffffffffffffffff800000000000000000000000000000000000000000000000 // type(int192).min
 * 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff // -1
-= 0x0000000000000000800000000000000000000000000000000000000000000000 // type(int192).min (when seen as a int192)
+= 0x0000000000000000800000000000000000000000000000000000000000000000 // type(int192).min (when looking at the first 192 bits)
 ```
 
 A method to address this issue is to always start by sign-extending or cleaning the result before attempting to reconstruct the other multiplicand.
@@ -715,9 +715,10 @@ function checkedMulInt192_2(int192 a, int192 b) public pure returns (int192 c) {
 In conclusion, we hope this article has served as an informative guide on signed integer arithmetic within the EVM and the two's complement system.
 We have explored:
 
-- the added complexity from handling signed over unsigned integers
-- the intricacies involved in managing sub 32-byte types
-- the significance of `signextend` and opcodes related to signed integers
-- the importance of bit-cleaning
+- How the EVM makes use of the two's complement representation
+- How integer values are interpreted as signed or unsigned depending on the opcodes used
+- The added complexity from handling arithmetic for signed vs. unsigned integers
+- The intricacies involved in managing sub 32-byte types
+- The importance of bit-cleaning and the significance of `signextend`
 
 While low-level optimizations are attractive, they are also heavily error-prone. This article aims to deepen one's understanding of low-level arithmetic, to reduce these risks. Nevertheless, it is crucial to integrate custom low-level optimizations only after thorough manual analysis, automated testing, and to document any non-obvious assumptions.
