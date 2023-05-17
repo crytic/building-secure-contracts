@@ -154,10 +154,10 @@ The first bit of an integer represents the sign, with `0` indicating a positive 
 For positive integers (those with a sign bit of `0`), their binary representation is the same as their unsigned bit representation.
 However, the negative domain is shifted to lie "above" the positive domain.
 
-$$uint256 \text{ domain}$$
+$$\text{uint256 domain}$$
 
 $$
-├\underset{0}{─}────────────────────────────\underset{\hskip -1.5em 2^{256} - 1}{─}┤
+├\underset{\hskip -0.5em 0}{─}────────────────────────────\underset{\hskip -3em 2^{256} - 1}{─}┤
 $$
 
 ```solidity
@@ -165,14 +165,14 @@ $$
 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff // uint256_max
 ```
 
-$$int256 \text{ domain}$$
+$$\text{int256 domain}$$
 
 $$
 \overset{positive}{
-    ├\underset{0}{─}────────────\underset{\hskip -1.5em 2^{255} - 1}{─}┤
+    ├\underset{\hskip -0.5em 0}{─}────────────\underset{\hskip -3em 2^{255} - 1}{─}┤
 }
 \overset{negative}{
-    ├────\underset{\hskip -3.5em - 2^{255}}─────────\underset{\hskip -0.4 em -1}{─}┤
+    ├──\underset{\hskip -2.1em - 2^{255}}{─}──────────\underset{\hskip -1 em -1}{─}┤
 }
 $$
 
@@ -508,42 +508,38 @@ We can simplify the expression to a single comparison if we can shift the disjoi
 To accomplish this, we subtract the smallest negative `int64` (`type(int64).min`) from a value (or add the underlying unsigned value).
 A better way to understand this is by visualizing the signed integer number domain in relation to the unsigned domain (which is demonstrated here using `int128`).
 
-$$uint256 \text{ domain}$$
+$$\text{uint256 domain}$$
 
 $$
-├\underset{0}{─}────────────────────────────\underset{\hskip -1.5em 2^{256} - 1}{─}┤
+├\underset{\hskip -0.5em 0}{─}────────────────────────────\underset{\hskip -3em 2^{256} - 1}{─}┤
 $$
 
-$$int256 \text{ domain}$$
+$$\text{int256 domain}$$
 
 $$
 \overset{positive}{
-    ├\underset{0}{─}────────────\underset{\hskip -1.5em 2^{255} - 1}{─}┤
+    ├\underset{\hskip -0.5em 0}{─}────────────\underset{\hskip -3em 2^{255} - 1}{─}┤
 }
 \overset{negative}{
-    ├────\underset{\hskip -3.5em - 2^{255}}─────────\underset{\hskip -0.4 em -1}{─}┤
+    ├──\underset{\hskip -2.1em - 2^{255}}{─}──────────\underset{\hskip -1 em -1}{─}┤
 }
 $$
 
 The domain for `uint128`/`int128` can be visualized as follows.
 
-$$uint128 \text{ domain}$$
+$$\text{uint128 domain}$$
 
 $$
-├\underset{0}─────────────\underset{\hskip -1.5em 2^{128}-1}─┤
-\phantom{───────────────}┆
+├\underset{\hskip -0.5em 0}─────────────\underset{\hskip -3em 2^{128}-1}─┤
+\hskip 7em┆
 $$
 
-$$int128 \text{ domain}$$
+$$\text{int128 domain}$$
 
 $$
-\overset{positive}{
-    ├\underset{0}{─}────\underset{\hskip -1.5em 2^{127} - 1}{─}┤
-}
-\phantom{────────────────}
-\overset{negative}{
-    ├────\underset{\hskip -3.5em - 2^{127}}─\underset{\hskip -0.4 em -1}{─}┤
-}
+├\underset{\hskip -0.5em 0}{─}────\underset{\hskip -3em 2^{127} - 1}─\overset{\hskip -3em positive}{┤}
+\hskip 7em
+├──\underset{\hskip -2.1em - 2^{127}}───\underset{\hskip -1 em -1}{─}\overset{\hskip -3em negative}{┤}
 $$
 
 Note that the scales of the number ranges in the previous section do not accurately depict the magnitude of numbers that are representable with the different types and only serve as a visualization. We can represent twice as many numbers with only one additional bit, yet the uint256 domain has twice the number of bits compared to uint128.
@@ -551,14 +547,14 @@ Note that the scales of the number ranges in the previous section do not accurat
 After subtracting `type(int128).min` (or adding `2**127`) and essentially shifting the domains to the right, we get the following, connected set of values.
 
 $$
-├\underset{0}─────────────\underset{\hskip -1.5em 2^{128}-1}─┤
-\phantom{───────────────}┆
+├\underset{\hskip -0.5em 0}{─}────────────\underset{\hskip -3em 2^{128}-1}─┤
+\hskip 7em┆
 $$
 
 $$
-\overset{negative}{├──────┤}
-\overset{positive}{├──────┤}
-\phantom{───────────────}┆
+├──────\overset{\hskip -3em negative}{┤}
+├──────\overset{\hskip -3em positive}{┤}
+\hskip 7em┆
 $$
 
 If we interpret the shifted value as an unsigned integer, we only need to check whether it exceeds the maximum unsigned integer `type(uint128).max`.
