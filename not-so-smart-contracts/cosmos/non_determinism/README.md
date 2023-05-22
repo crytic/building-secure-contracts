@@ -3,7 +3,7 @@
 Non-determinism in conensus-relevant code will cause the blockchain to halt.
 There are quite a few sources of non-determinism, some of which are specific to the Go language:
 
-- [`range` iterations over an unordered map or other operations involving unordered structures](https://lev.pm/posts/2020-04-18-golang-map-randomness/)
+- [`range` iterations over an unordered map or other operations involving unordered structures](https://go.dev/blog/maps#iteration-order)
 - [Implementation (platform) dependent types like `int`](https://go.dev/ref/spec#Numeric_types) or `filepath.Ext`
 - [goroutines and `select` statement](https://github.com/golang/go/issues/33702)
 - [Memory addresses](https://github.com/cosmos/cosmos-sdk/issues/11726#issuecomment-1108427164)

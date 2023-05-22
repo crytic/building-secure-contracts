@@ -1,6 +1,6 @@
 # Introduction to dynamic symbolic execution
 
-[Manticore]() is a dynamic symbolic execution tool, we described in our previous blogposts ([1](https://blog.trailofbits.com/2017/04/27/manticore-symbolic-execution-for-humans/), [2](https://blog.trailofbits.com/2017/05/15/magic-with-manticore/), [3](https://blog.trailofbits.com/2017/05/15/magic-with-manticore/), [4](https://blog.trailofbits.com/2017/05/15/magic-with-manticore/)).
+[Manticore]() is a dynamic symbolic execution tool, we described in our previous blogposts ([1](https://blog.trailofbits.com/2017/04/27/manticore-symbolic-execution-for-humans/), [2](https://blog.trailofbits.com/2017/05/15/magic-with-manticore/),[3](https://blog.trailofbits.com/2017/05/15/magic-with-manticore/)).
 
 ## Dynamic Symbolic Execution in a Nutshell
 
