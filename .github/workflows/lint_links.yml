@@ -23,3 +23,4 @@ jobs:
       - uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
           use-quiet-mode: "yes"
+          check-modified-files-only: ${{ (github.event_name == 'pull_request' && 'yes') || 'no' }}
