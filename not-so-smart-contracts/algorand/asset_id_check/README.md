@@ -1,15 +1,15 @@
-# Asset Id Check
+# Asset ID Check
 
-Lack of verification of asset id in the contract allows attackers to transfer a different asset in place of the expected asset and mislead the application.
+Failing to verify the asset ID in a contract can allow attackers to transfer a different asset instead of the expected one, potentially misleading the application.
 
 ## Description
 
-Contracts accepting and doing operations based on the assets transferred to the contract must verify that the transferred asset is the expected asset by checking the asset Id. Absence of check for expected asset Id could allow attackers to manipulate contract’s logic by transferring a fake, less or more valuable asset instead of the correct asset.
+Contracts that accept and perform operations based on assets transferred to them must verify that the transferred asset is indeed the expected asset by checking the asset ID. Neglecting to check the expected asset ID could enable attackers to manipulate the contract's logic by transferring a fake, less valuable, or more valuable asset instead of the correct one.
 
 ## Exploit Scenarios
 
-- A liquidity pool contract mints liquidity tokens on deposit of two tokens. Contract does not check that the asset Ids in the two asset transfer transactions are correct. Attacker deposits the same less valuable asset in the two transactions and withdraws both tokens by burning the pool tokens.
-- User creates a delegate signature that allows recurring transfers of a certain asset. Attacker creates a valid asset transfer transaction of more valuable assets.
+- A liquidity pool contract mints liquidity tokens upon the deposit of two tokens. The contract does not verify that the asset IDs in the two asset transfer transactions are correct. The attacker deposits the same, less valuable asset in both transactions and withdraws both tokens by burning the pool tokens.
+- A user creates a delegate signature that permits recurring transfers of a certain asset. The attacker then generates a valid asset transfer transaction involving more valuable assets.
 
 ## Examples
 
@@ -35,4 +35,4 @@ def withdraw_asset(
 
 ## Recommendations
 
-Verify the asset id to be expected asset for all asset related operations in the contract.
+Ensure that the asset ID is verified as the expected asset for all asset-related operations in the contract.
