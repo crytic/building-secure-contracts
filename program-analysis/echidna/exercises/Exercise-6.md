@@ -57,7 +57,7 @@ Note: Please ensure that you have placed `solution.sol` (or `UnstoppableEchidna.
 
 The goal of the unstoppable challenge is to recognize that `UnstoppableLender` has two modes of tracking its balance: `poolBalance` and `damnValuableToken.balanceOf(address(this))`.
 
-`poolBalance` is incremented when someone calls `depositTokens()`.
+`poolBalance` is increased when someone calls `depositTokens()`.
 
 However, a user can call `damnValuableToken.transfer()` directly and increase the `balanceOf(address(this))` without increasing `poolBalance`.
 

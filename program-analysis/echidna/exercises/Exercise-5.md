@@ -52,7 +52,7 @@ The solution can be found in the [`solutions` branch](https://github.com/crytic/
 <details>
 <summary>Solution Explained (spoilers ahead)</summary>
 
-The goal of the naive receiver challenge is to understand that any user can request a flash loan for `FlashLoanReceiver`, even if the user has no Ether.
+The goal of the naive receiver challenge is to realize that any user can request a flash loan for `FlashLoanReceiver`, even if the user has no Ether.
 
 Echidna discovers this by calling `NaiveReceiverLenderPool.flashLoan()` with the address of `FlashLoanReceiver` and any arbitrary amount.
 

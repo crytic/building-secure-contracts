@@ -36,7 +36,7 @@ The solution can be found in [solution.sol](https://github.com/crytic/building-s
 <details>
 <summary>Solution Explained (spoilers ahead)</summary>
 
-The goal of the side entrance challenge is to understand that the contract's ETH balance accounting is misconfigured. The `balanceBefore` variable tracks the contract's balance before the flash loan, while `address(this).balance` tracks the balance after the flash loan. As a result, you can use the deposit function to repay your flash loan while maintaining the notion that the contract's total ETH balance hasn't changed (i.e., `address(this).balance >= balanceBefore`). However, since you now own the deposited ETH, you can also withdraw it and drain all the funds from the contract.
+The goal of the side entrance challenge is to realize that the contract's ETH balance accounting is misconfigured. The `balanceBefore` variable tracks the contract's balance before the flash loan, while `address(this).balance` tracks the balance after the flash loan. As a result, you can use the deposit function to repay your flash loan while maintaining the notion that the contract's total ETH balance hasn't changed (i.e., `address(this).balance >= balanceBefore`). However, since you now own the deposited ETH, you can also withdraw it and drain all the funds from the contract.
 
 For Echidna to interact with the `SideEntranceLenderPool`, it must be deployed first. Deploying and funding the pool from the Echidna property testing contract won't work, as the funding transaction's `msg.sender` will be the contract itself. This means that the Echidna contract will own the funds, allowing it to remove them by calling `withdraw()` without exploiting the vulnerability.
 
