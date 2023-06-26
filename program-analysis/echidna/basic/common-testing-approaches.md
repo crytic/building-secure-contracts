@@ -163,6 +163,6 @@ While developers or auditors may be tempted to quickly create tests using this t
 
 - The tested code can be very different from what we want to test. This can either introduce unreal issues (false positives) or hide real issues from the original code (false negatives). In the example, it is unclear if the state variables can take arbitrary values.
 
-- The model will have limited value if the code changes since any modification to the original model will require rebuilding the model, a manual process.
+- The model will have limited value if the code changes since any modification to the original model will require manually rebuilding the model.
 
 In any case, developers should be warned that their code is difficult to test and should refactor it to avoid this issue in the future.

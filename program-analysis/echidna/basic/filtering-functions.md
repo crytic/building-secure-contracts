@@ -10,7 +10,7 @@
 
 ## Introduction
 
-In this article, we'll demonstrate how to filter specific functions to be fuzzed using Echidna. We'll use the following smart contract _[multi.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multi.sol)_ as our target:
+In this tutorial, we'll demonstrate how to filter specific functions to be fuzzed using Echidna. We'll use the following smart contract _[multi.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multi.sol)_ as our target:
 
 ```solidity
 contract C {

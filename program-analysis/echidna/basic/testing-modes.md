@@ -1,6 +1,6 @@
 # How to Select the Most Suitable Testing Mode
 
-Echidna offers several ways to write properties, which often leaves developers and auditors wondering about the most appropriate testing mode to use. In this article, we will review how each mode works, as well as their advantages and disadvantages.
+Echidna offers several ways to write properties, which often leaves developers and auditors wondering about the most appropriate testing mode to use. In this section, we will review how each mode works, as well as their advantages and disadvantages.
 
 **Table of Contents:**
 
