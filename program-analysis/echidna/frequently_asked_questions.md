@@ -89,7 +89,7 @@ the path ends at the assert statement, so it should fail there.
 
 Coverage mappings can be imprecise; however, if they fail completely, it could be that you are using the [`viaIR` optimization option](https://docs.soliditylang.org/en/v0.8.14/ir-breaking-changes.html?highlight=viaIR#solidity-ir-based-codegen-changes), which appears to have some unexpected impact on the solc maps that we are still investigating. As a workaround, disable `viaIR`.
 
-## Echidna crashes, displaying "NonEmpty.fromList: empty list."
+## Echidna crashes, displaying "NonEmpty.fromList: empty list"
 
 Echidna relies on the Solidity metadata to detect where each contract is deployed. Please do not disable it. If this is not the case, please [open an issue](https://github.com/crytic/echidna/issues) in our issue tracker.
 

@@ -33,7 +33,7 @@ This is where `multi-abi` testing comes in handy: It allows Echidna to call func
 
 We'll use a simple example to demonstrate how `multi-abi` works. We'll be using two contracts, `Flag` and `EchidnaTest`, both available in [multiabi.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/multiabi.sol).
 
-The `Flag` contract contains a boolean flag that is only set if `flip()` is called, and a getter function returns the value of the flag. For now, ignore `test_fail()`; we'll discuss this function later.
+The `Flag` contract contains a boolean flag that is only set if `flip()` is called, and a getter function that returns the value of the flag. For now, ignore `test_fail()`; we'll discuss this function later.
 
 ```solidity
 contract Flag {

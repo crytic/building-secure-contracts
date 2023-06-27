@@ -7,7 +7,7 @@ To learn through live coding sessions, watch our [Fuzzing workshop](https://www.
 **Table of Contents:**
 
 - [Introduction](introduction): Introductory material on fuzzing and Echidna
-- [Basic](basic): Discover the initial steps for using Echidna
+- [Basic](basic): Learn the first steps for using Echidna
 - [Advanced](advanced): Explore the advanced features of Echidna
 - [Fuzzing tips](./fuzzing_tips.md): General fuzzing recommendations
 - [Frequently Asked Questions](./frequently_asked_questions.md): Responses to common questions about Echidna

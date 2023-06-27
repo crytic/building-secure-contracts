@@ -8,7 +8,7 @@
 
 ## Introduction
 
-In this guide, we will explore how to collect and use a corpus of transactions with Echidna. Our target is the following smart contract, _[magic.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/magic.sol)_:
+In this guide, we will explore how to collect and use a corpus of transactions with Echidna. Our target is the following smart contract, [magic.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/magic.sol):
 
 ```solidity
 contract C {
@@ -47,7 +47,7 @@ corpusDir: "corpus-magic"
 Now, run the tool and inspect the collected corpus:
 
 ```
-echidna-test magic.sol --config config.yaml
+echidna magic.sol --config config.yaml
 ```
 
 Echidna is still unable to find the correct magic value. To understand where it gets stuck, review the `corpus-magic/covered.*.txt` file:
@@ -130,7 +130,7 @@ cp corpus-magic/coverage/2712688662897926208.txt corpus-magic/coverage/new.txt
 Modify `new.txt` to call `magic(42,129,333,0)`. Now, re-run Echidna:
 
 ```
-echidna-test magic.sol --config config.yaml
+echidna magic.sol --config config.yaml
 ...
 echidna_magic_values: failed!💥
   Call sequence:

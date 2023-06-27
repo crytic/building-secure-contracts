@@ -5,7 +5,7 @@
 - [Identifying high gas consumption transactions](#identifying-high-gas-consumption-transactions)
   - [Introduction](#introduction)
   - [Measuring Gas Consumption](#measuring-gas-consumption)
-- [Executing Echidna](#executing-echidna)
+- [Running Echidna](#running-echidna)
 - [Excluding Gas-Reducing Calls](#excluding-gas-reducing-calls)
   - [Summary: Identifying high gas consumption transactions](#summary-identifying-high-gas-consumption-transactions)
 
@@ -65,7 +65,7 @@ seqLen: 2
 estimateGas: true
 ```
 
-# Executing Echidna
+# Running Echidna
 
 With the configuration file created, we can run Echidna as follows:
 

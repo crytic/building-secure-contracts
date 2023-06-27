@@ -16,7 +16,7 @@ Each technique has its advantages and pitfalls, making them useful in [specific 
 
 \* if all paths are explored without timeout
 
-**Slither** analyzes contracts within seconds. However, static analysis might lead to false alarms and is less suitable for complex checks (e.g., arithmetic checks). Run Slither via the API for push-button access to built-in detectors or via the API for user-defined checks.
+**Slither** analyzes contracts within seconds. However, static analysis might lead to false alarms and is less suitable for complex checks (e.g., arithmetic checks). Run Slither via the CLI for push-button access to built-in detectors or via the API for user-defined checks.
 
 **Echidna** needs to run for several minutes and will only produce true positives. Echidna checks user-provided security properties written in Solidity. It might miss bugs since it is based on random exploration.
 
@@ -60,7 +60,7 @@ The broad areas frequently relevant for smart contracts include:
 
   - Manticore is the best choice here. Echidna can be used if the arithmetic is out-of-scope of the SMT solver.
 
-- **Inheritance correctness.** Solidity contracts rely heavily on multiple inheritance. Mistakes like a shadowing function missing a `super` call and misinterpreted c3 linearization order can quickly be introduced.
+- **Inheritance correctness.** Solidity contracts rely heavily on multiple inheritance. Mistakes like a shadowing function missing a `super` call and misinterpreted c3 linearization order can easily be introduced.
 
   - Slither is the tool for detecting these issues.
 
