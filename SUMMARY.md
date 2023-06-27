@@ -10,6 +10,7 @@
 - [Learn EVM](./learn_evm/README.md)
   - [EVM Opcode Reference](./learn_evm/evm_opcodes.md)
   - [Transaction Tracing](./learn_evm/tracing.md)
+  - [Arithmetic Checks](./learn_evm/arithmetic-checks.md)
   - [Yellow Paper Guidance](./learn_evm/yellow-paper.md):
     - [Forks <> EIPs](./learn_evm/eips_forks.md)
     - [Forks <> CIPs](./learn_evm/cips_forks.md)
@@ -79,6 +80,7 @@
       - [How to test bytecode-only contracts](./program-analysis/echidna/advanced/testing-bytecode.md)
       - [How to use hevm cheats to test permit](./program-analysis/echidna/advanced/hevm-cheats-to-test-permit.md)
       - [How to seed Echidna with unit tests](./program-analysis/echidna/advanced/end-to-end-testing.md)
+      - [How to fuzz contracts with external libraries](./program-analysis/echidna/advanced/working-with-libraries.md)
       - [Understanding and using `multi-abi`](./program-analysis/echidna/advanced/using-multi-abi.md)
     - [Fuzzing tips](./program-analysis/echidna/fuzzing_tips.md)
     - [Frequently Asked Questions](./program-analysis/echidna/frequently_asked_questions.md)

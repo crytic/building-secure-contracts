@@ -16,6 +16,7 @@ We welcome contributions, and you can contribute by following our [contributing 
 - [Learn EVM](./learn_evm): EVM technical knowledge
   - [EVM Opcodes](./learn_evm/evm_opcodes.md): Details on all EVM opcodes
   - [Transaction Tracing](./learn_evm/tracing.md): Helper scripts and guidance for generating and navigating transaction traces
+  - [Arithmetic Checks](./learn_evm/arithmetic-checks.md): A guide to performing arithmetic checks in the EVM
   - [Yellow Paper Guidance](./learn_evm/yellow-paper.md): Symbol reference for more easily reading the Ethereum yellow paper
   - [Forks <> EIPs](./learn_evm/eips_forks.md): Summarize the EIPs included in each Ethereum fork
     - [Forks <> CIPs](./learn_evm/cips_forks.md): Summarize the CIPs and EIPs included in each Celo fork _(EVM-compatible chain)_

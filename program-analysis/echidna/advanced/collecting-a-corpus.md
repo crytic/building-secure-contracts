@@ -53,21 +53,21 @@ echidna magic.sol --config config.yaml
 Echidna is still unable to find the correct magic value. To understand where it gets stuck, review the `corpus-magic/covered.*.txt` file:
 
 ```
-r   |contract C {
-  bool value_found = false;
-r   |  function magic(uint256 magic_1, uint256 magic_2, uint256 magic_3, uint256 magic_4) public {
-r   |    require(magic_1 == 42);
-r   |    require(magic_2 == 129);
-r   |    require(magic_3 == magic_4+333);
-    value_found = true;
-    return;
-  }
-
-  function echidna_magic_values() public returns (bool) {
-    return !value_found;
-  }
-
-}
+  1 | *   | contract C {
+  2 |     |     bool value_found = false;
+  3 |     |
+  4 | *   |     function magic(uint256 magic_1, uint256 magic_2, uint256 magic_3, uint256 magic_4) public {
+  5 | *r  |         require(magic_1 == 42);
+  6 | *r  |         require(magic_2 == 129);
+  7 | *r  |         require(magic_3 == magic_4 + 333);
+  8 |     |         value_found = true;
+  9 |     |         return;
+ 10 |     |     }
+ 11 |     |
+ 12 |     |     function echidna_magic_values() public returns (bool) {
+ 13 |     |         return !value_found;
+ 14 |     |     }
+ 15 |     | }
 ```
 
 The label `r` on the left of each line indicates that Echidna can reach these lines, but they result in a revert. As you can see, the fuzzer gets stuck at the last `require`.
@@ -145,19 +145,19 @@ Seed: -7293830866560616537
 This time, the property fails immediately. We can verify that another `covered.*.txt` file is created, showing a different trace (labeled with `*`) that Echidna executed, which ended with a return at the end of the `magic` function.
 
 ```
-*r  |contract C {
-  bool value_found = false;
-*r  |  function magic(uint256 magic_1, uint256 magic_2, uint256 magic_3, uint256 magic_4) public {
-*r  |    require(magic_1 == 42);
-*r  |    require(magic_2 == 129);
-*r  |    require(magic_3 == magic_4+333);
-*   |    value_found = true;
-    return;
-  }
-
-  function echidna_magic_values() public returns (bool) {
-    return !value_found;
-  }
-
-}
+  1 | *   | contract C {
+  2 |     |     bool value_found = false;
+  3 |     |
+  4 | *   |     function magic(uint256 magic_1, uint256 magic_2, uint256 magic_3, uint256 magic_4) public {
+  5 | *r  |         require(magic_1 == 42);
+  6 | *r  |         require(magic_2 == 129);
+  7 | *r  |         require(magic_3 == magic_4 + 333);
+  8 | *   |         value_found = true;
+  9 |     |         return;
+ 10 |     |     }
+ 11 |     |
+ 12 |     |     function echidna_magic_values() public returns (bool) {
+ 13 |     |         return !value_found;
+ 14 |     |     }
+ 15 |     | }
 ```
