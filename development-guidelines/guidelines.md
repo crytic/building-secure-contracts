@@ -24,10 +24,10 @@ Discuss the design of the contract ahead of time, before writing any code.
 
 ### Documentation and Specifications
 
-Update documentation at different levels as you implement the contracts:
+Write documentation at different levels and update it as you implement the contracts:
 
 - **A plain English description of the system**, describing the contracts' purpose and any assumptions about the codebase.
-- **Schema and architectural diagrams**, including contract interactions and the system's state machine. Use [Slither printers](https://github.com/crytic/slither/wiki/Printer-documentation) to generate these schemas.
+- **Schema and architectural diagrams**, including contract interactions and the system's state machine. Use [Slither printers](https://github.com/crytic/slither/wiki/Printer-documentation) to help generate these schemas.
 - **Thorough code documentation**. Use the [Natspec format](https://solidity.readthedocs.io/en/develop/natspec-format.html) for Solidity.
 
 ### On-chain vs Off-chain Computation
@@ -47,26 +47,26 @@ Refer to [our blog post](https://blog.trailofbits.com/2018/09/05/contract-upgrad
 
 #### Delegatecall Proxy Pattern
 
-The delegatecall opcode is a sharp tool that must be used carefully. Many high-profile exploits involve little-known edge cases and counter-intuitive aspects of the delegatecall proxy pattern. To develop secure delegatecall proxies, utilize the [slither-check-upgradability](https://github.com/crytic/slither/wiki/Upgradeability-Checks) tool, which performs safety checks for both upgradable and immutable delegatecall proxies.
+The delegatecall opcode is a sharp tool that must be used carefully. Many high-profile exploits involve little-known edge cases and counter-intuitive aspects of the delegatecall proxy pattern. To aid the development of secure delegatecall proxies, utilize the [slither-check-upgradability](https://github.com/crytic/slither/wiki/Upgradeability-Checks) tool, which performs safety checks for both upgradable and immutable delegatecall proxies.
 
 - **Storage layout**: Proxy and implementation storage layouts must be the same. Instead of defining the same state variables for each contract, both should inherit all state variables from a shared base contract.
 - **Inheritance**: Be aware that the order of inheritance affects the final storage layout. For example, `contract A is B, C` and `contract A is C, B` will not have the same storage layout if both B and C define state variables.
-- **Initialization**: Immediately initialize the implementation. Implement an uninitialized implementation contract to prevent well-known disasters (and near disasters). A factory pattern can help ensure correct deployment and initialization and reduce front-running risks.
-- **Function shadowing**: Ensure the proxy’s function is called if the same method is defined on the proxy and implementation. Be mindful of `setOwner` and other administration functions commonly found on proxies.
-- **Direct implementation usage**: Configure implementation state variables with values that prevent direct use, such as setting a flag during construction that disables the implementation and causes all methods to revert. This is particularly important if the implementation also carries delegatecall operations, as this may lead to accidental self-destruction.
-- **Immutable and constant variables**: These variables are embedded in the bytecode and can get out of sync between the proxy and implementation. The implementation may still use an incorrect immutable variable, even if the proxy’s bytecode correctly sets the same variables.
+- **Initialization**: Immediately initialize the implementation. Well-known disasters (and near disasters) have featured an uninitialized implementation contract. A factory pattern can help ensure correct deployment and initialization and reduce front-running risks.
+- **Function shadowing**: If the same method is defined on the proxy and the implementation, then the proxy’s function will not be called. Be mindful of `setOwner` and other administration functions commonly found on proxies.
+- **Direct implementation usage**: Configure implementation state variables with values that prevent direct use, such as setting a flag during construction that disables the implementation and causes all methods to revert. This is particularly important if the implementation also performs delegatecall operations, as this may lead to unintended self-destruction of the implementation.
+- **Immutable and constant variables**: These variables are embedded in the bytecode and can get out of sync between the proxy and implementation. If the implementation has an incorrect immutable variable, this value may still be used even if the same variable is correctly set in the proxy’s bytecode.
 - **Contract Existence Checks**: All [low-level calls](https://docs.soliditylang.org/en/latest/control-structures.html?highlight=existence#error-handling-assert-require-revert-and-exceptions), including delegatecall, return true for an address with empty bytecode. This can mislead callers into thinking a call performed a meaningful operation when it did not or cause crucial safety checks to be skipped. While a contract’s constructor runs, its bytecode remains empty until the end of execution. We recommend rigorously verifying that all low-level calls are protected against nonexistent contracts. Keep in mind that most proxy libraries (such as Openzeppelin's) do not automatically perform contract existence checks.
 
 For more information on delegatecall proxies, consult our blog posts and presentations:
 
 - [Contract Upgradability Anti-Patterns](https://blog.trailofbits.com/2018/09/05/contract-upgrade-anti-patterns/): Describes the differences between downstream data contracts and delegatecall proxies with upstream data contracts and how these patterns affect upgradability.
 - [How the Diamond Standard Falls Short](https://blog.trailofbits.com/2020/10/30/good-idea-bad-design-how-the-diamond-standard-falls-short/): Explores delegatecall risks that apply to all contracts, not just those following the diamond standard.
-- [Breaking Aave Upgradeability](https://blog.trailofbits.com/2020/12/16/breaking-aave-upgradeability/): Discusses a subtle problem discovered in Aave `AToken` contracts, resulting from the interplay between delegatecall proxies, contract existence checks, and unsafe initialization.
+- [Breaking Aave Upgradeability](https://blog.trailofbits.com/2020/12/16/breaking-aave-upgradeability/): Discusses a subtle problem we discovered in Aave `AToken` contracts, resulting from the interplay between delegatecall proxies, contract existence checks, and unsafe initialization.
 - [Contract Upgrade Risks and Recommendations](https://youtu.be/mebA5Qz9zeQ?t=353): A Trail of Bits talk on best practices for developing upgradable delegatecall proxies. The section starting at 5:49 describes general risks for non-upgradable proxies.
 
 ## Implementation Guidelines
 
-**Aim for simplicity.** Use the simplest solution that meets your needs. Any team member should understand your solution.
+**Aim for simplicity.** Use the simplest solution that meets your needs. Any member of your team should understand your solution.
 
 ### Function Composition
 
@@ -77,7 +77,7 @@ Design your codebase architecture to facilitate easy review and allow testing in
 
 ### Inheritance
 
-- **Keep inheritance manageable.** Though inheritance can help divide logic, minimize the depth and width of the inheritance tree.
+- **Keep inheritance manageable.** Though inheritance can help divide logic you should aim to minimize the depth and width of the inheritance tree.
 - **Use Slither’s [inheritance printer](https://github.com/crytic/slither/wiki/Printer-documentation#inheritance-graph) to check contract hierarchies.** The inheritance printer can help review the hierarchy size.
 
 ### Events
@@ -101,7 +101,7 @@ Design your codebase architecture to facilitate easy review and allow testing in
 
 ### Solidity
 
-- **Prefer Solidity versions outlined in our [Slither Recommendations](https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity)**. We believe older Solidity versions are more secure and have better built-in practices. Newer versions may be too immature for production and need time to develop.
+- **Favor Solidity versions outlined in our [Slither Recommendations](https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity)**. We believe older Solidity versions are more secure and have better built-in practices. Newer versions may be too immature for production and need time to develop.
 - **Compile using a stable release, but check for warnings with the latest release.** Verify that the latest compiler version reports no issues with your code. However, since Solidity has a fast release cycle and a history of compiler bugs, we do not recommend the newest version for deployment. See Slither’s [solc version recommendation](https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity).
 - **Avoid inline assembly.** Assembly requires EVM expertise. Do not write EVM code unless you have _mastered_ the yellow paper.
 
@@ -112,4 +112,4 @@ After developing and deploying the contract:
 - **Monitor contracts.** Observe logs and be prepared to respond in the event of contract or wallet compromise.
 - **Add contact information to [blockchain-security-contacts](https://github.com/crytic/blockchain-security-contacts).** This list helps third parties notify you of discovered security flaws.
 - **Secure privileged users' wallets.** Follow our [best practices](https://blog.trailofbits.com/2018/11/27/10-rules-for-the-secure-use-of-cryptocurrency-hardware-wallets/) for hardware wallet key storage.
-- **Develop a response-to-incident plan.** Assume your smart contracts can be compromised. Possible threats include contract bugs or attackers gaining control of the contract owner's keys.
+- **Develop an incident response plan.** Assume your smart contracts can be compromised. Possible threats include contract bugs or attackers gaining control of the contract owner's keys.

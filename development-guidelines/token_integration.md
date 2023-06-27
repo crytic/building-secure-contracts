@@ -1,6 +1,6 @@
 # Token Integration Checklist
 
-This checklist offers recommendations for engaging with arbitrary tokens. Ensure that every unchecked item is justified and that its risks are understood.
+This checklist offers recommendations for interacting with arbitrary tokens. Ensure that every unchecked item is justified and that its risks are understood.
 
 For convenience, all Slither [utilities](https://github.com/crytic/slither#tools) can be run directly on a token address, as shown below:
 
@@ -20,7 +20,7 @@ Use the following Slither output for the token to follow this checklist:
 
 ## General Considerations
 
-- [ ] **The contract has a security review.** Avoid engaging with contracts that lack a security review. Assess the review's duration (i.e., the level of effort), the reputation of the security firm, and the number and severity of findings.
+- [ ] **The contract has a security review.** Avoid interacting with contracts that lack a security review. Assess the review's duration (i.e., the level of effort), the reputation of the security firm, and the number and severity of findings.
 - [ ] **You have contacted the developers.** If necessary, alert their team to incidents. Locate appropriate contacts on [blockchain-security-contacts](https://github.com/crytic/blockchain-security-contacts).
 - [ ] **They have a security mailing list for critical announcements.** Their team should advise users (like you!) on critical issues or when upgrades occur.
 
@@ -34,7 +34,7 @@ Use the following Slither output for the token to follow this checklist:
 ## Owner Privileges
 
 - [ ] **The token is not upgradeable.** Upgradeable contracts may change their rules over time. Use Slither’s [`human-summary` printer](https://github.com/crytic/slither/wiki/Printer-documentation#contract-summary) to determine if the contract is upgradeable.
-- [ ] **The owner has limited minting capabilities.** Malicious or compromised owners can abuse minting capabilities. Use Slither’s [`human-summary` printer](https://github.com/crytic/slither/wiki/Printer-documentation#contract-summary) to review minting capabilities and consider manual code review.
+- [ ] **The owner has limited minting capabilities.** Malicious or compromised owners can abuse minting capabilities. Use Slither’s [`human-summary` printer](https://github.com/crytic/slither/wiki/Printer-documentation#contract-summary) to review minting capabilities and consider manually reviewing the code.
 - [ ] **The token is not pausable.** Malicious or compromised owners can trap contracts relying on pausable tokens. Identify pausable code manually.
 - [ ] **The owner cannot blacklist the contract.** Malicious or compromised owners can trap contracts relying on tokens with a blacklist. Identify blacklisting features manually.
 - [ ] **The team behind the token is known and can be held responsible for abuse.** Contracts with anonymous development teams or teams situated in legal shelters require a higher standard of review.
