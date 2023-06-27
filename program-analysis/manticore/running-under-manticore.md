@@ -1,4 +1,4 @@
-## Running under Manticore
+# Running under Manticore
 
 **Table of contents:**
 
@@ -9,7 +9,7 @@
 
 ## Introduction
 
-In this article, we will explore a smart contract with the Manticore API. The target is the following smart contract (_[example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)_):
+In this section, we will explore a smart contract with the Manticore API. The target is the following smart contract ([example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)):
 
 ```solidity
 pragma solidity >=0.4.24 <0.6.0;
@@ -25,7 +25,7 @@ contract Simple {
 
 ## Run a standalone exploration
 
-You can run Manticore directly on the smart contract using the following command (`project` can be a Solidity file or a project director):
+You can run Manticore directly on the smart contract using the following command (`project` can be a Solidity file or a project directory):
 
 ```bash
 manticore project
@@ -66,7 +66,7 @@ Here, Manticore founds 7 test cases, which correspond to (the filename order may
 | **test_00000005.tx** | Contract creation |      f(!=65)      | f(65)             | REVERT |
 | **test_00000006.tx** | Contract creation |      f(!=65)      | fallback function | REVERT |
 
-\*Exploration summary: f(!=65) denotes f called with any value different than 65.\_
+\*Exploration summary: f(!=65) denotes f called with any value different than 65.
 
 As you can see, Manticore generates a unique test case for every successful or reverted transaction.
 

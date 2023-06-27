@@ -4,7 +4,7 @@
 
 ## A Brief Overview of Dynamic Symbolic Execution
 
-Dynamic Symbolic Execution (DSE) is a program analysis technique that explores a state space with a high degree of semantic awareness. This technique is based on discovering "program paths," represented as mathematical formulas called `path predicates`. Conceptually, DSE operates on path predicates in two steps:
+Dynamic Symbolic Execution (DSE) is a program analysis technique that explores a state space with a high degree of semantic awareness. This technique is based on discovering "program paths" represented as mathematical formulas called `path predicates`. Conceptually, DSE operates on path predicates in two steps:
 
 1. They are constructed using constraints on the program's input.
 2. They are used to generate program inputs that will cause the associated paths to execute.
