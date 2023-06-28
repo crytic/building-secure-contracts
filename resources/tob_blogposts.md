@@ -10,7 +10,7 @@ The following contains blockchain-related blog posts made by Trail of Bits.
   - [Presentations](#presentations)
   - [Tooling](#tooling)
   - [Upgradeability](#upgradeability)
-  - [Zero-knowledge](#zero-knowledge)
+  - [Zero-Knowledge](#zero-knowledge)
 
 ## Consensus Algorithms
 
