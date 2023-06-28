@@ -85,6 +85,7 @@ The behavior of certain contracts may differ from the original ERC specification
 - [ ] **The `name` and `symbol` functions can return an empty string.** This behavior is allowed by the standard.
 - [ ] **The `ownerOf` function reverts if the `tokenId` is invalid or refers to a token that has already been burned.** The function cannot return 0x0. This behavior is required by the standard but may not always be implemented correctly.
 - [ ] **A transfer of an NFT clears its approvals.** This is required by the standard.
+- [ ] **The token ID of an NFT cannot be changed during its lifetime.** This is required by the standard.
 
 ### Common Risks of the ERC721 Standard
 
