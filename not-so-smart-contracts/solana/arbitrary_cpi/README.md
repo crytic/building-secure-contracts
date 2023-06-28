@@ -1,12 +1,12 @@
 # Arbitrary CPI
 
-Solana allows programs to call one another through cross-program invocation (CPI). This can be done via `invoke`, which is responsible for routing the passed in instruction to the program. Whenever an external contract is invoked via CPI, the program must check and verify the program ID. If the program ID isn't verified, then the contract can call an attacker-controlled program instead of the intended one.
+Solana allows programs to call one another through cross-program invocation (CPI). This can be done via `invoke`, which is responsible for routing the passed-in instruction to the program. Whenever an external contract is invoked via CPI, the program must check and verify the program ID. If the program ID isn't verified, then the contract can call an attacker-controlled program instead of the intended one.
 
 View ToB's lint implementation for the arbitrary CPI issue [here](https://github.com/crytic/solana-lints/tree/master/lints/arbitrary_cpi).
 
 ## Exploit Scenario
 
-Consider the following `withdraw` function. Tokens are able to be withdrawn from the pool to a user account. The program invoked here is user-controlled and there's no check that the program passed in is the intended `token_program`. This allows a malicious user to pass in their own program with functionality to their discretion - such as draining the pool of the inputted `amount` tokens.
+Consider the following `withdraw` function. Tokens can be withdrawn from the pool to a user account. The program invoked here is user-controlled, and there's no check to ensure that the passed-in program is the intended `token_program`. This allows a malicious user to pass in their own program with any functionality they choose, such as draining the pool of the inputted `amount` tokens.
 
 ### Example Contract
 

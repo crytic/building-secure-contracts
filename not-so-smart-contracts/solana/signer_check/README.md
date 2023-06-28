@@ -1,13 +1,12 @@
 # Missing Signer Check
 
-In Solana, each public key has an associated private key that can be used to generate signatures. A [transaction](https://docs.solana.com/developing/programming-model/transactions) lists each account public key whose private key was used to generate a signature for the transaction. These signatures are verified using the inputted public keys prior to transaction execution.
+In Solana, each public key has a corresponding private key used to generate signatures. A [transaction](https://docs.solana.com/developing/programming-model/transactions) includes a list of the public keys for each account, which were used to generate signatures for the transaction. These signatures are verified using the provided public keys before executing the transaction.
 
-In case certain permissions are required to perform a sensitive function of the contract, a missing signer check becomes an issue. Without this check, an attacker would be able to call the respective access controlled functions permissionlessly.
+If certain permissions are required to perform a sensitive function in a contract, a missing signer check becomes problematic. Without this check, an attacker could call the respective access-controlled functions without permission.
 
 ## Exploit Scenario
 
-The following contract sets an escrow account's state to `Complete`. Unfortunately, the contract does not check whether the `State` account's `authority` has signed the transaction.
-Therefore, a malicious actor can set the state to `Complete`, without needing access to the `authority`’s private key.
+In the following example, a contract is designed to change an escrow account's state to `Complete`. However, it does not verify if the `State` account's `authority` has signed the transaction. As a result, a malicious actor can set the state to `Complete` without needing access to the `authority`'s private key.
 
 ### Example Contract
 
@@ -27,7 +26,6 @@ fn complete_escrow(_program_id: &Pubkey, accounts: &[AccountInfo], _instruction_
     state.serialize(&mut &mut **state_info.data.borrow_mut())?;
 
     Ok(())
-
 }
 ```
 
@@ -36,9 +34,9 @@ _Inspired by [SPL Lending Program](https://github.com/solana-labs/solana-program
 ## Mitigation
 
 ```rust
-  	if !EXPECTED_ACCOUNT.is_signer {
-    	return Err(ProgramError::MissingRequiredSignature);
-	}
+    if !EXPECTED_ACCOUNT.is_signer {
+        return Err(ProgramError::MissingRequiredSignature);
+    }
 ```
 
-For further reading on different forms of account verification in Solana and implementation refer to the [Solana Cookbook](https://solanacookbook.com/references/programs.html#how-to-verify-accounts).
+For additional information on various forms of account verification in Solana and their implementation, please refer to the [Solana Cookbook](https://solanacookbook.com/references/programs.html#how-to-verify-accounts).
