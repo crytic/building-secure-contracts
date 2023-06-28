@@ -1,17 +1,17 @@
-# Rounding errors
+# Rounding Errors
 
-Application developers must take care of correct rounding of numbers, especially if the rounding impacts tokens amounts.
+Application developers must pay attention to the correct rounding of numbers, particularly if the rounding affects token amounts.
 
-Cosmos-sdk offers two custom types for dealing with numbers:
+Cosmos-sdk provides two custom types for handling numbers:
 
 - `sdk.Int` (`sdk.UInt`) type for integral numbers
 - `sdk.Dec` type for decimal arithmetic
 
-The `sdk.Dec` type [has problems with precision and does not guarantee associativity](https://github.com/cosmos/cosmos-sdk/issues/7773), so it must be used carefully. But even if a more robust library for decimal numbers is deployed in the cosmos-sdk, rounding may be unavoidable.
+The `sdk.Dec` type [has issues with precision and does not guarantee associativity](https://github.com/cosmos/cosmos-sdk/issues/7773), so it must be used cautiously. However, even if a more robust library for decimal numbers is implemented in the cosmos-sdk, rounding might still be unavoidable.
 
 ## Example
 
-Below we see a simple example demonstrating `sdk.Dec` type's precision problems.
+The simple example below demonstrates the precision problems with the `sdk.Dec` type.
 
 ```go
 func TestDec() {
@@ -29,12 +29,12 @@ func TestDec() {
 
 ## Mitigations
 
-- Ensure that all tokens operations that must round results always benefit the system (application) and not users. In other words, always decide on the correct rounding direction. See [Appendix G in the Umee audit report](https://github.com/trailofbits/publications/blob/master/reviews/Umee.pdf)
+- Ensure that all token operations requiring rounded results always benefit the system (application) and not the users. In other words, consistently choose the correct rounding direction. See [Appendix G in the Umee audit report](https://github.com/trailofbits/publications/blob/master/reviews/Umee.pdf).
 
-- Apply "multiplication before division" pattern. That is, instead of computing `(x / y) * z` do `(x * z) / y`
+- Use the "multiplication before division" pattern. In other words, instead of computing `(x / y) * z`, perform `(x * z) / y`.
 
-- Observe [issue #11783](https://github.com/cosmos/cosmos-sdk/issues/11783) for a replacement of the `sdk.Dec` type
+- Monitor [issue #11783](https://github.com/cosmos/cosmos-sdk/issues/11783) for a replacement of the `sdk.Dec` type.
 
-## External examples
+## External Examples
 
-- [Umee had vulnerability caused by incorrect rounding direction](https://github.com/umee-network/umee/issues/545)
+- [Umee experienced a vulnerability caused by an incorrect rounding direction](https://github.com/umee-network/umee/issues/545).

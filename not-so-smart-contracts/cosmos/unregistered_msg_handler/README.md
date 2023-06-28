@@ -1,12 +1,12 @@
-# Unregistered message handler
+# Unregistered Message Handler
 
-In the legacy version of the `Msg Service`, all messages have to be registered in a module keeper's `NewHandler` method. Failing to do so would prevent users from sending the not-registered message.
+In the legacy version of the `Msg Service`, every message must be registered within a module keeper's `NewHandler` method. Failure to register a message would prevent users from sending the unregistered message.
 
-In [the recent Cosmos version manual registration is no longer needed](https://docs.cosmos.network/v0.47/building-modules/msg-services).
+In [the recent Cosmos version, manual registration is no longer needed](https://docs.cosmos.network/v0.47/building-modules/msg-services).
 
 ## Example
 
-There is one message handler missing.
+In the code below, one message handler is missing.
 
 ```go
 service Msg {
@@ -98,85 +98,17 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
         case *types.MsgUpdateUserAddress:
             res, err := msgServer.UpdateUserAddress(sdk.WrapSDKContext(ctx), msg)
             return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgUpdateCall:
-            res, err := msgServer.UpdateCall(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgSendBatch:
-            res, err := msgServer.SendBatch(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgCancelUserAddress:
-            res, err := msgServer.CancelUserAddress(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgRequestBatch:
-            res, err := msgServer.RequestBatch(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgUpdateEthClaim:
-            res, err := msgServer.UpdateEthClaim(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgSendCall:
-            res, err := msgServer.SendCall(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgSetCall:
-            res, err := msgServer.SetCall(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgCancelEthClaim:
-            res, err := msgServer.CancelEthClaim(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgConfirmEthClaim:
-            res, err := msgServer.ConfirmEthClaim(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgConfirmCall:
-            res, err := msgServer.ConfirmCall(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgRequestCall:
-            res, err := msgServer.RequestCall(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgConfirmUserAddress:
-            res, err := msgServer.ConfirmUserAddress(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgRequestUserAddress:
-            res, err := msgServer.RequestUserAddress(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgSendEthClaim:
-            res, err := msgServer.SendEthClaim(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgSetEthClaim:
-            res, err := msgServer.SetEthClaim(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgCancelBatch:
-            res, err := msgServer.CancelBatch(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgSetUserAddress:
-            res, err := msgServer.SetUserAddress(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgRequestEthClaim:
-            res, err := msgServer.RequestEthClaim(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgConfirmBatch:
-            res, err := msgServer.ConfirmBatch(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgUpdateBatch:
-            res, err := msgServer.UpdateBatch(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-        case *types.MsgSendUserAddress:
-            res, err := msgServer.SendUserAddress(sdk.WrapSDKContext(ctx), msg)
-            return sdk.WrapServiceResult(ctx, res, err)
-
-        default:
-            return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, fmt.Sprintf("Unrecognized Gravity Msg type: %v", msg.Type()))
-        }
-    }
-}
+...
 ```
 
-And it is the `CancelCall` msg.
+The missing message is the `CancelCall` msg.
 
 ## Mitigations
 
-- Use the recent Msg Service mechanism
-- Test all functionalities
-- Deploy static-analysis tests in CI pipeline for all manually maintained code that must be repeated in multiple files/methods
+- Use the recent Msg Service mechanism.
+- Test all functionalities.
+- Deploy static-analysis tests in the CI pipeline for all manually maintained code that must be repeated in multiple files/methods.
 
 ## External examples
 
-- The bug occured in the [Gravity Bridge](https://github.com/code-423n4/2021-08-gravitybridge-findings/issues/64). It was impossible to send evidence of malicious behavior, which impacted Gravity Bridge's security model.
+- The bug occurred in the [Gravity Bridge](https://github.com/code-423n4/2021-08-gravitybridge-findings/issues/64). It was impossible to send evidence of malicious behavior, which impacted Gravity Bridge's security model.
