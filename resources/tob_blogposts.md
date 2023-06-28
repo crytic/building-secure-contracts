@@ -14,7 +14,7 @@ The following contains blockchain-related blog posts made by Trail of Bits.
 
 ## Consensus Algorithms
 
-Research in the distributes systems area
+Research in the distributed systems area
 
 | Date       | Title                                                                                                                                                                      | Description                                                                                                    |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -22,16 +22,16 @@ Research in the distributes systems area
 | 2019/10/25 | [Formal Analysis of the CBC Casper Consensus Algorithm with TLA+](https://blog.trailofbits.com/2019/10/25/formal-analysis-of-the-cbc-casper-consensus-algorithm-with-tla/) | Verification of finality of the Correct By Construction (CBC) PoS consensus protocol                           |
 | 2019/07/12 | [On LibraBFT’s use of broadcasts](https://blog.trailofbits.com/2019/07/12/librabft/)                                                                                       | Liveness of LibraBFT and HotStuff algorithms                                                                   |
 | 2019/07/02 | [State of the Art Proof-of-Work: RandomX](https://blog.trailofbits.com/2019/07/02/state/)                                                                                  | Summary of our audit of ASIC and GPU-resistant PoW algorithm                                                   |
-| 2018/10/12 | [Introduction to Verifiable Delay Functions (VDFs)](https://blog.trailofbits.com/2018/10/12/introduction-to-verifiable-delay-functions-vdfs/)                              | Basics of VDFs - a class of hard to compute, not parallelizable, but easily verifiable functions                |
+| 2018/10/12 | [Introduction to Verifiable Delay Functions (VDFs)](https://blog.trailofbits.com/2018/10/12/introduction-to-verifiable-delay-functions-vdfs/)                              | Basics of VDFs - a class of hard to compute, not parallelizable, but easily verifiable functions               |
 
 ## Fuzzing Compilers
 
 Our work on the topic of fuzzing the `solc` compiler
 
-| Date       | Title                                                                                                                                           | Description                         |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| Date       | Title                                                                                                                                           | Description                          |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | 2021/03/23 | [A Year in the Life of a Compiler Fuzzing Campaign](https://blog.trailofbits.com/2021/03/23/a-year-in-the-life-of-a-compiler-fuzzing-campaign/) | Results and features of fuzzing solc |
-| 2020/06/05 | [Breaking the Solidity Compiler with a Fuzzer](https://blog.trailofbits.com/2020/06/05/breaking-the-solidity-compiler-with-a-fuzzer/)           | Our approach to fuzzing solc        |
+| 2020/06/05 | [Breaking the Solidity Compiler with a Fuzzer](https://blog.trailofbits.com/2020/06/05/breaking-the-solidity-compiler-with-a-fuzzer/)           | Our approach to fuzzing solc         |
 
 ## General
 
@@ -39,10 +39,10 @@ Security research, analyses, announcements, and write-ups
 
 | Date       | Title                                                                                                                                                                          | Description                                                                                                                                                     |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2022/10/12 | [Porting the Solana eBPF JIT compiler to ARM64](https://blog.trailofbits.com/2022/10/12/solana-jit-compiler-ebpf-arm64/)                                                       | Low-level write-up of the work done to make the Solana compiler work on ARM64                                                                                        |
-| 2022/06/24 | [Managing risk in blockchain deployments](https://blog.trailofbits.com/2022/06/24/managing-risk-in-blockchain-deployments/)                                                    | A summary of "Do You Really Need a Blockchain? An Operational Risk Assessment" report                                                                             |
-| 2022/06/21 | [Are blockchains decentralized?](https://blog.trailofbits.com/2022/06/21/are-blockchains-decentralized/)                                                                       | A summary of "Are Blockchains Decentralized? Unintended Centralities in Distributed Ledgers" report                                                                |
-| 2020/08/05 | [Accidentally stepping on a DeFi lego](https://blog.trailofbits.com/2020/08/05/accidentally-stepping-on-a-defi-lego/)                                                          | Write-up of a vulnerability in yVault project                                                                                                                    |
+| 2022/10/12 | [Porting the Solana eBPF JIT compiler to ARM64](https://blog.trailofbits.com/2022/10/12/solana-jit-compiler-ebpf-arm64/)                                                       | Low-level write-up of the work done to make the Solana compiler work on ARM64                                                                                   |
+| 2022/06/24 | [Managing risk in blockchain deployments](https://blog.trailofbits.com/2022/06/24/managing-risk-in-blockchain-deployments/)                                                    | A summary of "Do You Really Need a Blockchain? An Operational Risk Assessment" report                                                                           |
+| 2022/06/21 | [Are blockchains decentralized?](https://blog.trailofbits.com/2022/06/21/are-blockchains-decentralized/)                                                                       | A summary of "Are Blockchains Decentralized? Unintended Centralities in Distributed Ledgers" report                                                             |
+| 2020/08/05 | [Accidentally stepping on a DeFi lego](https://blog.trailofbits.com/2020/08/05/accidentally-stepping-on-a-defi-lego/)                                                          | Write-up of a vulnerability in yVault project                                                                                                                   |
 | 2020/05/15 | [Bug Hunting with Crytic](https://blog.trailofbits.com/2020/05/15/bug-hunting-with-crytic/)                                                                                    | Description of 9 bugs found by Trail of Bits tools in public projects                                                                                           |
 | 2019/11/13 | [Announcing the Crytic $10k Research Prize](https://blog.trailofbits.com/2019/11/13/announcing-the-crytic-10k-research-prize/)                                                 | Academic research prize promoting open source work                                                                                                              |
 | 2019/10/24 | [Watch Your Language: Our First Vyper Audit](https://blog.trailofbits.com/2019/10/24/watch-your-language-our-first-vyper-audit/)                                               | Pros and cons of Vyper language and disclosure of vulnerability in the Vyper's compiler                                                                         |
@@ -112,7 +112,7 @@ Our work related to contracts upgradeability
 | 2018/10/29 | [How contract migration works](https://blog.trailofbits.com/2018/10/29/how-contract-migration-works/)                                                             | Alternative to upgradability mechanism - moving data to a new contract                                                                               |
 | 2018/09/05 | [Contract upgrade anti-patterns](https://blog.trailofbits.com/2018/09/05/contract-upgrade-anti-patterns/)                                                         | Discussion of risks and recommendations for Data Separation and Delegatecall Proxy patterns. Disclosure of vulnerability in Zeppelin Proxy contract. |
 
-## Zero-knowledge
+## Zero-Knowledge
 
 Our work in Zero-Knowledge Proofs space
 
