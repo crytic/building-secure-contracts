@@ -29,10 +29,10 @@ Here's a basic overview of Building-Secure-Contracts' structure:
 
 ```text
 .
-├── development-guidelnes # High-level best practices for all smart contracts
+├── development-guidelines # High-level best practices for all smart contracts
 ├── learn_evm # EVM technical knowledge
 ├── not-so-smart-contracts # Examples of common smart contract issues, including descriptions, examples, and recommendations
-├── program-analysis # How to utilize automated tools for securing contracts
+├── program-analysis # How to utilize automated tools to secure contracts
 ├── resources # Various online resources
 └── ...
 ```
