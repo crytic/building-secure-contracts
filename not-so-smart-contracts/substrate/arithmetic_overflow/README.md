@@ -1,10 +1,10 @@
-# Arithmetic overflow
+# Arithmetic Overflow
 
-Arithmetic overflow in Substrate occurs when arithmetic operations are performed using primitive operations instead of specialized functions that check for overflow. When a Substrate node is compiled in `debug` mode, integer overflows will cause the program to panic. However, when the node is compiled in `release` mode (e.g. `cargo build --release`), Substrate will perform two's complement wrapping. A production-ready node will be compiled in `release` mode, which makes it vulnerable to arithmetic overflow.
+In Substrate, arithmetic overflow occurs when arithmetic operations use primitive operations instead of specialized functions designed to check for overflow. When a Substrate node is compiled in `debug` mode, integer overflows will cause the program to panic. However, when the node is compiled in `release` mode (e.g. `cargo build --release`), Substrate performs two's complement wrapping. A production-ready node is compiled in `release` mode, which makes it susceptible to arithmetic overflow.
 
 # Example
 
-In the [`pallet-overflow`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/arithmetic_overflow/pallet-overflow.rs) pallet, notice that the `transfer` function sets `update_sender` and `update_to` using primitive arithmetic operations.
+In the [`pallet-overflow`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/arithmetic_overflow/pallet-overflow.rs) pallet, note that the `transfer` function sets `update_sender` and `update_to` using primitive arithmetic operations.
 
 ```rust
    /// Allow minting account to transfer a given balance to another account.
@@ -31,9 +31,9 @@ In the [`pallet-overflow`](https://github.com/crytic/building-secure-contracts/b
    }
 ```
 
-The sender of the extrinsic can exploit this vulnerability by causing `update_sender` to underflow, which artificially inflates their balance.
+The sender of the extrinsic can exploit this vulnerability by causing `update_sender` to underflow, thus artificially inflating their balance.
 
-**Note**: Aside from the stronger mitigations mentioned below, a check to make sure that `sender` has at least `amount` balance would have also prevented an underflow.
+**Note**: In addition to the stronger mitigations mentioned below, checking to make sure that `sender` has at least `amount` balance would have also prevented an underflow.
 
 # Mitigations
 

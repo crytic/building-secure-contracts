@@ -1,8 +1,8 @@
 # Origins
 
-The origin of a call tells a dispatchable function where the call has come from. Origins are a way to implement access controls in the system.
+In the context of dispatchable functions, the origin of a call indicates where the call has come from. Origins serve as a means to implement access controls in a system.
 
-There are three types of origins that can used in the runtime:
+There are three types of origins that can be used in the runtime:
 
 ```rust
 pub enum RawOrigin<AccountId> {
@@ -12,13 +12,13 @@ pub enum RawOrigin<AccountId> {
 }
 ```
 
-Outside of the out-of-box origins, custom origins can also be created that are catered to a specific runtime. The primary use case for custom origins is to configure privileged access to dispatch calls in the runtime, outside of `RawOrigin::Root`.
+Aside from the default origins, custom origins tailored for specific runtimes can also be created. The primary purpose of custom origins is to configure privileged access for dispatch calls in the runtime, outside of `RawOrigin::Root`.
 
-Using privileged origins, like `RawOrigin::Root` or custom origins, can lead to access control violations if not used correctly. It is a common error to use `ensure_signed` in place of `ensure_root` which would allow any user to bypass the access control placed by using `ensure_root`.
+Using privileged origins, such as `RawOrigin::Root` or custom origins, can result in access control violations if not employed properly. A common mistake is using `ensure_signed` instead of `ensure_root`, which allows any user to bypass the access control imposed by `ensure_root`.
 
 # Example
 
-In the [`pallet-bad-origin`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/origins/pallet-bad-origin.rs) pallet, there is a `set_important_val` function that should be only callable by the `ForceOrigin` _custom_ origin type. This custom origin allows the pallet to specify that only a specific account can call `set_important_val`.
+The [`pallet-bad-origin`](https://github.com/crytic/building-secure-contracts/blob/master/not-so-smart-contracts/substrate/origins/pallet-bad-origin.rs) pallet features a `set_important_val` function that should be callable only by the `ForceOrigin` _custom_ origin type. This custom origin enables the pallet to specify that only a specific account can call `set_important_val`.
 
 ```rust
 #[pallet::call]
@@ -42,7 +42,7 @@ impl<T:Config> Pallet<T> {
 }
 ```
 
-However, the `set_important_val` is using `ensure_signed`; this allows any account to set `ImportantVal`. To allow only the `ForceOrigin` to call `set_important_val` the following change can be made:
+However, since `set_important_val` is using `ensure_signed`, any account can set `ImportantVal`. To restrict `set_important_val` to `ForceOrigin` calls only, the following change can be made:
 
 ```rust
 T::ForceOrigin::ensure_origin(origin.clone())?;
@@ -51,9 +51,9 @@ let sender = ensure_signed(origin)?;
 
 # Mitigations
 
-- Ensure that the correct access controls are placed on privileged functions.
-- Develop user documentation on all risks associated with the system, including those associated with privileged users.
-- A thorough suite of unit tests that validates access controls is crucial.
+- Ensure that appropriate access controls are applied to privileged functions.
+- Create user documentation that covers all risks associated with the system, including those related to privileged users.
+- Develop a comprehensive suite of unit tests to verify access controls.
 
 # References
 
