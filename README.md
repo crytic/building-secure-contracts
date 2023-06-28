@@ -14,6 +14,7 @@ Brought to you by [Trail of Bits](https://www.trailofbits.com/), this repository
 - [Learn EVM](./learn_evm): Technical knowledge about the EVM
   - [EVM Opcodes](./learn_evm/evm_opcodes.md): Information on all EVM opcodes
   - [Transaction Tracing](./learn_evm/tracing.md): Helper scripts and guidance for generating and navigating transaction traces
+  - [Arithmetic Checks](./learn_evm/arithmetic-checks.md): A guide to performing arithmetic checks in the EVM
   - [Yellow Paper Guidance](./learn_evm/yellow-paper.md): Symbol reference for easier reading of the Ethereum yellow paper
   - [Forks <> EIPs](./learn_evm/eips_forks.md): Summaries of the EIPs included in each Ethereum fork
     - [Forks <> CIPs](./learn_evm/cips_forks.md): Summaries of the CIPs and EIPs included in each Celo fork _(EVM-compatible chain)_
