@@ -10,7 +10,7 @@ This exercise requires to finish [exercise 1](./Exercise-1.md) and [exercise 2](
     - [Goals](#goals)
   - [Solution](#solution)
 
-Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
+Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
 
 ## Targeted contract
 

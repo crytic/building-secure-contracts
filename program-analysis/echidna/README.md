@@ -13,4 +13,4 @@ Watch our [Fuzzing workshop](https://www.youtube.com/watch?v=QofNQxW_K08&list=PL
 - [Frequently Asked Questions](./frequently_asked_questions.md): Answers to common questions about Echidna
 - [Exercises](exercises): Exercises
 
-Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
+Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum

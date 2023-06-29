@@ -7,7 +7,7 @@
   - [Goals](#goals)
   - [Solution](#solution)
 
-Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
+Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
 
 ## Setup
 
