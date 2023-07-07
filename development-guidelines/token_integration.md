@@ -74,39 +74,7 @@ Reviews of token scarcity issues must be executed manually. Check for the follow
 
 ### Known non-standard ERC20 tokens
 
-The following tokens are known to be non-standard ERC20 tokens. They may have additional risks that must be covered.
-
-| Token                                                                                                  | Issue               | Notes                                                                  |
-| :----------------------------------------------------------------------------------------------------- | :------------------ | :--------------------------------------------------------------------- |
-| [Basic Attention Token (BAT)](https://etherscan.io/token/0x0d8775f648430679a709e98d2b0cb6250d2887ef)   | NO_REVERT           |                                                                        |
-| [Huobi Token (HT)](https://etherscan.io/token/0x6f259637dcd74c767781e37bc6133cd6a68aa161)              | NO_REVERT           |                                                                        |
-| [Compound USD Coin (cUSDC)](https://etherscan.io/token/0x39aa39c021dfbae8fac545936693ac917d5e7563)     | NO_REVERT           |                                                                        |
-| [Tether USD (USDT)](https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7)             | MISSING_RETURN_DATA |                                                                        |
-| [0x Protocol Token (ZRX)](https://etherscan.io/token/0xe41d2489571d322189246dafa5ebde1f4699f498)       | NO_REVERT           |                                                                        |
-| [Binance Coin (BNB)](https://etherscan.io/token/0xB8c77482e45F1F44dE1745F52C74426C631bDD52)            | MISSING_RETURN_DATA | Only missing return data on `transfer`. `transferFrom` returns `true`. |
-| [OMGToken (OMG)](https://etherscan.io/token/0xd26114cd6ee289accf82350c8d8487fedb8a0c07)                | MISSING_RETURN_DATA |                                                                        |
-| [Wrapped Ether (WETH)](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)          | PERMIT_NOOP         | Includes a non-reverting `fallback` function.                          |
-| [Amp (AMP)](https://etherscan.io/token/0xff20817765cb7f73d4bde2e66e067e58d11095c2)                     | TRANSFER_HOOKS      |                                                                        |
-| [The Tokenized Bitcoin (imBTC)](https://etherscan.io/token/0x3212b29E33587A00FB1C83346f5dBFA69A458923) | TRANSFER_HOOKS      |                                                                        |
-
-| Issue               | Description                                                                    | Notes                                                                                                                                                                                                                                                  |
-| :------------------ | :----------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| NO_REVERT           | Does not revert when a transfer fails due to missing funds.                    | Protocols must check the return value in addition to the call success status.                                                                                                                                                                          |
-| MISSING_RETURN_DATA | Does not return any data when transferring tokens.                             | Protocols that expect a return value when transferring tokens will revert. Solidity includes automatic checks on the return data size when calling `token.transfer`.                                                                                   |
-| TRANSFER_HOOKS      | Includes [ERC777](https://eips.ethereum.org/EIPS/eip-777)-like transfer hooks. | Protocols that interact with tokens that include transfer hooks must be extra careful to protect against reentrant calls. This can also affect cross-protocol reentrant calls to `view` functions.                                                     |
-| PERMIT_NOOP         | Does not revert when calling `permit`.                                         | Protocols that use [EIP-2612 permits](https://eips.ethereum.org/EIPS/eip-2612) should check that the token allowance has increased. See [Multichain's incident](https://media.dedaub.com/phantom-functions-and-the-billion-dollar-no-op-c56f062ae49f). |
-
-Additional non-standard behavior might include:
-
-- non-standard permits ([DAI](https://etherscan.io/token/0x6b175474e89094c44da98b954eedeac495271d0f))
-- revert for approval of amount `>= 2^96 < 2^256 - 1` ([UNI](https://etherscan.io/token/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984), [COMP](https://etherscan.io/token/0xc00e94cb662c3520282e6f5717214004a7f26888))
-- fee on transfers
-- do not reduce allowance when it is the maximum value
-- do not require allowance for transfers from self
-- upgradeable contracts (`USDC`)
-- tokens with multiple proxy addresses
-
-Refer to [d-xco/weird-erc20](https://github.com/d-xo/weird-erc20) for additional non-standard ERC20 tokens.
+Protocols that allow integration with arbitrary tokens must take care to properly handle certain well-known non-standard ERC20 tokens. Refer to the [non-standard-tokens list](./non-standard-tokens.md) for a list of well-known tokens that contain additional risks.
 
 ## ERC721 tokens
 
