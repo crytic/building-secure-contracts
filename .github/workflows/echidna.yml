@@ -1,15 +1,18 @@
-name: Echidna
+name: Run Echidna tests
 
 on:
   push:
-    paths-ignore:
-      - "**.md"
-      - "**.rs"
-      - "**.py"
+    paths:
+      - ".github/workflows/echidna.yml"
+      - "program-analysis/echidna/**/*.sol"
+      - "program-analysis/echidna/**/*.yml"
     branches:
       - master
-      - dev
   pull_request:
+    paths:
+      - ".github/workflows/echidna.yml"
+      - "program-analysis/echidna/**/*.sol"
+      - "program-analysis/echidna/**/*.yml"
   schedule:
     # run CI every day even if no PRs/merges occur
     - cron: "0 12 * * *"
@@ -112,7 +115,7 @@ jobs:
             config: Popsicle.yaml
             contract: PopsicleFixed
             outcome: success
-            expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*passed'
+            expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*passing'
           - name: TestDepositWithPermit
             workdir: program-analysis/echidna/example/
             files: TestDepositWithPermit.sol
@@ -120,7 +123,7 @@ jobs:
             config: testdeposit.yaml
             contract: TestDepositWithPermit
             outcome: success
-            expected: 'testERC20PermitDeposit(uint256):\s*passed'
+            expected: 'testERC20PermitDeposit(uint256):\s*passing'
           - name: MultiABI
             workdir: program-analysis/echidna/example/
             files: multiabi.sol
