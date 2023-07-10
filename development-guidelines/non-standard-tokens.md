@@ -4,7 +4,7 @@ The following tokens are known to be non-standard ERC20 tokens. They may have ad
 
 ## Missing Revert
 
-These tokens do not revert when a transfer fails due to missing funds. Protocols that integrate these tokens must include a check for the transfer success status in the function's return value and handle the failure case appropriately.
+These tokens do not revert when a transfer fails, e.g. due to missing funds. Protocols that integrate these tokens must include a check for the transfer function's returned boolean success status and handle the failure case appropriately.
 
 | Token                                                                                                | Notes |
 | :--------------------------------------------------------------------------------------------------- | :---- |
