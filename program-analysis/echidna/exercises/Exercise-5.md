@@ -28,10 +28,13 @@ The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/2
 - Create a `config.yaml` with the necessary configuration option(s).
 - Once Echidna finds the bug, fix the issue, and re-try your property with Echidna.
 
+### Descriptions
 Only the following contracts are relevant:
 
-- `contracts/naive-receiver/FlashLoanReceiver.sol`
-- `contracts/naive-receiver/NaiveReceiverLenderPool.sol`
+- [`contracts/naive-receiver/NaiveReceiverLenderPool.sol`](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/master/contracts/naive-receiver/NaiveReceiverLenderPool.sol): it allows to take a flash loan for a fee
+- [`contracts/naive-receiver/FlashLoanReceiver.sol`](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/master/contracts/naive-receiver/FlashLoanReceiver.sol): the user deploys a contract to do flash loans with the lender pool
+
+The user deploys a FlashLoanReceiver with 10 eth. Can you drain the funds?
 
 ## Hints
 

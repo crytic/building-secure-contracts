@@ -1,13 +1,29 @@
-# Building Secure Smart Contracts
+# Building Secure Smart Contracts - Devcon Edition
 
-![](https://github.com/crytic/building-secure-contracts/workflows/CI/badge.svg) ![](https://github.com/crytic/building-secure-contracts/workflows/Echidna/badge.svg)
+The slides are [here](https://github.com/crytic/building-secure-contracts/blob/devcon/Josselin%20Feist%2C%20Gustavo%20Grieco%20-%20Building%20Secure%20Contracts_%20Use%20Echidna%20Like%20a%20Pro.pdf).
 
-This repository, brought to you by [Trail of Bits](https://www.trailofbits.com/), outlines guidelines and best practices to write secure smart contracts.
+## Install Echidna
+- On MacOs: `brew install echidna`
+- On other systems: download from https://github.com/crytic/echidna/releases/tag/v2.2.0
 
-We welcome contributions, and you can contribute by following our [contributing guidelines](https://github.com/crytic/building-secure-contracts/blob/master/CONTRIBUTING.md).
+Consider using [eth-security-toolbox](https://github.com/trailofbits/eth-security-toolbox/) (docker) if you have troubles running Echidna.
 
-**Table of contents:**
+## Exercises
+- [Exercise 1](program-analysis/echidna/Exercise-1.md)
+- [Exercise 2](program-analysis/echidna/Exercise-2.md)
+- [Exercise 4](program-analysis/echidna/Exercise-4.md)
+- [Exercise 5](program-analysis/echidna/Exercise-5.md)
+- [Exercise 6](program-analysis/echidna/Exercise-6.md)
 
+## Additional information
+Consider using [solc-select](https://github.com/crytic/solc-select) to easily switch Solidity versions:
+- `pip3 install solc-select`: to install it
+- `solc-select install 0.7.0`: to install solc `0.7.0`
+- `solc-select use 0.7.0`: to switch to solc `0.7.0`
+
+[secure-contracts.com](https://secure-contracts.com/) contains additional exercises and guidelines that won't be covered during the workshop.
+
+<<<<<<< HEAD
 - [Development guidelines](./development-guidelines)
   - [High-level best practices](./development-guidelines/guidelines.md): High-level best-practices for all smart contracts
   - [Incident Response Recommendations](./development-guidelines/incident_response.md): Guidelines on how to formulate an incident response plan
@@ -41,3 +57,5 @@ We welcome contributions, and you can contribute by following our [contributing 
 # License
 
 secure-contracts and building-secure-contracts are licensed and distributed under the [AGPLv3 license](https://github.com/crytic/building-secure-contracts/blob/master/LICENSE). Contact us if you're looking for an exception to the terms.
+=======
+>>>>>>> devcon
