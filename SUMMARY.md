@@ -27,6 +27,8 @@
     - [Access Controls](./not-so-smart-contracts/algorand/access_controls/README.md)
     - [Asset Id Check](./not-so-smart-contracts/algorand/asset_id_check/README.md)
     - [Denial of Service](./not-so-smart-contracts/algorand/denial_of_service/README.md)
+    - [Inner Transaction Fee](./not-so-smart-contracts/algorand/inner_transaction_fee/README.md)
+    - [Clear State Transaction Check](./not-so-smart-contracts/algorand/clear_state_transaction_check/README.md)
   - [Cairo](./not-so-smart-contracts/cairo/README.md)
     - [Improper access controls](./not-so-smart-contracts/cairo/access_controls/README.md)
     - [Integer division errors](./not-so-smart-contracts/cairo/integer_division/README.md)

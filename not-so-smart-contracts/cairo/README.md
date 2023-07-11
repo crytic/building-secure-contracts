@@ -30,4 +30,4 @@ Each _Not So Smart Contract_ consists of a standard set of information:
 
 These examples are developed and maintained by [Trail of Bits](https://www.trailofbits.com/).
 
-If you have any questions, issues, or wish to learn more, join the #ethereum channel on the [Empire Hacking Slack](https://empireslacking.herokuapp.com/) or [contact us](https://www.trailofbits.com/contact/) directly.
+If you have any questions, issues, or wish to learn more, join the #ethereum channel on the [Empire Hacking Slack](https://slack.empirehacking.nyc/) or [contact us](https://www.trailofbits.com/contact/) directly.
