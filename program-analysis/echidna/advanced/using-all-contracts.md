@@ -33,7 +33,7 @@ This is where `allContracts` testing is useful: It allows Echidna to call functi
 
 ## Run Echidna
 
-We will use a simple example to show how `allContracts` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [allContracts.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/allContracts.sol).
+We will use a simple example to show how `allContracts` works. We will be using two contracts, `Flag` and `EchidnaTest`, both available in [allContracts.sol](../example/allContracts.sol).
 
 The `Flag` contract contains a boolean flag that is only set if `flip()` is called, and a getter function that returns the value of the flag. For now, ignore `test_fail()`, we will talk about this function later.
 
@@ -71,7 +71,7 @@ contract EchidnaTest {
 }
 ```
 
-In a non `allContracts` fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [allContracts.yaml here](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/allContracts.yaml).
+In a non `allContracts` fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [allContracts.yaml here](../example/allContracts.yaml).
 
 ```yaml
 testMode: assertion
