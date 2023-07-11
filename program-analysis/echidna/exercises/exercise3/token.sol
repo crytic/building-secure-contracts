@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 /// @notice The issues from exercise 1 and 2 are fixed.
 

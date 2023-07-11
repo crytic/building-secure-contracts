@@ -167,7 +167,7 @@ jobs:
           contract: ${{ matrix.contract }}
           config: ${{ matrix.config }}
           output-file: ${{ matrix.files }}.out
-          solc-version: ${{ matrix.solc-version || '0.5.11' }}
+          solc-version: ${{ matrix.solc-version || '0.8.0' }}
           echidna-workdir: ${{ matrix.workdir }}
           echidna-version: edge
           crytic-args: ${{ matrix.crytic-args || '' }}

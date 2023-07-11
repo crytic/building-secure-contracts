@@ -17,7 +17,7 @@ Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
 We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/token.sol)_:
 
 ```solidity
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 contract Ownable {
     address public owner = msg.sender;
@@ -79,13 +79,13 @@ This exercise is similar to the [first one](Exercise-1.md), but using assertions
 The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/template.sol)_):
 
 ````solidity
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 import "./token.sol";
 
 /// @dev Run the template with
 ///      ```
-///      solc-select use 0.5.0
+///      solc-select use 0.8.0
 ///      echidna program-analysis/echidna/exercises/exercise4/template.sol --contract TestToken --test-mode assertion
 ///      ```
 contract TestToken is Token {
