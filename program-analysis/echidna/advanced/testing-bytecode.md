@@ -1,20 +1,19 @@
-# How to test bytecode only contracts
+# How to Test Bytecode-Only Contracts
 
 **Table of contents:**
 
-- [How to test bytecode only contracts](#how-to-test-bytecode-only-contracts)
+- [How to Test Bytecode-Only Contracts](#how-to-test-bytecode-only-contracts)
   - [Introduction](#introduction)
-  - [Proxy pattern](#proxy-pattern)
-  - [Run Echidna](#run-echidna)
-    - [Target source code](#target-source-code)
-  - [Differential fuzzing](#differential-fuzzing)
-  - [Generic Proxy code](#generic-proxy-code)
-  - [Summary: Testing contracts without source code](#summary-testing-contracts-without-source-code)
+  - [Proxy Pattern](#proxy-pattern)
+  - [Running Echidna](#running-echidna)
+    - [Target Source Code](#target-source-code)
+  - [Differential Fuzzing](#differential-fuzzing)
+  - [Generic Proxy Code](#generic-proxy-code)
+  - [Summary: Testing Contracts Without Source Code](#summary-testing-contracts-without-source-code)
 
 ## Introduction
 
-We will see how to fuzz a contract without any provided source code.
-The technique can also be used to perform differential fuzzing (i.e. compare multiple implementations) between a Solidity contract and a Vyper contract.
+In this tutorial, you'll learn how to fuzz a contract without any provided source code. The technique can also be used to perform differential fuzzing (i.e., compare multiple implementations) between a Solidity contract and a Vyper contract.
 
 Consider the following bytecode:
 
@@ -36,10 +35,9 @@ interface Target {
 
 We want to test if it is possible to have more tokens than the total supply.
 
-## Proxy pattern
+## Proxy Pattern
 
-Because we don't have the source code, we cannot directly add the property in the contract.
-Instead we will use a proxy contract:
+Since we don't have the source code, we can't directly add the property to the contract. Instead, we'll use a proxy contract:
 
 ```solidity
 interface Target {
@@ -81,10 +79,10 @@ contract TestBytecodeOnly {
 The proxy:
 
 - Deploys the bytecode in its constructor
-- Has one function that will call the target's `transfer` function
+- Has one function that calls the target's `transfer` function
 - Has one Echidna property `target.balanceOf(address(this)) <= target.totalSupply()`
 
-## Run Echidna
+## Running Echidna
 
 ```bash
 echidna bytecode_only.sol --contract TestBytecodeOnly
@@ -93,9 +91,9 @@ echidna_test_balance: failed!💥
     transfer(0x0,1002)
 ```
 
-Here Echidna found that by calling `transfer(0, 1002)` anyone can mint tokens.
+Here, Echidna found that by calling `transfer(0, 1002)` anyone can mint tokens.
 
-### Target source code
+### Target Source Code
 
 The actual source code of the target is:
 
@@ -118,7 +116,7 @@ contract C {
 
 Echidna correctly found the bug: lack of overflow checks in `transfer`.
 
-## Differential fuzzing
+## Differential Fuzzing
 
 Consider the following Vyper and Solidity contracts:
 
@@ -137,7 +135,7 @@ contract SolidityVersion {
 }
 ```
 
-We can test that they return always the same values using the proxy pattern:
+We can test that they always return the same values using the proxy pattern:
 
 ```solidity
 interface Target {
@@ -179,7 +177,7 @@ echidna  vyper.sol --config config.yaml --contract SolidityVersion --test-mode a
 assertion in test: passed! 🎉
 ```
 
-## Generic Proxy code
+## Generic Proxy Code
 
 Adapt the following code to your needs:
 
@@ -212,6 +210,6 @@ contract TestBytecodeOnly {
 }
 ```
 
-## Summary: Testing contracts without source code
+## Summary: Testing Contracts Without Source Code
 
-Echidna can fuzz contracts without source code using a proxy contract. This technique can be also used to compare implementations written in Solidity and Vyper.
+Echidna can fuzz contracts without source code using a proxy contract. This technique can also be used to compare implementations written in Solidity and Vyper.
