@@ -49,5 +49,5 @@ Note that the simplest solution would be to sign the offchain submissions so tha
 - https://docs.substrate.io/main-docs/fundamentals/transaction-types/#unsigned-transactions
 - https://docs.substrate.io/main-docs/fundamentals/offchain-operations/
 - https://github.com/paritytech/substrate/blob/polkadot-v0.9.26/frame/examples/offchain-worker/src/lib.rs
-- https://docs.substrate.io/tutorials/work-with-pallets/add-offchain-workers/
+- https://docs.substrate.io/tutorials/build-application-logic/add-offchain-workers/
 - https://docs.substrate.io/reference/how-to-guides/offchain-workers/offchain-http-requests/

@@ -4,16 +4,23 @@ on:
   push:
     branches:
       - master
+    paths:
+      - ".github/workflows/lint_links.yml"
+      - "**.md"
   pull_request:
+    paths:
+      - ".github/workflows/lint_links.yml"
+      - "**.md"
   schedule:
-    # run CI at 09:00, on day 1 of the month even if no PRs/merges occur
-    - cron: "0 9 1 * *"
+    # run CI at 09:00 every Tuesday even if no PRs/merges occur
+    - cron: "0 9 * * 2"
 
 jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
           use-quiet-mode: "yes"
+          check-modified-files-only: ${{ (github.event_name == 'pull_request' && 'yes') || 'no' }}

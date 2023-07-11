@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - master
+    ignore-paths:
+      - "**.rs"
+      - "**.py"
+      - "**.sol"
   workflow_dispatch:
 
 jobs:
@@ -24,7 +28,7 @@ jobs:
       - name: Build artifacts
         run: mdbook build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: ./book
   deploy:

@@ -2,11 +2,11 @@
 
 ## Transaction Tracing
 
-One great way to learn more about how the EVM works internally is to trace the execution of a transaction opcode by opcode. This technique can also help you assess the correctness of assembly code and catch problems related to the compiler or it's optimization steps.
+One excellent way to learn more about the internal workings of the EVM is to trace the execution of a transaction opcode by opcode. This approach can also help you assess the correctness of assembly code and catch problems related to the compiler or its optimization steps.
 
-The following Javascript snippet uses an `ethers` provider to connect to an ethereum node with the `debug` JSON RPC endpoints activated. Although this requires an archive node on mainnet, it can also be run quickly & easily against a local development testnet using hardhat node, ganache, or some other ethprovider that targets developers.
+The following JavaScript snippet uses an `ethers` provider to connect to an Ethereum node with the `debug` JSON RPC endpoints activated. Although this requires an archive node on Mainnet, it can also be run quickly and easily against a local development Testnet using Hardhat node, Ganache, or some other Ethprovider targeting developers.
 
-Transaction traces for even simple smart contract interactions are verbose so we recommend you provide a filename to save the trace at for further analysis. Note that the following function depends on the `fs` module built into node.js so it should be copied into a node console rather than a browser console, however the filesystem interactions could be removed for use in the browser.
+Transaction traces for even simple smart contract interactions are verbose, so we recommend providing a filename to save the trace for further analysis. Note that the following function depends on the `fs` module built into Node.js, so it should be copied into a Node console rather than a browser console. However, the filesystem interactions could be removed for use in the browser.
 
 ```
 const ethers = require("ethers");
@@ -29,15 +29,15 @@ let traceTx = async (txHash, filename) => {
     if (filename) {
       fs.writeFileSync(filename, JSON.stringify(indexedRes, null, 2));
     } else {
-      log(indexecRes);
+      log(indexedRes);
     }
   });
 };
 ```
 
-Note that, by default, transaction traces do not feature a sequential index making it difficult to answer, for example, "Which was the 100th opcode executed?" The above script adds such an index for easier navigation and communication.
+By default, transaction traces do not feature a sequential index, making it difficult to answer questions such as, "Which was the 100th opcode executed?" The above script adds such an index for easier navigation and communication.
 
-The output of the above features a list of opcode executions, a snippet of which might look something like:
+The output of the script contains a list of opcode executions. A snippet might look something like:
 
 ```
 {
@@ -84,25 +84,25 @@ The output of the above features a list of opcode executions, a snippet of which
 
 An overview of the fields for opcode execution trace:
 
-- `index`: The index we added, indicates that the above opcode was the 191st one executed. Helpful for staying oriented as you jump around the trace.
-- `pc`: program counter eg this opcode exists at index `3645` of the contract bytecode. You'll notice that `pc` increments by one for many common opcodes, by more than one for PUSH opcodes, and is reset entirely by JUMP/JUMP opcodes.
-- `op`: name of the opcode, because most of the actual data is hex-encoded, using grep or ctrl-f to search through the trace for opcode names is an effective strategy.
-- `gas`: remaining gas _before_ the opcode is executed
-- `gasCost`: cost of this operation, for CALL & similar opcodes, this cost takes into account all gas spent by the child execution frame.
-- `depth`: each call creates a new child execution frame & this variable tracks how many sub-frames exist. Generally, CALL opcodes increase the depth and RETURN opcodes decrease it.
-- `stack`: a snapshot of the entire stack _before_ the opcode executes
-- `memory`: a snapshot of the entire memory _before_ the opcode executes
-- `storage`: an accumulation of all state changes made during the execution of the transaction being traced
+- `index`: The index we added indicates that the above opcode was the 191st one executed. This is helpful for staying oriented as you jump around the trace.
+- `pc`: Program counter, for example, this opcode exists at index `3645` of the contract bytecode. You will notice that `pc` increments by one for many common opcodes, by more than one for PUSH opcodes, and is reset entirely by JUMP/JUMP opcodes.
+- `op`: Name of the opcode. Since most of the actual data is hex-encoded, using grep or ctrl-f to search through the trace for opcode names is an effective strategy.
+- `gas`: Remaining gas _before_ the opcode is executed
+- `gasCost`: Cost of this operation. For CALL and similar opcodes, this cost takes into account all gas spent by the child execution frame.
+- `depth`: Each call creates a new child execution frame, and this variable tracks how many sub-frames exist. Generally, CALL opcodes increase the depth and RETURN opcodes decrease it.
+- `stack`: A snapshot of the entire stack _before_ the opcode executes
+- `memory`: A snapshot of the entire memory _before_ the opcode executes
+- `storage`: An accumulation of all state changes made during the execution of the transaction being traced
 
-One big challenge of navigating such a transaction trace is matching opcode executions to higher-level solidity code. An effective first step is to identify uncommon opcodes which correspond to easily identified logic of the source code. Generally, expensive operations are relatively uncommon so SLOAD and SSTORE are good ones to scan for first and match against places where state variables are being read or written in solidity. Alternatively, CALL and related opcodes are relatively uncommon and can be matched with calls to other contracts in the source code.
+Navigating a transaction trace can be challenging, especially when trying to match opcode executions to higher-level Solidity code. An effective first step is to identify uncommon opcodes that correspond to easily identifiable logic in the source code. Generally, expensive operations are relatively uncommon, so SLOAD and SSTORE are good ones to scan first and match against places where state variables are read or written in Solidity. Alternatively, CALL and related opcodes are relatively uncommon and can be matched with calls to other contracts in the source code.
 
-If there's a specific part of the source code that you're interested in tracing, matching uncommon opcodes to the source code will give you bounds on where to search. From here, you'll likely start walking through the trace opcode-by-opcode as you review the source code line by line. Leaving a few ephemeral comments in the source code like `# opcode 191` can help you keep track and pick up where you left off if you need to take a break.
+If there is a specific part of the source code you are interested in tracing, matching uncommon opcodes to the source code will give you bounds on where to search. From this point, you will likely start walking through the trace opcode by opcode as you review the source code line by line. Leaving a few ephemeral comments in the source code, like `# opcode 191`, can help you keep track and pick up where you left off if you need to take a break.
 
-Exploring transaction traces is challenging work but the reward is an ultra-high-definition view into how the EVM operates internally and can help you identify problems that might not be apparent from just the source code.
+Exploring transaction traces is challenging work, but the reward is an ultra-high-definition view of how the EVM operates internally and can help you identify problems that might not be apparent from just the source code.
 
 ## Storage Tracing
 
-Although you can get an overview of all the changes to the contract state by checking the `storage` field of the last executed opcode in the above trace, the following helper function will extract that for you for quicker and easier analysis. If you're doing a more involved investigation into a contract's state, we recommend you check out the [`slither-read-storage`](https://blog.trailofbits.com/2022/07/28/shedding-smart-contract-storage-with-slither/) command for a more powerful tool.
+Although you can get an overview of all the changes to the contract state by checking the `storage` field of the last executed opcode in the above trace, the following helper function will extract that for you for quicker and easier analysis. If you are conducting a more involved investigation into a contract's state, we recommend you check out the [`slither-read-storage`](https://blog.trailofbits.com/2022/07/28/shedding-smart-contract-storage-with-slither/) command for a more powerful tool.
 
 ```
 const traceStorage = async (txHash) => {
