@@ -16,7 +16,7 @@ The usage of this cheatcode should be extremely limited, well documented, and on
 
 If reading the previous section didn't scare you enough and you still want to use `ffi`, you will need to explicitly tell Echidna to allow the cheatcode in the tests. This safety measure makes sure you don't accidentally execute `ffi` code.
 
-To enable the cheatcode, set the 'allowFFI`flag to`true` in your Echidna configuration file:
+To enable the cheatcode, set the `allowFFI` flag to `true` in your Echidna configuration file:
 
 ```yaml
 allowFFI: true
