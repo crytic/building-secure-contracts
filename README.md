@@ -18,7 +18,7 @@ Consider using [eth-security-toolbox](https://github.com/trailofbits/eth-securit
 ## Additional information
 Consider using [solc-select](https://github.com/crytic/solc-select) to easily switch Solidity versions:
 - `pip3 install solc-select`: to install it
-- `solc-select install 0.7.0`: to install solc `0.7.0`
-- `solc-select use 0.7.0`: to switch to solc `0.7.0`
+- `solc-select install 0.8.0`: to install solc `0.8.0`
+- `solc-select use 0.8.0`: to switch to solc `0.8.0`
 
 [secure-contracts.com](https://secure-contracts.com/) contains additional exercises and guidelines that won't be covered during the workshop.
