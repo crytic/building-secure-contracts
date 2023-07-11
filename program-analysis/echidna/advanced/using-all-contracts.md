@@ -2,20 +2,20 @@
 
 **Table of contents:**
 
-- [Understanding and using `allContracts` in Echidna](#understanding-and-using-allcontracts-in-echidna)
+- [Understanding and using `allContracts` in Echidna](#understanding-and-using-allContracts-in-echidna)
   - [Introduction](#introduction)
-  - [What is `allContracts` testing?](#what-is-allcontracts-testing)
-  - [When and how to use `allContracts`](#when-and-how-to-use-allcontracts)
+  - [What is `allContracts` testing?](#what-is-allContracts-testing)
+  - [When and how to use `allContracts`](#when-and-how-to-use-allContracts)
   - [Run Echidna](#run-echidna)
-    - [Example run with `allContracts` set to `false`](#example-run-with-allcontracts-set-to-false)
-    - [Example run with `allContracts` set to `true`](#example-run-with-allcontracts-set-to-true)
+    - [Example run with `allContracts` set to `false`](#example-run-with-allContracts-set-to-false)
+    - [Example run with `allContracts` set to `true`](#example-run-with-allContracts-set-to-true)
   - [Use cases and conclusions](#use-cases-and-conclusions)
 
 ## Introduction
 
 This tutorial is written as a hands-on guide to using `allContracts` testing in Echidna. You will learn what `allContracts` testing is, how to use it in your tests, and what to expect from its usage.
 
-**Important note**: this feature used to be called `multi-abi` but it was later renamed to `allContracts` in Echidna 2.1.0. As expected, this version or later is required for this tutorial.
+> This feature used to be called `multi-abi` but it was later renamed to `allContracts` in Echidna 2.1.0. As expected, this version or later is required for this tutorial.
 
 ## What is `allContracts` testing?
 
@@ -71,7 +71,7 @@ contract EchidnaTest {
 }
 ```
 
-Without using `allContracts` in a fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [allContracts.yaml here](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/allContracts.yaml).
+In a non `allContracts` fuzzing campaign, Echidna is not able to break the invariant, because it only interacts with `EchidnaTest` functions. However, if we use the following configuration file, enabling `allContracts` testing, the invariant is broken. You can access [allContracts.yaml here](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/allContracts.yaml).
 
 ```yaml
 testMode: assertion
