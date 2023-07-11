@@ -1,10 +1,10 @@
-# State modifications in a view function
+# State Modifications in View Functions
 
-StarkNet provides the @view decorator to signal that a function should not make state modifications. However, this is [not currently enforced by the compiler](https://www.cairo-lang.org/docs/hello_starknet/intro.html). Developers should take care when designing view functions but also when calling functions in other contracts as they may result in unexpected behavior if they do include state modifications accidentally.
+StarkNet uses the @view decorator to indicate that a function should not modify the state. However, this restriction is [not currently enforced by the compiler](https://www.cairo-lang.org/docs/hello_starknet/intro.html). Developers should exercise caution when creating view functions and when calling functions in other contracts, as there may be unintended consequences if they accidentally include state modifications.
 
 ## Example
 
-Consider the following function that's declared as a `@view`. It may have originally been intended as an actual view function but was later repurposed to fetch a nonce _and also increment it in the process_ to ensure a nonce is never repeated when building a signature.
+Consider the following function that is declared as a `@view`. It might have originally been intended solely as a view function, but was later repurposed to fetch a nonce _and increment it in the process_ to ensure that a nonce is never repeated when creating a signature.
 
 ```cairo
 @view
@@ -21,6 +21,6 @@ func bad_get_nonce{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_p
 
 ## Mitigations
 
-- Carefully review all `@view` functions, including those called in 3rd party contracts, to ensure they don't modify state unexpectedly.
+- Thoroughly review all `@view` functions, including those in third-party contracts, to make sure they don't unintentionally modify the state.
 
 ## External Examples

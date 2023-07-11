@@ -1,22 +1,22 @@
-# How to write good properties step by step
+# How to Write Good Properties Step by Step
 
 **Table of contents:**
 
-- [How to write good properties step by step](#how-to-write-good-properties-step-by-step)
+- [How to Write Good Properties Step by Step](#how-to-write-good-properties-step-by-step)
   - [Introduction](#introduction)
-  - [A first approach](#a-first-approach)
-  - [Enhacing postcondition checks](#enhacing-postcondition-checks)
-  - [Combining properties](#combining-properties)
-  - [Final considerations](#final-considerations)
-  - [Summary: How to write good properties](#summary-how-to-write-good-properties)
+  - [A First Approach](#a-first-approach)
+  - [Enhancing Postcondition Checks](#enhancing-postcondition-checks)
+  - [Combining Properties](#combining-properties)
+  - [Final Considerations](#final-considerations)
+  - [Summary: How to Write Good Properties](#summary-how-to-write-good-properties)
 
 ## Introduction
 
-In this short tutorial, we will detail some ideas to write interesting or useful properties using Echidna. At each step, we will iteratively improve our properties.
+In this short tutorial, we will detail some ideas for writing interesting or useful properties using Echidna. At each step, we will iteratively improve our properties.
 
-## A first approach
+## A First Approach
 
-One of the simplest properties to write using Echidna is to throw an assertion when some function is expected to revert/return.
+One of the simplest properties to write using Echidna is to throw an assertion when some function is expected to revert or return.
 
 Let's suppose we have a contract interface like the one below:
 
@@ -86,10 +86,10 @@ contract Test {
 
 After you have written your first version of properties, run Echidna to make sure they work as expected. During this tutorial, we will improve them step by step. It is strongly recommended to run the fuzzer at each step to increase the probability of detecting any potential issues.
 
-Perhaps you think these properties are too low level to be useful, particularly if the code has a good coverage in terms of unit tests.
-But you will be surprised how often an unexpected revert/return uncovers a complex and severe issue. Moreover, we will see how these properties can be improved to cover more complex post-conditions.
+Perhaps you think these properties are too low level to be useful, particularly if the code has good coverage in terms of unit tests.
+But you will be surprised how often an unexpected revert or return uncovers a complex and severe issue. Moreover, we will see how these properties can be improved to cover more complex post-conditions.
 
-Before we continue, we will improve these properties using [try/catch](https://docs.soliditylang.org/en/v0.6.0/control-structures.html#try-catch). The use of a low-level call forces us to manually encode the data, which can be error prone (an error will always cause calls to revert). Note, this will only work if the codebase is using solc 0.6.0 or later:
+Before we continue, we will improve these properties using [try/catch](https://docs.soliditylang.org/en/v0.6.0/control-structures.html#try-catch). The use of a low-level call forces us to manually encode the data, which can be error-prone (an error will always cause calls to revert). Note, this will only work if the codebase is using solc 0.6.0 or later:
 
 ```solidity
 function depositShares_never_reverts(uint256 val) public {
@@ -113,7 +113,7 @@ function depositShares_can_revert(uint256 val) public {
 }
 ```
 
-## Enhacing postcondition checks
+## Enhancing Postcondition Checks
 
 If the previous properties are passing, this means that the pre-conditions are good enough, however the post-conditions are not very precise.
 Avoiding reverts doesn't mean that the contract is in a valid state. Let's add some basic preconditions:
@@ -142,11 +142,11 @@ function withdrawShares_never_reverts(uint256 val) public {
 }
 ```
 
-Uhm, it looks like it is not that easy to specify the value of shares/tokens obtained after each deposit/withdrawal. At least we can say that we must receive something, right?
+Hmm, it looks like it is not that easy to specify the value of shares or tokens obtained after each deposit or withdrawal. At least we can say that we must receive something, right?
 
-## Combining properties
+## Combining Properties
 
-In this generic example, it is unclear if there is a way to calculate how many shares or tokens we should receive after executing the deposit/withdraw operations. Of course, if we have that information, we should use it. In any case, what we can do here is to combine these two properties into a single one to be able check more precisely it's preconditions.
+In this generic example, it is unclear if there is a way to calculate how many shares or tokens we should receive after executing the deposit or withdraw operations. Of course, if we have that information, we should use it. In any case, what we can do here is to combine these two properties into a single one to be able check more precisely its preconditions.
 
 ```solidity
 function deposit_withdraw_shares_never_reverts(uint256 val) public {
@@ -169,9 +169,9 @@ function deposit_withdraw_shares_never_reverts(uint256 val) public {
 }
 ```
 
-The resulting property checks that calls to deposit/withdraw shares will never revert and once they execute, the original number of tokens remains the same. Keep in mind that this property should consider fees and any tolerated loss of precision (e.g. when the computation requires a division).
+The resulting property checks that calls to deposit or withdraw shares will never revert and once they execute, the original number of tokens remains the same. Keep in mind that this property should consider fees and any tolerated loss of precision (e.g. when the computation requires a division).
 
-## Final considerations
+## Final Considerations
 
 Two important considerations for this example:
 
@@ -194,6 +194,6 @@ function depositShares_never_reverts(uint256 val) public {
 
 Additionally, combining properties does not mean that we will have to remove simpler ones. For instance, if we want to write `withdraw_deposit_shares_never_reverts`, in which we reverse the order of operations (withdraw and then deposit, instead of deposit and then withdraw), we will have to make sure `defi.getShares(address(this))` can be positive. An easy way to do it is to keep `depositShares_never_reverts`, since this code allows Echidna to deposit tokens from `address(this)` (otherwise, this is impossible).
 
-## Summary: How to write good properties
+## Summary: How to Write Good Properties
 
-It is usually a good idea to start writing simple properties first and then improving them to make them more precise and easier to read. At each step you should run a short fuzzing campaign to make sure they work as expected and try to catch issues early during the development of your smart contracts.
+It is usually a good idea to start writing simple properties first and then improving them to make them more precise and easier to read. At each step, you should run a short fuzzing campaign to make sure they work as expected and try to catch issues early during the development of your smart contracts.
