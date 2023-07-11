@@ -30,4 +30,4 @@ Each _Not So Smart Cosmos_ includes a standard set of information:
 
 These examples are developed and maintained by [Trail of Bits](https://www.trailofbits.com/).
 
-If you have questions, problems, or just want to learn more, then join the #ethereum channel on the [Empire Hacking Slack](https://empireslacking.herokuapp.com/) or [contact us](https://www.trailofbits.com/contact/) directly.
+If you have questions, problems, or just want to learn more, then join the #ethereum channel on the [Empire Hacking Slack](https://slack.empirehacking.nyc/) or [contact us](https://www.trailofbits.com/contact/) directly.

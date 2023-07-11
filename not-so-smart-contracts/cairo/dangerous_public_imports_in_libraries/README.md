@@ -1,15 +1,14 @@
 # Dangerous Public Imports in Libraries
 
-NOTE: The following was possible until cairo-lang 0.10.0.
+NOTE: The following issue was present until cairo-lang 0.10.0.
 
-When a library is imported in Cairo, all functions can be called even if some of them are not declared in the import statement. As a result, it is possible to call functions that a developer may think is unexposed, leading to unexpected behavior.
+When a library is imported in Cairo, all functions become callable even if they are not explicitly declared in the import statement. Consequently, developers may unintentionally expose functions that lead to unexpected behavior.
 
 # Example
 
-Consider the library `library.cairo`. Even though the `example.cairo` file imports only the `check_owner()` and the `do_something()` function, the `bypass_owner_do_something()` function is still exposed and can thus be called, making it possible to circumvent the owner check.
+Consider the library `library.cairo`. Although the `example.cairo` file imports only the `check_owner()` and `do_something()` functions, the `bypass_owner_do_something()` function is still exposed and can be called, allowing the owner check to be circumvented.
 
 ```cairo
-
 # library.cairo
 
 %lang starknet
@@ -37,8 +36,6 @@ func bypass_owner_do_something():
     return ()
 end
 
-
-
 # example.cairo
 %lang starknet
 %builtins pedersen range_check
@@ -54,4 +51,4 @@ end
 
 # Mitigations
 
-Make sure to exercise caution when declaring external functions in a library. Recognize the possible state changes that can be made through the function and verify it is acceptable for anyone to call it. In addition, [Amarna](https://github.com/crytic/amarna) has a detector to uncover this issue.
+Exercise caution when declaring external functions in a library. Evaluate the potential state changes that can be made through the function and ensure it is safe for any user to call. Additionally, [Amarna](https://github.com/crytic/amarna) includes a detector to help identify this issue.
