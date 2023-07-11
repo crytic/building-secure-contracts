@@ -17,7 +17,7 @@ Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
 We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/token.sol)_:
 
 ```solidity
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 /// @notice The issues from exercises 1 and 2 are fixed.
 
@@ -66,7 +66,7 @@ contract Token is Ownable, Pausable {
 Consider the following extension of the token (_[mintable.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/mintable.sol)_):
 
 ```solidity
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 import "./token.sol";
 
@@ -98,7 +98,7 @@ The [version of token.sol](https://github.com/crytic/building-secure-contracts/t
 The skeleton for this exercise is [template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise3/template.sol):
 
 ````solidity
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 import "./mintable.sol";
 

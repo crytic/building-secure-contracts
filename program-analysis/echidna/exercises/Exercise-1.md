@@ -15,7 +15,7 @@ Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
 We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise1/token.sol)_:
 
 ```solidity
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 contract Ownable {
     address public owner = msg.sender;
@@ -67,13 +67,13 @@ contract Token is Ownable, Pausable {
 The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise1/template.sol)_):
 
 ````solidity
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 import "./token.sol";
 
 /// @dev Run the template with
 ///      ```
-///      solc-select use 0.5.0
+///      solc-select use 0.8.0
 ///      echidna program-analysis/echidna/exercises/exercise1/template.sol
 ///      ```
 contract TestToken is Token {
