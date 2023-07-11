@@ -7,7 +7,7 @@ these features are absent in the EVM.
 Consequently, these safeguards must be incorporated within the machine's constraints.
 
 Starting with Solidity version 0.8.0 the compiler automatically includes over and underflow protection in all arithmetic operations.
-Prior to version 0.8.0, developers were required to implement these checks manually, often using a library known as [SafeMath](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol), originally developed by OpenZeppelin.
+Prior to version 0.8.0, developers were required to implement these checks manually, often using a library known as [SafeMath](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.2/contracts/utils/math/SafeMath.sol), originally developed by OpenZeppelin.
 The compiler incorporates arithmetic checks in a manner similar to SafeMath, through additional operations.
 
 As the Solidity language has evolved, the compiler has generated increasingly optimized code for arithmetic checks. This trend is also observed in smart contract development in general, where highly optimized arithmetic code written in low-level assembly is becoming more common. However, there is still a lack of comprehensive resources explaining the nuances of how the EVM handles arithmetic for signed and unsigned integers of 256 bits and less.
