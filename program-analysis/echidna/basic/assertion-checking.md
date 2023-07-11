@@ -11,7 +11,7 @@
 
 ## Introduction
 
-In this short tutorial, we will demonstrate how to use Echidna to check assertions in smart contracts. For this example, be sure to use Solidity 0.7.x or older. If you run them with Solidity 0.8.x, the test will never fail.
+In this short tutorial, we will demonstrate how to use Echidna to check assertions in smart contracts.
 
 ## Write an Assertion
 
@@ -23,7 +23,9 @@ contract Incrementor {
 
     function inc(uint256 val) public returns (uint256) {
         uint256 tmp = counter;
-        counter += val;
+        unchecked {
+            counter += val;
+        }
         // tmp <= counter
         return (counter - tmp);
     }
@@ -38,7 +40,9 @@ contract Incrementor {
 
     function inc(uint256 val) public returns (uint256) {
         uint256 tmp = counter;
-        counter += val;
+        unchecked {
+            counter += val;
+        }
         assert(tmp <= counter);
         return (counter - tmp);
     }
@@ -55,7 +59,9 @@ contract Incrementor {
 
     function inc(uint256 val) public returns (uint256) {
         uint256 tmp = counter;
-        counter += val;
+        unchecked {
+            counter += val;
+        }
         if (tmp > counter) {
             emit AssertionFailed(counter);
         }

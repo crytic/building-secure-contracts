@@ -6,7 +6,9 @@ contract Incrementor {
 
     function inc(uint256 val) public returns (uint256) {
         uint256 tmp = counter;
-        counter += val;
+        unchecked {
+            counter += val;
+        }
         assert(tmp <= counter);
         return (counter - tmp);
     }
