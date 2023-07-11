@@ -115,7 +115,7 @@ jobs:
             config: Popsicle.yaml
             contract: PopsicleFixed
             outcome: success
-            expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*passed'
+            expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*passing'
           - name: TestDepositWithPermit
             workdir: program-analysis/echidna/example/
             files: TestDepositWithPermit.sol
@@ -123,7 +123,7 @@ jobs:
             config: testdeposit.yaml
             contract: TestDepositWithPermit
             outcome: success
-            expected: 'testERC20PermitDeposit(uint256):\s*passed'
+            expected: 'testERC20PermitDeposit(uint256):\s*passing'
           - name: MultiABI
             workdir: program-analysis/echidna/example/
             files: allContracts.sol

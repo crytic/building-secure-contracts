@@ -1,6 +1,6 @@
-# Exercice 1 : Function overridden protection
+# Exercise 1: Function Overridden Protection
 
-The goal is to create a script that fills a missing feature of Solidity: function overriding protection.
+The goal is to create a script that fills in a missing feature of Solidity: function overriding protection.
 
 [exercises/exercise1/coin.sol](exercises/exercise1/coin.sol) contains a function that must never be overridden:
 
@@ -8,20 +8,20 @@ The goal is to create a script that fills a missing feature of Solidity: functio
 _mint(address dst, uint256 val)
 ```
 
-Use Slither to ensure that no contract that inherits Coin overrides this function.
+Use Slither to ensure that no contract inheriting Coin overrides this function.
 
-## Proposed algorithm
+## Proposed Algorithm
 
 ```
-Get the coin contract
-    For each contract of the project:
-        If Coin is in the list of inherited contract:
-            Get the mint function
-            If the contract declaring the mint function is != Coin:
+Get the Coin contract
+    For each contract in the project:
+        If Coin is in the list of inherited contracts:
+            Get the _mint function
+            If the contract declaring the _mint function is not Coin:
                 A bug is found.
 ```
 
-## Hints
+## Tips
 
 - To get a specific contract, use `slither.get_contract_from_name` (note: it returns a list)
 - To get a specific function, use `contract.get_function_from_signature`

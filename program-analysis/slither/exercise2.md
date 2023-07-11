@@ -1,11 +1,10 @@
-# Exercice 2: Access control
+# Exercise 2: Access Control
 
-[exercises/exercise2/coin.sol](exercises/exercise2/coin.sol) possess an access control with the `onlyOwner` modifier.
-A frequent mistake is to forget to add the modifier to a critical function. We are going to see how to implement a conservative access control approach with Slither.
+The [exercises/exercise2/coin.sol](exercises/exercise2/coin.sol) file contains an access control implementation with the `onlyOwner` modifier. A common mistake is forgetting to add the modifier to a crucial function. In this exercise, we will use Slither to implement a conservative access control approach.
 
-The goal is to create a script that will ensure that all the public and external function calls `onlyOwner`, except for the functions whitelisted.
+Our goal is to create a script that ensures all public and external functions call `onlyOwner`, except for the functions on the whitelist.
 
-## Proposed algorithm
+## Proposed Algorithm
 
 ```
 Create a whitelist of signatures
@@ -19,4 +18,4 @@ Explore all the functions
 
 ## Solution
 
-See [exercises/exercise2/solution.py](exercises/exercise2/solution.py).
+Refer to [exercises/exercise2/solution.py](exercises/exercise2/solution.py) for the solution.
