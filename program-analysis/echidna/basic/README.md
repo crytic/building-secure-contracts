@@ -1,7 +1,7 @@
 # Basic
 
-- [How to select the most suitable testing mode](./testing-modes.md): How to select the most suitable testing mode
-- [How to select the best testing approach](./common-testing-approaches.md): How to select the best testing approach
-- [How to filter functions](./filtering-functions.md): How to filters the functions to be fuzzed
-- [How to test assertions](./assertion-checking.md): How to test assertions with Echidna
-- [How to write good properties step by step](./property-creation.md): How to iteratively improve property testing
+- [How to Choose the Most Suitable Testing Mode](./testing-modes.md): Selecting the Most Appropriate Testing Mode
+- [How to Determine the Best Testing Approach](./common-testing-approaches.md): Deciding on the Optimal Testing Method
+- [How to Filter Functions](./filtering-functions.md): Filtering the Functions to be Fuzzed
+- [How to Test Assertions Effectively](./assertion-checking.md): Efficiently Testing Assertions with Echidna
+- [Step by Step Guide to Writing Quality Properties](./property-creation.md): Improving Property Testing through Iteration
