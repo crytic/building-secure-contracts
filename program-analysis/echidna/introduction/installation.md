@@ -22,7 +22,7 @@ _The last command runs the eth-security-toolbox in a Docker container, which wil
 Inside Docker, execute the following commands:
 
 ```bash
-solc-select use 0.5.11
+solc-select use 0.8.0
 cd /home/training
 ```
 
@@ -32,4 +32,4 @@ You can find the latest released binary here:
 
 [https://github.com/crytic/echidna/releases/latest](https://github.com/crytic/echidna/releases/latest)
 
-It's essential to use the correct solc version to ensure that these exercises work as expected. We have tested them using version 0.5.11.
+It's essential to use the correct solc version to ensure that these exercises work as expected. We have tested them using version 0.8.0.

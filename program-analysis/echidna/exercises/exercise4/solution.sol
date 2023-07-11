@@ -9,7 +9,7 @@ import "./token.sol";
 ///      echidna program-analysis/echidna/exercises/exercise4/solution.sol --contract TestToken --test-mode assertion
 ///      ```
 contract TestToken is Token {
-    function transfer(address to, uint256 value) public {
+    function transfer(address to, uint256 value) override public {
         uint256 oldBalanceFrom = balances[msg.sender];
         uint256 oldBalanceTo = balances[to];
 
