@@ -14,7 +14,7 @@ The second part is exercise to solve.
 - [Adding constraints](./adding-constraints.md): How to use Manticore's API to add paths' constraints
 - [Exercises](./exercises)
 
-Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum, #manticore
+Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum, #manticore
 
 ## Installation
 
