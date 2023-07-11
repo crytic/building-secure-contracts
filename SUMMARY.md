@@ -82,6 +82,7 @@
       - [How to seed Echidna with unit tests](./program-analysis/echidna/advanced/end-to-end-testing.md)
       - [How to fuzz contracts with external libraries](./program-analysis/echidna/advanced/working-with-libraries.md)
       - [Understanding and using `multi-abi`](./program-analysis/echidna/advanced/using-multi-abi.md)
+      - [Interacting with off-chain data via FFI cheatcode](./program-analysis/echidna/advanced/interacting-with-offchain-data-via-ffi.md)
     - [Fuzzing tips](./program-analysis/echidna/fuzzing_tips.md)
     - [Frequently Asked Questions](./program-analysis/echidna/frequently_asked_questions.md)
     - [Exercises](./program-analysis/echidna/exercises/README.md)
