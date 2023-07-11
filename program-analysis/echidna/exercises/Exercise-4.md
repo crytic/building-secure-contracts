@@ -10,7 +10,7 @@
 
 This exercise is based on the tutorial [How to test assertions](../basic/assertion-checking.md).
 
-Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
+Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
 
 ## Targeted contract
 
