@@ -77,7 +77,7 @@ contract ExternalTest {
 }
 ```
 
-**Multi ABI**: Echidna can perform direct calls to every contract if the `multi-abi` mode is enabled. This means that using it does not require wrapped calls. However, since every deployed contract can be called, unintended effects may occur. For example, if we have a property to ensure that the amount of tokens is limited:
+**allContracts**: Echidna can perform direct calls to every contract if the `allContracts` mode is enabled. This means that using it does not require wrapped calls. However, since every deployed contract can be called, unintended effects may occur. For example, if we have a property to ensure that the amount of tokens is limited:
 
 ```solidity
 contract ExternalTest {

@@ -38,7 +38,7 @@ Only the following contracts are relevant:
 We recommend trying without reading the following hints first. The hints are in the [`hints` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/tree/hints).
 
 - The invariant you are looking for is "an attacker cannot get almost the entire amount of rewards."
-- Read about the [multi abi option](../basic/common-testing-approaches.md#external-testing).
+- Read about the [allContracts option](../basic/common-testing-approaches.md#external-testing).
 - A config file is provided in [the-rewarder.yaml](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/solutions/the-rewarder.yaml).
 
 ## Solution

@@ -39,7 +39,7 @@ Only the following contracts are relevant:
 We recommend trying without reading the following hints first. The hints are in the [`hints` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/tree/hints).
 
 - The invariant we are looking for is "Flash loans can always be made".
-- Read what the [multi abi option](../basic/common-testing-approaches.md#external-testing) is.
+- Read what the [allContracts option](../basic/common-testing-approaches.md#external-testing) is.
 - The `receiveTokens` callback function must be implemented.
 - A template is provided in [contracts/unstoppable/UnstoppableEchidna.sol](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/contracts/unstoppable/UnstoppableEchidna.sol).
 - A configuration file is provided in [unstoppable.yaml](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/unstoppable.yaml).

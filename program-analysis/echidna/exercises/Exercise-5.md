@@ -39,7 +39,7 @@ It is recommended to first attempt without reading the hints. The hints can be f
 
 - Remember that you might need to supply the test contract with Ether. Read more in [the Echidna wiki](https://github.com/crytic/echidna/wiki/Config) and check [the default config setup](https://github.com/crytic/echidna/blob/master/tests/solidity/basic/default.yaml).
 - The invariant to look for is that "the balance of the receiver contract cannot decrease."
-- Learn about the [multi abi option](../basic/common-testing-approaches.md#external-testing).
+- Learn about the [allContracts optio](../basic/common-testing-approaches.md#external-testing).
 - A template is provided in [contracts/naive-receiver/NaiveReceiverEchidna.sol](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/contracts/naive-receiver/NaiveReceiverEchidna.sol).
 - A config file is provided in [naivereceiver.yaml](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/naivereceiver.yaml).
 

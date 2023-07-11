@@ -148,7 +148,7 @@ This simple property checks if the stored data remains constant. To run it, you 
 ```yaml
 prefix: crytic_
 initialize: init.json
-multi-abi: true
+allContracts: true
 cryticArgs: ["--truffle-build-directory", "app/src/contracts/"] # needed by Drizzle
 ```
 

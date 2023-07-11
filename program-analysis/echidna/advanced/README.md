@@ -8,6 +8,6 @@
 - [How to Test Bytecode-only Contracts](./testing-bytecode.md): Learn how to fuzz contracts without source code or perform differential fuzzing between Solidity and Vyper.
 - [How to Use Hevm Cheats to Test Permit](./hevm-cheats-to-test-permit.md): Find out how to test code that relies on ecrecover signatures by using hevm cheat codes.
 - [How to Seed Echidna with Unit Tests](./end-to-end-testing.md): Discover how to use existing unit tests to seed Echidna.
-- [Understanding and Using `multi-abi`](./using-multi-abi.md): Learn what `multi-abi` testing is and how to utilize it effectively.
+- [Understanding and Using `allContracts`](./using-all-contracts.md): Learn what `allContracts` testing is and how to utilize it effectively.
 - [How to do on-chain fuzzing with state forking](./state-network-forking.md): How Echidna can use the state of blockchain during a fuzzing campaign
 - [Interacting with off-chain data via FFI cheatcode](./interacting-with-offchain-data-via-ffi.md): Using the `ffi` cheatcode as a way of communicating with the operating system
