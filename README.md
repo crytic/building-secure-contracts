@@ -1,6 +1,6 @@
 # Building Secure Smart Contracts - Devcon Edition
 
-The slides are [here](https://github.com/crytic/building-secure-contracts/blob/devcon/Josselin%20Feist%2C%20Gustavo%20Grieco%20-%20Building%20Secure%20Contracts_%20Use%20Echidna%20Like%20a%20Pro.pdf).
+The slides are TBD.
 
 ## Install Echidna
 
