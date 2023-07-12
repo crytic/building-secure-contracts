@@ -29,6 +29,7 @@ The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/2
 - Once Echidna finds the bug, fix the issue and re-test your property with Echidna.
 
 ### Descriptions
+
 Only the following contracts are relevant:
 
 - [`contracts/naive-receiver/NaiveReceiverLenderPool.sol`](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/master/contracts/naive-receiver/NaiveReceiverLenderPool.sol): it allows to take a flash loan for a fee

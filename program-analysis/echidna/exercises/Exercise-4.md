@@ -57,8 +57,11 @@ contract Token is Ownable, Pausable {
     mapping(address => uint256) public balances;
 
     function transfer(address to, uint256 value) public whenNotPaused {
-        balances[msg.sender] -= value;
-        balances[to] += value;
+        // unchecked to save gas
+        unchecked {
+            balances[msg.sender] -= value;
+            balances[to] += value;
+        }
     }
 }
 ```

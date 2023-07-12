@@ -38,8 +38,6 @@ Only the following contracts are relevant:
 
 Can you prevent `UnstoppableLender` from working?
 
-
-
 ## Hints
 
 We recommend trying without reading the following hints first. The hints are in the [`hints` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/tree/hints).
