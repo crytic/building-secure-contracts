@@ -38,13 +38,13 @@ contract TestPrank {
 
 A specific example on the use of `sign` cheat code is available [here in our documentation](hevm-cheats-to-test-permit.md).
 
-## Advice on the use of cheat codes
+## Risks of cheat codes
 
-While we provide support for the use of cheat codes, these should be used responsibly. We offer the following advice on the use of cheat codes:
+While we provide support for the use of cheat codes, these should be used responsibly. Consider that:
 
-- It can break certain assumptions in Solidity. For example, the compiler assumes that `block.number` is constant during a transaction. There are [reports of the optimizer interfering with (re)computation of the `block.number` or `block.timestamp`](https://github.com/ethereum/solidity/issues/12963#issuecomment-1110162425), which can generate incorrect tests when using cheat codes.
+- Cheat codes can break certain assumptions in Solidity. For example, the compiler assumes that `block.number` is constant during a transaction. There are [reports of the optimizer interfering with (re)computation of the `block.number` or `block.timestamp`](https://github.com/ethereum/solidity/issues/12963#issuecomment-1110162425), which can generate incorrect tests when using cheat codes.
 
-- It can introduce false positives on the testing. For instance, using `prank` to simulate calls from a contract can allow transactions that are not possible in the blockchain.
+- Cheat codes can introduce false positives on the testing. For instance, using `prank` to simulate calls from a contract can allow transactions that are not possible in the blockchain.
 
 - Using too many cheat codes:
   - can be confusing or error-prone. Certain cheat code like `prank` allow to change caller in the next external call: It can be difficult to follow, in particular if it is used in internal functions or modifiers.
