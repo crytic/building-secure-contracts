@@ -66,6 +66,7 @@
 - [Program Analysis](./program-analysis/README.md)
   - [Echidna](./program-analysis/echidna/README.md)
     - [Introduction](./program-analysis/echidna/introduction/README.md)
+      - [Installation](./program-analysis/echidna/introduction/installation.md)
       - [Introduction to Fuzzing](./program-analysis/echidna/introduction/fuzzing-introduction.md)
       - [How to Test a Property](./program-analysis/echidna/introduction/how-to-test-a-property.md)
     - [Basic](./program-analysis/echidna/basic/README.md)
