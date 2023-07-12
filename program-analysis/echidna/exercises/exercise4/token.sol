@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 contract Ownable {
     address public owner = msg.sender;
@@ -38,8 +38,11 @@ contract Pausable is Ownable {
 contract Token is Ownable, Pausable {
     mapping(address => uint256) public balances;
 
-    function transfer(address to, uint256 value) public whenNotPaused {
-        balances[msg.sender] -= value;
-        balances[to] += value;
+    function transfer(address to, uint256 value) public virtual whenNotPaused {
+        // unchecked to save gas
+        unchecked {
+            balances[msg.sender] -= value;
+            balances[to] += value;
+        }
     }
 }

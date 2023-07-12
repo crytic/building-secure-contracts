@@ -1,17 +1,17 @@
 # Testing a Property with Echidna
 
-**Table of contents:**
+**Table of Contents:**
 
 - [Testing a Property with Echidna](#testing-a-property-with-echidna)
   - [Introduction](#introduction)
-  - [Write a property](#write-a-property)
-  - [Initiate a contract](#initiate-a-contract)
+  - [Write a Property](#write-a-property)
+  - [Initiate a Contract](#initiate-a-contract)
   - [Run Echidna](#run-echidna)
-  - [Summary: Testing a property](#summary-testing-a-property)
+  - [Summary: Testing a Property](#summary-testing-a-property)
 
 ## Introduction
 
-We will see how to test a smart contract with Echidna. The target is the following smart contract (_[token.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/token.sol)_):
+This tutorial demonstrates how to test a smart contract with Echidna. The target is the following smart contract (_[token.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/token.sol)_):
 
 ```solidity
 contract Token {
@@ -32,25 +32,29 @@ contract Token {
 }
 ```
 
-We will make the assumption that this token has the following properties:
+We will assume that this token has the following properties:
 
-- Anyone can have at maximum 1000 tokens
+- Anyone can hold a maximum of 1000 tokens.
 
-- The token cannot be transferred (it is not an ERC20 token)
+- The token cannot be transferred (it is not an ERC20 token).
 
-## Write a property
+## Write a Property
 
 Echidna properties are Solidity functions. A property must:
 
-- Have no argument
-- Return true if it is successful
-- Have its name starting with `echidna`
+- Have no arguments.
+
+- Return true if successful.
+
+- Have its name starting with `echidna`.
 
 Echidna will:
 
 - Automatically generate arbitrary transactions to test the property.
-- Report any transactions leading a property to return false or throw an error.
-- Discard side-effects when calling a property (i.e. if the property changes a state variable, it is discarded after the test)
+
+- Report any transactions that lead a property to return false or throw an error.
+
+- Discard side-effects when calling a property (i.e., if the property changes a state variable, it is discarded after the test).
 
 The following property checks that the caller can have no more than 1000 tokens:
 
@@ -72,22 +76,22 @@ contract TestToken is Token {
 
 _[testtoken.sol](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/example/testtoken.sol)_ implements the property and inherits from the token.
 
-## Initiate a contract
+## Initiate a Contract
 
-Echidna needs a constructor without input arguments.
-If your contract needs a specific initialization, you need to do it in the constructor.
+Echidna requires a constructor without input arguments.
+If your contract needs specific initialization, you should do it in the constructor.
 
 There are some specific addresses in Echidna:
 
 - `0x30000` calls the constructor.
 
-- `0x10000`, `0x20000`, and `0x30000` randomly call the other functions.
+- `0x10000`, `0x20000`, and `0x30000` randomly call other functions.
 
-We do not need any particular initialization in our current example. As a result, our constructor is empty.
+We don't need any particular initialization in our current example. As a result, our constructor is empty.
 
 ## Run Echidna
 
-Echidna is launched with:
+Launch Echidna with:
 
 ```bash
 echidna contract.sol
@@ -99,9 +103,9 @@ If `contract.sol` contains multiple contracts, you can specify the target:
 echidna contract.sol --contract MyContract
 ```
 
-## Summary: Testing a property
+## Summary: Testing a Property
 
-The following summarizes the run of Echidna on our example:
+The following summarizes the Echidna run on our example:
 
 ```solidity
 contract TestToken is Token {
@@ -125,4 +129,4 @@ echidna_balance_under_1000: failed!💥
 ...
 ```
 
-Echidna found that the property is violated if `backdoor` is called.
+Echidna found that the property is violated if the `backdoor` function is called.

@@ -10,7 +10,7 @@ Please submit bug reports and feature suggestions to our issue tracker. When rep
 
 ## Questions
 
-You can submit questions to the issue tracker, but you might receive a quicker response if you ask in our [chat room](https://empireslacking.herokuapp.com/) (in the #ethereum channel).
+Questions can be submitted to the issue tracker, but you may get a faster response if you ask in our [chat room](https://slack.empirehacking.nyc/) (in the #ethereum channel).
 
 ## Code Contributions
 
