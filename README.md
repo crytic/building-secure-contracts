@@ -9,11 +9,11 @@ The slides are [here](https://github.com/crytic/building-secure-contracts/blob/d
 Consider using [eth-security-toolbox](https://github.com/trailofbits/eth-security-toolbox/) (docker) if you have troubles running Echidna.
 
 ## Exercises
-- [Exercise 1](program-analysis/echidna/Exercise-1.md)
-- [Exercise 2](program-analysis/echidna/Exercise-2.md)
-- [Exercise 4](program-analysis/echidna/Exercise-4.md)
-- [Exercise 5](program-analysis/echidna/Exercise-5.md)
-- [Exercise 6](program-analysis/echidna/Exercise-6.md)
+- [Exercise 1](program-analysis/echidna/exercises/Exercise-1.md)
+- [Exercise 2](program-analysis/echidna/exercises/Exercise-2.md)
+- [Exercise 4](program-analysis/echidna/exercises/Exercise-4.md)
+- [Exercise 5](program-analysis/echidna/exercises/Exercise-5.md)
+- [Exercise 6](program-analysis/echidna/exercises/Exercise-6.md)
 
 ## Additional information
 Consider using [solc-select](https://github.com/crytic/solc-select) to easily switch Solidity versions:
