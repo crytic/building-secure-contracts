@@ -7,6 +7,7 @@ Brought to you by [Trail of Bits](https://www.trailofbits.com/), this repository
 **Table of Contents:**
 
 - [Development Guidelines](./development-guidelines)
+  - [Code Maturity](./development-guidelines/code_maturity.md): Criteria for developers and security engineers to use when evaluating a codebase’s maturity
   - [High-Level Best Practices](./development-guidelines/guidelines.md): Best practices for all smart contracts
   - [Incident Response Recommendations](./development-guidelines/incident_response.md): Guidelines for creating an incident response plan
   - [Secure Development Workflow](./development-guidelines/workflow.md): A high-level process to follow during code development
