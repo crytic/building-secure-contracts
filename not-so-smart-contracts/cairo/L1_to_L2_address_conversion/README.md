@@ -1,10 +1,10 @@
 # L1 to L2 Address Conversion
 
-In Starknet, addresses are of type `felt` while on L1 addresses are of type `uint160`. Thus, in order to pass around address types during cross layer messaging, the address variable is typically given as a `uint256`. However, this can create an issue where an address on L1 can map to the zero address (or an unexpected address) on L2. This is because the primitive type in Cairo is the `felt`, which is in between the range ` 0 < x < P`, where P is the prime order of the curve. Typically we have `P = 2^251 + 17 * 2^192 + 1`.
+In Starknet, addresses are of the `felt` type, while on L1 addresses are of the `uint160` type. To pass address types during cross-layer messaging, the address variable is typically given as a `uint256`. However, this may create an issue where an address on L1 maps to the zero address (or an unexpected address) on L2. This is because the primitive type in Cairo is the `felt`, which lies within the range `0 < x < P`, where P is the prime order of the curve. Usually, we have `P = 2^251 + 17 * 2^192 + 1`.
 
 # Example
 
-Suppose that the following code to initiate L2 deposits from L1. The first example has no checks on the `to` parameter and thus depending on the users' address, it is possible to transfer tokens to an unexpected address on L2. The second example, however, verifies to make sure this check cannot happen. Note that the code is just a simplification of how messages are sent on L1 and processed on L2. For a more thorough overview, see here: https://www.cairo-lang.org/docs/hello_starknet/l1l2.html.
+Consider the following code to initiate L2 deposits from L1. The first example has no checks on the `to` parameter, and depending on the user's address, it could transfer tokens to an unexpected address on L2. The second example, however, adds verification to ensure this does not happen. Note that the code is a simplified version of how messages are sent on L1 and processed on L2. For a more comprehensive overview, see here: https://www.cairo-lang.org/docs/hello_starknet/l1l2.html.
 
 ```solidity
 contract L1ToL2Bridge {
@@ -30,4 +30,4 @@ contract L1ToL2Bridge {
 
 # Mitigations
 
-When sending a message from L1 to L2, remember to verify parameters, especially user supplied params. Remember that the type and range of Cairo's default `felt` type is less than the `uint256` type used by Solidity.
+When sending a message from L1 to L2, ensure verification of parameters, particularly user-supplied ones. Keep in mind that Cairo's default `felt` type range is smaller than the `uint256` type used by Solidity.
