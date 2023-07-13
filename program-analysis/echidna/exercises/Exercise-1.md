@@ -92,6 +92,3 @@ contract TestToken is Token {
 }
 ````
 
-## Solution
-
-This solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise1/solution.sol).
