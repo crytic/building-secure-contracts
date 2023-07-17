@@ -1,6 +1,6 @@
 # Building Secure Smart Contracts - Devcon Edition
 
-The slides are [here](./2023-07-14%20-%20How%20to%20fuzz%20like%20a%20pro%20(defi%20101).pdf).
+The slides are [here](./2023-07-14%20-%20How%20to%20fuzz%20like%20a%20pro%20(ethcc).pdf).
 
 ## Install Echidna
 
