@@ -11,8 +11,8 @@ import "./token.sol";
 contract TestToken is Token {
     address echidna = tx.origin;
 
-    constructor() public {
-        balances[echidna] = 10000;
+    constructor() {
+        balances[echidna] = 10_000;
     }
 
     function echidna_test_balance() public view returns (bool) {

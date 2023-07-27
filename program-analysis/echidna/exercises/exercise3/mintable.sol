@@ -7,7 +7,7 @@ contract MintableToken is Token {
     int256 public totalMinted;
     int256 public totalMintable;
 
-    constructor(int256 totalMintable_) public {
+    constructor(int256 totalMintable_) {
         totalMintable = totalMintable_;
     }
 
