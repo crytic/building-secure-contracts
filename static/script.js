@@ -1,3 +1,5 @@
-let script = document.createElement("hs-script-loader");
-script.src = "//js.hs-scripts.com/22554992.js";
-document.body.append(script);
+var wrapper = document.createElement("div");
+wrapper.innerHTML = '\
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/22554992.js"></script>\
+';
+document.body.appendChild(wrapper);
