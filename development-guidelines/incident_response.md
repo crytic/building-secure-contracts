@@ -1,30 +1,48 @@
-# Incident Response Recommendations
+# Incident Response Guidelines
 
-In this section, we provide recommendations for formulating a robust incident response plan.
+How you respond during an incident is a direct reflection of your preparatory efforts. Shift from a reactive approach to a **proactive** one by planning with the assumption that incidents are inevitable. To fully leverage the following guidelines, consider them during the application development, and not at the final stage.
 
-- [ ] **Identify specific individuals or roles responsible for carrying out the mitigations (deploying smart contracts, pausing contracts, upgrading the front end, etc.).**
-  - Defining these roles will enhance the incident response plan and facilitate the execution of mitigation actions when necessary.
-- [ ] **Document internal processes in cases where deployed remediation fails or introduces new bugs.**
-  - Consider developing a fallback plan that outlines an action strategy for failed remediation attempts.
-- [ ] **Provide a clear description of the intended contract deployment process.**
-- [ ] **Consider whether and under what circumstances your company will compensate affected users in the event of certain issues.**
-  - Some situations to consider include individual or aggregate losses, losses resulting from user error, contract flaws, and third-party contract flaws.
-- [ ] **Outline a plan for staying informed about new issues, so as to inform future development and enhance the security of the deployment toolchain and the external on-chain and off-chain services your system depends on.**
-  - For each language and component, identify reputable sources of vulnerability news. Subscribe to updates for each source. Consider creating a private Discord or Slack channel with a bot that posts the latest vulnerability news to help your team stay informed in a centralized location. Additionally, consider assigning specific team members to track vulnerability news for particular system components.
-- [ ] **Examine scenarios involving issues that would indirectly affect the system.**
-- [ ] **Decide when and how the team should seek assistance from or collaborate with external parties (auditors, affected users, other protocol developers, etc.).**
-  - Some problems may necessitate cooperation with external parties for efficient resolution.
-- [ ] **Define abnormal contract behavior for off-chain monitoring purposes.**
-  - Consider implementing more robust detection and mitigation solutions, including specific alternate endpoints, queries for diverse data, status pages, and support contacts for impacted services.
-- [ ] **Combine issues to evaluate whether new detection and mitigation scenarios are necessary.**
-- [ ] **Conduct periodic dry runs of specific scenarios in the incident response plan to identify gaps and improvement opportunities, and build muscle memory.**
-  - Establish intervals for performing dry runs for each scenario. Conduct more frequent dry runs for scenarios with higher likelihoods of occurrence. Create a template to document improvements required after each dry run for the incident response plan.
+## Application design
+
+- **Identify the components that should/should not to be**
+  - **Pausable**. While pausing a component can be beneficial during an incident, you must assess its potential impact on other contracts.
+  - **Migrable or upgradeable**. Discovering a bug might necessitate a [migration strategy](https://blog.trailofbits.com/2018/10/29/how-contract-migration-works/) or contract upgradeable to fix the issue. However always be aware that upgradeability has its own [sets of risks](https://blog.trailofbits.com/2020/12/16/breaking-aave-upgradeability/). Making all contracts upgradeable might not be the best approach.
+  - **Decentralized**. Using decentralized components can sometimes restrict rescue measures.
+- **Evaluate what events are needed**. A missed event in a critical spot might result in unnoticed incidents.
+- **Evaluate what components must be on-chain and off-chain**. On-chain components are generally more at risk, but off-chain components push the risks to the off-chain owner.
+- **Use an access control that allows fine-grained access**. Avoid setting all access controls to be available to an EOA. Opt for multisig wallets/MPC, and segregate access (e.g., the key responsible for setting fees shouldn't have access to the upgradeability feature).
+
+## Documentation
+
+- **Document how to interpret abnormal events emission**. Only emitting events isn't sufficient; proper documentation is crucial, and users should be empowered to decode them.
+- **Document how to access the wallets**. Clearly outline how to access wallets. Both the location and access procedures for every wallet should be clear and straightforward.
+- **Document the deployment and upgrade process**. Deployment and upgrade are risky processes, and must be thoroughly documented. This should include how to test the deployment/upgrade (ex: using fork testing) and how to validate it.
+- **Document how to contact the users and external dependencies**. Define guidelines regarding which stakeholders to contact, including the timing and mode of communication in case of incidents.
+
+## Process
+
+- **Conduct periodic training and incident response exercises**. Regularly organize training sessions and incident response exercises. Such measures ensure that employees remain updated and can help highlight any flaws in the current incident response protocol.
+- **Identify incident owners, with at least**:
+  - **A technical lead**. Responsible for gathering and centralizing technical data.
+  - **A communication lead**. Tasked with internal and external communication.
+  - **A legal lead**. Either provides legal advice or ensures the right legal entities are contacted. It might also be worth considering liaison with appropriate law enforcement agencies.
+- **Use automated monitoring tools**. Whether you opt for an in-house solution or third-party products, automation is key. While considering automated responses like pausing the system in the event of irregular activities, exercise caution. Without careful configuration, automatic responses might inadvertently facilitate denial-of-service (DOS) exploits.
+
+## Threat Intelligence
+
+- **Identify similar protocols, and stay informed of related compromises**. Being aware of vulnerabilities in similar systems can help preemptively address potential threats in your own.
+- **Identify dependencies, and monitor their behaviors to be alerted in case of compromise.** Follow twitter, discord, newsletter, etc.
+- **Maintain open communication lines with your dependencies owners**. This will help you to stay informed if one of your dependency is compromised.
+- **Subscribe to https://newsletter.blockthreat.io/**. Block threat will help you to know about recent incidents
+
+Additionally, consider conducting a threat modeling exercise. This will identify the risks an application faces at both structural and operational levels. If you're interested in undertaking such an exercise, [contact us](https://www.trailofbits.com/contact/).
 
 ## Incident Response Plan Resources
 
 - [How to Hack the Yield Protocol](https://docs.yieldprotocol.com/#/operations/how_to_hack)
 - [Emergency Steps – Yearn](https://github.com/yearn/yearn-devdocs/blob/master/docs/developers/v2/EMERGENCY.md)
+- [Monitoring & Incident Response - Heidi Wilder (DSS 2023)](https://www.youtube.com/watch?v=TDlkkg8N0wc)
 
-## Examples of Well-Handled Incidents
+### Examples of incidents retrospective
 
 - [Yield Protocol](https://medium.com/yield-protocol/post-mortem-of-incident-on-august-5th-2022-7bb70dbb9ada)
