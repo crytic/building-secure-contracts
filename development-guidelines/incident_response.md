@@ -1,22 +1,22 @@
 # Incident Response Guidelines
 
-How you respond during an incident is a direct reflection of your preparatory efforts. Shift from a reactive approach to a **proactive** one by planning with the assumption that incidents are inevitable. To fully leverage the following guidelines, consider them during the application development, and not at the final stage.
-
+How you respond during an incident is a direct reflection of your efforts to prepare for such an event. Adherance to our guidelines can help you shift from a reactive approach to a **proactive** approach by planning with the assumption that incidents are inevitable. To fully leverage the following guidelines, consider them throughout the application development process.
+ 
 ## Application design
 
-- **Identify the components that should/should not to be**
+- **Identify the components that should/should not be**
   - **Pausable**. While pausing a component can be beneficial during an incident, you must assess its potential impact on other contracts.
-  - **Migrable or upgradeable**. Discovering a bug might necessitate a [migration strategy](https://blog.trailofbits.com/2018/10/29/how-contract-migration-works/) or contract upgradeable to fix the issue. However always be aware that upgradeability has its own [sets of risks](https://blog.trailofbits.com/2020/12/16/breaking-aave-upgradeability/). Making all contracts upgradeable might not be the best approach.
+  - **Migrable or upgradeable**. Discovering a bug might necessitate a [migration strategy](https://blog.trailofbits.com/2018/10/29/how-contract-migration-works/) or contract upgrade to fix the issue; note, however,   that upgradeability has its own [sets of risks](https://blog.trailofbits.com/2020/12/16/breaking-aave-upgradeability/). Making all contracts upgradeable is not a solution in and of itself. 
   - **Decentralized**. Using decentralized components can sometimes restrict rescue measures.
-- **Evaluate what events are needed**. A missed event in a critical spot might result in unnoticed incidents.
+- **Evaluate what events are needed**. A missed event in a critical location might result in unnoticed incidents.
 - **Evaluate what components must be on-chain and off-chain**. On-chain components are generally more at risk, but off-chain components push the risks to the off-chain owner.
 - **Use an access control that allows fine-grained access**. Avoid setting all access controls to be available to an EOA. Opt for multisig wallets/MPC, and segregate access (e.g., the key responsible for setting fees shouldn't have access to the upgradeability feature).
 
 ## Documentation
 
 - **Document how to interpret abnormal events emission**. Only emitting events isn't sufficient; proper documentation is crucial, and users should be empowered to decode them.
-- **Document how to access the wallets**. Clearly outline how to access wallets. Both the location and access procedures for every wallet should be clear and straightforward.
-- **Document the deployment and upgrade process**. Deployment and upgrade are risky processes, and must be thoroughly documented. This should include how to test the deployment/upgrade (ex: using fork testing) and how to validate it.
+- **Document how to access wallets**. Clearly outline how to access wallets. Both the location and access procedures for every wallet should be clear and straightforward.
+- **Document the deployment and upgrade process**. Deployment and upgrade processes are risky and must be thoroughly documented. This should include how to test and valide the deployment/upgrade (ex: using fork testing). 
 - **Document how to contact the users and external dependencies**. Define guidelines regarding which stakeholders to contact, including the timing and mode of communication in case of incidents.
 
 ## Process
@@ -33,9 +33,8 @@ How you respond during an incident is a direct reflection of your preparatory ef
 - **Identify similar protocols, and stay informed of related compromises**. Being aware of vulnerabilities in similar systems can help preemptively address potential threats in your own.
 - **Identify dependencies, and monitor their behaviors to be alerted in case of compromise.** Follow twitter, discord, newsletter, etc.
 - **Maintain open communication lines with your dependencies owners**. This will help you to stay informed if one of your dependency is compromised.
-- **Subscribe to https://newsletter.blockthreat.io/**. Block threat will help you to know about recent incidents
-
-Additionally, consider conducting a threat modeling exercise. This will identify the risks an application faces at both structural and operational levels. If you're interested in undertaking such an exercise, [contact us](https://www.trailofbits.com/contact/).
+- **Subscribe to https://newsletter.blockthreat.io/**. BlockThreat will help you stay informed about recent incidents. 
+- Consider conducting a threat modeling exercise. This exercise will identify risks that an application faces at both the structural and operational level. If you're interested in undertaking such an exercise and would like to work with us, [contact us](https://www.trailofbits.com/contact/).
 
 ## Incident Response Plan Resources
 
