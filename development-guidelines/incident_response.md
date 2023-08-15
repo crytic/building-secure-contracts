@@ -1,7 +1,7 @@
 # Incident Response Guidelines
 
 How you respond during an incident is a direct reflection of your efforts to prepare for such an event. Adherance to our guidelines can help you shift from a reactive approach to a **proactive** approach by planning with the assumption that incidents are inevitable. To fully leverage the following guidelines, consider them throughout the application development process.
- 
+
 ## Application design
 
 - **Identify the components that should/should not be**
@@ -33,7 +33,7 @@ How you respond during an incident is a direct reflection of your efforts to pre
 - **Identify similar protocols, and stay informed of related compromises**. Being aware of vulnerabilities in similar systems can help preemptively address potential threats in your own.
 - **Identify dependencies, and monitor their behaviors to be alerted in case of compromise.** Follow twitter, discord, newsletter, etc.
 - **Maintain open communication lines with your dependencies owners**. This will help you to stay informed if one of your dependency is compromised.
-- **Subscribe to https://newsletter.blockthreat.io/**. BlockThreat will help you stay informed about recent incidents. 
+- **Subscribe to https://newsletter.blockthreat.io/**. BlockThreat will help you stay informed about recent incidents.
 
 Additionally, consider conducting a threat modeling exercise. This exercise will identify risks that an application faces at both the structural and operational level. If you're interested in undertaking such an exercise and would like to work with us, [contact us](https://www.trailofbits.com/contact/).
 
