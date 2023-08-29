@@ -4,14 +4,20 @@ Echidna offers several ways to write properties, which often leaves developers a
 
 **Table of Contents:**
 
+- [Introduction](#introduction)
 - [Boolean Properties](#boolean-properties)
 - [Assertions](#assertions)
 - [Dapptest](#dapptest)
+- [Other testing modes](#other-testing-modes)
 - [Stateless vs. Stateful](#stateless-vs-stateful)
+
+## Introduction
+
+Echidna offer a variety of different testing modes. These can be selected using the `testingMode` config option or using the `--testing-mode` parameter. Each mode will be explained, highlighting the keyword needed for the configuration.
 
 ## Boolean Properties
 
-By default, the "property" testing mode is used, which reports failures using special functions called properties:
+By default, the `property` testing mode is used, which reports failures using special functions called properties:
 
 - Testing functions should be named with a specific prefix (e.g. `echidna_`).
 - Testing functions take no parameters and always return a boolean value.
@@ -57,7 +63,7 @@ This mode can be used when a property can be easily computed from the use of sta
 
 ## Assertions
 
-Using the "assertion" testing mode, Echidna will report an assert violation if:
+Using the `assertion` testing mode, Echidna will report an assert violation if:
 
 - The execution reverts during a call to `assert`. Technically speaking, Echidna will detect an assertion failure if it executes an `assert` call that fails in the first call frame of the target contract (so this excludes most internal transactions).
 - An `AssertionFailed` event (with any number of parameters) is emitted by any contract. This pseudo-code summarizes how assertions work:
@@ -119,7 +125,7 @@ function testStake(uint256 toStake) public {
 
 ## Dapptest
 
-Using the "dapptest" testing mode, Echidna will report violations using certain functions following how dapptool and foundry work:
+Using the `dapptest` testing mode, Echidna will report violations using certain functions following how dapptool and foundry work:
 
 - This mode uses any function name with one or more arguments, which will trigger a failure if they revert, except in one special case. Specifically, if the execution reverts with the special reason “FOUNDRY::ASSUME”, then the test will pass (this emulates how [the `assume` foundry cheat code works](https://github.com/gakonst/foundry/commit/7dcce93a38345f261d92297abf11fafd6a9e7a35#diff-47207bb2f6cf3c4ac054647e851a98a57286fb9bb37321200f91637262d3eabfR90-R96)). This pseudo-code summarizes how dapptests work:
 
@@ -151,6 +157,13 @@ function checkDappTest(..) public { // One or more arguments are required
 
 Use dapptest mode if you are testing stateless invariants and the code will never unexpectedly revert. Avoid using it for stateful testing, as it was not designed for that (although Echidna supports it).
 
+## Other testing modes
+
+Echidna allows other testing mode, which are less frecuently used:
+* `overflow` mode: this mode is similar to `assertion` but it will only catch integer overflow (so no need to define any function with assertions). **It only works in solc 0.8.x or greater, for code outside `unchecked` blocks**.
+* `optimization` mode: this mode allows to maximize the value returned by a function. It is explained in detail in [its own tutorial](../advanced/optimization_mode.md).
+* `exploration` mode: this mode will not use any kind of invariants to check, allowing Echidna to collect coverage.
+  
 ## Stateless vs. Stateful
 
 Any of these testing modes can be used, in either stateful (by default) or stateless mode (using `--seqLen 1`). In stateful mode, Echidna will maintain the state between each function call and attempt to break the invariants. In stateless mode, Echidna will discard state changes during fuzzing. There are notable differences between these two modes.
