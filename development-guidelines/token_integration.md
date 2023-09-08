@@ -61,6 +61,8 @@ The behavior of certain contracts may differ from the original ERC specification
 - [ ] **The token is not an ERC777 token and has no external function call in `transfer` or `transferFrom`.** External calls in the transfer functions can lead to reentrancies.
 - [ ] **`Transfer` and `transferFrom` should not take a fee.** Deflationary tokens can lead to unexpected behavior.
 - [ ] **Consider any interest earned from the token.** Some tokens distribute interest to token holders. If not taken into account, this interest may become trapped in the contract.
+- [ ] **`decimals` function does not always return 18.** While the default return value for many ERC-20 implementations is 18, it's crucial to note that the `decimals` function on the token contract can return any `uint8` value. Therefore, it's important to account for this possibility whenever calling the function.
+- [ ] **The token makes external calls to a controlled function ID.** If the function identifier is controllable, it becomes possible to target functions in external contracts that have not undergone review or audit alongside the original contract. If an attacker gains control of the function identifier, they can effectively compel the contract to execute unintended functions on an external contract, potentially resulting in the loss of funds or other malicious outcomes. 
 
 ### Token Scarcity
 
@@ -71,6 +73,7 @@ Token scarcity issues must be reviewed manually. Check for the following conditi
 - [ ] **The tokens are located in more than a few exchanges.** If all tokens are in one exchange, compromising the exchange could compromise the contract relying on the token.
 - [ ] **Users understand the risks associated with large funds or flash loans.** Contracts relying on the token balance must account for attackers with large funds or attacks executed through flash loans.
 - [ ] **The token does not allow flash minting.** Flash minting can lead to drastic changes in balance and total supply, requiring strict and comprehensive overflow checks in the token operation.
+- [ ] **The token does not have a rebalancing mechanism.** Rebalancing tokens introduce increased complexity, which elevates the risk of undiscovered vulnerabilities. The reliance on external data, like oracles, can lead to manipulation and inaccurate rebalancing, and the potential for economic attacks exists where adversaries can exploit market conditions to force unfavorable rebalancing.
 
 ## ERC721 Tokens
 
