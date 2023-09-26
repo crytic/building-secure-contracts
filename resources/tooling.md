@@ -25,7 +25,7 @@ The following list contains links to projects every Smart Contract developer sho
 ### Deployment APIs
 
 - [Alchemy](https://www.alchemy.com/)
-- [Infura](https://www.infura.io/)
+- [Infura](https://docs.infura.io/)
 - [Moralis](https://moralis.io/)
 - [Quicknode](https://www.quicknode.com/)
 
