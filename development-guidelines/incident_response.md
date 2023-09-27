@@ -24,7 +24,7 @@ How you respond during an incident is a direct reflection of your efforts to pre
 ## Process
 
 - **Conduct periodic training and incident response exercises**. Regularly organize training sessions and incident response exercises. Such measures ensure that employees remain updated and can help highlight any flaws in the current incident response protocol.
-- **Remember to consider off-chain components when planning**. While much of this document is concerned with on-chain code, compromised frontends or social media accounts are also common sources of incidents. 
+- **Remember to consider off-chain components when planning**. While much of this document is concerned with on-chain code, compromised frontends or social media accounts are also common sources of incidents.
 - **Identify incident owners, with at least**:
   - **A technical lead**. Responsible for gathering and centralizing technical data.
   - **A communication lead**. Tasked with internal and external communication.
