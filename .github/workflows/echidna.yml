@@ -146,7 +146,7 @@ jobs:
           path: ${{ matrix.workdir }}
 
       - name: Set up Nodejs
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         if: startsWith(matrix.workdir, 'dvdefi')
         with:
           node-version: 16
