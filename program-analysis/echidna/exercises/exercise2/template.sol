@@ -9,7 +9,7 @@ import "./token.sol";
 ///      echidna program-analysis/echidna/exercises/exercise2/template.sol
 ///      ```
 contract TestToken is Token {
-    constructor() public {
+    constructor() {
         pause(); // pause the contract
         owner = address(0); // lose ownership
     }
