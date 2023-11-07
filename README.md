@@ -5,7 +5,7 @@ The slides are [here](./2023-11-07%20-%20How%20to%20fuzz%20like%20a%20pro%20(EBS
 ## Install Echidna
 
 - On MacOs: `brew install echidna`
-- On other systems: download from https://github.com/crytic/echidna/releases/tag/v2.2.0
+- On other systems: download from [https://github.com/crytic/echidna/releases/tag/v2.2.0](https://github.com/crytic/echidna/releases/tag/v2.2.1)
 
 Consider using [eth-security-toolbox](https://github.com/trailofbits/eth-security-toolbox/) (docker) if you have troubles running Echidna.
 
