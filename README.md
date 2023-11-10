@@ -1,6 +1,6 @@
 # Building Secure Smart Contracts - Block Summit Edition
 
-The slides are [here](./2023-11-07%20-%20How%20to%20fuzz%20like%20a%20pro%20(EBS).pdf).
+The slides are [here](./slides.pdf).
 
 ## Install Echidna
 
