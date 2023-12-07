@@ -1,22 +1,50 @@
-# Preparing for a Security Review Checklist
+# Security Review Preparation Checklist
 
-Here’s how to make that security review more effective, valuable, and satisfying for everybody involved.
+So, you're getting a security review! 
 
-### Resolve the Easy Issues
+Ensure the security review proceeds smoothly by taking prior action with the following informative items.
 
-- [ ] **Enable and address compiler warnings.** Go after the easy stuff first: turn on every single compiler warning you can find, understand each warning, then fix your code until they’re all gone. Upgrade your compiler to the latest version, then fix all the new warnings and errors. Even innocuous seeming warnings can indicate problems lying in wait.
-- [ ] **Increase unit and feature test coverage.** Ideally this has been part of the development process, but everyone slips up, tests don’t get updated, or new features don’t quite match the old integrations tests. Now is the time to update the tests and run them all.
-- [ ] **Remove dead code, stale branches, unused libraries, and other extraneous weight.** You may know which branch is active and which is dead but the consultants won’t and will waste time investigating it for potential issues. The same goes for that new feature that hasn’t seen progress in months, or that third-party library that doesn’t get used anymore.
+## Essential Items 
+The items below guide us in focusing effectively on the pertinent parts of your code, maximizing our utilization of time and resources.
 
-### Document
+- [ ] **Provide build instructions** – share how to build and test your code using a fresh clone of your repository. It gives us direct insight into your setup.
+- [ ] **List exact files in scope for the review** –  list out the exact files to be reviewed to focus on key areas of your codebase.
+- [ ] **Freeze and share your hash/branch/release before the review starts** – a stable commit allows us to start digging into your codebase and learning how it works. Tell your security review team what commit to review, and try to ensure that this commit is frozen before the review commences. 
+- [ ] **Add inline comments** –  utilise comments on complex areas of the codebase. Document why something was done, its purpose and goal. 
+- [ ] **Provide Natspec documentation** – ensure all functions have NatSpec descriptions for function's purpose, parameters, and return values.
+- [ ] **Provide test coverage report** – provide a report outlining tested and untested code areas.
+- [ ] **Share your unit tests** – share your unit tests with us! We may use it to understand the system flow, can provide feedback on its setup, and can use it to test proof of concepts. 
+- [ ] **List external dependencies you're using and their purpose** – list used libraries and external dependencies along with their purposes.
+- [ ] **Create user flow diagrams** – outline the entrypoint functions, subsequent callstacks, and expected system interactions for users.
+- [ ] **Design an architecture diagram** – illustrate the interactions among contracts.
+- [ ] **Let us know what you're worried about** – reveal parts of the code or exploit paths that cause concern.This helps us target our review and make sure that we prioritize the areas of the codebase you're worried about.
+- [ ] **Document the impossible** – know when you are making assumptions on types and their values into the codebase, and document all these instances. 
 
-- [ ] **Provide external documentation and reports from any prior security reviews.** Including external documentation and reports from previous security reviews is important for gaining a comprehensive understanding of the system, identifying past issues, and reviewing any remediation measures taken. This information is crucial for conducting a thorough and effective security audit.
-- [ ] **Describe what your product does, who uses it, and how.** The most important documentation is high level: what does your product do? What do users want from it? How does it achieve that goal? Use clear language to describe how systems interact and the rationale for design decisions made during development.
-- [ ] **Add comments in-line with the code. Preferably in NatSpec format.** Functions should have comments containing high-level descriptions of their intended behavior. Complicated sections of code should have comments describing what is happening and why this particular approach was chosen.
-- [ ] **Label and describe your tests.** More complicated tests should describe the exact behavior they’re testing. The expected results of tests, both positive and negative, should be documented.
+### Defi-Specific Additions  
+- [ ] **Share economic analysis performed on the codebase** – sharing results of economic analysis will help us to understand the boundaries of inputs and ranges of outputs.
+- [ ] **List system invariants** – define your assumptions about system operations and function behaviors.
+- [ ] **Provide documentation for arithmetic formulas used with code references** – all formulas you implement should be referenced in this document, with a link to the function in your code that implements it. If the representation in your code differs from the formula, provide the derivation that maps the formula used in the code and the formula you intend to implement. 
+- [ ] **Create a glossary for your system** – consistently used terminology should be documented and made accessible.
+- [ ] **Validation of rounding directions** – share all analysis you have done on checking the correct rounding direction for your system. 
 
-### Deliver the Code, Batteries Included
+### Bridge-Specific Additions
+- [ ] **Document off-chain checks** – provide details about validations performed by off-chain components like relayers or bots.
+- [ ] **Checks performed by off-chain components such as relayers or bots** tell us what data validation takes place off-chain so we can better understand what data is sent to smart contracts 
+- [ ] **Transition of value-passing on source and destination chains** – show us how the chains share data, and what return values/emissions from a source chain maps to a destination chain 
 
-- [ ] **Prepare the build environment.** Document the steps to create a build environment from scratch on a computer that is fully disconnected from your internal network. Where relevant, be specific about software versions. Walk through this process on your own to ensure that it is complete. If you have external dependencies that are not publicly available, include them with your code. Fully provisioned virtual machine images are a great way to deliver a working build environment.
-- [ ] **Document the build process.** Include both the debug and release build processes, and also include steps on how to build and run the tests. If the test environment is distinct from the build environment, include steps on how to create the test environment. A well-documented build process enables a consultant to run static analysis tools far more efficiently and effectively.
-- [ ] **Document the deploy process.** This includes how to build the deployment environment. It is very important to list all the specific versions of external tools and libraries for this process, as the deployment environment is a considerable factor in evaluating the security of your product. A well-documented deployment process enables a consultant to run dynamic analysis tools in a real world environment.
+## Beneficial Additions
+
+Providing the following items can bolster the efficiency of our review, allowing for a deeper and more thorough examination of your codebase.
+
+- [ ] **Ranges of all system parameters used in the system** – explicitly outline the minimum and maximum bound of configuration values in your codebase 
+- [ ] **Document all design decisions** – decision-making processes engineering tradeoffs, and discarded alternatives related to the system and codebase setup provides valuable context that greatly enhances our review efficiency, affording a more comprehensive and nuanced understanding of the entire system.  
+- [ ] **Provide results of fuzz and differential testing** – especially vital if your code involves lower-level assembly or math-related libraries. This aids us in employing tooling to spot deviations and edge cases.
+- [ ] **Perform and report on stateful invariant testing** – such testing enables us to pinpoint edge cases that might occur during end-to-end operations.
+- [ ] **Provide videos of complex workflows** – visual aids can effectively capture complex workflows, improving our grasp of the system's intricacies and bolstering the efficiency of our review.
+- [ ] **Provide lists of actors with their expected roles and privileges** – outlining the distinct actors in your system, along with their specific roles and permissions, grants us a clearer understanding of how user interactions are designed and how authority is structured within the system. This, in turn, boosts the efficiency and depth of our review.
+- [ ] **Prepare and share an Incident response plan** – a robust incident response plan provides insight into how your system is prepared to handle potential security breaches or unexpected system behavior. By sharing this, we can assess the system's robustness under adverse conditions, as well as provide recommendations for enhancing the resilience of your incident response strategy.
+
+### References 
+
+- Our own experience 
+- [The Pragamatic Programmer](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/)
