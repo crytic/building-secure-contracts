@@ -34,7 +34,7 @@ Follow this high-level process while developing your smart contracts for enhance
 
 ## Ask for help
 
-[Office Hours](https://calendly.com/trail-of-bits-sales/trail-of-bits-office-hours) are held every Tuesday afternoon. These one-hour, one-on-one sessions provide an opportunity to ask questions about security, troubleshoot tool usage, and receive expert feedback on your current approach. We will help you work through this guide.
+[Office Hours](https://meetings.hubspot.com/trailofbits/office-hours) are held every Tuesday afternoon. These one-hour, one-on-one sessions provide an opportunity to ask questions about security, troubleshoot tool usage, and receive expert feedback on your current approach. We will help you work through this guide.
 
 Join our Slack: [Empire Hacking](https://join.slack.com/t/empirehacking/shared_invite/zt-h97bbrj8-1jwuiU33nnzg67JcvIciUw). We are always available in the #crytic and #ethereum channels if you have questions.
 
