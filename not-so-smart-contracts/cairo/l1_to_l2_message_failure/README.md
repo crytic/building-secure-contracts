@@ -1,4 +1,4 @@
-# Consider L1 to L2 Message Failure
+# L1 to L2 Message Failure
 
 In Starknet, Ethereum contracts can send messages from L1 to L2 using a bridge. However, it is not guaranteed that the message will be processed by the sequencer. For instance, a message can fail to be processed if there is a sudden spike in the gas price and the value provided is too low. To address this issue, Starknet developers have provided an API to cancel ongoing messages.
 
