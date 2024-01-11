@@ -4,43 +4,51 @@ When interacting with contracts that are designed to interact with both L1 and L
 
 ## Example
 
-The following Starknet bridge contract allows for permissionless deposit to any address from L1 via the `deposit_to_L2`. In particular, someone can deposit tokens to the `bad_address`.However the tokens will be trapped on L2 because the L2 contract's `deposit_from_L1` function is not permissionless and prevents `bad_address` from being the recipient.
-
-```solidity
-uint256 public immutable DEPOSIT_SELECTOR;
-address public immutable MESSENGER_CONTRACT;
-address public immutable L2_BRIDGE_ADDRESS;
-
-constructor(uint256 _selector, address _messenger, address _bridge) {
-    DEPOSIT_SELECTOR = _selector;
-    MESSENGER_CONTRACT = _messenger;
-    L2_BRIDGE_ADDRESS = _bridge;
-
-}
-
-function depositToL2(uint256[] calldata payload) external {
-    require(owner == msg.sender, "not owner");
-    IStarknetMessaging(MESSENGER_CONTRACT).sendMessageToL2(L2_BRIDGE_ADDRESS, DEPOSIT_SELECTOR, payload);
-}
-```
+The following Starknet bridge contract allows for permissionless deposit to any address on L1 via the `deposit_to_L1` function. In particular, someone can deposit tokens to the `BAD_ADDRESS`.However the tokens will be trapped on L1 because the L1 contract's `depositFromL2` function is not permissionless and prevents `BAD_ADDRESS` from being the recipient.
 
 ```Cairo
 #[storage]
 struct Storage {
-    owner: ContractAddress,
     l1_bridge: EthAddress,
-    bad_address: ContractAddress
 
+}
+#[derive(Serde)]
+struct Deposit {
+    recipient: EthAddress,
+    token: EthAddress,
+    amount: u256
 }
 
 #[l1_handler]
-fn deposit_from_l1(ref self:ContractState, from_address: felt252, recipient: ContractAddress, amount) {
-    assert(from_address == l1_bridge, "not bridge");
-    assert(recipient != bad_address, "not allowed to deposit");
+fn deposit_to_l1(ref self:ContractState, deposit: Deposit) {
+    let payload = ArrayTrait::new();
+    starknet::send_message_to_l1_syscall(self.l1_bridge.read(),deposit.serialize(ref payload)).unwrap();
+}
+```
+
+```solidity
+
+address public immutable MESSENGER_CONTRACT;
+address public immutable L2_TOKEN_BRIDGE;
+address public constant BAD_ADDRESS = address(0xdead);
+
+constructor(address _messenger, address _bridge) {
+    MESSENGER_CONTRACT = _messenger;
+    L2_TOKEN_BRIDGE = _bridge;
+}
+
+function depositFromL2(address recipient, address token, uint256 amount) external {
+    require(recipient != BAD_ADDRESS, "blacklisted");
+    uint256[] memory payload = _buildPayload(recipient,token,amount);
+    MESSENGER_CONTRACT.consumeMessageFromL2(L2_TOKEN_BRIDGE,payload);
     //deposit logic
     [...]
 }
 
+function _buildPayload(address recipient, address token, uint256 amount) internal returns (uint256[] memory) {
+    //payload building logic for Starknet message
+    [...]
+}
 ```
 ## Mitigations
 
