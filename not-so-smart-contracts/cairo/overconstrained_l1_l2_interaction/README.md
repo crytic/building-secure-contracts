@@ -4,14 +4,15 @@ When interacting with contracts that are designed to interact with both L1 and L
 
 ## Example
 
-The following Starknet bridge contract allows for permissionless deposit to any address on L1 via the `deposit_to_L1` function. In particular, someone can deposit tokens to the `BAD_ADDRESS`.However the tokens will be trapped on L1 because the L1 contract's `depositFromL2` function is not permissionless and prevents `BAD_ADDRESS` from being the recipient.
+The following Starknet bridge contract allows for permissionless deposit to any address on L1 via the `deposit_to_L1` function. In particular, someone can deposit tokens to the `BAD_ADDRESS`. However, in that case the tokens will be lost forever, because the tokens are burned on L2 and the L1 contract's `depositFromL2` function prevents `BAD_ADDRESS` from being the recipient.
 
 ```Cairo
 #[storage]
 struct Storage {
     l1_bridge: EthAddress,
-
+    balances: LegacyMap<ContractAddress,u256>
 }
+
 #[derive(Serde)]
 struct Deposit {
     recipient: EthAddress,
@@ -19,10 +20,12 @@ struct Deposit {
     amount: u256
 }
 
-#[l1_handler]
-fn deposit_to_l1(ref self:ContractState, deposit: Deposit) {
+fn deposit_to_l1(ref self: ContractState, deposit: Deposit) {
+    let caller = get_caller_address();
+    //burn the tokens on the L2 side
+    self.balances.write(caller, self.balances.read(caller) - deposit.amount);
     let payload = ArrayTrait::new();
-    starknet::send_message_to_l1_syscall(self.l1_bridge.read(),deposit.serialize(ref payload)).unwrap();
+    starknet::send_message_to_l1_syscall(self.l1_bridge.read(), deposit.serialize(ref payload)).unwrap();
 }
 ```
 
@@ -50,6 +53,7 @@ function _buildPayload(address recipient, address token, uint256 amount) interna
     [...]
 }
 ```
+
 ## Mitigations
 
 - Make sure to validate that the checks on both the L1 and L2 side are similar enough to prevent unexpected behavior. Ensure that any unsymmetric validations on either side cannot lead to a tokens being trapped or any other denial of service.

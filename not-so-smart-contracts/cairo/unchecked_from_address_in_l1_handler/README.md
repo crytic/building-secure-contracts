@@ -31,7 +31,7 @@ struct Storage {
 }
 
 #[l1_handler]
-fn set_owner_from_l1(ref self:ContractState, from_address: felt252, new_owner: ContractAddress) {
+fn set_owner_from_l1(ref self: ContractState, from_address: felt252, new_owner: ContractAddress) {
     self.owner.write(new_owner);
 }
 
