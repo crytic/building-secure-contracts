@@ -42,6 +42,7 @@ Additionally, consider conducting a threat modeling exercise. This exercise will
 - [How to Hack the Yield Protocol](https://docs.yieldprotocol.com/#/operations/how_to_hack)
 - [Emergency Steps – Yearn](https://github.com/yearn/yearn-devdocs/blob/master/docs/developers/v2/EMERGENCY.md)
 - [Monitoring & Incident Response - Heidi Wilder (DSS 2023)](https://www.youtube.com/watch?v=TDlkkg8N0wc)
+- [Crisis Handbook - Smart Contract Hack (SEAL)](https://docs.google.com/document/d/1DaAiuGFkMEMMiIuvqhePL5aDFGHJ9Ya6D04rdaldqC0/edit) 
 
 ### Examples of incidents retrospective
 
