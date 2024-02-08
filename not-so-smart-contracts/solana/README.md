@@ -14,13 +14,14 @@ Each _Not So Smart Contract_ includes a standard set of information:
 
 ## Vulnerabilities
 
-| Not So Smart Contract                              | Description                                               |
-| -------------------------------------------------- | --------------------------------------------------------- |
-| [Arbitrary CPI](arbitrary_cpi)                     | Arbitrary program account passed in upon invocation       |
-| [Improper PDA Validation](improper_pda_validation) | PDAs are vulnerable to being spoofed via bump seeds       |
-| [Ownership Check](ownership_check)                 | Broken access control due to missing ownership validation |
-| [Signer Check](signer_check)                       | Broken access control due to missing signer validation    |
-| [Sysvar Account Check](sysvar_account_check)       | Sysvar accounts are vulnerable to being spoofed           |
+| Not So Smart Contract                                                    | Description                                               |
+| ------------------------------------------------------------------------ | --------------------------------------------------------- |
+| [Arbitrary CPI](arbitrary_cpi)                                           | Arbitrary program account passed in upon invocation       |
+| [Improper PDA Validation](improper_pda_validation)                       | PDAs are vulnerable to being spoofed via bump seeds       |
+| [Ownership Check](ownership_check)                                       | Broken access control due to missing ownership validation |
+| [Signer Check](signer_check)                                             | Broken access control due to missing signer validation    |
+| [Sysvar Account Check](sysvar_account_check)                             | Sysvar accounts are vulnerable to being spoofed           |
+| [Improper Instruction Introspection](improper_instruction_introspection) | Program accesses instruction using absolute index         |
 
 ## Credits
 
