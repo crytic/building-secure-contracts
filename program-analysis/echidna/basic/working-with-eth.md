@@ -116,4 +116,4 @@ echidna_C_has_some_value: failed!💥
 Echidna has two options for using ether during a fuzzing campaign.
 
 - `maxValue` to set the max amount of ether per transaction
-- `contractBalance` to set the initial amount of ether that the testing contract receives in the constructor.
+- `balanceContract` to set the initial amount of ether that the testing contract receives in the constructor.
