@@ -1,4 +1,4 @@
-# Incident Response Preparation
+# Incident Response Recommendations
 
 How you respond during an incident is a direct reflection of your efforts to prepare for such an event. Each team or project's needs will vary so we provide the guidelines below as a starting point. Adherance to our guidelines can help you shift from a reactive approach to a **proactive** approach by planning with the assumption that incidents are inevitable. To fully leverage the following guidelines, consider them throughout the application development process.
 
@@ -16,7 +16,7 @@ How you respond during an incident is a direct reflection of your efforts to pre
 ## Documentation
 
 - **Assemble a runbook of common actions you may need to perform**. It's not possible or practical to exhaustively detail how you'll respond to every type of incident. But you _can_ start to document procedures for some of the more important ones as well as actions that might be common across multiple scenarios (e.g., pausing, rotating owner keys, upgrading an implementation). This can also include scripts or snippets of code to facilitate performing these actions in a reproducible manner.
-- **Document how to interpret abnormal events emission**. Only emitting events isn't sufficient; proper documentation is crucial, and users should be empowered to identify and decode them.
+- **Document how to interpret events emission**. Only emitting events isn't sufficient; proper documentation is crucial, and users should be empowered to identify and decode them.
 - **Document how to access wallets**. Clearly outline how to access wallets with special roles in the system. This should include both the location as well as access procedures for each wallet.
 - **Document the deployment and upgrade process**. Deployment and upgrade processes are risky and must be thoroughly documented. This should include how to test the deployment/upgrade (e.g., using fork testing) and how to validate it (e.g., using a post-deployment script).
 - **Document how to contact users and external dependencies**. Define guidelines regarding which stakeholders to contact, including the timing and mode of communication in case of incidents. The right communication at the right time is key to maintaining trust.
