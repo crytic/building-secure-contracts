@@ -74,7 +74,7 @@ Once it runs, check the coverage file located in `corpus-exploration/covered.*.t
 
 ## 3. Initiate a continuous fuzzing campaign
 
-When satisfied with the first iteration of the initialization, we can start a "continuous campaign" for exploration and testing using [echidna-parade](https://github.com/agroce/echidna-parade). Before starting, double-check your config file. For instance, if you added properties, do not forget to remove `benchmarkMode`.
+When satisfied with the first iteration of the initialization, we can start a "continuous campaign" for exploration and testing using [echidna-parade](https://github.com/crytic/echidna-parade). Before starting, double-check your config file. For instance, if you added properties, do not forget to remove `benchmarkMode`.
 
 `echidna-parade` is a tool used to launch multiple Echidna instances simultaneously while keeping track of each corpus. Each instance will be configured to run for a specific duration, with different parameters, to maximize the chance of reaching new code.
 

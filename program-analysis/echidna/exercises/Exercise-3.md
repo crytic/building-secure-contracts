@@ -19,7 +19,7 @@ We will test the following contract _[token.sol](https://github.com/crytic/build
 ```solidity
 pragma solidity ^0.8.0;
 
-/// @notice The issues from exercises 1 and 2 are fixed.
+/// @notice The issues from exercise 1 and 2 are fixed.
 
 contract Ownable {
     address public owner = msg.sender;
@@ -74,7 +74,7 @@ contract MintableToken is Token {
     int256 public totalMinted;
     int256 public totalMintable;
 
-    constructor(int256 totalMintable_) public {
+    constructor(int256 totalMintable_) {
         totalMintable = totalMintable_;
     }
 
@@ -111,7 +111,7 @@ contract TestToken is MintableToken {
     address echidna = msg.sender;
 
     // TODO: update the constructor
-    constructor(int256 totalMintable) public MintableToken(totalMintable) {}
+    constructor(int256 totalMintable) MintableToken(totalMintable) {}
 
     function echidna_test_balance() public view returns (bool) {
         // TODO: add the property

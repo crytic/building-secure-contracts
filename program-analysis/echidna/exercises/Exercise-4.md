@@ -27,7 +27,7 @@ contract Ownable {
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Ownable: Caller is not the owner");
+        require(msg.sender == owner, "Ownable: Caller is not the owner.");
         _;
     }
 }
@@ -48,7 +48,7 @@ contract Pausable is Ownable {
     }
 
     modifier whenNotPaused() {
-        require(!_paused, "Pausable: Contract is paused");
+        require(!_paused, "Pausable: Contract is paused.");
         _;
     }
 }
@@ -56,9 +56,12 @@ contract Pausable is Ownable {
 contract Token is Ownable, Pausable {
     mapping(address => uint256) public balances;
 
-    function transfer(address to, uint256 value) public whenNotPaused {
-        balances[msg.sender] -= value;
-        balances[to] += value;
+    function transfer(address to, uint256 value) public virtual whenNotPaused {
+        // unchecked to save gas
+        unchecked {
+            balances[msg.sender] -= value;
+            balances[to] += value;
+        }
     }
 }
 ```
@@ -87,6 +90,10 @@ import "./token.sol";
 ///      ```
 ///      solc-select use 0.8.0
 ///      echidna program-analysis/echidna/exercises/exercise4/template.sol --contract TestToken --test-mode assertion
+///      ```
+///      or by providing a config
+///      ```
+///      echidna program-analysis/echidna/exercises/exercise4/template.sol --contract TestToken --config program-analysis/echidna/exercises/exercise4/config.yaml
 ///      ```
 contract TestToken is Token {
     function transfer(address to, uint256 value) public {
