@@ -1,52 +1,54 @@
-# Security Review Preparation Checklist
+# How to prepare for a security review
 
 Get ready for your security review! Ensuring a few key elements are in place before the review starts can make the process significantly smoother for both sides.
 
-💡 **ProTip 1:** Predefine areas of focus and provide the review team early access to your codebase.
+## Set a goal for the review
 
-- Provide a detailed list of files for review.
-- Freeze a stable commit hash, branch, or release prior to review.
-- Pinpoint areas in the codebase that previously had issues, inspire less confidence, or are of particular concern.
-- If your codebase is a fork of an existing protocol, delinate the differences and modifications you made compared to the original codebase.
+This is the most important step of a security review, and paradoxically the one most often overlooked. You should have an idea of what kind of questions you want answered, such as:
 
-💡 **ProTip 2:** Lay the groundwork for your review by ensuring your project is build-ready. This allows us to focus on giving you actionable recommendations instead of trying to build your code!
+- What’s the overall level of security for this product?
+- What are the areas that you are the most concerns about?
+  - Take into considerations previous audits and issues, complex parts, and fragile components.
+- What is the worst case scenario for your project?
 
-- Create a clear set of build instructions.
-- Confirm your setup process by cloning and testing your repository on a fresh environment.
+Knowing your biggest area of concern will help the assessment team tailor their approach to meet your needs.
 
-💡 **ProTip 3:** Streamline our process of building a mental model of your codebase by providing comprehensive documentation.
+## Resolve the easy issues
 
-- Create flowcharts and sequence diagrams to depict primary workflows.
-- List actors and with their respective roles and privileges.
-- Incorporate external developer documentation that links directly to your code.
-- Add inline comments for complex areas of your system.
-- Maintain comprehensive NatSpec descriptions for all functions.
-- Create short video walkthroughs for complex workflows or areas of concern.
+Handing the code off to the assessment team is a lot like releasing the product: the cleaner the code, the better everything will go. To that end:
 
-💡 **ProTip 4:** Share your test suite and coverage report with us to better understand the system.
+- **Triage all results from static analysis tools**. Go after the low-hanging fruits and use:
+  - [Slither](https://github.com/crytic/slither) for Solidity codebases
+  - [dylint](https://github.com/trailofbits/dylint) for Rust codebases
+  - [golangci](https://golangci-lint.run/) for Go codebases
+  - [CodeQL and Semgrep](https://appsec.guide/) for Go/Rust/C++/... codebases
+- **Increase unit and feature test coverage**. Ideally this has been part of the development process, but everyone slips up, tests don’t get updated, or new features don’t quite match the old integrations tests. Now is the time to update the tests and run them all.
+- **Remove dead code, unused libraries, and other extraneous weight.** You may know which is unused but the consultants won’t and will waste time investigating it for potential issues. The same goes for that new feature that hasn’t seen progress in months, or that third-party library that doesn’t get used anymore.
 
-- Provide your test coverage report.
-- Share unit and stateful fuzz tests.
-- Share fuzz and differential tests.
+## Ensure the code is accessible
 
-💡 **ProTip 5:** For arithmetic-heavy codebases, meticulously document and map all of your formulas.
+Making the code accessible and clearly identified will avoid wasting ressources from the security engineers.
 
-- Document every formula implemented in your codebase.
-- Map each formula to in-code implementation and if there are deviations between these two, include derivations.
-- Share all rounding direction analysis.
-- Share results from any economic analysis conducted on your codebase.
+- **Provide a detailed list of files for review.**. This will avoid confusion if your codebase is large and some elements are not meant to be in scope.
+- **Create a clear set of build instructions, and confirm the setup by cloning and testing your repository on a fresh environment.** A code that cannot be built is a code more difficult to review.
+- **Freeze a stable commit hash, branch, or release prior to review.** Working on a moving target makes the review more difficult
+- **Identify boilerplates, dependencies and difference from forked code**. By highliting what code you wrote, you will help keeping the review focused
 
-💡 **ProTip 6:** Expedite familiarisation of your codebase by detailing all assumptions.
+## Document, Document, Document
 
-- List system invariants.
-- Identify the parameter ranges (minimum and maximum values) used in your system.
-- Highlight unreachable or logically excluded system states.
-- Compile a glossary for consistent terminology use.
-- List external dependencies used and their purpose.
+Streamline the revuew process of building a mental model of your codebase by providing comprehensive documentation.
 
-💡 **ProTip 7:** Clarify all interactions within the system. Highlight how contracts work together on-chain and how your contract interfaces with off-chain components.
-
-- Create an architecture diagram of on-chain contract interactions.
-- Document all design decisions, including engineering trade-offs, and discarded alternatives.
-- If your system uses off-chain components, outline data validation procedures off-chain and the input bounds for on-chain functions.
-- If your system has bridge-like functionality, document values passing between source and destination chains.
+- **Create flowcharts and sequence diagrams to depict primary workflows**. They will help identify the components and their relationships
+- **Write users stories**. Having users stories is a powerful tool to explain a project
+- **Outline the on-chain / off-chain assumptions**. This includes:
+  - Data validation procedure
+  - Oracles information
+  - Bridges assumptions
+- **List actors and with their respective roles and privileges**. The complexity of a system grows with its number of actors.
+- **Incorporate external developer documentation that links directly to your code**. This will help to ensure the documentation is up to date with the code
+- **Add function documentation and inline comments for complex areas of your system**. Code documentation should include:
+  - System and function level invariants
+  - Parameter ranges (minimum and maximum values) used in your system.
+  - Arithmetic formula: how they map to their specification, and their precision loss exceptations
+- **Compile a glossary for consistent terminology use.** You use your codebase every day and you are familar with the terminology - a new person looking at your code is not
+- **Consider creating short video walkthroughs for complex workflows or areas of concern**. Video walkthroughs is a great format to share your knowledge
