@@ -52,6 +52,7 @@ Additionally, consider conducting a threat modeling exercise. This exercise will
 - [How to Hack the Yield Protocol](https://docs.yieldprotocol.com/#/operations/how_to_hack)
 - [Emergency Procedures for Yearn Finance](https://github.com/yearn/yearn-devdocs/blob/master/docs/developers/v2/EMERGENCY.md)
 - [Rekt pilled: What to do when your dApp gets pwned and how to stay kalm - Heidi Wilder (DSS 2023)](https://www.youtube.com/watch?v=TDlkkg8N0wc)
+- [Crisis Handbook - Smart Contract Hack (SEAL)](https://docs.google.com/document/d/1DaAiuGFkMEMMiIuvqhePL5aDFGHJ9Ya6D04rdaldqC0/edit)
 
 ### Community Incident Retrospectives
 
