@@ -8,6 +8,7 @@
   - [Token Integration Checklist](./development-guidelines/token_integration.md)
   - [Incident Response Recommendations](./development-guidelines/incident_response.md)
   - [Secure Development Workflow](./development-guidelines/workflow.md)
+  - [Preparing for a Security Review](./development-guidelines/review_checklist.md)
 - [Learn EVM](./learn_evm/README.md)
   - [EVM Opcode Reference](./learn_evm/evm_opcodes.md)
   - [Transaction Tracing](./learn_evm/tracing.md)
