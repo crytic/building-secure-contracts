@@ -823,7 +823,7 @@ noop, marks a valid jump destination
 
 The constant value 0 is pushed onto the stack.
 
-() => ()
+() => (0)
 
 ---
 
