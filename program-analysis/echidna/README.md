@@ -15,4 +15,4 @@ To learn through live coding sessions, watch our [Fuzzing workshop](https://www.
 
 Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum.
 
-If you are looking for help to build fuzzing capabilities for your team, check out our [invariant development as a service](https://www.trailofbits.com/services/software-assurance/#blockchain-invariant-development). 
+If you are looking for help to build fuzzing capabilities for your team, check out our [invariant development as a service](https://www.trailofbits.com/services/software-assurance/#blockchain-invariant-development).
