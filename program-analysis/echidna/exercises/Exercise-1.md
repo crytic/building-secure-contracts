@@ -51,8 +51,11 @@ contract Token is Ownable, Pausable {
     mapping(address => uint256) public balances;
 
     function transfer(address to, uint256 value) public whenNotPaused {
-        balances[msg.sender] -= value;
-        balances[to] += value;
+        // unchecked to save gas
+        unchecked {
+            balances[msg.sender] -= value;
+            balances[to] += value;
+        }
     }
 }
 ```
@@ -79,8 +82,8 @@ import "./token.sol";
 contract TestToken is Token {
     address echidna = tx.origin;
 
-    constructor() public {
-        balances[echidna] = 10000;
+    constructor() {
+        balances[echidna] = 10_000;
     }
 
     function echidna_test_balance() public view returns (bool) {
