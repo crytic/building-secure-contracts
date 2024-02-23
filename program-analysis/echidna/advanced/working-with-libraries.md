@@ -60,19 +60,6 @@ We can use the coverage report to verify that function using the library (`getBa
  30 |     |     }
 ```
 
-However, the code of the library itself will not have their coverage displayed correctly:
-
-```
- 6 |     | library ConvertLib{
- 7 |     |     function convert(uint amount, uint conversionRate) public pure returns (uint convertedAmount)
- 8 |     |     {
- 9 |     |             return amount * conversionRate;
-10 |     |     }
-11 |     | }
-```
-
-This is caused by the usage of `delegatecall` to execute contract code and [unfortunately we do not have a workaround for it right now](https://github.com/crytic/echidna/issues/1042).
-
 ## Summary
 
 Working with libraries in Echidna is supported. It involves to deploy the library to a particular address using `deployContracts` and then asking `crytic-compile` to link the bytecode with the same address using `--compile-libraries` command line.

@@ -19,7 +19,7 @@ jobs:
       CARGO_TERM_COLOR: always
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Install mdbook
@@ -28,7 +28,7 @@ jobs:
       - name: Build artifacts
         run: mdbook build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./book
   deploy:
@@ -43,4 +43,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4

@@ -10,14 +10,14 @@
 
 This exercise is based on the tutorial [How to test assertions](../basic/assertion-checking.md).
 
-Join the team on Slack at: https://empireslacking.herokuapp.com/ #ethereum
+Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
 
 ## Targeted contract
 
-We will test the following contract _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/token.sol)_:
+We will test the following contract, _[token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/token.sol)_:
 
 ```solidity
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 contract Ownable {
     address public owner = msg.sender;
@@ -56,9 +56,12 @@ contract Pausable is Ownable {
 contract Token is Ownable, Pausable {
     mapping(address => uint256) public balances;
 
-    function transfer(address to, uint256 value) public whenNotPaused {
-        balances[msg.sender] -= value;
-        balances[to] += value;
+    function transfer(address to, uint256 value) public virtual whenNotPaused {
+        // unchecked to save gas
+        unchecked {
+            balances[msg.sender] -= value;
+            balances[to] += value;
+        }
     }
 }
 ```
@@ -67,26 +70,30 @@ contract Token is Ownable, Pausable {
 
 ### Goals
 
-Add asserts to ensure that after calling `transfer`:
+Add assertions to ensure that after calling `transfer`:
 
 - `msg.sender` must have its initial balance or less.
 - `to` must have its initial balance or more.
 
 Once Echidna finds the bug, fix the issue, and re-try your assertion with Echidna.
 
-This exercise is similar to the [first one](Exercise-1.md), but using assertions instead of explicit properties.
+This exercise is similar to the [first one](Exercise-1.md), but it uses assertions instead of explicit properties.
 
-The skeleton for this exercise is (_[template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/template.sol)_):
+The skeleton for this exercise is ([template.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise4/template.sol)):
 
 ````solidity
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 import "./token.sol";
 
 /// @dev Run the template with
 ///      ```
-///      solc-select use 0.5.0
+///      solc-select use 0.8.0
 ///      echidna program-analysis/echidna/exercises/exercise4/template.sol --contract TestToken --test-mode assertion
+///      ```
+///      or by providing a config
+///      ```
+///      echidna program-analysis/echidna/exercises/exercise4/template.sol --contract TestToken --config program-analysis/echidna/exercises/exercise4/config.yaml
 ///      ```
 contract TestToken is Token {
     function transfer(address to, uint256 value) public {

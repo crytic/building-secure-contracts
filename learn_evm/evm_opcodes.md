@@ -78,7 +78,8 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0x59`](#msize)          | MSIZE          | Get the size of active memory in bytes                                                                                                                       | -                                                                                                         | 2           |
 | [`0x5a`](#gas)            | GAS            | Get the amount of available gas, including the corresponding reduction for the cost of this instruction                                                      | -                                                                                                         | 2           |
 | [`0x5b`](#jumpdest)       | JUMPDEST       | Mark a valid destination for jumps                                                                                                                           | -                                                                                                         | 1           |
-| `0x5c` - `0x5f`           | Unused         | -                                                                                                                                                            |
+| `0x5c` - `0x5e`           | Unused         | -                                                                                                                                                            |
+| [`0x5f`](#push0)          | PUSH0          | Place the constant value 0 on stack                                                                                                                          | [EIP-3855](https://eips.ethereum.org/EIPS/eip-3855)                                                       | 2           |
 | [`0x60`](#push1)          | PUSH1          | Place 1 byte item on stack                                                                                                                                   | -                                                                                                         | 3           |
 | [`0x61`](#push2)          | PUSH2          | Place 2-byte item on stack                                                                                                                                   | -                                                                                                         | 3           |
 | [`0x62`](#push3)          | PUSH3          | Place 3-byte item on stack                                                                                                                                   | -                                                                                                         | 3           |
@@ -813,6 +814,16 @@ not including the gas required for this opcode
 () => ()
 
 noop, marks a valid jump destination
+
+---
+
+### PUSH0
+
+**0x5f**
+
+The constant value 0 is pushed onto the stack.
+
+() => (0)
 
 ---
 
