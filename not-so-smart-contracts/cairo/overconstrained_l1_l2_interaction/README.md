@@ -1,6 +1,6 @@
 # Overconstrained L1 <-> L2 interaction
-When interacting with contracts that are designed to interact with both L1 and L2, care must be taken that the checks and validations on both sides are symmetrical. If one side has more validations than the other, this could create a situation where a user performs an action on one side, but is unable to perform the corresponding action on the other side, leading to a loss of funds or a denial of service.
 
+When interacting with contracts that are designed to interact with both L1 and L2, care must be taken that the checks and validations on both sides are symmetrical. If one side has more validations than the other, this could create a situation where a user performs an action on one side, but is unable to perform the corresponding action on the other side, leading to a loss of funds or a denial of service.
 
 ## Example
 
