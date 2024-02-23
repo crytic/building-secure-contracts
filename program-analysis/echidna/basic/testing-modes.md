@@ -160,10 +160,11 @@ Use dapptest mode if you are testing stateless invariants and the code will neve
 ## Other testing modes
 
 Echidna allows other testing mode, which are less frecuently used:
-* `overflow` mode: this mode is similar to `assertion` but it will only catch integer overflow (so no need to define any function with assertions). **It only works in solc 0.8.x or greater, for code outside `unchecked` blocks**.
-* `optimization` mode: this mode allows to maximize the value returned by a function. It is explained in detail in [its own tutorial](../advanced/optimization_mode.md).
-* `exploration` mode: this mode will not use any kind of invariants to check, allowing Echidna to collect coverage.
-  
+
+- `overflow` mode: this mode is similar to `assertion` but it will only catch integer overflow (so no need to define any function with assertions). **It only works in solc 0.8.x or greater, for code outside `unchecked` blocks**.
+- `optimization` mode: this mode allows to maximize the value returned by a function. It is explained in detail in [its own tutorial](../advanced/optimization_mode.md).
+- `exploration` mode: this mode will not use any kind of invariants to check, allowing Echidna to collect coverage.
+
 ## Stateless vs. Stateful
 
 Any of these testing modes can be used, in either stateful (by default) or stateless mode (using `--seqLen 1`). In stateful mode, Echidna will maintain the state between each function call and attempt to break the invariants. In stateless mode, Echidna will discard state changes during fuzzing. There are notable differences between these two modes.
