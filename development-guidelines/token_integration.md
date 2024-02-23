@@ -72,6 +72,10 @@ Token scarcity issues must be reviewed manually. Check for the following conditi
 - [ ] **Users understand the risks associated with large funds or flash loans.** Contracts relying on the token balance must account for attackers with large funds or attacks executed through flash loans.
 - [ ] **The token does not allow flash minting.** Flash minting can lead to drastic changes in balance and total supply, requiring strict and comprehensive overflow checks in the token operation.
 
+### Known non-standard ERC20 tokens
+
+Protocols that allow integration with arbitrary tokens must take care to properly handle certain well-known non-standard ERC20 tokens. Refer to the [non-standard-tokens list](./non-standard-tokens.md) for a list of well-known tokens that contain additional risks.
+
 ## ERC721 Tokens
 
 ### ERC721 Conformity Checks

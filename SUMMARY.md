@@ -6,6 +6,7 @@
   - [Code Maturity](./development-guidelines/code_maturity.md)
   - [High-Level Best Practices](./development-guidelines/guidelines.md)
   - [Token Integration Checklist](./development-guidelines/token_integration.md)
+  - [Known non-standard ERC20 tokens](./development-guidelines/non-standard-tokens.md)
   - [Incident Response Recommendations](./development-guidelines/incident_response.md)
   - [Secure Development Workflow](./development-guidelines/workflow.md)
   - [Preparing for a Security Review](./development-guidelines/review_checklist.md)
