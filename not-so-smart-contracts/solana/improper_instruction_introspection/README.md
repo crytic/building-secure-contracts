@@ -4,7 +4,6 @@ Solana allows programs to inspect other instructions in the transaction using th
 
 ## Exploit Scenario
 
-
 A program mints tokens based on the amount of tokens transferred to it. A program checks that `Token::transfer` instruction is called in the first instruction of the transaction. The program uses absolute index `0` to access the instruction data, program id and validates them. If the first instruction is a `Token::transfer` then program mints some tokens.
 
 ```rust
