@@ -48,6 +48,3 @@ On the other hand, if an attacker sends a `useful_amounts` vector that is incred
 
 - https://docs.substrate.io/main-docs/build/tx-weights-fees/
 - https://docs.substrate.io/reference/how-to-guides/weights/add-benchmarks/
-- https://docs.substrate.io/reference/how-to-guides/weights/use-custom-weights/
-- https://docs.substrate.io/reference/how-to-guides/weights/use-conditional-weights/
-- https://www.shawntabrizi.com/substrate/substrate-weight-and-fees/

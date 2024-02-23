@@ -2,7 +2,7 @@
 
 So, you want to read the Yellow Paper? Before we dive in, keep in mind that the Yellow Paper is outdated, and some in the community might refer to it as being deprecated. Check out the [`yellowpaper` repository on GitHub](https://github.com/ethereum/yellowpaper) and its [BRANCHES.md](https://github.com/ethereum/yellowpaper/blob/master/BRANCHES.md) file to stay up-to-date on how closely this document tracks the latest version of the Ethereum protocol. At the time of writing, the Yellow Paper is up to date with the Berlin hardfork, which occurred in April 2021. For an overview of all Ethereum forks and which EIPs are included in each of them, see the [EIPs Forks](./eips_forks.md) page.
 
-For a more up-to-date reference, check out the [Ethereum Specification](https://ethereum.github.io/execution-specs/autoapi/ethereum/), which features a detailed description of each opcode _for each hardfork_ in addition to reference implementations written in Python.
+For a more up-to-date reference, check out the [Ethereum Specification](https://github.com/ethereum/execution-specs), which features a detailed description of each opcode _for each hardfork_ in addition to reference implementations written in Python.
 
 That said, the Yellow Paper is still a rich resource for ramping up on the fundamentals of the Ethereum protocol. This document aims to provide some guidance and assistance in deciphering Ethereum's flagship specification.
 
