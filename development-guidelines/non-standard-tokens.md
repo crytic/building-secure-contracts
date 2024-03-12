@@ -53,4 +53,4 @@ Additional non-standard token behavior that could be problematic includes:
 - do not require allowance for transfers from self
 - revert for approval of large amounts `>= 2^96 < 2^256 - 1` ([UNI](https://etherscan.io/token/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984), [COMP](https://etherscan.io/token/0xc00e94cb662c3520282e6f5717214004a7f26888))
 
-Refer to [d-xco/weird-erc20](https://github.com/d-xo/weird-erc20) for additional non-standard ERC20 tokens.
+Refer to [d-xo/weird-erc20](https://github.com/d-xo/weird-erc20) for additional non-standard ERC20 tokens.
