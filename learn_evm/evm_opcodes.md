@@ -66,6 +66,9 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0x46`](#chainid)        | CHAINID        | Returns the current chain’s EIP-155 unique identifier                                                                                                        | [EIP 1344](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1344.md)                                 | 2           |
 | [`0x47`](#selfbalance)    | SELFBALANCE    | Returns the balance of the currently executing account                                                                                                       | -                                                                                                         | 5           |
 | [`0x48`](#basefee)        | BASEFEE        | Returns the value of the base fee of the current block it is executing in.                                                                                   | [EIP 3198](https://eips.ethereum.org/EIPS/eip-3198)                                                       | 2           |
+| [`0x49`](#blobhash)       | BLOBHASH       | Returns the transaction blob versioned hash at the given index, or `0` if the index is greater than the number of versioned hashes                           | [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)                                                       | 3           |
+| [`0x4a`](#blobbasefee)    | BLOBBASEFEE    | Returns the value of the blob base fee of the current block it is executing in                                                                               | [EIP-7516](https://eips.ethereum.org/EIPS/eip-7516)                                                       | 2           |
+| `0x4b` - `0x4f`           | Unused         | -                                                                                                                                                            |
 | [`0x50`](#pop)            | POP            | Remove word from stack                                                                                                                                       | -                                                                                                         | 2           |
 | [`0x51`](#mload)          | MLOAD          | Load word from memory                                                                                                                                        | -                                                                                                         | 3\*         |
 | [`0x52`](#mstore)         | MSTORE         | Save word to memory                                                                                                                                          | -                                                                                                         | 3\*         |
@@ -78,7 +81,9 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | [`0x59`](#msize)          | MSIZE          | Get the size of active memory in bytes                                                                                                                       | -                                                                                                         | 2           |
 | [`0x5a`](#gas)            | GAS            | Get the amount of available gas, including the corresponding reduction for the cost of this instruction                                                      | -                                                                                                         | 2           |
 | [`0x5b`](#jumpdest)       | JUMPDEST       | Mark a valid destination for jumps                                                                                                                           | -                                                                                                         | 1           |
-| `0x5c` - `0x5e`           | Unused         | -                                                                                                                                                            |
+| [`0x5c`](#tload)          | TLOAD          | Load word from transient storage                                                                                                                             | [EIP-1153](https://eips.ethereum.org/EIPS/eip-1153)                                                       | 100         |
+| [`0x5d`](#tstore)         | TSTORE         | Save word to transient storage                                                                                                                               | [EIP-1153](https://eips.ethereum.org/EIPS/eip-1153)                                                       | 100         |
+| [`0x5e`](#mcopy)          | MCOPY          | Copy memory from one area to another                                                                                                                         | [EIP-5656](https://eips.ethereum.org/EIPS/eip-5656)                                                       | 3+3\*words\*|
 | [`0x5f`](#push0)          | PUSH0          | Place the constant value 0 on stack                                                                                                                          | [EIP-3855](https://eips.ethereum.org/EIPS/eip-3855)                                                       | 2           |
 | [`0x60`](#push1)          | PUSH1          | Place 1 byte item on stack                                                                                                                                   | -                                                                                                         | 3           |
 | [`0x61`](#push2)          | PUSH2          | Place 2-byte item on stack                                                                                                                                   | -                                                                                                         | 3           |
@@ -175,7 +180,7 @@ The gas information is a work in progress. If an asterisk is in the Gas column, 
 | `0xfb`                    | Unused         | -                                                                                                                                                            | -                                                                                                         |
 | [`0xfd`](#revert)         | REVERT         | Stop execution and revert state changes, without consuming all provided gas and providing a reason                                                           | -                                                                                                         | 0           |
 | `0xfe`                    | INVALID        | Designated invalid instruction                                                                                                                               | -                                                                                                         | 0           |
-| [`0xff`](#selfdestruct)   | SELFDESTRUCT   | Halt execution and register account for later deletion                                                                                                       | -                                                                                                         | 5000\*      |
+| [`0xff`](#selfdestruct)   | SELFDESTRUCT   | Sends all ETH to the target. If executed in the same transaction a contract was created, register the account for later deletion                             | [EIP-6780](https://eips.ethereum.org/EIPS/eip-6780)                                                       | 5000\*      |
 
 ## Instruction Details
 
@@ -693,6 +698,26 @@ current block's base fee (related to EIP1559)
 
 ---
 
+### BLOBHASH
+
+**0x49**
+
+(index) => (tx.blob_versioned_hashes[index])
+
+the transaction blob versioned hash at the given index, or `0` if the index is greater than the number of versioned hashes ([EIP-4844](https://eips.ethereum.org/EIPS/eip-4844))
+
+---
+
+### BLOBBASEFEE
+
+**0x4a**
+
+() => (block.blobbasefee)
+
+current block's blob base fee ([EIP-7516](https://eips.ethereum.org/EIPS/eip-7516))
+
+---
+
 ### POP
 
 **0x50**
@@ -814,6 +839,40 @@ not including the gas required for this opcode
 () => ()
 
 noop, marks a valid jump destination
+
+---
+
+### TLOAD
+
+**0x5c**
+
+Pops 1 element off the stack, that being the key which is the transient storage slot and returns the read value stored there ([EIP-1153](https://eips.ethereum.org/EIPS/eip-1153)).
+
+(key) => (value)
+
+value = transient_storage[key]
+
+---
+
+### TSTORE
+
+**0x5d**
+
+Pops 2 elements off the stack, the first element being the key and the second being the value which is then stored at the transient storage slot represented from the first element (key) ([EIP-1153](https://eips.ethereum.org/EIPS/eip-1153)).
+
+(key, value) => ()
+
+transient_storage[key] = value
+
+---
+
+### MCOPY
+
+**0x5e**
+
+(dstOffset, srcOffset, length) => ()
+
+memory[dstOffset:dstOffset+length] = memory[srcOffset:srcOffset+length]
 
 ---
 
