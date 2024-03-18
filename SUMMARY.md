@@ -120,3 +120,5 @@
     - [Exercise 1](./program-analysis/slither/exercise1.md)
     - [Exercise 2](./program-analysis/slither/exercise2.md)
 - [Resources](./resources/tob_blogposts.md)
+  - [Security contact](./resources/contact.md)
+  - [Blog posts](./resources/tob_blogposts.md)
