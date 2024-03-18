@@ -1,0 +1,3 @@
+[submodule "blockchain-security-contacts"]
+	path = blockchain-security-contacts
+	url = https://github.com/crytic/blockchain-security-contacts.git
