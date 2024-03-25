@@ -28,14 +28,12 @@ This Codebase Maturity Evaluation uses five ratings:
 - **Weak**: Several and/or significant areas of improvement have been identified.
 - **Moderate**: The codebase follows adequate procedure, but it can be improved.
 - **Satisfactory**: The codebase is above average, but it can be improved.
-- **Strong**: Only small potential areas of improvement have been identified.
 
 _How are ratings determined?_ While the process for assigning ratings can vary due to a number of variables unique to each codebase (e.g., use cases, size and complexity of the codebase, specific goals of the audit, timeline), a general approach for determining ratings is as follows:
 
 - If “Weak” criteria apply, “Weak” is applied.
 - If _none_ of the “Weak” criteria apply, and some “Moderate” criteria apply, “Moderate” can be applied.
 - If _all_ “Moderate” criteria apply, and some “Satisfactory” criteria apply, “Satisfactory” can be applied.
-- If _all_ “Satisfactory” criteria apply, and there is evidence of exceptional practices or security controls in place, “Strong” can be applied.
 
 ## Arithmetic
 
