@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
 contract Coin {
     address owner = msg.sender;
@@ -7,7 +7,7 @@ contract Coin {
     mapping(address => uint256) balances;
 
     // _mint must not be overriden
-    function _mint(address dst, uint256 val) internal {
+    function _mint(address dst, uint256 val) internal virtual {
         require(msg.sender == owner);
         balances[dst] += val;
     }
@@ -20,7 +20,7 @@ contract Coin {
 contract MyCoin is Coin {
     event Mint(address, uint256);
 
-    function _mint(address dst, uint256 val) internal {
+    function _mint(address dst, uint256 val) internal override {
         balances[dst] += val;
         emit Mint(dst, val);
     }
