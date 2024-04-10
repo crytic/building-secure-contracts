@@ -11,8 +11,9 @@ Once you feel confident with the material in this README, proceed to the exercis
 
 - [Exercise 1](./exercise1.md): Function override protection
 - [Exercise 2](./exercise2.md): Check for access controls
+- [Exercise 3](./exercise3.md): Find variable used in conditional statements
 
-Watch Slither's [code walkthrough](https://www.youtube.com/watch?v=EUl3UlYSluU) to learn about its code structure.
+Watch Slither's [code walkthrough](https://www.youtube.com/watch?v=EUl3UlYSluU), or [API walkthrough](https://www.youtube.com/watch?v=Ijf0pellvgw) to learn about its code structure.
 
 ## Installation
 

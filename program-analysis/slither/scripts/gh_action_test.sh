@@ -57,8 +57,15 @@ cd program-analysis/slither
 pip install slither-analyzer
 
 test_examples
+solc-select install 0.5.11
+solc-select use 0.5.11
 test_exercise 1
+
+solc-select install 0.8.20
+solc-select use 0.8.20
 test_exercise 2
+
+test_exercise 3
 
 echo "Slither tests passed"
 
