@@ -119,4 +119,5 @@
     - [API](./program-analysis/slither/api.md)
     - [Exercise 1](./program-analysis/slither/exercise1.md)
     - [Exercise 2](./program-analysis/slither/exercise2.md)
+    - [Exercise 3](./program-analysis/slither/exercise3.md)
 - [Resources](./resources/tob_blogposts.md)
