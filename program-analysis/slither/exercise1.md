@@ -1,6 +1,6 @@
 # Exercise 1: Function Overridden Protection
 
-The goal is to create a script that fills in a solidity feature of Solidity that were not present in previous version of Solidity: function overriding protection.
+The goal is to create a script that performs a feature that was not present in previous version of Solidity: function overriding protection.
 
 [exercises/exercise1/coin.sol](exercises/exercise1/coin.sol) contains a function that must never be overridden:
 
