@@ -3,6 +3,7 @@
 Slither has an API that allows you to explore basic attributes of contracts and their functions.
 
 On a high level there are 6 layers:
+
 - `Slither` - main slither object
 - `SlitherCompilationUnit` - group of files used by one call to solc
 - `Contract` - contract level
@@ -29,27 +30,28 @@ slither = Slither('0x..') # assuming the code is verified on etherscan
 ```
 
 Use `etherscan_api_key` to provide an [Etherscan API KEY](https://docs.etherscan.io/getting-started/viewing-api-usage-statistics)
+
 ```python
-slither = Slither('0x..', etherscan_api_key='..') 
+slither = Slither('0x..', etherscan_api_key='..')
 ```
 
 You can retrieve the list of compilation units with:
+
 - `sl.compilation_units # array of SlitherCompilationUnit`
 
-
 ## SlitherCompilationUnit object
+
 - ~ group of files used by one call to solc
 - Most targets have 1 compilation, but not always true
   - Partial compilation for optimization
   - Multiple solc version used
   - Etc..
 - Why compilation unit matters?
-  - Some APIs might be not intuitive 
+  - Some APIs might be not intuitive
   - Ex: looking for a contract based on the name?
     - Can have multiple contracts
 - For hacking you can (probably) use the first compilation unit
   - `compilation_unit = sl.compilation_units[0]`
-
 
 A [`SlitherCompilationUnit`](https://github.com/crytic/slither/blob/master/slither/core/compilation_unit.py) has:
 
@@ -59,6 +61,7 @@ A [`SlitherCompilationUnit`](https://github.com/crytic/slither/blob/master/slith
 - `[structures | enums | events | variables | functions]_top_level`: Top level object
 
 Example
+
 ```python
 from slither import Slither
 sl = Slither("0xdac17f958d2ee523a2206206994597c13d831ec7")
@@ -70,6 +73,7 @@ print([str(c) for c in compilation_unit.contracts])
 # Print the most derived contracts from the USDT address
 print([str(c) for c in compilation_unit.contracts_derived])
 ```
+
 ```bash
 % python test.py
 ['SafeMath', 'Ownable', 'ERC20Basic', 'ERC20', 'BasicToken', 'StandardToken', 'Pausable', 'BlackList', 'UpgradedStandardToken', 'TetherToken']
@@ -78,6 +82,7 @@ print([str(c) for c in compilation_unit.contracts_derived])
 ```
 
 ## Contract Object
+
 A [`Contract`](https://github.com/crytic/slither/blob/master/slither/core/declarations/contract.py) object has:
 
 - `name: str`: The name of the contract
@@ -93,10 +98,11 @@ A [`Contract`](https://github.com/crytic/slither/blob/master/slither/core/declar
 - `state_variables_ordered: List[StateVariable]`: all variable ordered by declaration
 
 Example
+
 ```python
 from slither import Slither
 sl = Slither("0xdac17f958d2ee523a2206206994597c13d831ec7")
-compilation_unit = sl.compilation_units[0] 
+compilation_unit = sl.compilation_units[0]
 
 # Print all the state variables of the USDT token
 contract = compilation_unit.get_contract_from_name("TetherToken")[0]
@@ -117,8 +123,8 @@ A [`Function`](https://github.com/crytic/slither/blob/master/slither/core/declar
 - `nodes: list[Node]`: A list of nodes composing the CFG of the function/modifier
 - `entry_point: Node`: The entry point of the CFG
 - `[state |local]_variable_[read |write]: list[StateVariable]`: A list of local/state variables read/write
-   - All can be prefixed by “all_” for recursive lookup
-   - Ex: `all_state_variable_read`: return all the state variables read in internal calls
+  - All can be prefixed by “all\_” for recursive lookup
+  - Ex: `all_state_variable_read`: return all the state variables read in internal calls
 - `slithir_operations: List[Operation]`: list of IR operations
 
 ```python
@@ -129,7 +135,7 @@ contract = compilation_unit.get_contract_from_name("TetherToken")[0]
 
 transfer = contract.get_function_from_signature("transfer(address,uint256)")
 
-# Print all the state variables read by the transfer function 
+# Print all the state variables read by the transfer function
 print([str(v) for v in transfer.state_variables_read])
 # Print all the state variables read by the transfer function and its internal calls
 print([str(v) for v in transfer.all_state_variables_read])
@@ -142,12 +148,15 @@ print([str(v) for v in transfer.all_state_variables_read])
 ```
 
 ## Node object
+
 [Node](https://github.com/crytic/slither/blob/master/slither/core/cfg/node.py)
 
 To explore the nodes:
+
 - If order does not matter
   - `for node in function.nodes`
 - If order matters, walk through the nodes
+
 ```python
 def visit_node(node: Node, visited: List[Node]):
 
@@ -159,21 +168,22 @@ def visit_node(node: Node, visited: List[Node]):
     for son in node.sons:
         visit_node(son, visited)
 ```
-- If need to iterate more than once (advanced usages)
- -  Bound the iteration X times
- -  Create a fix-point - abstract interpretation style analysis
 
+- If need to iterate more than once (advanced usages)
+- Bound the iteration X times
+- Create a fix-point - abstract interpretation style analysis
 
 ## SlithIR
+
 - [slither/slithir](https://github.com/crytic/slither/tree/master/slither/slithir)
 - Every IR operation has its own methods
 - Check if an operation is of a type:
   - `isinstance(ir, TYPE)`
   - Ex: `isinstance(ir, Call)`
 - Check if the operation is an addition
- - `isinstance(ir, Binary) & ir.type == BinaryType.ADDITION`
+- `isinstance(ir, Binary) & ir.type == BinaryType.ADDITION`
 - Check if the operation is a call to MyContract
- - `isinstance(ir, HighLevelCall) & ir.destination == MyContract`
+- `isinstance(ir, HighLevelCall) & ir.destination == MyContract`
 
 ```python
 from slither import Slither

@@ -2,7 +2,7 @@
 
 The goal is to create a script that performs a feature that was not present in previous version of Solidity: function overriding protection.
 
-[exercises/exercise1/coin.sol](exercises/exercise1/coin.sol) contains a function that must never be overridden:
+[exercises/exercise1/coin.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/slither/exercises/exercise1/coin.sol) contains a function that must never be overridden:
 
 ```solidity
 _mint(address dst, uint256 val)
@@ -10,7 +10,7 @@ _mint(address dst, uint256 val)
 
 Use Slither to ensure that no contract inheriting Coin overrides this function.
 
-Use `solc-select install 0.5.0 && solc-select use 0.5.0` to switch to solc 0.5.0 
+Use `solc-select install 0.5.0 && solc-select use 0.5.0` to switch to solc 0.5.0
 
 ## Proposed Algorithm
 
@@ -30,4 +30,4 @@ Get the Coin contract
 
 ## Solution
 
-See [exercises/exercise1/solution.py](exercises/exercise1/solution.py).
+See [exercises/exercise1/solution.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/slither/exercises/exercise1/solution.py).
