@@ -1,6 +1,6 @@
 # Incident Response Recommendations
 
-How you respond during an incident is a direct reflection of your efforts to prepare for such an event. Each team or project's needs will vary so we provide the guidelines below as a starting point. Adherance to our guidelines can help you shift from a reactive approach to a **proactive** approach by planning with the assumption that incidents are inevitable. To fully leverage the following guidelines, consider them throughout the application development process.
+How you respond during an incident is a direct reflection of your efforts to prepare for such an event. Each team or project's needs will vary so we provide the guidelines below as a starting point. Adherence to our guidelines can help you shift from a reactive approach to a **proactive** approach by planning with the assumption that incidents are inevitable. To fully leverage the following guidelines, consider them throughout the application development process.
 
 ## Application Design
 

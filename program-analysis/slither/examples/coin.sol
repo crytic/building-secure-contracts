@@ -6,7 +6,7 @@ contract Coin {
 
     mapping(address => uint256) balances;
 
-    // _mint must not be overriden
+    // _mint must not be overridden
     function _mint(address dst, uint256 val) internal virtual {
         require(msg.sender == owner);
         balances[dst] += val;
