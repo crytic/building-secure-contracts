@@ -2,6 +2,10 @@
 
 This list provides answers to frequently asked questions related to the usage of Echidna. If you find this information challenging to understand, please ensure you have already reviewed [all the other Echidna documentation](./README.md).
 
+## Echidna fails to start saying `VM failed for unhandled reason, MaxInitCodeSizeExceeded`
+
+One or more contracts that you try to deploy are too big for the EVM. However, this can be easy solved from inside Echidna adding `codeSize: 0xffffffff` into your config file. Keep in mind that the contracts that you are using will *fail* to deploy on the real EVM, so they should only be used for testing.
+
 ## Echidna fails to start or compile my contract; what should I do?
 
 Begin by testing if `crytic-compile` can compile your contracts. If you are using a compilation framework such as Truffle or Hardhat, use the command:
