@@ -245,3 +245,97 @@ Type | Default | Available in
 Bool | `false` | 2.1.0+
 
 Allows the use of the HEVM `ffi` cheatcode.
+
+## `rpcUrl`
+
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+String | `null` | 2.2.0+ | `--rpc-url URL`
+
+URL to fetch contracts over RPC.
+
+## `rpcBlock`
+
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+String | `null` | 2.2.0+ | `--rpc-block N`
+
+Block number to use when fetching over RPC.
+
+## `coverageFormats`
+
+Type | Default | Available in
+-----|---------|-------------
+[String] | `["txt","html","lcov"]` | 2.2.0+
+
+List of file formats to save coverage reports in; default is all possible
+formats.
+
+## `workers`
+
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+Int  | `1`     | 2.2.0+       | `--workers`
+
+Number of workers.
+
+## `server`
+
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+Int  | `null`  | 2.2.2+       | `--server PORT`
+
+Run events server on the given port.
+
+## `symExec`
+
+Type | Default | Available in
+-----|---------|-------------
+Bool | `false` | 2.2.4+
+
+Whether to add an additional symbolic execution worker.
+
+## `symExecConcolic`
+
+Type | Default | Available in
+-----|---------|-------------
+Bool | `true`  | 2.2.4+
+
+Whether symbolic execution will be concolic (vs full symbolic execution). Only
+relevant if `symExec` is true.
+
+## `symExecNSolvers`
+
+Type | Default | Available in
+-----|---------|-------------
+Int  | `1`     | 2.2.4+
+
+Number of SMT solvers used in symbolic execution. Only relevant if `symExec` is
+true.
+
+## `symExecTimeout`
+
+Type | Default | Available in
+-----|---------|-------------
+Int  | `30`    | 2.2.4+
+
+Timeout for symbolic execution SMT solver. Only relevant if `symExec` is true.
+
+## `symExecMaxIters`
+
+Type | Default | Available in
+-----|---------|-------------
+Int  | `10`    | 2.2.4+
+
+Number of times we may revisit a particular branching point. Only relevant if
+`symExec` is true and `symExecConcolic` is false.
+
+## `symExecAskSMTIters`
+
+Type | Default | Available in
+-----|---------|-------------
+Int  | `1`     | 2.2.4+
+
+Number of times we may revisit a particular branching point before we consult
+the smt solver to check reachability. Only relevant if `symExec` is true and
+`symExecConcolic` is false.
