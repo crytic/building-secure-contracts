@@ -96,6 +96,7 @@
       - [Interacting with off-chain data via FFI cheatcode](./program-analysis/echidna/advanced/interacting-with-offchain-data-via-ffi.md)
     - [Fuzzing tips](./program-analysis/echidna/fuzzing_tips.md)
     - [Frequently Asked Questions](./program-analysis/echidna/frequently_asked_questions.md)
+    - [Configuration options](./program-analysis/echidna/configuration.md)
     - [Exercises](./program-analysis/echidna/exercises/README.md)
       - [Exercise 1](./program-analysis/echidna/exercises/Exercise-1.md)
       - [Exercise 2](./program-analysis/echidna/exercises/Exercise-2.md)
