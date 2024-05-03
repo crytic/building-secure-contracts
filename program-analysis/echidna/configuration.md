@@ -6,9 +6,9 @@ The following is a list of all the options that may be provided in the Echidna c
 
 ## `testMode`
 
-Type | Default | Available in
------|---------|-------------
-String | `"property"` | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+String | `"property"` | * | `--test-mode MODE`
 
 The test mode to run. It should be one of the following items:
 
@@ -20,33 +20,33 @@ The test mode to run. It should be one of the following items:
 
 ## `testLimit`
 
-Type | Default | Available in
------|---------|-------------
-Int  | `50000` | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+Int  | `50000` | *            | `--test-limit N`
 
 Number of sequences of transactions to generate during testing.
 
 ## `seqLen`
 
-Type | Default | Available in
------|---------|-------------
-Int  | `100`   | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+Int  | `100`   | *            | `--seq-len N`
 
 Number of transactions to generate during testing.
 
 ## `shrinkLimit`
 
-Type | Default | Available in
------|---------|-------------
-Int  | `5000`  | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+Int  | `5000`  | *            | `-shrink-limit N`
 
 Number of attempts to shrink a failing sequence of transactions.
 
 ## `contractAddr`
 
-Type | Default | Available in
------|---------|-------------
-Address | `"0x00a329c0648769a73afac7f9381e08fb43dbea72"` | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+Address | `"0x00a329c0648769a73af` `ac7f9381e08fb43dbea72"` | * | `--contract-addr ADDR`
 
 Address to deploy the contract to test.
 
@@ -60,17 +60,17 @@ Enable the use of coverage-guided fuzzing and corpus collection.
 
 ## `corpusDir`
 
-Type | Default | Available in
------|---------|-------------
-String | `null` | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+String | `null` | * | `--corpus-dir PATH`
 
 Directory to save the corpus collected (requires coverage enabled).
 
 ## `deployer`
 
-Type | Default | Available in
------|---------|-------------
-Address | `"0x30000"` | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+Address | `"0x30000"` | * | `--deployer`
 
 Address of the deployer of the contract to test.
 
@@ -78,7 +78,7 @@ Address of the deployer of the contract to test.
 
 Type | Default | Available in
 -----|---------|-------------
-[⁠[⁠Address, String⁠]⁠] | `[]` | *
+[⁠[⁠Address, String⁠]⁠] | `[]` | 2.0.2+
 
 Addresses and contract names to deploy using the available source code. The deployer address is the same as the contract to test. Echidna will error if the deployment fails.
 
@@ -86,15 +86,15 @@ Addresses and contract names to deploy using the available source code. The depl
 
 Type | Default | Available in
 -----|---------|-------------
-[⁠[⁠Address, String⁠]⁠] | `[]` | *
+[⁠[⁠Address, String⁠]⁠] | `[]` | 2.0.2+
 
 Addresses and bytecodes to deploy. The deployer address is the same as the contract to test. Echidna will error if the deployment fails.
 
 ## `sender`
 
-Type | Default | Available in
------|---------|-------------
-[Address] | `["0x10000", "0x20000", "0x30000"]` | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+[Address] | `["0x10000", "0x20000", "0x30000"]` | * | `--sender`
 
 List of addresses to (randomly) use for the transactions sent during testing.
 
@@ -156,17 +156,17 @@ Maximum amount of block numbers between transactions.
 
 ## `solcArgs`
 
-Type | Default | Available in
------|---------|-------------
-String | `""` | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+String | `""` | * | `--solc-args ARGS`
 
 Additional arguments to use in `solc` for compiling the contract to test.
 
 ## `cryticArgs`
 
-Type | Default | Available in
------|---------|-------------
-[String] | `[]` | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+[String] | `[]` | * | `--crytic-args ARGS`
 
 Additional arguments to use in `crytic-compile` for compiling the contract to test.
 
@@ -180,9 +180,9 @@ Hide `solc` stderr output and additional information during the testing.
 
 ## `format`
 
-Type | Default | Available in
------|---------|-------------
-String | `null` | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+String | `null` | * | `--format FORMAT`
 
 Select a textual output format. By default, interactive TUI is run or text if a terminal is absent.
 
@@ -232,9 +232,9 @@ Stops the fuzzing campaign when the first test fails.
 
 ## `allContracts`
 
-Type | Default | Available in
------|---------|-------------
-Bool | `false` | *
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+Bool | `false` | 2.1.0+ (previously `multi-abi`) | `--all-contracts`
 
 Makes Echidna fuzz the provided test contracts and any other deployed contract whose ABI is known at runtime.
 
