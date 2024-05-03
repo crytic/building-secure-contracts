@@ -1,8 +1,12 @@
 # Configuration options
 
+<!-- To left align the tables -->
 <style>table {margin: 0}</style>
-
-The following is a list of all the options that may be provided in the Echidna configuration file.
+The following is a list of all the options that may be provided in the Echidna
+configuration file. Whenever an option can also be set via the command line, the
+CLI equivalent flag is provided as a reference. Some flags are relatively new
+and only available on recent Echidna builds; in those cases, the minimum Echidna
+version required to use the feature is indicated in the table.
 
 ## `testMode`
 
@@ -33,6 +37,22 @@ Type | Default | Available in | CLI equivalent
 Int  | `100`   | *            | `--seq-len N`
 
 Number of transactions to generate during testing.
+
+## `timeout`
+
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+Int  | `null`  | *            | `--timeout N`
+
+Campaign timeout, in seconds. By default it is not time-limited.
+
+## `seed`
+
+Type | Default | Available in | CLI equivalent
+-----|---------|--------------|---------------
+Int  | random  | *            | `--seed N`
+
+Seed used for random value generation. By default it is a random integer.
 
 ## `shrinkLimit`
 
@@ -237,6 +257,26 @@ Type | Default | Available in | CLI equivalent
 Bool | `false` | 2.1.0+ (previously `multi-abi`) | `--all-contracts`
 
 Makes Echidna fuzz the provided test contracts and any other deployed contract whose ABI is known at runtime.
+
+## `filterBlacklist`
+
+Type | Default | Available in
+-----|---------|-------------
+Bool | `true`  | *
+
+Allows Echidna to avoid calling (when set to true) or only call (when set to
+false) a set of functions. The function allowlist or denylist should be provided
+in `filterFunctions`.
+
+## `filterFunctions`
+
+Type | Default | Available in
+-----|---------|-------------
+[String] | `[]` | *
+
+Configures the function allowlist or denylist from `filterBlacklist`. The list
+should contain strings in the format of
+`"Contract.functionName(uint256,uint256)"` following the signature convention.
 
 ## `allowFFI`
 
