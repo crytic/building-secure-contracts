@@ -23,13 +23,15 @@ The test mode to run. It should be one of the following items:
 - `"overflow"`: Detect integer overflows (only available in Solidity 0.8.0 or greater).
 - `"exploration"`: Run contract code without executing any tests.
 
+Review the [testing modes tutorial](./basic/testing-modes.md) to select the one most suitable to your project.
+
 ## `testLimit`
 
 | Type | Default | Available in | CLI equivalent   |
 | ---- | ------- | ------------ | ---------------- |
 | Int  | `50000` | \*           | `--test-limit N` |
 
-Number of sequences of transactions to generate during testing.
+Number of transactions to generate during testing. The campaign will stop when the `testLimit` is reached or if a `timeout` is set and the execution time exceeds it.
 
 ## `seqLen`
 
@@ -37,7 +39,7 @@ Number of sequences of transactions to generate during testing.
 | ---- | ------- | ------------ | -------------- |
 | Int  | `100`   | \*           | `--seq-len N`  |
 
-Number of transactions to generate during testing.
+Number of transactions that a transaction sequence will have during testing, and maximum length of transaction sequences in the corpus. After every N transactions, Echidna will reset the EVM to the initial post-deployment state.
 
 ## `timeout`
 
@@ -45,7 +47,7 @@ Number of transactions to generate during testing.
 | ---- | ------- | ------------ | -------------- |
 | Int  | `null`  | \*           | `--timeout N`  |
 
-Campaign timeout, in seconds. By default it is not time-limited.
+Campaign timeout, in seconds. By default it is not time-limited. If a value is set, the campaign will stop when the time is exhausted or the `testLimit` is reached, whichever happens first.
 
 ## `seed`
 
@@ -53,7 +55,7 @@ Campaign timeout, in seconds. By default it is not time-limited.
 | ---- | ------- | ------------ | -------------- |
 | Int  | random  | \*           | `--seed N`     |
 
-Seed used for random value generation. By default it is a random integer.
+Seed used for random value generation. By default it is a random integer. The seed may not guarantee reproducibility if multiple `workers` are used, as the operating system thread scheduling may introduce additional randomness into the process.
 
 ## `shrinkLimit`
 
@@ -77,7 +79,7 @@ Address to deploy the contract to test.
 | ---- | ------- | ------------ |
 | Bool | `true`  | \*           |
 
-Enable the use of coverage-guided fuzzing and corpus collection.
+Enable the use of coverage-guided fuzzing and corpus collection. We recommend keeping this enabled.
 
 ## `corpusDir`
 
@@ -141,7 +143,7 @@ Prefix of the function names used as properties in the contract to test.
 | ---- | -------------------------------------- | ------------ |
 | Int  | `12500000` (current max gas per block) | \*           |
 
-Maximum amount of gas to consume when running function properties.
+Maximum amount of gas to consume when running function properties. If a property runs out of gas, it will be considered as a failure.
 
 ## `testMaxGas`
 
@@ -149,7 +151,7 @@ Maximum amount of gas to consume when running function properties.
 | ---- | -------------------------------------- | ------------ |
 | Int  | `12500000` (current max gas per block) | \*           |
 
-Maximum amount of gas to consume when running random transactions.
+Maximum amount of gas to consume when running random transactions. A non-property transaction that runs out of gas (e.g. a transaction in assertion mode) will not be considered a failure.
 
 ## `maxGasprice`
 
@@ -217,7 +219,7 @@ Select a textual output format. By default, interactive TUI is run or text if a 
 | ---- | ------- | ------------ |
 | Int  | `0`     | \*           |
 
-Initial Ether balance of `contractAddr`.
+Initial Ether balance of `contractAddr`. See our tutorial on [working with ETH](./basic/working-with-eth.md) for more details.
 
 ## `balanceAddr`
 
@@ -225,7 +227,7 @@ Initial Ether balance of `contractAddr`.
 | ---- | ------------ | ------------ |
 | Int  | `0xffffffff` | \*           |
 
-Initial Ether balance of `deployer` and each of the `sender` accounts.
+Initial Ether balance of `deployer` and each of the `sender` accounts. See our tutorial on [working with ETH](./basic/working-with-eth.md) for more details.
 
 ## `maxValue`
 
@@ -233,7 +235,7 @@ Initial Ether balance of `deployer` and each of the `sender` accounts.
 | ---- | --------------------------------- | ------------ |
 | Int  | `100000000000000000000` (100 ETH) | \*           |
 
-Max amount of value in each randomly generated transaction.
+Max amount of value in each randomly generated transaction. See our tutorial on [working with ETH](./basic/working-with-eth.md) for more details.
 
 ## `testDestruction`
 
@@ -289,19 +291,27 @@ Allows the use of the HEVM `ffi` cheatcode.
 
 ## `rpcUrl`
 
-| Type   | Default | Available in | CLI equivalent  |
-| ------ | ------- | ------------ | --------------- |
-| String | `null`  | 2.2.0+       | `--rpc-url URL` |
+| Type   | Default | Available in                                | CLI equivalent  | Env. variable equivalent |
+| ------ | ------- | ------------------------------------------- | --------------- | ------------------------ |
+| String | `null`  | 2.1.0+ (env), 2.2.0+ (config), 2.2.3+ (cli) | `--rpc-url URL` | `ECHIDNA_RPC_URL`        |
 
 URL to fetch contracts over RPC.
 
 ## `rpcBlock`
 
-| Type   | Default | Available in | CLI equivalent  |
-| ------ | ------- | ------------ | --------------- |
-| String | `null`  | 2.2.0+       | `--rpc-block N` |
+| Type   | Default | Available in                                | CLI equivalent  | Env. variable equivalent |
+| ------ | ------- | ------------------------------------------- | --------------- | ------------------------ |
+| String | `null`  | 2.1.0+ (env), 2.2.0+ (config), 2.2.3+ (cli) | `--rpc-block N` | `ECHIDNA_RPC_BLOCK`      |
 
 Block number to use when fetching over RPC.
+
+## `etherscanApiKey`
+
+| Type   | Default | Available in                  | Env. variable equivalent |
+| ------ | ------- | ----------------------------- | ------------------------ |
+| String | `null`  | 2.1.0+ (env), 2.2.4+ (config) | `ETHERSCAN_API_KEY`      |
+
+Etherscan API key used to fetch contract code.
 
 ## `coverageFormats`
 
@@ -351,8 +361,7 @@ relevant if `symExec` is true.
 | ---- | ------- | ------------ |
 | Int  | `1`     | 2.2.4+       |
 
-Number of SMT solvers used in symbolic execution. Only relevant if `symExec` is
-true.
+Number of SMT solvers used in symbolic execution. While there is a single symExec worker, N threads may be used to solve SMT queries. Only relevant if `symExec` is true.
 
 ## `symExecTimeout`
 
@@ -360,7 +369,7 @@ true.
 | ---- | ------- | ------------ |
 | Int  | `30`    | 2.2.4+       |
 
-Timeout for symbolic execution SMT solver. Only relevant if `symExec` is true.
+Timeout for symbolic execution SMT solver. Only relevant if `symExec` is true. When the SMT solver used is Z3, this timeout applies per query, and is not global.
 
 ## `symExecMaxIters`
 
