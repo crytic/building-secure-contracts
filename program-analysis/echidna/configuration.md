@@ -23,7 +23,8 @@ The test mode to run. It should be one of the following items:
 - `"overflow"`: Detect integer overflows (only available in Solidity 0.8.0 or greater).
 - `"exploration"`: Run contract code without executing any tests.
 
-Review the [testing modes tutorial](./basic/testing-modes.md) to select the one most suitable to your project.
+Review the [testing modes tutorial](./basic/testing-modes.md) to select the one
+most suitable to your project.
 
 ## `testLimit`
 
@@ -31,7 +32,9 @@ Review the [testing modes tutorial](./basic/testing-modes.md) to select the one 
 | ---- | ------- | ------------ | ---------------- |
 | Int  | `50000` | \*           | `--test-limit N` |
 
-Number of transactions to generate during testing. The campaign will stop when the `testLimit` is reached or if a `timeout` is set and the execution time exceeds it.
+Number of transactions to generate during testing. The campaign will stop when
+the `testLimit` is reached or if a `timeout` is set and the execution time
+exceeds it.
 
 ## `seqLen`
 
@@ -39,7 +42,9 @@ Number of transactions to generate during testing. The campaign will stop when t
 | ---- | ------- | ------------ | -------------- |
 | Int  | `100`   | \*           | `--seq-len N`  |
 
-Number of transactions that a transaction sequence will have during testing, and maximum length of transaction sequences in the corpus. After every N transactions, Echidna will reset the EVM to the initial post-deployment state.
+Number of transactions that a transaction sequence will have during testing, and
+maximum length of transaction sequences in the corpus. After every N
+transactions, Echidna will reset the EVM to the initial post-deployment state.
 
 ## `timeout`
 
@@ -47,7 +52,9 @@ Number of transactions that a transaction sequence will have during testing, and
 | ---- | ------- | ------------ | -------------- |
 | Int  | `null`  | \*           | `--timeout N`  |
 
-Campaign timeout, in seconds. By default it is not time-limited. If a value is set, the campaign will stop when the time is exhausted or the `testLimit` is reached, whichever happens first.
+Campaign timeout, in seconds. By default it is not time-limited. If a value is
+set, the campaign will stop when the time is exhausted or the `testLimit` is
+reached, whichever happens first.
 
 ## `seed`
 
@@ -55,7 +62,10 @@ Campaign timeout, in seconds. By default it is not time-limited. If a value is s
 | ---- | ------- | ------------ | -------------- |
 | Int  | random  | \*           | `--seed N`     |
 
-Seed used for random value generation. By default it is a random integer. The seed may not guarantee reproducibility if multiple `workers` are used, as the operating system thread scheduling may introduce additional randomness into the process.
+Seed used for random value generation. By default it is a random integer. The
+seed may not guarantee reproducibility if multiple `workers` are used, as the
+operating system thread scheduling may introduce additional randomness into the
+process.
 
 ## `shrinkLimit`
 
@@ -79,7 +89,8 @@ Address to deploy the contract to test.
 | ---- | ------- | ------------ |
 | Bool | `true`  | \*           |
 
-Enable the use of coverage-guided fuzzing and corpus collection. We recommend keeping this enabled.
+Enable the use of coverage-guided fuzzing and corpus collection. We recommend
+keeping this enabled.
 
 ## `corpusDir`
 
@@ -103,7 +114,9 @@ Address of the deployer of the contract to test.
 | ----------------------- | ------- | ------------ |
 | [⁠[⁠Address, String⁠]⁠] | `[]`    | 2.0.2+       |
 
-Addresses and contract names to deploy using the available source code. The deployer address is the same as the contract to test. Echidna will error if the deployment fails.
+Addresses and contract names to deploy using the available source code. The
+deployer address is the same as the contract to test. Echidna will error if the
+deployment fails.
 
 ## `deployBytecodes`
 
@@ -111,7 +124,8 @@ Addresses and contract names to deploy using the available source code. The depl
 | ----------------------- | ------- | ------------ |
 | [⁠[⁠Address, String⁠]⁠] | `[]`    | 2.0.2+       |
 
-Addresses and bytecodes to deploy. The deployer address is the same as the contract to test. Echidna will error if the deployment fails.
+Addresses and bytecodes to deploy. The deployer address is the same as the
+contract to test. Echidna will error if the deployment fails.
 
 ## `sender`
 
@@ -143,7 +157,8 @@ Prefix of the function names used as properties in the contract to test.
 | ---- | -------------------------------------- | ------------ |
 | Int  | `12500000` (current max gas per block) | \*           |
 
-Maximum amount of gas to consume when running function properties. If a property runs out of gas, it will be considered as a failure.
+Maximum amount of gas to consume when running function properties. If a property
+runs out of gas, it will be considered as a failure.
 
 ## `testMaxGas`
 
@@ -151,7 +166,9 @@ Maximum amount of gas to consume when running function properties. If a property
 | ---- | -------------------------------------- | ------------ |
 | Int  | `12500000` (current max gas per block) | \*           |
 
-Maximum amount of gas to consume when running random transactions. A non-property transaction that runs out of gas (e.g. a transaction in assertion mode) will not be considered a failure.
+Maximum amount of gas to consume when running random transactions. A
+non-property transaction that runs out of gas (e.g. a transaction in assertion
+mode) will not be considered a failure.
 
 ## `maxGasprice`
 
@@ -159,7 +176,8 @@ Maximum amount of gas to consume when running random transactions. A non-propert
 | ---- | ------- | ------------ |
 | Int  | `0`     | \*           |
 
-Maximum amount of gas price to randomly use in transactions. Do not change it unless you absolutely need it.
+Maximum amount of gas price to randomly use in transactions. Do not change it
+unless you absolutely need it.
 
 ## `maxTimeDelay`
 
@@ -191,7 +209,8 @@ Additional arguments to use in `solc` for compiling the contract to test.
 | -------- | ------- | ------------ | -------------------- |
 | [String] | `[]`    | \*           | `--crytic-args ARGS` |
 
-Additional arguments to use in `crytic-compile` for compiling the contract to test.
+Additional arguments to use in `crytic-compile` for compiling the contract to
+test.
 
 ## `quiet`
 
@@ -207,7 +226,8 @@ Hide `solc` stderr output and additional information during the testing.
 | ------ | ------- | ------------ | ----------------- |
 | String | `null`  | \*           | `--format FORMAT` |
 
-Select a textual output format. By default, interactive TUI is run or text if a terminal is absent.
+Select a textual output format. By default, interactive TUI is run or text if a
+terminal is absent.
 
 - `"text"`: simple textual interface.
 - `"json"`: JSON output.
@@ -219,7 +239,8 @@ Select a textual output format. By default, interactive TUI is run or text if a 
 | ---- | ------- | ------------ |
 | Int  | `0`     | \*           |
 
-Initial Ether balance of `contractAddr`. See our tutorial on [working with ETH](./basic/working-with-eth.md) for more details.
+Initial Ether balance of `contractAddr`. See our tutorial on [working with
+ETH](./basic/working-with-eth.md) for more details.
 
 ## `balanceAddr`
 
@@ -227,7 +248,8 @@ Initial Ether balance of `contractAddr`. See our tutorial on [working with ETH](
 | ---- | ------------ | ------------ |
 | Int  | `0xffffffff` | \*           |
 
-Initial Ether balance of `deployer` and each of the `sender` accounts. See our tutorial on [working with ETH](./basic/working-with-eth.md) for more details.
+Initial Ether balance of `deployer` and each of the `sender` accounts. See our
+tutorial on [working with ETH](./basic/working-with-eth.md) for more details.
 
 ## `maxValue`
 
@@ -235,7 +257,8 @@ Initial Ether balance of `deployer` and each of the `sender` accounts. See our t
 | ---- | --------------------------------- | ------------ |
 | Int  | `100000000000000000000` (100 ETH) | \*           |
 
-Max amount of value in each randomly generated transaction. See our tutorial on [working with ETH](./basic/working-with-eth.md) for more details.
+Max amount of value in each randomly generated transaction. See our tutorial on
+[working with ETH](./basic/working-with-eth.md) for more details.
 
 ## `testDestruction`
 
@@ -259,7 +282,8 @@ Stops the fuzzing campaign when the first test fails.
 | ---- | ------- | ------------------------------- | ----------------- |
 | Bool | `false` | 2.1.0+ (previously `multi-abi`) | `--all-contracts` |
 
-Makes Echidna fuzz the provided test contracts and any other deployed contract whose ABI is known at runtime.
+Makes Echidna fuzz the provided test contracts and any other deployed contract
+whose ABI is known at runtime.
 
 ## `filterBlacklist`
 
@@ -361,7 +385,9 @@ relevant if `symExec` is true.
 | ---- | ------- | ------------ |
 | Int  | `1`     | 2.2.4+       |
 
-Number of SMT solvers used in symbolic execution. While there is a single symExec worker, N threads may be used to solve SMT queries. Only relevant if `symExec` is true.
+Number of SMT solvers used in symbolic execution. While there is a single
+symExec worker, N threads may be used to solve SMT queries. Only relevant if
+`symExec` is true.
 
 ## `symExecTimeout`
 
@@ -369,7 +395,9 @@ Number of SMT solvers used in symbolic execution. While there is a single symExe
 | ---- | ------- | ------------ |
 | Int  | `30`    | 2.2.4+       |
 
-Timeout for symbolic execution SMT solver. Only relevant if `symExec` is true. When the SMT solver used is Z3, this timeout applies per query, and is not global.
+Timeout for symbolic execution SMT solver. Only relevant if `symExec` is true.
+When the SMT solver used is Z3, this timeout applies per query, and is not
+global.
 
 ## `symExecMaxIters`
 
