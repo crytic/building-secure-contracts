@@ -1,8 +1,5 @@
 # Configuration options
 
-<!-- To left align the tables -->
-<style>table {margin: 0}</style>
-
 The following is a list of all the options that may be provided in the Echidna
 configuration file. Whenever an option can also be set via the command line, the
 CLI equivalent flag is provided as a reference. Some flags are relatively new

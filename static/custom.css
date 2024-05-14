@@ -5,3 +5,8 @@
   width: 50%;
   max-width: max-content;
 }
+
+/* program-analysis/echidna/configuration.md */
+h1#configuration-options ~ div > table {
+  margin: 0;
+}
