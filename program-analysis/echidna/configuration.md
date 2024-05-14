@@ -130,7 +130,10 @@ contract to test. Echidna will error if the deployment fails.
 | --------- | ----------------------------------- | ------------ | -------------- |
 | [Address] | `["0x10000", "0x20000", "0x30000"]` | \*           | `--sender`     |
 
-List of addresses to (randomly) use for the transactions sent during testing.
+List of addresses to (randomly) use as `msg.sender` for the transactions sent
+during testing. These addresses are used as the sender for all transactions
+produced by Echidna, except for property evaluation in `property` mode (see
+`psender` below).
 
 ## `psender`
 
@@ -138,7 +141,9 @@ List of addresses to (randomly) use for the transactions sent during testing.
 | ------- | ----------- | ------------ |
 | Address | `"0x10000"` | \*           |
 
-Address of the sender of the property to test.
+Address of `msg.sender` to use for property evaluation. This address is only
+used to evaluate properties (functions with the configured `prefix`) while
+executing Echidna in `property` mode.
 
 ## `prefix`
 
