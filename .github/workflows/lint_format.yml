@@ -25,6 +25,13 @@ jobs:
         run: |
           npm ci
 
+      - name: Remove Medusa uncessary files
+        run: |
+          rm -rf program-analysis/medusa/chain
+          rm -rf program-analysis/medusa/compilation
+          rm -rf program-analysis/medusa/fuzzing
+          rm program-analysis/medusa/docs/theme/highlight.js
+
       - name: Run lint
         run: |
           npm run lint:format
