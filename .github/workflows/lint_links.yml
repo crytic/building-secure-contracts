@@ -24,3 +24,4 @@ jobs:
         with:
           use-quiet-mode: "yes"
           check-modified-files-only: ${{ (github.event_name == 'pull_request' && 'yes') || 'no' }}
+          submodules: true
