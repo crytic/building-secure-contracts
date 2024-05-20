@@ -1,0 +1,3 @@
+[submodule "program-analysis/medusa"]
+	path = program-analysis/medusa
+	url = https://github.com/crytic/medusa.git
