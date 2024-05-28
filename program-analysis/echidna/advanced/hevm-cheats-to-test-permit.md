@@ -8,7 +8,7 @@
 
 This method presents a new way of allocating allowances, as signatures can be computed off-chain and passed to a contract. It allows a relayer to pay the entire gas fee of the permit transaction in exchange for a fee, enabling completely gasless transactions for a user. Furthermore, this removes the typical `approve() -> transferFrom()` pattern that forces users to send two transactions instead of just one through this new method.
 
-Note that for the permit function to work, a valid signature is needed. This example will demonstrate how we can use [`hevm`'s `sign` cheatcode](https://github.com/dapphub/dapptools/blob/master/src/hevm/README.md#cheat-codes) to sign data with a private key. More generally, you can use this cheatcode to test anything that requires valid signatures.
+Note that for the permit function to work, a valid signature is needed. This example will demonstrate how we can use [`hevm`'s `sign` cheatcode](https://hevm.dev/ds-test-tutorial.html#supported-cheat-codes) to sign data with a private key. More generally, you can use this cheatcode to test anything that requires valid signatures.
 
 ## Example
 
