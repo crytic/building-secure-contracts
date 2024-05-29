@@ -153,16 +153,16 @@ jobs:
       - name: Go setup
         uses: actions/setup-go@v4
         with:
-            go-version: "^1.18.1"
+          go-version: "^1.18.1"
 
       - name: Install medusa
         run: |
-            git clone https://github.com/crytic/medusa.git
-            cd medusa
-            go build -o medusa -v .
-            go install -v .
-            sudo cp medusa /usr/bin
-            pip install crytic-compile solc-select
+          git clone https://github.com/crytic/medusa.git
+          cd medusa
+          go build -o medusa -v .
+          go install -v .
+          sudo cp medusa /usr/bin
+          pip install crytic-compile solc-select
 
       - name: Run Medusa
         continue-on-error: true
