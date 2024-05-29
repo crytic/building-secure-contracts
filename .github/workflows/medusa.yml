@@ -87,14 +87,14 @@ jobs:
             contract: C
             config: filter.yaml
             outcome: failure
-            expected: 'echidna_state4()\" failed after the following call sequence'
+            expected: 'echidna_state4()\" resulted in an assertion failure after the following call sequence'
           - name: Assert
             workdir: program-analysis/echidna/example/
             files: assert.sol
             config: assert.yaml
             contract: Incrementor
             outcome: failure
-            expected: 'inc(uint256)\" failed after the following call sequence'
+            expected: 'inc(uint256)\" resulted in an assertion failure after the following call sequence'
           - name: PopsicleBroken
             workdir: program-analysis/echidna/example/
             files: PopsicleBroken.sol
@@ -171,7 +171,7 @@ jobs:
         run: |
           solc-select install ${{ matrix.solc-version || '0.8.0' }}
           solc-select use ${{ matrix.solc-version || '0.8.0' }}
-          medusa fuzz --compilation-target ${{ matrix.files }} --target-contracts ${{ matrix.contract }} --no-color --test-limit 10000 --config medusa.json > ${{ matrix.files }}.out || true
+          medusa fuzz --compilation-target ${{ matrix.files }} --target-contracts ${{ matrix.contract }} --no-color --test-limit 30000 --config medusa.json > ${{ matrix.files }}.out || true
 
       - name: Verify that the output is correct
         working-directory: ${{ matrix.workdir }}
