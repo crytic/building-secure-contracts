@@ -1,0 +1,184 @@
+name: Run Medusa tests
+
+on:
+  push:
+    paths:
+      - ".github/workflows/medusa.yml"
+      - "program-analysis/echidna/**/*.sol"
+      - "program-analysis/echidna/**/*.yml"
+    branches:
+      - master
+  pull_request:
+    paths:
+      - ".github/workflows/medusa.yml"
+      - "program-analysis/echidna/**/*.sol"
+      - "program-analysis/echidna/**/*.yml"
+  schedule:
+    # run CI every day even if no PRs/merges occur
+    - cron: "0 12 * * *"
+
+jobs:
+  tests:
+    name: ${{ matrix.name }}
+    continue-on-error: ${{ matrix.flaky == true }}
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Exercise 1
+            workdir: program-analysis/echidna/exercises/exercise1/
+            files: solution.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_test_balance()\" failed after the following call sequence'
+          - name: Exercise 2
+            workdir: program-analysis/echidna/exercises/exercise2/
+            files: solution.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_no_transfer()\" failed after the following call sequence'
+          - name: Exercise 3
+            workdir: program-analysis/echidna/exercises/exercise3/
+            files: solution.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_test_balance()\" failed after the following call sequence'
+          - name: Exercise 4
+            workdir: program-analysis/echidna/exercises/exercise4/
+            files: solution.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'transfer(address,uint256)\" resulted in an assertion failure after the following call sequence:'
+          # - name: Exercise 5
+          #   workdir: dvdefi/
+          #   files: .
+          #   config: naivereceiver.yaml
+          #   crytic-args: --hardhat-ignore-compile
+          #   contract: NaiveReceiverEchidna
+          #   outcome: failure
+          #   expected: 'echidna_test_contract_balance:\s*failed'
+          # - name: Exercise 6
+          #   workdir: dvdefi/
+          #   files: .
+          #   config: unstoppable.yaml
+          #   crytic-args: --hardhat-ignore-compile
+          #   contract: UnstoppableEchidna
+          #   outcome: failure
+          #   expected: 'echidna_testFlashLoan:\s*failed'
+          # - name: Exercise 7
+          #   workdir: dvdefi/
+          #   files: .
+          #   config: sideentrance.yaml
+          #   crytic-args: --hardhat-ignore-compile
+          #   contract: SideEntranceEchidna
+          #   outcome: failure
+          #   expected: 'testPoolBalance():\s*failed'
+          - name: TestToken
+            workdir: program-analysis/echidna/example/
+            files: testtoken.sol
+            contract: TestToken
+            outcome: failure
+            expected: 'echidna_balance_under_1000()\" failed after the following call sequence'
+          - name: Multi
+            workdir: program-analysis/echidna/example/
+            files: multi.sol
+            contract: C
+            config: filter.yaml
+            outcome: failure
+            expected: 'echidna_state4()\" failed after the following call sequence'
+          - name: Assert
+            workdir: program-analysis/echidna/example/
+            files: assert.sol
+            config: assert.yaml
+            contract: Incrementor
+            outcome: failure
+            expected: 'inc(uint256)\" resulted in an assertion failure after the following call sequence'
+          - name: PopsicleBroken
+            workdir: program-analysis/echidna/example/
+            files: PopsicleBroken.sol
+            solc-version: 0.8.4
+            contract: PopsicleBroken
+            outcome: failure
+            expected: 'PopsicleBroken.totalBalanceAfterTransferIsPreserved(address,uint256)\" resulted in an assertion failure after the following call sequence'
+          - name: PopsicleFixed
+            workdir: program-analysis/echidna/example/
+            files: PopsicleFixed.sol
+            solc-version: 0.8.4
+            contract: PopsicleFixed
+            outcome: success
+            expected: '\[PASSED\] Assertion Test: PopsicleFixed.totalBalanceAfterTransferIsPreserved(address,uint256)'
+          - name: TestDepositWithPermit
+            workdir: program-analysis/echidna/example/
+            files: TestDepositWithPermit.sol
+            solc-version: 0.8.0
+            config: testdeposit.yaml
+            contract: TestDepositWithPermit
+            outcome: success
+            expected: '\[PASSED\] Assertion Test: TestDepositWithPermit.testERC20PermitDeposit(uint256)'
+          # - name: MultiABI
+          #   workdir: program-analysis/echidna/example/
+          #   files: allContracts.sol
+          #   solc-version: 0.8.0
+          #   config: allContracts.yaml
+          #   contract: EchidnaTest
+          #   outcome: failure
+          #   expected: 'test_flag_is_false():\s*failed'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout Damn Vulnerable DeFi solutions
+        uses: actions/checkout@v4
+        if: startsWith(matrix.workdir, 'dvdefi')
+        with:
+          repository: crytic/damn-vulnerable-defi-echidna
+          ref: solutions
+          path: ${{ matrix.workdir }}
+
+      - name: Set up Nodejs
+        uses: actions/setup-node@v3
+        if: startsWith(matrix.workdir, 'dvdefi')
+        with:
+          node-version: 16
+
+      - name: Install dependencies and compile
+        if: startsWith(matrix.workdir, 'dvdefi')
+        run: |
+          yarn install --frozen-lockfile
+          npx hardhat compile --force
+        working-directory: ${{ matrix.workdir }}
+
+      - name: Go setup
+        uses: actions/setup-go@v4
+        with:
+          go-version: "^1.18.1"
+
+      - name: Install medusa
+        run: |
+          git clone https://github.com/crytic/medusa.git
+          cd medusa
+          go build -o medusa -v .
+          go install -v .
+          sudo cp medusa /usr/bin
+          pip install crytic-compile solc-select
+
+      - name: Run Medusa
+        continue-on-error: true
+        working-directory: ${{ matrix.workdir }}
+        run: |
+          solc-select install ${{ matrix.solc-version || '0.8.0' }}
+          solc-select use ${{ matrix.solc-version || '0.8.0' }}
+          medusa fuzz --compilation-target ${{ matrix.files }} --target-contracts ${{ matrix.contract }} --no-color --test-limit 100000 --config medusa.json > ${{ matrix.files }}.out || true
+
+      - name: Verify that the output is correct
+        working-directory: ${{ matrix.workdir }}
+        run: |
+          if grep -q "${{ matrix.expected }}" "${{ matrix.files }}.out"; then
+            echo "Output matches"
+          else
+            echo "Output mismatch. Expected something matching '${{ matrix.expected }}'. Got the following:"
+            cat "${{ matrix.files }}.out"
+            exit 1
+          fi

@@ -1,0 +1,72 @@
+{
+  "fuzzing": {
+    "workers": 10,
+    "workerResetLimit": 50,
+    "timeout": 0,
+    "testLimit": 0,
+    "callSequenceLength": 100,
+    "corpusDirectory": "",
+    "coverageEnabled": true,
+    "targetContracts": [],
+    "targetContractsBalances": [],
+    "constructorArgs": {},
+    "deployerAddress": "0x30000",
+    "senderAddresses": ["0x10000", "0x20000", "0x30000"],
+    "blockNumberDelayMax": 60480,
+    "blockTimestampDelayMax": 604800,
+    "blockGasLimit": 125000000,
+    "transactionGasLimit": 12500000,
+    "testing": {
+      "stopOnFailedTest": true,
+      "stopOnFailedContractMatching": false,
+      "stopOnNoTests": true,
+      "testAllContracts": false,
+      "traceAll": false,
+      "assertionTesting": {
+        "enabled": true,
+        "testViewMethods": false,
+        "panicCodeConfig": {
+          "failOnCompilerInsertedPanic": false,
+          "failOnAssertion": true,
+          "failOnArithmeticUnderflow": false,
+          "failOnDivideByZero": false,
+          "failOnEnumTypeConversionOutOfBounds": false,
+          "failOnIncorrectStorageAccess": false,
+          "failOnPopEmptyArray": false,
+          "failOnOutOfBoundsArrayAccess": false,
+          "failOnAllocateTooMuchMemory": false,
+          "failOnCallUninitializedVariable": false
+        }
+      },
+      "propertyTesting": {
+        "enabled": true,
+        "testPrefixes": ["property_"]
+      },
+      "optimizationTesting": {
+        "enabled": true,
+        "testPrefixes": ["optimize_"]
+      }
+    },
+    "chainConfig": {
+      "codeSizeCheckDisabled": true,
+      "cheatCodes": {
+        "cheatCodesEnabled": true,
+        "enableFFI": false
+      }
+    }
+  },
+  "compilation": {
+    "platform": "crytic-compile",
+    "platformConfig": {
+      "target": ".",
+      "solcVersion": "",
+      "exportDirectory": "",
+      "args": []
+    }
+  },
+  "logging": {
+    "level": "info",
+    "logDirectory": "",
+    "noColor": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "fuzzing": {
+    "testing": {
+      "propertyTesting": {
+        "enabled": true,
+        "testPrefixes": ["echidna_"]
+      }
+    }
+  },
+  "compilation": {
+    "platform": "crytic-compile",
+    "platformConfig": {
+      "target": ".",
+      "solcVersion": "",
+      "exportDirectory": "",
+      "args": []
+    }
+  }
+}
