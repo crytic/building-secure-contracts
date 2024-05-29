@@ -47,7 +47,6 @@ jobs:
           - name: Exercise 4
             workdir: program-analysis/echidna/exercises/exercise4/
             files: solution.sol
-            config: config.yaml
             contract: TestToken
             outcome: failure
             expected: 'transfer(address,uint256)\" failed after the following call sequence'
@@ -87,7 +86,7 @@ jobs:
             contract: C
             config: filter.yaml
             outcome: failure
-            expected: 'echidna_state4()\" resulted in an assertion failure after the following call sequence'
+            expected: 'echidna_state4()\" failed after the following call sequence'
           - name: Assert
             workdir: program-analysis/echidna/example/
             files: assert.sol

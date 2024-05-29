@@ -1,8 +1,10 @@
 {
 	"fuzzing": {
 		"testing": {
+			"assertionTesting": {
+                                "enabled": true
+			},
 			"propertyTesting": {
-				"enabled": true,
 				"testPrefixes": [
 					"echidna_"
 				]
