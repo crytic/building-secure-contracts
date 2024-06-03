@@ -13,8 +13,7 @@
 
 ## Introduction
 
-We will see how to constrain the exploration. We will make the assumption that the
-documentation of `f()` states that the function is never called with `a == 65`, so any bug with `a == 65` is not a real bug. The target is still the following smart contract (_[example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)_):
+We will explore how to limit the exploration by adding constraints. Assuming the documentation of `f()` states that the function is never called with `a == 65`, any bug with `a == 65` is not considered a real bug. Our target is the following smart contract ([example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)):
 
 ```solidity
 pragma solidity >=0.4.24 <0.6.0;
@@ -30,7 +29,7 @@ contract Simple {
 
 ## Operators
 
-The [Operators](https://github.com/trailofbits/manticore/blob/master/manticore/core/smtlib/operators.py) module facilitates the manipulation of constraints, among other it provides:
+The [Operators](https://github.com/trailofbits/manticore/blob/master/manticore/core/smtlib/operators.py) module enables constraint manipulation and provides various operations, such as:
 
 - Operators.AND,
 - Operators.OR,
@@ -39,13 +38,13 @@ The [Operators](https://github.com/trailofbits/manticore/blob/master/manticore/c
 - Operators.ULT (unsigned lower than),
 - Operators.ULE (unsigned lower than or equal to).
 
-To import the module use the following:
+To import the module, use the following:
 
 ```python3
 from manticore.core.smtlib import Operators
 ```
 
-`Operators.CONCAT` is used to concatenate an array to a value. For example, the return_data of a transaction needs to be changed to a value to be checked against another value:
+`Operators.CONCAT` can be used to concatenate an array to a value. For instance, the return_data of a transaction needs to be converted to a value before checking it against another value:
 
 ```python3
 last_return = Operators.CONCAT(256, *last_return)
@@ -53,12 +52,11 @@ last_return = Operators.CONCAT(256, *last_return)
 
 ## Constraints
 
-You can use constraints globally or for a specific state.
+Constraints can be applied globally or to a specific state.
 
 ### Global constraint
 
-Use `m.constrain(constraint)` to add a global cosntraint.
-For example, you can call a contract from a symbolic address, and restraint this address to be specific values:
+To add a global constraint, use `m.constrain(constraint)`. For example, you can call a contract from a symbolic address and limit this address to specific values:
 
 ```python3
 symbolic_address = m.make_symbolic_value()
@@ -71,13 +69,11 @@ m.transaction(caller=user_account,
 
 ### State constraint
 
-Use [state.constrain(constraint)](https://manticore.readthedocs.io/en/latest/states.html?highlight=statebase#manticore.core.state.StateBase.constrain) to add a constraint to a specific state
-It can be used to constrain the state after its exploration to check some property on it.
+To add a constraint to a specific state, use [`state.constrain(constraint)`](https://manticore.readthedocs.io/en/latest/states.html?highlight=statebase#manticore.core.state.StateBase.constrain). It can be employed to constrain the state after its exploration in order to check properties on it.
 
 ## Checking Constraint
 
-Use `solver.check(state.constraints)` to know if a constraint is still feasible.
-For example, the following will constraint symbolic_value to be different from 65 and check if the state is still feasible:
+`solver.check(state.constraints)` can be used to determine if a constraint is still feasible. For instance, the following code constrains `symbolic_value` to be different from 65 and checks if the state is still feasible:
 
 ```python3
 state.constrain(symbolic_var != 65)
@@ -87,7 +83,7 @@ if solver.check(state.constraints):
 
 ## Summary: Adding Constraints
 
-Adding constraint to the previous code, we obtain:
+By incorporating constraints into the previous code, we obtain:
 
 ```python3
 from manticore.ethereum import ManticoreEVM
@@ -122,6 +118,6 @@ if no_bug_found:
     print(f'No bug found')
 ```
 
-All the code above you can find into the [example_constraint.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example_constraint.py)
+The complete code can be found in [example_constraint.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example_constraint.py).
 
 The next step is to follow the [exercises](./exercises).

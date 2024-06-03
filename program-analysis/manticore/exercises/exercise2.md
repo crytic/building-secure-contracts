@@ -1,10 +1,10 @@
-# Exercise 2 : Arithmetic overflow through multiple transactions
+# Exercise 2: Arithmetic Overflow through Multiple Transactions
 
-Use Manticore to find if an overflow is possible in Overflow.add. Propose a fix of the contract, and test your fix using your Manticore script.
+Use Manticore to find if an overflow is possible in Overflow.add. Propose a fix for the contract and test your fix using your Manticore script.
 
-## Proposed scenario
+## Proposed Scenario
 
-Follow the pattern initialization, exploration and property for the script.
+Follow the pattern of initialization, exploration, and property for the script.
 
 ## Initialization
 
@@ -13,12 +13,12 @@ Follow the pattern initialization, exploration and property for the script.
 
 ## Exploration
 
-- Call two times `add` with two symbolic values
+- Call `add` twice with two symbolic values
 - Call `sellerBalance()`
 
 ## Property
 
-- Check if it is possible for the value returned by sellerBalance() to be lower than the first input.
+- Check if it is possible for the value returned by `sellerBalance()` to be lower than the first input.
 
 ## Hints
 
