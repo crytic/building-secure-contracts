@@ -420,7 +420,7 @@ Number of times we may revisit a particular branching point before we consult
 the smt solver to check reachability. Only relevant if `symExec` is true and
 `symExecConcolic` is false.
 
-## Experimental or deprecated options
+## Experimental options
 
 There are some options in Echidna that are meant for advanced debugging and
 experimenting. Those are listed below.
