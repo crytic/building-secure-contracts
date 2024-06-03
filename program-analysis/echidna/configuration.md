@@ -6,7 +6,7 @@ CLI equivalent flag is provided as a reference. Some flags are relatively new
 and only available on recent Echidna builds; in those cases, the minimum Echidna
 version required to use the feature is indicated in the table.
 
-## `testMode`
+### `testMode`
 
 | Type   | Default      | Available in | CLI equivalent     |
 | ------ | ------------ | ------------ | ------------------ |
@@ -23,7 +23,7 @@ The test mode to run. It should be one of the following items:
 Review the [testing modes tutorial](./basic/testing-modes.md) to select the one
 most suitable to your project.
 
-## `testLimit`
+### `testLimit`
 
 | Type | Default | Available in | CLI equivalent   |
 | ---- | ------- | ------------ | ---------------- |
@@ -33,7 +33,7 @@ Number of transactions to generate during testing. The campaign will stop when
 the `testLimit` is reached or if a `timeout` is set and the execution time
 exceeds it.
 
-## `seqLen`
+### `seqLen`
 
 | Type | Default | Available in | CLI equivalent |
 | ---- | ------- | ------------ | -------------- |
@@ -43,7 +43,7 @@ Number of transactions that a transaction sequence will have during testing, and
 maximum length of transaction sequences in the corpus. After every N
 transactions, Echidna will reset the EVM to the initial post-deployment state.
 
-## `timeout`
+### `timeout`
 
 | Type | Default | Available in | CLI equivalent |
 | ---- | ------- | ------------ | -------------- |
@@ -53,7 +53,7 @@ Campaign timeout, in seconds. By default it is not time-limited. If a value is
 set, the campaign will stop when the time is exhausted or the `testLimit` is
 reached, whichever happens first.
 
-## `seed`
+### `seed`
 
 | Type | Default | Available in | CLI equivalent |
 | ---- | ------- | ------------ | -------------- |
@@ -64,7 +64,7 @@ seed may not guarantee reproducibility if multiple `workers` are used, as the
 operating system thread scheduling may introduce additional randomness into the
 process.
 
-## `shrinkLimit`
+### `shrinkLimit`
 
 | Type | Default | Available in | CLI equivalent    |
 | ---- | ------- | ------------ | ----------------- |
@@ -72,7 +72,7 @@ process.
 
 Number of attempts to shrink a failing sequence of transactions.
 
-## `contractAddr`
+### `contractAddr`
 
 | Type    | Default                                           | Available in | CLI equivalent         |
 | ------- | ------------------------------------------------- | ------------ | ---------------------- |
@@ -80,7 +80,7 @@ Number of attempts to shrink a failing sequence of transactions.
 
 Address to deploy the contract to test.
 
-## `coverage`
+### `coverage`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -89,7 +89,7 @@ Address to deploy the contract to test.
 Enable the use of coverage-guided fuzzing and corpus collection. We recommend
 keeping this enabled.
 
-## `corpusDir`
+### `corpusDir`
 
 | Type   | Default | Available in | CLI equivalent      |
 | ------ | ------- | ------------ | ------------------- |
@@ -97,7 +97,7 @@ keeping this enabled.
 
 Directory to save the corpus collected (requires coverage enabled).
 
-## `deployer`
+### `deployer`
 
 | Type    | Default     | Available in | CLI equivalent |
 | ------- | ----------- | ------------ | -------------- |
@@ -105,7 +105,7 @@ Directory to save the corpus collected (requires coverage enabled).
 
 Address of the deployer of the contract to test.
 
-## `deployContracts`
+### `deployContracts`
 
 | Type                    | Default | Available in |
 | ----------------------- | ------- | ------------ |
@@ -115,7 +115,7 @@ Addresses and contract names to deploy using the available source code. The
 deployer address is the same as the contract to test. Echidna will error if the
 deployment fails.
 
-## `deployBytecodes`
+### `deployBytecodes`
 
 | Type                    | Default | Available in |
 | ----------------------- | ------- | ------------ |
@@ -124,7 +124,7 @@ deployment fails.
 Addresses and bytecodes to deploy. The deployer address is the same as the
 contract to test. Echidna will error if the deployment fails.
 
-## `sender`
+### `sender`
 
 | Type      | Default                             | Available in | CLI equivalent |
 | --------- | ----------------------------------- | ------------ | -------------- |
@@ -135,7 +135,7 @@ during testing. These addresses are used as the sender for all transactions
 produced by Echidna, except for property evaluation in `property` mode (see
 `psender` below).
 
-## `psender`
+### `psender`
 
 | Type    | Default     | Available in |
 | ------- | ----------- | ------------ |
@@ -145,7 +145,7 @@ Address of `msg.sender` to use for property evaluation. This address is only
 used to evaluate properties (functions with the configured `prefix`) while
 executing Echidna in `property` mode.
 
-## `prefix`
+### `prefix`
 
 | Type   | Default      | Available in |
 | ------ | ------------ | ------------ |
@@ -153,7 +153,7 @@ executing Echidna in `property` mode.
 
 Prefix of the function names used as properties in the contract to test.
 
-## `propMaxGas`
+### `propMaxGas`
 
 | Type | Default                                | Available in |
 | ---- | -------------------------------------- | ------------ |
@@ -162,7 +162,7 @@ Prefix of the function names used as properties in the contract to test.
 Maximum amount of gas to consume when running function properties. If a property
 runs out of gas, it will be considered as a failure.
 
-## `testMaxGas`
+### `testMaxGas`
 
 | Type | Default                                | Available in |
 | ---- | -------------------------------------- | ------------ |
@@ -172,7 +172,7 @@ Maximum amount of gas to consume when running random transactions. A
 non-property transaction that runs out of gas (e.g. a transaction in assertion
 mode) will not be considered a failure.
 
-## `maxGasprice`
+### `maxGasprice`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -181,7 +181,7 @@ mode) will not be considered a failure.
 Maximum amount of gas price to randomly use in transactions. Do not change it
 unless you absolutely need it.
 
-## `maxTimeDelay`
+### `maxTimeDelay`
 
 | Type | Default             | Available in |
 | ---- | ------------------- | ------------ |
@@ -189,7 +189,7 @@ unless you absolutely need it.
 
 Maximum amount of seconds of delay between transactions.
 
-## `maxBlockDelay`
+### `maxBlockDelay`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -197,7 +197,7 @@ Maximum amount of seconds of delay between transactions.
 
 Maximum amount of block numbers between transactions.
 
-## `solcArgs`
+### `solcArgs`
 
 | Type   | Default | Available in | CLI equivalent     |
 | ------ | ------- | ------------ | ------------------ |
@@ -205,7 +205,7 @@ Maximum amount of block numbers between transactions.
 
 Additional arguments to use in `solc` for compiling the contract to test.
 
-## `cryticArgs`
+### `cryticArgs`
 
 | Type     | Default | Available in | CLI equivalent       |
 | -------- | ------- | ------------ | -------------------- |
@@ -214,7 +214,7 @@ Additional arguments to use in `solc` for compiling the contract to test.
 Additional arguments to use in `crytic-compile` for compiling the contract to
 test.
 
-## `quiet`
+### `quiet`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -222,7 +222,7 @@ test.
 
 Hide `solc` stderr output and additional information during the testing.
 
-## `format`
+### `format`
 
 | Type   | Default | Available in | CLI equivalent    |
 | ------ | ------- | ------------ | ----------------- |
@@ -235,7 +235,7 @@ terminal is absent.
 - `"json"`: JSON output.
 - `"none"`: no output.
 
-## `balanceContract`
+### `balanceContract`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -244,7 +244,7 @@ terminal is absent.
 Initial Ether balance of `contractAddr`. See our tutorial on [working with
 ETH](./basic/working-with-eth.md) for more details.
 
-## `balanceAddr`
+### `balanceAddr`
 
 | Type | Default      | Available in |
 | ---- | ------------ | ------------ |
@@ -253,7 +253,7 @@ ETH](./basic/working-with-eth.md) for more details.
 Initial Ether balance of `deployer` and each of the `sender` accounts. See our
 tutorial on [working with ETH](./basic/working-with-eth.md) for more details.
 
-## `maxValue`
+### `maxValue`
 
 | Type | Default                           | Available in |
 | ---- | --------------------------------- | ------------ |
@@ -262,7 +262,7 @@ tutorial on [working with ETH](./basic/working-with-eth.md) for more details.
 Max amount of value in each randomly generated transaction. See our tutorial on
 [working with ETH](./basic/working-with-eth.md) for more details.
 
-## `testDestruction`
+### `testDestruction`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -270,7 +270,7 @@ Max amount of value in each randomly generated transaction. See our tutorial on
 
 Add a special test that fails if a contract is self-destructed.
 
-## `stopOnFail`
+### `stopOnFail`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -278,7 +278,7 @@ Add a special test that fails if a contract is self-destructed.
 
 Stops the fuzzing campaign when the first test fails.
 
-## `allContracts`
+### `allContracts`
 
 | Type | Default | Available in                    | CLI equivalent    |
 | ---- | ------- | ------------------------------- | ----------------- |
@@ -287,7 +287,7 @@ Stops the fuzzing campaign when the first test fails.
 Makes Echidna fuzz the provided test contracts and any other deployed contract
 whose ABI is known at runtime.
 
-## `filterBlacklist`
+### `filterBlacklist`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -297,7 +297,7 @@ Allows Echidna to avoid calling (when set to true) or only call (when set to
 false) a set of functions. The function allowlist or denylist should be provided
 in `filterFunctions`.
 
-## `filterFunctions`
+### `filterFunctions`
 
 | Type     | Default | Available in |
 | -------- | ------- | ------------ |
@@ -307,7 +307,7 @@ Configures the function allowlist or denylist from `filterBlacklist`. The list
 should contain strings in the format of
 `"Contract.functionName(uint256,uint256)"` following the signature convention.
 
-## `allowFFI`
+### `allowFFI`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -315,7 +315,7 @@ should contain strings in the format of
 
 Allows the use of the HEVM `ffi` cheatcode.
 
-## `rpcUrl`
+### `rpcUrl`
 
 | Type   | Default | Available in                                | CLI equivalent  | Env. variable equivalent |
 | ------ | ------- | ------------------------------------------- | --------------- | ------------------------ |
@@ -323,7 +323,7 @@ Allows the use of the HEVM `ffi` cheatcode.
 
 URL to fetch contracts over RPC.
 
-## `rpcBlock`
+### `rpcBlock`
 
 | Type   | Default | Available in                                | CLI equivalent  | Env. variable equivalent |
 | ------ | ------- | ------------------------------------------- | --------------- | ------------------------ |
@@ -331,7 +331,7 @@ URL to fetch contracts over RPC.
 
 Block number to use when fetching over RPC.
 
-## `etherscanApiKey`
+### `etherscanApiKey`
 
 | Type   | Default | Available in                  | Env. variable equivalent |
 | ------ | ------- | ----------------------------- | ------------------------ |
@@ -339,7 +339,7 @@ Block number to use when fetching over RPC.
 
 Etherscan API key used to fetch contract code.
 
-## `coverageFormats`
+### `coverageFormats`
 
 | Type     | Default                 | Available in |
 | -------- | ----------------------- | ------------ |
@@ -348,7 +348,7 @@ Etherscan API key used to fetch contract code.
 List of file formats to save coverage reports in; default is all possible
 formats.
 
-## `workers`
+### `workers`
 
 | Type | Default | Available in | CLI equivalent |
 | ---- | ------- | ------------ | -------------- |
@@ -356,7 +356,7 @@ formats.
 
 Number of workers.
 
-## `server`
+### `server`
 
 | Type | Default | Available in | CLI equivalent  |
 | ---- | ------- | ------------ | --------------- |
@@ -364,7 +364,7 @@ Number of workers.
 
 Run events server on the given port.
 
-## `symExec`
+### `symExec`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -372,7 +372,7 @@ Run events server on the given port.
 
 Whether to add an additional symbolic execution worker.
 
-## `symExecConcolic`
+### `symExecConcolic`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -381,7 +381,7 @@ Whether to add an additional symbolic execution worker.
 Whether symbolic execution will be concolic (vs full symbolic execution). Only
 relevant if `symExec` is true.
 
-## `symExecNSolvers`
+### `symExecNSolvers`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -391,7 +391,7 @@ Number of SMT solvers used in symbolic execution. While there is a single
 symExec worker, N threads may be used to solve SMT queries. Only relevant if
 `symExec` is true.
 
-## `symExecTimeout`
+### `symExecTimeout`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -401,7 +401,7 @@ Timeout for symbolic execution SMT solver. Only relevant if `symExec` is true.
 When the SMT solver used is Z3, this timeout applies per query, and is not
 global.
 
-## `symExecMaxIters`
+### `symExecMaxIters`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -410,7 +410,7 @@ global.
 Number of times we may revisit a particular branching point. Only relevant if
 `symExec` is true and `symExecConcolic` is false.
 
-## `symExecAskSMTIters`
+### `symExecAskSMTIters`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
@@ -419,3 +419,54 @@ Number of times we may revisit a particular branching point. Only relevant if
 Number of times we may revisit a particular branching point before we consult
 the smt solver to check reachability. Only relevant if `symExec` is true and
 `symExecConcolic` is false.
+
+## Experimental options
+
+There are some options in Echidna that are meant for advanced debugging and
+experimenting. Those are listed below.
+
+### `estimateGas`
+
+| Type | Default | Available in |
+| ---- | ------- | ------------ |
+| Bool | `false` | \*           |
+
+Enables the collection of worst-case gas usage. The information is stored as
+part of the corpus on the `gas_info` field. This functionality is experimental.
+
+### `dictfreq`
+
+| Type  | Default | Available in |
+| ----- | ------- | ------------ |
+| Float | `0.40`  | \*           |
+
+This parameter controls how often Echidna uses its internal dictionary versus a
+random value when generating a transaction. We do not recommend changing the
+default value.
+
+### `mutConsts`
+
+| Type  | Default        | Available in |
+| ----- | -------------- | ------------ |
+| [Int] | `[1, 1, 1, 1]` | \*           |
+
+Echidna uses weighted probabilities to pick a mutator for a transaction
+sequence. This parameter configures the weights for each kind of mutation. The
+value consists of four integers, `[c1, c2, c3, c4]`. Refer to the
+[implementation
+code](https://github.com/crytic/echidna/blob/8d20836c4a5bba6779c7a5b58cc7907c89a4e581/lib/Echidna/Mutator/Corpus.hs#L70-L101)
+for their meaning and impact. We do not recommend changing the default value.
+
+## Deprecated options
+
+There are some options in Echidna that have been deprecated and will be removed soon. Those are listed below.
+
+### `initialize`
+
+| Type   | Default | Available in |
+| ------ | ------- | ------------ |
+| String | `null`  | \*           |
+
+This allows initializing the chain state in Echidna with a series of
+transactions, typically captured with [Etheno](https://github.com/crytic/etheno). Nowadays, with the
+introduction of on-chain fuzzing in Echidna, it has become deprecated.
