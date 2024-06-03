@@ -423,7 +423,7 @@ the smt solver to check reachability. Only relevant if `symExec` is true and
 ## Experimental or deprecated options
 
 There are some options in Echidna that are meant for advanced debugging and
-experimenting, or that have been deprecated. Those are listed below.
+experimenting. Those are listed below.
 
 ### `estimateGas`
 
@@ -433,17 +433,6 @@ experimenting, or that have been deprecated. Those are listed below.
 
 Enables the collection of worst-case gas usage. The information is stored as
 part of the corpus on the `gas_info` field. This functionality is experimental.
-
-### `initialize`
-
-| Type   | Default | Available in |
-| ------ | ------- | ------------ |
-| String | `null`  | \*           |
-
-This allows initializing the chain state in Echidna with a series of
-transactions, typically captured with Etheno. See the [end-to-end testing
-guide](./advanced/end-to-end-testing.md) for more details. Nowadays, with the
-introduction of on-chain fuzzing in Echidna, it has become less relevant.
 
 ### `dictfreq`
 
@@ -467,3 +456,17 @@ value consists of four integers, `[c1, c2, c3, c4]`. Refer to the
 [implementation
 code](https://github.com/crytic/echidna/blob/8d20836c4a5bba6779c7a5b58cc7907c89a4e581/lib/Echidna/Mutator/Corpus.hs#L70-L101)
 for their meaning and impact. We do not recommend changing the default value.
+
+## Deprecated options
+
+There are some options in Echidna that have been deprecated and will be removed soon. Those are listed below.
+
+### `initialize`
+
+| Type   | Default | Available in |
+| ------ | ------- | ------------ |
+| String | `null`  | \*           |
+
+This allows initializing the chain state in Echidna with a series of
+transactions, typically captured with [Etheno](https://github.com/crytic/etheno). Nowadays, with the
+introduction of on-chain fuzzing in Echidna, it has become deprecated.
