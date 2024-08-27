@@ -64,7 +64,7 @@ test_exercise(){
 
 pip install manticore==0.3.5 crytic-compile==0.1.13
 
-cd program-analysis/manticore
+cd src/program-analysis/manticore
 
 sudo add-apt-repository ppa:sri-csl/formal-methods -y
 sudo apt-get update

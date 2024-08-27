@@ -25,12 +25,12 @@ jobs:
         run: |
           npm ci
 
-      - name: Remove Medusa uncessary files
+      - name: Remove unnecessary Medusa files
         run: |
-          rm -rf program-analysis/medusa/chain
-          rm -rf program-analysis/medusa/compilation
-          rm -rf program-analysis/medusa/fuzzing
-          rm program-analysis/medusa/docs/theme/highlight.js
+          rm -rf src/program-analysis/medusa/chain
+          rm -rf src/program-analysis/medusa/compilation
+          rm -rf src/program-analysis/medusa/fuzzing
+          rm src/program-analysis/medusa/docs/theme/highlight.js
 
       - name: Run lint
         run: |

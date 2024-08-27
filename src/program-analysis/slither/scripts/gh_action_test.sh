@@ -53,7 +53,7 @@ test_exercise(){
 }
 
 
-cd program-analysis/slither
+cd src/program-analysis/slither
 pip install slither-analyzer
 solc-select install 0.8.20
 solc-select use 0.8.20

@@ -4,15 +4,15 @@ on:
   push:
     paths:
       - ".github/workflows/echidna.yml"
-      - "program-analysis/echidna/**/*.sol"
-      - "program-analysis/echidna/**/*.yml"
+      - "src/program-analysis/echidna/**/*.sol"
+      - "src/program-analysis/echidna/**/*.yml"
     branches:
       - master
   pull_request:
     paths:
       - ".github/workflows/echidna.yml"
-      - "program-analysis/echidna/**/*.sol"
-      - "program-analysis/echidna/**/*.yml"
+      - "src/program-analysis/echidna/**/*.sol"
+      - "src/program-analysis/echidna/**/*.yml"
   schedule:
     # run CI every day even if no PRs/merges occur
     - cron: "0 12 * * *"
@@ -27,25 +27,25 @@ jobs:
       matrix:
         include:
           - name: Exercise 1
-            workdir: program-analysis/echidna/exercises/exercise1/
+            workdir: src/program-analysis/echidna/exercises/exercise1/
             files: solution.sol
             contract: TestToken
             outcome: failure
             expected: 'echidna_test_balance:\s*failed'
           - name: Exercise 2
-            workdir: program-analysis/echidna/exercises/exercise2/
+            workdir: src/program-analysis/echidna/exercises/exercise2/
             files: solution.sol
             contract: TestToken
             outcome: failure
             expected: 'echidna_no_transfer:\s*failed'
           - name: Exercise 3
-            workdir: program-analysis/echidna/exercises/exercise3/
+            workdir: src/program-analysis/echidna/exercises/exercise3/
             files: solution.sol
             contract: TestToken
             outcome: failure
             expected: 'echidna_test_balance:\s*failed'
           - name: Exercise 4
-            workdir: program-analysis/echidna/exercises/exercise4/
+            workdir: src/program-analysis/echidna/exercises/exercise4/
             files: solution.sol
             config: config.yaml
             contract: TestToken
@@ -76,32 +76,32 @@ jobs:
             outcome: failure
             expected: 'testPoolBalance():\s*failed'
           - name: TestToken
-            workdir: program-analysis/echidna/example/
+            workdir: src/program-analysis/echidna/example/
             files: testtoken.sol
             contract: TestToken
             outcome: failure
             expected: 'echidna_balance_under_1000:\s*failed'
           - name: Gas estimation
-            workdir: program-analysis/echidna/example/
+            workdir: src/program-analysis/echidna/example/
             files: gas.sol
             config: gas.yaml
             outcome: success
             expected: "f(42,123,"
             flaky: true
           - name: Multi
-            workdir: program-analysis/echidna/example/
+            workdir: src/program-analysis/echidna/example/
             files: multi.sol
             config: filter.yaml
             outcome: failure
             expected: 'echidna_state4:\s*failed'
           - name: Assert
-            workdir: program-analysis/echidna/example/
+            workdir: src/program-analysis/echidna/example/
             files: assert.sol
             config: assert.yaml
             outcome: failure
             expected: 'inc(uint256):\s*failed'
           - name: PopsicleBroken
-            workdir: program-analysis/echidna/example/
+            workdir: src/program-analysis/echidna/example/
             files: PopsicleBroken.sol
             solc-version: 0.8.4
             config: Popsicle.yaml
@@ -109,7 +109,7 @@ jobs:
             outcome: failure
             expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*failed'
           - name: PopsicleFixed
-            workdir: program-analysis/echidna/example/
+            workdir: src/program-analysis/echidna/example/
             files: PopsicleFixed.sol
             solc-version: 0.8.4
             config: Popsicle.yaml
@@ -117,7 +117,7 @@ jobs:
             outcome: success
             expected: 'totalBalanceAfterTransferIsPreserved(address,uint256):\s*passing'
           - name: TestDepositWithPermit
-            workdir: program-analysis/echidna/example/
+            workdir: src/program-analysis/echidna/example/
             files: TestDepositWithPermit.sol
             solc-version: 0.8.0
             config: testdeposit.yaml
@@ -125,7 +125,7 @@ jobs:
             outcome: success
             expected: 'testERC20PermitDeposit(uint256):\s*passing'
           - name: MultiABI
-            workdir: program-analysis/echidna/example/
+            workdir: src/program-analysis/echidna/example/
             files: allContracts.sol
             solc-version: 0.8.0
             config: allContracts.yaml
