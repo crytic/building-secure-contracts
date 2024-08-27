@@ -2,7 +2,7 @@
 authors = ["Trail of Bits"]
 language = "en"
 multilingual = false
-src = "."
+src = "src"
 title = "Building Secure Contracts"
 description = "This repository, brought to you by Trail of Bits, outlines our guidelines and best practices to write secure smart contracts."
 logo = "static/TOB_Black.svg"
