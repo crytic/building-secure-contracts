@@ -6,7 +6,7 @@ The sysvar (system account) account is often used while validating access contro
 
 secp256k1 is an elliptic curve used by a number of blockchains for signatures. Validating signatures is crucial as by bypassing signature checks, an attacker can gain access to restricted functions that could lead to drainage of funds.
 
-Here, `load_current_index` and `load_instruction_at` are functions that don't verify that the inputted sysvar account is authorized, therefore allowing serialized maliciously fabricated data to sucessfully spoof as an authorized secp256k1 signature.
+Here, `load_current_index` and `load_instruction_at` are functions that don't verify that the inputted sysvar account is authorized, therefore allowing serialized maliciously fabricated data to successfully spoof as an authorized secp256k1 signature.
 
 ### Example Contract
 
