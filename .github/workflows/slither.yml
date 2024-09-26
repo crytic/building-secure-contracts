@@ -4,13 +4,13 @@ on:
   push:
     paths:
       - ".github/workflows/slither.yml"
-      - "program-analysis/slither/**/*.py"
+      - "src/program-analysis/slither/**/*.py"
     branches:
       - master
   pull_request:
     paths:
       - ".github/workflows/slither.yml"
-      - "program-analysis/slither/**/*.py"
+      - "src/program-analysis/slither/**/*.py"
   schedule:
     # run CI every day even if no PRs/merges occur
     - cron: "0 12 * * *"
@@ -31,4 +31,4 @@ jobs:
           pip install solc-select
       - name: Run Tests
         run: |
-          bash program-analysis/slither/scripts/gh_action_test.sh
+          bash src/program-analysis/slither/scripts/gh_action_test.sh

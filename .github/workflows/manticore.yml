@@ -4,13 +4,13 @@ on:
   push:
     paths:
       - ".github/workflows/manticore.yml"
-      - "program-analysis/manticore/**/*.py"
+      - "src/program-analysis/manticore/**/*.py"
     branches:
       - master
   pull_request:
     paths:
       - ".github/workflows/manticore.yml"
-      - "program-analysis/manticore/**/*.py"
+      - "src/program-analysis/manticore/**/*.py"
   schedule:
     # run CI every day even if no PRs/merges occur
     - cron: "0 12 * * *"
@@ -33,4 +33,4 @@ jobs:
           solc-select use 0.5.11
       - name: Run Tests
         run: |
-          bash program-analysis/manticore/scripts/gh_action_test.sh
+          bash src/program-analysis/manticore/scripts/gh_action_test.sh

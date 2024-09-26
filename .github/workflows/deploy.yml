@@ -27,7 +27,11 @@ jobs:
         run: |
           cargo install --git https://github.com/montyly/mdBook.git mdbook || true
       - name: Build artifacts
-        run: mdbook build
+        run: |
+          mv src/program-analysis/medusa/docs/src/ tmp-medusa
+          rm -rf src/program-analysis/medusa
+          mv tmp-medusa src/program-analysis/medusa
+          mdbook build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

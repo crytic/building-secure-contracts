@@ -9,6 +9,7 @@
     "prettier-plugin-solidity": "^1.1.3"
   },
   "scripts": {
+    "update-readme": "cat src/README.md | sed 's#](./#](./src/#' > README.md",
     "format": "prettier --write . && npm run format:embedded",
     "format:embedded": "prettier --write \"**/*.md\" --embedded-language-formatting=auto --plugin prettier-plugin-solidity --tab-width 4 --print-width 120 && prettier --write \"**/*.md\"",
     "lint": "npm run lint:format && npm run lint:links",
