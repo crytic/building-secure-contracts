@@ -10,3 +10,11 @@
 h1#configuration-options ~ div > table {
   margin: 0;
 }
+
+/* light logo in dark mode themes */
+.coal .sidebar-book-logo img,
+.navy .sidebar-book-logo img,
+.ayu .sidebar-book-logo img,
+.rust .sidebar-book-logo img {
+  filter: invert(1);
+}
