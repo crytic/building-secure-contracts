@@ -36,6 +36,7 @@ Brought to you by [Trail of Bits](https://www.trailofbits.com/), this repository
     - Exercises that take approximately two hours to gain practical understanding
 - [Resources](./resources): Assorted online resources
   - [Trail of Bits Blog Posts](./resources/tob_blogposts.md): A list of blockchain-related blog posts created by Trail of Bits
+  - [Suggested Tools](./resources/tooling.md): A list of suggested tools for Smart Contract developers
 
 # License
 
