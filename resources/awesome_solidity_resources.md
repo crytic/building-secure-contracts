@@ -155,4 +155,4 @@ This list compiles a variety of essential tools and libraries for Solidity devel
 
 ---
 
-> **Disclaimer:** ⚠️ The tools and resources listed above are provided for informational purposes only. Trail of Bits does not endorse any tools it doesn't own and takes no responsibility for their functionality, security, or any potential issues that may arise from their use. Users are encouraged to conduct their own research and testing before integrating any of these tools into their projects. 🔍
+> **Disclaimer:** ⚠️ The tools and resources listed above are provided for informational purposes only. Trail of Bits does not endorse any tool it doesn't own and takes no responsibility for their functionality, security, or any potential issues that may arise from their use. Users are encouraged to conduct their own research and testing before integrating any of these tools into their projects. 🔍
