@@ -21,7 +21,7 @@ h1#configuration-options ~ div > table {
 
 /* Reduce medusa logo's size */
 #content img[alt="medusa_logo"] {
-    width: 50%;
-    margin: 0 auto;
-    display: block;
+  width: 50%;
+  margin: 0 auto;
+  display: block;
 }
