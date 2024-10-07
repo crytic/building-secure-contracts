@@ -18,3 +18,10 @@ h1#configuration-options ~ div > table {
 .rust .sidebar-book-logo img {
   filter: invert(1);
 }
+
+/* Reduce medusa logo's size */
+#content img[alt="medusa_logo"] {
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+}
