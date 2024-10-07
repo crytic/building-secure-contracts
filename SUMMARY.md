@@ -106,6 +106,17 @@
       - [Exercise 6](./program-analysis/echidna/exercises/Exercise-6.md)
       - [Exercise 7](./program-analysis/echidna/exercises/Exercise-7.md)
       - [Exercise 8](./program-analysis/echidna/exercises/Exercise-8.md)
+  - [Medusa](./program-analysis/medusa/docs/src/README.md)
+    - [Getting Started](./program-analysis/medusa/docs/src/getting_started/installation.md)
+    - [Project Configuration](./program-analysis/medusa/docs/src/project_configuration/overview.md)
+      the vast number of configuration options that can be set up based on your project needs.
+    - [Command Line Interface](./program-analysis/medusa/docs/src/cli/overview.md)
+    - [Writing Tests](./program-analysis/medusa/docs/src/testing/overview.md)
+    - [API (WIP)](./program-analysis/medusa/docs/src/api/api_overview.md)
+    - [Cheatcodes](./program-analysis/medusa/docs/src/cheatcodes/cheatcodes_overview.md)
+    - [Console Logging](./program-analysis/medusa/docs/src/console_logging.md)
+    - [Coverage report](./program-analysis/medusa/docs/src/coverage_reports.md)
+    - [FAQ](./program-analysis/medusa/docs/src/faq.md)
   - [Manticore](./program-analysis/manticore/README.md)
     - [Introduction to symbolic execution](./program-analysis/manticore/symbolic-execution-introduction.md):
     - [Running under Manticore](./program-analysis/manticore/running-under-manticore.md)
