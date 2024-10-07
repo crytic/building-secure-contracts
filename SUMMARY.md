@@ -120,7 +120,7 @@
       - [fuzz](./program-analysis/medusa/docs/src/cli/fuzz.md)
       - [completion](./program-analysis/medusa/docs/src/cli/completion.md)
     - [Testing Overview](./program-analysis/medusa/docs/src/testing/overview.md)
-      - [The Fuzzing Lifecycle](./program-analysis/medusa/docs/testing/fuzzing_lifecycle.md)
+      - [The Fuzzing Lifecycle](./program-analysis/medusa/docs/src/testing/fuzzing_lifecycle.md)
       - [Types of Invariants](./program-analysis/medusa/docs/src/testing/invariants.md)
       - [Writing Function-Level Invariants](./program-analysis/medusa/docs/src/testing/writing-function-level-invariants.md)
       - [Writing System-Level Invariants (WIP)](./program-analysis/medusa/docs/src/testing/writing-system-level-invariants.md)
