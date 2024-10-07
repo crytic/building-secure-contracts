@@ -20,3 +20,8 @@ mathjax-support = true
 [output.html.fold]
 enable = true
 level = 1
+
+[output.html.redirect]
+"medusa/index.html" = "../program-analysis/medusa/docs/src"
+"slither/index.html" = "../program-analysis/slither"
+"echidna/index.html" = "../program-analysis/echidna"
