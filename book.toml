@@ -22,6 +22,6 @@ enable = true
 level = 1
 
 [output.html.redirect]
-"medusa" = "./program-analysis/medusa/docs/src/index.html"
-"slither" = "./program-analysis/slither/index.html"
-"echidna" = "./program-analysis/echidna/index.html"
+"medusa/index.html" = "./program-analysis/medusa/docs/src"
+"slither/index.html" = "./program-analysis/slither"
+"echidna/index.html" = "./program-analysis/echidna"
