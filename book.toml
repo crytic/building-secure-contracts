@@ -22,6 +22,6 @@ enable = true
 level = 1
 
 [output.html.redirect]
-"medusa" = "./program-analysis/medusa/"
+"medusa" = "./program-analysis/medusa/docs/src/"
 "slither" = "./program-analysis/slither/"
 "echidna" = "./program-analysis/echidna/"
