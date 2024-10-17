@@ -6,49 +6,49 @@ This document is a work in progress. We're happy to accept feedback, questions, 
 
 ## Recommendations
 
-- Refer to [disclose.io](https://disclose.io/) for vulnerability disclosure program best practices
-- Don't make researchers [agree to terms](https://twitter.com/matthew_d_green/status/1025365194330066945) to report security issues to you
-- Create a security@ email address that delivers directly to your engineering team
+-   Refer to [disclose.io](https://disclose.io/) for vulnerability disclosure program best practices
+-   Don't make researchers [agree to terms](https://twitter.com/matthew_d_green/status/1025365194330066945) to report security issues to you
+-   Create a security@ email address that delivers directly to your engineering team
 
 ## Blockchains
 
-| Name             | Contact                                                                                          | More info                                                                                                                  |
-| ---------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- | --- |
-| Aptos            | security@aptoslabs.com                                                                           |                                                                                                                            |     |
-| Arweave          | team@arweave.org                                                                                 |                                                                                                                            |     |
-| Auroracoin       | m.hannes@auroracoin.is                                                                           |                                                                                                                            |     |
-| Bitcoin          | security@bitcoincore.org                                                                         | [Security page](https://bitcoincore.org/en/contact/)                                                                       |
-| Bitcoin Cash     |                                                                                                  |                                                                                                                            |
-| Bitcoin Gold     | admin@bitcoingold.org                                                                            | [Disclosure policy](https://github.com/BTCGPU/dev/blob/master/responsible-disclosure.md)                                   |
-| Bitshares        | contactbitshares@bitshares.org                                                                   |                                                                                                                            |
-| Bytecoin         | contact@bytecoin.org                                                                             |                                                                                                                            |
-| Cloakcoin        | anorak@cloakcoin.com                                                                             |                                                                                                                            |     |
-| Decred           | contact@decred.org                                                                               |                                                                                                                            |
-| DogeCoin         |                                                                                                  |                                                                                                                            |
-| Edgeware         | security@commonwealth.im                                                                         |                                                                                                                            |     |
-| Ethereum         | bounty@ethereum.org                                                                              | [Bug bounty](https://bounty.ethereum.org/)                                                                                 |
-| Ethereum Classic | security@etcdevteam.com                                                                          |                                                                                                                            |
-| Horizen          | security@horizen.global                                                                          | [Bug bounty](https://horizenofficial.atlassian.net/wiki/spaces/ZEN/pages/136871957/Bug+Bounty+Submission+Policy+and+Scope) |
-| Hush             | hushteam@protonmail.com                                                                          | [Security Page](https://github.com/MyHush/hush/blob/master/doc/security.md)                                                |
-| ICON             | hello@icon.foundation                                                                            |                                                                                                                            |
-| IOV              | security@iov.one                                                                                 |                                                                                                                            |
-| Komodo           | security@komodoplatform.com                                                                      |                                                                                                                            |
-| Litecoin         | contact@litecoin.org                                                                             |                                                                                                                            |
-| Nem              | contact@nem.io                                                                                   |                                                                                                                            |
-| Neo              | contact@neo.org                                                                                  |                                                                                                                            |
-| Monero           | [Multiple](https://github.com/monero-project/meta/blob/master/VULNERABILITY_RESPONSE_PROCESS.md) | [Bug bounty](https://hackerone.com/monero)                                                                                 |
-| Ontology         | contact@ont.io                                                                                   |                                                                                                                            |
-| POA Core         | security@poanetwork.com                                                                          | [Security page](https://forum.poa.network/c/general/security)                                                              |
-| Ripple           | bugs@ripple.com                                                                                  | [Bug bounty](https://ripple.com/bug-bounty/)                                                                               |
-| RSK              | security@rsk.co                                                                                  | [Bug bounty](https://hackerone.com/iovlabs)                                                                                |
-| Sia              | hello@sia.tech                                                                                   |                                                                                                                            |
-| Steem            |                                                                                                  |                                                                                                                            |
-| Tezos            | security@tezos.com                                                                               | [Bug bounty](https://tezos.foundation/security/security-policy-bug-bounty/)                                                |
-| Qtum             |                                                                                                  |                                                                                                                            |
-| Quorum           | quorum_info@jpmorgan.com                                                                         |                                                                                                                            |
-| VeChain          |                                                                                                  |                                                                                                                            |
-| xDai Chain       | security@poanetwork.com                                                                          | [Security page](https://forum.poa.network/c/general/security)                                                              |
-| ZCash            | security@z.cash                                                                                  | [Security page](https://z.cash/support/security/)                                                                          |
+| Name         | Contact                        | More info                                                                                |
+| ------------ | ------------------------------ | ---------------------------------------------------------------------------------------- |
+| Aptos        | security@aptoslabs.com         |                                                                                          |
+| Arweave      | team@arweave.org               |                                                                                          |
+| Auroracoin   | m.hannes@auroracoin.is         |                                                                                          |
+| Bitcoin      | security@bitcoincore.org       | [Security page](https://bitcoincore.org/en/contact/)                                     |
+| Bitcoin Cash |                                |
+| Bitcoin Gold | admin@bitcoingold.org          | [Disclosure policy](https://github.com/BTCGPU/dev/blob/master/responsible-disclosure.md) |
+| Bitshares    | contactbitshares@bitshares.org |
+| Bytecoin     | contact@bytecoin.org           |
+| Cloakcoin    | anorak@cloakcoin.com           |                                                                                          |
+| Decred       | contact@decred.org             |
+| DogeCoin | | |
+| Edgeware | security@commonwealth.im | | |
+| Ethereum | bounty@ethereum.org | [Bug bounty](https://bounty.ethereum.org/) |
+| Ethereum Classic | security@etcdevteam.com | |
+| Horizen | security@horizen.global | [Bug bounty](https://horizenofficial.atlassian.net/wiki/spaces/ZEN/pages/136871957/Bug+Bounty+Submission+Policy+and+Scope) |
+| Hush | hushteam@protonmail.com | [Security Page](https://github.com/MyHush/hush/blob/master/doc/security.md) |
+| ICON | hello@icon.foundation | |
+| IOV | security@iov.one | |
+| Komodo | security@komodoplatform.com | |
+| Litecoin | contact@litecoin.org | |
+| Nem | contact@nem.io | |
+| Neo | contact@neo.org | |
+| Monero | [Multiple](https://github.com/monero-project/meta/blob/master/VULNERABILITY_RESPONSE_PROCESS.md) | [Bug bounty](https://hackerone.com/monero) |
+| Ontology | contact@ont.io | |
+| POA Core | security@poanetwork.com | [Security page](https://forum.poa.network/c/general/security) |
+| Ripple | bugs@ripple.com | [Bug bounty](https://ripple.com/bug-bounty/) |
+| RSK | security@rsk.co | [Bug bounty](https://hackerone.com/iovlabs) |
+| Sia | hello@sia.tech | |
+| Steem | | |
+| Tezos | security@tezos.com | [Bug bounty](https://tezos.foundation/security/security-policy-bug-bounty/) |
+| Qtum | | |
+| Quorum | quorum_info@jpmorgan.com | |
+| VeChain | | |
+| xDai Chain | security@poanetwork.com | [Security page](https://forum.poa.network/c/general/security) |
+| ZCash | security@z.cash | [Security page](https://z.cash/support/security/) |
 
 ## Decentralized Applications
 
@@ -108,8 +108,8 @@ This document is a work in progress. We're happy to accept feedback, questions, 
 
 ## ERC20 Tokens
 
-| Name                   | Ticker          | Mainnet Address                                                                                               | Contact                                    | More info                                                                                                                                 |
-| ---------------------- | --------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| Name                   | Ticker          | Mainnet Address                                     | Contact                | More info       |
+| ---------------------- | --------------- | ---------------------------------------             | ---------------------- | --- |
 | Aelf                   | ELF             | [Etherscan](https://etherscan.io/token/0xbf2179859fc6d5bee9bf9158632dc51678a4100e)                            | contact@aelf.io                            |                                                                                                                                           |
 | Aeternity              | AE              | [Etherscan](https://etherscan.io/token/0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d)                            | info@aeternity.com                         |                                                                                                                                           |
 | Aion                   | AION            | [Etherscan](https://etherscan.io/token/0x4CEdA7906a5Ed2179785Cd3A40A69ee8bc99C466)                            | hello@aion.network                         |                                                                                                                                           |
