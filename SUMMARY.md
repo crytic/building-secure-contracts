@@ -170,3 +170,5 @@
     - [Exercise 2](./program-analysis/slither/exercise2.md)
     - [Exercise 3](./program-analysis/slither/exercise3.md)
 - [Resources](./resources/tob_blogposts.md)
+  - [Security contact](./resources/contact.md)
+  - [Blog posts](./resources/tob_blogposts.md)
