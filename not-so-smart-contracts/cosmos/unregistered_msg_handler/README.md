@@ -179,4 +179,4 @@ And it is the `CancelCall` msg.
 
 ## External examples
 
-- The bug occured in the [Gravity Bridge](https://github.com/code-423n4/2021-08-gravitybridge-findings/issues/64). It was impossible to send evidence of malicious behavior, which impacted Gravity Bridge's security model.
+- The bug occurred in the [Gravity Bridge](https://github.com/code-423n4/2021-08-gravitybridge-findings/issues/64). It was impossible to send evidence of malicious behavior, which impacted Gravity Bridge's security model.
