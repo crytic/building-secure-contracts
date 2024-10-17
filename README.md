@@ -1,6 +1,6 @@
 # Building Secure Smart Contracts
 
-![](https://github.com/crytic/building-secure-contracts/workflows/CI/badge.svg) ![](https://github.com/crytic/building-secure-contracts/workflows/Echidna/badge.svg)
+![](https://github.com/crytic/building-secure-contracts/actions/workflows/slither.yml/badge.svg) ![](https://github.com/crytic/building-secure-contracts/actions/workflows/echidna.yml/badge.svg) ![](https://github.com/crytic/building-secure-contracts/actions/workflows/medusa.yml/badge.svg)
 
 Brought to you by [Trail of Bits](https://www.trailofbits.com/), this repository offers guidelines and best practices for developing secure smart contracts. Contributions are welcome, you can contribute by following our [contributing guidelines](https://github.com/crytic/building-secure-contracts/blob/master/CONTRIBUTING.md).
 
@@ -29,6 +29,7 @@ Brought to you by [Trail of Bits](https://www.trailofbits.com/), this repository
   - [Solana](./not-so-smart-contracts/solana)
 - [Program Analysis](./program-analysis): Using automated tools to secure contracts
   - [Echidna](./program-analysis/echidna): A fuzzer that checks your contract's properties
+  - [Medusa](./program-analysis/medusa/docs/src): A next-gen fuzzer that checks your contract's properties
   - [Slither](./program-analysis/slither): A static analyzer with both CLI and scriptable interfaces
   - [Manticore](./program-analysis/manticore): A symbolic execution engine that proves the correctness of properties
   - For each tool, this training material provides:

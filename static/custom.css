@@ -5,3 +5,23 @@
   width: 50%;
   max-width: max-content;
 }
+
+/* program-analysis/echidna/configuration.md */
+h1#configuration-options ~ div > table {
+  margin: 0;
+}
+
+/* light logo in dark mode themes */
+.coal .sidebar-book-logo img,
+.navy .sidebar-book-logo img,
+.ayu .sidebar-book-logo img,
+.rust .sidebar-book-logo img {
+  filter: invert(1);
+}
+
+/* Reduce medusa logo's size */
+#content img[alt="medusa_logo"] {
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+}

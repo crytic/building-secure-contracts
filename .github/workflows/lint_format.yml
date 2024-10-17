@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -22,6 +24,13 @@ jobs:
       - name: Install npm and dependencies
         run: |
           npm ci
+
+      - name: Remove Medusa uncessary files
+        run: |
+          rm -rf program-analysis/medusa/chain
+          rm -rf program-analysis/medusa/compilation
+          rm -rf program-analysis/medusa/fuzzing
+          rm program-analysis/medusa/docs/theme/highlight.js
 
       - name: Run lint
         run: |
