@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "gitsubmodule"
+    directory: "/program-analysis/medusa"
+    schedule:
+      interval: "daily" # Check for updates daily
+    commit-message:
+      prefix: "Update medusa"
+    assignees:
+      - montyly
+    reviewers:
+      - montyly
