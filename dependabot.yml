@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: "daily" # Check for updates daily
     commit-message:
-      prefix: "Update medusas"
+      prefix: "Update medusa"
     assignees:
       - montyly
     reviewers:
