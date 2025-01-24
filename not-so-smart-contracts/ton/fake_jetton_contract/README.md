@@ -35,17 +35,17 @@ The following simplified code highlights the lack of token_id validation in the 
         cell forward_payload_ref = in_msg_body~load_ref();
         slice forward_payload = forward_payload_ref.begin_parse();
 
-        int is_token0? = forward_payload.load_int(1);
+        int is_token0? = forward_payload~load_int(1);
 
         if (is_token0?) {
             slice balance_before = token0_balances.dict_get?(267, from_address);
-            int balance = balance_before.load_coins();
+            int balance = balance_before~load_coins();
             balance = balance + amount;
             slice balance_after = begin_cell().store_coinds(balance).end_cell().being_parse();
             token0_balances~dict_set(267, from_address, balance_after);
         } else {
             slice balance_before = token1_balances.dict_get?(267, from_address);
-            int balance = balance_before.load_coins();
+            int balance = balance_before~load_coins();
             balance = balance + amount;
             slice balance_after = begin_cell().store_coinds(balance).end_cell().being_parse();
             token1_balances~dict_set(267, from_address, balance_after);
