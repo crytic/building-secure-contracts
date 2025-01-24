@@ -41,12 +41,14 @@ The following simplified code highlights the lack of token_id validation in the 
             slice balance_before = token0_balances.dict_get?(267, from_address);
             int balance = balance_before.load_coins();
             balance = balance + amount;
-            token0_balances~dict_set(267, from_address, balance);
+            slice balance_after = begin_cell().store_coinds(balance).end_cell().being_parse();
+            token0_balances~dict_set(267, from_address, balance_after);
         } else {
             slice balance_before = token1_balances.dict_get?(267, from_address);
             int balance = balance_before.load_coins();
             balance = balance + amount;
-            token1_balances~dict_set(267, from_address, balance);
+            slice balance_after = begin_cell().store_coinds(balance).end_cell().being_parse();
+            token1_balances~dict_set(267, from_address, balance_after);
         }
 
         save_data();
