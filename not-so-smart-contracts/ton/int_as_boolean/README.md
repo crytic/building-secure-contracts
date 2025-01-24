@@ -1,6 +1,6 @@
 # Using int as boolean values
 
-In FunC, booleans are represented as integers; false is represented as 0 and true is represented as -1 (257 ones in binary notation). 
+In FunC, booleans are represented as integers; false is represented as 0 and true is represented as -1 (257 ones in binary notation).
 
 Logical operations are done as bitwise operations over the binary representation of the integer values. Notably, The not operation `~` flips all the bits of an integer value; therefore, a non-zero value other than -1 becomes another non-zero value.
 
@@ -69,6 +69,7 @@ The following simplified code highlights the unexpected behavior of the `~` oper
 ```
 
 The `recv_internal` function above prints the following debug logs:
+
 ```
     #DEBUG#: correct_true is true
     #DEBUG#: ~correct_true is false
@@ -80,7 +81,7 @@ The `recv_internal` function above prints the following debug logs:
     #DEBUG#: ~negative is true
 ```
 
-It demonstrats that the `~ 10` and `~ -10` both evaluate to `true` instead of becoming `false` with the `~` operator. 
+It demonstrats that the `~ 10` and `~ -10` both evaluate to `true` instead of becoming `false` with the `~` operator.
 
 ## Mitigations
 

@@ -3,7 +3,7 @@
 TON smart contracts use the `transfer_notification` message sent by the receiver's Jetton wallet contract to specify and process a user request along with the transfer of a Jetton. Users add a `forward_payload` to the Jetton `transfer` message when transferring their Jettons, this `forward_payload` is forwarded by the receiver's Jetton wallet contract to the receiver in the `transfer_notification` message. The `transfer_notification` message has the following TL-B schema:
 
 ```
-transfer_notification#7362d09c query_id:uint64 amount:(VarUInteger 16) 
+transfer_notification#7362d09c query_id:uint64 amount:(VarUInteger 16)
                               sender:MsgAddress forward_payload:(Either Cell ^Cell)
                               = InternalMsgBody;
 ```
@@ -27,14 +27,14 @@ The following simplified code highlights the lack of token_id validation in the 
     slice sender_address = cs~load_msg_addr(); ;; incorrectly assumed to be Jetton wallet contract owned by this contract
 
     (cell token0_balances, cell token1_balances) = load_data(); ;; balances dictionaries
-    
+
     (int op, int query_id) = in_msg_body~load_op_and_query_id();
 
     if (op == op::transfer_notification) {
         (int amount, slice from_address) = (in_msg_body~load_coins(), in_msg_body~load_msg_addr());
         cell forward_payload_ref = in_msg_body~load_ref();
         slice forward_payload = forward_payload_ref.begin_parse();
-        
+
         int is_token0? = forward_payload.load_int(1);
 
         if (is_token0?) {

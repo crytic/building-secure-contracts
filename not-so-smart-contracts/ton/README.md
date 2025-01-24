@@ -14,10 +14,10 @@ Each _Not So Smart Contract_ consists of a standard set of information:
 
 ## Vulnerabilities
 
-| Not So Smart Contract                                                        | Description                                                  |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [Int as Boolean](int_as_boolean)                                             | Unexpected result of logical operations on the int type      |
-| [Fake Jetton contract](fake_jetton_contract)                                 | Any contract can send a `transfer_notification` message      |
+| Not So Smart Contract                        | Description                                             |
+| -------------------------------------------- | ------------------------------------------------------- |
+| [Int as Boolean](int_as_boolean)             | Unexpected result of logical operations on the int type |
+| [Fake Jetton contract](fake_jetton_contract) | Any contract can send a `transfer_notification` message |
 
 ## Credits
 
