@@ -27,6 +27,7 @@ Brought to you by [Trail of Bits](https://www.trailofbits.com/), this repository
   - [Cosmos](./not-so-smart-contracts/cosmos)
   - [Substrate](./not-so-smart-contracts/substrate)
   - [Solana](./not-so-smart-contracts/solana)
+  - [TON](./not-so-smart-contracts/ton)
 - [Program Analysis](./program-analysis): Using automated tools to secure contracts
   - [Echidna](./program-analysis/echidna): A fuzzer that checks your contract's properties
   - [Medusa](./program-analysis/medusa/docs/src): A next-gen fuzzer that checks your contract's properties
