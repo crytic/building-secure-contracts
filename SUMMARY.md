@@ -67,6 +67,10 @@
     - [Unsigned Transaction Validation](./not-so-smart-contracts/substrate/validate_unsigned/README.md)
     - [Bad Randomness](./not-so-smart-contracts/substrate/randomness/README.md)
     - [Bad Origin](./not-so-smart-contracts/substrate/origins/README.md)
+  - [Ton](./not-so-smart-contracts/ton/README.md)
+    - [Fake Jetton Contract](./not-so-smart-contracts/ton/fake_jetton_contract/README.md)
+    - [Foward TON without gas check](./not-so-smart-contracts/ton/forward_ton_without_gas_check/README.md)
+    - [Int as boolean](./not-so-smart-contracts/ton/int_as_boolean/README.md)
 
 - [Program Analysis](./program-analysis/README.md)
   - [Echidna](./program-analysis/echidna/README.md)
