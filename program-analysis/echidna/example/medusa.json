@@ -4,10 +4,13 @@
     "workerResetLimit": 50,
     "timeout": 0,
     "testLimit": 0,
+    "shrinkLimit": 5000,
     "callSequenceLength": 100,
     "corpusDirectory": "",
     "coverageEnabled": true,
+    "coverageFormats": ["html", "lcov"],
     "targetContracts": [],
+    "predeployedContracts": {},
     "targetContractsBalances": [],
     "constructorArgs": {},
     "deployerAddress": "0x30000",
@@ -43,16 +46,19 @@
         "testPrefixes": ["echidna_"]
       },
       "optimizationTesting": {
-        "enabled": false,
+        "enabled": true,
         "testPrefixes": ["optimize_"]
-      }
+      },
+      "targetFunctionSignatures": [],
+      "excludeFunctionSignatures": []
     },
     "chainConfig": {
       "codeSizeCheckDisabled": true,
       "cheatCodes": {
         "cheatCodesEnabled": true,
         "enableFFI": false
-      }
+      },
+      "skipAccountChecks": true
     }
   },
   "compilation": {
