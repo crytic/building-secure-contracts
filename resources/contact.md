@@ -279,7 +279,7 @@ This document is a work in progress. We're happy to accept feedback, questions, 
 | Ambisafe CryptoWallet | security@ambisafe.com          |                                                     |
 | Arkane                | info@arkane.network            |                                                     |
 | Blockchain            | security@blockchain.com        | [Bug bounty](https://hackerone.com/blockchain)      |
-| BitGo                 | secteam@bitgo.com              |                                                     |
+| BitGo                 | InfoSec@bitgo.com              | [Bug Bounty](https://bugcrowd.com/engagements/bitgo-mbb-og-public) |
 | Emerald Wallet        | security@etcdevteam.com        |                                                     |
 | Groundhog             | security@groundhog.network     |                                                     |
 | KeepKey               | security@shapeshift.io         |                                                     |
