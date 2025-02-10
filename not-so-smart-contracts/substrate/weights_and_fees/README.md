@@ -47,4 +47,4 @@ On the other hand, if an attacker sends a `useful_amounts` vector that is incred
 # References
 
 - https://docs.substrate.io/main-docs/build/tx-weights-fees/
-- https://docs.substrate.io/reference/how-to-guides/weights/add-benchmarks/
+- https://docs.polkadot.com/develop/parachains/testing/benchmarking/
