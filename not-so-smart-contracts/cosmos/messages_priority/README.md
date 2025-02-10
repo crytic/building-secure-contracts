@@ -58,5 +58,5 @@ Once a bug in pool's implementation is discovered, attackers and the pool's oper
 
 ## External examples
 
-- [Terra Money's oracle messages were not prioritized](https://cryptorisks.substack.com/p/ust-december-2021) (search for "priority"). It was [fixed with modifications to Tendermint](https://github.com/terra-money/tendermint/commit/6805b4866bdbd6933000eb0e761acbf15edd8ed6).
+- [Terra Money's oracle messages were not prioritized](https://x.com/terra_money/status/1524785058296778752). It was [fixed with modifications to Tendermint](https://github.com/terra-money/tendermint/commit/6805b4866bdbd6933000eb0e761acbf15edd8ed6).
 - [Umee oracle and orchestrator messages were not prioritized](https://github.com/trailofbits/publications/blob/master/reviews/Umee.pdf) (search for finding TOB-UMEE-20 and TOB-UMEE-31).
