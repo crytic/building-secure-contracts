@@ -43,7 +43,7 @@ This document is a work in progress. We're happy to accept feedback, questions, 
 | Tezos            | security@tezos.com                                                                               | [Bug bounty](https://tezos.foundation/security/security-policy-bug-bounty/)                                                |
 | Quorum           | quorum_info@jpmorgan.com                                                                         |
 | xDai Chain       | security@poanetwork.com                                                                          | [Security page](https://forum.poa.network/c/general/security)                                                              |
-| ZCash            | security@z.cash                                                                                  | [Security page](https://z.cash/support/security/)                                                                          |
+| ZCash            | security@z.cash                                                                                  | [Security page](https://github.com/zcash/zcash/security)                                                                   |
 
 ## Decentralized Applications
 
