@@ -1,11 +1,10 @@
-# Exercise 1 : Arithmetic rounding
+# Exercise 1: Arithmetic Rounding
 
-Use Manticore to find an input allowing an attacker to generate free tokens in [token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise1/token.sol).
-Propose a fix of the contract, and test your fix using your Manticore script.
+Use Manticore to discover an input that allows an attacker to generate free tokens in [token.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise1/token.sol). Propose a fix for the contract and test your solution using the Manticore script.
 
-## Proposed scenario
+## Proposed Scenario
 
-Follow the pattern initialization, exploration and property for the script.
+Follow the initialization, exploration, and property pattern for the script.
 
 ## Initialization
 
@@ -14,18 +13,18 @@ Follow the pattern initialization, exploration and property for the script.
 
 ## Exploration
 
-- Call `is_valid_buy` with two symbolic values for tokens_amount and wei_amount
+- Call `is_valid_buy` with two symbolic values for `tokens_amount` and `wei_amount`
 
 ## Property
 
-- An attack is found if on a state alive `wei_amount == 0 and tokens_amount >= 1`
+- An attack is discovered if, on a live state, `wei_amount == 0 and tokens_amount >= 1`
 
 ## Hints
 
-- `m.ready_states` returns the list of state alive
-- `Operators.AND(a, b)` allows to create and AND condition
-- You can use the template proposed in [template.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise1/template.py)
+- `m.ready_states` returns a list of live states
+- Use `Operators.AND(a, b)` to create an AND condition
+- The [template.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise1/template.py) can serve as a starting point
 
 ## Solution
 
-[solution.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise1/solution.py)
+Refer to [solution.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/exercises/exercise1/solution.py) for a possible solution.

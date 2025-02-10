@@ -1,17 +1,17 @@
-# Getting Throwing Path
+# Finding Throwing Paths
 
-**Table of contents:**
+**Table of Contents:**
 
-- [Getting Throwing Path](#getting-throwing-path)
+- [Finding Throwing Paths](#finding-throwing-paths)
   - [Introduction](#introduction)
-  - [Using state information](#using-state-information)
-  - [How to generate testcase](#how-to-generate-testcase)
+  - [Using State Information](#using-state-information)
+  - [Generating Test Cases](#generating-test-cases)
   - [Summary](#summary)
-  - [Summary: Getting Throwing Path](#summary-getting-throwing-path)
+  - [Summary: Finding Throwing Paths](#summary-finding-throwing-paths)
 
 ## Introduction
 
-We will now improve [the previous example](running-under-manticore.md) and generate specific inputs for the paths raising an exception in `f()`. The target is still the following smart contract (_[example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)_):
+We will now improve [the previous example](running-under-manticore.md) and generate specific inputs for paths raising an exception in `f()`. The target is still the following smart contract ([example.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example.sol)):
 
 ```solidity
 pragma solidity >=0.4.24 <0.6.0;
@@ -25,12 +25,12 @@ contract Simple {
 }
 ```
 
-## Using state information
+## Using State Information
 
-Each path executed has its state of the blockchain. A state is either ready or it is killed, meaning that it reaches a THROW or REVERT instruction:
+Each executed path has its own blockchain state. A state is either ready or killed, meaning that it reaches a THROW or REVERT instruction:
 
 - [m.ready_states](https://manticore.readthedocs.io/en/latest/states.html#accessing): the list of states that are ready (they did not execute a REVERT/INVALID)
-- [m.killed_states](https://manticore.readthedocs.io/en/latest/states.html#accessings): the list of states that are ready (they did not execute a REVERT/INVALID)
+- [m.killed_states](https://manticore.readthedocs.io/en/latest/states.html#accessings): the list of killed states (they did execute a REVERT/INVALID)
 - [m.all_states](https://manticore.readthedocs.io/en/latest/states.html#accessings): all the states
 
 ```python3
@@ -38,22 +38,22 @@ for state in m.all_states:
     # do something with state
 ```
 
-You can access state information. For example:
+You can access information about a state. For example:
 
 - `state.platform.get_balance(account.address)`: the balance of the account
 - `state.platform.transactions`: the list of transactions
 - `state.platform.transactions[-1].return_data`: the data returned by the last transaction
 
-The data returned by the last transaction is an array, which can be converted to a value with ABI.deserialize, for example:
+The data returned by the last transaction is an array, which can be converted to a value with ABI.deserialize. For example:
 
 ```python
 data = state.platform.transactions[0].return_data
 data = ABI.deserialize("uint256", data)
 ```
 
-## How to generate testcase
+## Generating Test Cases
 
-Use [m.generate_testcase(state, name)](https://github.com/trailofbits/manticore/blob/dc8c3c822bbd50adabe50cafef38457505c0bc7b/manticore/ethereum/manticore.py#L1572) to generate testcase:
+Use [m.generate_testcase(state, name)](https://github.com/trailofbits/manticore/blob/dc8c3c822bbd50adabe50cafef38457505c0bc7b/manticore/ethereum/manticore.py#L1572) to generate test cases:
 
 ```python3
 m.generate_testcase(state, 'BugFound')
@@ -61,13 +61,13 @@ m.generate_testcase(state, 'BugFound')
 
 ## Summary
 
-- You can iterate over the state with m.all_states
-- `state.platform.get_balance(account.address)` returns the account’s balance
+- You can iterate over the states with m.all_states
+- `state.platform.get_balance(account.address)` returns the account's balance
 - `state.platform.transactions` returns the list of transactions
 - `transaction.return_data` is the data returned
-- `m.generate_testcase(state, name)` generate inputs for the state
+- `m.generate_testcase(state, name)` generates inputs for the state
 
-## Summary: Getting Throwing Path
+## Summary: Finding Throwing Paths
 
 ```python3
 from manticore.ethereum import ManticoreEVM
@@ -91,8 +91,8 @@ for state in m.terminated_states:
         m.generate_testcase(state, 'ThrowFound')
 ```
 
-All the code above you can find into the [example_throw.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example_throw.py)
+You can find all the code above in the [example_throw.py](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/manticore/examples/example_throw.py) file.
 
 The next step is to [add constraints](./adding-constraints.md) to the state.
 
-_Note we could have generated a much simpler script, as all the states returned by terminated_state have REVERT or INVALID in their result: this example was only meant to demonstrate how to manipulate the API._
+_Note: We could have generated a much simpler script since all the states returned by terminated_state have REVERT or INVALID in their result. This example was only meant to demonstrate how to manipulate the API._
