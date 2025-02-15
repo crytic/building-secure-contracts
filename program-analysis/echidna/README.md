@@ -13,6 +13,7 @@ To learn through live coding sessions, watch our [Fuzzing workshop](https://www.
 - [Frequently Asked Questions](./frequently_asked_questions.md): Responses to common questions about Echidna
 - [Configuration options](./configuration.md): Description of all Echidna configuration options
 - [Exercises](exercises): Practical exercises to enhance your understanding
+- [Workshops](./workshop_links.md): Recordings of workshops and presentations
 
 Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum.
 
