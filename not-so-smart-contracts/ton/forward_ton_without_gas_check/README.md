@@ -6,7 +6,7 @@ If a contract lacks such a gas check then users can specify a higher forward TON
 
 ## Example
 
-The following simplified code highlights the lack of gas check. The following contract implements a `withdraw` operation that allows users to specify a forward TON amount to and forward payload to send with the Jettons. However, this contract does not chekc if used included enough TON with the `withdraw` message to cover for the `withdraw` message transaction, jetton transfer gas fee, and forward TON amount. This allows users to drain the TON balance of the smart contract.
+The following simplified code highlights the lack of a gas check. The contract implements a `withdraw` operation that allows users to specify a forward TON amount and a forward payload to send with the Jettons. However, the contract does not check if the user included enough TON with the `withdraw` message to cover the `withdraw` message transaction, the Jetton transfer gas fee, and the forward TON amount. This allows users to drain the TON balance of the smart contract.
 
 ```FunC
 #include "imports/stdlib.fc";
