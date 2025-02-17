@@ -2,7 +2,7 @@
 
 TON smart contracts needs to send TON as gas fee along with the Jetton transfers or any other message they send to another contract. If a contract allows its users to specify the amount of TON to be sent with an outgoing message then it must check that the user supplied enough TON with their message to cover for the transaction fee and the forward TON amount.
 
-If a contract lacks such a gas check then users can specify a higher forward TON amount to drain the TON balance of the smart contract, freezing the smart contract and potentially destrying it.
+If a contract lacks such a gas check then users can specify a higher forward TON amount to drain the TON balance of the smart contract, freezing the smart contract and potentially destroying it.
 
 ## Example
 
