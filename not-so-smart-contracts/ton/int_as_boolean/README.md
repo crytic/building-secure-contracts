@@ -87,4 +87,4 @@ It demonstrats that the `~ 10` and `~ -10` both evaluate to `true` instead of be
 
 - Always use `0` or `-1` in condition checks to get correct results.
 - Be careful with the logical operator usage on non-zero integer values.
-- Implement test cases to verify correct behavior of all condition checks with different interger values.
+- Implement test cases to verify correct behavior of all condition checks with different integer values.
