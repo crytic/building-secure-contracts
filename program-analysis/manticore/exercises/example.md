@@ -1,12 +1,12 @@
-# Example: Arithmetic overflow
+# Example: Arithmetic Overflow
 
-This scenario is given as an example. You can follow its structure to solve the exercises.
+This scenario is provided as an example. You can use its structure as a guide to solving the exercises.
 
-[`my_token.py`](example/my_token.py) uses Manticore to find for an attacker to generate tokens during a transfer on Token ([my_token.sol](example/my_token.sol)).
+[`my_token.py`](example/my_token.py) utilizes Manticore to discover if an attacker can generate tokens during a transfer on the Token contract ([my_token.sol](example/my_token.sol)).
 
-## Proposed scenario
+## Proposed Scenario
 
-We use the pattern initialization, exploration and property for our scripts.
+We will use the pattern of initialization, exploration, and property checking for our scripts.
 
 ## Initialization
 
@@ -15,10 +15,10 @@ We use the pattern initialization, exploration and property for our scripts.
 
 ## Exploration
 
-- Call balances on the user account
-- Call transfer with symbolic destination and value
-- Call balances on the user account
+- Call 'balances' on the user account
+- Call 'transfer' with a symbolic destination and value
+- Call 'balances' on the user account again
 
-## Property
+## Property Checking
 
-- Check if the user can have more token after the transfer than before.
+- Verify if the user can possess more tokens after the transfer than before.
