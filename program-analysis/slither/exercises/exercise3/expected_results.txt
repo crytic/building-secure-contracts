@@ -1,1 +1,0 @@
-The function using "a" in condition are ['condition', 'call_require']
