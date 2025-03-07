@@ -73,6 +73,7 @@
     - [Int as boolean](./not-so-smart-contracts/ton/int_as_boolean/README.md)
 
 - [Program Analysis](./program-analysis/README.md)
+
   - [Echidna](./program-analysis/echidna/README.md)
     - [Introduction](./program-analysis/echidna/introduction/README.md)
       - [Installation](./program-analysis/echidna/introduction/installation.md)
@@ -194,7 +195,7 @@
       - [Path Finding Utility](./program-analysis/slither/docs/src/tools/Path-Finding-Utility.md)
       - [Property Generation](./program-analysis/slither/docs/src/tools/Property-generation.md)
       - [Read Storage](./program-analysis/slither/docs/src/tools/ReadStorage.md)
-      - [Format](./program-analysis/slither/docs/src/tools/Slither-format.md)   
+      - [Format](./program-analysis/slither/docs/src/tools/Slither-format.md)
       - [Upgradeability checks](./program-analysis/slither/docs/src/tools/Upgradeability-Checks.md)
     - [Tutorials](./program-analysis/slither/docs/src/tutorials/README.md)
       - [Exercise 1](./program-analysis/slither/docs/src/tutorials/exercise1.md)
