@@ -4,4 +4,4 @@
 [submodule "program-analysis/slither"]
 	path = program-analysis/slither
 	url = https://github.com/crytic/slither.git
-	branch = secure-contract-docs
+	branch = master
