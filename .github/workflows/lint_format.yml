@@ -34,7 +34,7 @@ jobs:
       
       - name: Remove slither uncessary files
         run: |
-          find program-analysis/slither -mindepth 1 -not -name "docs" -exec rm -rf {} +
+          rm -rf program-analysis/slither
 
       - name: Run lint
         run: |

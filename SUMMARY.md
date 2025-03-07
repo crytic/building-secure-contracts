@@ -185,7 +185,7 @@
     - [Printers](./program-analysis/slither/docs/src/printers/Printer-documentation.md)
     - [Tools](./program-analysis/slither/docs/src/tools/README.md)
       - [Adding a new tool](./program-analysis/slither/docs/src/tools/Adding-a-new-utility.md)
-      - [Code Similarity](./program-analysis/slither/docs/src/tools/Code-Similarity-detector.md)
+      - [Code Similarity](./program-analysis/slither/docs/src/tools/Code-Similarity-Detector.md)
       - [Contract Flattening](./program-analysis/slither/docs/src/tools/Contract-Flattening.md)
       - [Documentation](./program-analysis/slither/docs/src/tools/Documentation.md)
       - [Doctor](./program-analysis/slither/docs/src/tools/Doctor.md)
