@@ -31,7 +31,7 @@ jobs:
           rm -rf program-analysis/medusa/compilation
           rm -rf program-analysis/medusa/fuzzing
           rm program-analysis/medusa/docs/theme/highlight.js
-      
+
       - name: Remove slither uncessary files
         run: |
           rm -rf program-analysis/slither
