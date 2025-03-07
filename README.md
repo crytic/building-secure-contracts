@@ -31,7 +31,7 @@ Brought to you by [Trail of Bits](https://www.trailofbits.com/), this repository
 - [Program Analysis](./program-analysis): Using automated tools to secure contracts
   - [Echidna](./program-analysis/echidna): A fuzzer that checks your contract's properties
   - [Medusa](./program-analysis/medusa/docs/src): A next-gen fuzzer that checks your contract's properties
-  - [Slither](./program-analysis/slither/secure_contracts_docs/src/): A static analyzer with both CLI and scriptable interfaces
+  - [Slither](./program-analysis/slither/docs/src/): A static analyzer with both CLI and scriptable interfaces
   - [Manticore](./program-analysis/manticore): A symbolic execution engine that proves the correctness of properties
   - For each tool, this training material provides:
     - A theoretical introduction, an API walkthrough, and a set of exercises
