@@ -1,3 +1,7 @@
 [submodule "program-analysis/medusa"]
 	path = program-analysis/medusa
 	url = https://github.com/crytic/medusa.git
+[submodule "program-analysis/slither"]
+	path = program-analysis/slither
+	url = https://github.com/crytic/slither.git
+	branch = master
