@@ -197,6 +197,14 @@ Maximum amount of seconds of delay between transactions.
 
 Maximum amount of block numbers between transactions.
 
+### `codeSize`
+
+| Type | Default      | Available in |
+| ---- | ------------ | ------------ |
+| Int  | `0xffffffff` | \*           |
+
+Maximum code size for deployed contracts.
+
 ### `solcArgs`
 
 | Type   | Default | Available in | CLI equivalent     |
@@ -354,7 +362,8 @@ formats.
 | ---- | ------- | ------------ | -------------- |
 | Int  | `1`     | 2.2.0+       | `--workers`    |
 
-Number of workers.
+Number of workers. Starting on 2.2.4, the default value is equal to the
+number of cores on the system, with a minimum of 1 and a maximum of 4.
 
 ### `server`
 
@@ -420,19 +429,28 @@ Number of times we may revisit a particular branching point before we consult
 the smt solver to check reachability. Only relevant if `symExec` is true and
 `symExecConcolic` is false.
 
+### `disableSlither`
+
+| Type | Default | Available in | CLI Equivalent      |
+| ---- | ------- | ------------ | ------------------- |
+| Bool | `false` | 2.2.6+       | `--disable-slither` |
+
+Allows disabling the Slither integration. This is only intended for development,
+and we do not recommend using this flag as it degrades fuzzing efficiency.
+
+### `projectName`
+
+| Type   | Default | Available in |
+| ------ | ------- | ------------ |
+| String | `null`  | 2.2.7+       |
+
+A friendly name to identify what is being fuzzed. It is shown next to the
+Echidna version in the UI.
+
 ## Experimental options
 
 There are some options in Echidna that are meant for advanced debugging and
 experimenting. Those are listed below.
-
-### `estimateGas`
-
-| Type | Default | Available in |
-| ---- | ------- | ------------ |
-| Bool | `false` | \*           |
-
-Enables the collection of worst-case gas usage. The information is stored as
-part of the corpus on the `gas_info` field. This functionality is experimental.
 
 ### `dictfreq`
 
@@ -457,16 +475,25 @@ value consists of four integers, `[c1, c2, c3, c4]`. Refer to the
 code](https://github.com/crytic/echidna/blob/8d20836c4a5bba6779c7a5b58cc7907c89a4e581/lib/Echidna/Mutator/Corpus.hs#L70-L101)
 for their meaning and impact. We do not recommend changing the default value.
 
-## Deprecated options
+## Removed options
 
-There are some options in Echidna that have been deprecated and will be removed soon. Those are listed below.
+There are some options in Echidna that have been removed. Those are listed below.
 
 ### `initialize`
 
-| Type   | Default | Available in |
-| ------ | ------- | ------------ |
-| String | `null`  | \*           |
+| Type   | Default | Available in   |
+| ------ | ------- | -------------- |
+| String | `null`  | \* until 2.2.7 |
 
-This allows initializing the chain state in Echidna with a series of
-transactions, typically captured with [Etheno](https://github.com/crytic/etheno). Nowadays, with the
-introduction of on-chain fuzzing in Echidna, it has become deprecated.
+This allowed initializing the chain state in Echidna with a series of
+transactions, typically captured with [Etheno](https://github.com/crytic/etheno). With the
+introduction of on-chain fuzzing in Echidna, it had become deprecated, and was later removed.
+
+### `estimateGas`
+
+| Type | Default | Available in   |
+| ---- | ------- | -------------- |
+| Bool | `false` | \* until 2.2.7 |
+
+Enabled the collection of worst-case gas usage. The information was stored as
+part of the corpus on the `gas_info` field. This functionality was experimental.
