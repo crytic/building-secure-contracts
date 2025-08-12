@@ -135,10 +135,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Checkout Damn Vulnerable DeFi solutions
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         if: startsWith(matrix.workdir, 'dvdefi')
         with:
           repository: crytic/damn-vulnerable-defi-echidna
