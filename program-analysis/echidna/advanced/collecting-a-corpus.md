@@ -42,6 +42,7 @@ Next, create an [Echidna configuration file](https://github.com/crytic/echidna/w
 
 ```yaml
 corpusDir: "corpus-magic"
+coverage: true
 ```
 
 Now, run the tool and inspect the collected corpus:
