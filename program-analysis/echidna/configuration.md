@@ -411,7 +411,7 @@ The SMT solver used when doing symbolic execution. Valid values are: "cvc5", "z3
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
-| Int  | `10`    | 2.2.4+       |
+| Int  | `10`    | 2.2.8+       |
 
 Number of states in base 2 (e.g. `2 ** 10`) that we may explore using symbolic execution. Only relevant if
 `symExec` is true.
@@ -507,8 +507,7 @@ part of the corpus on the `gas_info` field. This functionality was experimental.
 
 | Type | Default | Available in   |
 | ---- | ------- | -------------- |
-| Bool | `true`  | \* until 2.2.8 |
+| Bool | `true`  | \* until 2.2.7 |
 
-Whether symbolic execution will be concolic (vs full symbolic execution). Only
-relevant if `symExec` is true.
+This option controlled whether symbolic execution will be concolic (vs full symbolic execution). It has been removed from the current version of Echidna.
 
