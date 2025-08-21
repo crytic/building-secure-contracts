@@ -413,7 +413,7 @@ The SMT solver used when doing symbolic execution. Valid values are: "cvc5", "z3
 | ---- | ------- | ------------ |
 | Int  | `10`    | 2.2.8+       |
 
-Number of states in base 2 (e.g. `2 ** 10`) that we may explore using symbolic execution. Only relevant if
+Number of states in exponents of 2 (i.e. 2^10 states) that we may explore using symbolic execution. Only relevant if
 `symExec` is true.
 
 ### `symExecMaxIters`
