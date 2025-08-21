@@ -420,7 +420,7 @@ Number of states in base 2 (e.g. `2 ** 10`) that we may explore using symbolic e
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
-| Int  | `10`    | 2.2.4+       |
+| Int  | `5`    | 2.2.4+       |
 
 Number of times we may revisit a particular branching point. Only relevant if `symExec` is true.
 
@@ -439,8 +439,9 @@ the smt solver to check reachability. Only relevant if `symExec` is true.
 | --------| ------- | ------------ |---------------------|
 | [String]| `null`  | 2.2.4+       | `--sym-exec-target` |
 
-List of function names to include during the symbolic execution exploration.
-When used in the CLI, it will only allow a single target. Only relevant if `symExec` is true.
+List of whitelisted functions for using symbolic exploration. When set to null,
+all functions are eligible. If used in the CLI, it will only allow a single target. 
+Only relevant if `symExec` is true.
 
 ### `disableSlither`
 
