@@ -431,8 +431,16 @@ Number of times we may revisit a particular branching point. Only relevant if `s
 | Int  | `1`     | 2.2.4+       |
 
 Number of times we may revisit a particular branching point before we consult
-the smt solver to check reachability. Only relevant if `symExec` is true and
-`symExecConcolic` is false.
+the smt solver to check reachability. Only relevant if `symExec` is true.
+
+### `symExecTargets`
+
+| Type    | Default | Available in |    CLI Equivalent   |
+| --------| ------- | ------------ |---------------------|
+| [String]| `null`  | 2.2.4+       | `--sym-exec-target` |
+
+List of function names to include during the symbolic execution exploration.
+When used in the CLI, it will only allow a single target. Only relevant if `symExec` is true.
 
 ### `disableSlither`
 
