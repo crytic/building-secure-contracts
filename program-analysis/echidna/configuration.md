@@ -403,7 +403,7 @@ Timeout for symbolic execution SMT solver per formula to solve. Only relevant if
 
 | Type | Default    | Available in |
 | ---- | -----------| ------------ |
-| Int  | `bitwuzla` | 2.2.8+       |
+| String  | `bitwuzla` | 2.2.8+       |
 
 The SMT solver used when doing symbolic execution. Valid values are: "cvc5", "z3" and "bitwuzla". Only relevant if `symExec` is true.
 
