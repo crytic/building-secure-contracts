@@ -43,6 +43,6 @@ func validateTotalBorrows(ctx sdk.Context, k keeper.Keeper) {
 
 ## External examples
 
-- [Gravity Bridge can `panic` in multiple locations in the `EndBlocker` method](https://giters.com/althea-net/cosmos-gravity-bridge/issues/348)
+- [Gravity Bridge can `panic` in multiple locations in the `EndBlocker` method](https://github.com/althea-net/cosmos-gravity-bridge/issues/348)
 - [Agoric `panic`s purposefully if the `PushAction` method returns an error](https://github.com/Agoric/agoric-sdk/blob/9116ede69169ebb252faf069d90022e8e05c6a4e/golang/cosmos/x/vbank/module.go#L166)
 - [Setting invalid parameters in `x/distribution` module causes `panic` in `BeginBlocker`](https://github.com/cosmos/cosmos-sdk/issues/5808). Valid parameters are [described in the documentation](https://docs.cosmos.network/v0.45/modules/distribution/07_params.html).
