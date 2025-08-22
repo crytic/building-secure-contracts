@@ -89,7 +89,6 @@
     - [Advanced](./program-analysis/echidna/advanced/README.md)
       - [How to collect a corpus](./program-analysis/echidna/advanced/collecting-a-corpus.md)
       - [How to use optimization mode](./program-analysis/echidna/advanced/optimization_mode.md)
-      - [How to detect high gas consumption](./program-analysis/echidna/advanced/finding-transactions-with-high-gas-consumption.md)
       - [How to perform smart contract fuzzing at a large scale](./program-analysis/echidna/advanced/smart-contract-fuzzing-at-scale.md)
       - [How to test bytecode-only contracts](./program-analysis/echidna/advanced/testing-bytecode.md)
       - [How and when to use cheat codes](program-analysis/echidna/advanced/on-using-cheat-codes.md)

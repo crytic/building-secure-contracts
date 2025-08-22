@@ -81,13 +81,6 @@ jobs:
             contract: TestToken
             outcome: failure
             expected: 'echidna_balance_under_1000:\s*failed'
-          - name: Gas estimation
-            workdir: program-analysis/echidna/example/
-            files: gas.sol
-            config: gas.yaml
-            outcome: success
-            expected: "f(42,123,"
-            flaky: true
           - name: Multi
             workdir: program-analysis/echidna/example/
             files: multi.sol
