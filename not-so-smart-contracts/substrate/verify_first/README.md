@@ -1,6 +1,6 @@
 # Verify First, Write Last
 
-**NOTE**: As of [Polkadot v0.9.25](https://github.com/substrate-developer-hub/substrate-docs/issues/1215), the **Verify First, Write Last** practice is no longer required. However, since older versions are still vulnerable and because it is still best practice, it is worth discussing the "Verify First, Write Last" idiom.
+**NOTE**: As of [Polkadot v0.9.25](https://github.com/polkadot-developers/substrate-docs/issues/1215), the **Verify First, Write Last** practice is no longer required. However, since older versions are still vulnerable and because it is still best practice, it is worth discussing the "Verify First, Write Last" idiom.
 
 Substrate does not cache state prior to extrinsic dispatch. Instead, state changes are made as they are invoked. This is in contrast to a transaction in Ethereum where, if the transaction reverts, no state changes will persist. In the case of Substrate, if a state change is made and then the dispatch throws a `DispatchError`, the original state change will persist. This unique behavior has led to the "Verify First, Write Last" practice.
 

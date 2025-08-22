@@ -49,11 +49,10 @@ Additionally, consider conducting a threat modeling exercise. This exercise will
   - An approachable guide for incident response. Chapter 4 includes examples for how to approach practicing your process.
 - [PagerDuty Incident Response](https://response.pagerduty.com/)
   - A _very_ detailed handbook of how PagerDuty handles incident response themselves. Some useful ideas and resources, but more practical for larger organizations.
-- [How to Hack the Yield Protocol](https://docs.yieldprotocol.com/#/operations/how_to_hack)
-- [Emergency Procedures for Yearn Finance](https://github.com/yearn/yearn-devdocs/blob/master/docs/developers/v2/EMERGENCY.md)
+- [Emergency Procedures for Yearn Finance](https://github.com/yearn/yearn-devdocs/blob/master/docs/developers/security/EMERGENCY.md)
 - [Rekt pilled: What to do when your dApp gets pwned and how to stay kalm - Heidi Wilder (DSS 2023)](https://www.youtube.com/watch?v=TDlkkg8N0wc)
 - [Crisis Handbook - Smart Contract Hack (SEAL)](https://docs.google.com/document/d/1DaAiuGFkMEMMiIuvqhePL5aDFGHJ9Ya6D04rdaldqC0/edit)
 
 ### Community Incident Retrospectives
 
-- [Yield Protocol](https://medium.com/yield-protocol/post-mortem-of-incident-on-august-5th-2022-7bb70dbb9ada)
+- [Yield Protocol](https://web.archive.org/web/20230105183841/https://medium.com/yield-protocol/post-mortem-of-incident-on-august-5th-2022-7bb70dbb9ada)

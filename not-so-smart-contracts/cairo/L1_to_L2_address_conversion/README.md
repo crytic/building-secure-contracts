@@ -4,7 +4,7 @@ In Starknet, addresses are of the `felt` type, while on L1 addresses are of the 
 
 # Example
 
-Consider the following code to initiate L2 deposits from L1. The first example has no checks on the `to` parameter, and depending on the user's address, it could transfer tokens to an unexpected address on L2. The second example, however, adds verification to ensure this does not happen. Note that the code is a simplified version of how messages are sent on L1 and processed on L2. For a more comprehensive overview, see here: [https://www.cairo-lang.org/docs/hello_starknet/l1l2.html](https://docs.cairo-lang.org/hello_starknet/l1l2.html).
+Consider the following code to initiate L2 deposits from L1. The first example has no checks on the `to` parameter, and depending on the user's address, it could transfer tokens to an unexpected address on L2. The second example, however, adds verification to ensure this does not happen. Note that the code is a simplified version of how messages are sent on L1 and processed on L2. For a more comprehensive overview, see here: [https://www.cairo-lang.org/docs/hello_starknet/l1l2.html](https://web.archive.org/web/20250117175431/https://docs.cairo-lang.org/hello_starknet/l1l2.html).
 
 ```solidity
 contract L1ToL2Bridge {

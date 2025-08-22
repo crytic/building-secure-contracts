@@ -84,13 +84,11 @@ jobs:
             workdir: program-analysis/echidna/example/
             files: multi.sol
             contract: C
-            config: filter.yaml
             outcome: failure
             expected: 'echidna_state4()\" failed after the following call sequence'
           - name: Assert
             workdir: program-analysis/echidna/example/
             files: assert.sol
-            config: assert.yaml
             contract: Incrementor
             outcome: failure
             expected: 'inc(uint256)\" resulted in an assertion failure after the following call sequence'
@@ -112,7 +110,6 @@ jobs:
             workdir: program-analysis/echidna/example/
             files: TestDepositWithPermit.sol
             solc-version: 0.8.0
-            config: testdeposit.yaml
             contract: TestDepositWithPermit
             outcome: success
             expected: '\[PASSED\] Assertion Test: TestDepositWithPermit.testERC20PermitDeposit(uint256)'
@@ -162,7 +159,7 @@ jobs:
           go build -o medusa -v .
           go install -v .
           sudo cp medusa /usr/bin
-          pip install crytic-compile solc-select
+          pip install crytic-compile solc-select slither-analyzer
 
       - name: Run Medusa
         continue-on-error: true

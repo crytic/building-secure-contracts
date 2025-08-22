@@ -61,4 +61,4 @@ Note that the quality of randomness provided to the `pallet-bad-lottery` pallet 
 - https://docs.substrate.io/reference/how-to-guides/pallet-design/incorporate-randomness/
 - https://ethresear.ch/t/rng-exploitability-analysis-assuming-pure-randao-based-main-chain/1825/7
 - https://ethresear.ch/t/collective-coin-flipping-csprng/3252/21
-- https://github.com/paritytech/ink/issues/57#issuecomment-486998848
+- https://github.com/use-ink/ink/issues/57#issuecomment-486998848
