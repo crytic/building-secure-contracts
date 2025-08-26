@@ -22,8 +22,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           submodules: recursive
-      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+      - uses: tcort/github-action-markdown-link-check@v1
         with:
           use-quiet-mode: "yes"
           check-modified-files-only: ${{ (github.event_name == 'pull_request' && 'yes') || 'no' }}
-          submodules: true
