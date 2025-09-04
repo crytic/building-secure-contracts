@@ -148,7 +148,7 @@ jobs:
         working-directory: ${{ matrix.workdir }}
 
       - name: Go setup
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version: "^1.18.1"
 
