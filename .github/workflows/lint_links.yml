@@ -15,6 +15,9 @@ on:
     # run CI at 09:00 every Tuesday even if no PRs/merges occur
     - cron: "0 9 * * 2"
 
+permissions:
+  contents: read
+
 jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
@@ -22,6 +25,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           submodules: recursive
+          persist-credentials: false
       - uses: tcort/github-action-markdown-link-check@v1
         with:
           use-quiet-mode: "yes"

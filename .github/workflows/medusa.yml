@@ -17,6 +17,9 @@ on:
     # run CI every day even if no PRs/merges occur
     - cron: "0 12 * * *"
 
+permissions:
+  contents: read
+
 jobs:
   tests:
     name: ${{ matrix.name }}
@@ -125,6 +128,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - name: Checkout Damn Vulnerable DeFi solutions
         uses: actions/checkout@v5
@@ -133,6 +138,7 @@ jobs:
           repository: crytic/damn-vulnerable-defi-echidna
           ref: solutions
           path: ${{ matrix.workdir }}
+          persist-credentials: false
 
       - name: Set up Nodejs
         uses: actions/setup-node@v5
