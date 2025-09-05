@@ -375,26 +375,17 @@ Run events server on the given port.
 
 ### `symExec`
 
-| Type | Default | Available in |
-| ---- | ------- | ------------ |
-| Bool | `false` | 2.2.4+       |
+| Type | Default | Available in | CLI equivalent |
+| ---- | ------- | ------------ | -------------- |
+| Bool | `false` | 2.2.4+       | `--sym-exec`   |
 
 Whether to add an additional symbolic execution worker.
 
-### `symExecConcolic`
-
-| Type | Default | Available in |
-| ---- | ------- | ------------ |
-| Bool | `true`  | 2.2.4+       |
-
-Whether symbolic execution will be concolic (vs full symbolic execution). Only
-relevant if `symExec` is true.
-
 ### `symExecNSolvers`
 
-| Type | Default | Available in |
-| ---- | ------- | ------------ |
-| Int  | `1`     | 2.2.4+       |
+| Type | Default | Available in | CLI equivalent         |
+| ---- | ------- | ------------ | ---------------------- |
+| Int  | `1`     | 2.2.4+       | `--sym-exec-n-solvers` |
 
 Number of SMT solvers used in symbolic execution. While there is a single
 symExec worker, N threads may be used to solve SMT queries. Only relevant if
@@ -402,22 +393,36 @@ symExec worker, N threads may be used to solve SMT queries. Only relevant if
 
 ### `symExecTimeout`
 
+| Type | Default | Available in | CLI equivalent       |
+| ---- | ------- | ------------ | -------------------- |
+| Int  | `30`    | 2.2.4+       | `--sym-exec-timeout` |
+
+Timeout for symbolic execution SMT solver per formula to solve. Only relevant if `symExec` is true.
+
+### `symExecSMTSolver`
+
+| Type   | Default    | Available in |
+| ------ | ---------- | ------------ |
+| String | `bitwuzla` | 2.2.8+       |
+
+The SMT solver used when doing symbolic execution. Valid values are: "cvc5", "z3" and "bitwuzla". Only relevant if `symExec` is true.
+
+### `symExecMaxExplore`
+
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
-| Int  | `30`    | 2.2.4+       |
+| Int  | `10`    | 2.2.8+       |
 
-Timeout for symbolic execution SMT solver. Only relevant if `symExec` is true.
-When the SMT solver used is Z3, this timeout applies per query, and is not
-global.
+Number of states in exponents of 2 (i.e. 2^10 states) that we may explore using symbolic execution. Only relevant if
+`symExec` is true.
 
 ### `symExecMaxIters`
 
 | Type | Default | Available in |
 | ---- | ------- | ------------ |
-| Int  | `10`    | 2.2.4+       |
+| Int  | `5`     | 2.2.4+       |
 
-Number of times we may revisit a particular branching point. Only relevant if
-`symExec` is true and `symExecConcolic` is false.
+Number of times we may revisit a particular branching point. Only relevant if `symExec` is true.
 
 ### `symExecAskSMTIters`
 
@@ -426,8 +431,17 @@ Number of times we may revisit a particular branching point. Only relevant if
 | Int  | `1`     | 2.2.4+       |
 
 Number of times we may revisit a particular branching point before we consult
-the smt solver to check reachability. Only relevant if `symExec` is true and
-`symExecConcolic` is false.
+the smt solver to check reachability. Only relevant if `symExec` is true.
+
+### `symExecTargets`
+
+| Type     | Default | Available in | CLI Equivalent      |
+| -------- | ------- | ------------ | ------------------- |
+| [String] | `null`  | 2.2.4+       | `--sym-exec-target` |
+
+List of whitelisted functions for using symbolic exploration. When set to null,
+all functions are eligible. If used in the CLI, it will only allow a single target.
+Only relevant if `symExec` is true.
 
 ### `disableSlither`
 
@@ -497,3 +511,11 @@ introduction of on-chain fuzzing in Echidna, it had become deprecated, and was l
 
 Enabled the collection of worst-case gas usage. The information was stored as
 part of the corpus on the `gas_info` field. This functionality was experimental.
+
+### `symExecConcolic`
+
+| Type | Default | Available in   |
+| ---- | ------- | -------------- |
+| Bool | `true`  | \* until 2.2.7 |
+
+This option controlled whether symbolic execution will be concolic (vs full symbolic execution). It has been removed from the current version of Echidna.
