@@ -23,9 +23,10 @@ jobs:
         with:
           fetch-depth: 0
           submodules: true
+          persist-credentials: false
       - name: Install mdbook
         run: |
-          cargo install --git https://github.com/montyly/mdBook.git mdbook || true
+          cargo install --git https://github.com/trail-of-forks/mdBook.git --branch building-secure-contracts mdbook || true
       - name: Build artifacts
         run: mdbook build
       - name: Upload artifact

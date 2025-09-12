@@ -15,13 +15,16 @@ on:
     # run CI every day even if no PRs/merges occur
     - cron: "0 12 * * *"
 
+permissions:
+  contents: read
+
 jobs:
   tests:
     runs-on: ubuntu-22.04
-    strategy:
-      fail-fast: false
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Set up Python 3.8
         uses: actions/setup-python@v6
         with:

@@ -68,9 +68,9 @@ We utilize `mdbook` to generate [secure-contracts.com](https://secure-contracts.
 
 To run it locally:
 
-```
-cargo install --git https://github.com/montyly/mdBook.git mdbook
+```bash
+cargo install --git https://github.com/trail-of-forks/mdBook.git --branch building-secure-contracts mdbook
 mdbook build
 ```
 
-Note: We use https://github.com/montyly/mdBook.git, which contains https://github.com/rust-lang/mdBook/pull/1584.
+Note: We use https://github.com/trail-of-forks/mdBook.git, which contains https://github.com/rust-lang/mdBook/pull/1584.
