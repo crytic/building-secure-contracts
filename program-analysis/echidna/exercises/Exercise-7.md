@@ -16,6 +16,8 @@ Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
 3. Analyze the `before` function in `test/side-entrance/side-entrance.challenge.js` to determine the initial setup requirements.
 4. Create a contract to be used for property testing with Echidna.
 
+The challenge contracts are here: https://github.com/tinchoabbate/damn-vulnerable-defi/tree/v2.0.0/contracts/side-entrance (Damn Vulnerable DeFi v2.0.0).
+
 No skeleton will be provided for this exercise.
 
 ## Goals

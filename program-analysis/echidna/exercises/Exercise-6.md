@@ -18,7 +18,7 @@ Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
 
 ## Context
 
-The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/1.html. We assume that the reader is familiar with it.
+The challenge contracts are here: https://github.com/tinchoabbate/damn-vulnerable-defi/tree/v2.0.0/contracts/unstoppable (Damn Vulnerable DeFi v2.0.0). We assume that the reader is familiar with it.
 
 ## Goals
 

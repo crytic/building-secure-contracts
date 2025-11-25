@@ -18,7 +18,7 @@ Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
 
 ## Context
 
-The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/2.html. It is assumed that the reader is familiar with the challenge.
+The challenge contracts are here: https://github.com/tinchoabbate/damn-vulnerable-defi/tree/v2.0.0/contracts/naive-receiver (Damn Vulnerable DeFi v2.0.0). It is assumed that the reader is familiar with the challenge.
 
 ## Goals
 
