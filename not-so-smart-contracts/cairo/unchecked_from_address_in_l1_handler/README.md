@@ -18,7 +18,7 @@ constructor(address _owner, address _messenger, address _bridge) {
 }
 
 function setOwnerOnL2(uint256[] calldata payload, uint256 selector) external {
-    require(owner == msg.sender, "not owner");
+    require(OWNER == msg.sender, "not owner");
     IStarknetMessaging(MESSENGER_CONTRACT).sendMessageToL2(L2_BRIDGE_ADDRESS, selector, payload);
 }
 ```
