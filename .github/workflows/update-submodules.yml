@@ -56,7 +56,7 @@ jobs:
             - Update slither to latest commit
           branch: update-submodules
           delete-branch: true
-          title: 'Update submodules (medusa, slither)'
+          title: "Update submodules (medusa, slither)"
           body: |
             ## Automated Submodule Update
 
