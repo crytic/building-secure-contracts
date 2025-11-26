@@ -1,0 +1,87 @@
+name: Update Submodules
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+
+      - name: Update submodules to latest versions
+        run: |
+          echo "Updating submodules to latest commits..."
+          git submodule update --remote --merge
+
+          echo "Current submodule status:"
+          git submodule status
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet HEAD; then
+            echo "No submodule updates available"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "Submodules have been updated"
+            echo "changed=true" >> $GITHUB_OUTPUT
+
+            echo "Changes detected:"
+            git diff --stat
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            Update submodules to latest versions
+
+            - Update medusa to latest commit
+            - Update slither to latest commit
+          branch: update-submodules
+          delete-branch: true
+          title: 'Update submodules (medusa, slither)'
+          body: |
+            ## Automated Submodule Update
+
+            This PR updates the following submodules to their latest commits:
+
+            - **medusa** (`program-analysis/medusa`) - [View repository](https://github.com/crytic/medusa)
+            - **slither** (`program-analysis/slither`) - [View repository](https://github.com/crytic/slither)
+
+            ### Changes
+
+            These submodules provide documentation that is integrated into the mdbook build:
+            - `program-analysis/medusa/docs/` - Medusa documentation
+            - `program-analysis/slither/docs/` - Slither documentation
+
+            ### Review Checklist
+
+            - [ ] Check that medusa documentation builds correctly
+            - [ ] Check that slither documentation builds correctly
+            - [ ] Verify no breaking changes in submodule documentation structure
+            - [ ] Review submodule commit history for significant changes
+
+            ---
+
+            Generated automatically by the [update-submodules workflow](https://github.com/crytic/building-secure-contracts/actions/workflows/update-submodules.yml)
+          labels: |
+            dependencies
+            automated
+          draft: false
