@@ -14,7 +14,7 @@ Cheat codes are special functions that allow to change the state of the EVM in w
 
 ## Cheat codes available in Echidna
 
-Echidna supports all cheat codes that are available in [hevm](https://github.com/ethereum/hevm). These are documented here: [https://hevm.dev/controlling-the-unit-testing-environment.html#cheat-codes](https://hevm.dev/std-test-tutorial.html#supported-cheat-codes).
+Echidna supports all cheat codes that are available in [hevm](https://github.com/argotorg/hevm). These are documented here: [https://hevm.dev/std-test-tutorial.html#supported-cheat-codes](https://hevm.dev/std-test-tutorial.html#supported-cheat-codes).
 If a new cheat code is added in the future, Echidna only needs to update the hevm version and everything should work out of the box.
 
 As an example, the `prank` cheat code is able to set the `msg.sender` address in the context of the next external call:
@@ -42,7 +42,7 @@ A specific example on the use of `sign` cheat code is available [here in our doc
 
 While we provide support for the use of cheat codes, these should be used responsibly. Consider that:
 
-- Cheat codes can break certain assumptions in Solidity. For example, the compiler assumes that `block.number` is constant during a transaction. There are [reports of the optimizer interfering with (re)computation of the `block.number` or `block.timestamp`](https://github.com/ethereum/solidity/issues/12963#issuecomment-1110162425), which can generate incorrect tests when using cheat codes.
+- Cheat codes can break certain assumptions in Solidity. For example, the compiler assumes that `block.number` is constant during a transaction. There are [reports of the optimizer interfering with (re)computation of the `block.number` or `block.timestamp`](https://github.com/argotorg/solidity/issues/12963#issuecomment-1110162425), which can generate incorrect tests when using cheat codes.
 
 - Cheat codes can introduce false positives on the testing. For instance, using `prank` to simulate calls from a contract can allow transactions that are not possible in the blockchain.
 
