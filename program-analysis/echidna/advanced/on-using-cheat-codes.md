@@ -14,7 +14,7 @@ Cheat codes are special functions that allow to change the state of the EVM in w
 
 ## Cheat codes available in Echidna
 
-Echidna supports all cheat codes that are available in [hevm](https://github.com/ethereum/hevm). These are documented here: [https://hevm.dev/controlling-the-unit-testing-environment.html#cheat-codes](https://hevm.dev/std-test-tutorial.html#supported-cheat-codes).
+Echidna supports all cheat codes that are available in [hevm](https://github.com/ethereum/hevm). These are documented here: [https://hevm.dev/std-test-tutorial.html#supported-cheat-codes](https://hevm.dev/std-test-tutorial.html#supported-cheat-codes).
 If a new cheat code is added in the future, Echidna only needs to update the hevm version and everything should work out of the box.
 
 As an example, the `prank` cheat code is able to set the `msg.sender` address in the context of the next external call:
