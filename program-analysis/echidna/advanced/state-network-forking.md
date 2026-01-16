@@ -6,7 +6,7 @@
   - [Introduction](#introduction)
   - [Example](#example)
   - [Corpus and RPC cache](#corpus-and-rpc-cache)
-  - [Coverage and Etherscan integration](#coverage-and-etherscan-integration)
+  - [Coverage and source code fetching](#coverage-and-source-code-fetching)
 
 ## Introduction
 
@@ -71,20 +71,51 @@ $ ls corpus/cache/
 block_16771449_fetch_cache_contracts.json  block_16771449_fetch_cache_slots.json
 ```
 
-## Coverage and Etherscan integration
+## Coverage and source code fetching
 
-When the fuzzing campaign is over, if the source code mapping of any executed on-chain contract is available on Etherscan, it will be fetched automatically for the coverage report. Optionally, an Etherscan key can be provided using the `ETHERSCAN_API_KEY` environment variable.
+When the fuzzing campaign is over, Echidna attempts to fetch source code for any
+executed on-chain contracts to generate coverage reports. Starting with version
+2.3.1, Echidna will first try [Sourcify](https://sourcify.dev/), and if that
+fails, fall back to Etherscan.
+
+[Sourcify](https://sourcify.dev/) is an open-source source code verification
+service for Solidity and Vyper contracts. It doesn't require an API key and
+its verified contracts are publicly available for download. Etherscan requires
+an API key (via the `ETHERSCAN_API_KEY` environment variable or
+`etherscanApiKey` config option).
+
+Example output when Sourcify has the contract:
 
 ```
-Fetching Solidity source for contract at address 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5... Retrying (5 left). Error: Max rate limit reached, please use API Key for higher rate limit
-Retrying (4 left). Error: Max rate limit reached, please use API Key for higher rate limit
-Retrying (3 left). Error: Max rate limit reached, please use API Key for higher rate limit
-Success!
-Fetching Solidity source map for contract at address 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5... Error!
+Fetching source for 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5 from Sourcify... Success!
 ```
 
-While the source code for the [cETH contract is available](https://etherscan.io/address/0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5#code), their source maps are NOT.
-In order to generate the coverage report for a fetched contract, **both** source code and source mapping should be available. In that case, there will be a new directory inside the corpus directory to show coverage for each contract that was fetched. In any case, the coverage report will be always available for the user-provided contracts, such as this one:
+If Sourcify fails and Etherscan API key is configured:
+
+```
+Fetching source for 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5 from Sourcify... Failed!
+Fetching source for 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5 from Etherscan... Success!
+```
+
+If Sourcify fails and no Etherscan API key was provided:
+
+```
+Fetching source for 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5 from Sourcify... Failed!
+Skipping Etherscan (no API key configured)
+```
+
+To disable on-chain source fetching entirely, use `--disable-onchain-sources` or
+set `disableOnchainSources: true` in your config file.
+
+In order to generate the coverage report for a fetched contract, **both** source
+code and source mapping should be available. When using Etherscan, some
+contracts may have source code available but lack source maps, such as for the
+[cETH contract](https://etherscan.io/address/0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5#code).
+When both are available, there will be a new directory inside the corpus
+directory to show coverage for each contract that was fetched.
+
+In addition to that, the coverage report will always be available for the
+user-provided contracts, such as this one:
 
 ```
 20 |     |
