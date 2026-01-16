@@ -445,7 +445,7 @@ the smt solver to check reachability. Only relevant if `symExec` is true.
 
 ### `symExecTargets`
 
-| Type     | Default | Available in | CLI Equivalent      |
+| Type     | Default | Available in | CLI equivalent      |
 | -------- | ------- | ------------ | ------------------- |
 | [String] | `null`  | 2.2.4+       | `--sym-exec-target` |
 
@@ -455,7 +455,7 @@ Only relevant if `symExec` is true.
 
 ### `disableSlither`
 
-| Type | Default | Available in | CLI Equivalent      |
+| Type | Default | Available in | CLI equivalent      |
 | ---- | ------- | ------------ | ------------------- |
 | Bool | `false` | 2.2.6+       | `--disable-slither` |
 
