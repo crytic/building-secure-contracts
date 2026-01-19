@@ -1,10 +1,12 @@
 # Exercise 7
 
-**Table of contents:**
+**Table of Contents:**
 
 - [Exercise 7](#exercise-7)
   - [Setup](#setup)
+  - [Context](#context)
   - [Goals](#goals)
+  - [Hints](#hints)
   - [Solution](#solution)
 
 Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
@@ -12,24 +14,37 @@ Join the team on Slack at: https://slack.empirehacking.nyc/ #ethereum
 ## Setup
 
 1. Clone the repository: `git clone https://github.com/crytic/damn-vulnerable-defi-echidna`
-2. Install dependencies using `yarn install`.
-3. Analyze the `before` function in `test/side-entrance/side-entrance.challenge.js` to determine the initial setup requirements.
-4. Create a contract to be used for property testing with Echidna.
+2. Install the dependencies via `yarn install`.
 
-No skeleton will be provided for this exercise.
+## Context
+
+The challenge is described here: https://www.damnvulnerabledefi.xyz/challenges/4.html. We assume that the reader is familiar with it.
 
 ## Goals
 
 - Set up the testing environment with appropriate contracts and necessary balances.
+- Analyze the `before` function in `test/side-entrance/side-entrance.challenge.js` to determine the initial setup requirements.
 - Add a property to check if the balance of the `SideEntranceLenderPool` contract has changed.
 - Create a `config.yaml` with the required configuration option(s).
 - After Echidna discovers the bug, fix the issue and test your property with Echidna again.
 
-Hint: To become familiar with the workings of the target contract, try manually executing a flash loan.
+Only the following contracts are relevant:
+
+- `contracts/side-entrance/SideEntranceLenderPool.sol`
+
+## Hints
+
+We recommend trying without reading the following hints first. The hints are in the [`hints` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/tree/hints).
+
+- The invariant you are looking for is "the balance of the pool contract cannot change."
+- To become familiar with the workings of the target contract, try manually executing a flash loan.
+- Read about the [allContracts option](../basic/common-testing-approaches.md#external-testing).
+- A template is provided in [contracts/side-entrance/SideEntranceEchidna.sol](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/contracts/side-entrance/SideEntranceEchidna.sol).
+- A config file is provided in [side-entrance.yaml](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/hints/side-entrance.yaml).
 
 ## Solution
 
-The solution can be found in [solution.sol](https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/echidna/exercises/exercise7/solution.sol).
+This solution can be found in the [`solutions` branch](https://github.com/crytic/damn-vulnerable-defi-echidna/blob/solutions/contracts/side-entrance/SideEntranceEchidna.sol).
 
 [ctf]: https://www.damnvulnerabledefi.xyz/
 
