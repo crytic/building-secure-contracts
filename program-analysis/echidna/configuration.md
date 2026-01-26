@@ -97,6 +97,16 @@ keeping this enabled.
 
 Directory to save the corpus collected (requires coverage enabled).
 
+### `coverageDir`
+
+| Type   | Default | Available in | CLI equivalent        |
+| ------ | ------- | ------------ | --------------------- |
+| String | `null`  | 2.3.0+       | `--coverage-dir PATH` |
+
+Directory to save coverage reports. If not specified, coverage reports will be
+saved to the `corpusDir`. This allows separating corpus data (reproducers,
+coverage transactions) from coverage reports.
+
 ### `deployer`
 
 | Type    | Default     | Available in | CLI equivalent |
@@ -435,17 +445,17 @@ the smt solver to check reachability. Only relevant if `symExec` is true.
 
 ### `symExecTargets`
 
-| Type     | Default | Available in | CLI Equivalent      |
+| Type     | Default | Available in | CLI equivalent      |
 | -------- | ------- | ------------ | ------------------- |
 | [String] | `null`  | 2.2.4+       | `--sym-exec-target` |
 
 List of whitelisted functions for using symbolic exploration. When set to null,
-all functions are eligible. If used in the CLI, it will only allow a single target.
+all functions are eligible. Can be passed multiple times on the CLI.
 Only relevant if `symExec` is true.
 
 ### `disableSlither`
 
-| Type | Default | Available in | CLI Equivalent      |
+| Type | Default | Available in | CLI equivalent      |
 | ---- | ------- | ------------ | ------------------- |
 | Bool | `false` | 2.2.6+       | `--disable-slither` |
 
@@ -460,6 +470,17 @@ and we do not recommend using this flag as it degrades fuzzing efficiency.
 
 A friendly name to identify what is being fuzzed. It is shown next to the
 Echidna version in the UI.
+
+### `disableOnchainSources`
+
+| Type | Default | Available in | CLI equivalent              |
+| ---- | ------- | ------------ | --------------------------- |
+| Bool | `false` | 2.3.1+       | `--disable-onchain-sources` |
+
+Disable fetching source code from Sourcify and Etherscan for on-chain contracts.
+When enabled, coverage reports will only include locally compiled contracts.
+This can be useful to speed up campaigns or when external source fetching is
+not needed.
 
 ## Experimental options
 
