@@ -116,7 +116,7 @@ function depositShares_can_revert(uint256 val) public {
 ## Enhancing Postcondition Checks
 
 If the previous properties are passing, this means that the pre-conditions are good enough, however the post-conditions are not very precise.
-Avoiding reverts doesn't mean that the contract is in a valid state. Let's add some basic preconditions:
+Avoiding reverts doesn't mean that the contract is in a valid state. Let's add some basic post-conditions:
 
 ```solidity
 function depositShares_never_reverts(uint256 val) public {
