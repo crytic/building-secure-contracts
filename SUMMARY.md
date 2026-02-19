@@ -71,6 +71,14 @@
     - [Fake Jetton Contract](./not-so-smart-contracts/ton/fake_jetton_contract/README.md)
     - [Foward TON without gas check](./not-so-smart-contracts/ton/forward_ton_without_gas_check/README.md)
     - [Int as boolean](./not-so-smart-contracts/ton/int_as_boolean/README.md)
+    - [Missing Bounce Handler](./not-so-smart-contracts/ton/missing_bounce_handler/README.md)
+    - [Irreversible State Changes](./not-so-smart-contracts/ton/irreversible_state_changes/README.md)
+    - [Raw Reserve Before Validation](./not-so-smart-contracts/ton/raw_reserve_before_validation/README.md)
+    - [Unvalidated Storage Upgrade](./not-so-smart-contracts/ton/unvalidated_storage_upgrade/README.md)
+    - [Single-Step Ownership Transfer](./not-so-smart-contracts/ton/single_step_ownership_transfer/README.md)
+    - [Missing Impure Specifier](./not-so-smart-contracts/ton/missing_impure_specifier/README.md)
+    - [Silent Message Failure](./not-so-smart-contracts/ton/silent_message_failure/README.md)
+    - [Race Conditions](./not-so-smart-contracts/ton/race_conditions/README.md)
 
 - [Program Analysis](./program-analysis/README.md)
 
