@@ -25,6 +25,11 @@ Brought to you by [Trail of Bits](https://www.trailofbits.com/), this repository
   - [Algorand](./not-so-smart-contracts/algorand)
   - [Cairo](./not-so-smart-contracts/cairo)
   - [Cosmos](./not-so-smart-contracts/cosmos)
+  - [EVM Domains](./not-so-smart-contracts/evm-domains): Domain-specific EVM vulnerability patterns
+    - [DeFi Bridge](./not-so-smart-contracts/evm-domains/defi-bridge)
+    - [Merkle Tree](./not-so-smart-contracts/evm-domains/merkle-tree)
+    - [Tick Math](./not-so-smart-contracts/evm-domains/tick-math)
+    - [Voting Governance](./not-so-smart-contracts/evm-domains/voting-governance)
   - [Substrate](./not-so-smart-contracts/substrate)
   - [Solana](./not-so-smart-contracts/solana)
   - [TON](./not-so-smart-contracts/ton)
