@@ -8,3 +8,4 @@ This repository contains examples of common smart contract vulnerabilities, incl
 - [Solana](./solana)
 - [Substrate](./substrate)
 - [TON](./ton)
+- [Cryptography](./cryptography)

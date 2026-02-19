@@ -71,6 +71,15 @@
     - [Fake Jetton Contract](./not-so-smart-contracts/ton/fake_jetton_contract/README.md)
     - [Foward TON without gas check](./not-so-smart-contracts/ton/forward_ton_without_gas_check/README.md)
     - [Int as boolean](./not-so-smart-contracts/ton/int_as_boolean/README.md)
+  - [Cryptography](./not-so-smart-contracts/cryptography/README.md)
+    - [Timing Side-Channel Leaks](./not-so-smart-contracts/cryptography/timing_side_channel/README.md)
+    - [Nonce and Randomness Reuse](./not-so-smart-contracts/cryptography/nonce_reuse/README.md)
+    - [Missing Secret Data Zeroization](./not-so-smart-contracts/cryptography/missing_zeroization/README.md)
+    - [Hash Domain Separation Failure](./not-so-smart-contracts/cryptography/hash_domain_separation/README.md)
+    - [Underconstrained ZK Circuits](./not-so-smart-contracts/cryptography/underconstrained_zk_circuits/README.md)
+    - [AEAD Metadata Authentication Failure](./not-so-smart-contracts/cryptography/aead_misuse/README.md)
+    - [Weak Key Ratcheting](./not-so-smart-contracts/cryptography/weak_key_ratcheting/README.md)
+    - [DKG and MPC Protocol Flaws](./not-so-smart-contracts/cryptography/dkg_mpc_protocol_flaws/README.md)
 
 - [Program Analysis](./program-analysis/README.md)
 
