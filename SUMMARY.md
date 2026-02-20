@@ -34,7 +34,6 @@
     - [Inner Transaction Fee](./not-so-smart-contracts/algorand/inner_transaction_fee/README.md)
     - [Clear State Transaction Check](./not-so-smart-contracts/algorand/clear_state_transaction_check/README.md)
   - [Cairo](./not-so-smart-contracts/cairo/README.md)
-
     - [Arithmetic Overflow](./not-so-smart-contracts/cairo/arithmetic_overflow/README.md)
     - [L1 to L2 Address Conversion](./not-so-smart-contracts/cairo/L1_to_L2_address_conversion/README.md)
     - [L1 to L2 failure](./not-so-smart-contracts/cairo/l1_to_l2_message_failure/README.md)
@@ -42,6 +41,12 @@
     - [Signature replays](./not-so-smart-contracts/cairo/replay_protection/README.md)
     - [Unchecked from address in L1 Handler](./not-so-smart-contracts/cairo/unchecked_from_address_in_l1_handler/README.md)
 
+  - [Circom](./not-so-smart-contracts/circom/README.md)
+    - [Unconstrained Signal Assignments](./not-so-smart-contracts/circom/unconstrained_signals/README.md)
+    - [Field Overflow Aliasing](./not-so-smart-contracts/circom/field_overflow_aliasing/README.md)
+    - [Unconstrained Component Outputs](./not-so-smart-contracts/circom/unconstrained_component_outputs/README.md)
+    - [Missing Input Constraints](./not-so-smart-contracts/circom/missing_input_constraints/README.md)
+    - [Unsafe Arithmetic Edge Cases](./not-so-smart-contracts/circom/unsafe_arithmetic_edge_cases/README.md)
   - [Cosmos](./not-so-smart-contracts/cosmos/README.md)
     - [Incorrect Signers](./not-so-smart-contracts/cosmos/incorrect_getsigners/README.md)
     - [Non-Determinism](./not-so-smart-contracts/cosmos/non_determinism/README.md)
