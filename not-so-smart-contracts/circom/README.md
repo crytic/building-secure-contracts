@@ -1,4 +1,4 @@
-# (Not So) Smart Contracts — Circom
+# (Not So) Smart Contracts (Circom)
 
 This repository contains examples of common Circom circuit vulnerabilities, featuring patterns from real security audits. Utilize the Not So Smart Contracts to learn about Circom pitfalls, refer to them during security reviews, and use them as a benchmark for security analysis tools.
 
@@ -9,7 +9,6 @@ Each _Not So Smart Contract_ consists of a standard set of information:
 - Vulnerability type description
 - Attack scenarios to exploit the vulnerability
 - Recommendations to eliminate or mitigate the vulnerability
-- Real-world patterns exhibiting the flaw
 
 ## Vulnerabilities
 
@@ -23,6 +22,6 @@ Each _Not So Smart Contract_ consists of a standard set of information:
 
 ## Credits
 
-These examples are developed and maintained by [Trail of Bits](https://www.trailofbits.com/).
+These examples are developed and maintained by **[Trail of Bits](https://www.trailofbits.com/)**.
 
 If you have any questions, issues, or wish to learn more, join the #ethereum channel on the [Empire Hacking Slack](https://slack.empirehacking.nyc/) or [contact us](https://www.trailofbits.com/contact/) directly.
