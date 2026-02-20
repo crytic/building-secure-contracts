@@ -1,8 +1,16 @@
 # Weak Key Ratcheting
 
+Static or epoch-bound keys lack forward secrecy, allowing one key compromise to expose all messages.
+
+## Description
+
 A key ratchet is supposed to evolve the encryption key after every operation so that compromising the current key does not reveal past plaintext (forward secrecy) or future plaintext (post-compromise security). Two common failures break this guarantee.
 
 **Static key ratchet.** The ratchet derives the encryption key from a fixed value -- such as a user ID or a long-lived seed -- with no ephemeral component. Because the inputs never change, the "ratchet" produces the same key every time. Compromising it once exposes every past and future message. **Weak intra-epoch forward secrecy.** In group protocols that use epoch-based key management, a single symmetric key protects all messages within an epoch. If an attacker obtains the sender's key mid-epoch, they can decrypt every message in that epoch. Without per-message ratcheting inside epochs, one compromised message key exposes the entire epoch.
+
+## Exploit Scenario
+
+Alice deploys a group messaging protocol that uses epoch-based key management. Within each epoch, a single symmetric `epoch_key` encrypts all messages, with only the nonce changing per message. Bob compromises Alice's device mid-epoch and extracts the current `epoch_key`. Because no per-message ratcheting occurs within the epoch, Bob decrypts every message sent during that epoch -- both before and after the compromise. Furthermore, the key derivation function uses only the static group secret and a user ID with no ephemeral input, so the same key is produced every epoch. Bob now has access to the complete message history.
 
 ## Example
 
@@ -34,22 +42,6 @@ function send_epoch_message(plaintext, epoch_key, msg_counter):
     // Compromising epoch_key reveals every message from this epoch
     nonce = msg_counter
     return AEAD_Encrypt(epoch_key, nonce, plaintext)
-```
-
-A correct ratchet feeds the previous key (or fresh DH output) back into the derivation so the key evolves with every message.
-
-```pseudocode
-function ratchet_message_key(chain_key):
-    message_key = HKDF(input_key = chain_key, info = "msg-key")
-    next_chain  = HKDF(input_key = chain_key, info = "chain-advance")
-    return message_key, next_chain
-
-function send_message(plaintext, chain_key):
-    key, chain_key = ratchet_message_key(chain_key)
-    nonce = random_bytes(12)
-    ciphertext = AEAD_Encrypt(key, nonce, plaintext)
-    delete(key)                       // zeroize after use
-    return ciphertext, chain_key      // caller stores updated chain_key
 ```
 
 ## Mitigations

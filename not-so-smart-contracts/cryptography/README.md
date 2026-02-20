@@ -1,4 +1,4 @@
-# (Not So) Smart Contracts — Cryptography
+# (Not So) Smart Contracts (Cryptography)
 
 This repository contains examples of common cryptographic vulnerabilities found in blockchain systems, featuring patterns from real security audits. Utilize the Not So Smart Contracts to learn about cryptographic pitfalls, refer to them during security reviews, and use them as a benchmark for security analysis tools.
 
@@ -6,10 +6,9 @@ This repository contains examples of common cryptographic vulnerabilities found 
 
 Each _Not So Smart Contract_ consists of a standard set of information:
 
-- Vulnerability type description
+- Description of the vulnerability type
 - Attack scenarios to exploit the vulnerability
 - Recommendations to eliminate or mitigate the vulnerability
-- Real-world patterns exhibiting the flaw
 
 ## Vulnerabilities
 
@@ -26,6 +25,6 @@ Each _Not So Smart Contract_ consists of a standard set of information:
 
 ## Credits
 
-These examples are developed and maintained by [Trail of Bits](https://www.trailofbits.com/).
+These examples are developed and maintained by **[Trail of Bits](https://www.trailofbits.com/)**.
 
 If you have any questions, issues, or wish to learn more, join the #ethereum channel on the [Empire Hacking Slack](https://slack.empirehacking.nyc/) or [contact us](https://www.trailofbits.com/contact/) directly.

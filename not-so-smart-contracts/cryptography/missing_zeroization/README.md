@@ -1,5 +1,9 @@
 # Missing Secret Data Zeroization
 
+Temporary secrets left in memory after use are recoverable from dumps, enabling private key reconstruction.
+
+## Description
+
 Cryptographic protocols frequently generate temporary secrets -- presignatures, key shares, intermediate
 scalars, and ephemeral private keys -- that must be erased from memory immediately after use. If these
 buffers are not explicitly zeroized, their contents persist in RAM even after the memory is freed or the
@@ -12,6 +16,10 @@ before `return` can be silently deleted, leaving secrets intact. In threshold si
 especially dangerous: presignatures and multiplicative triples are one-time-use, so recovering even a
 single old value from memory can allow full reconstruction of the long-term secret.
 
+## Exploit Scenario
+
+Alice deploys a threshold signing service that generates ephemeral keys for each signature operation. The signing function stores the ephemeral key in a stack buffer, computes the signature, and calls `memset` to clear the buffer before returning. The compiler, running with `-O2` optimization, detects that `tmp_secret` is never read after the `memset` and eliminates the zeroization as a dead store. Bob, who gains read access to the server's memory through a separate vulnerability, captures a core dump and recovers the ephemeral key from the uncleared stack frame. Using the recovered ephemeral key and the corresponding signature, Bob computes the long-term private key and drains the signing wallet.
+
 ## Example
 
 The signing function below creates a temporary secret key on the stack, uses it, and attempts to clear
@@ -19,7 +27,6 @@ it before returning. The compiler is free to remove the `memset` because `tmp_se
 afterward.
 
 ```c
-// VULNERABLE: compiler may eliminate the memset (dead store elimination)
 int sign_message(const uint8_t *msg, size_t msg_len, uint8_t *sig_out) {
     uint8_t tmp_secret[32];
 
@@ -27,17 +34,6 @@ int sign_message(const uint8_t *msg, size_t msg_len, uint8_t *sig_out) {
     compute_signature(tmp_secret, msg, msg_len, sig_out);
 
     memset(tmp_secret, 0, sizeof(tmp_secret));  // may be optimized away
-    return 0;
-}
-
-// FIXED: use a platform-guaranteed zeroization primitive
-int sign_message(const uint8_t *msg, size_t msg_len, uint8_t *sig_out) {
-    uint8_t tmp_secret[32];
-
-    derive_ephemeral_key(tmp_secret);
-    compute_signature(tmp_secret, msg, msg_len, sig_out);
-
-    explicit_bzero(tmp_secret, sizeof(tmp_secret));  // cannot be removed
     return 0;
 }
 ```

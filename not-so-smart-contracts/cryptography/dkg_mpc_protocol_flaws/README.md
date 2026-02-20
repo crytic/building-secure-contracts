@@ -1,14 +1,22 @@
 # DKG and MPC Protocol Flaws
 
+Subtle bugs in multi-party key generation protocols break security even when the underlying cryptography is correct.
+
+## Description
+
 Distributed key generation (DKG) and multi-party computation (MPC) protocols coordinate multiple participants through structured message rounds to jointly generate keys or compute signatures without any single party holding the full secret. Because these protocols involve complex multi-round state machines, subtle implementation bugs can break the security model entirely -- even when the underlying cryptographic primitives are correct.
 
 Common flaws include failing to validate the degree of shared polynomials in Feldman VSS, allowing a malicious participant to silently raise the reconstruction threshold; poor abort handling that lets an adversary leak secret bits through selective failures or deny service by triggering unilateral aborts; and reuse of session identifiers that enables cross-session message replay, leading to state corruption or key compromise.
+
+## Exploit Scenario
+
+Alice deploys a threshold wallet that uses a Feldman VSS-based DKG protocol with threshold `t = 3` among five participants. Bob, a malicious participant, sends commitments for a degree-5 polynomial instead of degree-3. The verification function does not check `len(commitments) == t + 1`, so it accepts the oversized polynomial. The effective reconstruction threshold silently rises, and the honest participants can no longer sign transactions because they need more shares than expected. Bob then selectively aborts OT sub-protocol sessions to leak bits of other participants' secret shares over time. Because the abort handler panics without identifying the cheater, Bob replays old session messages into new DKG rounds, corrupting the shared secret and locking the wallet funds permanently.
 
 ## Example
 
 A DKG share verification function receives commitments from each participant but does not enforce that the polynomial has exactly degree `t`. A malicious participant sends `t + 2` coefficients, silently raising the threshold needed to reconstruct the key.
 
-```
+```pseudocode
 function verify_share(participant_id, share, commitments[], t):
     // BUG: no check that len(commitments) == t + 1
     // A malicious participant can send t + 3 commitments,
@@ -33,7 +41,7 @@ receiver sends special check values to detect cheating. If the protocol just pan
 instead of identifying the cheater, a malicious receiver can selectively trigger or suppress
 aborts to leak bits of the sender's secret over many sessions:
 
-```
+```pseudocode
 function handle_ot_check(check_value, expected):
     if check_value != expected:
         // BUG: panic aborts the entire session without blame.
@@ -43,48 +51,17 @@ function handle_ot_check(check_value, expected):
         // By observing which sessions abort, the receiver learns one
         // secret bit per session and reconstructs the key over time.
         panic("OT check failed")
-
-    // FIX: identify the cheating party and continue or publish blame proof
-    // return abort_with_blame(receiver_id, check_value, expected)
 ```
 
 Message replay across sessions occurs when session IDs are not unique. An attacker records
 messages from a previous DKG session and injects them into a new session:
 
-```
+```pseudocode
 function process_dkg_message(sender, round, payload):
     // BUG: no session binding -- message from session #1 accepted in session #2
     // An attacker replays old commitments, causing participants to derive
     // different keys and corrupting the shared secret.
     store_commitment(sender, round, payload)
-
-    // FIX: bind every message to a unique session ID
-    // if payload.session_id != current_session_id:
-    //     return abort_with_blame(sender, "session mismatch")
-```
-
-The fixed DKG verification function addresses all four flaws:
-
-```
-// FIXED version:
-function verify_share_safe(participant_id, share, commitments[], t, session_id):
-    // Fix 1: enforce polynomial degree
-    if len(commitments) != t + 1:
-        return abort_with_blame(participant_id, "wrong polynomial degree")
-
-    // Fix 2: reject replayed messages by checking session binding
-    if not verify_session_tag(session_id, participant_id, commitments):
-        return abort_with_blame(participant_id, "session mismatch")
-
-    expected = commitments[0]
-    for j = 1 to t:
-        expected = expected + commitments[j] * (participant_id ^ j)
-
-    if expected != share * G:
-        // Fix 3: coordinated abort with cryptographic blame proof
-        return abort_with_blame(participant_id, "invalid share")
-
-    return ok
 ```
 
 ## Mitigations

@@ -1,5 +1,9 @@
 # Underconstrained ZK Circuits
 
+Insufficient constraints in zero-knowledge circuits allow a malicious prover to forge proofs for false statements.
+
+## Description
+
 Zero-knowledge proof circuits require that every witness value is fully determined by the
 constraints. When constraints are insufficient, a malicious prover can supply witness values that
 satisfy the circuit but do not match the intended computation. This breaks soundness -- the verifier
@@ -14,12 +18,16 @@ different value that still satisfies the weak constraint. Third, **incorrect equ
 the circuit computes whether `A == B` into a variable but never constrains that variable to equal 1,
 so the equality is checked but not enforced.
 
+## Exploit Scenario
+
+Alice deploys a ZK rollup that uses a division gadget to verify token distribution ratios on-chain. The circuit computes `out = input / divisor` and constrains `input == divisor * out + remainder` with a range check on `remainder`, but omits the range check on `out`. Bob, a malicious prover, sets `out` to `FIELD_ORDER + true_quotient`, which wraps to the same field element and satisfies the constraint. Bob submits a proof claiming a fraudulent distribution ratio, the verifier accepts it, and Bob withdraws more tokens than he is entitled to.
+
 ## Example
 
 A division gadget that computes `out = input / divisor` using a remainder check, but omits the
 range check on `out`. The prover can use a field-wrapped value instead of the true integer quotient.
 
-```
+```pseudocode
 // Circuit: integer division gadget
 // Assigns witness values (prover-controlled)
 witness input, divisor, out, remainder
@@ -35,15 +43,12 @@ assert_range(remainder, 0, divisor - 1)
 //   out       = FIELD_ORDER + true_quotient   (wraps to true_quotient in the field)
 //   remainder = (recomputed to satisfy the first constraint)
 // The constraints pass, but 'out' does not represent the real integer quotient.
-
-// --- FIX: add an explicit range check on 'out' ---
-// assert_range(out, 0, MAX_EXPECTED_QUOTIENT)
 ```
 
 A separate but equally dangerous variant occurs with equality assertions. The circuit
 computes whether two values are equal, but the result is never enforced:
 
-```
+```pseudocode
 // Circuit: verify a user-provided value matches a commitment
 witness committed_value, user_value
 
@@ -53,9 +58,6 @@ is_eq = compute_is_equal(committed_value, user_value)
 // BUG: is_eq is computed but never constrained to 1
 // The prover can set user_value to anything -- the circuit
 // calculates is_eq = 0 but never rejects it.
-
-// FIX: constrain the equality output
-// assert is_eq == 1
 ```
 
 ## Mitigations

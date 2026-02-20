@@ -1,5 +1,9 @@
 # Hash Domain Separation Failure
 
+Missing length or type prefixes in hash inputs cause collisions across semantically different messages.
+
+## Description
+
 Hash functions should produce different outputs for semantically different inputs, even
 when the raw byte representations happen to be identical. This property is called domain
 separation. Without it, an attacker can craft two distinct inputs that hash to the same
@@ -11,6 +15,10 @@ inputs with zeros to a fixed width. If the original input length is not recorded
 `hash([1])` and `hash([1, 0])` produce identical digests. The same class of bug appears
 in Merkle trees when leaf nodes and branch nodes share a hashing scheme: an attacker can
 submit a payload that is valid as both a leaf and a branch, breaking the tree's integrity.
+
+## Exploit Scenario
+
+Alice deploys a Merkle-tree-based asset registry that uses a sponge hash with zero-padding and no domain tags. Leaf nodes represent user balances and branch nodes represent internal tree structure. Bob constructs a crafted payload whose raw bytes match the concatenation of two existing leaf hashes. Because the tree uses the same hash function for leaves and branches without any prefix, Bob submits this payload as a leaf, and it produces a hash identical to an existing branch node. Bob uses the forged Merkle proof to claim assets belonging to other users, passing verification because the root hash remains valid.
 
 ## Example
 

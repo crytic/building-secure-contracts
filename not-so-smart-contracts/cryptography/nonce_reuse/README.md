@@ -1,8 +1,16 @@
 # Nonce and Randomness Reuse
 
+Reusing nonces in ECDSA or AEAD schemes allows private key recovery and plaintext exposure.
+
+## Description
+
 Reusing a nonce in cryptographic protocols has catastrophic consequences. In ECDSA signing, if the same nonce `k` is used for two different messages under the same private key, an attacker can recover the private key through simple algebra: subtracting the two signature equations cancels `k` and isolates the secret scalar. This is not a theoretical concern -- it has led to real-world key extractions.
 
 The damage extends beyond signatures. In AEAD schemes like ChaCha20-Poly1305 or AES-GCM, reusing a `(key, nonce)` pair breaks both confidentiality and authenticity. An attacker can XOR two ciphertexts to eliminate the keystream and recover plaintext, and can forge authentication tags. In MPC or DKG communication channels, if two parties encrypt different messages with the same shared key and nonce, XORing the ciphertexts cancels the stream cipher entirely, exposing both plaintexts.
+
+## Exploit Scenario
+
+Alice deploys an ECDSA signing service that derives nonces from a 32-bit counter. Bob submits signing requests at high volume. After 2^32 + 1 requests, the counter wraps to zero, and the service reuses a previous nonce. Bob collects the two signatures that share the same `r` value (indicating nonce reuse), subtracts the signature equations, recovers the nonce `k`, and then computes Alice's private key. Bob now signs arbitrary transactions on behalf of Alice and drains her accounts.
 
 ## Example
 

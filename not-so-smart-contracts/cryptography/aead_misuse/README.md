@@ -1,8 +1,18 @@
 # AEAD Metadata Authentication Failure
 
+Unprotected metadata in authenticated encryption allows attackers to tamper with headers undetected.
+
+## Description
+
 Authenticated Encryption with Associated Data (AEAD) schemes like AES-GCM authenticate both the ciphertext and any associated data (AAD) passed alongside it. However, the AAD must be explicitly provided by the caller -- any metadata not included in the AAD parameter is left completely unprotected. The authentication tag only covers what it is told to cover.
 
 In encrypted communication protocols, frames typically contain unencrypted metadata (offsets, sizes, flags, sequence numbers) alongside the encrypted payload. If these header fields are not included in the AAD, an attacker can silently modify them without invalidating the authentication tag. This enables packet manipulation: reordering encrypted chunks, changing frame boundaries, altering routing metadata, or truncating messages -- all without detection by the receiver.
+
+## Exploit Scenario
+
+Alice deploys an encrypted messaging relay that uses AES-GCM to protect frame payloads. Each frame contains an unencrypted header with `offset`, `size`, and `flags` fields used by receivers to reassemble data streams. The encrypt function passes an empty AAD, leaving the header unauthenticated.
+
+Bob, a network-level attacker, intercepts a frame in transit and modifies `header.offset` from 0 to 1024. He forwards the altered frame to the receiver. Because the AES-GCM tag never covered the header, tag verification passes. The receiver reassembles the plaintext at the wrong position, corrupting the output stream. Bob can exploit this to inject controlled data, reorder message fragments, or truncate communications without any authentication failure.
 
 ## Example
 
