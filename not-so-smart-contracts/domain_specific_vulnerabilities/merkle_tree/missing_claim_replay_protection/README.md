@@ -15,6 +15,9 @@ Alice has a valid Merkle proof for 1000 tokens in an airdrop. She calls `claim()
 ## Example
 
 ```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
 contract VulnerableAirdrop {
     bytes32 public merkleRoot;
     IERC20 public token;

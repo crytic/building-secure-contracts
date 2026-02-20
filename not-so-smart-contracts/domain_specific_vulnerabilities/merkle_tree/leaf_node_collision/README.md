@@ -17,6 +17,9 @@ An airdrop tree hashes leaves as `keccak256(abi.encodePacked(uint256(address), u
 ## Example
 
 ```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
 contract VulnerableAirdrop {
     bytes32 public merkleRoot;
     IERC20 public token;

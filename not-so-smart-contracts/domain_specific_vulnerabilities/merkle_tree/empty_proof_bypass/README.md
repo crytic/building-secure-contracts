@@ -17,6 +17,9 @@ A token airdrop contract verifies claims using a Merkle proof. Bob observes the 
 ## Example
 
 ```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
 contract VulnerableAirdrop {
     bytes32 public merkleRoot;
     IERC20 public token;

@@ -19,6 +19,9 @@ A whitelist tree has depth 20. Bob submits a proof with only 10 elements, using 
 ## Example
 
 ```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
 contract VulnerableWhitelist {
     bytes32 public merkleRoot;
     // Tree depth is 20, but never enforced

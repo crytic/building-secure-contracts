@@ -17,6 +17,9 @@ A token claim contract accepts `(proof, root, leaf)` as parameters and verifies 
 ## Example
 
 ```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
 contract VulnerableAirdrop {
     IERC20 public token;
     // merkleRoot is stored but never used for comparison

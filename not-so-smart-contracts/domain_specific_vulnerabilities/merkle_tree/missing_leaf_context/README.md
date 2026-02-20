@@ -17,6 +17,9 @@ A protocol deploys the same airdrop contract on Ethereum and Arbitrum with the s
 ## Example
 
 ```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
 contract VulnerableAirdrop {
     bytes32 public merkleRoot;
     IERC20 public token;

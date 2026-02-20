@@ -17,6 +17,9 @@ Bob submits a random proof and leaf to the claim contract. The verification comp
 ## Example
 
 ```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
 contract VulnerableAirdrop {
     bytes32 public merkleRoot;
     IERC20 public token;

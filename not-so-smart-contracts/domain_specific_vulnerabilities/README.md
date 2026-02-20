@@ -13,7 +13,7 @@ Each not-so-smart-contract includes:
 
 ## Vulnerabilities
 
-| Domain | Description |
+| Name | Description |
 |---|---|
 | [DeFi Bridge](./defi_bridge) | Vulnerabilities in cross-chain bridge protocols and aggregators |
 | [ERC-4337](./erc4337) | Vulnerabilities in account abstraction: smart accounts, paymasters, and bundlers |

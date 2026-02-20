@@ -17,6 +17,9 @@ An airdrop contract has a `setMerkleRoot(bytes32)` function with no access modif
 ## Example
 
 ```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
 contract VulnerableAirdrop {
     bytes32 public merkleRoot;
     IERC20 public token;
