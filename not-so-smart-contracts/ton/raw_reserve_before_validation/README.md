@@ -1,8 +1,16 @@
 # Raw Reserve Before Validation
 
+Calling `raw_reserve` before input validation locks deposited TON permanently when subsequent checks fail.
+
+## Description
+
 The `raw_reserve` function in FunC reserves a specified amount of TON in the contract's balance, making it unavailable for outgoing messages in the current transaction. If `raw_reserve` is called before validation checks (such as gas sufficiency or input validation), and a subsequent check fails, the contract may attempt to refund the user but cannot access the reserved funds. The refund message is sent with insufficient value, and the reserved TON becomes permanently locked in the contract.
 
 This pattern is especially dangerous in deposit flows where the contract receives TON from a user, reserves it for protocol accounting, and then validates whether the user provided enough gas for the operation. If the gas check fails after the reserve, the user's deposited TON is trapped.
+
+## Exploit Scenario
+
+Alice deploys a lending protocol that accepts TON deposits. The protocol's supply function calls `raw_reserve` to lock the deposited amount before validating gas. Bob sends a deposit of 10 TON but attaches only a minimal gas fee. The contract calls `raw_reserve(10 TON, 2)`, locking the 10 TON. It then checks whether Bob sent enough gas for the subsequent message cascade and determines the fee is insufficient. The contract attempts to refund Bob using `CARRY_ALL_BALANCE` mode, but the reserved 10 TON is excluded from the available balance. Bob receives a near-zero refund, and his 10 TON is permanently locked in the contract.
 
 ## Example
 

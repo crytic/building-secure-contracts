@@ -1,8 +1,16 @@
 # Missing Bounce Handler
 
+Contracts that ignore bounced bounceable messages silently lose funds and enter inconsistent state.
+
+## Description
+
 TON smart contracts can send messages with the bounceable flag, which means the message will be returned to the sender if the destination contract fails to process it (e.g., due to an unhandled opcode, insufficient gas, or a thrown exception). If the sending contract does not implement a bounce handler, the bounced message is silently ignored. This can lead to loss of funds or inconsistent state, because the sender assumes the operation succeeded when it did not.
 
 This issue is particularly dangerous in contracts that transfer Jettons or native TON via bounceable messages. If the transfer bounces and the sending contract has already updated its internal accounting (e.g., reduced a user's balance), the funds are effectively lost — the recipient never received them, and the sender's state reflects a completed transfer.
+
+## Exploit Scenario
+
+Alice deploys a vault contract that allows users to withdraw Jettons. The vault sends Jetton transfer messages using the bounceable flag (`0x18`) but does not implement any bounce handling logic in `recv_internal`. Bob requests a withdrawal of 1000 Jettons. The vault decrements Bob's internal balance by 1000 and sends a bounceable transfer message to Bob's Jetton wallet. However, the destination wallet contract runs out of gas and the message bounces back. Because the vault has no bounce handler, the bounced message is silently discarded. Bob's internal balance now shows 0, but the 1000 Jettons were never transferred — the funds are permanently lost.
 
 ## Example
 

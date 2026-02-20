@@ -75,7 +75,6 @@
     - [Irreversible State Changes](./not-so-smart-contracts/ton/irreversible_state_changes/README.md)
     - [Raw Reserve Before Validation](./not-so-smart-contracts/ton/raw_reserve_before_validation/README.md)
     - [Unvalidated Storage Upgrade](./not-so-smart-contracts/ton/unvalidated_storage_upgrade/README.md)
-    - [Single-Step Ownership Transfer](./not-so-smart-contracts/ton/single_step_ownership_transfer/README.md)
     - [Missing Impure Specifier](./not-so-smart-contracts/ton/missing_impure_specifier/README.md)
     - [Silent Message Failure](./not-so-smart-contracts/ton/silent_message_failure/README.md)
     - [Race Conditions](./not-so-smart-contracts/ton/race_conditions/README.md)

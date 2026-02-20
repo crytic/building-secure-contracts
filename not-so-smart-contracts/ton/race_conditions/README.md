@@ -1,8 +1,16 @@
 # Race Conditions in Asynchronous Messaging
 
+Concurrent message flows on TON can modify shared contract state, invalidating earlier assumptions.
+
+## Description
+
 TON smart contracts process messages asynchronously. A message cascade (A sends to B, B sends to C, C sends back to A) can span multiple blocks. While one message flow is in progress, an attacker can initiate a second, independent message flow that modifies the same contract state. Properties that were validated at the start of the first flow (e.g., a user's balance, a contract's authorization status, or a dictionary entry) may no longer hold when a later message in the same flow arrives.
 
 This is fundamentally different from EVM, where a transaction executes atomically. In TON, any assumption about state consistency across multiple messages is potentially unsafe. A common instance is bounce-handling race conditions: if a contract sends a message, receives an unrelated deposit before the bounce arrives, and then processes the bounce by restoring the original balance, the deposit is overwritten and lost.
+
+## Exploit Scenario
+
+Alice deploys a DEX pool contract that tracks LP token balances per user in a dictionary. Bob holds 100 LP tokens and initiates a remove-liquidity operation. The pool sets Bob's LP balance to 0 and sends a bounceable message to transfer Bob's tokens. Before the transfer completes, Bob sends a second transaction adding 50 LP of new liquidity. The pool updates Bob's balance to 50. The original transfer then bounces due to an error at the destination. The pool's bounce handler overwrites Bob's balance with the original 100 LP (the bounced amount) instead of adding it. Bob's 50 LP deposit from the second transaction is silently erased. Expected balance: 150. Actual balance: 100.
 
 ## Example
 

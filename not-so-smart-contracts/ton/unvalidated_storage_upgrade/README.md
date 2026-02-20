@@ -1,8 +1,16 @@
 # Unvalidated Storage Upgrade
 
+Passing unvalidated cells to `set_data` during upgrades can permanently brick the contract and lock all funds.
+
+## Description
+
 TON smart contracts can update their storage using `set_data`, which replaces the contract's entire persistent state with a new cell. Upgrade operations that accept a user-provided or admin-provided cell and pass it directly to `set_data` without validation can permanently brick the contract. If the new cell is malformed, incomplete, or empty, every subsequent call to the contract's `load_data` function will throw an exception, making the contract completely unusable.
 
 This is particularly dangerous because `set_data` is irreversible in most cases — once the storage is corrupted, the contract cannot parse its own state to execute any recovery logic. The contract becomes a permanent black hole for any funds it holds.
+
+## Exploit Scenario
+
+Alice deploys a Jetton master contract with an admin-only `upgrade_storage` operation. The admin key is held by a multisig. During a routine upgrade, the multisig signers submit a transaction that includes a new storage cell with a missing field — the `total_supply` value is omitted. The contract calls `set_data` with the incomplete cell. On the next user interaction, `load_data` attempts to parse `total_supply` and throws an exception. Every subsequent call to the contract fails at `load_data`. The contract holds 500,000 TON in reserves, all of which are now permanently inaccessible.
 
 ## Example
 

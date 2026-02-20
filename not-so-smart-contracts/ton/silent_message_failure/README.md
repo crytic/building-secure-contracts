@@ -1,8 +1,16 @@
 # Silent Message Failure
 
+Using `SendIgnoreErrors` silently drops messages when the contract balance is insufficient, causing fund loss.
+
+## Description
+
 TON provides the `SendIgnoreErrors` (mode 2) flag for sending messages. When this flag is used, if the contract's current balance is insufficient to cover the message value, the message is silently dropped during the action phase — no error is raised and no bounce message is generated. The sending contract's state has already been updated in the compute phase, so any accounting changes (balance decrements, state transitions) persist even though the message was never delivered.
 
 This creates a class of vulnerabilities where funds appear to have been sent but never arrive at the destination. The sender's internal accounting shows a completed transfer, but the recipient's balance is unchanged. Over time, this leads to state desynchronization between contracts and unrecoverable fund loss.
+
+## Exploit Scenario
+
+Alice deploys a settlement contract that processes batch withdrawals for users. The contract uses `SendIgnoreErrors` (mode 2) for all outgoing Jetton transfers. Over time, operational fees deplete the contract's TON balance. Bob requests a withdrawal of 5000 tokens. The contract decrements Bob's internal balance by 5000 and calls `send_raw_message` with mode 2. Because the contract's TON balance is below the required gas amount, the message is silently dropped during the action phase. Bob's balance in the contract now shows 0, but the Jetton transfer never reached his wallet. The 5000 tokens are permanently lost.
 
 ## Example
 

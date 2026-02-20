@@ -1,8 +1,16 @@
 # Missing `impure` Specifier
 
+The FunC compiler silently removes side-effecting functions lacking `impure`, eliminating security checks.
+
+## Description
+
 In FunC, the `impure` specifier indicates that a function has side effects — it modifies state, sends messages, or can throw exceptions. If a function that performs these actions is not marked as `impure`, the FunC compiler may optimize it away entirely when it determines that the function's return value is unused. This means critical operations such as access control checks, state validations, and error-throwing guard functions can be silently removed from the compiled contract.
 
 This is especially dangerous for helper functions that are called solely for their side effects (e.g., `throw_unless` wrappers, permission checks). If the compiler removes such a function, the contract deploys without the intended security check, and no error or warning is produced during compilation.
+
+## Exploit Scenario
+
+Alice deploys a DEX contract with a `check_swap_allowed` function that verifies only the admin can initiate swaps. The function calls `throw_unless` if the sender is not the admin, but it is not marked as `impure`. The FunC compiler determines that `check_swap_allowed` returns nothing and its return value is unused, so it removes the call entirely during optimization. The deployed contract accepts swap operations from any address. Bob discovers this by inspecting the compiled bytecode and calls the swap function directly, draining liquidity from the pool without authorization.
 
 ## Example
 
