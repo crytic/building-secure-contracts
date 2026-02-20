@@ -1,16 +1,22 @@
 # Runtime Limit Denial of Service
 
+Sui's hard runtime limits on shared objects allow attackers to permanently brick shared state with crafted input.
+
+## Description
+
 Sui enforces several hard runtime limits that, when exceeded, abort the entire transaction. Because shared objects persist across transactions, malicious data that triggers these limits can permanently brick shared state. An attacker only needs to push a shared object past a single limit once -- every future transaction that touches that object will also abort, locking out all users.
 
 The key limits are: dynamic field accesses (1,000 per transaction), maximum object size (256,000 bytes), computation budget (`max_computation_budget`), and event processing (50 per checkpoint). Each can be weaponized when user-controlled input determines how much work a transaction performs or how large an object grows. The common thread is an asymmetry: the attacker's setup cost is O(1) or very cheap, while the resulting damage forces O(n) costs on every other user.
+
+## Exploit Scenario
+
+Alice deploys a vault contract that distributes rewards to all participants by iterating over a dynamic field table. Each user requires two dynamic field accesses per iteration. Bob creates 501 accounts and joins the vault with each one. When Alice or any user calls `distribute_funds`, the function attempts over 1,000 dynamic field accesses, exceeding Sui's per-transaction limit. The transaction aborts, and because the shared vault object retains all 501 entries, every future call to `distribute_funds` also aborts, permanently locking all deposited funds.
 
 ## Example
 
 A vault distributes funds to all participants by iterating over a dynamic field table. Each user requires two dynamic field accesses (one to read the balance, one to write the updated balance). An attacker joins the vault with enough accounts to push the total past 501 users, causing every call to `distribute_funds` to exceed the 1,000 dynamic field access limit and abort.
 
 ```move
-// Vulnerable: iterates all users with 2 dynamic field accesses each.
-// At 501+ users, this exceeds the 1,000 dynamic field access limit.
 public fun distribute_funds(vault: &mut Vault, amount: u64) {
     let total_users = vault.user_count;
     let per_user = amount / total_users;
@@ -27,7 +33,6 @@ public fun distribute_funds(vault: &mut Vault, amount: u64) {
 A separate class of attack targets the 256KB object size limit. A shared registry stores participant metadata including user-controlled string fields. A malicious user sets `display_name` and `bio` to very long byte strings, bloating the shared `Registry` object past the size cap and blocking all subsequent writes, including withdrawals.
 
 ```move
-// Vulnerable: no length cap on user-controlled strings stored in a shared object.
 public fun register_participant(
     registry: &mut Registry,
     display_name: String,

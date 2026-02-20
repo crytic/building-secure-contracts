@@ -1,8 +1,16 @@
 # Missing Object Uniqueness Enforcement
 
-In Sui, every call to `object::new(ctx)` creates a new object with a unique UID. Unlike the EVM's account-based storage where writing to a `mapping(address => Struct)` naturally enforces one entry per address, Sui's object model has no built-in constraint preventing multiple objects of the same type from being associated with the same address. If a registration function creates and transfers a new object without checking whether one already exists for that address, users can accumulate duplicate objects.
+Sui's object model lacks built-in one-per-address constraints, allowing duplicate singleton objects to bypass restrictions.
 
-This leads to state inconsistency: a user holding two `Membership` objects can have `is_active = true` on one and `is_active = false` on the other, allowing them to bypass single-use restrictions by switching to the second object. The same class of bug applies to any system that assumes one-object-per-user semantics -- profiles, accounts, memberships, or any singleton-like abstraction built on transferred objects.
+## Description
+
+In Sui, every call to `object::new(ctx)` creates a new object with a unique UID, and `transfer::transfer` sends it to an address in a one-way operation with no built-in deduplication. Unlike the EVM, where writing to a `mapping(address => Struct)` naturally enforces one entry per address, Sui has no `mapping`-equivalent that ties a single value to each address at the storage layer. Once an object is transferred, the contract cannot enumerate which objects an address already owns -- there is no on-chain index of objects by type and owner accessible from Move code.
+
+This architectural gap means that if a registration function creates and transfers a new object without explicitly checking a separate registry, users can accumulate duplicate objects. A user holding two `Membership` objects can have `is_active = true` on one and `is_active = false` on the other, allowing them to bypass single-use restrictions by switching to the unconsumed copy. The same class of bug applies to any system that assumes one-object-per-user semantics -- profiles, accounts, memberships, or any singleton-like abstraction built on transferred objects.
+
+## Exploit Scenario
+
+Alice deploys a membership module where an admin registers members by creating a `Membership` object and calling `transfer::transfer` to send it to the member's address. Bob convinces the admin to register his address twice (or exploits a public registration function). Bob now owns two `Membership` objects. When the protocol deactivates Bob's first membership by setting `is_active = false`, Bob simply passes his second `Membership` object to bypass the restriction, breaking the single-membership invariant the protocol depends on.
 
 ## Example
 
@@ -24,25 +32,6 @@ public fun register_member(
         is_active: false,
     };
     // BUG: no check whether member_addr already has a Membership object
-    transfer::transfer(membership, member_addr);
-}
-```
-
-If the admin registers the same address twice, that user now owns two `Membership` objects. When the first is locked with `is_active = true`, the user simply passes the second to bypass the restriction, breaking the single-membership invariant. The fix is to maintain a registry that tracks which addresses have already been registered:
-
-```move
-public fun register_member(
-    _: &AdminCap,
-    registry: &mut Table<address, ID>,
-    member_addr: address,
-    ctx: &mut TxContext,
-) {
-    assert!(!table::contains(registry, member_addr), EAlreadyRegistered);
-    let membership = Membership {
-        id: object::new(ctx),
-        is_active: false,
-    };
-    table::add(registry, member_addr, object::id(&membership));
     transfer::transfer(membership, member_addr);
 }
 ```

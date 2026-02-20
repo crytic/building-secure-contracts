@@ -1,8 +1,16 @@
 # Verifier Bypass via Package Upgrade
 
+Adding the `key` ability to a struct during a package upgrade bypasses Sui's `id_leak_verifier` checks on prior versions.
+
+## Description
+
 Sui's `id_leak_verifier` ensures that the `id` field of any struct with the `key` ability originates from `object::new()` and is never transferred between different struct types. This prevents object identity spoofing at the bytecode level. However, the verifier only enforces this rule on structs that currently possess the `key` ability -- structs without `key` are free to pack arbitrary UIDs without restriction.
 
 Sui's upgrade model historically allowed adding abilities (including `key`) to existing structs during a package upgrade. Combined with Programmable Transaction Blocks (PTBs), which can invoke functions from different package versions in the same transaction, an attacker can exploit the gap: publish V0 with a struct that lacks `key` and a helper function that packs it from any UID, upgrade to V1 adding `key` to that struct (and removing the helper), then use a PTB to call V0's helper (still on-chain) to mint a forged object and pass it into V1's functions as a legitimate Sui object. The verifier is bypassed because V0's bytecode was validated without `key` checks on the struct.
+
+## Exploit Scenario
+
+Alice publishes package V0 containing a `Bar` struct with only the `store` ability and a public function `build_bar_from_foo` that packs a `Bar` from an arbitrary UID. Alice then upgrades to V1, adding `key` to `Bar` and removing the helper function. Bob constructs a Programmable Transaction Block that calls V0's `build_bar_from_foo` (still deployed on-chain) to forge a `Bar` with a copied UID, then passes this forged object into V1's `take_bar` function. The runtime accepts it as a valid Sui object because `Bar` now has `key` in V1, allowing Bob to spoof object identity.
 
 ## Example
 

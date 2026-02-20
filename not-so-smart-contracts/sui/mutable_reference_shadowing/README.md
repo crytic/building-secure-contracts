@@ -1,8 +1,16 @@
 # Mutable Reference Shadowing
 
+Destructured `mut` bindings in Sui Move silently rebind local variables instead of writing through to struct fields.
+
+## Description
+
 In Sui Move, destructuring a mutable reference with `mut` creates a local mutable binding rather than a mutable borrow of the underlying field. Assigning to this binding (e.g., `left = limit`) only reassigns the local variable -- it does not write through the reference to update the struct field. To actually modify the field, the developer must dereference explicitly with `*left = *limit`. This is a subtle quirk of Move's ownership and reference system.
 
-Unlike Rust, which would emit a compiler warning about the unused write, Move silently accepts the reassignment. Solidity has no equivalent concept. The practical result is that state updates appear correct in source code but silently fail to persist, leaving on-chain data unchanged after a transaction that was supposed to mutate it.
+Unlike Rust, which would emit a compiler warning about the unused write, Move silently accepts the reassignment. The practical result is that state updates appear correct in source code but silently fail to persist, leaving on-chain data unchanged after a transaction that was supposed to mutate it.
+
+## Exploit Scenario
+
+Alice deploys a minting module with a `MinterCap` shared object that tracks how many tokens remain mintable per epoch. When a new epoch starts, the `mint` function is supposed to reset the remaining allowance by assigning `left = limit`. Bob notices the destructured `mut left` binding only rebinds the local variable. Bob waits until the epoch rolls over and then calls `mint` repeatedly. Because the allowance was never actually reset on-chain, all minting attempts after the first epoch's supply is exhausted permanently fail, denying service to all users.
 
 ## Example
 

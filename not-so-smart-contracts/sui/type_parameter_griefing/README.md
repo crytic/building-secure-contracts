@@ -1,8 +1,16 @@
 # Type Parameter Griefing
 
+Callers can substitute arbitrary generic type parameters to destroy shared state before type validation occurs.
+
+## Description
+
 In Sui Move, `public entry` functions with generic type parameters (e.g., `<ASSET: key + store>`) can be called by any user with any type that satisfies the ability constraints. The caller controls which concrete type is substituted at the call site. If the function performs an irreversible state change -- like popping an order from a queue -- before validating that the generic type matches the expected asset, an attacker can call the function with a wrong type. The type mismatch causes downstream logic to fail (e.g., a precheck returns `false`), but the state change has already occurred and the order is consumed without being executed.
 
 This is Sui-specific because Move generics are resolved at the call site -- any caller can pass any qualifying type. On the EVM, function signatures are fixed and there are no generics. The practical impact is that an attacker can repeatedly invoke the function with a mismatched type to drain an entire order queue, destroying every pending order without executing any of them.
+
+## Exploit Scenario
+
+Alice deploys a task-processing module with a shared `RequestQueue` that holds pending orders, each associated with a specific asset type. The `process_request<ASSET>` entry function pops the next request and validates each step against the `ASSET` type parameter. Bob calls `process_request<FakeToken>` instead of the correct `process_request<RealToken>`. The function pops the request from the queue (an irreversible mutation), but every validation step fails because `FakeToken` does not match the request's actual asset. The request is permanently lost. Bob repeats this call to drain the entire queue, destroying all pending orders without executing any of them.
 
 ## Example
 
@@ -19,7 +27,7 @@ public entry fun process_request<ASSET: key + store>(
     let i = 0;
     while (i < vector::length(&request.steps)) {
         let step = vector::borrow(&request.steps, i);
-        // BUG: if ASSET doesn't match the request's real asset, validation
+        // BUG: if ASSET does not match the request's real asset, validation
         // returns false and the step is silently skipped
         if (validate_step<ASSET>(step)) {
             execute_step<ASSET>(step, ctx);
@@ -27,21 +35,6 @@ public entry fun process_request<ASSET: key + store>(
         i = i + 1;
     };
     // request is consumed; if every validation failed, all work is lost
-}
-```
-
-The fix is to validate the type before performing the irreversible pop. Abort on mismatch so the transaction reverts and the request stays in the queue:
-
-```move
-public entry fun process_request<ASSET: key + store>(
-    queue: &mut RequestQueue,
-    ctx: &mut TxContext,
-) {
-    // Validate type BEFORE mutating state
-    assert!(request_queue::peek_asset_type(queue) == type_name::get<ASSET>(), ETypeMismatch);
-
-    let request = request_queue::pop_front(queue);
-    // ... execute steps ...
 }
 ```
 
