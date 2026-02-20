@@ -5,7 +5,7 @@ This repository contains examples of common smart contract vulnerabilities, incl
 - [Algorand](./algorand)
 - [Cairo](./cairo)
 - [Cosmos](./cosmos)
-- [EVM Domains](./evm-domains)
+- [Domain-Specific Vulnerabilities](./domain-specific-vulnerabilities)
 - [Solana](./solana)
 - [Substrate](./substrate)
 - [TON](./ton)
