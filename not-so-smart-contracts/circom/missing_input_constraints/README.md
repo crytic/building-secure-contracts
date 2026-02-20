@@ -1,12 +1,20 @@
 # Missing Input Constraints
 
+Templates that assume inputs are boolean or range-bound without enforcing constraints accept invalid values.
+
+## Description
+
 Circom templates often assume their inputs satisfy certain properties — such as being boolean (0 or 1), being within a specific range, or being valid curve points — without actually enforcing these assumptions with constraints. Since any field element can be passed as an input signal, a malicious prover can violate the assumption while still satisfying all explicit constraints in the circuit.
 
 This is especially dangerous with logical gates: the `AND()` template computes `out <== a * b`, which only functions as a boolean AND when both `a` and `b` are 0 or 1. If a prover supplies `a = 2` and `b = 3`, the output is 6 — which is neither 0 nor 1 and breaks any downstream logic expecting a boolean. Similarly, curve-arithmetic templates that assume inputs are valid curve points (satisfying the curve equation) can produce incorrect results or allow forged proofs when fed arbitrary field elements.
 
+## Exploit Scenario
+
+Alice deploys a ZK-based access control circuit where two boolean flags (`has_role` and `is_active`) are ANDed together to produce an `allowed` signal. A downstream template grants access when `allowed != 0`. Bob, a malicious prover, supplies `has_role = 2` and `is_active = 3`, producing `allowed = 6`. Since no constraint enforces that the inputs are boolean, the proof verifies. The downstream nonzero check passes, and Bob gains access despite holding invalid credential values.
+
 ## Example
 
-A circuit that computes the AND of two access flags, assuming both are boolean:
+A circuit that computes the AND of two access flags, assuming both are boolean. A downstream template consumes the result and makes an access decision based on it:
 
 ```circom
 template AccessCheck() {
@@ -18,23 +26,23 @@ template AccessCheck() {
     // but no constraint enforces this
     allowed <== has_role * is_active;
 }
-```
 
-A prover can set `has_role = 2, is_active = 3`, producing `allowed = 6`. Downstream templates that check `allowed === 1` would reject this, but templates that check `allowed != 0` (nonzero = true) would accept it even though the inputs are invalid. Fix: enforce boolean constraints on inputs:
+template GrantAccess() {
+    signal input role_flag;
+    signal input active_flag;
 
-```circom
-template AccessCheck() {
-    signal input has_role;
-    signal input is_active;
-    signal output allowed;
+    component check = AccessCheck();
+    check.has_role <== role_flag;
+    check.is_active <== active_flag;
 
-    // FIX: constrain inputs to be boolean
-    has_role * (1 - has_role) === 0;
-    is_active * (1 - is_active) === 0;
-
-    allowed <== has_role * is_active;
+    // Downstream logic: nonzero means access granted
+    component nz = IsZero();
+    nz.in <== check.allowed;
+    nz.out === 0;  // requires allowed != 0
 }
 ```
+
+A prover can set `role_flag = 2, active_flag = 3`, producing `allowed = 6`. The `IsZero` check passes because 6 is nonzero, granting access despite the inputs being invalid booleans.
 
 ## Mitigations
 

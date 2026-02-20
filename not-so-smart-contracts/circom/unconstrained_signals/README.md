@@ -1,8 +1,16 @@
 # Unconstrained Signal Assignments
 
+Signals assigned with `<--` and checked with `assert` lack R1CS constraints, allowing prover manipulation.
+
+## Description
+
 In Circom, the `<--` operator assigns a value to a signal but does **not** add an R1CS constraint. Only `<==` (which combines `<--` and `===`) adds a constraint. Similarly, Circom's `assert` keyword checks a condition at proof generation time but does **not** produce a constraint in the R1CS system — a malicious prover can patch their binary to skip asserts entirely. The only way to enforce a relationship in the proof is through `===` (constraint equality).
 
 This is the most fundamental Circom pitfall. Developers use `<--` for complex computations where the full expression cannot be written as a single quadratic constraint, intending to add constraints later — but forget to do so. The result is a signal the prover can set to any value.
+
+## Exploit Scenario
+
+Alice deploys a ZK protocol that uses a `Sqrt` template to verify square root computations on-chain. The template assigns the result with `<--` and validates it with `assert`. Bob, a malicious prover, modifies his proof generation binary to skip the `assert` check. He sets `out` to an arbitrary value unrelated to the actual square root, generates a valid proof (since no R1CS constraint binds `out`), and submits it. The verifier contract accepts the proof, allowing Bob to claim a correct computation that never occurred.
 
 ## Example
 
@@ -22,20 +30,6 @@ template Sqrt() {
 ```
 
 A malicious prover can set `out` to any value — the assert runs in their local binary (which they control) and no R1CS constraint enforces `out * out == in`.
-
-The fix is to replace the `assert` with a `===` constraint:
-
-```circom
-template Sqrt() {
-    signal input in;
-    signal output out;
-
-    out <-- compute_sqrt(in);
-
-    // Adds an actual R1CS constraint
-    out * out === in;
-}
-```
 
 ## Mitigations
 
