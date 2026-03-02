@@ -12,16 +12,16 @@ Each _Not So Smart Contract_ consists of a standard set of information:
 
 ## Vulnerabilities
 
-| Not So Smart Contract                                            | Description                                                                      |
-| ---------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| [Timing Side-Channel Leaks](timing_side_channel)                 | Non-constant-time crypto operations leak secret key bits via execution timing     |
-| [Nonce and Randomness Reuse](nonce_reuse)                        | Reusing nonces in ECDSA or AEAD schemes breaks confidentiality and authenticity   |
-| [Missing Secret Data Zeroization](missing_zeroization)           | Temporary secrets persist in memory after use, recoverable via dumps              |
-| [Hash Domain Separation Failure](hash_domain_separation)         | Missing length or type prefixes cause hash collisions across different inputs     |
-| [Underconstrained ZK Circuits](underconstrained_zk_circuits)     | Insufficient constraints let a malicious prover forge zero-knowledge proofs       |
-| [AEAD Metadata Authentication Failure](aead_misuse)              | Unprotected metadata in authenticated encryption allows undetected tampering      |
-| [Weak Key Ratcheting](weak_key_ratcheting)                       | Static or epoch-bound keys lack forward secrecy and post-compromise security      |
-| [DKG and MPC Protocol Flaws](dkg_mpc_protocol_flaws)             | Polynomial length, selective abort, replay, and DoS in distributed key generation |
+| Not So Smart Contract                                        | Description                                                                       |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| [Timing Side-Channel Leaks](timing_side_channel)             | Non-constant-time crypto operations leak secret key bits via execution timing     |
+| [Nonce and Randomness Reuse](nonce_reuse)                    | Reusing nonces in ECDSA or AEAD schemes breaks confidentiality and authenticity   |
+| [Missing Secret Data Zeroization](missing_zeroization)       | Temporary secrets persist in memory after use, recoverable via dumps              |
+| [Hash Domain Separation Failure](hash_domain_separation)     | Missing length or type prefixes cause hash collisions across different inputs     |
+| [Underconstrained ZK Circuits](underconstrained_zk_circuits) | Insufficient constraints let a malicious prover forge zero-knowledge proofs       |
+| [AEAD Metadata Authentication Failure](aead_misuse)          | Unprotected metadata in authenticated encryption allows undetected tampering      |
+| [Weak Key Ratcheting](weak_key_ratcheting)                   | Static or epoch-bound keys lack forward secrecy and post-compromise security      |
+| [DKG and MPC Protocol Flaws](dkg_mpc_protocol_flaws)         | Polynomial length, selective abort, replay, and DoS in distributed key generation |
 
 ## Credits
 
