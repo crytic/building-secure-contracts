@@ -12,14 +12,14 @@ Each _Not So Smart Contract_ includes:
 
 ## Vulnerabilities
 
-| Name | Description |
-|---|---|
-| [Mutable Reference Shadowing](./mutable_reference_shadowing) | Destructured `mut` bindings silently fail to write through to struct fields |
-| [Unvalidated Shared Object Identity](./unvalidated_object_identity) | Functions accept any shared object of the correct type without ID validation |
-| [Verifier Bypass via Package Upgrade](./verifier_bypass_via_upgrade) | Adding `key` ability on upgrade bypasses the `id_leak_verifier` |
-| [Runtime Limit Denial of Service](./runtime_limit_dos) | Hard runtime limits abort on shared objects causing permanent denial of service |
-| [Missing Object Uniqueness](./missing_object_uniqueness) | No built-in one-per-address constraint allows duplicate singleton objects |
-| [Type Parameter Griefing](./type_parameter_griefing) | Callers substitute wrong generic types to destroy state before validation |
+| Name                                                                 | Description                                                                     |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [Mutable Reference Shadowing](./mutable_reference_shadowing)         | Destructured `mut` bindings silently fail to write through to struct fields     |
+| [Unvalidated Shared Object Identity](./unvalidated_object_identity)  | Functions accept any shared object of the correct type without ID validation    |
+| [Verifier Bypass via Package Upgrade](./verifier_bypass_via_upgrade) | Adding `key` ability on upgrade bypasses the `id_leak_verifier`                 |
+| [Runtime Limit Denial of Service](./runtime_limit_dos)               | Hard runtime limits abort on shared objects causing permanent denial of service |
+| [Missing Object Uniqueness](./missing_object_uniqueness)             | No built-in one-per-address constraint allows duplicate singleton objects       |
+| [Type Parameter Griefing](./type_parameter_griefing)                 | Callers substitute wrong generic types to destroy state before validation       |
 
 ## Credits
 
