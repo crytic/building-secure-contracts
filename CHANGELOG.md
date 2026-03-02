@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+
 - TON (The Open Network) not-so-smart-contracts examples (#385)
 - Medusa documentation and CI integration (#358, #361, #373, #388, #398)
 - Echidna symbolic execution documentation (#401, #402)
@@ -16,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Shapella and Deneb fork updates (#352)
 
 ### Changed
+
 - Updated Slither documentation to use mdbook format (#397)
 - Updated Cairo/StarkNet documentation and links (#338, #360)
 - Updated Echidna configuration documentation (#362, #357)
@@ -23,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Various link fixes and documentation improvements (#346, #390, #405, #411)
 
 ### Fixed
+
 - Fixed broken links throughout documentation (#359, #363, #367)
 - Fixed HEVM cheat codes links (#359)
 - Fixed Yellow Paper links (#363)
@@ -32,6 +35,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Introduced [secure-contracts.com](https://secure-contracts.com) website.
 
 ### Added
+
 - Solana not-so-smart-contracts examples
 - Two advanced Echidna tutorials: multi-abi and optimization mode
 - EVM-related guidelines
@@ -40,11 +44,13 @@ Introduced [secure-contracts.com](https://secure-contracts.com) website.
 - CIP fork updates (#217)
 
 ### Changed
+
 - Reorganized documentation structure for mdbook compatibility (#218, #219)
 
 ## [0.2.0] - 2022-11-30
 
 ### Added
+
 - Not-so-smart-contracts examples for Algorand, Cairo, Cosmos, and Substrate
 - Two new Echidna exercises
 - Additional guidance for using Echidna to find smart contract vulnerabilities
@@ -54,6 +60,7 @@ Introduced [secure-contracts.com](https://secure-contracts.com) website.
 Initial release.
 
 ### Added
+
 - 4 development guidelines: best practices, token integration, incident response, secure workflows
 - EIPs included in each Ethereum mainnet fork
 - Program analysis training materials for Echidna, Slither, and Manticore
