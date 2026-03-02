@@ -46,6 +46,7 @@ The following simplified code shows a DEX pool contract that tracks user LP toke
 ```
 
 The race condition occurs in this sequence:
+
 1. Pool has LP balance 100 for User A. It sends a remove-liquidity message to return tokens.
 2. Pool sets User A's LP balance to 0 (removal pending).
 3. User A adds liquidity of 10 to the pool. Pool updates LP balance to 10.
