@@ -13,15 +13,15 @@ Each not-so-smart-contract includes:
 
 ## Vulnerabilities
 
-| Name | Description |
-|---|---|
-| [slot0 Tick Misalignment](./slot0_tick_misalignment) | Using `slot0.tick` instead of deriving from `sqrtPriceX96` causes off-by-one errors |
-| [Negative Tick Rounding](./negative_tick_rounding) | Solidity integer division truncates toward zero, producing incorrect TWAP ticks |
-| [Fee Growth Underflow](./fee_growth_underflow) | Intentional underflow in fee accounting reverts in Solidity 0.8+ |
-| [Unsafe Integer Downcast](./unsafe_integer_downcast) | Casting `int256` to `int24` without bounds checking causes tick wraparound |
-| [Missing Tick Spacing Validation](./tick_spacing_validation) | Positions with non-aligned ticks have zero liquidity or revert |
-| [Tick Boundary Crossing](./tick_boundary_crossing) | Incorrect tick iterator logic skips boundary ticks, causing liquidity underflow |
-| [TWAP Array Inversion](./twap_array_inversion) | Subtracting tick cumulatives in wrong order inverts the price direction |
+| Name                                                         | Description                                                                         |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| [slot0 Tick Misalignment](./slot0_tick_misalignment)         | Using `slot0.tick` instead of deriving from `sqrtPriceX96` causes off-by-one errors |
+| [Negative Tick Rounding](./negative_tick_rounding)           | Solidity integer division truncates toward zero, producing incorrect TWAP ticks     |
+| [Fee Growth Underflow](./fee_growth_underflow)               | Intentional underflow in fee accounting reverts in Solidity 0.8+                    |
+| [Unsafe Integer Downcast](./unsafe_integer_downcast)         | Casting `int256` to `int24` without bounds checking causes tick wraparound          |
+| [Missing Tick Spacing Validation](./tick_spacing_validation) | Positions with non-aligned ticks have zero liquidity or revert                      |
+| [Tick Boundary Crossing](./tick_boundary_crossing)           | Incorrect tick iterator logic skips boundary ticks, causing liquidity underflow     |
+| [TWAP Array Inversion](./twap_array_inversion)               | Subtracting tick cumulatives in wrong order inverts the price direction             |
 
 ## Credits
 

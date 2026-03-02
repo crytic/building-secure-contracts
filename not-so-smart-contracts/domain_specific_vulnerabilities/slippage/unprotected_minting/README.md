@@ -10,7 +10,7 @@ The same pattern applies to LP token minting where `amountAMin` and `amountBMin`
 
 ## Exploit Scenario
 
-A vault has 100 shares and 100 tokens. Bob, who holds 50 of those shares, frontruns Alice's 10-token deposit by donating 1000 tokens to the vault. The vault now has 1100 tokens for 100 shares. Alice's 10 tokens mint only 0 shares (10 * 100 / 1100 = 0 due to integer truncation). Bob redeems his 50 shares, receiving 555 tokens (50 * 1110 / 100), recovering his donation plus Alice's deposit.
+A vault has 100 shares and 100 tokens. Bob, who holds 50 of those shares, frontruns Alice's 10-token deposit by donating 1000 tokens to the vault. The vault now has 1100 tokens for 100 shares. Alice's 10 tokens mint only 0 shares (10 _ 100 / 1100 = 0 due to integer truncation). Bob redeems his 50 shares, receiving 555 tokens (50 _ 1110 / 100), recovering his donation plus Alice's deposit.
 
 ## Example
 

@@ -13,16 +13,16 @@ Each not-so-smart-contract includes:
 
 ## Vulnerabilities
 
-| Name | Description |
-|---|---|
-| [Arbitrary External Calls](./arbitrary_external_calls) | Bridge facets that allow user-controlled call targets enable token theft |
-| [Cross-Chain Message Authentication Bypass](./cross_chain_message_authentication) | Missing validation of message source chain or sender allows forged messages |
-| [Native Token Handling Inconsistency](./native_token_handling) | Different native token representations across chains cause bridging failures |
-| [Missing Recovery Mechanisms](./missing_recovery_mechanisms) | Absence of fund recovery paths causes permanent loss on failed operations |
-| [Unchecked Return Values](./unchecked_return_values) | Silent failures from unchecked low-level calls cause fund loss |
-| [ERC-777 Reentrancy](./erc777_reentrancy) | ERC-777 token callbacks enable reentrancy in balance-difference accounting |
-| [Cross-Chain Address Assumptions](./cross_chain_address_assumptions) | Assuming address equivalence across chains leads to fund theft |
-| [Gas Griefing](./gas_griefing) | Insufficient gas forwarding causes permanent message channel blockage |
+| Name                                                                              | Description                                                                  |
+| --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [Arbitrary External Calls](./arbitrary_external_calls)                            | Bridge facets that allow user-controlled call targets enable token theft     |
+| [Cross-Chain Message Authentication Bypass](./cross_chain_message_authentication) | Missing validation of message source chain or sender allows forged messages  |
+| [Native Token Handling Inconsistency](./native_token_handling)                    | Different native token representations across chains cause bridging failures |
+| [Missing Recovery Mechanisms](./missing_recovery_mechanisms)                      | Absence of fund recovery paths causes permanent loss on failed operations    |
+| [Unchecked Return Values](./unchecked_return_values)                              | Silent failures from unchecked low-level calls cause fund loss               |
+| [ERC-777 Reentrancy](./erc777_reentrancy)                                         | ERC-777 token callbacks enable reentrancy in balance-difference accounting   |
+| [Cross-Chain Address Assumptions](./cross_chain_address_assumptions)              | Assuming address equivalence across chains leads to fund theft               |
+| [Gas Griefing](./gas_griefing)                                                    | Insufficient gas forwarding causes permanent message channel blockage        |
 
 ## Credits
 

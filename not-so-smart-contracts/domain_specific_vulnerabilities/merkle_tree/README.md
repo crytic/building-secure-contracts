@@ -13,16 +13,16 @@ Each not-so-smart-contract includes:
 
 ## Vulnerabilities
 
-| Name | Description |
-|---|---|
-| [Empty Proof Bypass](./empty_proof_bypass) | Verification accepts empty proof arrays, allowing any leaf to validate as the root |
-| [Leaf-Node Hash Collision](./leaf_node_collision) | Identical pre-hash sizes for leaves and internal nodes enable second preimage attacks |
-| [Missing Claim Replay Protection](./missing_claim_replay_protection) | Absence of claim tracking allows the same proof to be used multiple times |
-| [Arbitrary Proof Length](./arbitrary_proof_length) | Accepting proofs of any length enables collision attacks or denial of service |
-| [Missing Root Validation](./missing_root_validation) | Proof verified against a user-supplied root instead of the stored root |
-| [Missing Leaf Context](./missing_leaf_context) | Leaves without chain ID or contract address enable cross-chain replay |
-| [Inverted Verification Logic](./inverted_verification_logic) | Negated boolean in proof verification accepts invalid proofs |
-| [Unauthorized Root Update](./unauthorized_root_update) | Missing access control on root update functions allows arbitrary root replacement |
+| Name                                                                 | Description                                                                           |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [Empty Proof Bypass](./empty_proof_bypass)                           | Verification accepts empty proof arrays, allowing any leaf to validate as the root    |
+| [Leaf-Node Hash Collision](./leaf_node_collision)                    | Identical pre-hash sizes for leaves and internal nodes enable second preimage attacks |
+| [Missing Claim Replay Protection](./missing_claim_replay_protection) | Absence of claim tracking allows the same proof to be used multiple times             |
+| [Arbitrary Proof Length](./arbitrary_proof_length)                   | Accepting proofs of any length enables collision attacks or denial of service         |
+| [Missing Root Validation](./missing_root_validation)                 | Proof verified against a user-supplied root instead of the stored root                |
+| [Missing Leaf Context](./missing_leaf_context)                       | Leaves without chain ID or contract address enable cross-chain replay                 |
+| [Inverted Verification Logic](./inverted_verification_logic)         | Negated boolean in proof verification accepts invalid proofs                          |
+| [Unauthorized Root Update](./unauthorized_root_update)               | Missing access control on root update functions allows arbitrary root replacement     |
 
 ## Credits
 

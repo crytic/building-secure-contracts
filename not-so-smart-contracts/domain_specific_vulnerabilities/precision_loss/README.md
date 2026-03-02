@@ -13,15 +13,15 @@ Each not-so-smart-contract includes:
 
 ## Vulnerabilities
 
-| Name | Description |
-|---|---|
-| [Division Before Multiplication](./division_before_multiplication) | Performing division before multiplication causes intermediate truncation that can reduce results to zero |
-| [Incorrect Rounding Direction](./incorrect_rounding_direction) | Rounding in a direction that favors users over the protocol enables value extraction through repeated operations |
-| [Ratio Truncation to Zero](./ratio_truncation_to_zero) | When a ratio in a formula truncates to zero, the formula can collapse to return the entire pool balance to the attacker |
-| [Conflicting Rounding Requirements](./conflicting_rounding_requirements) | Reusing a single intermediate value for calculations that need opposite rounding directions guarantees one of them is wrong |
-| [Rounding-Induced Denial of Service](./rounding_induced_dos) | Rounding up a computed value can cause it to exceed actual balances, reverting critical operations like withdrawals |
-| [Decimal Mismatch](./decimal_mismatch) | Assuming all tokens use 18 decimals causes massive over- or under-valuation when interacting with tokens of different precision |
-| [Fee Truncation Bypass](./fee_truncation_bypass) | Fees on small amounts truncate to zero, allowing users to avoid fees entirely by splitting operations |
+| Name                                                                     | Description                                                                                                                     |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| [Division Before Multiplication](./division_before_multiplication)       | Performing division before multiplication causes intermediate truncation that can reduce results to zero                        |
+| [Incorrect Rounding Direction](./incorrect_rounding_direction)           | Rounding in a direction that favors users over the protocol enables value extraction through repeated operations                |
+| [Ratio Truncation to Zero](./ratio_truncation_to_zero)                   | When a ratio in a formula truncates to zero, the formula can collapse to return the entire pool balance to the attacker         |
+| [Conflicting Rounding Requirements](./conflicting_rounding_requirements) | Reusing a single intermediate value for calculations that need opposite rounding directions guarantees one of them is wrong     |
+| [Rounding-Induced Denial of Service](./rounding_induced_dos)             | Rounding up a computed value can cause it to exceed actual balances, reverting critical operations like withdrawals             |
+| [Decimal Mismatch](./decimal_mismatch)                                   | Assuming all tokens use 18 decimals causes massive over- or under-valuation when interacting with tokens of different precision |
+| [Fee Truncation Bypass](./fee_truncation_bypass)                         | Fees on small amounts truncate to zero, allowing users to avoid fees entirely by splitting operations                           |
 
 ## Credits
 
