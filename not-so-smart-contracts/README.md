@@ -7,4 +7,5 @@ This repository contains examples of common smart contract vulnerabilities, incl
 - [Cosmos](./cosmos)
 - [Solana](./solana)
 - [Substrate](./substrate)
+- [Sui](./sui)
 - [TON](./ton)
