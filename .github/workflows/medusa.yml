@@ -184,8 +184,8 @@ jobs:
       - name: Verify that the output is correct
         working-directory: ${{ matrix.workdir }}
         run: |
-          # Parse JSON array and check each pattern
-          echo "${{ toJSON(matrix.expected) }}" | jq -r '.[]' | while IFS= read -r pattern; do
+          EXPECTED_JSON='${{ toJSON(matrix.expected) }}'
+          echo "$EXPECTED_JSON" | jq -r '.[]' | while IFS= read -r pattern; do
             if grep -q "$pattern" "${{ matrix.files }}.out"; then
               echo "✓ Found: $pattern"
             else
