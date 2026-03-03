@@ -113,8 +113,8 @@ jobs:
             contract: PopsicleFixed
             outcome: success
             expected:
-              - '\[PASSED\] Assertion Test: PopsicleFixed.totalBalanceAfterTransferIsPreserved(address,uint256)' ]
-              - '\[PASSED\] Assertion Test: PopsicleFixed.totalBalanceAfterTransferFromIsPreserved(address,uint256)' ]
+              - '\[PASSED\] Assertion Test: PopsicleFixed.totalBalanceAfterTransferIsPreserved(address,uint256)'
+              - '\[PASSED\] Assertion Test: PopsicleFixed.totalBalanceAfterTransferFromIsPreserved(address,uint256)'
           - name: TestDepositWithPermit
             workdir: program-analysis/echidna/example/
             files: TestDepositWithPermit.sol
