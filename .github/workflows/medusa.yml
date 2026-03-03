@@ -6,6 +6,7 @@ on:
       - ".github/workflows/medusa.yml"
       - "program-analysis/echidna/**/*.sol"
       - "program-analysis/echidna/**/*.yml"
+      - "program-analysis/**/medusa.json"
     branches:
       - master
   pull_request:
@@ -13,6 +14,7 @@ on:
       - ".github/workflows/medusa.yml"
       - "program-analysis/echidna/**/*.sol"
       - "program-analysis/echidna/**/*.yml"
+      - "program-analysis/**/medusa.json"
   schedule:
     # run CI every day even if no PRs/merges occur
     - cron: "0 12 * * *"
