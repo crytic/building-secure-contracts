@@ -24,6 +24,7 @@ Brought to you by [Trail of Bits](https://www.trailofbits.com/), this repository
 - [Not So Smart Contracts](./not-so-smart-contracts): Examples of common smart contract issues, complete with descriptions, examples, and recommendations
   - [Algorand](./not-so-smart-contracts/algorand)
   - [Cairo](./not-so-smart-contracts/cairo)
+  - [Circom](./not-so-smart-contracts/circom)
   - [Cosmos](./not-so-smart-contracts/cosmos)
   - [Substrate](./not-so-smart-contracts/substrate)
   - [Solana](./not-so-smart-contracts/solana)

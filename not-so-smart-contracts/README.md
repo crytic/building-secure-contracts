@@ -4,6 +4,7 @@ This repository contains examples of common smart contract vulnerabilities, incl
 
 - [Algorand](./algorand)
 - [Cairo](./cairo)
+- [Circom](./circom)
 - [Cosmos](./cosmos)
 - [Solana](./solana)
 - [Substrate](./substrate)
