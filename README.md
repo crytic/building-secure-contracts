@@ -10,6 +10,7 @@ Brought to you by [Trail of Bits](https://www.trailofbits.com/), this repository
   - [Code Maturity](./development-guidelines/code_maturity.md): Criteria for developers and security engineers to use when evaluating a codebase’s maturity
   - [High-Level Best Practices](./development-guidelines/guidelines.md): Best practices for all smart contracts
   - [Incident Response Recommendations](./development-guidelines/incident_response.md): Guidelines for creating an incident response plan
+  - [Preparing for a Security Review](./development-guidelines/preparing-for-a-review.md): A checklist for maximizing the value of a security engagement
   - [Secure Development Workflow](./development-guidelines/workflow.md): A high-level process to follow during code development
   - [Token Integration Checklist](./development-guidelines/token_integration.md): What to check when interacting with arbitrary tokens
 - [Learn EVM](./learn_evm): Technical knowledge about the EVM
