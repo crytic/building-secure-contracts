@@ -30,7 +30,7 @@ jobs:
       - name: Build artifacts
         run: mdbook build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./book
   deploy:
