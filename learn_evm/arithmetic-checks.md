@@ -383,7 +383,7 @@ function checkedMulInt(int256 a, int256 b) public pure returns (int256 c) {
         c = a * b;
 
         if (a > 0 && b > 0 && a > type(int256).max / b) arithmeticError();
-        if (a > 0 && b < 0 && a < type(int256).min / b) arithmeticError();
+        if (a > 0 && b < 0 && b < type(int256).min / a) arithmeticError();
         if (a < 0 && b > 0 && a < type(int256).min / b) arithmeticError();
         if (a < 0 && b < 0 && a < type(int256).max / b) arithmeticError();
     }
