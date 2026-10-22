@@ -3,7 +3,18 @@ script.src = "//js.hs-scripts.com/22554992.js";
 document.body.append(script);
 
 let script2 = document.createElement("script");
-script2.src = "https://plausible.gateway.trailofbits.com/js/script.js";
-script2.setAttribute("data-domain", "secure-contracts.com");
-script2.setAttribute("defer", "defer");
+script2.src = "https://plausible.io/js/pa-POUVzq5eFpnqXBI7aYhWG.js";
+script2.async = true;
 document.body.append(script2);
+
+window.plausible =
+  window.plausible ||
+  function () {
+    (window.plausible.q = window.plausible.q || []).push(arguments);
+  };
+window.plausible.init =
+  window.plausible.init ||
+  function (i) {
+    window.plausible.o = i || {};
+  };
+window.plausible.init();
