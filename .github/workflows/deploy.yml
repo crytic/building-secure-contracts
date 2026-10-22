@@ -28,7 +28,10 @@ jobs:
         run: |
           cargo install --git https://github.com/trail-of-forks/mdBook.git --branch building-secure-contracts mdbook || true
       - name: Build artifacts
-        run: mdbook build
+        run: |
+          mdbook build
+          # Unknown paths must not expose relative navigation links or run analytics.
+          cp static/404.html book/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
